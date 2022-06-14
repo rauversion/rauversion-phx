@@ -3,6 +3,9 @@ defmodule Rauversion.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
+    field :first_name, :string
+    field :last_name, :string
+    field :username, :string
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
@@ -11,6 +14,17 @@ defmodule Rauversion.Accounts.User do
     has_many :tracks, Rauversion.Tracks.Track
 
     timestamps()
+  end
+
+  def profile_changeset(user, attrs, opts \\ []) do
+    user
+    |> validate_contact_fields(attrs)
+  end
+
+  def changeset(user, attrs, opts \\ []) do
+    user
+    |> validate_contact_fields(attrs)
+    |> registration_changeset(attrs, opts)
   end
 
   @doc """
@@ -35,6 +49,14 @@ defmodule Rauversion.Accounts.User do
     |> cast(attrs, [:email, :password])
     |> validate_email()
     |> validate_password(opts)
+  end
+
+  defp validate_contact_fields(changeset, attrs) do
+    changeset
+    |> cast(attrs, [:username, :first_name, :last_name])
+    |> validate_required([:username, :first_name, :last_name])
+    |> unsafe_validate_unique(:username, Rauversion.Repo)
+    |> unique_constraint(:username)
   end
 
   defp validate_email(changeset) do

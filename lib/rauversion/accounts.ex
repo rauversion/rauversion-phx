@@ -8,6 +8,10 @@ defmodule Rauversion.Accounts do
 
   alias Rauversion.Accounts.{User, UserToken, UserNotifier}
 
+  def list_accounts(limit \\ 20) do
+    User |> limit(^limit) |> Repo.all()
+  end
+
   ## Database getters
 
   @doc """
@@ -106,6 +110,15 @@ defmodule Rauversion.Accounts do
   """
   def change_user_email(user, attrs \\ %{}) do
     User.email_changeset(user, attrs)
+  end
+
+  def change_user_profile(user, attrs \\ %{}) do
+    User.profile_changeset(user, attrs)
+  end
+
+  def update_user_profile(user, attrs \\ %{}) do
+    User.profile_changeset(user, attrs)
+    |> Repo.update()
   end
 
   @doc """
@@ -349,5 +362,11 @@ defmodule Rauversion.Accounts do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
     end
+  end
+
+  def create_user(attrs) do
+    %User{}
+    |> User.changeset(attrs)
+    |> Repo.insert()
   end
 end

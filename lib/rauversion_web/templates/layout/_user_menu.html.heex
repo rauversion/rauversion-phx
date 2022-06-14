@@ -18,7 +18,7 @@
                 Tracks
               </a>
             
-              <a href="/account" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
+              <a href="/users/settings" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
                 Account
               </a>
             
@@ -30,11 +30,11 @@
                 Company
               </a>
 
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
+              <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+                <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+              <% end %>
 
-                <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+              <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
               <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
             
           </div>
@@ -103,7 +103,9 @@
               data-transition-leave-to="opacity-0 scale-95"
               >
               <div class="block px-4 py-2 text-sm text-gray-700">
-                <%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %>
+                <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "block px-4 py-2 text-sm text-gray-700" %>
+                <%= link "profile", to: Routes.profile_path(@conn, :show, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700" %>
+
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700">Support</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700">License</a>
                 <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700" %>
