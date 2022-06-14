@@ -1,0 +1,37 @@
+<h1>Listing Reposts</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.repost_index_path(@socket, :index)}>
+    <.live_component
+      module={RauversionWeb.RepostLive.FormComponent}
+      id={@repost.id || :new}
+      title={@page_title}
+      action={@live_action}
+      repost={@repost}
+      return_to={Routes.repost_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="reposts">
+    <%= for repost <- @reposts do %>
+      <tr id={"repost-#{repost.id}"}>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.repost_show_path(@socket, :show, repost) %></span>
+          <span><%= live_patch "Edit", to: Routes.repost_index_path(@socket, :edit, repost) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: repost.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Repost", to: Routes.repost_index_path(@socket, :new) %></span>

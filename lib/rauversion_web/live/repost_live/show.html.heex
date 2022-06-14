@@ -1,0 +1,21 @@
+<h1>Show Repost</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.repost_show_path(@socket, :show, @repost)}>
+    <.live_component
+      module={RauversionWeb.RepostLive.FormComponent}
+      id={@repost.id}
+      title={@page_title}
+      action={@live_action}
+      repost={@repost}
+      return_to={Routes.repost_show_path(@socket, :show, @repost)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.repost_show_path(@socket, :edit, @repost), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.repost_index_path(@socket, :index) %></span>

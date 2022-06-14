@@ -1,0 +1,20 @@
+defmodule Rauversion.TrackPlaylists.TrackPlaylist do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "track_playlists" do
+    # field :track_id, :id
+    # field :playlist, :id
+    belongs_to :playlist, Rauversion.Playlists.Playlist
+    belongs_to :track, Rauversion.Tracks.Track
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(track_playlist, attrs) do
+    track_playlist
+    |> cast(attrs, [])
+    |> validate_required([])
+  end
+end

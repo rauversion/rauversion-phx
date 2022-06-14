@@ -1,0 +1,225 @@
+<main>
+  <!-- Hero -->
+  <div class="flex flex-col border-b border-gray-200 lg:border-0">
+    <nav aria-label="Offers" class="order-last lg:order-first">
+      <div class="max-w-7xl mx-auto lg:px-8">
+        <ul role="list" class="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-y-0 lg:divide-x">
+          
+            <li class="flex flex-col">
+              <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
+                <p class="text-sm text-gray-500">
+                  Download the app
+                </p>
+                <p class="font-semibold text-gray-900">
+                  Get an exclusive $5 off code
+                </p>
+              </a>
+            </li>
+          
+            <li class="flex flex-col">
+              <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
+                <p class="text-sm text-gray-500">
+                  Return when you're ready
+                </p>
+                <p class="font-semibold text-gray-900">
+                  60 days of free returns
+                </p>
+              </a>
+            </li>
+          
+            <li class="flex flex-col">
+              <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
+                <p class="text-sm text-gray-500">
+                  Sign up for our newsletter
+                </p>
+                <p class="font-semibold text-gray-900">
+                  15% off your first order
+                </p>
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </nav>
+
+    <div class="relative">
+      <div aria-hidden="true" class="hidden absolute w-1/2 h-full bg-gray-100 lg:block"></div>
+      <div class="relative bg-black lg:bg-transparent- ">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2">
+          <div class="max-w-2xl mx-auto py-24 lg:py-64 lg:max-w-none">
+            <div class="lg:pr-16">
+              <h1 class="tracking-tight text-gray-900 sm:text-5xl xl:text-6xl
+              font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
+              ">Be your own music industry</h1>
+              <p class="mt-4 text-xl text-gray-100 ">
+                It's time to empower musicians all around the world and give them tools to own their industry
+              </p>
+              <div class="mt-6">
+                <a href="#" class="inline-block bg-indigo-600 border border-transparent py-3 px-8 rounded-md font-medium text-white hover:bg-indigo-700">
+                  Start now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full h-48 sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full">
+        <img src={ Routes.static_path(@conn, "/images/musician-making-music.jpg")} class="w-full h-full object-center object-cover" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Trending products -->
+  <section aria-labelledby="trending-heading" class="bg-white">
+    <div class="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:py-32 lg:px-8">
+      <div class="px-4 flex items-center justify-between sm:px-6 lg:px-0">
+        <h2 id="trending-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">Trending Albums</h2>
+        <a href="#" class="hidden sm:block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+          See everything
+          <span aria-hidden="true"> →</span>
+        </a>
+      </div>
+
+      <div class="mt-8 relative">
+        <div class="relative w-full overflow-x-auto">
+          <ul role="list" class="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
+            
+            <%= for item <- (1..4) do %>
+              <li class="w-64 inline-flex flex-col text-center lg:w-auto">
+                <div class="group relative">
+                  <div class="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
+                    <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-product-01.jpg" alt="Black machined steel pen with hexagonal grip and small white logo at top." class="w-full h-full object-center object-cover group-hover:opacity-75">
+                  </div>
+                  <div class="mt-6">
+                    <p class="text-sm text-gray-500">
+                      Black
+                    </p>
+                    <h3 class="mt-1 font-semibold text-gray-900">
+                      <a href="#">
+                        <span class="absolute inset-0"></span>
+                        Machined Pen
+                      </a>
+                    </h3>
+                    <p class="mt-1 text-gray-900">
+                      $35
+                    </p>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 px-4 sm:hidden">
+        <%= link to: "#", class: "text-sm font-semibold text-indigo-600 hover:text-indigo-500" do %>
+          See everything<span aria-hidden="true"> →</span>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collections -->
+  <section aria-labelledby="collections-heading" class="bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
+        <h2 id="collections-heading" class="text-2xl font-extrabold text-gray-900">Playlists</h2>
+
+        <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
+          
+          <%= for item <- (1..4) do %>
+            <div class="group relative">
+              <div class="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full h-full object-center object-cover">
+              </div>
+              <h3 class="mt-6 text-sm text-gray-500">
+                <a href="#">
+                  <span class="absolute inset-0"></span>
+                  Desk and Office
+                </a>
+              </h3>
+              <p class="text-base font-semibold text-gray-900">Work from home accessories</p>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sale and testimonials -->
+  <div class="relative overflow-hidden">
+    <!-- Decorative background image and gradient -->
+    <div aria-hidden="true" class="absolute inset-0">
+      <div class="absolute inset-0 max-w-7xl mx-auto overflow-hidden xl:px-8">
+        <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg" alt="" class="w-full h-full object-center object-cover">
+      </div>
+      <div class="absolute inset-0 bg-white bg-opacity-75"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-white via-white"></div>
+    </div>
+
+    <!-- Sale -->
+    <section aria-labelledby="sale-heading" class="relative max-w-7xl mx-auto pt-32 px-4 flex flex-col items-center text-center sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto lg:max-w-none">
+        <h2 id="sale-heading" class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+          Get 25% off during our one-time sale
+        </h2>
+        <p class="mt-4 max-w-xl mx-auto text-xl text-gray-600">Most of our products are limited releases that won't come back. Get your favorite items while they're in stock.</p>
+        <a href="#" class="mt-6 inline-block w-full bg-gray-900 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-gray-800 sm:w-auto">Get access to our one-time sale</a>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section aria-labelledby="testimonial-heading" class="relative py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:py-32 lg:px-8">
+      <div class="max-w-2xl mx-auto lg:max-w-none">
+        <h2 id="testimonial-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">What are people saying?</h2>
+
+        <div class="mt-16 space-y-16 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
+          
+            <blockquote class="sm:flex lg:block">
+              <svg width="24" height="18" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="flex-shrink-0 text-gray-300">
+                <path d="M0 18h8.7v-5.555c-.024-3.906 1.113-6.841 2.892-9.68L6.452 0C3.188 2.644-.026 7.86 0 12.469V18zm12.408 0h8.7v-5.555C21.083 8.539 22.22 5.604 24 2.765L18.859 0c-3.263 2.644-6.476 7.86-6.451 12.469V18z" fill="currentColor"></path>
+              </svg>
+              <div class="mt-8 sm:mt-0 sm:ml-6 lg:mt-10 lg:ml-0">
+                <p class="text-lg text-gray-600">
+                  My order arrived super quickly. The product is even better than I hoped it would be. Very happy customer over here!
+                </p>
+                <cite class="mt-4 block font-semibold not-italic text-gray-900">
+                  Sarah Peters, New Orleans
+                </cite>
+              </div>
+            </blockquote>
+          
+            <blockquote class="sm:flex lg:block">
+              <svg width="24" height="18" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="flex-shrink-0 text-gray-300">
+                <path d="M0 18h8.7v-5.555c-.024-3.906 1.113-6.841 2.892-9.68L6.452 0C3.188 2.644-.026 7.86 0 12.469V18zm12.408 0h8.7v-5.555C21.083 8.539 22.22 5.604 24 2.765L18.859 0c-3.263 2.644-6.476 7.86-6.451 12.469V18z" fill="currentColor"></path>
+              </svg>
+              <div class="mt-8 sm:mt-0 sm:ml-6 lg:mt-10 lg:ml-0">
+                <p class="text-lg text-gray-600">
+                  I had to return a purchase that didn’t fit. The whole process was so simple that I ended up ordering two new items!
+                </p>
+                <cite class="mt-4 block font-semibold not-italic text-gray-900">
+                  Kelly McPherson, Chicago
+                </cite>
+              </div>
+            </blockquote>
+          
+            <blockquote class="sm:flex lg:block">
+              <svg width="24" height="18" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="flex-shrink-0 text-gray-300">
+                <path d="M0 18h8.7v-5.555c-.024-3.906 1.113-6.841 2.892-9.68L6.452 0C3.188 2.644-.026 7.86 0 12.469V18zm12.408 0h8.7v-5.555C21.083 8.539 22.22 5.604 24 2.765L18.859 0c-3.263 2.644-6.476 7.86-6.451 12.469V18z" fill="currentColor"></path>
+              </svg>
+              <div class="mt-8 sm:mt-0 sm:ml-6 lg:mt-10 lg:ml-0">
+                <p class="text-lg text-gray-600">
+                  Now that I’m on holiday for the summer, I’ll probably order a few more shirts. It’s just so convenient, and I know the quality will always be there.
+                </p>
+                <cite class="mt-4 block font-semibold not-italic text-gray-900">
+                  Chris Paul, Phoenix
+                </cite>
+              </div>
+            </blockquote>
+          
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

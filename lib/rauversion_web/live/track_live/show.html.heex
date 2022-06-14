@@ -1,0 +1,56 @@
+<h1>Show Track</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.track_show_path(@socket, :show, @track)}>
+    <.live_component
+      module={RauversionWeb.TrackLive.FormComponent}
+      id={@track.id}
+      title={@page_title}
+      action={@live_action}
+      track={@track}
+      return_to={Routes.track_show_path(@socket, :show, @track)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @track.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @track.description %>
+  </li>
+
+  <li>
+    <strong>Private:</strong>
+    <%= @track.private %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @track.slug %>
+  </li>
+
+  <li>
+    <strong>Caption:</strong>
+    <%= @track.caption %>
+  </li>
+
+  <li>
+    <strong>Notification settings:</strong>
+    <%= @track.notification_settings %>
+  </li>
+
+  <li>
+    <strong>Metadata:</strong>
+    <%= @track.metadata %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.track_show_path(@socket, :edit, @track), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.track_index_path(@socket, :index) %></span>

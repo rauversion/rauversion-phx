@@ -1,0 +1,171 @@
+
+<div class="h-64 bg-black">
+  <div class="flex justify-between">
+    <div class="flex">
+      <div class="m-4">
+        <% #if @profile&.avatar&.persisted? %>
+        <% #= image_tag @profile&.avatar, class: "h-2/5 rounded-full" %>
+        <% # end %>
+      </div>
+      <div class="text-white mt-6">
+        <p class="text-2xl sm:text-3xl font-extrabold">
+          <% #= @profile.username %>
+        </p>
+        <p class="text-xl sm:text-2xl font-extrabold">
+          Santiago, Chile
+        </p>
+      </div>
+    </div>
+    <div class="">bjkkjk</div>
+  </div>
+</div>
+
+<div class="relative bg-white">
+  <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
+  <div class="z-20 sticky top-0">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
+
+      <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
+        <nav class="flex space-x-10">
+          <%= for %{name: name, url: url} <- assigns.data do %>
+            <a href="#"
+              data-turbo-frame="tracks"
+              class="text-base font-medium text-gray-500 hover:text-gray-900"> 
+              <%= name %>
+            </a>
+          <% end %>
+        </nav>
+        <div class="flex items-center md:ml-12">
+          <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900"> Your insights </a>
+          <a href="#" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"> Edit profile </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="flex">
+
+  <aside class="hidden xl:block xl:col-span-4">
+    <div class="sticky top-4 space-y-4 p-4 bg-gray-50">
+
+      <div class="p-4 border-l-1 border-l-gray-50">
+        <div class="grid grid-cols-3 divide-x">
+          <div class="p-4">
+            <p class="text-base font-medium text-gray-900">Following</p>
+            <span class="text-base font-light text-gray-500">
+              xxx
+            </span>
+          </div>
+          <div  class="p-4">
+            <p class="text-base font-medium text-gray-900">Followers</p>
+            <span class="text-base font-light text-gray-500">
+              <% #= @profile.followers(User).size %>
+            </span>
+          </div>
+          <div  class="p-4">
+            <p class="text-base font-medium text-gray-900">Tracks</p>
+            <span class="text-base font-light text-gray-500">
+              <% #= @profile.tracks.size %>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <section aria-labelledby="who-to-follow-heading">
+        <div class="bg-white border-t">
+          <div class="p-6">
+            <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
+              Who to follow
+            </h2>
+            <div class="mt-6 flow-root">
+              <ul role="list" class="-my-4 divide-y divide-gray-200">
+                
+                <% # User.where.not(id: @profile.id).limit(5).each do |item| %>
+                  <li class="flex items-center py-4 space-x-3">
+                    <div class="flex-shrink-0">
+                      <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="text-sm font-medium text-gray-900">
+                        <a href="#"><% #= item.first_name %> <% #= item.last_name %></a>
+                      </p>
+                      <p class="text-sm text-gray-500">
+                        <a href="#">@<% #= item.username %></a>
+                      </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                      <button type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
+                        <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" x-description="Heroicon name: solid/plus-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>
+                          Follow
+                        </span>
+                      </button>
+                    </div>
+                  </li>
+                <% # end %>
+                
+              </ul>
+            </div>
+            <div class="mt-6">
+              <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                View all
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section aria-labelledby="trending-heading">
+        <div class="bg-white border-t">
+          <div class="p-6">
+            <h2 id="trending-heading" class="text-base font-medium text-gray-900">
+              Trending
+            </h2>
+            <div class="mt-6 flow-root">
+              <ul role="list" class="-my-4 divide-y divide-gray-200">
+                
+                <% # User.where.not(id: @profile.id).limit(5).each do |item| %>
+                  <li class="flex py-4 space-x-3">
+                    <div class="flex-shrink-0">
+                      <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="Floyd Miles">
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="text-sm text-gray-800">What books do you have on your bookshelf just to look smarter than you actually are?</p>
+                      <div class="mt-2 flex">
+                        <span class="inline-flex items-center text-sm">
+                          <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                            <svg class="h-5 w-5" x-description="Heroicon name: solid/chat-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="font-medium text-gray-900">291</span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                <% # end %>
+                
+              </ul>
+            </div>
+            <div class="mt-6">
+              <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                View all
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </aside>
+
+</div>
+
+
+
+
+
+
+
