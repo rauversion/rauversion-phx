@@ -23,19 +23,20 @@ defmodule Rauversion.Tracks.Track do
       :title,
       :description,
       :private,
-      :slug,
-      :caption,
-      :notification_settings,
-      :metadata
+      :user_id
+      # :slug,
+      # :caption,
+      # :notification_settings,
+      # :metadata
     ])
     |> validate_required([
       :title,
-      :description,
-      :private,
-      :slug,
-      :caption,
-      :notification_settings,
-      :metadata
+      :description
+      # :private
+      # :slug,
+      # :caption
+      # :notification_settings,
+      # :metadata
     ])
   end
 end

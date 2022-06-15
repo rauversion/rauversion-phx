@@ -1,0 +1,31 @@
+defmodule RauversionWeb.ProfileLive.HeadingComponent do
+  # If you generated an app with mix phx.new --live,
+  # the line below would be: use MyAppWeb, :live_component
+  # use Phoenix.LiveComponent
+  use RauversionWeb, :live_component
+
+  def render(%{profile: profile} = assigns) do
+    ~H"""
+      <div class="h-64 bg-black">
+        <div class="flex justify-between">
+          <div class="flex">
+            <div class="m-4">
+              <% #if @profile&.avatar&.persisted? %>
+              <% #= image_tag @profile&.avatar, class: "h-2/5 rounded-full" %>
+              <% # end %>
+            </div>
+            <div class="text-white mt-6">
+              <p class="text-2xl sm:text-3xl font-extrabold">
+                <%= @profile.username %>
+              </p>
+              <p class="text-xl sm:text-2xl font-extrabold">
+                Santiago, Chile
+              </p>
+            </div>
+          </div>
+          <div class="">bjkkjk</div>
+        </div>
+      </div>
+    """
+  end
+end

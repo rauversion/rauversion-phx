@@ -104,7 +104,7 @@
               >
               <div class="block px-4 py-2 text-sm text-gray-700">
                 <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "block px-4 py-2 text-sm text-gray-700" %>
-                <%= link "profile", to: Routes.profile_path(@conn, :show, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700" %>
+                <%= link "profile", to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700" %>
 
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700">Support</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700">License</a>

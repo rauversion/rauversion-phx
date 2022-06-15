@@ -1,0 +1,60 @@
+<.live_component
+  module={RauversionWeb.ProfileLive.HeadingComponent}
+  id={"profile-#{@profile.id}"}
+  profile={@profile}
+/>
+
+<.live_component
+  module={RauversionWeb.ProfileLive.MenuComponent}
+  id={"track-#{@profile.id}"}
+  data={assigns.data}
+/>
+
+<div class="flex">
+
+  <div class="flex-grow" >
+
+    <%= case @title do 
+      "all" -> live_component(
+                  RauversionWeb.TrackLive.TrackListComponent,
+                  id: "all-track-#{@profile.id}",
+                  track: "track",
+                  profile: @profile,
+                  tracks: @tracks
+                )
+      
+      _ -> "no match"
+    end  %>
+    
+  </div>
+
+  <aside class="hidden xl:block xl:col-span-4">
+    <div class="sticky top-4 space-y-4 p-4 bg-gray-50">
+
+      <div class="p-4 border-l-1 border-l-gray-50">
+        <.live_component
+          module={RauversionWeb.ProfileLive.StatsComponent}
+          id={"track-#{@profile.id}"}
+          track={"track"}
+        />
+      </div>
+
+      <section aria-labelledby="who-to-follow-heading">
+        <.live_component
+          module={RauversionWeb.ProfileLive.UserSuggestionComponent}
+          id={"track-#{@profile.id}"}
+          track={"track"}
+        />
+      </section>
+
+      <section aria-labelledby="trending-heading">
+        <.live_component
+          module={RauversionWeb.ProfileLive.TrendingComponent}
+          id={"track-#{@profile.id}"}
+          track={"track"}
+        />
+      </section>
+    </div>
+  </aside>
+
+</div>

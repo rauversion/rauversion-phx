@@ -81,7 +81,7 @@ defmodule RauversionWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     live "/tracks", TrackLive.Index, :index
-    live "/tracks/new", TrackLive.Index, :new
+    live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
 
     live "/tracks/:id", TrackLive.Show, :show
@@ -101,7 +101,12 @@ defmodule RauversionWeb.Router do
     live "/playlists/:id", PlaylistLive.Show, :show
     live "/playlists/:id/show/edit", PlaylistLive.Show, :edit
 
-    get "/:username", ProfileController, :show
+    # get "/:username", ProfileController, :show
+    live "/:username", ProfileLive.Index, :index
+    live "/:username/tracks/all", ProfileLive.Index, :tracks_all
+    live "/:username/tracks/reposts", ProfileLive.Index, :reposts
+    live "/:username/tracks/albums", ProfileLive.Index, :albums
+    live "/:username/tracks/playlists", ProfileLive.Index, :playlists
   end
 
   scope "/", RauversionWeb do

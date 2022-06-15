@@ -14,7 +14,9 @@ defmodule RauversionWeb.TrackLive.FormComponent do
   end
 
   @impl true
-  def handle_event("validate", %{"track" => track_params}, socket) do
+  def handle_event("validate", %{"track" => track_params} = params, socket) do
+    track_params = track_params |> Map.put("user_id", socket.assigns.current_user.id)
+
     changeset =
       socket.assigns.track
       |> Tracks.change_track(track_params)
@@ -24,6 +26,8 @@ defmodule RauversionWeb.TrackLive.FormComponent do
   end
 
   def handle_event("save", %{"track" => track_params}, socket) do
+    track_params = track_params |> Map.put("user_id", socket.assigns.current_user.id)
+
     save_track(socket, socket.assigns.action, track_params)
   end
 

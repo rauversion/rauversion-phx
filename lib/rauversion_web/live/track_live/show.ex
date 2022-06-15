@@ -1,7 +1,7 @@
 defmodule RauversionWeb.TrackLive.Show do
   use RauversionWeb, :live_view
 
-  alias Rauversion.Tracks
+  alias Rauversion.{Tracks, Repo}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -13,7 +13,7 @@ defmodule RauversionWeb.TrackLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:track, Tracks.get_track!(id))}
+     |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))}
   end
 
   defp page_title(:show), do: "Show Track"
