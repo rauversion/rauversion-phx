@@ -86,7 +86,11 @@
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
       <h1 class="text-3xl font-extrabold text-blue-gray-900">Account</h1>
 
-      <.form let={f} for={@profile_changeset} action={Routes.user_settings_path(@conn, :update)} id="update_profile">
+      <.form let={f} 
+        for={@profile_changeset} 
+        multipart={true}
+        action={Routes.user_settings_path(@conn, :update)} 
+        id="update_profile">
         <%= if @profile_changeset.action do %>
           <div class="alert alert-danger">
             <p>Oops, something went wrong! Please check the errors below.</p>
@@ -117,6 +121,32 @@
             <%= label f, :username, class: "block text-sm font-medium text-blue-gray-900" %>
             <%= text_input f, :username, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
             <%= error_tag f, :username %>
+          </div>
+
+          <div class="sm:col-span-6">
+            <label for="photo" class="block text-sm font-medium text-blue-gray-900">
+              Photo
+            </label>
+            <div class="mt-1 flex items-center">
+              <img class="inline-block h-12 w-12 rounded-full" src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1c687bbe832438c474ba2618f2208b8aa9e937c5/Screen%20Shot%202021-09-10%20at%2012.10.49%20AM.png">
+              <img class="inline-block-- h-12 w-12 rounded-full hidden" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&amp;auto=format&amp;fit=facearea&amp;facepad=2.5&amp;w=256&amp;h=256&amp;q=80" alt="">
+              <div class="ml-4 flex">
+                <div class="relative bg-white py-2 px-3 border border-blue-gray-300 rounded-md shadow-sm flex items-center cursor-pointer hover:bg-blue-gray-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-blue-gray-50 focus-within:ring-blue-500">
+                  <label for="user-photo" class="relative text-sm font-medium text-blue-gray-900 pointer-events-none">
+                    <span>Change</span>
+                    <span class="sr-only"> user photo</span>
+                  </label>
+
+                  <input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" 
+                  type="file" 
+                  name="user[avatar]" 
+                  id="user_avatar">
+                </div>
+                <button type="button" class="ml-3 bg-transparent py-2 px-3 border border-transparent rounded-md text-sm font-medium text-blue-gray-900 hover:text-blue-gray-700 focus:outline-none focus:border-blue-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-gray-50 focus:ring-blue-500">
+                  Remove
+                </button>
+              </div>
+            </div>
           </div>
 
         </div>
