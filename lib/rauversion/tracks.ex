@@ -77,6 +77,8 @@ defmodule Rauversion.Tracks do
   def update_track(%Track{} = track, attrs) do
     track
     |> Track.changeset(attrs)
+    |> Track.process_one_upload(attrs, "cover")
+    |> Track.process_one_upload(attrs, "audio")
     |> Repo.update()
   end
 
@@ -107,5 +109,26 @@ defmodule Rauversion.Tracks do
   """
   def change_track(%Track{} = track, attrs \\ %{}) do
     Track.changeset(track, attrs)
+  end
+
+  def blob_url(user, kind) do
+    kind_blob = :"#{kind}_blob"
+
+    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
+    case user do
+      nil ->
+        nil
+
+      %{^kind_blob => nil} ->
+        nil
+
+      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
+        blob |> ActiveStorage.url()
+
+      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
+        user = user |> Rauversion.Repo.preload(kind_blob)
+
+        apply(__MODULE__, :blob_url, [user, kind])
+    end
   end
 end

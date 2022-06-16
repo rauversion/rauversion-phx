@@ -22,10 +22,10 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                     </div>
                     <div class="min-w-0 flex-1">
                       <p class="text-sm font-medium text-gray-900">
-                        <a href="#"><%= item.first_name %> <%= item.last_name %></a>
+                        <%= link "#{item.first_name} #{item.last_name}", to: Routes.profile_index_path(@socket, :index, item.username) %>
                       </p>
                       <p class="text-sm text-gray-500">
-                        <a href="#">@<%= item.username %></a>
+                        <%= link "#{item.username}", to: Routes.profile_index_path(@socket, :index, item.username) %>
                       </p>
                     </div>
                     <div class="flex-shrink-0">

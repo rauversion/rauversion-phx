@@ -1,3 +1,5 @@
+<%= @current_user.username %> 
+
 <%= if @live_action in [:edit] do %>
   <.modal return_to={Routes.track_show_path(@socket, :show, @track)}>
     <.live_component
@@ -6,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       track={@track}
+      current_user={@current_user}
       return_to={Routes.track_show_path(@socket, :show, @track)}
     />
   </.modal>

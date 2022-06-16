@@ -13,6 +13,8 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         <div class="group relative aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden">
           <% #= image_tag url_for(track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
 
+          <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "object-center object-cover group-hover:opacity-75") %>
+
           <div class="flex flex-col justify-end">
             <div class="p-4 bg-white bg-opacity-60 text-sm">
               <a href="#" class="font-medium text-gray-900">
@@ -28,13 +30,12 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
       <div class="py-2 w-full">
 
-
         <% #= audio_tag rails_storage_proxy_path(track.audio), controls: true %>
 
         <% # if track.audio.persisted? %>
-          <% #= content_tag :div, data: { controller: 'audio',
-             #                         "audio-target": 'player',
-             #                         'audio-url': url_for(track.audio) } do %>
+          <%= content_tag :div, "data-controller": "audio",
+                                 "data-audio-target": "player",
+                                "data-audio-url": Rauversion.Tracks.blob_url(track, "audio")  do %>
             <div class='controls flex items-center'>
               <span class="relative z-0 inline-flex">
                 <button type="button"
@@ -65,7 +66,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 <% end %>
               </div>
             </div>
-          <% #end %>
+          <% end %>
         <% #end %>
 
         <p class="hidden mt-1 text-sm text-gray-500">

@@ -143,10 +143,13 @@ defmodule Rauversion.Accounts do
       nil ->
         nil
 
+      %{avatar_blob: nil} ->
+        nil
+
       %{avatar_blob: %ActiveStorage.Blob{} = avatar_blob} ->
         avatar_blob |> ActiveStorage.url()
 
-      %{avatar_blob: %ActiveStorage.Blob{} = avatar_blob} ->
+      %{avatar_blob: %Ecto.Association.NotLoaded{}} ->
         user = user |> Rauversion.Repo.preload(:avatar_blob)
         Rauversion.Accounts.avatar_url(user)
     end
