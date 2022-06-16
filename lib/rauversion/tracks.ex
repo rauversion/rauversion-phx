@@ -154,11 +154,9 @@ defmodule Rauversion.Tracks do
   end
 
   def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
-    blob = blob_for(track, kind)
-
-    variant = ActiveStorage.Blob.Representable.variant(blob, options)
-    ActiveStorage.Variant.processed(variant)
-
-    variant |> ActiveStorage.Variant.url()
+    blob_for(track, kind)
+    |> ActiveStorage.Blob.Representable.variant(options)
+    |> ActiveStorage.Variant.processed()
+    |> ActiveStorage.Variant.url()
   end
 end
