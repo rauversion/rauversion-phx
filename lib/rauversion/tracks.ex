@@ -17,11 +17,12 @@ defmodule Rauversion.Tracks do
       [%Track{}, ...]
 
   """
-  def list_tracks do
-    Repo.all(Track) |> Repo.preload(:user)
+
+  def list_tracks(limit \\ 20) do
+    Track |> limit(^limit) |> Repo.all()
   end
 
-  def list_tracks(%{user_id: user_id}) do
+  def list_tracks_by_username(user_id) do
     Rauversion.Accounts.get_user_by_username(user_id)
     |> Ecto.assoc(:tracks)
     |> Repo.all()

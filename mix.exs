@@ -52,6 +52,7 @@ defmodule Rauversion.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:faker, "~> 0.17", only: [:test, :dev]},
+      {:ecto_autoslug_field, "~> 3.0"},
       {:active_storage,
        path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"},
       {:active_job,

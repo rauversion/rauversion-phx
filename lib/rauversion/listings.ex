@@ -30,7 +30,7 @@ defmodule Rauversion.Listings do
       %Listing{}
 
   """
-  def get_listing!(id), do: nil
+  def get_listing!(_id), do: nil
 
   @doc """
   Creates a listing.
@@ -44,7 +44,7 @@ defmodule Rauversion.Listings do
       {:error, ...}
 
   """
-  def create_listing(attrs \\ %{}) do
+  def create_listing(_attrs \\ %{}) do
     raise "TODO"
   end
 

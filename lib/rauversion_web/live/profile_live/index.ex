@@ -23,7 +23,7 @@ defmodule RauversionWeb.ProfileLive.Index do
   defp apply_action(socket, :index, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
 
-    tracks = Tracks.list_tracks(%{user_id: id})
+    tracks = Tracks.list_tracks_by_username(id)
 
     socket
     |> assign(:tracks, tracks)
@@ -34,7 +34,7 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :tracks_all, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
-    tracks = Tracks.list_tracks(%{user_id: id})
+    tracks = Tracks.list_tracks_by_username(id)
 
     socket
     |> assign(:page_title, "Tracks all")

@@ -84,21 +84,21 @@
         <div class="relative w-full overflow-x-auto">
           <ul role="list" class="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
             
-            <%= for item <- (1..4) do %>
+            <%= for track <- Rauversion.Tracks.list_tracks(5) do %>
               <li class="w-64 inline-flex flex-col text-center lg:w-auto">
                 <div class="group relative">
                   <div class="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
-                    <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-product-01.jpg" alt="Black machined steel pen with hexagonal grip and small white logo at top." class="w-full h-full object-center object-cover group-hover:opacity-75">
+                    <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
                   </div>
                   <div class="mt-6">
                     <p class="text-sm text-gray-500">
                       Black
                     </p>
                     <h3 class="mt-1 font-semibold text-gray-900">
-                      <a href="#">
+                      <%= link to: Routes.track_show_path(@conn, :show, track) do %>
                         <span class="absolute inset-0"></span>
-                        Machined Pen
-                      </a>
+                        <%= track.title %>
+                      <% end %>
                     </h3>
                     <p class="mt-1 text-gray-900">
                       $35
@@ -127,18 +127,19 @@
 
         <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
           
-          <%= for item <- Rauversion.Accounts.list_accounts(5) do %>
+          <%= for track <- Rauversion.Tracks.list_tracks(5) do %>
             <div class="group relative">
               <div class="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full h-full object-center object-cover">
+                <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover") %>
               </div>
+
               <h3 class="mt-6 text-sm text-gray-500">
-                <a href="#">
+                <%= link to: Routes.track_show_path(@conn, :show, track) do %>
                   <span class="absolute inset-0"></span>
-                  Desk and Office
-                </a>
+                  <%= track.title %>
+                <% end %>
               </h3>
-              <p class="text-base font-semibold text-gray-900">Work from home accessories</p>
+              <p class="text-base font-semibold text-gray-900 hidden">xxx</p>
             </div>
           <% end %>
 
