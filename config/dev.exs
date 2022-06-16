@@ -67,6 +67,8 @@ config :rauversion, RauversionWeb.Endpoint,
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
+config :rauversion, :app_name, "Rauversion.com"
+
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
@@ -78,7 +80,6 @@ config :phoenix, :plug_init_mode, :runtime
 
 # :amazon
 config :active_storage, :default_source, :local
-
 config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo
 config :active_storage, repo: Rauversion.Repo

@@ -132,4 +132,33 @@ defmodule Rauversion.Tracks do
         apply(__MODULE__, :blob_url, [user, kind])
     end
   end
+
+  def blob_for(track, kind) do
+    kind_blob = :"#{kind}_blob"
+
+    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
+    case track do
+      nil ->
+        nil
+
+      %{^kind_blob => nil} ->
+        nil
+
+      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
+        blob
+
+      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
+        track = track |> Rauversion.Repo.preload(kind_blob)
+        apply(__MODULE__, :blob_for, [track, kind])
+    end
+  end
+
+  def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
+    blob = blob_for(track, kind)
+
+    variant = ActiveStorage.Blob.Representable.variant(blob, options)
+    ActiveStorage.Variant.processed(variant)
+
+    variant |> ActiveStorage.Variant.url()
+  end
 end
