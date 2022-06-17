@@ -94,7 +94,7 @@ config :mogrify,
 
 config :mogrify,
   convert_command: [
-    path: "covert",
+    path: "convert",
     args: []
   ]
 
