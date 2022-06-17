@@ -65,6 +65,8 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
+  config :active_storage, :secret_key_base, secret_key_base
+
   config :rauversion, RauversionWeb.Endpoint,
     http: [
       # Enable IPv6 and bind on all interfaces.
