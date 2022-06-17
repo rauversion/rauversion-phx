@@ -49,3 +49,33 @@ config :logger, level: :info
 #       force_ssl: [hsts: true]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
+
+# Finally import the config/prod.secret.exs which loads secrets
+# and configuration from environment variables.
+
+config :active_storage, :service, :amazon
+# config :active_storage, :secret_key_base, "xxxxxxxxxxx"
+config :active_job, repo: Rauversion.Repo
+config :active_storage, repo: Rauversion.Repo
+
+config :mogrify,
+  mogrify_command: [
+    path: "magick",
+    args: ["mogrify"]
+  ]
+
+# Configure convert command:
+
+config :mogrify,
+  convert_command: [
+    path: "magick",
+    args: ["convert"]
+  ]
+
+# Configure identify command:
+
+config :mogrify,
+  identify_command: [
+    path: "magick",
+    args: ["identify", "-verbose"]
+  ]
