@@ -1,5 +1,38 @@
 import Config
 
+unless Mix.env() == :prod do
+  Dotenv.load!()
+end
+
+config :active_storage, :services,
+  amazon: [
+    service: "S3",
+    bucket: System.get_env("AWS_S3_BUCKET"),
+    access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
+    secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
+    region: System.get_env("AWS_S3_REGION"),
+    # scheme: "https://",
+    # host: "localhost",
+    # port: 9000,
+    force_path_style: true
+  ],
+  minio: [
+    service: "S3",
+    bucket: "active-storage-test",
+    access_key_id: "root",
+    secret_access_key: "active_storage_test",
+    scheme: "http://",
+    host: "localhost",
+    port: 9000,
+    force_path_style: true
+  ],
+  local: [service: "Disk", root: Path.join(File.cwd!(), "tmp/storage")],
+  local_public: [service: "Disk", root: Path.join(File.cwd!(), "tmp/storage"), public: true],
+  test: [
+    service: "Disk",
+    root: "tmp/storage"
+  ]
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration

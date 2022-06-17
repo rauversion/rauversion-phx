@@ -117,7 +117,7 @@ defmodule RauversionWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
 
     get(
-      "/active_storage/blobs/redirect/:signed_id",
+      "/active_storage/blobs/redirect/:signed_id/*filename",
       ActiveStorage.Blobs.RedirectController,
       :show
     )
@@ -125,6 +125,12 @@ defmodule RauversionWeb.Router do
     # get "/blobs/redirect/:signed_id/*filename" => "active_storage/blobs/redirect#show", as: :rails_service_blob
     # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy
     # get "/blobs/:signed_id/*filename" => "active_storage/blobs/redirect#show"
+
+    get(
+      "/active_storage/representations/redirect/:signed_blob_id/:variation_key/*filename",
+      ActiveStorage.Representations.RedirectController,
+      :show
+    )
 
     # get "/representations/redirect/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/redirect#show", as: :rails_blob_representation
     # get "/representations/proxy/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/proxy#show", as: :rails_blob_representation_proxy

@@ -1,10 +1,10 @@
-defmodule ActiveStorage.Blobs.RedirectController do
+defmodule RauversionWeb.ActiveStorage.Blobs.RedirectController do
   use RauversionWeb, :controller
 
   action_fallback RauversionWeb.FallbackController
 
   def show(conn, %{"signed_id" => signed_id}) do
-    case Chaskiq.Verifier.verify(signed_id) do
+    case ActiveStorage.Verifier.verify(signed_id) do
       {:ok, id} -> conn |> handle_redirect(id)
       _ -> conn |> error_response(422, "Wrong provider key")
     end
@@ -16,8 +16,12 @@ defmodule ActiveStorage.Blobs.RedirectController do
       |> ActiveStorage.url()
 
     case presigned do
-      nil -> conn |> error_response(422, "Invalid blob id")
-      url -> conn |> redirect(external: url) |> halt()
+      nil ->
+        conn |> error_response(422, "Invalid blob id")
+
+      url ->
+        IO.inspect("REDIRECT TO #{url}")
+        conn |> redirect(external: url) |> halt()
     end
   end
 

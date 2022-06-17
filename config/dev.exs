@@ -79,38 +79,10 @@ config :phoenix, :plug_init_mode, :runtime
 # activestorage
 
 # :amazon
-config :active_storage, :default_source, :local
+config :active_storage, :service, :amazon
 config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo
 config :active_storage, repo: Rauversion.Repo
-
-config :active_storage, :services,
-  amazon: [
-    service: "S3",
-    bucket: "active-storage-test",
-    access_key_id: "root",
-    secret_access_key: "active_storage_test",
-    scheme: "http://",
-    host: "localhost",
-    port: 9000,
-    force_path_style: true
-  ],
-  minio: [
-    service: "S3",
-    bucket: "active-storage-test",
-    access_key_id: "root",
-    secret_access_key: "active_storage_test",
-    scheme: "http://",
-    host: "localhost",
-    port: 9000,
-    force_path_style: true
-  ],
-  local: [service: "Disk", root: Path.join(File.cwd!(), "tmp/storage")],
-  local_public: [service: "Disk", root: Path.join(File.cwd!(), "tmp/storage"), public: true],
-  test: [
-    service: "Disk",
-    root: "tmp/storage"
-  ]
 
 config :mogrify,
   mogrify_command: [

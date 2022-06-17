@@ -115,7 +115,6 @@ defmodule Rauversion.Tracks do
   def blob_url(user, kind) do
     kind_blob = :"#{kind}_blob"
 
-    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
     case user do
       nil ->
         nil
@@ -154,9 +153,23 @@ defmodule Rauversion.Tracks do
   end
 
   def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
-    blob_for(track, kind)
-    |> ActiveStorage.Blob.Representable.variant(options)
-    |> ActiveStorage.Variant.processed()
-    |> ActiveStorage.Variant.url()
+    case blob_for(track, kind) do
+      nil ->
+        # default url here?
+        nil
+
+      blob ->
+        variant =
+          ActiveStorage.Blob.Representable.variant(blob, options)
+          |> ActiveStorage.Variant.processed()
+
+        ActiveStorage.storage_redirect_url(variant, options)
+        # |> ActiveStorage.Variant.url()
+    end
+  end
+
+  def blob_url_for(track, kind) do
+    blob = blob_for(track, kind)
+    ActiveStorage.service_blob_url(blob)
   end
 end
