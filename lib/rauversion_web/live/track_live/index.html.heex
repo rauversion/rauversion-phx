@@ -169,8 +169,19 @@
                   
                 </div>
               
-                <div class="px-4 relative inline-block text-left" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
-                  <button type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()">
+                <div class="px-4 relative inline-block text-left" 
+                  data-controller="dropdown"
+                  x-data="Components.popover({ open: false, focus: false })"
+                  x-init="init()" 
+                  @keydown.escape="onEscape" 
+                  @close-popover-group.window="onClosePopoverGroup">
+                  <button type="button" 
+                    data-action="dropdown#toggle click@window->dropdown#hide" 
+                    class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" 
+                    @click="toggle" 
+                    @mousedown="if (open) $event.preventDefault()" 
+                    aria-expanded="false" 
+                    :aria-expanded="open.toString()">
                     <span>Color</span>
                     <svg class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" x-description="Heroicon name: solid/chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -178,7 +189,20 @@
                   </button>
 
                   
-                    <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none" x-description="'Color' dropdown, show/hide based on dropdown state." x-ref="panel" @click.away="open = false" style="display: none;">
+                    <div 
+                       data-dropdown-target="menu"
+                      x-show="open" 
+                      x-transition:enter="transition ease-out duration-100" 
+                      x-transition:enter-start="transform opacity-0 scale-95" 
+                      x-transition:enter-end="transform opacity-100 scale-100" 
+                      x-transition:leave="transition ease-in duration-75" 
+                      x-transition:leave-start="transform opacity-100 scale-100" 
+                      x-transition:leave-end="transform opacity-0 scale-95" 
+                      class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none" 
+                      x-description="'Color' dropdown, show/hide based on dropdown state."
+                      x-ref="panel" 
+                      @click.away="open = false" 
+                      style="display: none;">
                       <form class="space-y-4">
                         
                           <div class="flex items-center">
@@ -230,14 +254,24 @@
               
                 <div class="px-4 relative inline-block text-left" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
                   <button type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()">
-                    <span>Sizes</span>
+                    <span>BPM</span>
                     <svg class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" x-description="Heroicon name: solid/chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
                   </button>
 
                   
-                    <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none" x-description="'Sizes' dropdown, show/hide based on dropdown state." x-ref="panel" @click.away="open = false" style="display: none;">
+                    <div x-show="open" 
+                      x-transition:enter="transition ease-out duration-100" 
+                      x-transition:enter-start="transform opacity-0 scale-95" 
+                      x-transition:enter-end="transform opacity-100 scale-100" 
+                      x-transition:leave="transition ease-in duration-75" 
+                      x-transition:leave-start="transform opacity-100 scale-100" 
+                      x-transition:leave-end="transform opacity-0 scale-95" 
+                      class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none" 
+                      x-description="'Sizes' dropdown, show/hide based on dropdown state." 
+                      x-ref="panel" 
+                      @click.away="open = false" style="display: none;">
                       <form class="space-y-4">
                         
                           <div class="flex items-center">
