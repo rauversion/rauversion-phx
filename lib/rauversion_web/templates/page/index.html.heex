@@ -1,7 +1,7 @@
 <main>
   <!-- Hero -->
   <div class="flex flex-col border-b border-gray-200 lg:border-0">
-    <nav aria-label="Offers" class="order-last lg:order-first">
+    <nav aria-label="Offers" class="order-last lg:order-first hidden">
       <div class="max-w-7xl mx-auto lg:px-8">
         <ul role="list" class="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-y-0 lg:divide-x">
           
@@ -48,14 +48,20 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2">
           <div class="max-w-2xl mx-auto py-24 lg:py-64 lg:max-w-none">
             <div class="lg:pr-16">
+
+              <a href="/" class="text-white text-xl font-extrabold">
+                RAUVERSION
+              </a>
+
               <h1 class="tracking-tight text-gray-900 sm:text-5xl xl:text-6xl
-              font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600
-              ">Be your own music industry</h1>
+              font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-orange-600">
+                Be your own music industry
+              </h1>
               <p class="mt-4 text-xl text-gray-100 ">
                 It's time to empower musicians all around the world and give them tools to own their industry
               </p>
               <div class="mt-6">
-                <a href="#" class="inline-block bg-indigo-600 border border-transparent py-3 px-8 rounded-md font-medium text-white hover:bg-indigo-700">
+                <a href="/users/register" class="inline-block bg-orange-600 border border-transparent py-3 px-8 rounded-md font-medium text-white hover:bg-orange-700">
                   Start now
                 </a>
               </div>
@@ -64,7 +70,7 @@
         </div>
       </div>
       <div class="w-full h-48 sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full">
-        <img src={ Routes.static_path(@conn, "/images/musician-making-music.jpg")} class="w-full h-full object-center object-cover" />
+        <img src={ Routes.static_path(@conn, "/images/daniel-schludi-mbGxz7pt0jM-unsplash.jpg")} class="w-full h-full object-center object-cover" />
       </div>
     </div>
   </div>

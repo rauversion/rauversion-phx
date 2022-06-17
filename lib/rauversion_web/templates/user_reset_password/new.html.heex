@@ -1,15 +1,37 @@
-<h1>Forgot your password?</h1>
 
-<.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-
-  <div>
-    <%= submit "Send instructions to reset password" %>
+<div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <!--<img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-orange-600.svg" alt="Workflow">-->
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Forgot your password?</h2>
   </div>
-</.form>
 
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
-</p>
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+      <.form let={f} 
+          for={:user} 
+          action={Routes.user_reset_password_path(@conn, :create)}
+          class="space-y-6">
+
+        <div>
+          <%= label f, :email, "Email address", class: "block text-sm font-medium text-gray-700" %> 
+          <div class="mt-1">
+            <%= email_input f, :email, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" %>
+            <!-- <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"> -->
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+            Send instructions to reset password
+          </button>
+        </div>
+      </.form>
+
+        <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
+        <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
+
+
+    </div>
+  </div>
+</div>
