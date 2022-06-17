@@ -26,7 +26,7 @@ rauversion-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
-
+/priv/static/
 # Ignore digested assets cache.
 /priv/static/cache_manifest.json
 

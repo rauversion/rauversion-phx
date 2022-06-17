@@ -4,5 +4,8 @@
     "@rails/activestorage": "^6.0.5",
     "stimulus-dropdown": "^2.0.0",
     "wavesurfer": "^1.3.4"
+  },
+  "scripts": {
+    "deploy": "cd .. && mix assets.deploy"
   }
 }
