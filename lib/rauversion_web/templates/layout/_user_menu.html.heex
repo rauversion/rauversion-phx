@@ -1,9 +1,4 @@
-
-
-
-
-
-<nav x-data="{ open: false }" class="bg-black" aria-label="Global">
+<nav class="bg-black" aria-label="Global">
     <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center px-2 lg:px-0">
@@ -20,14 +15,6 @@
             
               <a href="/users/settings" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
                 Account
-              </a>
-            
-              <a href="/listings" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
-                Listing
-              </a>
-            
-              <a href="#" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
-                Company
               </a>
 
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>

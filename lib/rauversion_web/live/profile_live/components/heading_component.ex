@@ -10,9 +10,8 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
         <div class="flex justify-between">
           <div class="flex">
             <div class="m-4">
-              <% #if @profile&.avatar&.persisted? %>
-              <% #= image_tag @profile&.avatar, class: "h-2/5 rounded-full" %>
-              <% # end %>
+
+              <%= img_tag(Rauversion.Accounts.avatar_url(@profile),  class: "h-2/5 rounded-full") %>
             </div>
             <div class="text-white mt-6">
               <p class="text-2xl sm:text-3xl font-extrabold">

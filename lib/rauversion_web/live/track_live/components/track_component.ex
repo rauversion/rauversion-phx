@@ -13,6 +13,8 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         <div class="group relative aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden">
           <% #= image_tag url_for(track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
 
+          <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "object-center object-cover group-hover:opacity-75") %>
+
           <div class="flex flex-col justify-end">
             <div class="p-4 bg-white bg-opacity-60 text-sm">
               <a href="#" class="font-medium text-gray-900">
@@ -28,13 +30,10 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
       <div class="py-2 w-full">
 
-
-        <% #= audio_tag rails_storage_proxy_path(track.audio), controls: true %>
-
         <% # if track.audio.persisted? %>
-          <% #= content_tag :div, data: { controller: 'audio',
-             #                         "audio-target": 'player',
-             #                         'audio-url': url_for(track.audio) } do %>
+          <%= content_tag :div, "data-controller": "audio",
+                                 "data-audio-target": "player",
+                                "data-audio-url": Rauversion.Tracks.blob_url(track, "audio")  do %>
             <div class='controls flex items-center'>
               <span class="relative z-0 inline-flex">
                 <button type="button"
@@ -42,7 +41,6 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                   data-audio-target="play"
                   class="relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                   <span class="sr-only">Play</span>
-
                   <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
                 </button>
 
@@ -51,7 +49,6 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 data-audio-target="pause"
                 class="-ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                   <span class="sr-only">Next</span>
-
                   <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path></svg>
                 </button>
 
@@ -65,7 +62,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 <% end %>
               </div>
             </div>
-          <% #end %>
+          <% end %>
         <% #end %>
 
         <p class="hidden mt-1 text-sm text-gray-500">

@@ -6,8 +6,17 @@ defmodule RauversionWeb.TrackLive.Index do
   alias Rauversion.Repo
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :tracks, list_tracks())}
+  def mount(_params, session, socket) do
+    @current_user
+
+    user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
+
+    socket =
+      socket
+      |> assign(:current_user, user)
+      |> assign(:tracks, list_tracks)
+
+    {:ok, socket}
   end
 
   @impl true

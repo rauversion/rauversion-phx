@@ -137,6 +137,24 @@ defmodule Rauversion.Accounts do
     |> Repo.update()
   end
 
+  def avatar_url(user) do
+    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
+    case user do
+      nil ->
+        nil
+
+      %{avatar_blob: nil} ->
+        nil
+
+      %{avatar_blob: %ActiveStorage.Blob{} = avatar_blob} ->
+        avatar_blob |> ActiveStorage.url()
+
+      %{avatar_blob: %Ecto.Association.NotLoaded{}} ->
+        user = user |> Rauversion.Repo.preload(:avatar_blob)
+        Rauversion.Accounts.avatar_url(user)
+    end
+  end
+
   @doc """
   Emulates that the email will change without actually changing
   it in the database.

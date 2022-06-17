@@ -17,11 +17,12 @@ defmodule Rauversion.Tracks do
       [%Track{}, ...]
 
   """
-  def list_tracks do
-    Repo.all(Track) |> Repo.preload(:user)
+
+  def list_tracks(limit \\ 20) do
+    Track |> limit(^limit) |> Repo.all()
   end
 
-  def list_tracks(%{user_id: user_id}) do
+  def list_tracks_by_username(user_id) do
     Rauversion.Accounts.get_user_by_username(user_id)
     |> Ecto.assoc(:tracks)
     |> Repo.all()
@@ -77,6 +78,8 @@ defmodule Rauversion.Tracks do
   def update_track(%Track{} = track, attrs) do
     track
     |> Track.changeset(attrs)
+    |> Track.process_one_upload(attrs, "cover")
+    |> Track.process_one_upload(attrs, "audio")
     |> Repo.update()
   end
 
@@ -107,5 +110,66 @@ defmodule Rauversion.Tracks do
   """
   def change_track(%Track{} = track, attrs \\ %{}) do
     Track.changeset(track, attrs)
+  end
+
+  def blob_url(user, kind) do
+    kind_blob = :"#{kind}_blob"
+
+    case user do
+      nil ->
+        nil
+
+      %{^kind_blob => nil} ->
+        nil
+
+      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
+        blob |> ActiveStorage.url()
+
+      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
+        user = user |> Rauversion.Repo.preload(kind_blob)
+
+        apply(__MODULE__, :blob_url, [user, kind])
+    end
+  end
+
+  def blob_for(track, kind) do
+    kind_blob = :"#{kind}_blob"
+
+    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
+    case track do
+      nil ->
+        nil
+
+      %{^kind_blob => nil} ->
+        nil
+
+      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
+        blob
+
+      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
+        track = track |> Rauversion.Repo.preload(kind_blob)
+        apply(__MODULE__, :blob_for, [track, kind])
+    end
+  end
+
+  def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
+    case blob_for(track, kind) do
+      nil ->
+        # default url here?
+        nil
+
+      blob ->
+        variant =
+          ActiveStorage.Blob.Representable.variant(blob, options)
+          |> ActiveStorage.Variant.processed()
+
+        ActiveStorage.storage_redirect_url(variant, options)
+        # |> ActiveStorage.Variant.url()
+    end
+  end
+
+  def blob_url_for(track, kind) do
+    blob = blob_for(track, kind)
+    ActiveStorage.service_blob_url(blob)
   end
 end

@@ -2,6 +2,9 @@ defmodule Rauversion.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  use ActiveStorage.Attached.Model
+  use ActiveStorage.Attached.HasOne, name: :avatar, model: "User"
+
   schema "users" do
     field :first_name, :string
     field :last_name, :string
@@ -13,18 +16,53 @@ defmodule Rauversion.Accounts.User do
 
     has_many :tracks, Rauversion.Tracks.Track
 
+    has_one(:avatar_attachment, ActiveStorage.Attachment,
+      where: [record_type: "User", name: "avatar"],
+      foreign_key: :record_id
+    )
+
+    has_one(:avatar_blob, through: [:avatar_attachment, :blob])
+
     timestamps()
+  end
+
+  def record_type() do
+    "User"
   end
 
   def profile_changeset(user, attrs, opts \\ []) do
     user
     |> validate_contact_fields(attrs)
+    |> process_avatar(attrs)
   end
 
   def changeset(user, attrs, opts \\ []) do
-    user
-    |> validate_contact_fields(attrs)
-    |> registration_changeset(attrs, opts)
+    user =
+      user
+      |> validate_contact_fields(attrs)
+      |> registration_changeset(attrs, opts)
+  end
+
+  def process_avatar(user, attrs) do
+    case attrs do
+      %{"avatar" => avatar} ->
+        blob =
+          ActiveStorage.Blob.create_and_upload!(
+            %ActiveStorage.Blob{},
+            io: {:path, attrs["avatar"].path},
+            filename: attrs["avatar"].filename,
+            content_type: attrs["avatar"].content_type,
+            identify: true
+          )
+
+        avatar = user.data.__struct__.avatar(user.data)
+        avatar_attachment = avatar.__struct__.attach(avatar, blob)
+
+        user
+
+      _ ->
+        user
+    end
   end
 
   @doc """

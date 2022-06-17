@@ -3,7 +3,7 @@ defmodule Mix.Tasks.FakeAccounts do
   use Mix.Task
 
   @shortdoc "Generates fake contacts."
-  def run(id) do
+  def run(_id) do
     Mix.Task.run("app.start")
     Faker.start()
 

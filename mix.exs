@@ -36,7 +36,7 @@ defmodule Rauversion.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.6.0"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.6"},
+      {:ecto_sql, "~> 3.7.2"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
@@ -51,7 +51,21 @@ defmodule Rauversion.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:faker, "~> 0.17", only: [:test, :dev]}
+      {:faker, "~> 0.17", only: [:test, :dev]},
+      {:ecto_autoslug_field, "~> 3.0"},
+      {:dotenv, "~> 3.0.0", only: [:dev, :test]},
+      {
+        :active_storage,
+        git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
+      },
+      {
+        :active_job,
+        "0.1.1"
+      }
+      # {:active_storage,
+      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"},
+      # {:active_job,
+      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_job"}
     ]
   end
 
