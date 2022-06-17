@@ -1,6 +1,6 @@
 %{
   "active_job": {:hex, :active_job, "0.1.1", "e0a8c5beee0f4aca70c900aee23d54caf282eb541204b43375402d6504a0ac21", [:mix], [{:ecto, "~> 3.7.2", [hex: :ecto, repo: "hexpm", optional: false]}, {:ecto_sql, "~> 3.7.2", [hex: :ecto_sql, repo: "hexpm", optional: false]}, {:exq, "~> 0.16.2", [hex: :exq, repo: "hexpm", optional: true]}, {:oban, "~> 2.12", [hex: :oban, repo: "hexpm", optional: true]}], "hexpm", "3c3ed5d413a174dbb63f7481ec0d34d47a95eb4ba4dee76470bc5577d9f5fd22"},
-  "active_storage": {:git, "https://github.com/chaskiq/ex-rails.git", "b9b0edf084d581d0f5bd5ef6fefad0041db1384a", [sparse: "apps/active_storage"]},
+  "active_storage": {:git, "https://github.com/chaskiq/ex-rails.git", "372f7ed20ad32c7fca3ef1aa98d957997423372c", [sparse: "apps/active_storage"]},
   "bcrypt_elixir": {:hex, :bcrypt_elixir, "3.0.0", "851d16b901b6c94a0ceadd3470f2b58d9899007bf04a42e0e4b399e2dd6ab307", [:make, :mix], [{:comeonin, "~> 5.3", [hex: :comeonin, repo: "hexpm", optional: false]}, {:elixir_make, "~> 0.6", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm", "fe251accb51f1aa17d67009cb125bddf81fb056cacad71bfad7827a44652f4ee"},
   "castore": {:hex, :castore, "0.1.17", "ba672681de4e51ed8ec1f74ed624d104c0db72742ea1a5e74edbc770c815182f", [:mix], [], "hexpm", "d9844227ed52d26e7519224525cb6868650c272d4a3d327ce3ca5570c12163f9"},
   "certifi": {:hex, :certifi, "2.9.0", "6f2a475689dd47f19fb74334859d460a2dc4e3252a3324bd2111b8f0429e7e21", [:rebar3], [], "hexpm", "266da46bdb06d6c6d35fde799bcb28d36d985d424ad7c08b5bb48f5b5cdd4641"},
