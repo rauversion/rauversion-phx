@@ -4,6 +4,11 @@ import WaveSurfer from 'wavesurfer'
 
 export default class extends Controller {
   static targets = ['player', 'play', 'pause']
+
+  static values = {
+    height: String
+  }
+
   initialize() {}
   connect() {
     this.wave()
@@ -17,6 +22,7 @@ export default class extends Controller {
         backend: 'MediaElement',
         waveColor: 'violet',
         progressColor: 'purple',
+        height: this.heightValue || 70,
         //fillParent: false,
         barWidth: 2,
         barHeight: 10, // the height of the wave

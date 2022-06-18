@@ -89,4 +89,13 @@ defmodule RauversionWeb.LiveHelpers do
       socket
     end
   end
+
+  def authorize_user_resource(socket) do
+    if socket.assigns.track.user_id == socket.assigns.current_user.id do
+      {:ok, socket}
+    else
+      socket = socket |> put_flash(:error, "resource not authorized")
+      {:err, push_patch(socket, to: "/", replace: true)}
+    end
+  end
 end

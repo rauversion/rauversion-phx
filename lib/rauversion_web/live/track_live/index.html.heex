@@ -1,5 +1,3 @@
-<h1>Listing Tracks</h1>
-
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.track_index_path(@socket, :index)}>
     <.live_component
@@ -14,45 +12,44 @@
   </.modal>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Private</th>
-      <th>Slug</th>
-      <th>Caption</th>
-      <th>Notification settings</th>
-      <th>Metadata</th>
+<% if Mix.env == :dev do %>
+  <table class="hidden">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Private</th>
+        <th>Slug</th>
+        <th>Caption</th>
+        <th>Notification settings</th>
+        <th>Metadata</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="tracks">
-    <%= for track <- @tracks do %>
-      <tr id={"track-#{track.id}"}>
-        <td><%= track.title %></td>
-        <td><%= track.description %></td>
-        <td><%= track.private %></td>
-        <td><%= track.slug %></td>
-        <td><%= track.caption %></td>
-        <td><%= track.notification_settings %></td>
-        <td><%= track.metadata %></td>
-
-        <td>
-          <span><%= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track) %></span>
-          <span><%= live_patch "Edit", to: Routes.track_index_path(@socket, :edit, track) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: track.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody id="tracks">
+      <%= for track <- @tracks do %>
+        <tr id={"track-#{track.id}"}>
+          <td><%= track.title %></td>
+          <td><%= track.description %></td>
+          <td><%= track.private %></td>
+          <td><%= track.slug %></td>
+          <td><%= track.caption %></td>
+          <td><%= track.notification_settings %></td>
+          <td><%= track.metadata %></td>
 
-<span><%= live_patch "New Track", to: Routes.track_new_path(@socket, :new) %></span>
+          <td>
+            <span><%= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track) %></span>
+            <span><%= live_patch "Edit", to: Routes.track_index_path(@socket, :edit, track) %></span>
+            <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: track.id, data: [confirm: "Are you sure?"] %></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-
-
+  <span><%= live_patch "New Track", to: Routes.track_new_path(@socket, :new) %></span>
+<% end %>
 
 <main>
   <div class="bg-white">

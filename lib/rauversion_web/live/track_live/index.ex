@@ -1,17 +1,17 @@
 defmodule RauversionWeb.TrackLive.Index do
   use RauversionWeb, :live_view
+  on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
   alias Rauversion.Repo
 
-  @impl true
+  # @impl true
   def mount(_params, session, socket) do
-    @current_user
+    # @current_user
 
     socket =
       socket
-      |> RauversionWeb.LiveHelpers.get_user_by_session(session)
       |> assign(:tracks, list_tracks)
 
     {:ok, socket}
@@ -19,13 +19,31 @@ defmodule RauversionWeb.TrackLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+    case apply_action(socket, socket.assigns.live_action, params) do
+      {:ok, reply} ->
+        {:noreply, reply}
+
+      {:err, err} ->
+        {:noreply, err}
+
+      any ->
+        {:noreply, any}
+    end
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Track")
-    |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
+    socket =
+      socket
+      |> assign(:page_title, "Edit Track")
+      |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
+
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket) do
+      {:ok} ->
+        socket
+
+      err ->
+        err
+    end
   end
 
   defp apply_action(socket, :new, _params) do
@@ -42,10 +60,17 @@ defmodule RauversionWeb.TrackLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    track = Tracks.get_track!(id)
-    {:ok, _} = Tracks.delete_track(track)
+    socket
+    |> assign(:track, Tracks.get_track!(id))
 
-    {:noreply, assign(socket, :tracks, list_tracks())}
+    case authorize_user_resource(socket) do
+      {:ok} ->
+        {:ok, _} = Tracks.delete_track(socket.assigns.track)
+        {:noreply, assign(socket, :tracks, list_tracks())}
+
+      err ->
+        err
+    end
   end
 
   defp list_tracks do

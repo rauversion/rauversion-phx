@@ -11,11 +11,27 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
+  def handle_params(%{"id" => id} = params, _, socket = %{assigns: %{live_action: :show}}) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))}
+  end
+
+  @impl true
+  def handle_params(%{"id" => id} = params, _, socket = %{assigns: %{live_action: :edit}}) do
+    socket =
+      socket
+      |> assign(:page_title, page_title(socket.assigns.live_action))
+      |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
+
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket) do
+      {:ok, socket} ->
+        {:noreply, socket}
+
+      {:err, err} ->
+        {:noreply, err}
+    end
   end
 
   defp page_title(:show), do: "Show Track"
