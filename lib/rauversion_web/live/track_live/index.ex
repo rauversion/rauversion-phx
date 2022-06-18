@@ -9,11 +9,9 @@ defmodule RauversionWeb.TrackLive.Index do
   def mount(_params, session, socket) do
     @current_user
 
-    user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
-
     socket =
       socket
-      |> assign(:current_user, user)
+      |> RauversionWeb.LiveHelpers.get_user_by_session(session)
       |> assign(:tracks, list_tracks)
 
     {:ok, socket}

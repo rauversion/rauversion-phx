@@ -77,4 +77,16 @@ defmodule RauversionWeb.LiveHelpers do
     |> JS.hide(to: "#modal", transition: "fade-out")
     |> JS.hide(to: "#modal-content", transition: "fade-out-scale")
   end
+
+  def get_user_by_session(socket, session) do
+    if session["user_token"] do
+      user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
+
+      socket =
+        socket
+        |> assign(:current_user, user)
+    else
+      socket
+    end
+  end
 end

@@ -5,11 +5,7 @@ defmodule RauversionWeb.TrackLive.Show do
 
   @impl true
   def mount(_params, session, socket) do
-    user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
-
-    socket =
-      socket
-      |> assign(:current_user, user)
+    socket = RauversionWeb.LiveHelpers.get_user_by_session(socket, session)
 
     {:ok, socket}
   end

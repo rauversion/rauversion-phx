@@ -78,33 +78,19 @@ defmodule RauversionWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    live "/tracks", TrackLive.Index, :index
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
 
-    live "/tracks/:id", TrackLive.Show, :show
     live "/tracks/:id/show/edit", TrackLive.Show, :edit
 
-    live "/reposts", RepostLive.Index, :index
     live "/reposts/new", RepostLive.Index, :new
     live "/reposts/:id/edit", RepostLive.Index, :edit
 
-    live "/reposts/:id", RepostLive.Show, :show
     live "/reposts/:id/show/edit", RepostLive.Show, :edit
 
-    live "/playlists", PlaylistLive.Index, :index
     live "/playlists/new", PlaylistLive.Index, :new
     live "/playlists/:id/edit", PlaylistLive.Index, :edit
-
-    live "/playlists/:id", PlaylistLive.Show, :show
     live "/playlists/:id/show/edit", PlaylistLive.Show, :edit
-
-    # get "/:username", ProfileController, :show
-    live "/:username", ProfileLive.Index, :index
-    live "/:username/tracks/all", ProfileLive.Index, :tracks_all
-    live "/:username/tracks/reposts", ProfileLive.Index, :reposts
-    live "/:username/tracks/albums", ProfileLive.Index, :albums
-    live "/:username/tracks/playlists", ProfileLive.Index, :playlists
   end
 
   scope "/", RauversionWeb do
@@ -115,6 +101,13 @@ defmodule RauversionWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
+
+    live "/tracks", TrackLive.Index, :index
+    live "/tracks/:id", TrackLive.Show, :show
+    live "/reposts", RepostLive.Index, :index
+    live "/reposts/:id", RepostLive.Show, :show
+    live "/playlists", PlaylistLive.Index, :index
+    live "/playlists/:id", PlaylistLive.Show, :show
 
     get(
       "/active_storage/blobs/redirect/:signed_id/*filename",
@@ -145,5 +138,12 @@ defmodule RauversionWeb.Router do
     # get  "/disk/:encoded_key/*filename" => "active_storage/disk#show", as: :rails_disk_service
     # put  "/disk/:encoded_token" => "active_storage/disk#update", as: :update_rails_disk_service
     # post "/direct_uploads" => "active_storage/direct_uploads#create", as: :rails_direct_uploads
+
+    # get "/:username", ProfileController, :show
+    live "/:username", ProfileLive.Index, :index
+    live "/:username/tracks/all", ProfileLive.Index, :tracks_all
+    live "/:username/tracks/reposts", ProfileLive.Index, :reposts
+    live "/:username/tracks/albums", ProfileLive.Index, :albums
+    live "/:username/tracks/playlists", ProfileLive.Index, :playlists
   end
 end
