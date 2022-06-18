@@ -6,17 +6,26 @@ defmodule Rauversion.RepostsTest do
   describe "reposts" do
     alias Rauversion.Reposts.Repost
 
-    import Rauversion.RepostsFixtures
+    import Rauversion.{
+      RepostsFixtures,
+      TracksFixtures,
+      AccountsFixtures
+    }
 
     @invalid_attrs %{}
 
+    def valid_repost() do
+      user = user_fixture()
+      track = track_fixture()
+      repost = repost_fixture(%{user_id: user.id, track_id: track.id})
+    end
+
     test "list_reposts/0 returns all reposts" do
-      repost = repost_fixture()
-      assert Reposts.list_reposts() == [repost]
+      assert Reposts.list_reposts() == [valid_repost()]
     end
 
     test "get_repost!/1 returns the repost with given id" do
-      repost = repost_fixture()
+      repost = valid_repost()
       assert Reposts.get_repost!(repost.id) == repost
     end
 
@@ -38,7 +47,7 @@ defmodule Rauversion.RepostsTest do
     end
 
     test "update_repost/2 with invalid data returns error changeset" do
-      repost = repost_fixture()
+      repost = valid_repost()
       assert {:error, %Ecto.Changeset{}} = Reposts.update_repost(repost, @invalid_attrs)
       assert repost == Reposts.get_repost!(repost.id)
     end

@@ -8,7 +8,15 @@ defmodule Rauversion.TracksTest do
 
     import Rauversion.TracksFixtures
 
-    @invalid_attrs %{caption: nil, description: nil, metadata: nil, notification_settings: nil, private: nil, slug: nil, title: nil}
+    @invalid_attrs %{
+      caption: nil,
+      description: nil,
+      metadata: nil,
+      notification_settings: nil,
+      private: nil,
+      slug: nil,
+      title: nil
+    }
 
     test "list_tracks/0 returns all tracks" do
       track = track_fixture()
@@ -21,7 +29,15 @@ defmodule Rauversion.TracksTest do
     end
 
     test "create_track/1 with valid data creates a track" do
-      valid_attrs = %{caption: "some caption", description: "some description", metadata: %{}, notification_settings: %{}, private: true, slug: "some slug", title: "some title"}
+      valid_attrs = %{
+        caption: "some caption",
+        description: "some description",
+        metadata: %{},
+        notification_settings: %{},
+        private: true,
+        slug: "some slug",
+        title: "some title"
+      }
 
       assert {:ok, %Track{} = track} = Tracks.create_track(valid_attrs)
       assert track.caption == "some caption"
@@ -29,7 +45,7 @@ defmodule Rauversion.TracksTest do
       assert track.metadata == %{}
       assert track.notification_settings == %{}
       assert track.private == true
-      assert track.slug == "some slug"
+      assert track.slug == "some-title"
       assert track.title == "some title"
     end
 
@@ -39,7 +55,16 @@ defmodule Rauversion.TracksTest do
 
     test "update_track/2 with valid data updates the track" do
       track = track_fixture()
-      update_attrs = %{caption: "some updated caption", description: "some updated description", metadata: %{}, notification_settings: %{}, private: false, slug: "some updated slug", title: "some updated title"}
+
+      update_attrs = %{
+        caption: "some updated caption",
+        description: "some updated description",
+        metadata: %{},
+        notification_settings: %{},
+        private: false,
+        slug: "some updated slug",
+        title: "some updated title"
+      }
 
       assert {:ok, %Track{} = track} = Tracks.update_track(track, update_attrs)
       assert track.caption == "some updated caption"
@@ -47,7 +72,7 @@ defmodule Rauversion.TracksTest do
       assert track.metadata == %{}
       assert track.notification_settings == %{}
       assert track.private == false
-      assert track.slug == "some updated slug"
+      assert track.slug == "some-title"
       assert track.title == "some updated title"
     end
 

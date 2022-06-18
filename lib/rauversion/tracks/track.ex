@@ -14,8 +14,8 @@ defmodule Rauversion.Tracks.Track do
   schema "tracks" do
     field :caption, :string
     field :description, :string
-    field :metadata, :map
-    field :notification_settings, :map
+    field :metadata, :map, default: %{}
+    field :notification_settings, :map, default: %{}
     field :private, :boolean, default: false
     field :slug, TitleSlug.Type
     field :title, :string
@@ -50,7 +50,8 @@ defmodule Rauversion.Tracks.Track do
       :title,
       :description,
       :private,
-      :user_id
+      :user_id,
+      :caption
       # :slug,
       # :caption,
       # :notification_settings,
