@@ -1,12 +1,13 @@
 defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
+  on_mount RauversionWeb.UserLiveAuth
+
   alias Rauversion.{Accounts, Tracks}
 
   @impl true
   def mount(params = %{"username" => id}, session, socket) do
     socket =
       socket
-      |> RauversionWeb.LiveHelpers.get_user_by_session(session)
       |> assign(:profile, Accounts.get_user_by_username(id))
 
     {:ok, socket}
