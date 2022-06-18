@@ -30,6 +30,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [ ] Playlists
 - [ ] Likes
 - [ ] Followers / Followings
+- [ ] Range responses https://github.com/elixir-plug/plug/pull/526/files
 
 
 # Setup:

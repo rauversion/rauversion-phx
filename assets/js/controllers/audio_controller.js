@@ -23,6 +23,8 @@ export default class extends Controller {
         waveColor: 'violet',
         progressColor: 'purple',
         height: this.heightValue || 70,
+        //partialRender: true,
+        pixelRatio: 1,
         //fillParent: false,
         barWidth: 2,
         barHeight: 10, // the height of the wave
