@@ -115,6 +115,9 @@ defmodule RauversionWeb.Router do
       :show
     )
 
+    get("/blobs/proxy/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
+    get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
+
     # get "/blobs/redirect/:signed_id/*filename" => "active_storage/blobs/redirect#show", as: :rails_service_blob
     # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy
     # get "/blobs/:signed_id/*filename" => "active_storage/blobs/redirect#show"
@@ -122,6 +125,12 @@ defmodule RauversionWeb.Router do
     get(
       "/active_storage/representations/redirect/:signed_blob_id/:variation_key/*filename",
       ActiveStorage.Representations.RedirectController,
+      :show
+    )
+
+    get(
+      "/representations/proxy/:signed_blob_id/:variation_key/*filename",
+      ActiveStorage.Representations.ProxyController,
       :show
     )
 
