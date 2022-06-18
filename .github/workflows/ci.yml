@@ -1,0 +1,37 @@
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: ['5433:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+      REDIS_URL: redis://localhost:6379/0
+      MIX_ENV: test
+    steps:
+      - uses: actions/checkout@v2
+      #- uses: mfinelli/setup-imagemagick@v1
+      #- name: Install Ubuntu dependencies
+      #  run: sudo apt-get -y install poppler-data poppler-utils ffmpeg mupdf-tools
+      - name: Check identify
+        run: identify --version
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: '24'
+          elixir-version: '1.12'
+      - run: mix deps.get
+      - run: mix test.all
