@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:14.3
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+  rauversion-phx:
+    environment:
+      PORT: 4000
+      DB_HOST: db
+      MIX_BUILD_ROOT: /opt/elixir-artifacts/_build
+      MIX_DEPS_PATH: /opt/elixir-artifacts/deps
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ..:/workspace:delegated
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.gitignore:/root/.gitignore
+      - ~/.ssh:/root/.ssh
+      - elixir-artifacts:/opt/elixir-artifacts
+    command: sleep infinity
+
+volumes:
+  elixir-artifacts: {}
+  db: {}

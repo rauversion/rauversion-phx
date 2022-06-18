@@ -12,7 +12,7 @@ config :rauversion, Rauversion.Repo,
   username: "postgres",
   password: "postgres",
   database: "rauversion_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
+  hostname: System.get_env("DB_HOST", "localhost"),
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 

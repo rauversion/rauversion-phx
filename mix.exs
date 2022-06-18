@@ -1,3 +1,4 @@
+
 defmodule Rauversion.MixProject do
   use Mix.Project
 
@@ -5,7 +6,7 @@ defmodule Rauversion.MixProject do
     [
       app: :rauversion,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -54,15 +55,12 @@ defmodule Rauversion.MixProject do
       {:faker, "~> 0.17", only: [:test, :dev]},
       {:ecto_autoslug_field, "~> 3.0"},
       {:dotenv, "~> 3.0.0", only: [:dev, :test]},
+      {:active_job,  "0.1.1"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
-      },
-      {
-        :active_job,
-        "0.1.1"
       }
-      # {:active_storage,
+            # {:active_storage,
       # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"},
       # {:active_job,
       # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_job"}
