@@ -105,4 +105,20 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  config :oscflow_phx, OscflowPhx.Mailer,
+    adapter: Swoosh.Adapters.SMTP,
+    relay: System.get_env("SMTP_DOMAIN"),
+    username: System.get_env("SMTP_USERNAME"),
+    password: System.get_env("SMTP_PASSWORD"),
+    # ssl: true,
+    # tls: :always,
+    auth: :always,
+    port: 587,
+    # dkim: [
+    #  s: "default", d: "domain.com",
+    #  private_key: {:pem_plain, File.read!("priv/keys/domain.private")}
+    # ],
+    retries: 2,
+    no_mx_lookups: false
 end
