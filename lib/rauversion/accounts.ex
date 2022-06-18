@@ -141,10 +141,14 @@ defmodule Rauversion.Accounts do
     # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
     case user do
       nil ->
-        nil
+        Rauversion.BlobUtils.fallback_image(
+          "/images/dan-cristian-padure-XKCH37dHt7w-unsplash.jpg"
+        )
 
       %{avatar_blob: nil} ->
-        nil
+        Rauversion.BlobUtils.fallback_image(
+          "/images/dan-cristian-padure-XKCH37dHt7w-unsplash.jpg"
+        )
 
       %{avatar_blob: %ActiveStorage.Blob{} = avatar_blob} ->
         avatar_blob |> ActiveStorage.url()

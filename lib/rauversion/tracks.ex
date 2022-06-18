@@ -112,64 +112,11 @@ defmodule Rauversion.Tracks do
     Track.changeset(track, attrs)
   end
 
-  def blob_url(user, kind) do
-    kind_blob = :"#{kind}_blob"
+  defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
 
-    case user do
-      nil ->
-        nil
+  defdelegate blob_for(track, kind), to: Rauversion.BlobUtils
 
-      %{^kind_blob => nil} ->
-        nil
+  defdelegate variant_url(track, kind, options), to: Rauversion.BlobUtils
 
-      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
-        blob |> ActiveStorage.url()
-
-      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
-        user = user |> Rauversion.Repo.preload(kind_blob)
-
-        apply(__MODULE__, :blob_url, [user, kind])
-    end
-  end
-
-  def blob_for(track, kind) do
-    kind_blob = :"#{kind}_blob"
-
-    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
-    case track do
-      nil ->
-        nil
-
-      %{^kind_blob => nil} ->
-        nil
-
-      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
-        blob
-
-      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
-        track = track |> Rauversion.Repo.preload(kind_blob)
-        apply(__MODULE__, :blob_for, [track, kind])
-    end
-  end
-
-  def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
-    case blob_for(track, kind) do
-      nil ->
-        # default url here?
-        nil
-
-      blob ->
-        variant =
-          ActiveStorage.Blob.Representable.variant(blob, options)
-          |> ActiveStorage.Variant.processed()
-
-        ActiveStorage.storage_redirect_url(variant, options)
-        # |> ActiveStorage.Variant.url()
-    end
-  end
-
-  def blob_url_for(track, kind) do
-    blob = blob_for(track, kind)
-    ActiveStorage.service_blob_url(blob)
-  end
+  defdelegate blob_url_for(track, kind), to: Rauversion.BlobUtils
 end

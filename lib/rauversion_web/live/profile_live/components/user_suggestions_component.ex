@@ -18,7 +18,11 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                 <%= for item <- Rauversion.Accounts.list_accounts(5) do %>
                   <li class="flex items-center py-4 space-x-3">
                     <div class="flex-shrink-0">
-                      <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+
+                      <%= img_tag(
+                        Rauversion.Accounts.avatar_url(item),
+                        class: "h-8 w-8 rounded-full") %>
+
                     </div>
                     <div class="min-w-0 flex-1">
                       <p class="text-sm font-medium text-gray-900">

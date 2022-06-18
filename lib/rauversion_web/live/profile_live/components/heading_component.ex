@@ -11,7 +11,8 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
           <div class="flex">
             <div class="m-4">
 
-              <%= img_tag(Rauversion.Accounts.avatar_url(@profile),  class: "h-2/5 rounded-full") %>
+              <%= img_tag(Rauversion.Accounts.avatar_url(@profile),
+              class: "w-48 h-48 rounded-full") %>
             </div>
             <div class="text-white mt-6">
               <p class="text-2xl sm:text-3xl font-extrabold">
