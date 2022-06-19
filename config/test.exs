@@ -31,3 +31,9 @@ config :logger, level: :warn
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# :amazon
+config :active_storage, :service, :local
+config :active_storage, :secret_key_base, "xxxxxxxxxxx"
+config :active_job, repo: Rauversion.Repo
+config :active_storage, repo: Rauversion.Repo
