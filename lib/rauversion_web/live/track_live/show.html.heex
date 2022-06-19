@@ -38,7 +38,7 @@
 
             <%= content_tag :div, "data-controller": "audio",
                                 "data-audio-target": "player",
-                                "data-audio-url": Rauversion.Tracks.blob_url(@track, "audio") do %>
+                                "data-audio-url": Rauversion.Tracks.blob_proxy_url(@track, "audio") do %>
               <div class='controls flex items-center'>
                 <span class="relative z-0 inline-flex ml-2 pl-6 pt-6">
                   <button type="button" 

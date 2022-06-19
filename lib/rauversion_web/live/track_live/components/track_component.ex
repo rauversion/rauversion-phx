@@ -16,28 +16,28 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
           <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "object-center object-cover group-hover:opacity-75") %>
 
           <div class="flex flex-col justify-end">
-            <div class="p-4 bg-white bg-opacity-60 text-sm">
+            <!--<div class="p-4 bg-white bg-opacity-60 text-sm">
               <a href="#" class="font-medium text-gray-900">
                 <span class="absolute inset-0" aria-hidden="true"></span>
-                New Arrivals
+
               </a>
-              <p aria-hidden="true" class="mt-0.5 text-gray-700 sm:mt-1">Shop now</p>
-            </div>
+              <p aria-hidden="true" class="mt-0.5 text-gray-700 sm:mt-1">Listen now</p>
+            </div>-->
           </div>
         </div>
 
       </div>
 
-      <div class="py-2 w-full">
+      <div class="w-full">
 
         <% # if track.audio.persisted? %>
           <%= content_tag :div, "data-controller": "audio",
                                  "data-audio-target": "player",
                                  "data-audio-height-value": 70,
-                                "data-audio-url": Rauversion.Tracks.blob_url(track, "audio"),
+                                "data-audio-url": Rauversion.Tracks.blob_proxy_url(track, "audio"),
                                 class: "h-32"  do %>
             <div class='controls flex items-center'>
-              <span class="relative z-0 inline-flex">
+              <span class="relative z-0 inline-flex py-2">
                 <button type="button"
                   data-action='audio#play'
                   data-audio-target="play"

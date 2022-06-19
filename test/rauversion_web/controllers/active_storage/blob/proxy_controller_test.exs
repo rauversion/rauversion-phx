@@ -10,7 +10,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyControllerTest do
     conn =
       conn
       |> put_req_header("range", "bytes=0-")
-      |> get("/blobs/proxy/#{signed_id}/#{filename.filename}")
+      |> get("/active_storage/blobs/proxy/#{signed_id}/#{filename.filename}")
 
     assert response(conn, 206) =~ "Hello World!"
   end
@@ -23,7 +23,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyControllerTest do
     conn =
       conn
       |> put_req_header("range", "bytes=0-1")
-      |> get("/blobs/proxy/#{signed_id}/#{filename.filename}")
+      |> get("/active_storage/blobs/proxy/#{signed_id}/#{filename.filename}")
 
     assert response(conn, 206) == "H"
   end
@@ -37,7 +37,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyControllerTest do
     conn =
       conn
       |> put_req_header("range", "bytes=5-9,13-17")
-      |> get("/blobs/proxy/#{signed_id}/#{filename.filename}")
+      |> get("/active_storage/blobs/proxy/#{signed_id}/#{filename.filename}")
 
     assert response(conn, 206) =~ "World!"
   end

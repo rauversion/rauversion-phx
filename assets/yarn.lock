@@ -19,6 +19,21 @@ hotkeys-js@>=3:
   resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.9.4.tgz#ce1aa4c3a132b6a63a9dd5644fc92b8a9b9cbfb9"
   integrity sha512-2zuLt85Ta+gIyvs4N88pCYskNrxf1TFv3LR9t5mdAZIX8BcgQQ48F2opUptvHa6m8zsy5v/a0i9mWzTrlNWU0Q==
 
+phoenix@^1.6.10:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/phoenix/-/phoenix-1.6.10.tgz#6a5d0a330b32070fb7f90b96efa1244ba7c4da08"
+  integrity sha512-KfYAJrrw95JGaOlvmZ+lFJZhSfQmo4SVOj6s175/V8YxqhYGO5EGacdrJxQmJ6uhaK4H3S6b0wkC1T33qU/d8Q==
+
+phoenix_html@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/phoenix_html/-/phoenix_html-3.2.0.tgz#4a30e5c331a72abababa1f3b81a9fe2c0e5a43d7"
+  integrity sha512-zv7PIZk0MPkF0ax8n465Q6w86+sGAy5cTem6KcbkUbdgxGc0y3WZmzkM2bSlYdSGbLEZfjXxos1G72xXsha6xA==
+
+phoenix_live_view@^0.17.10:
+  version "0.17.10"
+  resolved "https://registry.yarnpkg.com/phoenix_live_view/-/phoenix_live_view-0.17.10.tgz#ea8f849d9b49dd00f2f9a1468038d225c184279a"
+  integrity sha512-oHSoH0IdJ1I5uAYjH2A1KlBmwra6LgcUrHlAP3EEorrZyMpbhBJjNNhXxhBu6dmcxqnaAbwsIXMQRLi6KjJZIg==
+
 spark-md5@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.2.tgz#7952c4a30784347abcee73268e473b9c0167e3fc"

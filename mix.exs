@@ -54,16 +54,16 @@ defmodule Rauversion.MixProject do
       {:faker, "~> 0.17", only: [:test, :dev]},
       {:ecto_autoslug_field, "~> 3.0"},
       {:dotenv, "~> 3.0.0", only: [:dev, :test]},
-      # {
-      #  :active_storage,
-      #  git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
-      # },
-      # {
-      #  :active_job,
-      #  "0.1.1"
-      # }
-      {:active_storage,
-       path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"}
+      {
+        :active_storage,
+        git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
+      },
+      {
+        :active_job,
+        "0.1.1"
+      }
+      # {:active_storage,
+      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"}
       # {:active_job,
       # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_job"}
     ]

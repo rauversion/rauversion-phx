@@ -74,8 +74,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
   def send_range(conn, range) do
     blob = conn.assigns.blob
     service = blob |> ActiveStorage.Blob.service()
-    require IEx
-    IEx.pry()
+
     data = service.__struct__.download_chunk(service, blob.key, range)
     {range_start, range_end} = range
     filename = blob |> ActiveStorage.Blob.filename()

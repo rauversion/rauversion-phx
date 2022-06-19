@@ -49,11 +49,7 @@ defmodule Rauversion.BlobUtils do
   def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
     case blob_for(track, kind) do
       nil ->
-        # default url here?
-        RauversionWeb.Router.Helpers.static_path(
-          RauversionWeb.Endpoint,
-          "/images/daniel-schludi-mbGxz7pt0jM-unsplash.jpg"
-        )
+        fallback_image()
 
       blob ->
         variant =
@@ -68,5 +64,10 @@ defmodule Rauversion.BlobUtils do
   def blob_url_for(track, kind) do
     blob = blob_for(track, kind)
     ActiveStorage.service_blob_url(blob)
+  end
+
+  def blob_proxy_url(track, kind) do
+    blob = blob_for(track, kind)
+    ActiveStorage.blob_proxy_url(blob)
   end
 end
