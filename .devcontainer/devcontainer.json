@@ -1,0 +1,19 @@
+{
+  "name": "rauversion-phx",
+  "dockerComposeFile": [
+    "./docker-compose.yml"
+  ],
+  "extensions": [
+    "jakebecker.elixir-ls"
+  ],
+  "service": "rauversion-phx",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "settings": {
+    "editor.formatOnSave": true,
+    "search.exclude": {
+      "**/doc": true
+    },
+    "elixirLS.dialyzerEnabled": false
+  }
+}
