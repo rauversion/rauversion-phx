@@ -4,7 +4,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track} = assigns) do
+  def render(%{track: track, current_user: current_user} = assigns) do
     ~H"""
 
     <div class="sm:flex border rounded-md shadow-sm my-2">
@@ -33,7 +33,9 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         <% # if track.audio.persisted? %>
           <%= content_tag :div, "data-controller": "audio",
                                  "data-audio-target": "player",
-                                "data-audio-url": Rauversion.Tracks.blob_url(track, "audio")  do %>
+                                 "data-audio-height-value": 70,
+                                "data-audio-url": Rauversion.Tracks.blob_url(track, "audio"),
+                                class: "h-32"  do %>
             <div class='controls flex items-center'>
               <span class="relative z-0 inline-flex">
                 <button type="button"
@@ -70,6 +72,11 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         </p>
 
         <div class="pt-2" data-turbo="false">
+          <%= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          <%= if current_user && current_user.id == track.user_id do %>
+            <%= live_patch "Edit", to: Routes.track_index_path(@socket, :edit, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+            <%= link "Delete", to: "#", phx_click: "delete", phx_value_id: track.id, data: [confirm: "Are you sure?"], class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          <% end %>
           <% #= link_to "Show this track", track, class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
           <% #= link_to 'Edit this track', edit_track_path(track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
         </div>

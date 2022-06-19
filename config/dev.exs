@@ -86,22 +86,22 @@ config :active_storage, repo: Rauversion.Repo
 
 config :mogrify,
   mogrify_command: [
-    path: "magick",
-    args: ["mogrify"]
+    path: "mogrify",
+    args: []
   ]
 
 # Configure convert command:
 
 config :mogrify,
   convert_command: [
-    path: "magick",
-    args: ["convert"]
+    path: "convert",
+    args: []
   ]
 
 # Configure identify command:
 
 config :mogrify,
   identify_command: [
-    path: "magick",
-    args: ["identify", "-verbose"]
+    path: "identify",
+    args: ["-verbose"]
   ]

@@ -77,4 +77,25 @@ defmodule RauversionWeb.LiveHelpers do
     |> JS.hide(to: "#modal", transition: "fade-out")
     |> JS.hide(to: "#modal-content", transition: "fade-out-scale")
   end
+
+  def get_user_by_session(socket, session) do
+    if session["user_token"] do
+      user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
+
+      socket =
+        socket
+        |> assign(:current_user, user)
+    else
+      socket
+    end
+  end
+
+  def authorize_user_resource(socket) do
+    if socket.assigns.track.user_id == socket.assigns.current_user.id do
+      {:ok, socket}
+    else
+      socket = socket |> put_flash(:error, "resource not authorized")
+      {:err, push_patch(socket, to: "/", replace: true)}
+    end
+  end
 end

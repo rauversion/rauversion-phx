@@ -46,19 +46,19 @@
       <div aria-hidden="true" class="hidden absolute w-1/2 h-full bg-gray-100 lg:block"></div>
       <div class="relative bg-black lg:bg-transparent- ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2">
-          <div class="max-w-2xl mx-auto py-24 lg:py-64 lg:max-w-none">
+          <div class="max-w-2xl mx-auto py-6 lg:py-64 lg:max-w-none">
             <div class="lg:pr-16">
 
-              <a href="/" class="text-white text-xl font-extrabold">
+              <a href="/" class="text-white text-sm xl:text-xl font-extrabold">
                 RAUVERSION
               </a>
 
-              <h1 class="tracking-tight text-gray-900 sm:text-5xl xl:text-6xl
+              <h1 class="tracking-tight text-gray-900 text-3xl xl:text-6xl
               font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-orange-600">
                 Be your own music industry
               </h1>
               <p class="mt-4 text-xl text-gray-100 ">
-                It's time to empower musicians all around the world and give them tools to own their industry
+                Empowering independent music communities on the internet
               </p>
               <div class="mt-6">
                 <a href="/users/register" class="inline-block bg-orange-600 border border-transparent py-3 px-8 rounded-md font-medium text-white hover:bg-orange-700">
@@ -90,7 +90,7 @@
         <div class="relative w-full overflow-x-auto">
           <ul role="list" class="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
             
-            <%= for track <- Rauversion.Tracks.list_tracks(5) do %>
+            <%= for track <- Rauversion.Tracks.list_tracks(5) |> Rauversion.Repo.preload(:user) do %>
               <li class="w-64 inline-flex flex-col text-center lg:w-auto">
                 <div class="group relative">
                   <div class="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
@@ -98,7 +98,7 @@
                   </div>
                   <div class="mt-6">
                     <p class="text-sm text-gray-500">
-                      Black
+                      <%= track.user.username %>
                     </p>
                     <h3 class="mt-1 font-semibold text-gray-900">
                       <%= link to: Routes.track_show_path(@conn, :show, track) do %>
@@ -106,8 +106,8 @@
                         <%= track.title %>
                       <% end %>
                     </h3>
-                    <p class="mt-1 text-gray-900">
-                      $35
+                    <p class="mt-1 text-gray-900 hidden">
+                      PRICE ?
                     </p>
                   </div>
                 </div>
@@ -133,7 +133,7 @@
 
         <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
           
-          <%= for track <- Rauversion.Tracks.list_tracks(5) do %>
+          <%= for track <- Rauversion.Tracks.list_tracks(5) |> Rauversion.Repo.preload(:user) do %>
             <div class="group relative">
               <div class="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
                 <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover") %>
@@ -145,7 +145,7 @@
                   <%= track.title %>
                 <% end %>
               </h3>
-              <p class="text-base font-semibold text-gray-900 hidden">xxx</p>
+              <p class="text-base font-semibold text-gray-900"><%= track.user.username %></p>
             </div>
           <% end %>
 
