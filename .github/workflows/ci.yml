@@ -26,6 +26,13 @@ jobs:
       #- uses: mfinelli/setup-imagemagick@v1
       #- name: Install Ubuntu dependencies
       #  run: sudo apt-get -y install poppler-data poppler-utils ffmpeg mupdf-tools
+      - name: installs audiowaveform
+        uses: actions/cache@v1
+        id: build-cache
+        run: sudo add-apt-repository ppa:chris-needham/ppa
+        run: sudo apt-get update
+        run: sudo apt-get install audiowaveform
+      
       - name: Check identify
         run: identify --version
 

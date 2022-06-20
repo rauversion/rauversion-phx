@@ -82,6 +82,16 @@ defmodule Rauversion.TracksTest do
       assert track == Tracks.get_track!(track.id)
     end
 
+    test "update_track/2 with changeset peaks" do
+      track = track_fixture()
+
+      assert {:ok, %Rauversion.Tracks.Track{}} =
+               Tracks.update_track(track, %{metadata: %{peaks: [12, 3, 4, 5]}})
+
+      assert %Rauversion.Tracks.Track{metadata: %{"peaks" => [12, 3, 4, 5]}} =
+               Tracks.get_track!(track.id)
+    end
+
     test "delete_track/1 deletes the track" do
       track = track_fixture()
       assert {:ok, %Track{}} = Tracks.delete_track(track)

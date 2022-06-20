@@ -5,7 +5,14 @@ defmodule Rauversion.PeaksGeneratorTest do
 
   describe "peaks generator" do
     test "peaks gen" do
-      Rauversion.Services.PeaksGenerator.run("/Users/michelson/Desktop/patio/STE-098.mp3")
+      assert [hd | rest] = Rauversion.Services.PeaksGenerator.run("./test/files/audio.mp3")
+      IO.inspect("qty: #{rest |> length}")
+    end
+
+    test "peaks gen ffprobe" do
+      a = Rauversion.Services.PeaksGenerator.run_ffprobe("./test/files/audio.mp3")
+      require IEx
+      IEx.pry()
     end
   end
 end

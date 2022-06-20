@@ -11,6 +11,7 @@ export default class extends Controller {
 
   initialize() {}
   connect() {
+    console.log("INIT WAVEEE")
     this.wave()
   }
   disconnect() {}
@@ -25,16 +26,25 @@ export default class extends Controller {
         height: this.heightValue || 70,
         //fillParent: false,
         barWidth: 2,
-        barHeight: 10, // the height of the wave
+        //barHeight: 10, // the height of the wave
         barGap: null,
-
+        minPxPerSec: 2,
+        pixelRatio: 10,
         cursorWidth: 1,
         cursorColor: "lightgray",
         normalize: true,
-        responsive: true,
-        fillParent: true
+        //responsive: true,
+        //fillParent: true
       })
-      this._wave.load(this.data.get('url'))
+
+
+      console.log("VAUES",this.data.get('peaks').length)
+      const data = JSON.parse(this.data.get('peaks')) // [0.45,0.54,0.43,0.61,0.47,0.71,0.42,0.59,0.39,0.59,0.41,0.57,0.39,0.59,0.41,0.56,0.43,0.57,0.44,0.59,0.45,0.6,0.44,0.56,0.42,0.63,0.4,0.63,0.36]
+      this._wave.load(this.data.get('url'), data)
+
+      window.tt = this
+
+
       var _this = this
       // var that = this
       _this.pauseTarget.style.display = 'none'

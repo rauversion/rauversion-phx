@@ -51,7 +51,8 @@ defmodule Rauversion.Tracks.Track do
       :description,
       :private,
       :user_id,
-      :caption
+      :caption,
+      :metadata
       # :slug,
       # :caption,
       # :notification_settings,
@@ -70,9 +71,25 @@ defmodule Rauversion.Tracks.Track do
     |> TitleSlug.unique_constraint()
   end
 
-  def process_one_upload(user, attrs, kind) do
+  def process_one_upload(struct, attrs, kind) do
     case attrs do
       %{^kind => [file | _]} ->
+        # Get peaks. maybe detach this processings
+        struct =
+          if kind == "audio" do
+            case Rauversion.Services.PeaksGenerator.run_audiowaveform(file.path) do
+              [_ | _] = data -> put_change(struct, :metadata, %{peaks: data})
+              _ -> struct
+            end
+          else
+            struct
+          end
+
+        # Tracks.update_track(struct, %{metadata: %{peaks: data}})
+        ####
+
+        IO.inspect(struct)
+
         blob =
           ActiveStorage.Blob.create_and_upload!(
             %ActiveStorage.Blob{},
@@ -82,13 +99,13 @@ defmodule Rauversion.Tracks.Track do
             identify: true
           )
 
-        cover = apply(user.data.__struct__, :"#{kind}", [user.data])
+        cover = apply(struct.data.__struct__, :"#{kind}", [struct.data])
         apply(cover.__struct__, :attach, [cover, blob])
 
-        user
+        struct
 
       _ ->
-        user
+        struct
     end
   end
 end

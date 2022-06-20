@@ -112,6 +112,30 @@ defmodule Rauversion.Tracks do
     Track.changeset(track, attrs)
   end
 
+  def metadata(track, type) do
+    case track do
+      %{metadata: nil} ->
+        nil
+
+      %{metadata: metadata} ->
+        metadata |> Map.get(type)
+
+      _ ->
+        nil
+    end
+  end
+
+  # processes clip only for :local
+  def reprocess_peaks(track) do
+    blob = Rauversion.Tracks.blob_for(track, :audio)
+    service = blob |> ActiveStorage.Blob.service()
+    path = service.__struct__.path_for(service, blob.key)
+
+    data = Rauversion.Services.PeaksGenerator.run_audiowaveform(path)
+    IO.inspect(data |> length())
+    update_track(track, %{metadata: %{peaks: data}})
+  end
+
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
 
   defdelegate blob_for(track, kind), to: Rauversion.BlobUtils

@@ -36,7 +36,13 @@
           <td><%= track.slug %></td>
           <td><%= track.caption %></td>
           <td><%= track.notification_settings %></td>
-          <td><%= track.metadata %></td>
+          <td>
+          <%= case Tracks.metadata(track, "peaks") do
+              nil -> ""
+              [hd | _rest] -> hd
+              end
+           %>
+           </td>
 
           <td>
             <span><%= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track) %></span>

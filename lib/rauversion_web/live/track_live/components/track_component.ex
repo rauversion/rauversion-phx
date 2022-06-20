@@ -34,6 +34,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
           <%= content_tag :div, "data-controller": "audio",
                                 "data-audio-target": "player",
                                 "data-audio-height-value": 70,
+                                "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(track, "peaks")),
                                 "data-audio-url": Rauversion.Tracks.blob_proxy_url(track, "audio"),
                                 class: "h-32"  do %>
             <div class='controls flex items-center'>
