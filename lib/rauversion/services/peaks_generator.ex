@@ -51,7 +51,7 @@ defmodule Rauversion.Services.PeaksGenerator do
       input,
       &((new_min + (&1 - min) / (max - min) * (new_max - new_min))
         |> Decimal.from_float()
-        |> Decimal.round(2)
+        |> Decimal.round(4)
         |> Decimal.to_float())
     )
   end

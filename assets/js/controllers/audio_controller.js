@@ -33,8 +33,8 @@ export default class extends Controller {
         cursorWidth: 1,
         cursorColor: "lightgray",
         normalize: true,
-        //responsive: true,
-        //fillParent: true
+        responsive: true,
+        fillParent: true
       })
 
 
