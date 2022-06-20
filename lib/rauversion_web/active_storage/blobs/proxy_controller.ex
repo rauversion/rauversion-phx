@@ -21,7 +21,7 @@
 defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
   use RauversionWeb, :controller
 
-  action_fallback RauversionWeb.FallbackController
+  # action_fallback RauversionWeb.FallbackController
 
   def show(conn, %{"signed_id" => signed_id}) do
     case conn |> handle_action(signed_id) do
@@ -57,7 +57,8 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
             send_multipart_ranges(conn, ranges)
 
           _ ->
-            raise "no ranges???"
+            conn
+            |> Plug.Conn.send_resp(422, "not found")
         end
 
       _ ->
@@ -67,7 +68,17 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
         #
         #         send_blob_stream @blob, disposition: params[:disposition]
         #       end
+
+        # disposition: params[:disposition]
+
         conn
+        |> Plug.Conn.put_resp_header("accept-ranges", "bytes")
+        |> Plug.Conn.put_resp_header("content-length", conn.assigns.blob.byte_size |> to_string)
+        |> Plug.Conn.put_resp_header(
+          "content-disposition",
+          ~s(inline; filename="#{ActiveStorage.Blob.filename(conn.assigns.blob).filename}")
+        )
+        |> send_blob_stream(blob)
     end
   end
 
@@ -199,6 +210,21 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
   def send_blob_stream(conn, blob, options \\ []) do
     defaults = [disposition: nil]
     options = Keyword.merge(defaults, options)
+
+    conn =
+      conn
+      |> put_resp_content_type(blob.content_type)
+      |> send_chunked(200)
+
+    downloaded_stream =
+      ActiveStorage.Blob.download(blob, fn chunk_data ->
+        IO.inspect(chunk_data)
+        IO.inspect("chunk_data: !!")
+        chunk(conn, chunk_data)
+      end)
+
+    {:ok, conn} = downloaded_stream
+    conn
 
     # send_stream(
     #    filename: blob.filename.sanitized,

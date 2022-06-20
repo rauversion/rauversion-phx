@@ -38,6 +38,7 @@ defmodule Rauversion.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.7.2"},
       {:postgrex, ">= 0.0.0"},
+      {:ecto_psql_extras, "~> 0.6"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.0"},
@@ -57,11 +58,11 @@ defmodule Rauversion.MixProject do
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
-      },
-      {
-        :active_job,
-        "0.1.1"
       }
+      # {
+      #  :active_job,
+      #  "0.1.1"
+      # }
       # {:active_storage,
       # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"}
       # {:active_job,

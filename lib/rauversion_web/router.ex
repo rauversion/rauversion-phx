@@ -40,7 +40,7 @@ defmodule RauversionWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: RauversionWeb.Telemetry
+      live_dashboard "/dashboard", metrics: RauversionWeb.Telemetry, ecto_repos: [Rauversion.Repo]
     end
   end
 
