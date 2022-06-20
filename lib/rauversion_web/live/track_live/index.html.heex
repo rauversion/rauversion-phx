@@ -35,7 +35,7 @@
           <td><%= track.private %></td>
           <td><%= track.slug %></td>
           <td><%= track.caption %></td>
-          <td><%= track.notification_settings %></td>
+          <td><% #= track.notification_settings %></td>
           <td>
           <%= case Tracks.metadata(track, "peaks") do
               nil -> ""

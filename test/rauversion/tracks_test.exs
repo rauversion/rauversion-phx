@@ -76,6 +76,25 @@ defmodule Rauversion.TracksTest do
       assert track.title == "some updated title"
     end
 
+    test "update_track/2 with valid file" do
+      track = track_fixture()
+
+      update_attrs = %{
+        "audio" => [
+          %{
+            content_type: "audio/wav",
+            filename: "STE-065.wav",
+            path: "./test/files/audio.mp3",
+            size: 187_324_814
+          }
+        ]
+      }
+
+      assert {:ok, %Track{} = track} = Tracks.update_track(track, update_attrs)
+
+      assert %{metadata: %{"peaks" => [_ | _]}} = Tracks.get_track!(track.id)
+    end
+
     test "update_track/2 with invalid data returns error changeset" do
       track = track_fixture()
       assert {:error, %Ecto.Changeset{}} = Tracks.update_track(track, @invalid_attrs)
