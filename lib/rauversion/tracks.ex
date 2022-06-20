@@ -116,6 +116,8 @@ defmodule Rauversion.Tracks do
 
   defdelegate blob_for(track, kind), to: Rauversion.BlobUtils
 
+  defdelegate blob_proxy_url(user, kind), to: Rauversion.BlobUtils
+
   defdelegate variant_url(track, kind, options), to: Rauversion.BlobUtils
 
   defdelegate blob_url_for(track, kind), to: Rauversion.BlobUtils

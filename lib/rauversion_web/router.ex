@@ -40,7 +40,7 @@ defmodule RauversionWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: RauversionWeb.Telemetry
+      live_dashboard "/dashboard", metrics: RauversionWeb.Telemetry, ecto_repos: [Rauversion.Repo]
     end
   end
 
@@ -115,8 +115,13 @@ defmodule RauversionWeb.Router do
       :show
     )
 
-    get("/blobs/proxy/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
-    get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
+    get(
+      "/active_storage/blobs/proxy/:signed_id/*filename",
+      ActiveStorage.Blobs.ProxyController,
+      :show
+    )
+
+    # get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
 
     # get "/blobs/redirect/:signed_id/*filename" => "active_storage/blobs/redirect#show", as: :rails_service_blob
     # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy

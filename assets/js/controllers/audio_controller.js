@@ -20,15 +20,19 @@ export default class extends Controller {
       this._wave = WaveSurfer.create({
         container: this.playerTarget,
         backend: 'MediaElement',
-        waveColor: 'violet',
-        progressColor: 'purple',
+        waveColor: 'grey',
+        progressColor: 'tomato',
         height: this.heightValue || 70,
-        //partialRender: true,
-        pixelRatio: 1,
         //fillParent: false,
         barWidth: 2,
         barHeight: 10, // the height of the wave
-        barGap: null 
+        barGap: null,
+
+        cursorWidth: 1,
+        cursorColor: "lightgray",
+        normalize: true,
+        responsive: true,
+        fillParent: true
       })
       this._wave.load(this.data.get('url'))
       var _this = this
