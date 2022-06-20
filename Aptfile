@@ -10,7 +10,7 @@
 
 lame
 
-:repo:deb https://ppa.launchpadcontent.net/chris-needham/ppa/ubuntu 18.04 main 
+:repo:deb https://ppa.launchpadcontent.net/chris-needham/ppa/ubuntu bionic main 
 
 audiowaveform
 
