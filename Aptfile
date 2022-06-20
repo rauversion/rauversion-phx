@@ -1,6 +1,20 @@
 # https://github.com/bbc/audiowaveform
 
-sudo add-apt-repository ppa:chris-needham/ppa
-sudo apt-get update
-sudo apt-get install audiowaveform
-sudo apt-get install -y lame
+# you can list packages
+# libexample-dev
+# or include links to specific .deb files
+# https://downloads.example.com/example.deb
+# or add custom apt repos (only required if using packages outside of the standard Ubuntu APT repositories)
+# :repo:deb https://apt.example.com/ example-distro main
+
+
+lame
+
+:repo:deb https://ppa.launchpadcontent.net/chris-needham/ppa/ubuntu 18.04 main 
+
+audiowaveform
+
+#sudo add-apt-repository ppa:chris-needham/ppa
+#sudo apt-get update
+#sudo apt-get install audiowaveform
+#sudo apt-get install -y lame
