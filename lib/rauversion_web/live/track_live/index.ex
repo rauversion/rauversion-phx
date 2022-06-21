@@ -74,6 +74,6 @@ defmodule RauversionWeb.TrackLive.Index do
   end
 
   defp list_tracks do
-    Tracks.list_tracks()
+    Tracks.list_tracks() |> Rauversion.Repo.preload(:user)
   end
 end

@@ -6,19 +6,19 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
 
   def render(%{profile: profile} = assigns) do
     ~H"""
-      <div class="h-64 bg-black">
+      <div class="sm:h-64 h-24 bg-black sticky top-0 z-50 sm:relative">
         <div class="flex justify-between">
           <div class="flex">
             <div class="m-4">
 
               <%= img_tag(Rauversion.Accounts.avatar_url(@profile),
-              class: "w-48 h-48 rounded-full") %>
+              class: "sm:w-48 sm:h-48 w-16 h-16 rounded-full") %>
             </div>
             <div class="text-white mt-6">
-              <p class="text-2xl sm:text-3xl font-extrabold">
+              <p class="sm:text-3xl text-lg font-extrabold">
                 <%= @profile.username %>
               </p>
-              <p class="text-xl sm:text-2xl font-extrabold">
+              <p class="text-sm sm:text-xl font-extrabold">
                 Santiago, Chile
               </p>
             </div>

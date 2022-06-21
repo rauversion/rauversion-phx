@@ -366,7 +366,7 @@
     <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       
       <%= for track <- @tracks do %>
-        <%= link to: Routes.track_show_path(@socket, :show, track), class: "group" do %>
+        <%= live_redirect to: Routes.track_show_path(@socket, :show, track), class: "group" do %>
           <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
             <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
           </div>
@@ -374,7 +374,7 @@
             <%= track.title %>
           </h3>
           <p class="mt-1 text-lg font-medium text-gray-900">
-            $48
+            <%= track.user.username %>
           </p>
         <% end  %>
       <% end  %>
