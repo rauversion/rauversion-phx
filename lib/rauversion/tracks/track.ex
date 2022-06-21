@@ -123,6 +123,8 @@ defmodule Rauversion.Tracks.Track do
   end
 
   def convert_to_mp3(struct, file) do
+    IO.inspect("CONVERT MP3 #{file.path}")
+    IO.inspect(File.exists?(file.path))
     path = Rauversion.Services.Mp3Converter.run(file.path)
 
     blob =
