@@ -3,7 +3,16 @@ libid3tag0-dev
 libsndfile1-dev
 libgd-dev
 lame
-http://mirrors.kernel.org/ubuntu/pool/main/b/boost-defaults/libboost-dev_1.65.1.0ubuntu1_amd64.deb
+
+
+# libboost-filesystem-dev
+# libboost-program-options-dev
+# libboost-regex-dev
+# # http://mirrors.kernel.org/ubuntu/pool/main/b/boost-defaults/libboost-dev_1.65.1.0ubuntu1_amd64.deb
+
+http://mirrors.kernel.org/ubuntu/pool/universe/b/boost-defaults/libboost-regex-dev_1.65.1.0ubuntu1_amd64.deb
+
+http://mirrors.kernel.org/ubuntu/pool/main/b/boost-defaults/libboost-filesystem-dev_1.65.1.0ubuntu1_amd64.deb
 
 http://mirrors.kernel.org/ubuntu/pool/main/b/boost1.65.1/libboost-program-options1.65-dev_1.65.1+dfsg-0ubuntu5_amd64.deb
 
