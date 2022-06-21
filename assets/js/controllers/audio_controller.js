@@ -32,7 +32,7 @@ export default class extends Controller {
         pixelRatio: 10,
         cursorWidth: 1,
         cursorColor: "lightgray",
-        normalize: true,
+        normalize: false,
         responsive: true,
         fillParent: true
       })

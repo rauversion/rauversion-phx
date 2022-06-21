@@ -90,7 +90,7 @@ defmodule Rauversion.Tracks.Track do
           if kind == "audio" do
             # coput temp file from live
             {:ok, dir_path} = Temp.mkdir("my-dir")
-            new_path = "#{dir_path}#{file.filename}"
+            new_path = "#{dir_path}#{file.filename}" |> String.replace(~r/\s+/, "-")
             :ok = File.cp(file.path, new_path)
 
             file = %{file | path: new_path}
@@ -99,7 +99,7 @@ defmodule Rauversion.Tracks.Track do
 
             duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
 
-            case Rauversion.Services.PeaksGenerator.run_audiowaveform(path, duration) do
+            case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
               [_ | _] = data ->
                 put_change(struct, :metadata, %{peaks: data})
 

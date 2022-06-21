@@ -28,11 +28,13 @@ defmodule Rauversion.Services.PeaksGenerator do
     # audiowaveform -i /root/audio.mp3 --pixels-per-second 100 --output-format json -
   end
 
-  def run_ffprobe(file) do
+  def run_ffprobe(file, duration) do
     IO.inspect("processing #{file}")
 
+    pixels_per_frame = duration * 75
+
     cmd =
-      "#{ffprobe_path()} -v error -f lavfi -i amovie=#{file},astats=metadata=1:reset=1 -show_entries frame_tags=lavfi.astats.Overall.Peak_level -of json"
+      "#{ffprobe_path()} -v error -f lavfi -i amovie=#{file},asetnsamples=n=#{pixels_per_frame}:p=0,astats=metadata=1:reset=1 -show_entries frame_tags=lavfi.astats.Overall.Peak_level -of json"
       |> to_charlist()
 
     IO.inspect(cmd)
@@ -46,6 +48,7 @@ defmodule Rauversion.Services.PeaksGenerator do
           _ -> nil
         end
       end)
+      |> normalize
   end
 
   def desired_pixels_per_second(desired_pixels, duration) do
@@ -75,7 +78,7 @@ defmodule Rauversion.Services.PeaksGenerator do
       input,
       &((new_min + (&1 - min) / (max - min) * (new_max - new_min))
         |> Decimal.from_float()
-        |> Decimal.round(4)
+        |> Decimal.round(1)
         |> Decimal.to_float())
     )
   end
