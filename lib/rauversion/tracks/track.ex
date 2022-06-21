@@ -127,6 +127,9 @@ defmodule Rauversion.Tracks.Track do
     IO.inspect(File.exists?(file.path))
     path = Rauversion.Services.Mp3Converter.run(file.path)
 
+    IO.inspect("CONVERTED MP3!! #{path}")
+    IO.inspect(File.exists?(path))
+
     blob =
       ActiveStorage.Blob.create_and_upload!(
         %ActiveStorage.Blob{},
