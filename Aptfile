@@ -7,7 +7,7 @@ lame
 libboost-dev=1.65.1
 libboost-regex-dev=1.65.1
 libboost-filesystem-dev=1.65.1
-libboost-program-options1.65dev=1.65.1
+libboost-program-options-dev=1.65.1
 
 # libboost-filesystem-dev
 # libboost-program-options-dev
