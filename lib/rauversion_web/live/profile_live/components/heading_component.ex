@@ -23,7 +23,7 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
               </p>
             </div>
           </div>
-          <div class="">bjkkjk</div>
+          <div class="hidden">bjkkjk</div>
         </div>
       </div>
     """
