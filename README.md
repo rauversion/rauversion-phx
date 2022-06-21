@@ -9,9 +9,9 @@ Rauversion is an open source music sharing platform.
 Rauversion is built on Elixir with Phoenix framework.
 
 ## setup
-  
+
 You can develop directly in a container with [vscode devcontainer](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) or [neovim devcontainer](https://github.com/jamestthompson3/nvim-remote-containers)
-  
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
