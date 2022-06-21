@@ -83,7 +83,7 @@ defmodule Rauversion.TracksTest do
         "audio" => [
           %{
             content_type: "audio/wav",
-            filename: "STE-065.wav",
+            filename: "STE-065.mp3",
             path: "./test/files/audio.mp3",
             size: 187_324_814
           }

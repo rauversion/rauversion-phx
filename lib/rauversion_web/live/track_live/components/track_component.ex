@@ -61,7 +61,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                   <%= live_redirect track.title, to: Routes.track_show_path(@socket, :show, track) %>
                 </h4>
                 <%= if track.user do %>
-                  <h5 class="text-sm font-"><%= track.user.email %></h5>
+                  <h5 class="text-sm font-"><%= track.user.username %></h5>
                 <% end %>
               </div>
             </div>

@@ -88,6 +88,13 @@ defmodule Rauversion.Tracks.Track do
         # Get peaks. maybe detach this processings
         struct =
           if kind == "audio" do
+            # coput temp file from live
+            {:ok, dir_path} = Temp.mkdir("my-dir")
+            new_path = "#{dir_path}#{file.filename}"
+            :ok = File.cp(file.path, new_path)
+
+            file = %{file | path: new_path}
+
             %{path: path} = convert_to_mp3(struct, file)
 
             case Rauversion.Services.PeaksGenerator.run_audiowaveform(path) do
@@ -132,6 +139,7 @@ defmodule Rauversion.Tracks.Track do
     %{path: path, blob: blob}
   end
 
+  #  TODO: maybe copy here the live-upload
   def attach_file_with_blob(struct, kind, file) do
     blob =
       ActiveStorage.Blob.create_and_upload!(
