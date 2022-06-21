@@ -3,5 +3,6 @@ libid3tag0-dev
 libsndfile1-dev
 libgd-dev
 lame
-libboost1.65-dev
+http://mirrors.kernel.org/ubuntu/pool/main/b/boost-defaults/libboost-dev_1.65.1.0ubuntu1_amd64.deb
+
 https://launchpad.net/~chris-needham/+archive/ubuntu/ppa/+files/audiowaveform_1.6.0-1bionic1_amd64.deb
