@@ -1,5 +1,10 @@
 defmodule Rauversion.Services.PeaksGenerator do
-  def run_audiowaveform(file) do
+  # TODO: idea calculate duration to have 1000 data points
+  def run_audiowaveform(file, duration) do
+    desired_pixels = 500
+
+    pixels_per_second = desired_pixels_per_second(desired_pixels, duration)
+
     {output, _status} =
       System.cmd(audiowaveform_path(), [
         "-i",
@@ -7,7 +12,7 @@ defmodule Rauversion.Services.PeaksGenerator do
         "--input-format",
         "mp3",
         "--pixels-per-second",
-        "1",
+        "#{pixels_per_second}",
         "-b",
         "8",
         "--output-format",
@@ -41,6 +46,25 @@ defmodule Rauversion.Services.PeaksGenerator do
           _ -> nil
         end
       end)
+  end
+
+  def desired_pixels_per_second(desired_pixels, duration) do
+    res =
+      (desired_pixels / duration)
+      |> to_string
+      |> Integer.parse()
+
+    case res do
+      {pixels_per_second, _} ->
+        cond do
+          pixels_per_second < 0 -> 1
+          pixels_per_second == 0 -> 1
+          true -> pixels_per_second
+        end
+
+      _ ->
+        1
+    end
   end
 
   def normalize(input) do

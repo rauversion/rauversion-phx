@@ -106,7 +106,7 @@ if config_env() == :prod do
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 
-  config :oscflow_phx, OscflowPhx.Mailer,
+  config :rauversion, Rauversion.Mailer,
     adapter: Swoosh.Adapters.SMTP,
     relay: System.get_env("SMTP_DOMAIN"),
     username: System.get_env("SMTP_USERNAME"),

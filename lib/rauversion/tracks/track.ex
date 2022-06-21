@@ -95,9 +95,11 @@ defmodule Rauversion.Tracks.Track do
 
             file = %{file | path: new_path}
 
-            %{path: path} = convert_to_mp3(struct, file)
+            %{path: path, blob: blob} = convert_to_mp3(struct, file)
 
-            case Rauversion.Services.PeaksGenerator.run_audiowaveform(path) do
+            duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
+
+            case Rauversion.Services.PeaksGenerator.run_audiowaveform(path, duration) do
               [_ | _] = data ->
                 put_change(struct, :metadata, %{peaks: data})
 
@@ -138,6 +140,7 @@ defmodule Rauversion.Tracks.Track do
         content_type: "audio/mpeg",
         identify: true
       )
+      |> ActiveStorage.Blob.analyze()
 
     attach_file(struct, "mp3_audio", blob)
 
