@@ -36,23 +36,22 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [ ] Playlists
 - [ ] Likes
 - [ ] Followers / Followings
-- [ ] load waveform data as data
+- [x] load waveform data as data
 - [x] Range responses https://github.com/elixir-plug/plug/pull/526/files
-
-with audiowaveform
-  audiowaveform -i ~/Desktop/patio/STE-098.mp3 -o long_clip.json --pixels-per-second 20 --bits 8
-
-as binary
- ffmpeg -i ~/Desktop/patio/STE-098.mp3 -ac 1 -filter:a aresample=200 -map 0:a -c:a pcm_s16le -f data - > SomeFile.txt
-
-as text
- ffmpeg -i in.mp3 -af astats=metadata=1:reset=1,ametadata=print:key=lavfi.astats.Overall.RMS_level:file=log.txt -f null -
 
 # Setup:
 
 ### Generate fake accounts
 
   iex -S mix fake_accounts
+
+
+### File preprocessing requirements:
+
++ Lame
++ FFMPEG
++ audiowaveform
++ imagemagick
 
 ### image credits
 
