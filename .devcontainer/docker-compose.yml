@@ -22,7 +22,7 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ..:/workspace:delegated
+      - ..:/app:delegated
       - ~/.gitconfig:/root/.gitconfig
       - ~/.gitignore:/root/.gitignore
       - ~/.ssh:/root/.ssh
