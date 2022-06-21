@@ -1,4 +1,4 @@
-<nav class="bg-black" aria-label="Global">
+<nav class="bg-black" aria-label="Global" data-controller="dropdown">
     <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center px-2 lg:px-0">
@@ -19,12 +19,13 @@
               </a>
 
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+                <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
               <% end %>
 
-              <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-              <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-            
+              <%= if !@current_user do %>
+                <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+                <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+              <% end  %>
           </div>
         </div>
 
@@ -51,7 +52,12 @@
         
         <div class="flex items-center lg:hidden">
           <!-- Mobile menu button -->
-          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" @click="open = !open" aria-expanded="false" x-bind:aria-expanded="open.toString()">
+          <button type="button" 
+          data-action="dropdown#toggle click@window->dropdown#hide"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" 
+          aria-controls="mobile-menu" 
+          @click="open = !open" 
+          aria-expanded="false" x-bind:aria-expanded="open.toString()">
             <span class="sr-only">Open menu</span>
             <svg x-description="Icon when menu is closed.
 
@@ -72,13 +78,13 @@
                 data-action="dropdown#toggle click@window->dropdown#hide" 
                 class="flex-shrink-0 bg-gray-500 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
                 <span class="sr-only">Notificaitons</span>
-                <svg class="h-6 w-6" x-description="Heroicon name: outline/bell" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                </svg>
+
+                <%= img_tag(Rauversion.Accounts.avatar_url(@current_user), class: "h-6 w-6 rounded-full") %>
+
               </button>
                 <div
                   data-dropdown-target="menu"
-                  class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                   data-transition-enter-from="opacity-0 scale-95"
                   data-transition-enter-to="opacity-100 scale-100"
                   data-transition-leave-from="opacity-100 scale-100"
@@ -99,27 +105,42 @@
       </div>
     </div>
 
-    <!--
-    <div x-description="Mobile menu, show/hide based on menu state." class="lg:hidden" id="mobile-menu" x-show="open" style="display: none;">
+    
+    <div 
+      data-dropdown-target="menu"
+      x-description="Mobile menu, show/hide based on menu state." 
+      class="lg:hidden" 
+      id="mobile-menu" 
+      x-show="open" 
+      >
       <div class="pt-2 pb-3 px-2 space-y-1">
+
+
+          <a href="/tracks" class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800">
+            Tracks
+          </a>
         
-          <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800">Dashboard</a>
-        
-          <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800">Jobs</a>
-        
-          <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800">Applicants</a>
-        
-          <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800">Company</a>
+          <a href="/users/settings" class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800">
+            Account
+          </a>
+
+          <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+          <% end %>
+
+          <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+          <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
         
       </div>
       <div class="pt-4 pb-3 border-t border-gray-500">
         <div class="flex items-center px-4">
+          <%= if @current_user do %>
           <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+            <%= img_tag(Rauversion.Accounts.avatar_url(@current_user), class: "h-10 w-10 rounded-full") %>
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-white">Floyd Miles</div>
-            <div class="text-sm font-medium text-gray-200">floydmiles@example.com</div>
+            <div class="text-base font-medium text-white"><%= @current_user.username %></div>
+            <div class="text-sm font-medium text-gray-200"><%= @current_user.email %></div>
           </div>
           <button type="button" class="ml-auto flex-shrink-0 bg-gray-500 rounded-full p-1 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
             <span class="sr-only">View notifications</span>
@@ -127,17 +148,20 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
           </button>
+          <% end %>
         </div>
         <div class="mt-3 px-2">
-          
-            <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800">Your Profile</a>
-          
-            <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800">Settings</a>
-          
-            <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800">Sign out</a>
-          
+
+          <%= if @current_user do %>
+            <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+            <%= link "profile", to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+            <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800">Support</a>
+            <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800">License</a>
+            <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+          <% end %>
+
         </div>
       </div>
     </div>
-    -->
+    
   </nav>

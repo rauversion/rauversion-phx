@@ -112,64 +112,37 @@ defmodule Rauversion.Tracks do
     Track.changeset(track, attrs)
   end
 
-  def blob_url(user, kind) do
-    kind_blob = :"#{kind}_blob"
-
-    case user do
-      nil ->
-        nil
-
-      %{^kind_blob => nil} ->
-        nil
-
-      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
-        blob |> ActiveStorage.url()
-
-      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
-        user = user |> Rauversion.Repo.preload(kind_blob)
-
-        apply(__MODULE__, :blob_url, [user, kind])
-    end
-  end
-
-  def blob_for(track, kind) do
-    kind_blob = :"#{kind}_blob"
-
-    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
+  def metadata(track, type) do
     case track do
-      nil ->
+      %{metadata: nil} ->
         nil
 
-      %{^kind_blob => nil} ->
+      %{metadata: metadata} ->
+        metadata |> Map.get(type)
+
+      _ ->
         nil
-
-      %{^kind_blob => %ActiveStorage.Blob{} = blob} ->
-        blob
-
-      %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
-        track = track |> Rauversion.Repo.preload(kind_blob)
-        apply(__MODULE__, :blob_for, [track, kind])
     end
   end
 
-  def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
-    case blob_for(track, kind) do
-      nil ->
-        # default url here?
-        nil
+  # processes clip only for :local
+  def reprocess_peaks(track) do
+    blob = Rauversion.Tracks.blob_for(track, :audio)
+    service = blob |> ActiveStorage.Blob.service()
+    path = service.__struct__.path_for(service, blob.key)
 
-      blob ->
-        variant =
-          ActiveStorage.Blob.Representable.variant(blob, options)
-          |> ActiveStorage.Variant.processed()
-
-        ActiveStorage.storage_redirect_url(variant, options)
-        # |> ActiveStorage.Variant.url()
-    end
+    data = Rauversion.Services.PeaksGenerator.run_audiowaveform(path)
+    IO.inspect(data |> length())
+    update_track(track, %{metadata: %{peaks: data}})
   end
 
-  def blob_url_for(track, kind) do
-    blob = blob_for(track, kind)
-    ActiveStorage.service_blob_url(blob)
-  end
+  defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
+
+  defdelegate blob_for(track, kind), to: Rauversion.BlobUtils
+
+  defdelegate blob_proxy_url(user, kind), to: Rauversion.BlobUtils
+
+  defdelegate variant_url(track, kind, options), to: Rauversion.BlobUtils
+
+  defdelegate blob_url_for(track, kind), to: Rauversion.BlobUtils
 end

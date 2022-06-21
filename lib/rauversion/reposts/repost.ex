@@ -3,7 +3,6 @@ defmodule Rauversion.Reposts.Repost do
   import Ecto.Changeset
 
   schema "reposts" do
-
     field :user_id, :id
     field :track_id, :id
 
@@ -13,7 +12,7 @@ defmodule Rauversion.Reposts.Repost do
   @doc false
   def changeset(repost, attrs) do
     repost
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:user_id, :track_id])
+    |> validate_required([:user_id, :track_id])
   end
 end

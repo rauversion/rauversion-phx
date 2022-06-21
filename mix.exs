@@ -1,4 +1,3 @@
-
 defmodule Rauversion.MixProject do
   use Mix.Project
 
@@ -6,7 +5,7 @@ defmodule Rauversion.MixProject do
     [
       app: :rauversion,
       version: "0.1.0",
-      elixir: "~> 1.13",
+      elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -39,6 +38,7 @@ defmodule Rauversion.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.7.2"},
       {:postgrex, ">= 0.0.0"},
+      {:ecto_psql_extras, "~> 0.6"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.0"},
@@ -55,13 +55,16 @@ defmodule Rauversion.MixProject do
       {:faker, "~> 0.17", only: [:test, :dev]},
       {:ecto_autoslug_field, "~> 3.0"},
       {:dotenv, "~> 3.0.0", only: [:dev, :test]},
-      {:active_job,  "0.1.1"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
       }
-            # {:active_storage,
-      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"},
+      # {
+      #  :active_job,
+      #  "0.1.1"
+      # }
+      # {:active_storage,
+      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"}
       # {:active_job,
       # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_job"}
     ]

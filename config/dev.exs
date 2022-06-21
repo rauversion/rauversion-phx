@@ -79,29 +79,29 @@ config :phoenix, :plug_init_mode, :runtime
 # activestorage
 
 # :amazon
-config :active_storage, :service, :amazon
+config :active_storage, :service, :local
 config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo
 config :active_storage, repo: Rauversion.Repo
 
 config :mogrify,
   mogrify_command: [
-    path: "magick",
-    args: ["mogrify"]
+    path: "mogrify",
+    args: []
   ]
 
 # Configure convert command:
 
 config :mogrify,
   convert_command: [
-    path: "magick",
-    args: ["convert"]
+    path: "convert",
+    args: []
   ]
 
 # Configure identify command:
 
 config :mogrify,
   identify_command: [
-    path: "magick",
-    args: ["identify", "-verbose"]
+    path: "identify",
+    args: ["-verbose"]
   ]

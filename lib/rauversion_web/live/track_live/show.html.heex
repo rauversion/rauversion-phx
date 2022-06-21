@@ -18,7 +18,7 @@
 <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
   <!-- Breadcrumb -->
   <nav class="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
-    <%= live_redirect  to: Routes.track_index_path(@socket, :index), 
+    <%= live_redirect  to: Routes.profile_index_path(@socket, :index, @track.user.username), 
     class: "inline-flex items-center space-x-3 text-sm font-medium text-gray-900" do %>
       <svg class="-ml-2 h-5 w-5 text-gray-400" x-description="Heroicon name: solid/chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
@@ -31,55 +31,55 @@
     <!-- Profile header -->
     <div>
 
-      <div class="flex">
-        <div class="flex-grow bg-pink-500 items-center">
+      <div class="flex flex-col sm:flex-row mb-6">
+        <div class="flex-grow bg-black items-center text-white">
           <img class="hidden h-32 w-full object-cover lg:h-48" 
             src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" alt="">
-        
-        
-          <%= content_tag :div, "data-controller": "audio",
-                               "data-audio-target": "player",
-                               "data-audio-url": Rauversion.Tracks.blob_url(@track, "audio") do %>
-            <div class='controls flex items-center'>
-              <span class="relative z-0 inline-flex ml-2 pl-6 pt-6">
-                <button type="button" 
-                data-action='audio#play' 
-                data-audio-target="play" 
-                class="relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                  <span class="sr-only">Play</span>
-                  
-                  <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
-                </button>
 
-                <button type="button" 
-                data-action='audio#pause' 
-                data-audio-target="pause"
-                class="-ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                  <span class="sr-only">Next</span>
-                  
-                  <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path></svg>
-                </button>
+            <%= content_tag :div, "data-controller": "audio",
+                                "data-audio-target": "player",
+                                "data-audio-height-value": 250,
+                                "data-audio-peaks": Jason.encode!(Tracks.metadata(@track, "peaks")),
+                                "data-audio-url": Rauversion.Tracks.blob_proxy_url(@track, "mp3_audio") do %>
+              <div class='controls flex items-center'>
+                <span class="relative z-0 inline-flex ml-2 pl-6 pt-6">
+                  <button type="button" 
+                  data-action='audio#play' 
+                  data-audio-target="play" 
+                  class="relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    <span class="sr-only">Play</span>
+                    
+                    <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
+                  </button>
 
-              </span>
-              <div class="ml-2 pl-6 pt-6">
-                <h4 class="text-lg font-bold">
-                  <%= live_redirect @track.title, to: Routes.track_show_path(@socket, :show, @track) %>
-                </h4>
-                <%= if @track.user do %>
-                  <h5 class="text-sm font-"><%= @track.user.username %></h5>
-                <% end  %>
+                  <button type="button" 
+                  data-action='audio#pause' 
+                  data-audio-target="pause"
+                  class="-ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    <span class="sr-only">Next</span>
+                    
+                    <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path></svg>
+                  </button>
+
+                </span>
+                <div class="ml-2 pl-6 pt-6">
+                  <h4 class="text-lg font-bold">
+                    <%= live_redirect @track.title, to: Routes.track_show_path(@socket, :show, @track) %>
+                  </h4>
+                  <%= if @track.user do %>
+                    <h5 class="text-sm font-">
+                    <%= live_redirect @track.user.username, to: Routes.profile_index_path(@socket, :index, @track.user.username) %>
+                    </h5>
+                  <% end  %>
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
         </div>
 
-        <div class="w-1/4">
+        <div class="w-1/4 hidden sm:block">
           <div class="group relative aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden">
             <% #= image_tag url_for(@track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
            
-
-
-
             <%= img_tag(Rauversion.Tracks.blob_url_for(@track, "cover"), 
               class: "object-center object-cover group-hover:opacity-75") 
             %>
@@ -95,7 +95,7 @@
                   <span class="absolute inset-0" aria-hidden="true"></span>
                   Upload image
                 </a>
-                <p aria-hidden="true" class="mt-0.5 text-gray-700 sm:mt-1">Shop now</p>
+                <p aria-hidden="true" class="mt-0.5 text-gray-700 sm:mt-1">Listen now</p>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@
             <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
               <h1 class="text-2xl font-bold text-gray-900 truncate">
                 <%= if @track.user do %>
-                <%= @track.user.username %>
+                <%= live_redirect @track.user.username, to: Routes.profile_index_path(@socket, :index, @track.user.username) %>
                 <% end  %>
               </h1>
             </div>
@@ -150,7 +150,7 @@
           <h1 class="text-2xl font-bold text-gray-900 truncate">
             <% #= @track&.user&.username %>
             <%= if @track.user do %>
-              <%= @track.user.username %>
+              <%= live_redirect @track.user.username, to: Routes.profile_index_path(@socket, :index, @track.user.username) %>
             <% end  %>
           </h1>
         </div>
