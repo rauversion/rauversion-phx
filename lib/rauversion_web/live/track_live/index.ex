@@ -5,6 +5,7 @@ defmodule RauversionWeb.TrackLive.Index do
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
   alias Rauversion.Repo
+  alias RauversionWeb.TrackLive.Step
 
   # @impl true
   def mount(_params, session, socket) do
@@ -34,6 +35,7 @@ defmodule RauversionWeb.TrackLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket =
       socket
+      |> assign(:step, %Step{name: "info", prev: "upload", next: "share"})
       |> assign(:page_title, "Edit Track")
       |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
 

@@ -59,7 +59,7 @@ defmodule Rauversion.Tracks do
   """
   def create_track(attrs \\ %{}) do
     %Track{}
-    |> Track.changeset(attrs)
+    |> Track.new_changeset(attrs)
     |> Repo.insert()
   end
 
@@ -112,6 +112,10 @@ defmodule Rauversion.Tracks do
     Track.changeset(track, attrs)
   end
 
+  def change_new_track(%Track{} = track, attrs \\ %{}) do
+    Track.new_changeset(track, attrs)
+  end
+
   def metadata(track, type) do
     case track do
       %{metadata: nil} ->
@@ -130,8 +134,9 @@ defmodule Rauversion.Tracks do
     blob = Rauversion.Tracks.blob_for(track, :audio)
     service = blob |> ActiveStorage.Blob.service()
     path = service.__struct__.path_for(service, blob.key)
+    duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
 
-    data = Rauversion.Services.PeaksGenerator.run_audiowaveform(path)
+    data = Rauversion.Services.PeaksGenerator.run_audiowaveform(path, duration)
     IO.inspect(data |> length())
     update_track(track, %{metadata: %{peaks: data}})
   end

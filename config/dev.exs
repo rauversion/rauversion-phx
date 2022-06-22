@@ -65,7 +65,9 @@ config :rauversion, RauversionWeb.Endpoint,
   ]
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :console,
+  format: "[$level] $message\n",
+  truncate: :infinity
 
 config :rauversion, :app_name, "Rauversion.com"
 

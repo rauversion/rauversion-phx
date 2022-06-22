@@ -1,6 +1,5 @@
 
-<%= @current_user.username %>
-
+<% #= @current_user.username %>
 
 <.live_component
   module={RauversionWeb.TrackLive.FormComponent}
@@ -8,6 +7,7 @@
   title={@page_title}
   action={@live_action}
   track={@track}
+  step={@step}
   current_user={@current_user}
   return_to={Routes.track_index_path(@socket, :index)}
 />

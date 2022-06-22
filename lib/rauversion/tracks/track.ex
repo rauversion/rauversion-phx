@@ -82,42 +82,52 @@ defmodule Rauversion.Tracks.Track do
     |> TitleSlug.unique_constraint()
   end
 
+  def new_changeset(track, attrs) do
+    track
+    |> cast(attrs, [:title, :user_id, :private])
+    |> validate_required([])
+    |> TitleSlug.maybe_generate_slug()
+    |> TitleSlug.unique_constraint()
+  end
+
   def process_one_upload(struct, attrs, kind) do
-    case attrs do
-      %{^kind => [file | _]} ->
-        # Get peaks. maybe detach this processings
-        struct =
-          if kind == "audio" do
-            # coput temp file from live
-            {:ok, dir_path} = Temp.mkdir("my-dir")
-            new_path = "#{dir_path}#{file.filename}" |> String.replace(~r/\s+/, "-")
-            :ok = File.cp(file.path, new_path)
+    case struct do
+      %{valid?: true} ->
+        case attrs do
+          %{^kind => [file | _]} ->
+            # Get peaks. maybe detach this processings
+            struct =
+              if kind == "audio" do
+                # copy temp file from live
+                file = generate_local_copy(file)
 
-            file = %{file | path: new_path}
+                %{path: path, blob: blob} = convert_to_mp3(struct, file)
 
-            %{path: path, blob: blob} = convert_to_mp3(struct, file)
+                duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
 
-            duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
+                case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
+                  [_ | _] = data ->
+                    put_change(struct, :metadata, %{peaks: data})
 
-            case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
-              [_ | _] = data ->
-                put_change(struct, :metadata, %{peaks: data})
-
-              _ ->
+                  _ ->
+                    struct
+                end
+              else
                 struct
-            end
-          else
+              end
+
+            # Tracks.update_track(struct, %{metadata: %{peaks: data}})
+            ####
+
+            IO.inspect(struct)
+
+            attach_file_with_blob(struct, kind, file)
+
             struct
-          end
 
-        # Tracks.update_track(struct, %{metadata: %{peaks: data}})
-        ####
-
-        IO.inspect(struct)
-
-        attach_file_with_blob(struct, kind, file)
-
-        struct
+          _ ->
+            struct
+        end
 
       _ ->
         struct
@@ -133,13 +143,7 @@ defmodule Rauversion.Tracks.Track do
     IO.inspect(File.exists?(path))
 
     blob =
-      ActiveStorage.Blob.create_and_upload!(
-        %ActiveStorage.Blob{},
-        io: {:path, path},
-        filename: "audio.mp3",
-        content_type: "audio/mpeg",
-        identify: true
-      )
+      create_blob(file)
       |> ActiveStorage.Blob.analyze()
 
     attach_file(struct, "mp3_audio", blob)
@@ -147,16 +151,26 @@ defmodule Rauversion.Tracks.Track do
     %{path: path, blob: blob}
   end
 
+  def generate_local_copy(file) do
+    {:ok, dir_path} = Temp.mkdir("my-dir")
+    new_path = "#{dir_path}#{file.filename}" |> String.replace(~r/\s+/, "-")
+    :ok = File.cp(file.path, new_path)
+    %{file | path: new_path}
+  end
+
+  def create_blob(file) do
+    ActiveStorage.Blob.create_and_upload!(
+      %ActiveStorage.Blob{},
+      io: {:path, file.path},
+      filename: file.filename,
+      content_type: file.content_type,
+      identify: true
+    )
+  end
+
   #  TODO: maybe copy here the live-upload
   def attach_file_with_blob(struct, kind, file) do
-    blob =
-      ActiveStorage.Blob.create_and_upload!(
-        %ActiveStorage.Blob{},
-        io: {:path, file.path},
-        filename: file.filename,
-        content_type: file.content_type,
-        identify: true
-      )
+    blob = create_blob(file)
 
     attach_file(struct, kind, blob)
   end

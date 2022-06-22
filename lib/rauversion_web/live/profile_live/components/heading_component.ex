@@ -6,7 +6,7 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
 
   def render(%{profile: profile} = assigns) do
     ~H"""
-      <div class="sm:h-64 h-24 bg-black sticky top-0 z-50 sm:relative">
+      <div class="sm:h-64 h-24 bg-black sticky top-0 z-40 sm:relative">
         <div class="flex justify-between">
           <div class="flex">
             <div class="m-4">

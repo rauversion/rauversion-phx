@@ -1,8 +1,20 @@
+defmodule RauversionWeb.TrackLive.Step do
+  @moduledoc "Describe a step in the multi-step form and where it can go."
+  defstruct [:name, :prev, :next]
+end
+
 defmodule RauversionWeb.TrackLive.New do
   use RauversionWeb, :live_view
 
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
+  alias RauversionWeb.TrackLive.Step
+
+  @steps [
+    %Step{name: "upload", prev: nil, next: "info"},
+    %Step{name: "info", prev: "upload", next: "share"},
+    %Step{name: "share", prev: "info", next: nil}
+  ]
 
   @impl true
   def mount(_params, session, socket) do
@@ -24,6 +36,7 @@ defmodule RauversionWeb.TrackLive.New do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Track")
+    |> assign(:step, List.first(@steps))
     |> assign(:track, %Track{})
   end
 
