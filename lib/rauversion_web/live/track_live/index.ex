@@ -37,7 +37,10 @@ defmodule RauversionWeb.TrackLive.Index do
       socket
       |> assign(:step, %Step{name: "info", prev: "upload", next: "share"})
       |> assign(:page_title, "Edit Track")
-      |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
+      |> assign(
+        :track,
+        Tracks.get_track!(id) |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
+      )
 
     case RauversionWeb.LiveHelpers.authorize_user_resource(socket) do
       {:ok} ->
@@ -76,6 +79,6 @@ defmodule RauversionWeb.TrackLive.Index do
   end
 
   defp list_tracks do
-    Tracks.list_tracks() |> Rauversion.Repo.preload(:user)
+    Tracks.list_tracks() |> Rauversion.Repo.preload([:user, :cover_blob, :mp3_audio_blob])
   end
 end

@@ -20,8 +20,9 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :index, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
-
-    tracks = Tracks.list_tracks_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Rauversion.Repo.preload([:cover_blob, :mp3_audio_blob])
 
     socket
     |> assign(:tracks, tracks)
@@ -32,7 +33,9 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :tracks_all, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
-    tracks = Tracks.list_tracks_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Rauversion.Repo.preload([:cover_blob, :mp3_audio_blob])
 
     socket
     |> assign(:page_title, "Tracks all")
