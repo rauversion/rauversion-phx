@@ -31,7 +31,9 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
       <div class="w-full">
 
         <% # if track.audio.persisted? %>
-          <%= content_tag :div, "data-controller": "audio",
+          <%= content_tag :div, id: "track-player-#{track.id}",
+                                "phx-hooks-disavledd": "AudioPlayer",
+                                "data-controller": "audio",
                                 "data-audio-target": "player",
                                 "data-audio-height-value": 70,
                                 "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(track, "peaks")),
@@ -61,7 +63,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 <h4 class="text-lg font-bold">
                   <%= live_redirect track.title, to: Routes.track_show_path(@socket, :show, track) %>
                 </h4>
-                <%= if track.user do %>
+                <%= if track.user == %Rauversion.Accounts.User{} do %>
                   <h5 class="text-sm font-"><%= track.user.username %></h5>
                 <% end %>
               </div>
@@ -77,7 +79,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
           <%= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
           <%= if current_user && current_user.id == track.user_id do %>
             <%= live_patch "Edit", to:  Routes.track_show_path(@socket, :edit, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-            <%= link "Delete", to: "#", phx_click: "delete", phx_value_id: track.id, data: [confirm: "Are you sure?"], class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+            <%= link "Delete", to: "#", phx_click: "delete-track", phx_value_id: track.id, data: [confirm: "Are you sure?"], class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
           <% end %>
           <% #= link_to "Show this track", track, class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
           <% #= link_to 'Edit this track', edit_track_path(track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>

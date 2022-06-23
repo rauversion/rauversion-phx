@@ -42,7 +42,7 @@ defmodule RauversionWeb.TrackLive.Index do
         Tracks.get_track!(id) |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
       )
 
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket) do
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok} ->
         socket
 
@@ -68,7 +68,7 @@ defmodule RauversionWeb.TrackLive.Index do
     socket
     |> assign(:track, Tracks.get_track!(id))
 
-    case authorize_user_resource(socket) do
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok} ->
         {:ok, _} = Tracks.delete_track(socket.assigns.track)
         {:noreply, assign(socket, :tracks, list_tracks())}

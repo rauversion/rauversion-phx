@@ -101,9 +101,13 @@ defmodule Rauversion.Tracks.Track do
                 # copy temp file from live
                 file = generate_local_copy(file)
 
+                Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converting])
+
                 %{path: path, blob: blob} = convert_to_mp3(struct, file)
 
                 duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
+
+                Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converted])
 
                 case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
                   [_ | _] = data ->
@@ -121,7 +125,11 @@ defmodule Rauversion.Tracks.Track do
 
             IO.inspect(struct)
 
+            Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_attaching])
+
             attach_file_with_blob(struct, kind, file)
+
+            Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converted])
 
             struct
 

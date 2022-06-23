@@ -27,7 +27,7 @@ defmodule RauversionWeb.TrackLive.Show do
       |> assign(:page_title, page_title(socket.assigns.live_action))
       |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
 
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket) do
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok, socket} ->
         {:noreply, socket}
 

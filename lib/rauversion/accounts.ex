@@ -8,6 +8,21 @@ defmodule Rauversion.Accounts do
 
   alias Rauversion.Accounts.{User, UserToken, UserNotifier}
 
+  @topic inspect(__MODULE__)
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(Rauversion.PubSub, @topic)
+  end
+
+  def broadcast_change({:ok, result}, event) do
+    Phoenix.PubSub.broadcast(Rauversion.PubSub, @topic, {__MODULE__, event, result})
+    {:ok, result}
+  end
+
+  def broadcast_change({:error, result}, event) do
+    {:error, result}
+  end
+
   def list_accounts(limit \\ 20) do
     User |> limit(^limit) |> Repo.all()
   end

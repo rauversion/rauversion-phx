@@ -10,7 +10,36 @@ defmodule RauversionWeb.ProfileLive.Index do
       socket
       |> assign(:profile, Accounts.get_user_by_username(id))
 
+    Tracks.subscribe()
+
     {:ok, socket}
+  end
+
+  # @impl true
+  # def handle_info({Tracks, [:tracks, _], _}, socket) do
+  #  IO.puts("OLIII")
+  #  {:noreply, assign(socket, :tracks, Tracks.list_tracks())}
+  # end
+
+  @impl true
+  def handle_info(
+        {Tracks, [:tracks, :destroyed], %Tracks.Track{user_id: user_id} = deleted_track},
+        socket
+      ) do
+    IO.puts("HANDLE DELETE TRACK EVENT")
+
+    cond do
+      user_id == socket.assigns.profile.id ->
+        {:noreply,
+         assign(
+           socket,
+           :tracks,
+           socket.assigns.tracks |> Enum.filter(fn t -> t.id != deleted_track.id end)
+         )}
+
+      true ->
+        {:noreply, socket}
+    end
   end
 
   @impl true
@@ -49,6 +78,20 @@ defmodule RauversionWeb.ProfileLive.Index do
     IEx.pry()
     # post_id = socket.assigns.post.id
     # do something with sort_by
+  end
+
+  @impl true
+  def handle_event("delete-track", %{"id" => id}, socket) do
+    track = Tracks.get_track!(id)
+
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, track.user_id) do
+      {:ok, socket} ->
+        {:ok, _} = Tracks.delete_track(track)
+        {:noreply, socket}
+
+      err ->
+        {:noreply, socket}
+    end
   end
 
   defp menu(socket, id) do

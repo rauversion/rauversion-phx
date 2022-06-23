@@ -8,6 +8,21 @@ defmodule Rauversion.Tracks do
 
   alias Rauversion.Tracks.Track
 
+  @topic inspect(__MODULE__)
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(Rauversion.PubSub, @topic)
+  end
+
+  def broadcast_change({:ok, result}, event) do
+    Phoenix.PubSub.broadcast(Rauversion.PubSub, @topic, {__MODULE__, event, result})
+    {:ok, result}
+  end
+
+  def broadcast_change({:error, result}, event) do
+    {:error, result}
+  end
+
   @doc """
   Returns the list of tracks.
 
@@ -61,6 +76,7 @@ defmodule Rauversion.Tracks do
     %Track{}
     |> Track.new_changeset(attrs)
     |> Repo.insert()
+    |> broadcast_change([:tracks, :created])
   end
 
   @doc """
@@ -81,6 +97,7 @@ defmodule Rauversion.Tracks do
     |> Track.process_one_upload(attrs, "cover")
     |> Track.process_one_upload(attrs, "audio")
     |> Repo.update()
+    |> broadcast_change([:tracks, :updated])
   end
 
   @doc """
@@ -97,6 +114,7 @@ defmodule Rauversion.Tracks do
   """
   def delete_track(%Track{} = track) do
     Repo.delete(track)
+    |> broadcast_change([:tracks, :destroyed])
   end
 
   @doc """
