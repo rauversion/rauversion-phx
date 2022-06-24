@@ -29,15 +29,127 @@ import { Application } from "@hotwired/stimulus"
 
 import "./controllers"
 
-import * as ActiveStorage from "@rails/activestorage"
+import WaveSurfer from 'wavesurfer'
+
+// import * as ActiveStorage from "@rails/activestorage"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", info => topbar.show())
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
+
+let execJS = (selector, attr) => {
+  document.querySelectorAll(selector).forEach(el => liveSocket.execJS(el, el.getAttribute(attr)))
+}
+
+let Hooks = {}
+
+
+Hooks.AudioPlayer = {
+  mounted(){
+    this.heightValue = 70
+    this.playerTarget = this.el
+    this.peaks = JSON.parse(this.el.dataset.audioPeaks)
+    this.url = this.el.dataset.audioUrl
+    this.playiconTarget = this.el.querySelector('[data-audio-target="playicon"]')
+    this.pauseiconTarget =  this.el.querySelector('[data-audio-target="pauseicon"]')
+
+    this._wave = WaveSurfer.create({
+      container: this.playerTarget,
+      backend: 'MediaElement',
+      waveColor: 'grey',
+      progressColor: 'tomato',
+      height: this.heightValue || 70,
+      //fillParent: false,
+      barWidth: 2,
+      //barHeight: 10, // the height of the wave
+      barGap: null,
+      minPxPerSec: 2,
+      pixelRatio: 10,
+      cursorWidth: 1,
+      cursorColor: "lightgray",
+      normalize: false,
+      responsive: true,
+      fillParent: true
+    })
+
+    console.log("VAUES",this.peaks)
+
+    if (!this.url) return 
+    
+    this._wave.load(this.url, this.peaks)
+
+    this._wave.on('pause', ()=> {
+      this.playiconTarget.style.display = 'block'
+      this.pauseiconTarget.style.display = 'none'
+    })
+
+    this._wave.on('play', ()=> {
+      this.playiconTarget.style.display = 'none'
+      this.pauseiconTarget.style.display = 'block'
+    })
+
+
+    /*this.playbackBeganAt = null
+    this.player = this.el.querySelector("audio")
+    this.currentTime = this.el.querySelector("#player-time")
+    this.duration = this.el.querySelector("#player-duration")
+    this.progress = this.el.querySelector("#player-progress")
+    let enableAudio = () => {
+      if(this.player.src){
+        document.removeEventListener("click", enableAudio)
+        if(this.player.readyState === 0){
+          this.player.play().catch(error => null)
+          this.player.pause()
+        }
+      }
+    }
+    document.addEventListener("click", enableAudio)
+    this.el.addEventListener("js:listen_now", () => this.play({sync: true}))
+    this.el.addEventListener("js:play_pause", () => {
+      if(this.player.paused){
+        this.play()
+      }
+    })
+    this.handleEvent("play", ({url, token, elapsed, artist, title}) => {
+      this.playbackBeganAt = nowSeconds() - elapsed
+      let currentSrc = this.player.src.split("?")[0]
+      if(currentSrc === url && this.player.paused){
+        this.play({sync: true})
+      } else if(currentSrc !== url) {
+        this.player.src = `${url}?token=${token}`
+        this.play({sync: true})
+      }
+
+      if("mediaSession" in navigator){
+        navigator.mediaSession.metadata = new MediaMetadata({artist, title})
+      }
+    })
+    this.handleEvent("pause", () => this.pause())
+    this.handleEvent("stop", () => this.stop())*/
+  },
+
+  wave(){
+    return this._wave
+  },
+
+  play(opts = {}){
+    this.wave().playPause()
+  },
+
+  pause(){
+    clearInterval(this.progressTimer)
+    this.player.pause()
+  },
+
+  stop(){
+    this.wave().stop()
+  },
+}
+
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()

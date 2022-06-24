@@ -5,6 +5,7 @@ defmodule RauversionWeb.TrackLive.Index do
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
   alias Rauversion.Repo
+  alias RauversionWeb.TrackLive.Step
 
   # @impl true
   def mount(_params, session, socket) do
@@ -34,10 +35,14 @@ defmodule RauversionWeb.TrackLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket =
       socket
+      |> assign(:step, %Step{name: "info", prev: "upload", next: "share"})
       |> assign(:page_title, "Edit Track")
-      |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
+      |> assign(
+        :track,
+        Tracks.get_track!(id) |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
+      )
 
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket) do
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok} ->
         socket
 
@@ -63,7 +68,7 @@ defmodule RauversionWeb.TrackLive.Index do
     socket
     |> assign(:track, Tracks.get_track!(id))
 
-    case authorize_user_resource(socket) do
+    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok} ->
         {:ok, _} = Tracks.delete_track(socket.assigns.track)
         {:noreply, assign(socket, :tracks, list_tracks())}
@@ -74,6 +79,6 @@ defmodule RauversionWeb.TrackLive.Index do
   end
 
   defp list_tracks do
-    Tracks.list_tracks() |> Rauversion.Repo.preload(:user)
+    Tracks.list_tracks() |> Rauversion.Repo.preload([:user, :cover_blob, :mp3_audio_blob])
   end
 end

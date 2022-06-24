@@ -3,6 +3,7 @@ defmodule RauversionWeb.LiveHelpers do
   import Phoenix.LiveView.Helpers
 
   alias Phoenix.LiveView.JS
+  alias Phoenix.LiveView
 
   @doc """
   Renders a live component inside a modal.
@@ -90,12 +91,32 @@ defmodule RauversionWeb.LiveHelpers do
     end
   end
 
-  def authorize_user_resource(socket) do
-    if socket.assigns.track.user_id == socket.assigns.current_user.id do
+  def authorize_user_resource(socket, user_id) do
+    if user_id == socket.assigns.current_user.id do
       {:ok, socket}
     else
       socket = socket |> put_flash(:error, "resource not authorized")
       {:err, push_patch(socket, to: "/", replace: true)}
     end
+  end
+
+  def live_audio_preview(%Phoenix.LiveView.UploadEntry{ref: ref} = entry, opts \\ []) do
+    attrs =
+      Keyword.merge(opts,
+        id: opts[:id] || "phx-preview-#{ref}",
+        data_phx_upload_ref: entry.upload_ref,
+        data_phx_entry_ref: ref,
+        data_phx_hook: "Phoenix.LiveImgPreview",
+        data_phx_update: "ignore"
+      )
+
+    assigns = LiveView.assign(%{__changed__: nil}, attrs: attrs)
+
+    ~H"""
+      <audio controls>
+        <source {@attrs}>
+        Your browser does not support the audio tag.
+      </audio>
+    """
   end
 end

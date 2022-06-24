@@ -140,7 +140,7 @@
               </div>
 
               <h3 class="mt-6 text-sm text-gray-500">
-                <%= link to: Routes.track_show_path(@conn, :show, track) do %>
+                <%= live_redirect to: Routes.track_show_path(@conn, :show, track) do %>
                   <span class="absolute inset-0"></span>
                   <%= track.title %>
                 <% end %>

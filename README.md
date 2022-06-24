@@ -31,13 +31,24 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] File uploads Avatar
 - [x] User auth
 - [x] Tracks
+- [ ] paginate profile tracks /:username
+- [ ] paginate /tracks
+- [ ] filter public/private tracks (where: private: true)
+- [ ] add metadata form step**
+- [ ] give feedback on upload preprosessing
+- [ ] a logo for rauv
 - [ ] Reposts
 - [ ] Albums
 - [ ] Playlists
 - [ ] Likes
 - [ ] Followers / Followings
+- [ ] telemetry for dashboard
+
 - [x] load waveform data as data
-- [x] Range responses https://github.com/elixir-plug/plug/pull/526/files
+- [x] Range responses
+
+
+
 
 # Setup:
 

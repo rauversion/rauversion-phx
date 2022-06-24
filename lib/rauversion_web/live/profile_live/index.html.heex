@@ -35,7 +35,7 @@
       <div class="p-4 border-l-1 border-l-gray-50">
         <.live_component
           module={RauversionWeb.ProfileLive.StatsComponent}
-          id={"track-#{@profile.id}"}
+          id={"track-#{@profile.id}-stats"}
           track={"track"}
         />
       </div>
@@ -43,7 +43,7 @@
       <section aria-labelledby="who-to-follow-heading">
         <.live_component
           module={RauversionWeb.ProfileLive.UserSuggestionComponent}
-          id={"track-#{@profile.id}"}
+          id={"track-#{@profile.id}-user-suggestion"}
           track={"track"}
         />
       </section>
@@ -51,7 +51,7 @@
       <section aria-labelledby="trending-heading">
         <.live_component
           module={RauversionWeb.ProfileLive.TrendingComponent}
-          id={"track-#{@profile.id}"}
+          id={"track-#{@profile.id}-trending"}
           track={"track"}
         />
       </section>
