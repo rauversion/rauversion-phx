@@ -8,6 +8,8 @@ defmodule Rauversion.Playlists.Playlist do
     field :slug, :string
     field :title, :string
     belongs_to :user, Rauversion.Accounts.User
+    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist
+    has_many :tracks, through: [:track_playlists, :tracks]
 
     timestamps()
   end

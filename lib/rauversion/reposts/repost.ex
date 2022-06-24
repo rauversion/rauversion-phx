@@ -3,8 +3,11 @@ defmodule Rauversion.Reposts.Repost do
   import Ecto.Changeset
 
   schema "reposts" do
-    field :user_id, :id
-    field :track_id, :id
+    # field :user_id, :id
+    # field :track_id, :id
+
+    belongs_to(:user, Rauversion.Accounts.User)
+    belongs_to(:track, Rauversion.Tracks.Track)
 
     timestamps()
   end

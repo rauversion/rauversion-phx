@@ -12,16 +12,19 @@ defmodule Rauversion.RepostsTest do
       AccountsFixtures
     }
 
-    @invalid_attrs %{}
+    @invalid_attrs %{
+      user_id: nil
+    }
 
     def valid_repost() do
       user = user_fixture()
-      track = track_fixture()
+      track = track_fixture(%{user_id: user.id})
       repost = repost_fixture(%{user_id: user.id, track_id: track.id})
     end
 
     test "list_reposts/0 returns all reposts" do
-      assert Reposts.list_reposts() == [valid_repost()]
+      v = valid_repost()
+      assert Reposts.list_reposts() == [v]
     end
 
     test "get_repost!/1 returns the repost with given id" do
@@ -30,7 +33,9 @@ defmodule Rauversion.RepostsTest do
     end
 
     test "create_repost/1 with valid data creates a repost" do
-      valid_attrs = %{}
+      user = user_fixture()
+      track = track_fixture(%{user_id: user.id})
+      valid_attrs = %{user_id: user.id, track_id: track.id}
 
       assert {:ok, %Repost{} = repost} = Reposts.create_repost(valid_attrs)
     end
@@ -40,7 +45,7 @@ defmodule Rauversion.RepostsTest do
     end
 
     test "update_repost/2 with valid data updates the repost" do
-      repost = repost_fixture()
+      repost = valid_repost()
       update_attrs = %{}
 
       assert {:ok, %Repost{} = repost} = Reposts.update_repost(repost, update_attrs)
@@ -53,13 +58,13 @@ defmodule Rauversion.RepostsTest do
     end
 
     test "delete_repost/1 deletes the repost" do
-      repost = repost_fixture()
+      repost = valid_repost()
       assert {:ok, %Repost{}} = Reposts.delete_repost(repost)
       assert_raise Ecto.NoResultsError, fn -> Reposts.get_repost!(repost.id) end
     end
 
     test "change_repost/1 returns a repost changeset" do
-      repost = repost_fixture()
+      repost = valid_repost()
       assert %Ecto.Changeset{} = Reposts.change_repost(repost)
     end
   end

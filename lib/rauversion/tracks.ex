@@ -156,7 +156,8 @@ defmodule Rauversion.Tracks do
 
     data = Rauversion.Services.PeaksGenerator.run_audiowaveform(path, duration)
     IO.inspect(data |> length())
-    update_track(track, %{metadata: %{peaks: data}})
+    # pass track.metadata.id is needed in order to merge the embedded_schema properly.
+    update_track(track, %{metadata: %{id: track.metadata.id, peaks: data}})
   end
 
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils

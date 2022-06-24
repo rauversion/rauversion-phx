@@ -38,7 +38,7 @@
           <td><%= track.caption %></td>
           <td><% #= track.notification_settings %></td>
           <td>
-          <%= case Tracks.metadata(track, "peaks") do
+          <%= case Tracks.metadata(track, :peaks) do
               nil -> ""
               [hd | _rest] -> hd
               end
