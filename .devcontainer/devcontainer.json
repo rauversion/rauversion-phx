@@ -7,7 +7,7 @@
     "jakebecker.elixir-ls"
   ],
   "service": "rauversion-phx",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/app",
   "shutdownAction": "stopCompose",
   "settings": {
     "editor.formatOnSave": true,
