@@ -29,6 +29,15 @@
         return_to={Routes.track_index_path(@socket, :index)}
       />
     <% end %>
+
+    <%= if @step.name == "share" do %>
+      <.live_component
+        id="share-track"
+        module={RauversionWeb.TrackLive.ShareTrackComponent}
+        track={@track}
+      />
+    <% end %>
+    
   </div>
 </div>
 

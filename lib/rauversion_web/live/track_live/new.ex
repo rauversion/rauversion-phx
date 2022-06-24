@@ -34,6 +34,8 @@ defmodule RauversionWeb.TrackLive.New do
   end
 
   defp apply_action(socket, :new, _params) do
+    # track = Tracks.get_track!(1) |> Rauversion.Repo.preload([:user, :cover_blob])
+
     socket
     |> assign(:page_title, "New Track")
     |> assign(:step, List.first(@steps))

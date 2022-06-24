@@ -10,13 +10,13 @@
           </div>
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
             
-              <a href="/tracks" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
+              <%= live_redirect to: "/tracks", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
                 Tracks
-              </a>
+              <% end %>
             
-              <a href="/users/settings" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
+              <% live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
                 Account
-              </a>
+              <% end %>
 
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
                 <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
@@ -44,10 +44,10 @@
         </div>
 
         <div class="flex items-center px-2 lg:px-0">
-          <a href="/tracks/new" 
-            class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-orange-600 ">
+          <% live_redirect to: "/tracks/new",
+            class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-orange-600" do %>
             upload
-          </a>
+          <% end %>
         </div>
         
         <div class="flex items-center lg:hidden">

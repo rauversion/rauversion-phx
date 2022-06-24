@@ -90,45 +90,6 @@ Hooks.AudioPlayer = {
       this.playiconTarget.style.display = 'none'
       this.pauseiconTarget.style.display = 'block'
     })
-
-
-    /*this.playbackBeganAt = null
-    this.player = this.el.querySelector("audio")
-    this.currentTime = this.el.querySelector("#player-time")
-    this.duration = this.el.querySelector("#player-duration")
-    this.progress = this.el.querySelector("#player-progress")
-    let enableAudio = () => {
-      if(this.player.src){
-        document.removeEventListener("click", enableAudio)
-        if(this.player.readyState === 0){
-          this.player.play().catch(error => null)
-          this.player.pause()
-        }
-      }
-    }
-    document.addEventListener("click", enableAudio)
-    this.el.addEventListener("js:listen_now", () => this.play({sync: true}))
-    this.el.addEventListener("js:play_pause", () => {
-      if(this.player.paused){
-        this.play()
-      }
-    })
-    this.handleEvent("play", ({url, token, elapsed, artist, title}) => {
-      this.playbackBeganAt = nowSeconds() - elapsed
-      let currentSrc = this.player.src.split("?")[0]
-      if(currentSrc === url && this.player.paused){
-        this.play({sync: true})
-      } else if(currentSrc !== url) {
-        this.player.src = `${url}?token=${token}`
-        this.play({sync: true})
-      }
-
-      if("mediaSession" in navigator){
-        navigator.mediaSession.metadata = new MediaMetadata({artist, title})
-      }
-    })
-    this.handleEvent("pause", () => this.pause())
-    this.handleEvent("stop", () => this.stop())*/
   },
 
   wave(){
