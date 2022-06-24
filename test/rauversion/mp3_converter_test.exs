@@ -1,4 +1,4 @@
-defmodule Rauversion.PeaksGeneratorTest do
+defmodule Rauversion.Services.Mp3ConverterTest do
   use Rauversion.DataCase
 
   alias Rauversion.Playlists

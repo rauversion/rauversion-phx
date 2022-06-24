@@ -14,7 +14,7 @@ defmodule Rauversion.TrackPlaylists.TrackPlaylist do
   @doc false
   def changeset(track_playlist, attrs) do
     track_playlist
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:playlist_id, :track_id])
+    |> validate_required([:playlist_id, :track_id])
   end
 end

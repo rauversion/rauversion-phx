@@ -1,4 +1,6 @@
-ExUnit.start()
+# ExUnit.start()
+ExUnit.start(timeout: 100_000_000)
+
 Ecto.Adapters.SQL.Sandbox.mode(Rauversion.Repo, :manual)
 
 defmodule ActiveStorageTestHelpers do

@@ -14,7 +14,9 @@ config :rauversion, Rauversion.Repo,
   database: "rauversion_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: System.get_env("DB_HOST", "localhost"),
   pool: Ecto.Adapters.SQL.Sandbox,
-  pool_size: 10
+  pool_size: 10,
+  ownership_timeout: 300_000_000,
+  timeout: 300_000_000
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.

@@ -1,6 +1,7 @@
 defmodule Rauversion.Tracks.TrackMetadata do
   use Ecto.Schema
   import Ecto.Changeset
+  # @primary_key false
 
   embedded_schema do
     field :peaks, {:array, :float}
@@ -59,11 +60,12 @@ defmodule Rauversion.Tracks.TrackMetadata do
     :display_stats,
     :include_in_rss,
     :offline_listening,
-    :enable_app_playblack
+    :enable_app_playblack,
+    :peaks
   ]
 
-  def changeset(attrs) do
-    %__MODULE__{}
+  def changeset(struct, attrs) do
+    struct
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
 

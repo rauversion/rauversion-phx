@@ -15,7 +15,9 @@ defmodule Rauversion.Tracks.Track do
   schema "tracks" do
     field :caption, :string
     field :description, :string
-    field :metadata, :map, default: %{}
+    # field :metadata, :map, default: %{}
+    embeds_one :metadata, Rauversion.Tracks.TrackMetadata, on_replace: :delete
+
     field :notification_settings, :map, default: %{}
     field :private, :boolean, default: false
     field :slug, TitleSlug.Type
@@ -62,16 +64,16 @@ defmodule Rauversion.Tracks.Track do
       :description,
       :private,
       :user_id,
-      :caption,
-      :metadata
+      :caption
       # :slug,
       # :caption,
       # :notification_settings,
       # :metadata
     ])
+    |> cast_embed(:metadata, with: &Rauversion.Tracks.TrackMetadata.changeset/2)
     |> validate_required([
-      :title,
-      :description
+      :title
+      # :description
       # :private
       # :slug,
       # :caption
@@ -84,8 +86,9 @@ defmodule Rauversion.Tracks.Track do
 
   def new_changeset(track, attrs) do
     track
-    |> cast(attrs, [:title, :user_id, :private])
-    |> validate_required([])
+    |> cast(attrs, [:title, :user_id, :private, :caption, :description])
+    |> cast_embed(:metadata, with: &Rauversion.Tracks.TrackMetadata.changeset/2)
+    |> validate_required([:user_id, :title])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
   end
