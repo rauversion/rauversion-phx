@@ -1,6 +1,7 @@
 import { Application } from "@hotwired/stimulus"
 import Dropdown from "stimulus-dropdown"
 import Audio from "./audio_controller"
+import Tabs from "./tabs_controller"
 
 const application = Application.start()
 
@@ -10,6 +11,7 @@ window.Stimulus   = application
 
 application.register("dropdown", Dropdown)
 application.register("audio", Audio)
+application.register("tabs", Tabs)
 
 export { application }
 

@@ -51,12 +51,12 @@ export default class extends Controller {
 
     _this.pauseTarget.style.display = 'none'
     this._wave.on('pause', function () {
-      _this.playiconTarget.style.display = 'block'
-      _this.pauseiconTarget.style.display = 'none'
-    })
-    this._wave.on('play', function () {
       _this.playiconTarget.style.display = 'none'
       _this.pauseiconTarget.style.display = 'block'
+    })
+    this._wave.on('play', function () {
+      _this.playiconTarget.style.display = 'block'
+      _this.pauseiconTarget.style.display = 'none'
     })
   }
 
