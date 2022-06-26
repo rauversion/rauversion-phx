@@ -1,6 +1,7 @@
 defmodule RauversionWeb.LiveHelpers do
   import Phoenix.LiveView
   import Phoenix.LiveView.Helpers
+  import Phoenix.HTML.Form
 
   alias Phoenix.LiveView.JS
   alias Phoenix.LiveView
@@ -118,5 +119,149 @@ defmodule RauversionWeb.LiveHelpers do
         Your browser does not support the audio tag.
       </audio>
     """
+  end
+
+  def form_input_renderer(f, field = %{type: :text_input}) do
+    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+      <div class={@field.wrapper_class}>
+        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1">
+          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+      </div>
+    """
+  end
+
+  def form_input_renderer(f, field = %{type: :date_input}) do
+    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+      <div class={@field.wrapper_class}>
+        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1">
+          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+      </div>
+    """
+  end
+
+  def form_input_renderer(f, field = %{type: :select}) do
+    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+      <div class={@field.wrapper_class}>
+        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1">
+          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+      </div>
+    """
+  end
+
+  def form_input_renderer(f, field = %{type: :date_select}) do
+    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+      <div class={@field.wrapper_class}>
+        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1 flex space-x-1 items-center">
+          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+      </div>
+    """
+  end
+
+  def form_input_renderer(f, field = %{type: :radio}) do
+    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+      <div class={"#{@field.wrapper_class}"}>
+        <div class="flex items-center space-x-2 py-6">
+          <div class="flex space-x-1 items-start">
+            <%= radio_button(@form, @field.name, @field.value, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300") %>
+          </div>
+          <div class="flex flex-col">
+            <%= label @form, @field[:label] || @field.name, class: "block text-sm font-medium text-gray-700" %>
+            <p class="text-xs text-gray-500">
+              <% #= Map.get(@form.data, @field.name) %>
+              <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
+                "true" ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+                "false" -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
+                _ -> case Map.get(@form.data, @field.name) do
+                  true ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+                  false -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
+                  _ -> Map.get(@field, :hint)
+                end
+              end
+              %>
+            </p>
+          </div>
+        </div>
+      </div>
+    """
+  end
+
+  def form_input_renderer(f, field = %{type: :checkbox}) do
+    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+      <div class={"#{@field.wrapper_class}"}>
+        <div class="flex items-center space-x-2 py-6">
+          <div class="flex space-x-1 items-start">
+            <%= checkbox(@form, @field.name, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300") %>
+          </div>
+          <div class="flex flex-col">
+            <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
+            <p class="text-xs text-gray-500">
+              <% #= Map.get(@form.data, @field.name) %>
+              <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
+                 "true" ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+                 "false" -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
+                 _ -> case Map.get(@form.data, @field.name) do
+                  true ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+                  false -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
+                  _ -> Map.get(@field, :hint)
+                 end
+               end
+               %>
+            </p>
+          </div>
+        </div>
+      </div>
+    """
+  end
+
+  def render_attribution_fields(f) do
+    assigns = LiveView.assign(%{__changed__: nil}, f: f)
+
+    ~H"""
+    <%= if Map.get(f.params, "copyright") == "common" || (Map.get(f.data, :copyright) == "common" && Map.get(f.params, "copyright") != "common") do %>
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <%= for field <- Rauversion.Tracks.TrackMetadata.form_definitions("common") do %>
+          <%= form_input_renderer(f, field) %>
+        <% end %>
+      </div>
+    <% else %>
+
+    <% end %>
+    """
+  end
+
+  def active_tab_for?(current_tab, expected) do
+    if current_tab == expected do
+      "block"
+    else
+      "hidden"
+    end
+  end
+
+  def active_tab_link?(current_tab, expected) do
+    if current_tab == expected do
+      "bg-orange-100 text-orange-700"
+    else
+      "text-orange-500 hover:text-orange-700"
+    end
   end
 end

@@ -25,6 +25,7 @@ defmodule RauversionWeb.TrackLive.Show do
       socket
       |> assign(:step, %Step{name: "info", prev: "upload", next: "share"})
       |> assign(:page_title, page_title(socket.assigns.live_action))
+      |> assign(:current_tab, "basic-info-tab")
       |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
 
     case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
@@ -34,6 +35,26 @@ defmodule RauversionWeb.TrackLive.Show do
       {:err, err} ->
         {:noreply, err}
     end
+  end
+
+  @impl true
+  def handle_event("metadata-tab" = tab, _, socket) do
+    {:noreply, socket |> assign(:current_tab, tab)}
+  end
+
+  @impl true
+  def handle_event("basic-info-tab" = tab, _, socket) do
+    {:noreply, socket |> assign(:current_tab, tab)}
+  end
+
+  @impl true
+  def handle_event("permissions-tab" = tab, _, socket) do
+    {:noreply, socket |> assign(:current_tab, tab)}
+  end
+
+  @impl true
+  def handle_event("share-tab" = tab, _, socket) do
+    {:noreply, socket |> assign(:current_tab, tab)}
   end
 
   defp page_title(:show), do: "Show Track"

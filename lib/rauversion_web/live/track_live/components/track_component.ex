@@ -32,11 +32,11 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
         <% # if track.audio.persisted? %>
           <%= content_tag :div, id: "track-player-#{track.id}",
-                                "phx-hooks-disavledd": "AudioPlayer",
+                                "phx-hooks-disabled": "AudioPlayer",
                                 "data-controller": "audio",
                                 "data-audio-target": "player",
                                 "data-audio-height-value": 70,
-                                "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(track, "peaks")),
+                                "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(track, :peaks)),
                                 "data-audio-url": Rauversion.Tracks.blob_proxy_url(track, "mp3_audio"),
                                 class: "h-32"  do %>
             <div class='controls flex items-center'>

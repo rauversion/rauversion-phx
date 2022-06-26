@@ -18,7 +18,7 @@
       />
     <% end %>
 
-    <%= if @step.name == "info" and @action == "new" do %>
+    <%= if @step.name == "info" and @action == :new do %>
       <.live_component
         module={RauversionWeb.TrackLive.InfoFormComponent}
         id="track-form"
@@ -42,6 +42,7 @@
         target={@myself}
         current_user={@current_user}
         uploads={@uploads}
+        current_tab={@current_tab}
         return_to={Routes.track_index_path(@socket, :index)}
       />
     <% end %>
