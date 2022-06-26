@@ -2,6 +2,8 @@
 <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
   <div class="mx-20 py-20">
 
+
+    
     <%= if @step.name == "upload" do %>
       <.live_component
         module={RauversionWeb.TrackLive.UploadFormComponent}
@@ -16,7 +18,7 @@
       />
     <% end %>
 
-    <%= if @step.name == "info" do %>
+    <%= if @step.name == "info" and @action == :new do %>
       <.live_component
         module={RauversionWeb.TrackLive.InfoFormComponent}
         id="track-form"
@@ -26,6 +28,21 @@
         target={@myself}
         current_user={@current_user}
         uploads={@uploads}
+        return_to={Routes.track_index_path(@socket, :index)}
+      />
+    <% end %>
+
+    <%= if @step.name == "info" and @action == :edit do %>
+      <.live_component
+        module={RauversionWeb.TrackLive.EditFormComponent}
+        id="track-form"
+        changeset={@changeset}
+        track={@track}
+        step={@step}
+        target={@myself}
+        current_user={@current_user}
+        uploads={@uploads}
+        current_tab={@current_tab}
         return_to={Routes.track_index_path(@socket, :index)}
       />
     <% end %>

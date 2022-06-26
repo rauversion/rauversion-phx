@@ -32,11 +32,11 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
         <% # if track.audio.persisted? %>
           <%= content_tag :div, id: "track-player-#{track.id}",
-                                "phx-hooks-disavledd": "AudioPlayer",
+                                "phx-hooks-disabled": "AudioPlayer",
                                 "data-controller": "audio",
                                 "data-audio-target": "player",
                                 "data-audio-height-value": 70,
-                                "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(track, "peaks")),
+                                "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(track, :peaks)),
                                 "data-audio-url": Rauversion.Tracks.blob_proxy_url(track, "mp3_audio"),
                                 class: "h-32"  do %>
             <div class='controls flex items-center'>
@@ -44,11 +44,11 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 <button type="button"
                   data-action='audio#play'
                   data-audio-target="play"
-                  class="relative inline-flex items-center px-2 py-2 rounded-full border border-orange-300 bg-orange-600 text-sm font-medium text-white hover:bg-orange-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-orange-700 focus:border-orange-800">
+                  class="relative inline-flex items-center px-2 py-2 rounded-full border border-orange-300 bg-orange-600 text-sm font-medium text-white hover:bg-orange-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-orange-700 focus:border-orange-400">
                   <span class="sr-only">Play</span>
-                  <svg data-audio-target="playicon" viewBox="0 0 15 15" class="h-6 w-6"  fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 3v9m4-9v9" stroke="currentColor"></path></svg>
-                  <svg data-audio-target="pauseicon" style="display:none" viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
-              </button>
+                  <svg data-audio-target="playicon" style="display:none" viewBox="0 0 15 15" class="h-6 w-6"  fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 3v9m4-9v9" stroke="currentColor"></path></svg>
+                  <svg data-audio-target="pauseicon"  viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
+                </button>
 
                 <button type="button"
                 data-action='audio#pause'
