@@ -4,7 +4,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track} = assigns) do
+  def render(%{collection: collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">
         <div class="bg-white border-t">
@@ -15,7 +15,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
             <div class="mt-6 flow-root">
               <ul role="list" class="-my-4 divide-y divide-gray-200">
 
-                <%= for item <- Rauversion.Accounts.list_accounts(5) do %>
+                <%= for item <- collection do %>
                   <li class="flex items-center py-4 space-x-3">
                     <div class="flex-shrink-0">
 
@@ -33,14 +33,14 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                       </p>
                     </div>
                     <div class="flex-shrink-0">
-                      <button type="button" class="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100">
+                      <%= link to: "#", phx_click: "follow-account", phx_value_id: item.id, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" do %>
                         <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" x-description="Heroicon name: solid/plus-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>
                         <span>
                           Follow
                         </span>
-                      </button>
+                      <% end %>
                     </div>
                   </li>
                 <% end %>

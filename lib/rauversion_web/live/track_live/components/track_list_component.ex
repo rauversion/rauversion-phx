@@ -20,7 +20,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
           <div class="bg-white border-r">
             <div class="px-4 py-5 sm:px-6">
               <div class="flex justify-between items-center">
-                <h1 class="font-bold text-4xl">Tracks</h1>
+                <h1 class="font-bold text-4xl"><%= @title %></h1>
 
                 <%= live_patch to: Routes.track_new_path(@socket, :new),
                  class: "inline-flex justify-between rounded-lg py-3 px-5 bg-black text-white block font-medium" do %>
@@ -49,6 +49,8 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
                     module={RauversionWeb.TrackLive.TrackComponent}
                     id={"track-list-#{track.id}"}
                     track={track}
+                    repost={nil}
+                    like={nil}
                     current_user={assigns[:current_user]}
                   />
                 <% end %>

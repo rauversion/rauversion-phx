@@ -10,7 +10,7 @@ defmodule RauversionWeb.ActiveStorage.DiskController do
 
   action_fallback RauversionWeb.FallbackController
 
-  def show(conn, %{"encoded_key" => encoded_key, "filename" => filename}) do
+  def show(conn, %{"encoded_key" => encoded_key, "filename" => _filename}) do
     case decode_verified_key(encoded_key) do
       {:ok, verified} ->
         res = Jason.decode!(verified)
@@ -44,7 +44,7 @@ defmodule RauversionWeb.ActiveStorage.DiskController do
     ActiveStorage.verifier().verified(params[:encoded_token], purpose: :blob_token)
   end
 
-  def acceptable_content?(token) do
+  def acceptable_content?(_token) do
     # token[:content_type] == request.content_mime_type &&
     #  token[:content_length] == request.content_length
   end

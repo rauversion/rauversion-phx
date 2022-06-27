@@ -55,7 +55,7 @@ defmodule RauversionWeb.UserSettingsController do
     user = conn.assigns.current_user
 
     case Accounts.update_user_profile(user, user_params) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
         |> put_flash(:info, "User profile updated successfully.")
         |> redirect(to: Routes.user_settings_path(conn, :edit))

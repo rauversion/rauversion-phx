@@ -84,9 +84,8 @@ defmodule RauversionWeb.LiveHelpers do
     if session["user_token"] do
       user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
 
-      socket =
-        socket
-        |> assign(:current_user, user)
+      socket
+      |> assign(:current_user, user)
     else
       socket
     end

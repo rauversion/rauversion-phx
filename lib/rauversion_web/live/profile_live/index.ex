@@ -2,18 +2,24 @@ defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Tracks}
+  alias Rauversion.{Accounts, Tracks, UserFollows, Repo}
 
   @impl true
   def mount(params = %{"username" => id}, session, socket) do
     socket =
       socket
       |> assign(:profile, Accounts.get_user_by_username(id))
+      |> assign(:who_to_follow, who_to_follow())
       |> assign(:share_track, nil)
 
     Tracks.subscribe()
 
     {:ok, socket}
+  end
+
+  defp who_to_follow() do
+    Rauversion.Accounts.unfollowed_users(@profile)
+    |> Rauversion.Repo.paginate(page: 1, page_size: 5)
   end
 
   @impl true
@@ -22,8 +28,18 @@ defmodule RauversionWeb.ProfileLive.Index do
      assign(
        socket,
        :share_track,
-       Tracks.get_track!(id) |> Rauversion.Repo.preload(user: :avatar_attachment)
+       Tracks.get_track!(id) |> Repo.preload(user: :avatar_attachment)
      )}
+  end
+
+  @impl true
+  def handle_event("follow-account", %{"id" => id}, socket) do
+    UserFollows.create_user_follow(%{
+      follower_id: socket.assigns.current_user.id,
+      following_id: id
+    })
+
+    {:noreply, socket}
   end
 
   # @impl true
@@ -62,7 +78,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
-      |> Rauversion.Repo.preload([
+      |> Repo.preload([
         :mp3_audio_blob,
         :cover_blob,
         :cover_attachment,
@@ -80,7 +96,46 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
-      |> Rauversion.Repo.preload([:cover_blob, :mp3_audio_blob])
+      |> Repo.preload([:cover_blob, :mp3_audio_blob])
+
+    socket
+    |> assign(:page_title, "Tracks all")
+    |> assign(:tracks, tracks)
+    |> assign(:title, "popular")
+    |> assign(:data, menu(socket, id))
+  end
+
+  defp apply_action(socket, :reposts, %{"username" => id}) do
+    # profile = Accounts.get_user_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
+
+    socket
+    |> assign(:page_title, "Tracks all")
+    |> assign(:tracks, tracks)
+    |> assign(:title, "reposts")
+    |> assign(:data, menu(socket, id))
+  end
+
+  defp apply_action(socket, :albums, %{"username" => id}) do
+    # profile = Accounts.get_user_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Repo.preload([:cover_blob, :mp3_audio_blob])
+
+    socket
+    |> assign(:page_title, "Tracks all")
+    |> assign(:tracks, tracks)
+    |> assign(:title, "popular")
+    |> assign(:data, menu(socket, id))
+  end
+
+  defp apply_action(socket, :playlists, %{"username" => id}) do
+    # profile = Accounts.get_user_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Repo.preload([:cover_blob, :mp3_audio_blob])
 
     socket
     |> assign(:page_title, "Tracks all")

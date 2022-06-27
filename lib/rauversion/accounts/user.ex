@@ -15,6 +15,8 @@ defmodule Rauversion.Accounts.User do
     field :confirmed_at, :naive_datetime
 
     has_many :tracks, Rauversion.Tracks.Track
+    has_many :followings, Rauversion.UserFollows.UserFollow, foreign_key: :following_id
+    has_many :followers, Rauversion.UserFollows.UserFollow, foreign_key: :follower_id
 
     has_one(:avatar_attachment, ActiveStorage.Attachment,
       where: [record_type: "User", name: "avatar"],
@@ -30,22 +32,21 @@ defmodule Rauversion.Accounts.User do
     "User"
   end
 
-  def profile_changeset(user, attrs, opts \\ []) do
+  def profile_changeset(user, attrs, _opts \\ []) do
     user
     |> validate_contact_fields(attrs)
     |> process_avatar(attrs)
   end
 
   def changeset(user, attrs, opts \\ []) do
-    user =
-      user
-      |> validate_contact_fields(attrs)
-      |> registration_changeset(attrs, opts)
+    user
+    |> validate_contact_fields(attrs)
+    |> registration_changeset(attrs, opts)
   end
 
   def process_avatar(user, attrs) do
     case attrs do
-      %{"avatar" => avatar} ->
+      %{"avatar" => _avatar} ->
         blob =
           ActiveStorage.Blob.create_and_upload!(
             %ActiveStorage.Blob{},

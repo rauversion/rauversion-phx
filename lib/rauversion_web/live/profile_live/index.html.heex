@@ -22,7 +22,7 @@
 
 <div class="flex">
 
-  <div class="flex-grow" >
+  <div class="flex-grow">
 
     <%= case @title do 
       "all" -> live_component(
@@ -31,21 +31,32 @@
                   track: "track",
                   profile: @profile,
                   tracks: @tracks,
+                  title: @title,
                   current_user: assigns[:current_user]
                 )
-      
-      _ -> "no match"
+      "reposts" ->
+                live_component(
+                  RauversionWeb.TrackLive.TrackListComponent,
+                  id: "all-reposts-#{@profile.id}",
+                  track: "track",
+                  profile: @profile,
+                  tracks: @tracks,
+                   title: @title,
+                  current_user: assigns[:current_user]
+                )
+      _ -> "no match on #{@title}"
     end  %>
     
   </div>
 
-  <aside class="hidden xl:block xl:col-span-4">
+  <aside class="hidden w-2/5 xl:block xl:col-span-4">
     <div class="sticky top-4 space-y-4 p-4 bg-gray-50">
 
       <div class="p-4 border-l-1 border-l-gray-50">
         <.live_component
           module={RauversionWeb.ProfileLive.StatsComponent}
           id={"track-#{@profile.id}-stats"}
+          profile={@profile}
           track={"track"}
         />
       </div>
@@ -54,7 +65,7 @@
         <.live_component
           module={RauversionWeb.ProfileLive.UserSuggestionComponent}
           id={"track-#{@profile.id}-user-suggestion"}
-          track={"track"}
+          collection={ @who_to_follow  }
         />
       </section>
 

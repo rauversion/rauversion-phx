@@ -37,6 +37,10 @@ defmodule Rauversion.Reposts do
   """
   def get_repost!(id), do: Repo.get!(Repost, id)
 
+  def get_repost_by_user_and_track(user_id, track_id) do
+    Repost |> where(user_id: ^user_id) |> where(track_id: ^track_id) |> Repo.one()
+  end
+
   @doc """
   Creates a repost.
 

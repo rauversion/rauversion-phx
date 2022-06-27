@@ -4,25 +4,25 @@ defmodule RauversionWeb.ProfileLive.StatsComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track} = assigns) do
+  def render(%{track: track, profile: profile} = assigns) do
     ~H"""
     <div class="grid grid-cols-3 divide-x">
       <div class="p-4">
         <p class="text-base font-medium text-gray-900">Following</p>
         <span class="text-base font-light text-gray-500">
-          xxx
+          <%= live_redirect Rauversion.UserFollows.followings_for(profile), to: Routes.follows_index_path(@socket, :followings, profile.username)  %>
         </span>
       </div>
       <div  class="p-4">
         <p class="text-base font-medium text-gray-900">Followers</p>
         <span class="text-base font-light text-gray-500">
-          <% #= @profile.followers(User).size %>
+          <%= live_redirect Rauversion.UserFollows.followers_for(profile), to: Routes.follows_index_path(@socket, :followers, profile.username)  %>
         </span>
       </div>
       <div  class="p-4">
         <p class="text-base font-medium text-gray-900">Tracks</p>
         <span class="text-base font-light text-gray-500">
-          <% #= @profile.tracks.size %>
+          <%= Rauversion.Accounts.tracks_count(profile) %>
         </span>
       </div>
     </div>
