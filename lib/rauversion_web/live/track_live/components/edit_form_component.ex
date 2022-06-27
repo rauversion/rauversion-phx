@@ -130,12 +130,12 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
                       <div class="flex-col space-y-3">
                         <div class="flex space-x-2 items-center">
-                          <%= radio_button f, :private, true %>
+                          <%= radio_button f, :private, false %>
                           <%= label f, :private, "Public", class: "" %>
                         </div>
 
                         <div class="flex space-x-2 items-center">
-                          <%= radio_button f, :private, false %>
+                          <%= radio_button f, :private, true %>
                           <%= label f, :private, "Private", class: "" %>
                         </div>
                       </div>
