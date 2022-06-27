@@ -33,7 +33,7 @@ defmodule RauversionWeb.FollowsLive.Index do
 
     socket
     |> assign(:page_title, "Listing Tracks")
-    |> assign(:follow_kind, "followers")
+    |> assign(:follow_kind, :follower)
     |> assign(:profile, user)
     |> assign(:collection, follows)
   end
@@ -45,7 +45,7 @@ defmodule RauversionWeb.FollowsLive.Index do
     socket
     |> assign(:page_title, "Listing Tracks")
     |> assign(:profile, user)
-    |> assign(:follow_kind, "followings")
+    |> assign(:follow_kind, :following)
     |> assign(:collection, follows)
   end
 
@@ -55,7 +55,7 @@ defmodule RauversionWeb.FollowsLive.Index do
     socket
     |> assign(:page_title, "Listing Tracks")
     |> assign(:profile, user)
-    |> assign(:follow_kind, "likes")
+    |> assign(:follow_kind, :likes)
     |> assign(:collection, [])
   end
 
@@ -65,7 +65,7 @@ defmodule RauversionWeb.FollowsLive.Index do
     socket
     |> assign(:page_title, "Listing Tracks")
     |> assign(:profile, user)
-    |> assign(:follow_kind, "comments")
+    |> assign(:follow_kind, :comments)
     |> assign(:collection, [])
   end
 end

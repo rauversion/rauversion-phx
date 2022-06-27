@@ -4,7 +4,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track} = assigns) do
+  def render(%{collection: collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">
         <div class="bg-white border-t">
@@ -15,7 +15,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
             <div class="mt-6 flow-root">
               <ul role="list" class="-my-4 divide-y divide-gray-200">
 
-                <%= for item <- Rauversion.Accounts.list_accounts(5) do %>
+                <%= for item <- collection do %>
                   <li class="flex items-center py-4 space-x-3">
                     <div class="flex-shrink-0">
 

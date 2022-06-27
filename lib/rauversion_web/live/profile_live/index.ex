@@ -9,11 +9,17 @@ defmodule RauversionWeb.ProfileLive.Index do
     socket =
       socket
       |> assign(:profile, Accounts.get_user_by_username(id))
+      |> assign(:who_to_follow, who_to_follow())
       |> assign(:share_track, nil)
 
     Tracks.subscribe()
 
     {:ok, socket}
+  end
+
+  defp who_to_follow() do
+    Rauversion.Accounts.unfollowed_users(@profile)
+    |> Rauversion.Repo.paginate(page: 1, page_size: 5)
   end
 
   @impl true

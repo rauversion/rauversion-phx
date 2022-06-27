@@ -35,14 +35,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] Embed at /embed/:track_id
 - [ ] Paginate profile tracks /:username
 - [ ] Paginate /tracks
-- [ ] Filter public/private tracks (where: private: true)
+- [x] Filter public/private tracks (where: private: true)
 - [ ] Give feedback on upload preprosessing
 - [ ] A logo for rauversion
 - [ ] Reposts
 - [ ] Albums
 - [ ] Playlists
 - [ ] Likes
-- [ ] Followers / Followings
+- [x] Followers / Followings
 - [ ] Telemetry for dashboard
 - [ ] Centralized player, fixed (bottom) across navigation
 

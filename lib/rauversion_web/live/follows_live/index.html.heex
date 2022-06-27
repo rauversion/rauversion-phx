@@ -36,10 +36,10 @@
     <div class="border-b border-gray-200">
       <nav class="-mb-px flex" aria-label="Tabs">
         <!-- Current: "border-orange-500 text-orange-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-        <%= live_redirect "Likes", to: Routes.follows_index_path(@socket, :likes, @profile.username), class: "#{if @follow_kind == "likes" do "border-orange-500 text-orange-600" else "" end} border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %> 
-        <%= live_redirect "Followings", to: Routes.follows_index_path(@socket, :followings, @profile.username), class: "#{if @follow_kind == "followings" do "border-orange-500 text-orange-600" else "" end} border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
-        <%= live_redirect "Followers", to: Routes.follows_index_path(@socket, :followers, @profile.username), class: "#{if @follow_kind == "followers" do "border-orange-500 text-orange-600" else "" end} w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
-        <%= live_redirect "Comments", to: Routes.follows_index_path(@socket, :comments, @profile.username), class: "#{if @follow_kind == "comments" do "border-orange-500 text-orange-600" else "" end}  border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
+        <%= live_redirect "Likes", to: Routes.follows_index_path(@socket, :likes, @profile.username), class: "#{if @follow_kind == :likes do "border-orange-500 text-orange-600" else "" end} border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %> 
+        <%= live_redirect "Followings", to: Routes.follows_index_path(@socket, :followings, @profile.username), class: "#{if @follow_kind == :followings do "border-orange-500 text-orange-600" else "" end} border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
+        <%= live_redirect "Followers", to: Routes.follows_index_path(@socket, :followers, @profile.username), class: "#{if @follow_kind == :follower do "border-orange-500 text-orange-600" else "" end} w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
+        <%= live_redirect "Comments", to: Routes.follows_index_path(@socket, :comments, @profile.username), class: "#{if @follow_kind == :comments do "border-orange-500 text-orange-600" else "" end}  border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
       </nav>
     </div>
   </div>
@@ -47,7 +47,7 @@
   <div>
 
     <%= case @follow_kind do 
-      "followers" -> 
+      :follower -> 
         live_component(
           RauversionWeb.FollowsLive.UserListComponent,
           id: "user-list-#{@profile.id}",
@@ -56,7 +56,7 @@
           kind: @follow_kind,
           collection: @collection
         )
-      "followings" -> 
+      :following -> 
         live_component(
           RauversionWeb.FollowsLive.UserListComponent,
           id: "user-list-#{@profile.id}",
@@ -65,8 +65,8 @@
           kind: @follow_kind,
           collection: @collection
         )
-      "likes" -> "LIKES SOON!"
-      "comments" -> "COMMENTS SOON!"
+      :likes -> "LIKES SOON!"
+      :comments -> "COMMENTS SOON!"
       _ -> "nothing to display!"
 
     end %>
