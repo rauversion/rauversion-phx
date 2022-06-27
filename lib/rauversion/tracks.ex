@@ -23,6 +23,17 @@ defmodule Rauversion.Tracks do
     {:error, result}
   end
 
+  def signed_id(track) do
+    token = Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", track.id)
+  end
+
+  def find_by_signed_id!(token) do
+    case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token, max_age: 86400) do
+      {:ok, track_id} -> get_track!(track_id)
+      _ -> nil
+    end
+  end
+
   @doc """
   Returns the list of tracks.
 

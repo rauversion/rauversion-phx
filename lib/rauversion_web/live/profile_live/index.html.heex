@@ -31,6 +31,7 @@
                   track: "track",
                   profile: @profile,
                   tracks: @tracks,
+                  title: @title,
                   current_user: assigns[:current_user]
                 )
       "reposts" ->
@@ -40,6 +41,7 @@
                   track: "track",
                   profile: @profile,
                   tracks: @tracks,
+                   title: @title,
                   current_user: assigns[:current_user]
                 )
       _ -> "no match on #{@title}"

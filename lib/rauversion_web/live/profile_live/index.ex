@@ -109,12 +109,12 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
-      |> Repo.preload([:cover_blob, :mp3_audio_blob])
+      |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
 
     socket
     |> assign(:page_title, "Tracks all")
     |> assign(:tracks, tracks)
-    |> assign(:title, "popular")
+    |> assign(:title, "reposts")
     |> assign(:data, menu(socket, id))
   end
 

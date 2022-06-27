@@ -33,6 +33,7 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through :browser_embed
     get "/embed/:track_id", EmbedController, :show
+    get "/embed/:track_id/private", EmbedController, :private
   end
 
   # Other scopes may use custom stacks.
@@ -116,6 +117,7 @@ defmodule RauversionWeb.Router do
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id", TrackLive.Show, :show
+    live "/tracks/:id/private", TrackLive.Show, :private
     live "/reposts", RepostLive.Index, :index
     live "/reposts/:id", RepostLive.Show, :show
     live "/playlists", PlaylistLive.Index, :index
