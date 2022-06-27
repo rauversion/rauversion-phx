@@ -13,14 +13,26 @@ defmodule RauversionWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :browser_embed do
+    plug :accepts, ["html"]
+    # plug :fetch_session
+    # plug :fetch_live_flash
+    plug :put_secure_browser_headers
+    plug :put_new_layout, {RauversionWeb.LayoutView, :embed}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", RauversionWeb do
     pipe_through :browser
-
     get "/", PageController, :index
+  end
+
+  scope "/", RauversionWeb do
+    pipe_through :browser_embed
+    get "/embed/:track_id", EmbedController, :show
   end
 
   # Other scopes may use custom stacks.

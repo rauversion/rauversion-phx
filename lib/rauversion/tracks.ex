@@ -37,6 +37,10 @@ defmodule Rauversion.Tracks do
     Track |> limit(^limit) |> Repo.all()
   end
 
+  def list_public_tracks(limit \\ 20) do
+    Track |> limit(^limit) |> where(private: false) |> Repo.all()
+  end
+
   def list_tracks_by_username(user_id) do
     Rauversion.Accounts.get_user_by_username(user_id)
     |> Ecto.assoc(:tracks)
@@ -59,6 +63,14 @@ defmodule Rauversion.Tracks do
 
   """
   def get_track!(id), do: Repo.get!(Track, id)
+
+  def get_public_track!(id) do
+    Track
+    |> where(id: ^id)
+    |> where([t], is_nil(t.private) or t.private == false)
+    |> limit(1)
+    |> Repo.one()
+  end
 
   @doc """
   Creates a track.

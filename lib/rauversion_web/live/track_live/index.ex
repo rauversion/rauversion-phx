@@ -79,6 +79,12 @@ defmodule RauversionWeb.TrackLive.Index do
   end
 
   defp list_tracks do
-    Tracks.list_tracks() |> Rauversion.Repo.preload([:user, :cover_blob, :mp3_audio_blob])
+    Tracks.list_public_tracks()
+    |> Rauversion.Repo.preload([
+      :mp3_audio_blob,
+      :cover_blob,
+      :cover_attachment,
+      user: :avatar_attachment
+    ])
   end
 end
