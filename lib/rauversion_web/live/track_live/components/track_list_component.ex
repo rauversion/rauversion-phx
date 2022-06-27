@@ -49,6 +49,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
                     module={RauversionWeb.TrackLive.TrackComponent}
                     id={"track-list-#{track.id}"}
                     track={track}
+                    repost={nil}
                     current_user={assigns[:current_user]}
                   />
                 <% end %>

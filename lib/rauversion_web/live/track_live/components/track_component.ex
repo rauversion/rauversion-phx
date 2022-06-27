@@ -4,9 +4,85 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track, current_user: current_user} = assigns) do
-    ~H"""
+  # def mount(socket) do
+  #  require IEx
+  #  IEx.pry()
+  # end
 
+  def update(assigns = %{current_user: nil}, socket) do
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:repost, nil)
+    }
+  end
+
+  def update(assigns = %{current_user: current_user}, socket) do
+    case assigns do
+      %{current_user: current_user} ->
+        repost =
+          Rauversion.Reposts.get_repost_by_user_and_track(
+            assigns.current_user.id,
+            assigns.track.id
+          )
+
+        {
+          :ok,
+          socket
+          |> assign(assigns)
+          |> assign(:repost, repost)
+        }
+
+      _ ->
+        {:ok, socket |> assign(:repost, nil)}
+    end
+  end
+
+  def handle_event(
+        "repost-track",
+        %{"id" => id},
+        socket = %{assigns: %{track: track, current_user: current_user}}
+      ) do
+    attrs = %{user_id: current_user.id, track_id: track.id}
+
+    {:ok, %Rauversion.Reposts.Repost{} = repost} = Rauversion.Reposts.create_repost(attrs)
+
+    {:noreply, assign(socket, :repost, repost)}
+  end
+
+  def handle_event(
+        "repost-track",
+        %{"id" => id},
+        socket = %{assigns: %{track: track, current_user: nil}}
+      ) do
+    # TODO: SHOW MODAL HERE
+    {:noreply, socket}
+  end
+
+  def render(
+        %{
+          track: track,
+          current_user: current_user,
+          repost: repost
+        } = assigns
+      ) do
+    action =
+      if !is_nil(repost) do
+        %{
+          action: "repost-track-delete",
+          class:
+            "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-orange-300 shadow-sm text-xs font-medium rounded text-orange-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        }
+      else
+        %{
+          action: "repost-track",
+          class:
+            "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        }
+      end
+
+    ~H"""
     <div class="flex flex-col sm:flex-row border rounded-md shadow-sm my-2">
       <div class="w-full sm:w-1/4 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
 
@@ -96,6 +172,14 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             </svg>
             <span>Share</span>
           <% end %>
+
+            <%= link to: "#", phx_click: action.action, phx_target: @myself, phx_value_id: track.id,
+              class: action.class do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+              </svg>
+              <span>Repost <% #= if @repost do @repost.id else "no" end %></span>
+            <% end %>
 
           <%= if current_user && current_user.id == track.user_id do %>
             <%= live_patch to:  Routes.track_show_path(@socket, :edit, track), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>

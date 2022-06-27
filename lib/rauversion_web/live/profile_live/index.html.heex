@@ -33,8 +33,16 @@
                   tracks: @tracks,
                   current_user: assigns[:current_user]
                 )
-      
-      _ -> "no match"
+      "reposts" ->
+                live_component(
+                  RauversionWeb.TrackLive.TrackListComponent,
+                  id: "all-reposts-#{@profile.id}",
+                  track: "track",
+                  profile: @profile,
+                  tracks: @tracks,
+                  current_user: assigns[:current_user]
+                )
+      _ -> "no match on #{@title}"
     end  %>
     
   </div>

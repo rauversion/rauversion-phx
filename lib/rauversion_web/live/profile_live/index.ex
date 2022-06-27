@@ -105,6 +105,45 @@ defmodule RauversionWeb.ProfileLive.Index do
     |> assign(:data, menu(socket, id))
   end
 
+  defp apply_action(socket, :reposts, %{"username" => id}) do
+    # profile = Accounts.get_user_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Repo.preload([:cover_blob, :mp3_audio_blob])
+
+    socket
+    |> assign(:page_title, "Tracks all")
+    |> assign(:tracks, tracks)
+    |> assign(:title, "popular")
+    |> assign(:data, menu(socket, id))
+  end
+
+  defp apply_action(socket, :albums, %{"username" => id}) do
+    # profile = Accounts.get_user_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Repo.preload([:cover_blob, :mp3_audio_blob])
+
+    socket
+    |> assign(:page_title, "Tracks all")
+    |> assign(:tracks, tracks)
+    |> assign(:title, "popular")
+    |> assign(:data, menu(socket, id))
+  end
+
+  defp apply_action(socket, :playlists, %{"username" => id}) do
+    # profile = Accounts.get_user_by_username(id)
+    tracks =
+      Tracks.list_tracks_by_username(id)
+      |> Repo.preload([:cover_blob, :mp3_audio_blob])
+
+    socket
+    |> assign(:page_title, "Tracks all")
+    |> assign(:tracks, tracks)
+    |> assign(:title, "popular")
+    |> assign(:data, menu(socket, id))
+  end
+
   def handle_params(%{"sort_by" => _sort_by}, _url, _socket) do
     require IEx
     IEx.pry()
