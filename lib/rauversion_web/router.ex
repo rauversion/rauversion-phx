@@ -167,6 +167,10 @@ defmodule RauversionWeb.Router do
 
     # get "/:username", ProfileController, :show
     live "/:username", ProfileLive.Index, :index
+    live "/:username/followers", FollowsLive.Index, :followers
+    live "/:username/following", FollowsLive.Index, :followings
+    live "/:username/comments", FollowsLive.Index, :comments
+    live "/:username/likes", FollowsLive.Index, :likes
     live "/:username/tracks/all", ProfileLive.Index, :tracks_all
     live "/:username/tracks/reposts", ProfileLive.Index, :reposts
     live "/:username/tracks/albums", ProfileLive.Index, :albums

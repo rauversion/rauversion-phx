@@ -27,7 +27,7 @@
 
       <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
         <nav class="flex space-x-10">
-          <%= for %{name: name, url: url} <- assigns.data do %>
+          <%= for %{name: name, url: _url} <- assigns.data do %>
             <a href="#"
               data-turbo-frame="tracks"
               class="text-base font-medium text-gray-500 hover:text-gray-900"> 

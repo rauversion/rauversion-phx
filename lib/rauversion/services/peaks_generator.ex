@@ -21,7 +21,7 @@ defmodule Rauversion.Services.PeaksGenerator do
       ])
 
     # |> normalize
-    frames = Jason.decode!(output)["data"]
+    Jason.decode!(output)["data"]
 
     # audiowaveform -i ~/Desktop/patio/STE-098.mp3
 
@@ -40,15 +40,14 @@ defmodule Rauversion.Services.PeaksGenerator do
     IO.inspect(cmd)
     output = :os.cmd(cmd)
 
-    frames =
-      Jason.decode!(output)["frames"]
-      |> Enum.map(fn x ->
-        case get_in(x, ["tags", "lavfi.astats.Overall.Peak_level"]) |> Float.parse() do
-          {f, _} -> f
-          _ -> nil
-        end
-      end)
-      |> normalize
+    Jason.decode!(output)["frames"]
+    |> Enum.map(fn x ->
+      case get_in(x, ["tags", "lavfi.astats.Overall.Peak_level"]) |> Float.parse() do
+        {f, _} -> f
+        _ -> nil
+      end
+    end)
+    |> normalize
   end
 
   def desired_pixels_per_second(desired_pixels, duration) do

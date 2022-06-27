@@ -19,7 +19,7 @@ defmodule Rauversion.Tracks do
     {:ok, result}
   end
 
-  def broadcast_change({:error, result}, event) do
+  def broadcast_change({:error, result}, _event) do
     {:error, result}
   end
 

@@ -82,7 +82,7 @@ defmodule Rauversion.Tracks.TrackMetadata do
     # |> validate_prescence_url_if(["frame", "link", "url"])
   end
 
-  def form_definitions(type = "metadata") do
+  def form_definitions(_type = "metadata") do
     [
       %{
         name: :genre,
@@ -230,7 +230,7 @@ defmodule Rauversion.Tracks.TrackMetadata do
     ]
   end
 
-  def form_definitions(type = "common") do
+  def form_definitions(_type = "common") do
     [
       %{
         name: :attribution,
@@ -269,7 +269,7 @@ defmodule Rauversion.Tracks.TrackMetadata do
 
   # TODO: move this to another store / module
   def genres do
-    names = [
+    [
       "Alternative Rock",
       "Ambient",
       "Classical",

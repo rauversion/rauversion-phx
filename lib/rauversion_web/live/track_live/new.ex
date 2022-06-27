@@ -23,7 +23,7 @@ defmodule RauversionWeb.TrackLive.New do
     socket =
       socket
       |> assign(:current_user, user)
-      |> assign(:tracks, list_tracks)
+      |> assign(:tracks, list_tracks())
 
     {:ok, socket}
   end

@@ -46,8 +46,6 @@ defmodule RauversionWeb.ActiveStorage.Representations.RedirectController do
 
   def set_representation(conn, params) do
     try do
-      conn
-
       representation =
         conn.assigns.blob.__struct__.representation(conn.assigns.blob, params["variation_key"])
 

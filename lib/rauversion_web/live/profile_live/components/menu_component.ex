@@ -4,7 +4,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{data: data} = assigns) do
+  def render(%{data: _data} = assigns) do
     ~H"""
     <div class="relative bg-white">
     <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>

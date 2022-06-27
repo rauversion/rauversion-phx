@@ -19,12 +19,18 @@ defmodule Rauversion.Accounts do
     {:ok, result}
   end
 
-  def broadcast_change({:error, result}, event) do
+  def broadcast_change({:error, result}, _event) do
     {:error, result}
   end
 
   def list_accounts(limit \\ 20) do
     User |> limit(^limit) |> Repo.all()
+  end
+
+  def tracks_count(user) do
+    user
+    |> Ecto.assoc(:tracks)
+    |> Repo.aggregate(:count, :id)
   end
 
   ## Database getters

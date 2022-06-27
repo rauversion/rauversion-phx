@@ -25,7 +25,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
 
   def show(conn, %{"signed_id" => signed_id}) do
     case conn |> handle_action(signed_id) do
-      %{assigns: %{blob: blob}} = conn ->
+      %{assigns: %{blob: _blob}} = conn ->
         handle_range_request(conn)
 
       _ ->
@@ -50,7 +50,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
             range = {range_start, conn.assigns.blob.byte_size}
             send_range(conn, range)
 
-          {range_start, range_end} = range ->
+          {_range_start, _range_end} = range ->
             send_range(conn, range)
 
           ranges when is_list(ranges) ->
