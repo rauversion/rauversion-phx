@@ -12,7 +12,7 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id} = params, _, socket = %{assigns: %{live_action: :show}}) do
+  def handle_params(%{"id" => id} = _params, _, socket = %{assigns: %{live_action: :show}}) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
@@ -20,7 +20,7 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id} = params, _, socket = %{assigns: %{live_action: :edit}}) do
+  def handle_params(%{"id" => id} = _params, _, socket = %{assigns: %{live_action: :edit}}) do
     socket =
       socket
       |> assign(:step, %Step{name: "info", prev: "upload", next: "share"})

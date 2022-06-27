@@ -73,7 +73,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     |> assign(:data, menu(socket, id))
   end
 
-  def handle_params(%{"sort_by" => sort_by}, url, socket) do
+  def handle_params(%{"sort_by" => _sort_by}, _url, _socket) do
     require IEx
     IEx.pry()
     # post_id = socket.assigns.post.id
@@ -89,7 +89,7 @@ defmodule RauversionWeb.ProfileLive.Index do
         {:ok, _} = Tracks.delete_track(track)
         {:noreply, socket}
 
-      err ->
+      _err ->
         {:noreply, socket}
     end
   end

@@ -11,6 +11,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
     {:ok, socket, temporary_assigns: [messages: []]}
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div class="">

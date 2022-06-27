@@ -7,7 +7,7 @@ defmodule RauversionWeb.TrackLive.Index do
   alias Rauversion.Repo
   alias RauversionWeb.TrackLive.Step
 
-  # @impl true
+  @impl true
   def mount(_params, session, socket) do
     # @current_user
 

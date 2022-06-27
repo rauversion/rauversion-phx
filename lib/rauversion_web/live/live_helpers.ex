@@ -215,15 +215,14 @@ defmodule RauversionWeb.LiveHelpers do
           <div class="flex flex-col">
             <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
             <p class="text-xs text-gray-500">
-              <% #= Map.get(@form.data, @field.name) %>
               <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
-                 "true" ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
-                 "false" -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
-                 _ -> case Map.get(@form.data, @field.name) do
+                "true" ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+                "false" -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
+                _ -> case Map.get(@form.data, @field.name) do
                   true ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
                   false -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
-                  _ -> Map.get(@field, :hint)
-                 end
+                  _ -> Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+                end
                end
                %>
             </p>
