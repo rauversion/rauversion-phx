@@ -9,10 +9,21 @@ defmodule RauversionWeb.ProfileLive.Index do
     socket =
       socket
       |> assign(:profile, Accounts.get_user_by_username(id))
+      |> assign(:share_track, nil)
 
     Tracks.subscribe()
 
     {:ok, socket}
+  end
+
+  @impl true
+  def handle_event("share-track-modal", %{"id" => id}, socket) do
+    {:noreply,
+     assign(
+       socket,
+       :share_track,
+       Tracks.get_track!(id) |> Rauversion.Repo.preload(user: :avatar_attachment)
+     )}
   end
 
   # @impl true
@@ -51,7 +62,12 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
-      |> Rauversion.Repo.preload([:cover_blob, :mp3_audio_blob])
+      |> Rauversion.Repo.preload([
+        :mp3_audio_blob,
+        :cover_blob,
+        :cover_attachment,
+        user: :avatar_attachment
+      ])
 
     socket
     |> assign(:tracks, tracks)

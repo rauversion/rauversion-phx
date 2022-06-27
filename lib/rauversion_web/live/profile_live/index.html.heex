@@ -10,6 +10,16 @@
   data={assigns.data}
 />
 
+<%= if @share_track do %>
+  <.modal return_to={Routes.profile_index_path(@socket, :index, @profile.username)}>
+    <.live_component
+      id={"share-track-modal-#{@share_track.id}"}
+      module={RauversionWeb.ProfileLive.ShareTrackComponent}
+      track={@share_track}
+    />
+  </.modal>
+<% end %>
+
 <div class="flex">
 
   <div class="flex-grow" >

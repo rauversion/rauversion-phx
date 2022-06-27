@@ -6,7 +6,9 @@ defmodule RauversionWeb.TrackLive.Show do
 
   @impl true
   def mount(_params, session, socket) do
-    socket = RauversionWeb.LiveHelpers.get_user_by_session(socket, session)
+    socket =
+      RauversionWeb.LiveHelpers.get_user_by_session(socket, session)
+      |> assign(:share_track, nil)
 
     {:ok, socket}
   end
@@ -55,6 +57,16 @@ defmodule RauversionWeb.TrackLive.Show do
   @impl true
   def handle_event("share-tab" = tab, _, socket) do
     {:noreply, socket |> assign(:current_tab, tab)}
+  end
+
+  @impl true
+  def handle_event("share-track-modal", %{"id" => id}, socket) do
+    {:noreply,
+     assign(
+       socket,
+       :share_track,
+       Tracks.get_track!(id) |> Rauversion.Repo.preload(user: :avatar_attachment)
+     )}
   end
 
   defp page_title(:show), do: "Show Track"

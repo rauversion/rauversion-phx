@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import WaveSurfer from 'wavesurfer'
 export default class extends Controller {
-  static targets = ['player', 'play', 'pause', 'playicon', 'pauseicon']
+  static targets = ['player', 'play', 'playicon', 'pauseicon']
 
   static values = {
     height: String
@@ -49,7 +49,7 @@ export default class extends Controller {
 
     var _this = this
 
-    _this.pauseTarget.style.display = 'none'
+    // _this.pauseTarget.style.display = 'none'
     this._wave.on('pause', function () {
       _this.playiconTarget.style.display = 'none'
       _this.pauseiconTarget.style.display = 'block'
