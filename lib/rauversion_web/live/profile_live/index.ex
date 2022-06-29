@@ -2,7 +2,7 @@ defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Tracks, UserFollows, Repo}
+  alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts}
 
   @impl true
   def mount(params = %{"username" => id}, session, socket) do
@@ -89,7 +89,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     |> assign(:tracks, tracks)
     |> assign(:page_title, "Edit Playlist")
     |> assign(:title, "all")
-    |> assign(:data, menu(socket, id))
+    |> assign(:data, menu(socket, id, "all"))
   end
 
   defp apply_action(socket, :tracks_all, %{"username" => id}) do
@@ -101,21 +101,27 @@ defmodule RauversionWeb.ProfileLive.Index do
     socket
     |> assign(:page_title, "Tracks all")
     |> assign(:tracks, tracks)
-    |> assign(:title, "popular")
-    |> assign(:data, menu(socket, id))
+    |> assign(:title, "tracks_all")
+    |> assign(:data, menu(socket, id, "tracks_all"))
   end
 
   defp apply_action(socket, :reposts, %{"username" => id}) do
-    # profile = Accounts.get_user_by_username(id)
+    profile = Accounts.get_user_by_username(id)
+
+    reposts =
+      Reposts.get_reposts_by_user_id(profile.id)
+      |> Rauversion.Repo.paginate(page: 1, page_size: 5)
+
     tracks =
-      Tracks.list_tracks_by_username(id)
-      |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
+      reposts.entries
+      |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
+      |> Enum.map(fn item -> item.track end)
 
     socket
-    |> assign(:page_title, "Tracks all")
+    |> assign(:page_title, "Reposts")
     |> assign(:tracks, tracks)
     |> assign(:title, "reposts")
-    |> assign(:data, menu(socket, id))
+    |> assign(:data, menu(socket, id, "reposts"))
   end
 
   defp apply_action(socket, :albums, %{"username" => id}) do
@@ -123,12 +129,8 @@ defmodule RauversionWeb.ProfileLive.Index do
     tracks =
       Tracks.list_tracks_by_username(id)
       |> Repo.preload([:cover_blob, :mp3_audio_blob])
-
-    socket
-    |> assign(:page_title, "Tracks all")
-    |> assign(:tracks, tracks)
-    |> assign(:title, "popular")
-    |> assign(:data, menu(socket, id))
+      |> assign(:title, "albums")
+      |> assign(:data, menu(socket, id, "albums"))
   end
 
   defp apply_action(socket, :playlists, %{"username" => id}) do
@@ -140,8 +142,14 @@ defmodule RauversionWeb.ProfileLive.Index do
     socket
     |> assign(:page_title, "Tracks all")
     |> assign(:tracks, tracks)
+    |> assign(:title, "playlists")
+    |> assign(:data, menu(socket, id, "playlists"))
+  end
+
+  defp apply_action(socket, :popular, %{"username" => id}) do
+    socket
     |> assign(:title, "popular")
-    |> assign(:data, menu(socket, id))
+    |> assign(:data, menu(socket, id, "popular"))
   end
 
   def handle_params(%{"sort_by" => _sort_by}, _url, _socket) do
@@ -165,20 +173,45 @@ defmodule RauversionWeb.ProfileLive.Index do
     end
   end
 
-  defp menu(socket, id) do
+  defp menu(socket, id, kind) do
+    # IO.inspect("AAAAAAAAAA #{socket.assigns}")
     [
-      %{name: "All", url: Routes.profile_index_path(socket, :index, id)},
+      %{
+        name: "All",
+        selected: kind == "all",
+        url: Routes.profile_index_path(socket, :index, id),
+        kind: kind
+      },
       %{
         name: "Popular tracks",
-        url: Routes.profile_index_path(socket, :tracks_all, id)
+        url: Routes.profile_index_path(socket, :popular, id),
+        selected: kind == "popular",
+        kind: kind
       },
       %{
         name: "Tracks",
-        url: Routes.profile_index_path(socket, :tracks_all, id)
+        url: Routes.profile_index_path(socket, :tracks_all, id),
+        selected: kind == "tracks_all",
+        kind: kind
       },
-      %{name: "Albums", url: Routes.profile_index_path(socket, :albums, id)},
-      %{name: "Playlists", url: Routes.profile_index_path(socket, :playlists, id)},
-      %{name: "Reposts", url: Routes.profile_index_path(socket, :reposts, id)}
+      %{
+        name: "Albums",
+        url: Routes.profile_index_path(socket, :albums, id),
+        selected: kind == "albums",
+        kind: kind
+      },
+      %{
+        name: "Playlists",
+        url: Routes.profile_index_path(socket, :playlists, id),
+        selected: kind == "playlists",
+        kind: kind
+      },
+      %{
+        name: "Reposts",
+        url: Routes.profile_index_path(socket, :reposts, id),
+        selected: kind == "reposts",
+        kind: kind
+      }
     ]
   end
 

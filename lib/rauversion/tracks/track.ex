@@ -23,6 +23,9 @@ defmodule Rauversion.Tracks.Track do
     field :slug, TitleSlug.Type
     field :title, :string
 
+    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist
+    has_many :playlists, through: [:track_playlists, :playlist]
+
     belongs_to(:user, Rauversion.Accounts.User)
 
     # original audio
