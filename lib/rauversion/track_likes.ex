@@ -89,6 +89,10 @@ defmodule Rauversion.TrackLikes do
     Repo.delete(track_like)
   end
 
+  def get_like_by_user_and_track(user_id, track_id) do
+    TrackLike |> where(user_id: ^user_id) |> where(track_id: ^track_id) |> Repo.one()
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking track_like changes.
 
