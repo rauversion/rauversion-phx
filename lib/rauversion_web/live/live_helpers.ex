@@ -80,13 +80,26 @@ defmodule RauversionWeb.LiveHelpers do
     |> JS.hide(to: "#modal-content", transition: "fade-out-scale")
   end
 
+  def active_button_class(struct) do
+    if !is_nil(struct) do
+      %{
+        class:
+          "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-orange-300 shadow-sm text-xs font-medium rounded text-orange-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      }
+    else
+      %{
+        class:
+          "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      }
+    end
+  end
+
   def get_user_by_session(socket, session) do
     if session["user_token"] do
       user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
 
-      socket =
-        socket
-        |> assign(:current_user, user)
+      socket
+      |> assign(:current_user, user)
     else
       socket
     end

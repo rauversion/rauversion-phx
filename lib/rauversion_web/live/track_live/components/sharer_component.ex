@@ -6,7 +6,7 @@ defmodule RauversionWeb.TrackLive.SharerComponent do
 
   def render(
         %{
-          track: track
+          track: _track
         } = assigns
       ) do
     track = assigns.track

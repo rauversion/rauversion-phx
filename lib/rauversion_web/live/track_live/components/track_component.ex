@@ -4,9 +4,116 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track, current_user: current_user} = assigns) do
-    ~H"""
+  # def mount(socket) do
+  #  require IEx
+  #  IEx.pry()
+  # end
 
+  def update(assigns = %{current_user: nil}, socket) do
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:repost, nil)
+    }
+  end
+
+  def update(assigns = %{current_user: current_user}, socket) do
+    case assigns do
+      %{current_user: current_user} ->
+        repost =
+          Rauversion.Reposts.get_repost_by_user_and_track(
+            assigns.current_user.id,
+            assigns.track.id
+          )
+
+        like =
+          Rauversion.TrackLikes.get_like_by_user_and_track(
+            assigns.current_user.id,
+            assigns.track.id
+          )
+
+        {
+          :ok,
+          socket
+          |> assign(assigns)
+          |> assign(:repost, repost)
+          |> assign(:like, like)
+        }
+
+      _ ->
+        {:ok, socket |> assign(:repost, nil)}
+    end
+  end
+
+  def handle_event(
+        "like-track",
+        %{"id" => id},
+        socket = %{assigns: %{track: track, current_user: current_user}}
+      ) do
+    attrs = %{user_id: current_user.id, track_id: track.id}
+
+    case socket.assigns.like do
+      %Rauversion.TrackLikes.TrackLike{} = track_like ->
+        Rauversion.TrackLikes.delete_track_like(track_like)
+        {:noreply, assign(socket, :like, nil)}
+
+      _ ->
+        {:ok, %Rauversion.TrackLikes.TrackLike{} = track_like} =
+          Rauversion.TrackLikes.create_track_like(attrs)
+
+        {:noreply, assign(socket, :like, track_like)}
+    end
+  end
+
+  def handle_event(
+        "like-track",
+        %{"id" => id},
+        socket = %{assigns: %{track: track, current_user: nil}}
+      ) do
+    # TODO: SHOW MODAL HERE
+    {:noreply, socket}
+  end
+
+  def handle_event(
+        "repost-track",
+        %{"id" => id},
+        socket = %{assigns: %{track: track, current_user: current_user}}
+      ) do
+    attrs = %{user_id: current_user.id, track_id: track.id}
+
+    case socket.assigns.repost do
+      %Rauversion.Reposts.Repost{} = repost ->
+        Rauversion.Reposts.delete_repost(repost)
+        {:noreply, assign(socket, :repost, nil)}
+
+      _ ->
+        {:ok, %Rauversion.Reposts.Repost{} = repost} = Rauversion.Reposts.create_repost(attrs)
+        {:noreply, assign(socket, :repost, repost)}
+    end
+  end
+
+  def handle_event(
+        "repost-track",
+        %{"id" => id},
+        socket = %{assigns: %{track: track, current_user: nil}}
+      ) do
+    # TODO: SHOW MODAL HERE
+    {:noreply, socket}
+  end
+
+  def render(
+        %{
+          track: track,
+          current_user: current_user,
+          repost: repost,
+          like: like
+        } = assigns
+      ) do
+    repost_class = active_button_class(repost)
+    like_class = active_button_class(like)
+
+    ~H"""
     <div class="flex flex-col sm:flex-row border rounded-md shadow-sm my-2">
       <div class="w-full sm:w-1/4 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
 
@@ -33,6 +140,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         <% # if track.audio.persisted? %>
           <%= content_tag :div, id: "track-player-#{track.id}",
                                 "phx-hooks-disabled": "AudioPlayer",
+                                "phx-update": "ignore",
                                 "data-controller": "audio",
                                 "data-audio-target": "player",
                                 "data-audio-height-value": 70,
@@ -65,9 +173,12 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                   <h4 class="text-md font-bold">
                     <%= live_redirect track.title, to: Routes.track_show_path(@socket, :show, track) %>
                   </h4>
-                  <%= if track.user == %Rauversion.Accounts.User{} do %>
-                    <h5 class="text-sm font-"><%= track.user.username %></h5>
-                  <% end %>
+                  <h5 class="text-sm font-">
+                    <%= case track.user do
+                      %Rauversion.Accounts.User{} ->  track.user.username
+                      _ -> ""
+                    end %>
+                  </h5>
                 </div>
 
                 <%= if track.private do %>
@@ -95,6 +206,22 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
               <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
             </svg>
             <span>Share</span>
+          <% end %>
+
+          <%= link to: "#", phx_click: "repost-track", phx_target: @myself, phx_value_id: track.id,
+            class: repost_class.class do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+            </svg>
+            <span>Repost <% #= if @repost do @repost.id else "no" end %></span>
+          <% end %>
+
+          <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: track.id,
+            class: like_class.class do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span>Like <% #= if @repost do @repost.id else "no" end %></span>
           <% end %>
 
           <%= if current_user && current_user.id == track.user_id do %>

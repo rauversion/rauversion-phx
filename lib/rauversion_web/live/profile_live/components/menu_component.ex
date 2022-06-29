@@ -4,7 +4,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{data: data} = assigns) do
+  def render(%{data: _data} = assigns) do
     ~H"""
     <div class="relative bg-white">
     <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
@@ -13,8 +13,10 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
 
         <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
           <nav class="flex space-x-10">
-            <%= for %{name: name, url: url} <- assigns.data do %>
-              <%= live_patch name, to: url, class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
+            <%= for %{name: name, url: url, selected: selected, kind: kind} <- assigns.data do %>
+              <% #= selected %>
+              <% #= kind %>
+              <%= live_patch name, to: url, class: "text-base font-medium #{if selected do "border-b border-b-4 text-gray-800 hover:text-gray-900 border-orange-500 " else "text-gray-500 hover:text-gray-900" end}" %>
             <% end %>
           </nav>
           <div class="flex items-center md:ml-12">

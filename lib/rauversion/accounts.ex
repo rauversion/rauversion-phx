@@ -19,12 +19,25 @@ defmodule Rauversion.Accounts do
     {:ok, result}
   end
 
-  def broadcast_change({:error, result}, event) do
+  def broadcast_change({:error, result}, _event) do
     {:error, result}
   end
 
   def list_accounts(limit \\ 20) do
     User |> limit(^limit) |> Repo.all()
+  end
+
+  def tracks_count(user) do
+    user
+    |> Ecto.assoc(:tracks)
+    |> Repo.aggregate(:count, :id)
+  end
+
+  def unfollowed_users(user) do
+    from(u in User,
+      left_join: m in assoc(u, :followings),
+      where: is_nil(m.id)
+    )
   end
 
   ## Database getters
@@ -156,14 +169,10 @@ defmodule Rauversion.Accounts do
     # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
     case user do
       nil ->
-        Rauversion.BlobUtils.fallback_image(
-          "/images/dan-cristian-padure-XKCH37dHt7w-unsplash.jpg"
-        )
+        Rauversion.BlobUtils.fallback_image("/images/sai-harish-kjNwiW4BjJE-unsplash-sqr.png")
 
       %{avatar_blob: nil} ->
-        Rauversion.BlobUtils.fallback_image(
-          "/images/dan-cristian-padure-XKCH37dHt7w-unsplash.jpg"
-        )
+        Rauversion.BlobUtils.fallback_image("/images/sai-harish-kjNwiW4BjJE-unsplash-sqr.png")
 
       %{avatar_blob: %ActiveStorage.Blob{} = avatar_blob} ->
         avatar_blob |> ActiveStorage.url()

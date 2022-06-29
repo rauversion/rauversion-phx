@@ -33,16 +33,19 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] Tracks
 - [x] Add metadata form step
 - [x] Embed at /embed/:track_id
+- [x] Embed at /embed/:track_id/private with signed_id
 - [ ] Paginate profile tracks /:username
 - [ ] Paginate /tracks
-- [ ] Filter public/private tracks (where: private: true)
+- [ ] Listening history
+- [x] Filter public/private tracks (where: private: true)
 - [ ] Give feedback on upload preprosessing
 - [ ] A logo for rauversion
-- [ ] Reposts
+- [x] Reposts
 - [ ] Albums
 - [ ] Playlists
-- [ ] Likes
-- [ ] Followers / Followings
+- [x] Likes
+- [x] Private preview on show
+- [x] Followers / Followings
 - [ ] Telemetry for dashboard
 - [ ] Centralized player, fixed (bottom) across navigation
 
@@ -79,4 +82,7 @@ Photo by <a href="https://unsplash.com/@schluditsch?utm_source=unsplash&utm_medi
 Photo by <a href="https://unsplash.com/@dancristianpaduret?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dan-Cristian Pădureț</a> on <a href="https://unsplash.com/s/photos/music-studio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 Photo by <a href="https://unsplash.com/@grittzheng?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Gritt Zheng</a> on <a href="https://unsplash.com/s/photos/music-studio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Photo by <a href="https://unsplash.com/@saiharishk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sai Harish</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
   

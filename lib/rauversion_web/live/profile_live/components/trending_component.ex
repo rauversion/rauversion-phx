@@ -4,7 +4,7 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track} = assigns) do
+  def render(%{track: _track} = assigns) do
     ~H"""
       <div class="bg-white border-t">
         <div class="p-6">

@@ -22,6 +22,18 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
+  def handle_params(
+        %{"id" => signed_id} = _params,
+        _,
+        socket = %{assigns: %{live_action: :private}}
+      ) do
+    {:noreply,
+     socket
+     |> assign(:page_title, page_title(socket.assigns.live_action))
+     |> assign(:track, Rauversion.Tracks.find_by_signed_id!(signed_id) |> Repo.preload(:user))}
+  end
+
+  @impl true
   def handle_params(%{"id" => id} = _params, _, socket = %{assigns: %{live_action: :edit}}) do
     socket =
       socket
@@ -69,6 +81,7 @@ defmodule RauversionWeb.TrackLive.Show do
      )}
   end
 
+  defp page_title(:private), do: "Show Track · private preview"
   defp page_title(:show), do: "Show Track"
   defp page_title(:edit), do: "Edit Track"
 end
