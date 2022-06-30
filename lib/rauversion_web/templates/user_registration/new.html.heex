@@ -2,7 +2,7 @@
   <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
     <div class="mx-auto w-full max-w-sm lg:w-96">
       <div>
-        <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-orange-600.svg" alt="Logo">
+        <img class="h-12 w-auto" src="https://via.placeholder.com/600.svg" alt="Logo">
         <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         <p class="mt-2 text-sm text-gray-600">
           Or
@@ -57,8 +57,8 @@
 
         <div class="mt-6">
 
-          <.form let={f} 
-          for={@changeset} 
+          <.form let={f}
+          for={@changeset}
           action={Routes.user_registration_path(@conn, :create)}
           class="space-y-6">
             <%= if @changeset.action do %>
@@ -71,7 +71,9 @@
                <%= label f, :email, "Email Address", class: "block text-sm font-medium text-gray-700"  %>
               <div class="mt-1">
                 <%= email_input f, :email, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" %>
-                <%= error_tag f, :email %>
+                <div class="mt-4">
+                  <%= error_tag f, :email %>
+                </div>
                 <!--<input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm">-->
               </div>
             </div>
@@ -80,7 +82,9 @@
               <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
               <div class="mt-1">
                 <%= password_input f, :password, required: true, autocomplete: false, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" %>
-                <%= error_tag f, :password %>
+                <div class="mt-4">
+                  <%= error_tag f, :password %>
+                </div>
               </div>
             </div>
 
@@ -88,7 +92,9 @@
               <label for="username" class="block text-sm font-medium text-gray-700"> Username </label>
               <div class="mt-1">
                 <%= text_input f, :username, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" %>
-                <%= error_tag f, :username %>
+                <div class="mt-4">
+                  <%= error_tag f, :username %>
+                </div>
               </div>
             </div>
 
@@ -111,9 +117,8 @@
   </div>
   <div class="hidden lg:block relative w-0 flex-1">
 
-    <img class="absolute inset-0 h-full w-full object-cover" 
+    <img class="absolute inset-0 h-full w-full object-cover"
     src={ Routes.static_path(@conn, "/images/actionvance-eXVd7gDPO9A-unsplash.jpg")}
      alt="">
   </div>
 </div>
-
