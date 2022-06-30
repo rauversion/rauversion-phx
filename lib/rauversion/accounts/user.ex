@@ -57,7 +57,7 @@ defmodule Rauversion.Accounts.User do
           )
 
         avatar = user.data.__struct__.avatar(user.data)
-        avatar_attachment = avatar.__struct__.attach(avatar, blob)
+        avatar.__struct__.attach(avatar, blob)
 
         user
 
@@ -86,8 +86,10 @@ defmodule Rauversion.Accounts.User do
   def registration_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password, :username])
+    |> validate_required([:username])
     |> validate_email()
     |> validate_password(opts)
+    |> unique_constraint(:username)
   end
 
   defp validate_contact_fields(changeset, attrs) do
