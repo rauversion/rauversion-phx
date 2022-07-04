@@ -2,5 +2,8 @@
   "prettier.singleQuote": true,
   "typescript.preferences.quoteStyle": "single",
   "javascript.preferences.quoteStyle": "single",
-  "elixirLS.enableTestLenses": true
+  "elixirLS.enableTestLenses": true,
+  "cSpell.words": [
+    "Rauversion"
+  ]
 }
