@@ -13,7 +13,7 @@ defmodule RauversionWeb.TrackLive.Index do
 
     socket =
       socket
-      |> assign(:tracks, list_tracks)
+      |> assign(:tracks, [])
 
     {:ok, socket}
   end
@@ -59,6 +59,7 @@ defmodule RauversionWeb.TrackLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
+    |> assign(:tracks, list_tracks)
     |> assign(:page_title, "Listing Tracks")
     |> assign(:track, nil)
   end
