@@ -4,13 +4,17 @@
     <%= case @action do 
       :new -> live_component(
                   RauversionWeb.PlaylistLive.CreateFormComponent,
-                  id: "playlist-new"
+                  id: "playlist-new",
+                  changeset: @changeset,
+                  ref: @myself,
+                  tab: @tab
                 )
 
       :edit -> live_component(
                   RauversionWeb.PlaylistLive.EditFormComponent,
                   id: "edit-new",
-                  changeset: @changeset
+                  changeset: @changeset,
+                  tab: @tab
                   # phx-target={@myself}
                 )
       _ -> "no match on #{@title}"

@@ -2,7 +2,7 @@ defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts}
+  alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts, Playlists}
 
   @impl true
   def mount(params = %{"username" => id}, session, socket) do
@@ -135,13 +135,16 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :playlists, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
-    tracks =
-      Tracks.list_tracks_by_username(id)
-      |> Repo.preload([:cover_blob, :mp3_audio_blob])
+    playlists =
+      Playlists.list_playlists_by_user(socket.assigns.profile)
+      |> Repo.all()
+      |> Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
+
+    # |> Repo.preload(tracks: [:cover_blob, :mp3_audio_blob])
 
     socket
     |> assign(:page_title, "Tracks all")
-    |> assign(:tracks, tracks)
+    |> assign(:playlists, playlists)
     |> assign(:title, "playlists")
     |> assign(:data, menu(socket, id, "playlists"))
   end

@@ -15,6 +15,7 @@ defmodule Rauversion.Accounts.User do
     field :confirmed_at, :naive_datetime
 
     has_many :tracks, Rauversion.Tracks.Track
+    has_many :playlists, Rauversion.Playlists.Playlist
     has_many :followings, Rauversion.UserFollows.UserFollow, foreign_key: :following_id
     has_many :followers, Rauversion.UserFollows.UserFollow, foreign_key: :follower_id
 

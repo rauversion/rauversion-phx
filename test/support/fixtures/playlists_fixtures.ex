@@ -8,7 +8,7 @@ defmodule Rauversion.PlaylistsFixtures do
   Generate a playlist.
   """
   def playlist_fixture(attrs \\ %{}) do
-    {:ok, playlist} =
+    {:ok, result} =
       attrs
       |> Enum.into(%{
         description: "some description",
@@ -18,6 +18,6 @@ defmodule Rauversion.PlaylistsFixtures do
       })
       |> Rauversion.Playlists.create_playlist()
 
-    playlist
+    result.playlist_with_tracks
   end
 end

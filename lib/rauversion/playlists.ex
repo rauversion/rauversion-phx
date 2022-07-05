@@ -21,6 +21,10 @@ defmodule Rauversion.Playlists do
     Repo.all(Playlist)
   end
 
+  def list_playlists_by_user(user) do
+    user |> Ecto.assoc(:playlists)
+  end
+
   @doc """
   Gets a single playlist.
 
@@ -50,9 +54,48 @@ defmodule Rauversion.Playlists do
 
   """
   def create_playlist(attrs \\ %{}) do
-    %Playlist{}
-    |> Playlist.changeset(attrs)
-    |> Repo.insert()
+    # %Playlist{}
+    # |> Playlist.changeset(attrs)
+    # |> Ecto.Changeset.cast_assoc(:track_playlists)
+    # |> Repo.insert()
+
+    alias Ecto.Multi
+
+    Multi.new()
+    |> Multi.insert(:playlist, Playlist.changeset(%Playlist{}, attrs))
+    |> Multi.run(:playlist_with_tracks, fn _, %{playlist: playlist} ->
+      # handles from params (stringy keys or from symbolized keys) ugly!
+
+      case attrs do
+        %{"track_playlists" => track_playlists} ->
+          track_playlists =
+            track_playlists
+            |> Enum.map(fn x ->
+              %{playlist_id: playlist.id, track_id: x["track_id"] |> String.to_integer()}
+            end)
+
+          Playlist.changeset(playlist |> Repo.preload([:track_playlists, :user]), %{})
+          |> Ecto.Changeset.put_assoc(:track_playlists, track_playlists)
+          |> Repo.update()
+
+        %{track_playlists: track_playlists} ->
+          track_playlists =
+            track_playlists
+            |> Enum.map(fn x ->
+              %{playlist_id: playlist.id, track_id: x.track_id}
+            end)
+
+          Playlist.changeset(playlist |> Repo.preload([:track_playlists, :user]), %{})
+          |> Ecto.Changeset.put_assoc(:track_playlists, track_playlists)
+          |> Repo.update()
+
+        _ ->
+          {:ok, playlist |> Repo.preload([:track_playlists, :user])}
+      end
+
+      # UsersProfiles.create_user_profile_owner(%{user_id: user.id, profile_id: id})
+    end)
+    |> Repo.transaction()
   end
 
   @doc """

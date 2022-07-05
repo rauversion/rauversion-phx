@@ -45,6 +45,18 @@
                    title: @title,
                   current_user: assigns[:current_user]
                 )
+
+
+      "playlists" ->
+                live_component(
+                  RauversionWeb.PlaylistLive.PlaylistListComponent,
+                  id: "all-reposts-#{@profile.id}",
+                  track: "track",
+                  profile: @profile,
+                  playlists: @playlists,
+                   title: @title,
+                  current_user: assigns[:current_user]
+                )
       _ -> "no match on #{@title}"
     end  %>
     

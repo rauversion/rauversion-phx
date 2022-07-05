@@ -5,18 +5,44 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
 
   @impl true
   def update(%{playlist: playlist} = assigns, socket) do
+    track = Rauversion.Tracks.get_track!(81)
+    tracks = [track]
+    playlist = %Rauversion.Playlists.Playlist{playlist | track_playlists: tracks}
+
     changeset = Playlists.change_playlist(playlist)
+
+    IO.inspect(changeset)
+    IO.inspect(changeset.changes)
 
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:tab, "add-to-tab")
+     |> assign(:tracks, tracks)
+     |> assign(playlist: playlist)
+     |> assign(:user_id, assigns.current_user.id)
      |> assign(:changeset, changeset)}
   end
 
   @impl true
+  def handle_event("add-to-tab", %{}, socket) do
+    {:noreply, assign(socket, :tab, "add-to-tab")}
+  end
+
+  @impl true
+  def handle_event("create-playlist-tab", %{}, socket) do
+    {:noreply, assign(socket, :tab, "create-playlist-tab")}
+  end
+
+  @impl true
   def handle_event("validate", %{"playlist" => playlist_params}, socket) do
-    changeset =
+    playlist = %Rauversion.Playlists.Playlist{
       socket.assigns.playlist
+      | tracks: socket.assigns.tracks
+    }
+
+    changeset =
+      playlist
       |> Playlists.change_playlist(playlist_params)
       |> Map.put(:action, :validate)
 
@@ -41,6 +67,23 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
   end
 
   defp save_playlist(socket, :new, playlist_params) do
+    playlist_params = playlist_params |> Map.merge(%{"user_id" => socket.assigns.user_id})
+
+    # a fucking ugly hack, kind of hate Ecto lack of nested form, or maybe I'm missing something?
+    tracks_params =
+      playlist_params["track_playlists"]
+      |> Enum.map(fn k ->
+        {_, v} = k
+        v
+      end)
+      |> Enum.map(fn x ->
+        %{"track_id" => x["id"]}
+      end)
+
+    IO.inspect(playlist_params)
+
+    playlist_params = playlist_params |> Map.merge(%{"track_playlists" => tracks_params})
+
     case Playlists.create_playlist(playlist_params) do
       {:ok, _playlist} ->
         {:noreply,
