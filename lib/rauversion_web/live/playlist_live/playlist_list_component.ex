@@ -12,6 +12,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
           module={RauversionWeb.PlaylistLive.PlaylistComponent}
           id={"playlist-#{playlist.id}"}
           playlist={playlist}
+          current_user={@current_user}
         />
       <% end %>
     </div>

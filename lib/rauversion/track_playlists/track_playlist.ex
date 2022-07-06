@@ -11,6 +11,10 @@ defmodule Rauversion.TrackPlaylists.TrackPlaylist do
     timestamps()
   end
 
+  def record_type() do
+    "Playlist"
+  end
+
   @doc false
   def changeset(track_playlist, attrs) do
     track_playlist

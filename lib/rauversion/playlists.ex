@@ -144,4 +144,14 @@ defmodule Rauversion.Playlists do
   def change_playlist(%Playlist{} = playlist, attrs \\ %{}) do
     Playlist.changeset(playlist, attrs)
   end
+
+  defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
+
+  defdelegate blob_for(struct, kind), to: Rauversion.BlobUtils
+
+  defdelegate blob_proxy_url(user, kind), to: Rauversion.BlobUtils
+
+  defdelegate variant_url(struct, kind, options), to: Rauversion.BlobUtils
+
+  defdelegate blob_url_for(struct, kind), to: Rauversion.BlobUtils
 end

@@ -126,11 +126,9 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :albums, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
-    tracks =
-      Tracks.list_tracks_by_username(id)
-      |> Repo.preload([:cover_blob, :mp3_audio_blob])
-      |> assign(:title, "albums")
-      |> assign(:data, menu(socket, id, "albums"))
+    socket
+    |> assign(:title, "albums")
+    |> assign(:data, menu(socket, id, "albums"))
   end
 
   defp apply_action(socket, :playlists, %{"username" => id}) do
@@ -153,6 +151,12 @@ defmodule RauversionWeb.ProfileLive.Index do
     socket
     |> assign(:title, "popular")
     |> assign(:data, menu(socket, id, "popular"))
+  end
+
+  defp apply_action(socket, :insights, %{"username" => id}) do
+    socket
+    |> assign(:title, "insights")
+    |> assign(:data, menu(socket, id, "insights"))
   end
 
   def handle_params(%{"sort_by" => _sort_by}, _url, _socket) do

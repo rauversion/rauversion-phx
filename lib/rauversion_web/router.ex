@@ -178,5 +178,6 @@ defmodule RauversionWeb.Router do
     live "/:username/tracks/albums", ProfileLive.Index, :albums
     live "/:username/tracks/playlists", ProfileLive.Index, :playlists
     live "/:username/tracks/popular", ProfileLive.Index, :popular
+    live "/:username/insights", ProfileLive.Index, :insights
   end
 end

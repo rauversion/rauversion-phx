@@ -9,6 +9,7 @@
   id={"track-#{@profile.id}"}
   data={assigns.data}
   title={@title}
+  username={@profile.username}
 />
 
 <%= if @share_track do %>
@@ -54,7 +55,7 @@
                   track: "track",
                   profile: @profile,
                   playlists: @playlists,
-                   title: @title,
+                  title: @title,
                   current_user: assigns[:current_user]
                 )
       _ -> "no match on #{@title}"

@@ -1,5 +1,6 @@
 defmodule RauversionWeb.PlaylistLive.Show do
   use RauversionWeb, :live_view
+  on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.Playlists
 
@@ -13,7 +14,12 @@ defmodule RauversionWeb.PlaylistLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:playlist, Playlists.get_playlist!(id))}
+     |> assign(:playlist, get_playlist(id))}
+  end
+
+  defp get_playlist(id) do
+    Playlists.get_playlist!(id)
+    |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 
   defp page_title(:show), do: "Show Playlist"
