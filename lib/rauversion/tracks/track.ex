@@ -23,11 +23,11 @@ defmodule Rauversion.Tracks.Track do
     field :slug, TitleSlug.Type
     field :title, :string
 
-    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist
+    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all
     has_many :playlists, through: [:track_playlists, :playlist]
 
-    has_many :likes, Rauversion.TrackLikes.TrackLike
-    has_many :reposts, Rauversion.Reposts.Repost
+    has_many :likes, Rauversion.TrackLikes.TrackLike, on_delete: :delete_all
+    has_many :reposts, Rauversion.Reposts.Repost, on_delete: :delete_all
 
     belongs_to(:user, Rauversion.Accounts.User)
 

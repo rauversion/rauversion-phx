@@ -4,6 +4,35 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
+  def update(assigns = %{current_user: nil}, socket) do
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+    }
+  end
+
+  def update(assigns = %{current_user: current_user}, socket) do
+    case assigns do
+      %{current_user: current_user} ->
+        like =
+          case assigns.playlist.likes do
+            [like] -> like
+            _ -> nil
+          end
+
+        {
+          :ok,
+          socket
+          |> assign(assigns)
+          |> assign(:like, like)
+        }
+
+      _ ->
+        {:ok, socket |> assign(:like, nil)}
+    end
+  end
+
   def render(assigns) do
     ~H"""
       <div class="my-2 p-2 border shadow-xs mx-3">
@@ -26,10 +55,12 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                         </div>
                         <div class="flex-1 min-w-0">
                           <p class="text-sm font-medium text-gray-900 truncate"><%= track_playlists.track.title %></p>
-                          <p class="text-sm text-gray-500 truncate">@leonardkrasner</p>
+                          <p class="text-sm text-gray-500 truncate"><%= @playlist.user.username  %></p>
                         </div>
                         <div>
-                          <a href="#" phx-click="remove-track" target={@myself} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                          <a href="#" phx-click="remove-track"
+                            target-nono={@myself}
+                            class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
                             remove
                           </a>
                         </div>

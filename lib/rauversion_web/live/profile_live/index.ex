@@ -121,10 +121,15 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :playlists, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
+    # Playlists.list_playlists_by_user(socket.assigns.profile)
+    # |> Repo.all()
+    # |> Repo.preload(:user)
+    # |> Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
     playlists =
-      Playlists.list_playlists_by_user(socket.assigns.profile)
-      |> Repo.all()
-      |> Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
+      Rauversion.Playlists.list_playlists_by_user(socket.assigns.profile)
+      |> Rauversion.Repo.all()
+      |> Rauversion.Repo.preload(:user)
+      |> Rauversion.Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
 
     # |> Repo.preload(tracks: [:cover_blob, :mp3_audio_blob])
 

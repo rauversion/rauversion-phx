@@ -23,6 +23,8 @@ defmodule Rauversion.Playlists.Playlist do
     # many_to_many :tracks, Rauversion.Tracks.Track,
     #  join_through: Rauversion.TrackPlaylists.TrackPlaylist
 
+    has_many :likes, Rauversion.PlaylistLikes.PlaylistLike
+
     # cover image
     has_one(:cover_attachment, ActiveStorage.Attachment,
       where: [record_type: "Playlist", name: "cover"],

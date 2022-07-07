@@ -19,6 +19,8 @@ defmodule Rauversion.Accounts.User do
     has_many :followings, Rauversion.UserFollows.UserFollow, foreign_key: :following_id
     has_many :followers, Rauversion.UserFollows.UserFollow, foreign_key: :follower_id
 
+    has_many :liked_playlists, Rauversion.PlaylistLikes.PlaylistLike
+
     has_many :liked_tracks, Rauversion.TrackLikes.TrackLike
     has_many :reposted_tracks, Rauversion.Reposts.Repost
 
