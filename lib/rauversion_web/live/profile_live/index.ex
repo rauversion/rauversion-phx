@@ -5,21 +5,15 @@ defmodule RauversionWeb.ProfileLive.Index do
   alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts, Playlists}
 
   @impl true
-  def mount(params = %{"username" => id}, session, socket) do
+  def mount(_params = %{"username" => id}, session, socket) do
     socket =
       socket
       |> assign(:profile, Accounts.get_user_by_username(id))
-      |> assign(:who_to_follow, who_to_follow())
       |> assign(:share_track, nil)
 
     Tracks.subscribe()
 
     {:ok, socket}
-  end
-
-  defp who_to_follow() do
-    Rauversion.Accounts.unfollowed_users(@profile)
-    |> Rauversion.Repo.paginate(page: 1, page_size: 5)
   end
 
   @impl true
@@ -30,16 +24,6 @@ defmodule RauversionWeb.ProfileLive.Index do
        :share_track,
        Tracks.get_track!(id) |> Repo.preload(user: :avatar_attachment)
      )}
-  end
-
-  @impl true
-  def handle_event("follow-account", %{"id" => id}, socket) do
-    UserFollows.create_user_follow(%{
-      follower_id: socket.assigns.current_user.id,
-      following_id: id
-    })
-
-    {:noreply, socket}
   end
 
   # @impl true
