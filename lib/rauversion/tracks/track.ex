@@ -26,6 +26,9 @@ defmodule Rauversion.Tracks.Track do
     has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist
     has_many :playlists, through: [:track_playlists, :playlist]
 
+    has_many :likes, Rauversion.TrackLikes.TrackLike
+    has_many :reposts, Rauversion.Reposts.Repost
+
     belongs_to(:user, Rauversion.Accounts.User)
 
     # original audio
@@ -128,8 +131,6 @@ defmodule Rauversion.Tracks.Track do
 
             # Tracks.update_track(struct, %{metadata: %{peaks: data}})
             ####
-
-            IO.inspect(struct)
 
             Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_attaching])
 

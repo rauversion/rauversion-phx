@@ -5,8 +5,6 @@ defmodule RauversionWeb.PlaylistLive.PlaylistShowItemsComponent do
   use RauversionWeb, :live_component
 
   def render(assigns) do
-    IO.inspect(assigns)
-
     ~H"""
       <div class="my-2 p-2 border shadow-xs mx-3">
         <div class="flex space-x-3">

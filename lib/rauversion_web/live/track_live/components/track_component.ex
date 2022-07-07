@@ -22,16 +22,16 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     case assigns do
       %{current_user: current_user} ->
         repost =
-          Rauversion.Reposts.get_repost_by_user_and_track(
-            assigns.current_user.id,
-            assigns.track.id
-          )
+          case assigns.track.reposts do
+            [repost] -> repost
+            _ -> nil
+          end
 
         like =
-          Rauversion.TrackLikes.get_like_by_user_and_track(
-            assigns.current_user.id,
-            assigns.track.id
-          )
+          case assigns.track.likes do
+            [like] -> like
+            _ -> nil
+          end
 
         {
           :ok,

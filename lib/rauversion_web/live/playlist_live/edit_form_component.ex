@@ -27,7 +27,6 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
 
       <ul role="list" class="-my-5 divide-y divide-gray-200">
         <%= inputs_for f, :track_playlists, fn track -> %>
-          <% IO.inspect(track) %>
 
           <%= hidden_input track, :track_id %>
 

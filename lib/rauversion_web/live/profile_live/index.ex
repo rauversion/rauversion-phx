@@ -62,6 +62,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
+      |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user])
       |> Repo.preload([
         :mp3_audio_blob,
         :cover_blob,
@@ -80,6 +81,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
+      |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user])
       |> Repo.preload([:cover_blob, :mp3_audio_blob])
 
     socket
@@ -93,12 +95,14 @@ defmodule RauversionWeb.ProfileLive.Index do
     profile = Accounts.get_user_by_username(id)
 
     reposts =
-      Reposts.get_reposts_by_user_id(profile.id)
+      Reposts.get_reposts_by_user_id(profile.id, socket.assigns[:current_user])
+      # |> Rauversion.Repo.all()
+      # |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
+      # |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user].id)
       |> Rauversion.Repo.paginate(page: 1, page_size: 5)
 
     tracks =
       reposts.entries
-      |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
       |> Enum.map(fn item -> item.track end)
 
     socket

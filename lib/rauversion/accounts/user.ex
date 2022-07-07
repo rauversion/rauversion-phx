@@ -19,6 +19,9 @@ defmodule Rauversion.Accounts.User do
     has_many :followings, Rauversion.UserFollows.UserFollow, foreign_key: :following_id
     has_many :followers, Rauversion.UserFollows.UserFollow, foreign_key: :follower_id
 
+    has_many :liked_tracks, Rauversion.TrackLikes.TrackLike
+    has_many :reposted_tracks, Rauversion.Reposts.Repost
+
     has_one(:avatar_attachment, ActiveStorage.Attachment,
       where: [record_type: "User", name: "avatar"],
       foreign_key: :record_id
