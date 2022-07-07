@@ -40,7 +40,7 @@ defmodule Rauversion.Playlists.Playlist do
     |> cast(attrs, [:description, :private, :title, :user_id])
     |> cast_embed(:metadata, with: &Rauversion.Playlists.PlaylistMetadata.changeset/2)
     # |> cast_assoc(:tracks)
-    # |> cast_assoc(:track_playlists)
+    |> cast_assoc(:track_playlists)
     |> validate_required([:title, :user_id])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()

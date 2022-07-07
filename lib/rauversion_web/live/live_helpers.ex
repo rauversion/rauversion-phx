@@ -27,6 +27,7 @@ defmodule RauversionWeb.LiveHelpers do
   """
   def modal(assigns) do
     assigns = assign_new(assigns, :return_to, fn -> nil end)
+    assigns = assign_new(assigns, :close_handler, fn -> nil end)
 
     ~H"""
     <div id="modal" class="phx-modal fade-in" phx-remove={hide_modal()}>
@@ -44,6 +45,9 @@ defmodule RauversionWeb.LiveHelpers do
             class: "phx-modal-close",
             phx_click: hide_modal()
           %>
+        <% end %>
+        <%= if @close_handler do %>
+          <a id="close" href="#" phx-click={"close-modal"} phx-target={@close_handler}>✖</a>
         <% else %>
           <a id="close" href="#" class="phx-modal-close" phx-click={hide_modal()}>✖</a>
         <% end %>

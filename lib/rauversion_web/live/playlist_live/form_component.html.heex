@@ -1,5 +1,4 @@
 <div>
-  <h2><%= @title %></h2>
 
     <%= case @action do 
       :new -> live_component(
@@ -7,14 +6,18 @@
                   id: "playlist-new",
                   changeset: @changeset,
                   ref: @myself,
-                  tab: @tab
+                  tab: @tab,
+                  new_track: @new_track,
+                  playlist: @playlist,
+                  playlists: @playlists
                 )
 
       :edit -> live_component(
                   RauversionWeb.PlaylistLive.EditFormComponent,
                   id: "edit-new",
                   changeset: @changeset,
-                  tab: @tab
+                  tab: @tab,
+                  ref: @myself
                   # phx-target={@myself}
                 )
       _ -> "no match on #{@title}"

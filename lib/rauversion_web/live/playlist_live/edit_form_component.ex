@@ -12,13 +12,9 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
       let={f}
       for={@changeset}
       id="playlist-form"
-      phx-target={@myself}
+      phx-target={@ref}
       phx-change="validate"
       phx-submit="save">
-
-      <%= label f, :slug %>
-      <%= text_input f, :slug %>
-      <%= error_tag f, :slug %>
 
       <%= label f, :description %>
       <%= textarea f, :description %>
@@ -28,9 +24,31 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
       <%= text_input f, :title %>
       <%= error_tag f, :title %>
 
-      <%= label f, :metadata %>
-      <%= text_input f, :metadata %>
-      <%= error_tag f, :metadata %>
+
+      <ul role="list" class="-my-5 divide-y divide-gray-200">
+        <%= inputs_for f, :track_playlists, fn track -> %>
+          <% IO.inspect(track) %>
+
+          <%= hidden_input track, :track_id %>
+
+          <li class="py-4">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate"><%= track.id %></p>
+                <p class="text-sm text-gray-500 truncate">@leonardkrasner</p>
+              </div>
+              <div>
+                <a href="#" phx-click="remove-track" target={@ref} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                  remove
+                </a>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
 
       <div>
         <%= submit "Save", phx_disable_with: "Saving..." %>

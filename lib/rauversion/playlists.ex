@@ -54,6 +54,13 @@ defmodule Rauversion.Playlists do
 
   """
   def create_playlist(attrs \\ %{}) do
+    %Playlist{}
+    |> Playlist.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:track_playlists)
+    |> Repo.insert()
+  end
+
+  def create_playlist_from_hash(attrs \\ %{}) do
     # %Playlist{}
     # |> Playlist.changeset(attrs)
     # |> Ecto.Changeset.cast_assoc(:track_playlists)

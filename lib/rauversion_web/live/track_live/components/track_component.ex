@@ -224,6 +224,17 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             <span>Like <% #= if @repost do @repost.id else "no" end %></span>
           <% end %>
 
+          <%= if current_user do %>
+
+            <.live_component
+              id={"playlist-button-add-track-#{track.id}"}
+              module={RauversionWeb.PlaylistLive.AddToPlaylistComponent}
+              track={track}
+              current_user={@current_user}
+              return_to={Routes.playlist_index_path(@socket, :index)}
+            />
+          <% end %>
+
           <%= if current_user && current_user.id == track.user_id do %>
             <%= live_patch to:  Routes.track_show_path(@socket, :edit, track), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
