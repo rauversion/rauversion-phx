@@ -16,16 +16,6 @@ defmodule RauversionWeb.ProfileLive.Index do
     {:ok, socket}
   end
 
-  @impl true
-  def handle_event("share-track-modal", %{"id" => id}, socket) do
-    {:noreply,
-     assign(
-       socket,
-       :share_track,
-       Tracks.get_track!(id) |> Repo.preload(user: :avatar_attachment)
-     )}
-  end
-
   # @impl true
   # def handle_info({Tracks, [:tracks, _], _}, socket) do
   #  IO.puts("OLIII")
