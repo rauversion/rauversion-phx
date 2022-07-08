@@ -23,15 +23,17 @@ jobs:
       MIX_ENV: test
     steps:
       - uses: actions/checkout@v2
-      #- uses: mfinelli/setup-imagemagick@v1
-      #- name: Install Ubuntu dependencies
-      #  run: sudo apt-get -y install poppler-data poppler-utils ffmpeg mupdf-tools
-      - name: installs audiowaveform
+      - uses: mfinelli/setup-imagemagick@v1
+      
+      - name: installs ffmpeg
         uses: actions/cache@v1
         id: build-cache
-        run: sudo add-apt-repository ppa:chris-needham/ppa
-        run: sudo apt-get update
-        run: sudo apt-get install audiowaveform
+        run: sudo apt-get ffmpeg
+
+      - name: installs lame
+        uses: actions/cache@v1
+        id: build-cache
+        run: sudo apt-get update -y; sudo apt-get install -y lame
       
       - name: Check identify
         run: identify --version
