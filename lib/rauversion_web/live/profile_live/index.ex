@@ -110,23 +110,8 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   defp apply_action(socket, :playlists, %{"username" => id}) do
-    # profile = Accounts.get_user_by_username(id)
-    # Playlists.list_playlists_by_user(socket.assigns.profile)
-    # |> Repo.all()
-    # |> Repo.preload(:user)
-    # |> Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
-    playlists =
-      Rauversion.Playlists.list_playlists_by_user(socket.assigns.profile)
-      |> Rauversion.Repo.all()
-      |> Rauversion.Playlists.preload_playlists_preloaded_by_user(socket.assigns[:current_user])
-      |> Rauversion.Repo.preload(:user)
-      |> Rauversion.Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
-
-    # |> Repo.preload(tracks: [:cover_blob, :mp3_audio_blob])
-
     socket
     |> assign(:page_title, "Tracks all")
-    |> assign(:playlists, playlists)
     |> assign(:title, "playlists")
     |> assign(:data, menu(socket, id, "playlists"))
   end

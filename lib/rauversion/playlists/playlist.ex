@@ -18,13 +18,12 @@ defmodule Rauversion.Playlists.Playlist do
     field :title, TitleSlug.Type
     field :private, :boolean
     belongs_to :user, Rauversion.Accounts.User
-    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist
+    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all
     has_many :tracks, through: [:track_playlists, :tracks]
     # many_to_many :tracks, Rauversion.Tracks.Track,
     #  join_through: Rauversion.TrackPlaylists.TrackPlaylist
 
-    # , on_delete: :delete_all
-    has_many :likes, Rauversion.PlaylistLikes.PlaylistLike
+    has_many :likes, Rauversion.PlaylistLikes.PlaylistLike, on_delete: :delete_all
 
     # cover image
     has_one(:cover_attachment, ActiveStorage.Attachment,
