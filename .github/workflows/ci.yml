@@ -37,4 +37,5 @@ jobs:
           otp-version: '24'
           elixir-version: '1.12'
       - run: mix deps.get
+      - run: mix ecto.create ; mix ecto.migrate
       - run: mix test
