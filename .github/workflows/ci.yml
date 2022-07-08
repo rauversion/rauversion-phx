@@ -24,15 +24,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: mfinelli/setup-imagemagick@v1
-      
+
       - name: installs ffmpeg
-        uses: actions/cache@v1
-        id: build-cache
         run: sudo apt-get ffmpeg
 
       - name: installs lame
-        uses: actions/cache@v1
-        id: build-cache
         run: sudo apt-get update -y; sudo apt-get install -y lame
       
       - name: Check identify
