@@ -105,6 +105,22 @@ defmodule Rauversion.Playlists do
     |> Repo.transaction()
   end
 
+  def preload_playlists_preloaded_by_user(
+        query,
+        _current_user = %Rauversion.Accounts.User{id: id}
+      ) do
+    likes_query =
+      from pi in Rauversion.PlaylistLikes.PlaylistLike,
+        where: pi.user_id == ^id
+
+    query
+    |> Repo.preload(likes: likes_query)
+  end
+
+  def preload_playlists_preloaded_by_user(query, _current_user_id = nil) do
+    query
+  end
+
   @doc """
   Updates a playlist.
 

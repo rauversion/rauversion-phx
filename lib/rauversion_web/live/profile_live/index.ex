@@ -128,6 +128,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     playlists =
       Rauversion.Playlists.list_playlists_by_user(socket.assigns.profile)
       |> Rauversion.Repo.all()
+      |> Rauversion.Playlists.preload_playlists_preloaded_by_user(socket.assigns[:current_user])
       |> Rauversion.Repo.preload(:user)
       |> Rauversion.Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
 

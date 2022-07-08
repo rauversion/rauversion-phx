@@ -33,7 +33,45 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
     end
   end
 
-  def render(assigns) do
+  def handle_event(
+        "like-playlist",
+        %{"id" => id},
+        socket = %{
+          assigns: %{playlist: playlist, current_user: current_user = %Rauversion.Accounts.User{}}
+        }
+      ) do
+    attrs = %{user_id: current_user.id, playlist_id: playlist.id}
+
+    case socket.assigns.like do
+      %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like ->
+        Rauversion.PlaylistLikes.delete_playlist_like(playlist_like)
+        {:noreply, assign(socket, :like, nil)}
+
+      _ ->
+        {:ok, %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like} =
+          Rauversion.PlaylistLikes.create_playlist_like(attrs)
+
+        {:noreply, assign(socket, :like, playlist_like)}
+    end
+  end
+
+  def handle_event(
+        "like-playlist",
+        %{"id" => _id},
+        socket = %{assigns: %{playlist: _playlist, current_user: nil}}
+      ) do
+    # TODO: SHOW MODAL HERE
+    {:noreply, socket}
+  end
+
+  def render(
+        %{
+          current_user: _current_user,
+          like: like
+        } = assigns
+      ) do
+    like_class = active_button_class(like)
+
     ~H"""
       <div class="my-2 p-2 border shadow-xs mx-3">
         <div class="flex space-x-3">
@@ -79,12 +117,12 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                   <span>Share</span>
                 <% end %>
 
-                <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: @playlist.id,
-                  class: "like_class.class" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                  <span>Like</span>
+                <%= link to: "#", phx_click: "like-playlist", phx_target: @myself, phx_value_id: @playlist.id,
+                  class: like_class.class do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    <span>Like</span>
                 <% end %>
 
                 <%= if @current_user && @current_user.id == @playlist.user_id do %>

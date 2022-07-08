@@ -18,6 +18,6 @@ defmodule Rauversion.PlaylistsFixtures do
       })
       |> Rauversion.Playlists.create_playlist()
 
-    result.playlist_with_tracks
+    result
   end
 end
