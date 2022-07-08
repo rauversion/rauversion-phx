@@ -115,6 +115,14 @@ Hooks.AudioPlayer = {
 Hooks.InfiniteScroll = InfiniteScroll
 
 
+// handler for remove playlist, this is basically because we are using pxh-update=append on the playlist list
+window.addEventListener(`phx:remove-playlist`, (e) => {
+  let el = document.getElementById(e.detail.id)
+  if(el) {
+    el.remove()
+  }
+})
+
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 
 // connect if there are any LiveViews on the page

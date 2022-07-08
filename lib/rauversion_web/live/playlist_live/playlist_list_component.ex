@@ -28,9 +28,15 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     playlist = Playlists.get_playlist!(id)
-    {:ok, _} = Playlists.delete_playlist(playlist)
 
-    {:noreply, assign(socket, :playlists, list_playlists(socket.assigns))}
+    case Playlists.delete_playlist(playlist) do
+      {:ok, playlist} ->
+        {:noreply, push_event(socket, "remove-playlist", %{id: "playlist-item-#{playlist.id}"})}
+
+      _ ->
+        # not sire what to reply here
+        {:noreply, socket}
+    end
   end
 
   def handle_event("paginate", %{}, socket) do
@@ -43,7 +49,13 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
   @impl true
   def render(assigns) do
     ~H"""
-    <div id="infinite-scroll" phx-hook="InfiniteScroll" phx-update="append" data-page={@page} phx-target={@myself}>
+    <div id="infinite-scroll"
+      phx-hook="InfiniteScroll"
+      phx-update="append"
+      data-page={@page}
+      phx-target={@myself}
+      data-paginate-end={assigns.playlists.total_pages == @page}
+      >
       <%= for playlist <- assigns.playlists.entries  do %>
         <.live_component
           module={RauversionWeb.PlaylistLive.PlaylistComponent}
