@@ -25,6 +25,14 @@ defmodule Rauversion.Playlists do
     user |> Ecto.assoc(:playlists)
   end
 
+  def get_public_playlist!(id) do
+    Playlist
+    |> where(id: ^id)
+    |> where([t], is_nil(t.private) or t.private == false)
+    |> limit(1)
+    |> Repo.one()
+  end
+
   @doc """
   Gets a single playlist.
 
@@ -166,6 +174,17 @@ defmodule Rauversion.Playlists do
   """
   def change_playlist(%Playlist{} = playlist, attrs \\ %{}) do
     Playlist.changeset(playlist, attrs)
+  end
+
+  def signed_id(playlist) do
+    Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", playlist.id)
+  end
+
+  def find_by_signed_id!(token) do
+    case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token, max_age: 86400) do
+      {:ok, playlist_id} -> get_playlist!(playlist_id)
+      _ -> nil
+    end
   end
 
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
