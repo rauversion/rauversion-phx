@@ -1,0 +1,28 @@
+// taken from: https://elixircasts.io/infinite-scroll-with-liveview
+
+let scrollAt = () => {
+  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+  let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+  let clientHeight = document.documentElement.clientHeight
+
+  return scrollTop / (scrollHeight - clientHeight) * 100
+}
+
+InfiniteScroll = {
+  page() { return this.el.dataset.page },
+  mounted(){
+    this.pending = this.page()
+    
+    const target = this.el.dataset.phxComponent
+    window.addEventListener("scroll", e => {
+      if(this.pending == this.page() && scrollAt() > 90){
+        this.pending = this.page() + 1
+        this.pushEventTo(target, "paginate", {})
+      }
+    })
+  },
+  reconnected(){ this.pending = this.page() },
+  updated(){ this.pending = this.page() }
+}
+
+export default InfiniteScroll

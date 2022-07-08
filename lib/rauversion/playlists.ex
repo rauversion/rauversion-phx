@@ -21,8 +21,23 @@ defmodule Rauversion.Playlists do
     Repo.all(Playlist)
   end
 
-  def list_playlists_by_user(user) do
-    user |> Ecto.assoc(:playlists)
+  def list_playlists_by_user(user, preloads = nil) do
+    from pi in Playlist,
+      where: pi.user_id == ^user.id
+  end
+
+  def list_playlists_by_user(user, _current_user = %Rauversion.Accounts.User{id: id}) do
+    likes_query =
+      from pi in Rauversion.PlaylistLikes.PlaylistLike,
+        where: pi.user_id == ^id
+
+    from pi in Playlist,
+      where: pi.user_id == ^user.id,
+      preload: [
+        :user,
+        likes: ^likes_query,
+        track_playlists: [track: [:cover_blob, :mp3_audio_blob]]
+      ]
   end
 
   def get_public_playlist!(id) do
@@ -68,61 +83,12 @@ defmodule Rauversion.Playlists do
     |> Repo.insert()
   end
 
-  def create_playlist_from_hash(attrs \\ %{}) do
-    # %Playlist{}
-    # |> Playlist.changeset(attrs)
-    # |> Ecto.Changeset.cast_assoc(:track_playlists)
-    # |> Repo.insert()
-
-    alias Ecto.Multi
-
-    Multi.new()
-    |> Multi.insert(:playlist, Playlist.changeset(%Playlist{}, attrs))
-    |> Multi.run(:playlist_with_tracks, fn _, %{playlist: playlist} ->
-      # handles from params (stringy keys or from symbolized keys) ugly!
-
-      case attrs do
-        %{"track_playlists" => track_playlists} ->
-          track_playlists =
-            track_playlists
-            |> Enum.map(fn x ->
-              %{playlist_id: playlist.id, track_id: x["track_id"] |> String.to_integer()}
-            end)
-
-          Playlist.changeset(playlist |> Repo.preload([:track_playlists, :user]), %{})
-          |> Ecto.Changeset.put_assoc(:track_playlists, track_playlists)
-          |> Repo.update()
-
-        %{track_playlists: track_playlists} ->
-          track_playlists =
-            track_playlists
-            |> Enum.map(fn x ->
-              %{playlist_id: playlist.id, track_id: x.track_id}
-            end)
-
-          Playlist.changeset(playlist |> Repo.preload([:track_playlists, :user]), %{})
-          |> Ecto.Changeset.put_assoc(:track_playlists, track_playlists)
-          |> Repo.update()
-
-        _ ->
-          {:ok, playlist |> Repo.preload([:track_playlists, :user])}
-      end
-
-      # UsersProfiles.create_user_profile_owner(%{user_id: user.id, profile_id: id})
-    end)
-    |> Repo.transaction()
-  end
-
-  def preload_playlists_preloaded_by_user(
-        query,
-        _current_user = %Rauversion.Accounts.User{id: id}
-      ) do
+  def preload_playlists_preloaded_by_user(_current_user = %Rauversion.Accounts.User{id: id}) do
     likes_query =
       from pi in Rauversion.PlaylistLikes.PlaylistLike,
         where: pi.user_id == ^id
 
-    query
-    |> Repo.preload(likes: likes_query)
+    [likes: likes_query]
   end
 
   def preload_playlists_preloaded_by_user(query, _current_user_id = nil) do

@@ -29,6 +29,8 @@ import { Application } from "@hotwired/stimulus"
 
 import "./controllers"
 
+import InfiniteScroll from "./hooks/infinite_scroll"
+
 import WaveSurfer from 'wavesurfer'
 
 // import * as ActiveStorage from "@rails/activestorage"
@@ -109,6 +111,9 @@ Hooks.AudioPlayer = {
     this.wave().stop()
   },
 }
+
+Hooks.InfiniteScroll = InfiniteScroll
+
 
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 

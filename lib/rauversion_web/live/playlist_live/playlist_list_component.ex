@@ -10,15 +10,19 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(page: 1)
      |> assign(playlists: list_playlists(assigns))}
   end
 
   defp list_playlists(assigns) do
-    Rauversion.Playlists.list_playlists_by_user(assigns.profile)
-    |> Rauversion.Repo.all()
-    |> Rauversion.Playlists.preload_playlists_preloaded_by_user(assigns[:current_user])
-    |> Rauversion.Repo.preload(:user)
-    |> Rauversion.Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
+    Rauversion.Playlists.list_playlists_by_user(
+      assigns.profile,
+      assigns[:current_user]
+    )
+    |> Rauversion.Repo.paginate(page: assigns.page, page_size: 5)
+
+    # |> Rauversion.Repo.preload(:user)
+    # |> Rauversion.Repo.preload(track_playlists: [track: [:cover_blob, :mp3_audio_blob]])
   end
 
   @impl true
@@ -29,11 +33,18 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
     {:noreply, assign(socket, :playlists, list_playlists(socket.assigns))}
   end
 
+  def handle_event("paginate", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:page, socket.assigns.page + 1)
+     |> assign(:playlists, list_playlists(socket.assigns))}
+  end
+
   @impl true
   def render(assigns) do
     ~H"""
-    <div>
-      <%= for playlist <- assigns.playlists  do %>
+    <div id="infinite-scroll" phx-hook="InfiniteScroll" phx-update="append" data-page={@page} phx-target={@myself}>
+      <%= for playlist <- assigns.playlists.entries  do %>
         <.live_component
           module={RauversionWeb.PlaylistLive.PlaylistComponent}
           id={"playlist-#{playlist.id}"}
