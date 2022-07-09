@@ -104,21 +104,6 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
   defp save_playlist(socket, :new, playlist_params) do
     playlist_params = playlist_params |> Map.merge(%{"user_id" => socket.assigns.user_id})
 
-    # a fucking ugly hack, kind of hate Ecto lack of nested form, or maybe I'm missing something?
-    # tracks_params =
-    #  playlist_params["track_playlists"]
-    #  |> Enum.map(fn k ->
-    #    {_, v} = k
-    #    v
-    #  end)
-    #  |> Enum.map(fn x ->
-    #    %{"track_id" => x["id"]}
-    #  end)
-
-    # IO.inspect(playlist_params)
-
-    # playlist_params = playlist_params |> Map.merge(%{"track_playlists" => tracks_params})
-
     case Playlists.create_playlist(playlist_params) do
       {:ok, playlist} ->
         {:noreply,

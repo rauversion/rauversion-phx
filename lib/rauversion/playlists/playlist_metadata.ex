@@ -8,6 +8,13 @@ defmodule Rauversion.Playlists.PlaylistMetadata do
     field :buy_link_title, :string
     field :buy, :boolean
     field :record_label, :string
+
+    field :attribution, :boolean
+    field :noncommercial, :boolean
+    field :non_derivative_works, :boolean
+    field :share_alike, :boolean
+    field :copies, :string
+    field :copyright, :string
   end
 
   @required_fields []
@@ -15,7 +22,11 @@ defmodule Rauversion.Playlists.PlaylistMetadata do
     :buy_link,
     :buy_link_title,
     :buy,
-    :record_label
+    :record_label,
+    :copyright,
+    :attribution,
+    :noncommercial,
+    :copies
   ]
 
   def changeset(struct, attrs) do
@@ -23,4 +34,6 @@ defmodule Rauversion.Playlists.PlaylistMetadata do
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
   end
+
+  # TODO: this is the same as the track metadata, consider unify this
 end

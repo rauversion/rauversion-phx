@@ -12,19 +12,14 @@ defmodule Rauversion.Playlists.Playlist do
 
   schema "playlists" do
     field :description, :string
-    embeds_one :metadata, Rauversion.Playlists.PlaylistMetadata, on_replace: :delete
-
     field :slug, :string
     field :title, TitleSlug.Type
     field :private, :boolean
     belongs_to :user, Rauversion.Accounts.User
+    embeds_one :metadata, Rauversion.Playlists.PlaylistMetadata, on_replace: :delete
     has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all
     has_many :tracks, through: [:track_playlists, :tracks]
-    # many_to_many :tracks, Rauversion.Tracks.Track,
-    #  join_through: Rauversion.TrackPlaylists.TrackPlaylist
-
     has_many :likes, Rauversion.PlaylistLikes.PlaylistLike, on_delete: :delete_all
-
     # cover image
     has_one(:cover_attachment, ActiveStorage.Attachment,
       where: [record_type: "Playlist", name: "cover"],

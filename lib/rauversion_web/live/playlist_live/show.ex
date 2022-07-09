@@ -13,8 +13,30 @@ defmodule RauversionWeb.PlaylistLive.Show do
   def handle_params(%{"id" => id}, _, socket) do
     {:noreply,
      socket
+     |> assign(:current_tab, "basic-info-tab")
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:playlist, get_playlist(id))}
+  end
+
+  @impl true
+  def handle_event("basic-info-tab", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:current_tab, "basic-info-tab")}
+  end
+
+  @impl true
+  def handle_event("metadata-tab", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:current_tab, "metadata-tab")}
+  end
+
+  @impl true
+  def handle_event("tracks-tab", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:current_tab, "tracks-tab")}
   end
 
   defp get_playlist(id) do
