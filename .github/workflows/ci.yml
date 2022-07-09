@@ -23,15 +23,11 @@ jobs:
       MIX_ENV: test
     steps:
       - uses: actions/checkout@v2
-      #- uses: mfinelli/setup-imagemagick@v1
-      #- name: Install Ubuntu dependencies
-      #  run: sudo apt-get -y install poppler-data poppler-utils ffmpeg mupdf-tools
-      - name: installs audiowaveform
-        uses: actions/cache@v1
-        id: build-cache
-        run: sudo add-apt-repository ppa:chris-needham/ppa
-        run: sudo apt-get update
-        run: sudo apt-get install audiowaveform
+      - uses: mfinelli/setup-imagemagick@v1
+      - uses: FedericoCarboni/setup-ffmpeg@v1
+
+      - name: installs lame
+        run: sudo apt-get update -y; sudo apt-get install -y lame
       
       - name: Check identify
         run: identify --version
@@ -41,4 +37,6 @@ jobs:
           otp-version: '24'
           elixir-version: '1.12'
       - run: mix deps.get
-      - run: mix test
+      - run: mix ecto.create ; mix ecto.migrate
+      # for now we will run only backend tests
+      - run: mix test test/rauversion

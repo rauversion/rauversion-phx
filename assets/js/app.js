@@ -29,6 +29,8 @@ import { Application } from "@hotwired/stimulus"
 
 import "./controllers"
 
+import InfiniteScroll from "./hooks/infinite_scroll"
+
 import WaveSurfer from 'wavesurfer'
 
 // import * as ActiveStorage from "@rails/activestorage"
@@ -109,6 +111,17 @@ Hooks.AudioPlayer = {
     this.wave().stop()
   },
 }
+
+Hooks.InfiniteScroll = InfiniteScroll
+
+
+// handler for remove playlist, this is basically because we are using pxh-update=append on the playlist list
+window.addEventListener(`phx:remove-playlist`, (e) => {
+  let el = document.getElementById(e.detail.id)
+  if(el) {
+    el.remove()
+  }
+})
 
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 

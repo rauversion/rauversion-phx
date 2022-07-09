@@ -59,6 +59,23 @@ defmodule Rauversion.Tracks do
     |> Repo.preload(:user)
   end
 
+  def preload_tracks_preloaded_by_user(query, current_user_id = %Rauversion.Accounts.User{id: id}) do
+    likes_query =
+      from pi in Rauversion.TrackLikes.TrackLike,
+        where: pi.user_id == ^id
+
+    reposts_query =
+      from pi in Rauversion.Reposts.Repost,
+        where: pi.user_id == ^id
+
+    query
+    |> Repo.preload(likes: likes_query, reposts: reposts_query)
+  end
+
+  def preload_tracks_preloaded_by_user(query, current_user_id = nil) do
+    query
+  end
+
   @doc """
   Gets a single track.
 
@@ -178,7 +195,6 @@ defmodule Rauversion.Tracks do
     duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
 
     data = Rauversion.Services.PeaksGenerator.run_audiowaveform(path, duration)
-    IO.inspect(data |> length())
     # pass track.metadata.id is needed in order to merge the embedded_schema properly.
     update_track(track, %{metadata: %{id: track.metadata.id, peaks: data}})
   end

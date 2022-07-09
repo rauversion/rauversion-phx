@@ -113,8 +113,6 @@ defmodule RauversionWeb.TrackLive.FormComponent do
       |> Map.put("cover", files_for(socket, :cover))
       |> Map.put("audio", files_for(socket, :audio))
 
-    IO.inspect(track_params)
-
     case Tracks.update_track(socket.assigns.track, track_params) do
       {:ok, _track} ->
         {:ok, socket}
@@ -144,7 +142,6 @@ defmodule RauversionWeb.TrackLive.FormComponent do
 
           {:error, %Ecto.Changeset{} = changeset} ->
             IO.inspect("ERORORORR")
-            IO.inspect(changeset)
             {:noreply, assign(socket, changeset: changeset)}
         end
 
