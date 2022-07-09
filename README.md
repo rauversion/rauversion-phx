@@ -42,11 +42,12 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] Range responses
 - [x] Fix specs on tests/rauversion
 - [ ] Fix specs on tests/rauversion-web
-- [ ] make GithubActions work!
+- [ ] Make GithubActions work!
 - [ ] Paginate profile tracks /:username
 - [ ] Paginate /tracks
 - [ ] Listening history
 - [ ] Give feedback on upload preprosessing
+- [ ] Refactor audio processing, add proceesing queue for the after upload
 - [ ] A logo for rauversion
 - [ ] Albums
 - [ ] Playlists
