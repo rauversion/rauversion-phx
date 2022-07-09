@@ -40,6 +40,21 @@ defmodule Rauversion.Playlists do
       ]
   end
 
+  def list_playlists_by_user_with_track(
+        _track = %Rauversion.Tracks.Track{id: track_id},
+        _current_user = %Rauversion.Accounts.User{id: user_id}
+      ) do
+    track_query =
+      from pi in Rauversion.TrackPlaylists.TrackPlaylist,
+        where: pi.track_id == ^track_id
+
+    from pi in Playlist,
+      where: pi.user_id == ^user_id,
+      preload: [
+        track_playlists: ^track_query
+      ]
+  end
+
   def get_public_playlist!(id) do
     Playlist
     |> where(id: ^id)

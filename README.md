@@ -33,26 +33,29 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] Add metadata form step
 - [x] Embed at /embed/:track_id
 - [x] Embed at /embed/:track_id/private with signed_id
+- [x] Filter public/private tracks (where: private: true)
+- [x] Reposts
+- [x] Likes
+- [x] Private preview on show
+- [x] Followers / Followings
+- [x] load waveform data as data
+- [x] Range responses
+- [ ] Fix specs on tests/rauversion
+- [ ] Fix specs on tests/rauversion-web
 - [ ] make GithubActions work!
 - [ ] Paginate profile tracks /:username
 - [ ] Paginate /tracks
 - [ ] Listening history
-- [x] Filter public/private tracks (where: private: true)
 - [ ] Give feedback on upload preprosessing
 - [ ] A logo for rauversion
-- [x] Reposts
 - [ ] Albums
 - [ ] Playlists
   - [ ] add to playlist select playlist / modal first tab
   - [ ] sort songs on playlist
 - [ ] A WYSIWYG editor for Markdown for Track/Playlist description
-- [x] Likes
-- [x] Private preview on show
-- [x] Followers / Followings
 - [ ] Telemetry for dashboard
 - [ ] Centralized player, fixed (bottom) across navigation
-- [x] load waveform data as data
-- [x] Range responses
+
 
 
 

@@ -18,7 +18,7 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
       })
 
     playlists =
-      Rauversion.Playlists.list_playlists_by_user(track.user, assigns.current_user)
+      Rauversion.Playlists.list_playlists_by_user_with_track(track, assigns.current_user)
       |> Rauversion.Repo.all()
 
     {:ok,
@@ -57,6 +57,44 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
   @impl true
   def handle_event("create-playlist-tab", %{}, socket) do
     {:noreply, assign(socket, :tab, "create-playlist-tab")}
+  end
+
+  # TODO: securize this
+  @impl true
+  def handle_event("add-to-playlist", %{"playlist" => id}, socket) do
+    playlist = Rauversion.Playlists.get_playlist!(id)
+    track = socket.assigns.track
+
+    Rauversion.TrackPlaylists.create_track_playlist(%{
+      playlist_id: playlist.id,
+      track_id: track.id
+    })
+
+    playlists =
+      Rauversion.Playlists.list_playlists_by_user_with_track(track, socket.assigns.current_user)
+      |> Rauversion.Repo.all()
+
+    {:noreply, socket |> assign(:playlists, playlists)}
+  end
+
+  # TODO: securize this
+  @impl true
+  def handle_event(
+        "remove-from-playlist",
+        %{"playlist" => _playlist_id, "track-playlist" => track_playlist_id},
+        socket
+      ) do
+    track_playlist = Rauversion.TrackPlaylists.get_track_playlist!(track_playlist_id)
+    Rauversion.TrackPlaylists.delete_track_playlist(track_playlist)
+
+    playlists =
+      Rauversion.Playlists.list_playlists_by_user_with_track(
+        socket.assigns.track,
+        socket.assigns.current_user
+      )
+      |> Rauversion.Repo.all()
+
+    {:noreply, socket |> assign(:playlists, playlists)}
   end
 
   @impl true
