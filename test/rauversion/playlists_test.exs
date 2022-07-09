@@ -20,15 +20,16 @@ defmodule Rauversion.PlaylistsTest do
     test "list_playlists/0 returns all playlists", %{user: user} do
       playlist = playlist_fixture(%{user_id: user.id})
 
-      list = Playlists.list_playlists() |> Rauversion.Repo.preload([:user, :track_playlists])
+      # |> Rauversion.Repo.preload([:user, :track_playlists])
+      list = Playlists.list_playlists()
       assert list == [playlist]
     end
 
     test "get_playlist!/1 returns the playlist with given id", %{user: user} do
-      playlist = playlist_fixture(%{user_id: user.id})
+      playlist =
+        playlist_fixture(%{user_id: user.id}) |> Rauversion.Repo.preload([:track_playlists])
 
-      record =
-        Playlists.get_playlist!(playlist.id) |> Rauversion.Repo.preload([:user, :track_playlists])
+      record = Playlists.get_playlist!(playlist.id) |> Rauversion.Repo.preload([:track_playlists])
 
       assert record == playlist
     end
@@ -42,7 +43,7 @@ defmodule Rauversion.PlaylistsTest do
         title: "some title"
       }
 
-      assert {:ok, %{playlist_with_tracks: playlist}} = Playlists.create_playlist(valid_attrs)
+      assert {:ok, playlist} = Playlists.create_playlist(valid_attrs)
       assert playlist.description == "some description"
       assert %Rauversion.Playlists.PlaylistMetadata{} = playlist.metadata
       assert playlist.slug == "some-title"
@@ -50,8 +51,7 @@ defmodule Rauversion.PlaylistsTest do
     end
 
     test "create_playlist/1 with invalid data returns error changeset" do
-      assert {:error, :playlist, %Ecto.Changeset{}, %{}} =
-               Playlists.create_playlist(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Playlists.create_playlist(@invalid_attrs)
     end
 
     test "update_playlist/2 with valid data updates the playlist", %{user: user} do
@@ -97,7 +97,7 @@ defmodule Rauversion.PlaylistsTest do
           track_playlists: [%{track_id: track.id}]
         })
 
-      length(result.playlist_with_tracks.track_playlists) == 1
+      length(result.track_playlists) == 1
     end
   end
 end
