@@ -4,13 +4,59 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
   alias Rauversion.Playlists
 
   @impl true
-  def update(%{playlist: playlist} = assigns, socket) do
+  def update(%{playlist: playlist, track: track, action: :new} = assigns, socket) do
+    playlist = playlist |> Rauversion.Repo.preload(:track_playlists)
+
+    # track = Rauversion.Tracks.get_track!(81) |> Rauversion.Repo.preload(:user)
+    track_playlist = %{"track_id" => track.id}
+
+    # playlist = %Rauversion.Playlists.Playlist{playlist | track_playlists: [track_playlist]}
+
+    changeset =
+      Playlists.change_playlist(playlist, %{
+        "track_playlists" => [track_playlist]
+      })
+
+    playlists =
+      Rauversion.Playlists.list_playlists_by_user(track.user, assigns.current_user)
+      |> Rauversion.Repo.all()
+
+    {:ok,
+     socket
+     |> assign(assigns)
+     |> assign(:tab, "add-to-tab")
+     |> assign(playlist: playlist)
+     |> assign(playlists: playlists)
+     |> assign(new_track: track)
+     |> assign(:user_id, assigns.current_user.id)
+     |> assign(:changeset, changeset)}
+
+    # IO.inspect(changeset)
+    # IO.inspect(changeset.changes)
+    # IO.inspect(changeset.data)
+  end
+
+  def update(%{playlist: playlist, action: :edit} = assigns, socket) do
     changeset = Playlists.change_playlist(playlist)
 
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:tab, "add-to-tab")
+     |> assign(playlist: playlist)
+     |> assign(:user_id, assigns.current_user.id)
+     |> assign(:changeset, changeset)
+     |> allow_upload(:cover, accept: ~w(.jpg .jpeg .png), max_entries: 1)}
+  end
+
+  @impl true
+  def handle_event("add-to-tab", %{}, socket) do
+    {:noreply, assign(socket, :tab, "add-to-tab")}
+  end
+
+  @impl true
+  def handle_event("create-playlist-tab", %{}, socket) do
+    {:noreply, assign(socket, :tab, "create-playlist-tab")}
   end
 
   @impl true
@@ -28,6 +74,10 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
   end
 
   defp save_playlist(socket, :edit, playlist_params) do
+    playlist_params =
+      playlist_params
+      |> Map.put("cover", files_for(socket, :cover))
+
     case Playlists.update_playlist(socket.assigns.playlist, playlist_params) do
       {:ok, _playlist} ->
         {:noreply,
@@ -41,15 +91,41 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
   end
 
   defp save_playlist(socket, :new, playlist_params) do
+    playlist_params = playlist_params |> Map.merge(%{"user_id" => socket.assigns.user_id})
+
     case Playlists.create_playlist(playlist_params) do
-      {:ok, _playlist} ->
+      {:ok, playlist} ->
         {:noreply,
          socket
          |> put_flash(:info, "Playlist created successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> assign(:playlist, playlist)}
+
+      # |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
+    end
+  end
+
+  # TODO: unify with the track form_component, same fn here
+  defp files_for(socket, kind) do
+    case uploaded_entries(socket, kind) do
+      {[_ | _] = entries, []} ->
+        uploaded_files =
+          Enum.map(entries, fn entry ->
+            consume_uploaded_entry(socket, entry, fn %{path: path} = file ->
+              {:postpone,
+               %{
+                 path: path,
+                 content_type: entry.client_type,
+                 filename: entry.client_name,
+                 size: entry.client_size
+               }}
+            end)
+          end)
+
+      _ ->
+        []
     end
   end
 end

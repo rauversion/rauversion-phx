@@ -3,6 +3,12 @@ defmodule RauversionWeb.Router do
 
   import RauversionWeb.UserAuth
 
+  import Plug.BasicAuth
+
+  pipeline :bauth do
+    plug :basic_auth, username: "rau", password: "raurocks"
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -34,6 +40,9 @@ defmodule RauversionWeb.Router do
     pipe_through :browser_embed
     get "/embed/:track_id", EmbedController, :show
     get "/embed/:track_id/private", EmbedController, :private
+
+    get "/embed/sets/:playlist_id", EmbedController, :show_playlist
+    get "/embed/sets/:playlist_id/private", EmbedController, :private_playlist
   end
 
   # Other scopes may use custom stacks.
@@ -48,11 +57,12 @@ defmodule RauversionWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
+  if Mix.env() in [:dev, :test, :prod] do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
       pipe_through :browser
+      pipe_through :bauth
       live_dashboard "/dashboard", metrics: RauversionWeb.Telemetry, ecto_repos: [Rauversion.Repo]
     end
   end
@@ -122,6 +132,7 @@ defmodule RauversionWeb.Router do
     live "/reposts/:id", RepostLive.Show, :show
     live "/playlists", PlaylistLive.Index, :index
     live "/playlists/:id", PlaylistLive.Show, :show
+    live "/playlists/:id/private", PlaylistLive.Show, :private
 
     get(
       "/active_storage/blobs/redirect/:signed_id/*filename",
@@ -178,5 +189,6 @@ defmodule RauversionWeb.Router do
     live "/:username/tracks/albums", ProfileLive.Index, :albums
     live "/:username/tracks/playlists", ProfileLive.Index, :playlists
     live "/:username/tracks/popular", ProfileLive.Index, :popular
+    live "/:username/insights", ProfileLive.Index, :insights
   end
 end

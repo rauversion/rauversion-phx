@@ -20,7 +20,8 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
             <% end %>
           </nav>
           <div class="flex items-center md:ml-12">
-            <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900"> Your insights </a>
+            <%= live_redirect "Your insights", to: Routes.profile_index_path(@socket, :insights, @username), class: "text-base font-medium text-gray-500 hover:text-gray-900" %>
+
             <a href="#" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700"> Edit profile </a>
           </div>
         </div>

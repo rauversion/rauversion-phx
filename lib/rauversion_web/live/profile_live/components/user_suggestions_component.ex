@@ -4,6 +4,35 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
+  alias Rauversion.{Accounts, UserFollows, Repo}
+
+  @impl true
+  def update(assigns, socket) do
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:collection, who_to_follow())
+    }
+  end
+
+  defp who_to_follow() do
+    Accounts.unfollowed_users(@profile)
+    |> Repo.paginate(page: 1, page_size: 5)
+
+    # |> Rauversion.Repo.preload(:avatar_blob)
+  end
+
+  @impl true
+  def handle_event("follow-account", %{"id" => id}, socket) do
+    UserFollows.create_user_follow(%{
+      follower_id: socket.assigns.current_user.id,
+      following_id: id
+    })
+
+    {:noreply, socket |> assign(:collection, who_to_follow())}
+  end
+
   def render(%{collection: collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">
@@ -20,7 +49,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                     <div class="flex-shrink-0">
 
                       <%= img_tag(
-                        Rauversion.Accounts.avatar_url(item),
+                        Accounts.avatar_url(item),
                         class: "h-8 w-8 rounded-full") %>
 
                     </div>
@@ -33,7 +62,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                       </p>
                     </div>
                     <div class="flex-shrink-0">
-                      <%= link to: "#", phx_click: "follow-account", phx_value_id: item.id, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" do %>
+                      <%= link to: "#", phx_click: "follow-account", phx_value_id: item.id, phx_target: @myself, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" do %>
                         <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" x-description="Heroicon name: solid/plus-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>

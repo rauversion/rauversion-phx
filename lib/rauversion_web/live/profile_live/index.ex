@@ -2,44 +2,18 @@ defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts}
+  alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts, Playlists}
 
   @impl true
-  def mount(params = %{"username" => id}, session, socket) do
+  def mount(_params = %{"username" => id}, session, socket) do
     socket =
       socket
       |> assign(:profile, Accounts.get_user_by_username(id))
-      |> assign(:who_to_follow, who_to_follow())
       |> assign(:share_track, nil)
 
     Tracks.subscribe()
 
     {:ok, socket}
-  end
-
-  defp who_to_follow() do
-    Rauversion.Accounts.unfollowed_users(@profile)
-    |> Rauversion.Repo.paginate(page: 1, page_size: 5)
-  end
-
-  @impl true
-  def handle_event("share-track-modal", %{"id" => id}, socket) do
-    {:noreply,
-     assign(
-       socket,
-       :share_track,
-       Tracks.get_track!(id) |> Repo.preload(user: :avatar_attachment)
-     )}
-  end
-
-  @impl true
-  def handle_event("follow-account", %{"id" => id}, socket) do
-    UserFollows.create_user_follow(%{
-      follower_id: socket.assigns.current_user.id,
-      following_id: id
-    })
-
-    {:noreply, socket}
   end
 
   # @impl true
@@ -78,6 +52,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
+      |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user])
       |> Repo.preload([
         :mp3_audio_blob,
         :cover_blob,
@@ -96,6 +71,7 @@ defmodule RauversionWeb.ProfileLive.Index do
     # profile = Accounts.get_user_by_username(id)
     tracks =
       Tracks.list_tracks_by_username(id)
+      |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user])
       |> Repo.preload([:cover_blob, :mp3_audio_blob])
 
     socket
@@ -109,12 +85,14 @@ defmodule RauversionWeb.ProfileLive.Index do
     profile = Accounts.get_user_by_username(id)
 
     reposts =
-      Reposts.get_reposts_by_user_id(profile.id)
+      Reposts.get_reposts_by_user_id(profile.id, socket.assigns[:current_user])
+      # |> Rauversion.Repo.all()
+      # |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
+      # |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user].id)
       |> Rauversion.Repo.paginate(page: 1, page_size: 5)
 
     tracks =
       reposts.entries
-      |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
       |> Enum.map(fn item -> item.track end)
 
     socket
@@ -126,22 +104,14 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :albums, %{"username" => id}) do
     # profile = Accounts.get_user_by_username(id)
-    tracks =
-      Tracks.list_tracks_by_username(id)
-      |> Repo.preload([:cover_blob, :mp3_audio_blob])
-      |> assign(:title, "albums")
-      |> assign(:data, menu(socket, id, "albums"))
+    socket
+    |> assign(:title, "albums")
+    |> assign(:data, menu(socket, id, "albums"))
   end
 
   defp apply_action(socket, :playlists, %{"username" => id}) do
-    # profile = Accounts.get_user_by_username(id)
-    tracks =
-      Tracks.list_tracks_by_username(id)
-      |> Repo.preload([:cover_blob, :mp3_audio_blob])
-
     socket
     |> assign(:page_title, "Tracks all")
-    |> assign(:tracks, tracks)
     |> assign(:title, "playlists")
     |> assign(:data, menu(socket, id, "playlists"))
   end
@@ -150,6 +120,12 @@ defmodule RauversionWeb.ProfileLive.Index do
     socket
     |> assign(:title, "popular")
     |> assign(:data, menu(socket, id, "popular"))
+  end
+
+  defp apply_action(socket, :insights, %{"username" => id}) do
+    socket
+    |> assign(:title, "insights")
+    |> assign(:data, menu(socket, id, "insights"))
   end
 
   def handle_params(%{"sort_by" => _sort_by}, _url, _socket) do

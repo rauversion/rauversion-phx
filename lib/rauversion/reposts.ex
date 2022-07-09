@@ -41,8 +41,23 @@ defmodule Rauversion.Reposts do
     Repost |> where(user_id: ^user_id) |> where(track_id: ^track_id) |> Repo.one()
   end
 
-  def get_reposts_by_user_id(user_id) do
-    Repost |> where(user_id: ^user_id)
+  def get_reposts_by_user_id(user_id, current_user = %Rauversion.Accounts.User{id: id}) do
+    from p in Repost,
+      where: p.user_id == ^user_id,
+      left_join: track in assoc(p, :track),
+      left_join: likes in assoc(track, :likes),
+      where: likes.user_id == ^id,
+      left_join: reposts in assoc(track, :reposts),
+      where: reposts.user_id == ^id,
+      preload: [
+        track: {track, [:user, :cover_blob, :mp3_audio_blob, likes: likes, reposts: reposts]}
+      ]
+  end
+
+  def get_reposts_by_user_id(user_id, current_user = nil) do
+    from p in Repost,
+      where: p.user_id == ^user_id,
+      preload: [track: [:user, :cover_blob, :mp3_audio_blob]]
   end
 
   @doc """
