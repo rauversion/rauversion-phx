@@ -50,8 +50,9 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [ ] A logo for rauversion
 - [ ] Albums
 - [ ] Playlists
-  - [ ] add to playlist select playlist / modal first tab
+  - [x] add to playlist select playlist / modal first tab
   - [ ] sort songs on playlist
+  - [ ] playlist player
 - [ ] A WYSIWYG editor for Markdown for Track/Playlist description
 - [ ] Telemetry for dashboard
 - [ ] Centralized player, fixed (bottom) across navigation
