@@ -63,7 +63,7 @@ defmodule Rauversion.PlaylistLikesTest do
       playlist_like = playlist_like_fixture(%{user_id: user.id, playlist_id: playlist.id})
 
       assert {:error, %Ecto.Changeset{}} =
-               PlaylistLikes.update_playlist_like(playlist_like, @invalid_attrs)
+               PlaylistLikes.update_playlist_like(playlist_like, %{user_id: nil})
 
       assert playlist_like == PlaylistLikes.get_playlist_like!(playlist_like.id)
     end
