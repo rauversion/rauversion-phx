@@ -1,4 +1,4 @@
-defmodule RauversionWeb.ProfileLive.ShareTrackComponent do
+defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
@@ -31,7 +31,7 @@ defmodule RauversionWeb.ProfileLive.ShareTrackComponent do
                   <div class="flex items-center space-x-3">
                     <input
                       type="text"
-                      value={Routes.track_show_url(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
+                      value={Routes.playlist_show_url(@socket, :private, Rauversion.Playlists.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
                       class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       readonly="readonly"/>
 
@@ -104,7 +104,7 @@ defmodule RauversionWeb.ProfileLive.ShareTrackComponent do
               />
 
               <input type="text"
-                value={Routes.embed_url(@socket, :private, Rauversion.Tracks.signed_id(track) )}
+                value={Routes.embed_url(@socket, :private_playlist, Rauversion.Playlists.signed_id(track) )}
                 class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
               />
 

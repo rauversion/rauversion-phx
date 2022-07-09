@@ -23,8 +23,11 @@ defmodule Rauversion.Tracks.Track do
     field :slug, TitleSlug.Type
     field :title, :string
 
-    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist
+    has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all
     has_many :playlists, through: [:track_playlists, :playlist]
+
+    has_many :likes, Rauversion.TrackLikes.TrackLike, on_delete: :delete_all
+    has_many :reposts, Rauversion.Reposts.Repost, on_delete: :delete_all
 
     belongs_to(:user, Rauversion.Accounts.User)
 
@@ -129,11 +132,9 @@ defmodule Rauversion.Tracks.Track do
             # Tracks.update_track(struct, %{metadata: %{peaks: data}})
             ####
 
-            IO.inspect(struct)
-
             Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_attaching])
 
-            attach_file_with_blob(struct, kind, file)
+            Rauversion.BlobUtils.attach_file_with_blob(struct, kind, file)
 
             Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converted])
 
@@ -157,10 +158,10 @@ defmodule Rauversion.Tracks.Track do
     IO.inspect(File.exists?(path))
 
     blob =
-      create_blob(file)
+      Rauversion.BlobUtils.create_blob(file)
       |> ActiveStorage.Blob.analyze()
 
-    attach_file(struct, "mp3_audio", blob)
+    Rauversion.BlobUtils.attach_file(struct, "mp3_audio", blob)
 
     %{path: path, blob: blob}
   end
@@ -170,27 +171,5 @@ defmodule Rauversion.Tracks.Track do
     new_path = "#{dir_path}#{file.filename}" |> String.replace(~r/\s+/, "-")
     :ok = File.cp(file.path, new_path)
     %{file | path: new_path}
-  end
-
-  def create_blob(file) do
-    ActiveStorage.Blob.create_and_upload!(
-      %ActiveStorage.Blob{},
-      io: {:path, file.path},
-      filename: file.filename,
-      content_type: file.content_type,
-      identify: true
-    )
-  end
-
-  #  TODO: maybe copy here the live-upload
-  def attach_file_with_blob(struct, kind, file) do
-    blob = create_blob(file)
-
-    attach_file(struct, kind, blob)
-  end
-
-  def attach_file(struct, kind, blob) do
-    cover = apply(struct.data.__struct__, :"#{kind}", [struct.data])
-    apply(cover.__struct__, :attach, [cover, blob])
   end
 end

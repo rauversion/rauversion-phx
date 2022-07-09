@@ -88,7 +88,7 @@ defmodule Rauversion.Tracks.TrackMetadata do
         name: :genre,
         wrapper_class: "sm:col-span-2",
         type: :select,
-        options: genres()
+        options: Rauversion.CategoryTypes.genres()
       },
       %{
         name: :contains_music,
@@ -165,7 +165,7 @@ defmodule Rauversion.Tracks.TrackMetadata do
     ]
   end
 
-  def form_definitions(type = "permissions") do
+  def form_definitions(_type = "permissions") do
     [
       %{
         name: :direct_download,
@@ -268,38 +268,4 @@ defmodule Rauversion.Tracks.TrackMetadata do
   end
 
   # TODO: move this to another store / module
-  def genres do
-    [
-      "Alternative Rock",
-      "Ambient",
-      "Classical",
-      "Country  ",
-      "Dance &amp; EDM",
-      "Dancehall",
-      "Deep House",
-      "Disco",
-      "Drum &amp; Bass",
-      "Dubstep",
-      "Electronic",
-      "Folk &amp; Singer-Songwriter",
-      "Hip-hop &amp; Rap",
-      "House",
-      "Indie",
-      "Jazz &amp; Blues",
-      "Latin",
-      "Metal",
-      "Piano",
-      "Pop",
-      "R&amp;B &amp; Soul",
-      "Reggae",
-      "Reggaeton",
-      "Rock",
-      "Soundtrack",
-      "Techno",
-      "Trance",
-      "Trap",
-      "Triphop",
-      "World"
-    ]
-  end
 end

@@ -1,4 +1,25 @@
 defmodule Rauversion.BlobUtils do
+  def create_blob(file) do
+    ActiveStorage.Blob.create_and_upload!(
+      %ActiveStorage.Blob{},
+      io: {:path, file.path},
+      filename: file.filename,
+      content_type: file.content_type,
+      identify: true
+    )
+  end
+
+  #  TODO: maybe copy here the live-upload
+  def attach_file_with_blob(struct, kind, file) do
+    blob = Rauversion.BlobUtils.create_blob(file)
+    Rauversion.BlobUtils.attach_file(struct, kind, blob)
+  end
+
+  def attach_file(struct, kind, blob) do
+    cover = apply(struct.data.__struct__, :"#{kind}", [struct.data])
+    apply(cover.__struct__, :attach, [cover, blob])
+  end
+
   def fallback_image(url \\ nil) do
     RauversionWeb.Router.Helpers.static_path(
       RauversionWeb.Endpoint,

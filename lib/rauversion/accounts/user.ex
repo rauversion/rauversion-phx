@@ -14,9 +14,21 @@ defmodule Rauversion.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
-    has_many :tracks, Rauversion.Tracks.Track
-    has_many :followings, Rauversion.UserFollows.UserFollow, foreign_key: :following_id
-    has_many :followers, Rauversion.UserFollows.UserFollow, foreign_key: :follower_id
+    has_many :tracks, Rauversion.Tracks.Track, on_delete: :delete_all
+    has_many :playlists, Rauversion.Playlists.Playlist, on_delete: :delete_all
+
+    has_many :followings, Rauversion.UserFollows.UserFollow,
+      foreign_key: :following_id,
+      on_delete: :delete_all
+
+    has_many :followers, Rauversion.UserFollows.UserFollow,
+      foreign_key: :follower_id,
+      on_delete: :delete_all
+
+    has_many :liked_playlists, Rauversion.PlaylistLikes.PlaylistLike, on_delete: :delete_all
+
+    has_many :liked_tracks, Rauversion.TrackLikes.TrackLike, on_delete: :delete_all
+    has_many :reposted_tracks, Rauversion.Reposts.Repost, on_delete: :delete_all
 
     has_one(:avatar_attachment, ActiveStorage.Attachment,
       where: [record_type: "User", name: "avatar"],

@@ -9,17 +9,8 @@
   id={"track-#{@profile.id}"}
   data={assigns.data}
   title={@title}
+  username={@profile.username}
 />
-
-<%= if @share_track do %>
-  <.modal return_to={Routes.profile_index_path(@socket, :index, @profile.username)}>
-    <.live_component
-      id={"share-track-modal-#{@share_track.id}"}
-      module={RauversionWeb.ProfileLive.ShareTrackComponent}
-      track={@share_track}
-    />
-  </.modal>
-<% end %>
 
 <div class="flex">
 
@@ -45,6 +36,15 @@
                    title: @title,
                   current_user: assigns[:current_user]
                 )
+      "playlists" ->
+                live_component(
+                  RauversionWeb.PlaylistLive.PlaylistListComponent,
+                  id: "all-reposts-#{@profile.id}",
+                  profile: @profile,
+                  title: @title,
+                  page: 1,
+                  current_user: assigns[:current_user]
+                )
       _ -> "no match on #{@title}"
     end  %>
     
@@ -66,7 +66,7 @@
         <.live_component
           module={RauversionWeb.ProfileLive.UserSuggestionComponent}
           id={"track-#{@profile.id}-user-suggestion"}
-          collection={ @who_to_follow  }
+          profile={@profile}
         />
       </section>
 

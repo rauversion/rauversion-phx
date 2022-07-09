@@ -22,16 +22,16 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     case assigns do
       %{current_user: current_user} ->
         repost =
-          Rauversion.Reposts.get_repost_by_user_and_track(
-            assigns.current_user.id,
-            assigns.track.id
-          )
+          case assigns.track.reposts do
+            [repost] -> repost
+            _ -> nil
+          end
 
         like =
-          Rauversion.TrackLikes.get_like_by_user_and_track(
-            assigns.current_user.id,
-            assigns.track.id
-          )
+          case assigns.track.likes do
+            [like] -> like
+            _ -> nil
+          end
 
         {
           :ok,
@@ -201,12 +201,12 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
         <div class="p-2 sm:p-0 sm:pt-2 flex items-center space-x-1" data-turbo="false">
           <% #= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-          <%= link to: "#", phx_click: "share-track-modal", phx_value_id: track.id, class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-            </svg>
-            <span>Share</span>
-          <% end %>
+
+          <.live_component
+            id={"share-track-button-#{track.id}"}
+            module={RauversionWeb.TrackLive.ShareTrackButtonComponent}
+            track={track}
+          />
 
           <%= link to: "#", phx_click: "repost-track", phx_target: @myself, phx_value_id: track.id,
             class: repost_class.class do %>
@@ -221,7 +221,18 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
-            <span>Like <% #= if @repost do @repost.id else "no" end %></span>
+            <span>Like</span>
+          <% end %>
+
+          <%= if current_user do %>
+
+            <.live_component
+              id={"playlist-button-add-track-#{track.id}"}
+              module={RauversionWeb.PlaylistLive.AddToPlaylistComponent}
+              track={track}
+              current_user={@current_user}
+              return_to={Routes.playlist_index_path(@socket, :index)}
+            />
           <% end %>
 
           <%= if current_user && current_user.id == track.user_id do %>
