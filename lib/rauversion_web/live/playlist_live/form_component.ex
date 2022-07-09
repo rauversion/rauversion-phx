@@ -18,7 +18,7 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
       })
 
     playlists =
-      Rauversion.Playlists.list_playlists_by_user(assigns.current_user)
+      Rauversion.Playlists.list_playlists_by_user(track.user, assigns.current_user)
       |> Rauversion.Repo.all()
 
     {:ok,

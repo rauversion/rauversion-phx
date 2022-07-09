@@ -4,8 +4,9 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts, Playlists}
+  alias Rauversion.{Accounts, UserFollows, Repo}
 
+  @impl true
   def update(assigns, socket) do
     {
       :ok,
@@ -16,8 +17,8 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   end
 
   defp who_to_follow() do
-    Rauversion.Accounts.unfollowed_users(@profile)
-    |> Rauversion.Repo.paginate(page: 1, page_size: 5)
+    Accounts.unfollowed_users(@profile)
+    |> Repo.paginate(page: 1, page_size: 5)
 
     # |> Rauversion.Repo.preload(:avatar_blob)
   end
@@ -29,7 +30,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
       following_id: id
     })
 
-    {:noreply, socket}
+    {:noreply, socket |> assign(:collection, who_to_follow())}
   end
 
   def render(%{collection: collection} = assigns) do
@@ -48,7 +49,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                     <div class="flex-shrink-0">
 
                       <%= img_tag(
-                        Rauversion.Accounts.avatar_url(item),
+                        Accounts.avatar_url(item),
                         class: "h-8 w-8 rounded-full") %>
 
                     </div>
