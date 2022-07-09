@@ -43,6 +43,9 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] Reposts
 - [ ] Albums
 - [ ] Playlists
+  - [ ] add to playlist select playlist / modal first tab
+  - [ ] sort songs on playlist
+- [ ] A WYSIWYG editor for Markdown for Track/Playlist description
 - [x] Likes
 - [x] Private preview on show
 - [x] Followers / Followings
