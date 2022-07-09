@@ -2,6 +2,7 @@ defmodule RauversionWeb.LiveHelpers do
   import Phoenix.LiveView
   import Phoenix.LiveView.Helpers
   import Phoenix.HTML.Form
+  import RauversionWeb.ErrorHelpers
 
   alias Phoenix.LiveView.JS
   alias Phoenix.LiveView
@@ -38,7 +39,7 @@ defmodule RauversionWeb.LiveHelpers do
         phx-window-keydown={JS.dispatch("click", to: "#close")}
         phx-key="escape"
       >
-        <%= if @return_to do %>
+        <%= if @return_to && !@close_handler do %>
           <%= live_patch "✖",
             to: @return_to,
             id: "close",
@@ -46,9 +47,12 @@ defmodule RauversionWeb.LiveHelpers do
             phx_click: hide_modal()
           %>
         <% end %>
-        <%= if @close_handler do %>
+
+        <%= if @close_handler && !@return_to do %>
           <a id="close" href="#" phx-click={"close-modal"} phx-target={@close_handler}>✖</a>
-        <% else %>
+        <% end %>
+
+        <%= if !@close_handler && !@return_to do %>
           <a id="close" href="#" class="phx-modal-close" phx-click={hide_modal()}>✖</a>
         <% end %>
 
@@ -67,7 +71,7 @@ defmodule RauversionWeb.LiveHelpers do
       <h3 class="mt-2 text-sm font-medium text-gray-900">No projects</h3>
       <p class="mt-1 text-sm text-gray-500">Get started by creating a new project.</p>
       <div class="mt-6">
-        <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
           <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
           </svg>
@@ -88,12 +92,12 @@ defmodule RauversionWeb.LiveHelpers do
     if !is_nil(struct) do
       %{
         class:
-          "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-orange-300 shadow-sm text-xs font-medium rounded text-orange-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-orange-300 shadow-sm text-xs font-medium rounded text-orange-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
       }
     else
       %{
         class:
-          "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
       }
     end
   end
@@ -145,7 +149,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
         <div class="mt-1">
-          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
         </div>
       </div>
     """
@@ -158,7 +162,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
         <div class="mt-1">
-          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
         </div>
       </div>
     """
@@ -171,7 +175,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
         <div class="mt-1">
-          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
         </div>
       </div>
     """
@@ -184,7 +188,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
         <div class="mt-1 flex space-x-1 items-center">
-          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
         </div>
       </div>
     """
@@ -197,7 +201,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={"#{@field.wrapper_class}"}>
         <div class="flex items-center space-x-2 py-6">
           <div class="flex space-x-1 items-start">
-            <%= radio_button(@form, @field.name, @field.value, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300") %>
+            <%= radio_button(@form, @field.name, @field.value, class: "focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300") %>
           </div>
           <div class="flex flex-col">
             <%= label @form, @field[:label] || @field.name, class: "block text-sm font-medium text-gray-700" %>
@@ -227,7 +231,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={"#{@field.wrapper_class}"}>
         <div class="flex items-center space-x-2 py-6">
           <div class="flex space-x-1 items-start">
-            <%= checkbox(@form, @field.name, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300") %>
+            <%= checkbox(@form, @field.name, class: "focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300") %>
           </div>
           <div class="flex flex-col">
             <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
@@ -249,12 +253,26 @@ defmodule RauversionWeb.LiveHelpers do
     """
   end
 
+  def form_input_renderer(f, field = %{type: :textarea}) do
+    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+      <div class={@field.wrapper_class}>
+        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1">
+          <%= textarea @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "max-w-lg shadow-sm block w-full focus:ring-orange-500 focus:border-orange-500 sm:text-sm border border-gray-300 rounded-md" %>
+        </div>
+        <%= error_tag @form, @field.name %>
+      </div>
+    """
+  end
+
   def render_attribution_fields(f) do
     assigns = LiveView.assign(%{__changed__: nil}, f: f)
 
     ~H"""
     <%= if Map.get(f.params, "copyright") == "common" || (Map.get(f.data, :copyright) == "common" && Map.get(f.params, "copyright") != "common") do %>
-      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-8">
         <%= for field <- Rauversion.Tracks.TrackMetadata.form_definitions("common") do %>
           <%= form_input_renderer(f, field) %>
         <% end %>
