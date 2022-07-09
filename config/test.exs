@@ -19,7 +19,7 @@ config :rauversion, Rauversion.Repo,
   timeout: 300_000_000
 
 if System.get_env("GITHUB_ACTIONS") do
-  config :chaskiq, Chaskiq.Repo,
+  config :rauversion, Chaskiq.Repo,
     username: "postgres",
     password: "postgres"
 end
