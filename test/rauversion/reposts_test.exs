@@ -17,7 +17,7 @@ defmodule Rauversion.RepostsTest do
     }
 
     def valid_repost() do
-      user = user_fixture()
+      user = user_fixture(%{username: "miki"})
       track = track_fixture(%{user_id: user.id})
       repost = repost_fixture(%{user_id: user.id, track_id: track.id})
     end
@@ -33,7 +33,7 @@ defmodule Rauversion.RepostsTest do
     end
 
     test "create_repost/1 with valid data creates a repost" do
-      user = user_fixture()
+      user = user_fixture(%{username: "foo"})
       track = track_fixture(%{user_id: user.id})
       valid_attrs = %{user_id: user.id, track_id: track.id}
 

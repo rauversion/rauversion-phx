@@ -110,6 +110,7 @@ defmodule Rauversion.Playlists do
   def update_playlist(%Playlist{} = playlist, attrs) do
     playlist
     |> Playlist.changeset(attrs)
+    |> Playlist.process_one_upload(attrs, "cover")
     |> Repo.update()
   end
 

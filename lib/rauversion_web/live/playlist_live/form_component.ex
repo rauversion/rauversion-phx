@@ -45,7 +45,8 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
      |> assign(:tab, "add-to-tab")
      |> assign(playlist: playlist)
      |> assign(:user_id, assigns.current_user.id)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> allow_upload(:cover, accept: ~w(.jpg .jpeg .png), max_entries: 1)}
   end
 
   @impl true
@@ -60,22 +61,6 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"playlist" => playlist_params}, socket) do
-    # track = Rauversion.Tracks.get_track!(81)
-    # playlist = %Rauversion.Playlists.Playlist{playlist | track_playlists: tracks}
-    # track_playlist = %{"track_id" => track.id}
-    # playlist_params = playlist_params |> Map.merge(%{"track_playlists" => [track_playlist]})
-
-    # a fucking ugly hack, kind of hate Ecto lack of nested form, or maybe I'm missing something?
-    # tracks_params =
-    #  playlist_params["track_playlists"]
-    #  |> Enum.map(fn k ->
-    #    {_, v} = k
-    #    v
-    #  end)
-    #  |> Enum.map(fn x ->
-    #    %{"track_id"=> x["id"]}
-    #  end)
-
     changeset =
       socket.assigns.playlist
       |> Playlists.change_playlist(playlist_params)
@@ -89,6 +74,10 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
   end
 
   defp save_playlist(socket, :edit, playlist_params) do
+    playlist_params =
+      playlist_params
+      |> Map.put("cover", files_for(socket, :cover))
+
     case Playlists.update_playlist(socket.assigns.playlist, playlist_params) do
       {:ok, _playlist} ->
         {:noreply,
@@ -115,6 +104,28 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
+    end
+  end
+
+  # TODO: unify with the track form_component, same fn here
+  defp files_for(socket, kind) do
+    case uploaded_entries(socket, kind) do
+      {[_ | _] = entries, []} ->
+        uploaded_files =
+          Enum.map(entries, fn entry ->
+            consume_uploaded_entry(socket, entry, fn %{path: path} = file ->
+              {:postpone,
+               %{
+                 path: path,
+                 content_type: entry.client_type,
+                 filename: entry.client_name,
+                 size: entry.client_size
+               }}
+            end)
+          end)
+
+      _ ->
+        []
     end
   end
 end

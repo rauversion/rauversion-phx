@@ -12,6 +12,6 @@ defmodule Rauversion.PlaylistLikes.PlaylistLike do
   def changeset(playlist_like, attrs) do
     playlist_like
     |> cast(attrs, [:user_id, :playlist_id])
-    |> validate_required([])
+    |> validate_required([:user_id, :playlist_id])
   end
 end
