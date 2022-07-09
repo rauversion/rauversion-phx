@@ -18,6 +18,12 @@ config :rauversion, Rauversion.Repo,
   ownership_timeout: 300_000_000,
   timeout: 300_000_000
 
+if System.get_env("GITHUB_ACTIONS") do
+  config :chaskiq, Chaskiq.Repo,
+    username: "postgres",
+    password: "postgres"
+end
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :rauversion, RauversionWeb.Endpoint,
