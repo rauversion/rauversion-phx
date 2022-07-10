@@ -4,12 +4,13 @@ install i:
 	mix deps.get
 	mix ecto.setup
 	mix fake_accounts
-	npm install --prefix assets
+	cd assets && yarn install
 
 deploy d:
 	mix assets.deploy
 
 start server s:
+	make deploy
 	iex -S mix phx.server
 
 format f:
