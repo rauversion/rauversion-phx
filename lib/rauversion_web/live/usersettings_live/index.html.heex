@@ -5,9 +5,9 @@
   <!-- Main content -->
     <.live_component
       module={RauversionWeb.UsersettingsLive.FormComponent}
-      id="form-component"
-      live_action={@live_action} 
-      current_user={@current_user}/>
+      id={@current_user.id || "profile-form"}
+      action={@live_action} 
+      current_user={@current_user} />
   
 </div>
 

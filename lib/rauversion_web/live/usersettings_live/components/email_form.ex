@@ -6,9 +6,13 @@ defmodule RauversionWeb.UsersettingsLive.EmailForm do
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Change Email</h1>
 
-    <.form let={f} for={@email_changeset}
-      id="update_email" class="space-y-8 divide-y divide-gray-200"
+    <.form
+      let={f}
+      for={@email_changeset}
+      id="update_email"
+      phx-target={@target}
       phx-submit="save"
+      class="space-y-8 divide-y divide-gray-200"
     >
     <%= if @email_changeset.action do %>
       <div class="alert alert-danger">

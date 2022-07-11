@@ -2,17 +2,19 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
   use RauversionWeb, :live_component
 
   def render(%{profile_changeset: _profile_changeset} = assigns) do
-    IO.puts("PROFILE CHANGESET IS #{inspect(_profile_changeset)}")
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Account</h1>
 
-    <.form let={f}
+    <.form
+      let={f}
       for={@profile_changeset}
-      multipart={true}
-      id="update_profile" class="space-y-8 divide-y divide-gray-200"
+      id="update_profile"
+      phx-target={@target}
       phx-submit="save"
-      phx-change="change">
+      multipart={true}
+      class="space-y-8 divide-y divide-gray-200"
+      >
       <%= if @profile_changeset.action do %>
         <div class="alert alert-danger">
           <p>Oops, something went wrong! Please check the errors below.</p>
@@ -61,12 +63,9 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
                   <span>Change</span>
                   <span class="sr-only"> user photo</span>
               <% end %>
-
-                <input
-                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
-                  type="file"
-                  name="user[avatar]"
-                  id="user_avatar">
+              <div phx-drop-target={@uploads.avatar.ref}>
+              <%= live_file_input @uploads.avatar, class: "absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"%>
+              </div>
               </div>
               <button type="button" class="ml-3 bg-transparent py-2 px-3 border border-transparent rounded-md text-sm font-medium text-blue-gray-900 hover:text-blue-gray-700 focus:outline-none focus:border-blue-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-gray-50 focus:ring-blue-500">
                 Remove
@@ -83,7 +82,6 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
         <% end %>
         <%= submit "Change information", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
       </div>
-
     </.form>
     </div>
     """
