@@ -3,33 +3,12 @@
   <.live_component module={RauversionWeb.UserSettingsLive.NavBar} id="nav_bar" live_action={@live_action} />
 
   <!-- Main content -->
-  <div class="flex-1 xl:overflow-y-auto">
-    
-    <%= if @live_action == :contact do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.ContactForm}
-        id="contact-form"
-        profile_changeset={@profile_changeset}
-      />
-    <% end %>
-
-    <%= if @live_action  == :email do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.EmailForm}
-        id="contact-form"
-        email_changeset={@email_changeset}
-      />
-    <% end %>
-
-    <%= if @live_action == :security do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.SecurityForm}
-        id="contact-form"
-        password_changeset={@password_changeset}
-      />
-    <% end %>
-
-  </div>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.FormComponent}
+      id="form-component"
+      live_action={@live_action} 
+      current_user={@current_user}/>
+  
 </div>
 
 

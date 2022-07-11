@@ -1,0 +1,27 @@
+<div class="flex-1 xl:overflow-y-auto">
+    
+    <%= if @live_action == :profile do %>
+      <.live_component
+        module={RauversionWeb.UsersettingsLive.ProfileForm}
+        id="contact-form"
+        profile_changeset={@profile_changeset}
+      />
+    <% end %>
+
+    <%= if @live_action  == :email do %>
+      <.live_component
+        module={RauversionWeb.UsersettingsLive.EmailForm}
+        id="contact-form"
+        email_changeset={@email_changeset}
+      />
+    <% end %>
+
+    <%= if @live_action == :security do %>
+      <.live_component
+        module={RauversionWeb.UsersettingsLive.SecurityForm}
+        id="contact-form"
+        password_changeset={@password_changeset}
+      />
+    <% end %>
+
+  </div>

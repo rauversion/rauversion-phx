@@ -97,7 +97,7 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    live "/users/settings", UserSettingsLive.Index, :contact
+    live "/users/settings", UserSettingsLive.Index, :profile
     live "/users/settings/email", UserSettingsLive.Index, :email
     live "/users/settings/security", UserSettingsLive.Index, :security
 

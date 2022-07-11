@@ -1,12 +1,19 @@
 defmodule RauversionWeb.UsersettingsLive.SecurityForm do
   use RauversionWeb, :live_component
 
+
+
+  @impl true
   def render(%{password_changeset: _password_changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Security</h1>
 
-    <.form let={f} for={@password_changeset} id="update_password">
+    <.form let={f}
+        for={@password_changeset}
+        id="update_password"  class="space-y-8 divide-y divide-gray-200"
+        phx-submit="save"
+        >
       <%= if @password_changeset.action do %>
         <div class="alert alert-danger">
           <p>Oops, something went wrong! Please check the errors below.</p>
@@ -43,10 +50,10 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
 
 
       <div class="pt-8 flex justify-end">
-        <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <%= live_redirect to: "/users/settings/security", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
           Cancel
-        </button>
-        <%= submit "Change password", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+        <% end %>
+        <%= submit "Change password", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
       </div>
 
     </.form>
@@ -54,4 +61,5 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
     </div>
     """
   end
+
 end

@@ -1,12 +1,14 @@
 defmodule RauversionWeb.UsersettingsLive.EmailForm do
   use RauversionWeb, :live_component
 
-  def render(%{email_changeset: email_changeset} = assigns) do
+  def render(%{email_changeset: _email_changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Change Email</h1>
 
-    <.form let={f} for={@email_changeset}  id="update_email" class="space-y-8 divide-y divide-gray-200" phx-submit="save"
+    <.form let={f} for={@email_changeset}
+      id="update_email" class="space-y-8 divide-y divide-gray-200"
+      phx-submit="save"
     >
     <%= if @email_changeset.action do %>
       <div class="alert alert-danger">
