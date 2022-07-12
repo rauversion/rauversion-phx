@@ -11,11 +11,40 @@ defmodule RauversionWeb.PlaylistLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
+    playlist = get_playlist(id)
+
+    track =
+      case playlist.track_playlists do
+        [tp | _] -> tp.track
+        _ -> nil
+      end
+
     {:noreply,
      socket
      |> assign(:current_tab, "basic-info-tab")
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:playlist, get_playlist(id))}
+     |> assign(:playlist, playlist)
+     |> assign(:track, track)}
+  end
+
+  @impl true
+  def handle_event("change-track", %{"id" => id}, socket) do
+    track =
+      Rauversion.Tracks.get_track!(id)
+      |> Rauversion.Repo.preload([:user, :mp3_audio_blob, :cover_blob])
+
+    {
+      :noreply,
+      push_event(
+        socket,
+        "change-playlist-track",
+        %{
+          track_id: track.id,
+          audio_peaks: Jason.encode!(Rauversion.Tracks.metadata(track, :peaks)),
+          audio_url: Rauversion.Tracks.blob_proxy_url(track, "mp3_audio")
+        }
+      )
+    }
   end
 
   @impl true

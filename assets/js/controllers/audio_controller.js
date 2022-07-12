@@ -9,9 +9,25 @@ export default class extends Controller {
 
   _wave = null
 
-  initialize() {}
+  _listener = null
+
+  initialize() {
+    
+  }
 
   connect() {
+
+    console.log("AUDIO PLAY", this.element)
+
+    this._listener = window.addEventListener(`phx:change-playlist-track`, (e)=>{
+      console.log(e.detail)
+      this.element.dataset.audioPeaks = e.detail.audio_peaks
+      this.element.dataset.audioUrl = e.detail.audio_url
+
+      this.destroyWave();
+      this.initWave();
+    })
+
     if(!this.data.get('url')) {
       console.error("skip player, no url found!")
       return
@@ -19,7 +35,13 @@ export default class extends Controller {
     console.log("INIT WAVEEE")
     this.initWave()
   }
+
   disconnect() {
+    this.destroyWave()
+    window.removeEventListener(this._listener)
+  }
+
+  destroyWave() {
     this._wave && this._wave.destroy()
   }
 

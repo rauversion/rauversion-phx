@@ -16,16 +16,22 @@ defmodule RauversionWeb.PlaylistLive.PlaylistShowItemsComponent do
                   <%= for track_playlists <- @playlist.track_playlists do %>
                     <li class="py-4">
                       <div class="flex items-center space-x-4">
+                        <div class="flex-1 min-w-0">
+                          <p class="text-sm font-medium text-gray-900 truncate">
 
-                          <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-gray-900 truncate"><%= track_playlists.track.title %></p>
-                            <p class="text-sm text-gray-500 truncate">
-                              <%= live_redirect track_playlists.track.user.username,
-                                to: Routes.profile_index_path(@socket, :index, track_playlists.track.user.username) %>
-                            </p>
-                          </div>
-                        <div>
+                            <a href="#"
+                              phx-click="change-track"
+                              phx-value-id={track_playlists.track.id}>
+                              <%= track_playlists.track.title %>
+                            </a>
 
+                          </p>
+                          <p class="text-sm text-gray-500 truncate">
+                            <%= live_redirect track_playlists.track.user.username,
+                              to: Routes.profile_index_path(@socket, :index, track_playlists.track.user.username)
+
+                            %>
+                          </p>
                         </div>
                       </div>
                     </li>
