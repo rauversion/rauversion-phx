@@ -15,10 +15,12 @@ defmodule RauversionWeb.TrackLive.Show do
 
   @impl true
   def handle_params(%{"id" => id} = _params, _, socket = %{assigns: %{live_action: :show}}) do
+    track = Tracks.get_track!(id) |> Repo.preload(:user)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))}
+     |> assign(:track, track)}
   end
 
   @impl true

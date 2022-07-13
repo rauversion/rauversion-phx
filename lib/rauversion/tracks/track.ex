@@ -23,6 +23,7 @@ defmodule Rauversion.Tracks.Track do
     field :slug, TitleSlug.Type
     field :title, :string
 
+    has_many :track_comments, Rauversion.TrackComments.TrackComment
     has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all
     has_many :playlists, through: [:track_playlists, :playlist]
 

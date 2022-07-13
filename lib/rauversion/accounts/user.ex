@@ -14,6 +14,7 @@ defmodule Rauversion.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
+    has_many :track_comments, Rauversion.TrackComments.TrackComment
     has_many :tracks, Rauversion.Tracks.Track, on_delete: :delete_all
     has_many :playlists, Rauversion.Playlists.Playlist, on_delete: :delete_all
 
