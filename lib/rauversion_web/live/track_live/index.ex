@@ -10,9 +10,9 @@ defmodule RauversionWeb.TrackLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     # @current_user
-
     socket =
       socket
+      |> assign(:page, 1)
       |> assign(:tracks, [])
 
     {:ok, socket}
@@ -59,33 +59,13 @@ defmodule RauversionWeb.TrackLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:tracks, list_tracks)
+    |> assign(:tracks, list_tracks(socket.assigns.page))
     |> assign(:page_title, "Listing Tracks")
     |> assign(:track, nil)
   end
 
-  @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    socket
-    |> assign(:track, Tracks.get_track!(id))
-
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
-      {:ok} ->
-        {:ok, _} = Tracks.delete_track(socket.assigns.track)
-        {:noreply, assign(socket, :tracks, list_tracks())}
-
-      err ->
-        err
-    end
-  end
-
-  defp list_tracks do
+  defp list_tracks(page) do
     Tracks.list_public_tracks()
-    |> Rauversion.Repo.preload([
-      :mp3_audio_blob,
-      :cover_blob,
-      :cover_attachment,
-      user: :avatar_attachment
-    ])
+    |> Rauversion.Repo.paginate(page: page, page_size: 5)
   end
 end

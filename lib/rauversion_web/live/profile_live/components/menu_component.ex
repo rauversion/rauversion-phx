@@ -16,7 +16,10 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
             <%= for %{name: name, url: url, selected: selected, kind: kind} <- assigns.data do %>
               <% #= selected %>
               <% #= kind %>
-              <%= live_patch name, to: url, class: "text-base font-medium #{if selected do "border-b border-b-4 text-gray-800 hover:text-gray-900 border-orange-500 " else "text-gray-500 hover:text-gray-900" end}" %>
+              <%= live_redirect name,
+                id: "profile-menu-#{name}",
+                to: url,
+                class: "text-base font-medium #{if selected do "border-b border-b-4 text-gray-800 hover:text-gray-900 border-orange-500 " else "text-gray-500 hover:text-gray-900" end}" %>
             <% end %>
           </nav>
           <div class="flex items-center md:ml-12">

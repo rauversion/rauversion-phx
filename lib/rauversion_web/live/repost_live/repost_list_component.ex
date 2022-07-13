@@ -1,9 +1,9 @@
-defmodule RauversionWeb.TrackLive.TrackListComponent do
+defmodule RauversionWeb.RepostLive.RepostListComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
-  alias Rauversion.{Tracks, Repo}
+  alias Rauversion.{Tracks, Reposts, Repo}
 
   @impl true
   def mount(socket) do
@@ -13,35 +13,22 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
 
   @impl true
   def update(assigns, socket) do
+    reposts =
+      Reposts.get_reposts_by_user_id(assigns.profile.id, socket.assigns[:current_user])
+      # |> Rauversion.Repo.all()
+      # |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
+      # |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user].id)
+      |> Repo.paginate(page: 1, page_size: 5)
+
     tracks =
-      Tracks.list_tracks_by_username(assigns.profile.username)
-      |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
-      |> Repo.preload([
-        :mp3_audio_blob,
-        :cover_blob,
-        :cover_attachment,
-        user: :avatar_attachment
-      ])
+      reposts.entries
+      |> Enum.map(fn item -> item.track end)
 
     {:ok,
      socket
      |> assign(assigns)
      |> assign(page: 1)
      |> assign(tracks: tracks)}
-  end
-
-  @impl true
-  def handle_event("delete-track", %{"id" => id}, socket) do
-    track = Tracks.get_track!(id)
-
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, track.user_id) do
-      {:ok, socket} ->
-        {:ok, _} = Tracks.delete_track(track)
-        {:noreply, push_event(socket, "remove-item", %{id: "track-item-#{track.id}"})}
-
-      _err ->
-        {:noreply, socket}
-    end
   end
 
   @impl true
@@ -90,7 +77,6 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
                     track={track}
                     repost={nil}
                     like={nil}
-                    ref={@myself}
                     current_user={assigns[:current_user]}
                   />
                 <% end %>

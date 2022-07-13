@@ -12,9 +12,9 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
     }
   end
 
-  def update(assigns = %{current_user: current_user}, socket) do
+  def update(assigns, socket) do
     case assigns do
-      %{current_user: current_user} ->
+      %{current_user: _current_user} ->
         like =
           case assigns.playlist.likes do
             [like] -> like
@@ -95,6 +95,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                           <p class="text-sm font-medium text-gray-900 truncate"><%= track_playlists.track.title %></p>
                           <p class="text-sm text-gray-500 truncate"><%= @playlist.user.username  %></p>
                         </div>
+                        <!--
                         <div>
                           <a href="#" phx-click="remove-track"
                             target-nono={@myself}
@@ -102,6 +103,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                             remove
                           </a>
                         </div>
+                        -->
                       </div>
                     </li>
                   <% end %>

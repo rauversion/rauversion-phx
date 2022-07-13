@@ -44,12 +44,25 @@ defmodule Rauversion.Tracks do
 
   """
 
-  def list_tracks(limit \\ 20) do
-    Track |> limit(^limit) |> Repo.all()
+  def list_tracks() do
+    from p in Track,
+      preload: [
+        :mp3_audio_blob,
+        :cover_blob,
+        :cover_attachment,
+        user: :avatar_attachment
+      ]
   end
 
-  def list_public_tracks(limit \\ 20) do
-    Track |> limit(^limit) |> where(private: false) |> Repo.all()
+  def list_public_tracks() do
+    from p in Track,
+      where: p.private == false,
+      preload: [
+        :mp3_audio_blob,
+        :cover_blob,
+        :cover_attachment,
+        user: :avatar_attachment
+      ]
   end
 
   def list_tracks_by_username(user_id) do
