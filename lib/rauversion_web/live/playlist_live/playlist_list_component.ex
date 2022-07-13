@@ -31,7 +31,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
 
     case Playlists.delete_playlist(playlist) do
       {:ok, playlist} ->
-        {:noreply, push_event(socket, "remove-playlist", %{id: "playlist-item-#{playlist.id}"})}
+        {:noreply, push_event(socket, "remove-item", %{id: "playlist-item-#{playlist.id}"})}
 
       _ ->
         # not sire what to reply here
@@ -39,6 +39,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
     end
   end
 
+  @impl true
   def handle_event("paginate", %{}, socket) do
     {:noreply,
      socket

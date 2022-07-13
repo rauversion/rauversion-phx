@@ -17,8 +17,6 @@ export default class extends Controller {
 
   connect() {
 
-    console.log("AUDIO PLAY", this.element)
-
     this._listener = window.addEventListener(`phx:change-playlist-track`, (e)=>{
       console.log(e.detail)
       this.element.dataset.audioPeaks = e.detail.audio_peaks
@@ -38,7 +36,7 @@ export default class extends Controller {
 
   disconnect() {
     this.destroyWave()
-    window.removeEventListener(this._listener)
+    window.removeEventListener('phx:change-playlist-track', this._listener)
   }
 
   destroyWave() {

@@ -114,7 +114,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     like_class = active_button_class(like)
 
     ~H"""
-    <div class="flex flex-col sm:flex-row border rounded-md shadow-sm my-2">
+    <div id={"track-item-#{track.id}"} class="flex flex-col sm:flex-row border rounded-md shadow-sm my-2">
       <div class="w-full sm:w-1/4 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
 
         <div class="group relative aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden">
@@ -248,7 +248,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
               </svg>
               <span>Edit</span>
             <% end %>
-            <%= link to: "#", phx_click: "delete-track", phx_value_id: track.id, data: [confirm: "Are you sure?"], class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+            <%= link to: "#", phx_click: "delete-track", phx_target: @ref, phx_value_id: track.id, data: [confirm: "Are you sure?"], class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
               </svg>

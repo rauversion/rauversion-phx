@@ -49,20 +49,8 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   defp apply_action(socket, :index, %{"username" => id}) do
-    # profile = Accounts.get_user_by_username(id)
-    tracks =
-      Tracks.list_tracks_by_username(id)
-      |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user])
-      |> Repo.preload([
-        :mp3_audio_blob,
-        :cover_blob,
-        :cover_attachment,
-        user: :avatar_attachment
-      ])
-
     socket
-    |> assign(:tracks, tracks)
-    |> assign(:page_title, "Edit Playlist")
+    |> assign(:page_title, "All tracks")
     |> assign(:title, "all")
     |> assign(:data, menu(socket, id, "all"))
   end
@@ -82,22 +70,8 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   defp apply_action(socket, :reposts, %{"username" => id}) do
-    profile = Accounts.get_user_by_username(id)
-
-    reposts =
-      Reposts.get_reposts_by_user_id(profile.id, socket.assigns[:current_user])
-      # |> Rauversion.Repo.all()
-      # |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
-      # |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user].id)
-      |> Rauversion.Repo.paginate(page: 1, page_size: 5)
-
-    tracks =
-      reposts.entries
-      |> Enum.map(fn item -> item.track end)
-
     socket
     |> assign(:page_title, "Reposts")
-    |> assign(:tracks, tracks)
     |> assign(:title, "reposts")
     |> assign(:data, menu(socket, id, "reposts"))
   end
@@ -133,20 +107,6 @@ defmodule RauversionWeb.ProfileLive.Index do
     IEx.pry()
     # post_id = socket.assigns.post.id
     # do something with sort_by
-  end
-
-  @impl true
-  def handle_event("delete-track", %{"id" => id}, socket) do
-    track = Tracks.get_track!(id)
-
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, track.user_id) do
-      {:ok, socket} ->
-        {:ok, _} = Tracks.delete_track(track)
-        {:noreply, socket}
-
-      _err ->
-        {:noreply, socket}
-    end
   end
 
   defp menu(socket, id, kind) do

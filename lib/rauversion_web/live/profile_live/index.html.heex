@@ -22,18 +22,16 @@
                   id: "all-track-#{@profile.id}",
                   track: "track",
                   profile: @profile,
-                  tracks: @tracks,
                   title: @title,
                   current_user: assigns[:current_user]
                 )
       "reposts" ->
                 live_component(
-                  RauversionWeb.TrackLive.TrackListComponent,
+                  RauversionWeb.RepostLive.RepostListComponent,
                   id: "all-reposts-#{@profile.id}",
                   track: "track",
                   profile: @profile,
-                  tracks: @tracks,
-                   title: @title,
+                  title: @title,
                   current_user: assigns[:current_user]
                 )
       "playlists" ->
