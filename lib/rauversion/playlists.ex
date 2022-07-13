@@ -55,6 +55,11 @@ defmodule Rauversion.Playlists do
       ]
   end
 
+  def list_public_playlists() do
+    from p in Playlist,
+      where: p.private == false
+  end
+
   def get_public_playlist!(id) do
     Playlist
     |> where(id: ^id)
