@@ -18,7 +18,7 @@ defmodule Rauversion.TrackComments.TrackComment do
   @doc false
   def changeset(track_comment, attrs) do
     track_comment
-    |> cast(attrs, [:body, :track_minute, :state])
-    |> validate_required([:body, :track_minute, :state])
+    |> cast(attrs, [:user_id, :track_id, :body, :track_minute, :state])
+    |> validate_required([:user_id, :track_id, :body])
   end
 end
