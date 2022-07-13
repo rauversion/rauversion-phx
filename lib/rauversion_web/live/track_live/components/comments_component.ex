@@ -4,115 +4,174 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track} = assigns) do
+  alias Rauversion.{Repo}
+
+  @impl true
+  def update(assigns, socket) do
+    comment_changeset =
+      Rauversion.TrackComments.change_track_comment(
+        %Rauversion.TrackComments.TrackComment{},
+        %{
+          track_id: assigns.track.id,
+          user_id: assigns.current_user.id
+        }
+      )
+
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:comment_changeset, comment_changeset)
+      |> assign(
+        :comments,
+        assigns.track
+        |> Ecto.assoc(:track_comments)
+        |> Repo.all()
+        |> Repo.preload(user: [:avatar_blob])
+      )
+      |> assign(:temporary_assigns, comments: [])
+    }
+  end
+
+  @impl true
+  def handle_event(
+        "validate",
+        %{"_target" => ["track_comment", "body"], "track_comment" => %{"body" => body}},
+        socket
+      ) do
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("save", %{"track_comment" => %{"body" => comment}}, socket) do
+    case Rauversion.TrackComments.create_track_comment(%{
+           user_id: socket.assigns.current_user.id,
+           track_id: socket.assigns.track.id,
+           body: comment
+         }) do
+      {:ok, comment} ->
+        comment = comment |> Repo.preload(:user)
+        # assign(socket, :comments, comment)
+
+        {:noreply, update(socket, :comments, fn messages -> [comment | messages] end)}
+
+      _ ->
+        {:noreply, socket}
+    end
+  end
+
+  @impl true
+  def render(assigns) do
     ~H"""
-    <section aria-labelledby="notes-title" class="mx-auto container">
-      <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
+    <section aria-labelledby="activity-title" class="mt-8 xl:mt-10">
+      <div>
         <div class="divide-y divide-gray-200">
-          <div class="px-4 py-5 sm:px-6">
-            <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+          <div class="pb-4">
+            <h2 id="activity-title" class="text-lg font-medium text-gray-900">Activity</h2>
           </div>
-          <div class="px-4 py-6 sm:px-6">
-            <ul role="list" class="space-y-8">
+          <div class="pt-6">
+            <!-- Activity feed-->
+            <div class="flow-root">
+              <ul id="track-comments"
+                role="list"
+                class="-mb-8"
+                phx-update="append">
 
-                <li>
-                  <div class="flex space-x-3">
-                    <div class="flex-shrink-0">
-                      <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-                    </div>
-                    <div>
-                      <div class="text-sm">
-                        <a href="#" class="font-medium text-gray-900">Leslie Alexander</a>
-                      </div>
-                      <div class="mt-1 text-sm text-gray-700">
-                        <p>Ducimus quas delectus ad maxime totam doloribus reiciendis ex. Tempore dolorem maiores. Similique voluptatibus tempore non ut.</p>
-                      </div>
-                      <div class="mt-2 text-sm space-x-2">
-                        <span class="text-gray-500 font-medium">4d ago</span>
-                        <!-- space -->
-                        <span class="text-gray-500 font-medium">·</span>
-                        <!-- space -->
-                        <button type="button" class="text-gray-900 font-medium">Reply</button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                <%= for comment <- @comments do %>
 
-                <li>
-                  <div class="flex space-x-3">
-                    <div class="flex-shrink-0">
-                      <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-                    </div>
-                    <div>
-                      <div class="text-sm">
-                        <a href="#" class="font-medium text-gray-900">Michael Foster</a>
-                      </div>
-                      <div class="mt-1 text-sm text-gray-700">
-                        <p>Et ut autem. Voluptatem eum dolores sint necessitatibus quos. Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo facere iusto quia accusamus veniam id explicabo et aut.</p>
-                      </div>
-                      <div class="mt-2 text-sm space-x-2">
-                        <span class="text-gray-500 font-medium">4d ago</span>
-                        <!-- space -->
-                        <span class="text-gray-500 font-medium">·</span>
-                        <!-- space -->
-                        <button type="button" class="text-gray-900 font-medium">Reply</button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                  <li id={"comment-#{comment.id}"}>
+                    <div class="relative pb-8">
 
-                <li>
-                  <div class="flex space-x-3">
-                    <div class="flex-shrink-0">
-                      <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-                    </div>
-                    <div>
-                      <div class="text-sm">
-                        <a href="#" class="font-medium text-gray-900">Dries Vincent</a>
-                      </div>
-                      <div class="mt-1 text-sm text-gray-700">
-                        <p>Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et.</p>
-                      </div>
-                      <div class="mt-2 text-sm space-x-2">
-                        <span class="text-gray-500 font-medium">4d ago</span>
-                        <!-- space -->
-                        <span class="text-gray-500 font-medium">·</span>
-                        <!-- space -->
-                        <button type="button" class="text-gray-900 font-medium">Reply</button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                      <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                      <div class="relative flex items-start space-x-3">
+                          <div class="relative">
 
-            </ul>
-          </div>
-        </div>
-        <div class="bg-gray-50 px-4 py-6 sm:px-6">
-          <div class="flex space-x-3">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=256&amp;h=256&amp;q=80" alt="">
+                            <%= img_tag(Rauversion.Accounts.avatar_url(comment.user),
+                              class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
+                              alt: comment.user.username
+                              )
+                            %>
+
+                            <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
+                              <svg class="h-5 w-5 text-gray-400" x-description="Heroicon name: solid/chat-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="min-w-0 flex-1">
+                            <div>
+                              <div class="text-sm">
+                                <%= live_redirect to: Routes.profile_index_path(@socket, :index, comment.user.username),
+                                  class: "font-medium text-gray-900" do %>
+                                  <%= comment.user.username %>
+                                <% end %>
+                              </div>
+                              <p class="mt-0.5 text-sm text-gray-500">
+                                Commented <%= comment.inserted_at %>
+                              </p>
+                            </div>
+                            <div class="mt-2 text-sm text-gray-700">
+                              <p>
+                                <%= comment.body %>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </li>
+
+                <% end %>
+
+              </ul>
             </div>
-            <div class="min-w-0 flex-1">
-              <form action="#">
-                <div>
-                  <label for="comment" class="sr-only">About</label>
-                  <textarea id="comment" name="comment" rows="3" class="shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md" placeholder="Add a note"></textarea>
-                </div>
-                <div class="mt-3 flex items-center justify-between">
-                  <a href="#" class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900">
-                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500" x-description="Heroicon name: solid/question-mark-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>
-                      Some HTML is okay.
+
+
+
+            <div class="mt-6">
+              <div class="flex space-x-3">
+                <div class="flex-shrink-0">
+                  <div class="relative">
+
+                    <%= img_tag(Rauversion.Accounts.avatar_url(@current_user),
+                      class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
+                      alt: @current_user.username
+                      )
+                    %>
+
+                    <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
+                      <svg class="h-5 w-5 text-gray-400" x-description="Heroicon name: solid/chat-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                      </svg>
                     </span>
-                  </a>
-                  <button type="submit" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Comment
-                  </button>
+                  </div>
                 </div>
-              </form>
+                <div class="min-w-0 flex-1">
+
+                  <.form
+                    let={f}
+                    for={@comment_changeset}
+                    id="track-form-2"
+                    phx-change="validate"
+                    phx-submit="save"
+                    phx-target={@myself}
+                    class="space-y-8 divide-y divide-gray-200"
+                  >
+                    <div>
+                      <label for="comment" class="sr-only">Comment</label>
+                      <%= textarea f, :body, rows: 3, class: "shadow-sm block w-full focus:ring-gray-900 focus:border-gray-900 sm:text-sm border border-gray-300 rounded-md", placeholder: "Leave a comment" %>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-end space-x-4 py-4">
+                      <%= submit "Comment", phx_disable_with: "Saving...", class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" %>
+                    </div>
+
+                  </.form>
+                </div>
+              </div>
             </div>
+
+
+
           </div>
         </div>
       </div>

@@ -41,10 +41,10 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] load waveform data as data
 - [x] Range responses
 - [x] Fix specs on tests/rauversion
+- [x] Paginate profile tracks /:username
+- [x] Paginate /tracks
 - [ ] Fix specs on tests/rauversion-web
 - [ ] Make GithubActions work!
-- [ ] Paginate profile tracks /:username
-- [ ] Paginate /tracks
 - [ ] Listening history
 - [ ] Give feedback on upload preprosessing
 - [ ] Refactor audio processing, add proceesing queue for the after upload

@@ -17,24 +17,10 @@ defmodule RauversionWeb.TrackLive.Show do
   def handle_params(%{"id" => id} = _params, _, socket = %{assigns: %{live_action: :show}}) do
     track = Tracks.get_track!(id) |> Repo.preload(:user)
 
-    comment_changeset =
-      Rauversion.TrackComments.change_track_comment(
-        %Rauversion.TrackComments.TrackComment{},
-        %{
-          track_id: track.id,
-          user_id: socket.assigns.current_user.id
-        }
-      )
-
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:track, track)
-     |> assign(
-       :comments,
-       track |> Ecto.assoc(:track_comments) |> Repo.all() |> Repo.preload(user: [:avatar_blob])
-     )
-     |> assign(:comment_changeset, comment_changeset)}
+     |> assign(:track, track)}
   end
 
   @impl true
@@ -65,29 +51,6 @@ defmodule RauversionWeb.TrackLive.Show do
       {:err, err} ->
         {:noreply, err}
     end
-  end
-
-  @impl true
-  def handle_event(
-        "validate",
-        %{"_target" => ["track_comment", "body"], "track_comment" => %{"body" => body}},
-        socket
-      ) do
-    {:noreply, socket}
-  end
-
-  @impl true
-  def handle_event("save", %{"track_comment" => %{"body" => comment}}, socket) do
-    a =
-      Rauversion.TrackComments.create_track_comment(%{
-        user_id: socket.assigns.current_user.id,
-        track_id: socket.assigns.track.id,
-        body: comment
-      })
-
-    IO.inspect(a)
-
-    {:noreply, socket}
   end
 
   @impl true
