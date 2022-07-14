@@ -8,7 +8,7 @@ defmodule Rauversion.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Rauversion", System.get_env("EMAIL_ACCOUNT")})
+      |> from({"Rauversion", System.get_env("EMAIL_ACCOUNT", "foo@bar.com")})
       |> subject(subject)
       |> text_body(body)
 
