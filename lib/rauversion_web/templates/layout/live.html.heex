@@ -10,4 +10,7 @@
     phx-value-key="error"><%= live_flash(@flash, :error) %></p>
 
   <%= @inner_content %>
+  <div class="my-20"></div>
+
+  <.live_component module={RauversionWeb.Live.Player.PlayerComponent} id={'item'} />
 

@@ -31,7 +31,34 @@ import "./controllers"
 
 import InfiniteScroll from "./hooks/infinite_scroll"
 
-import WaveSurfer from 'wavesurfer'
+//import WaveSurfer from 'wavesurfer'
+
+import create from 'zustand/vanilla'
+import { persist } from 'zustand/middleware'
+
+
+const store = create(
+  persist(
+    (set, get) => ({
+      fishes: 0,
+      addAFish: () => set({ fishes: get().fishes + 1 }),
+    }),
+    {
+      name: 'rau-storage', // unique name
+      getStorage: () => localStorage // sessionStorage, // (optional) by default, 'localStorage' is used
+    }
+  )
+)
+
+const { getState, setState, subscribe, destroy } = store
+
+subscribe((v)=> {
+  console.log("value changes", v)
+})
+
+setState({fishes: 1})
+
+window.s = store
 
 // import * as ActiveStorage from "@rails/activestorage"
 
