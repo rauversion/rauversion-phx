@@ -4,7 +4,25 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: _track} = assigns) do
+  @impl true
+  def update(assigns, socket) do
+    page = 1
+
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:page, page)
+      |> assign(:collection, comments_list(page))
+    }
+  end
+
+  defp comments_list(page) do
+    Rauversion.TrackComments.list_track_comments_query()
+    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+  end
+
+  def render(assigns) do
     ~H"""
       <div class="bg-white border-t">
         <div class="p-6">
@@ -14,26 +32,29 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
           <div class="mt-6 flow-root">
             <ul role="list" class="-my-4 divide-y divide-gray-200">
 
-              <% # User.where.not(id: @profile.id).limit(5).each do |item| %>
+              <%= for item <- assigns.collection do  %>
+
                 <li class="flex py-4 space-x-3">
                   <div class="flex-shrink-0">
-                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="Floyd Miles">
+                    <%= img_tag(Rauversion.Playlists.variant_url( item.user, "avatar", %{resize_to_limit: "300x200"}),
+                    class: "h-8 w-8 rounded-full")
+                    %>
                   </div>
-                  <div class="min-w-0 flex-1">
-                    <p class="text-sm text-gray-800">What books do you have on your bookshelf just to look smarter than you actually are?</p>
+                  <%= live_redirect to: Routes.track_show_path(@socket, :show, item.track_id), class: "min-w-0 flex-1" do %>
+                    <p class="text-sm text-gray-800"><%= item.body %></p>
                     <div class="mt-2 flex">
                       <span class="inline-flex items-center text-sm">
                         <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                           <svg class="h-5 w-5" x-description="Heroicon name: solid/chat-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
                           </svg>
-                          <span class="font-medium text-gray-900">291</span>
+                          <span class="font-medium text-gray-900"><%= item.user.username %></span>
                         </button>
                       </span>
                     </div>
-                  </div>
+                  <% end %>
                 </li>
-              <% # end %>
+              <% end %>
 
             </ul>
           </div>

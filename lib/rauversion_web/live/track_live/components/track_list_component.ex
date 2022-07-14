@@ -12,22 +12,33 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
   end
 
   @impl true
+  def handle_event("paginate", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:page, socket.assigns.page + 1)
+     |> assign(:tracks, list_tracks(socket.assigns))}
+  end
+
+  @impl true
   def update(assigns, socket) do
-    tracks =
-      Tracks.list_tracks_by_username(assigns.profile.username)
-      |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
-      |> Repo.preload([
-        :mp3_audio_blob,
-        :cover_blob,
-        :cover_attachment,
-        user: :avatar_attachment
-      ])
+    tracks = list_tracks(assigns)
 
     {:ok,
      socket
      |> assign(assigns)
      |> assign(page: 1)
      |> assign(tracks: tracks)}
+  end
+
+  defp list_tracks(assigns) do
+    Tracks.list_tracks_by_username(assigns.profile.username)
+    |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
+    |> Repo.preload([
+      :mp3_audio_blob,
+      :cover_blob,
+      :cover_attachment,
+      user: :avatar_attachment
+    ])
   end
 
   @impl true
