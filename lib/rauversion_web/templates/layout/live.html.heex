@@ -12,5 +12,6 @@
   <%= @inner_content %>
   <div class="my-20"></div>
 
-  <.live_component module={RauversionWeb.Live.Player.PlayerComponent} id={'item'} />
-
+  <div phx-update="ignore" id="main-player-wrapper">
+  <.live_component module={RauversionWeb.Live.Player.PlayerComponent} phx-update="ignore" id={'item'} />
+  </div>

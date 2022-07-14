@@ -4,7 +4,10 @@ defmodule RauversionWeb.Live.Player.PlayerComponent do
   @impl true
   def render(assigns) do
     ~H"""
-    <div data-controller="player"
+    <div
+      id="main-player"
+      phx-update="ignore"
+      data-controller="player"
       data-player-peaks="null"
       data-player-url="/active_storage/blobs/proxy/SFMyNTY.eyJleHBpcmVzX2luIjpudWxsLCJtZXNzYWdlIjoiMTg5IiwicHVycG9zZSI6bnVsbH0.OLVobnyEud_SsSJr3G9g7ix34wi_VtqyDWWtCQQUfQs/2046243449.mp3"
       class="z-50 fixed bottom-0 w-full h-[6rem]-- py-2 bg-gray-900">
@@ -41,7 +44,7 @@ defmodule RauversionWeb.Live.Player.PlayerComponent do
 
         <div class="mx-3">
 
-          <div class="py-0 px-2 w-64 h-12 leading-4 box-border text-zinc-800">
+          <div class="py-0 px-2 h-12 leading-4 box-border text-zinc-200">
             song info
           </div>
 
