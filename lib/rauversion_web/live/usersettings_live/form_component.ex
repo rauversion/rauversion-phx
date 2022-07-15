@@ -2,6 +2,7 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
   use RauversionWeb, :live_component
 
   alias Rauversion.Accounts
+  alias RauversionWeb.UserAuth
 
 
   @impl true
@@ -9,9 +10,9 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     socket = socket
             |> assign(assigns)
             |> get_change_set(assigns.current_user)
+            |> assign(:return_to, Routes.user_settings_index_path(socket, assigns.action, assigns))
     {:ok, socket}
   end
-
 
   defp get_change_set(socket, user) do
     get_change_set(socket.assigns.action, socket, user)
@@ -20,21 +21,22 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
   defp get_change_set(:profile, socket, user) do
     socket
     |> assign(:profile_changeset, Accounts.change_user_profile(user))
-    |> allow_upload(:avatar, accept: ~w(.jpg .jpeg .png), max_entries: 1, max_file_size: 100_000_000, auto_upload: true)
-    |> assign(:return_to, "/users/settings")
-
+    |> allow_upload(:avatar, accept: ~w(.jpg .jpeg .png), max_entries: 1)
   end
 
   defp get_change_set(:email, socket, user) do
     socket
     |> assign(:email_changeset, Accounts.change_user_email(user))
-    |> assign(:return_to, "/users/settings/email")
   end
 
   defp get_change_set(:security, socket, user) do
     socket
     |> assign(:password_changeset, Accounts.change_user_password(user))
-    |> assign(:return_to, "/users/settings/security")
+  end
+
+  @impl true
+  def handle_event("validate", _params, socket) do
+    {:noreply, socket}
   end
 
   @impl true
@@ -47,24 +49,10 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
   @impl true
   def handle_event("save", %{"action" => "update_password"} = params, socket = %{
     assigns: %{
-      live_action: :security
+      action: :security
     }
   }) do
-      %{"user" => user_params} = params
-      %{"current_password" => password} = user_params
-      user = socket.assigns.current_user
-      socket =
-        case Accounts.update_user_password(user, password, user_params) do
-          {:ok, user} ->
-            socket
-              |> UserAuth.log_in_user(user)
-              |> put_flash(:info, "Password updated successfully.")
-              #|> PhoenixLiveSession.put_session(:user_return_to, "/user/settings/security")
-
-          {:error, changeset} ->
-            socket |> assign(:password_changeset, changeset)
-        end
-    {:noreply, socket}
+    save_password(socket, socket.assigns.action, params)
   end
 
   @impl true
@@ -73,26 +61,7 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
       action: :profile
     }
   }) do
-    IO.puts("SAVE UPDATE PROFILE")
-    IO.puts("PARAMS == #{inspect(params)}")
-    IO.puts("SOCKET == #{inspect(socket)}")
-
-    IO.puts("ASIGNS == #{inspect(socket.assigns)}")
-
-      %{"user" => user_params} = params
-      IO.puts("USER_PARAMS == #{inspect(user_params)}")
-      user = socket.assigns.current_user
-      IO.puts("USER == #{inspect(user)}")
-      socket = case Accounts.update_user_profile(user, user_params) do
-        {:ok, _user} ->
-          socket
-          |> put_flash(:info, "User profile updated successfully.")
-          |> redirect(to: "/users/settings")
-
-        {:error, changeset} ->
-          socket |> assign(:profile_changeset, changeset)
-      end
-      {:noreply, socket}
+    save_profile(socket, socket.assigns.action, params)
   end
 
   defp save_email(socket, :email, %{"current_password" => password, "user" => user_params}) do
@@ -120,4 +89,57 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     {:noreply, socket}
   end
 
+  defp save_password(socket, :security, params) do
+    %{"user" => user_params} = params
+    %{"current_password" => password} = user_params
+    user = socket.assigns.current_user
+    socket =
+      case Accounts.update_user_password(user, password, user_params) do
+        {:ok, user} ->
+          socket
+            |> UserAuth.log_in_user(user)
+            |> put_flash(:info, "Password updated successfully.")
+            #|> PhoenixLiveSession.put_session(:user_return_to, "/user/settings/security")
+
+        {:error, changeset} ->
+          socket |> assign(:password_changeset, changeset)
+      end
+  {:noreply, socket}
+  end
+
+  defp save_profile(socket, :profile, %{"user" => user_params}) do
+    user = socket.assigns.current_user
+    user_params = user_params |> Map.put("avatar", file_for(socket, :avatar))
+    socket = case Accounts.update_user_profile(user, user_params) do
+        {:ok, _user} ->
+          socket
+          |> put_flash(:info, "User profile updated successfully.")
+          |> redirect(to: "/users/settings")
+
+        {:error, changeset} ->
+          socket |> assign(:profile_changeset, changeset)
+      end
+      {:noreply, socket}
+    end
+
+    defp file_for(socket, kind) do
+      case uploaded_entries(socket, kind) do
+        {[_ | _] = entries, []} ->
+            Enum.map(entries, fn entry ->
+              consume_uploaded_entry(socket, entry, fn %{path: path} ->
+                {:postpone,
+                 %{
+                   path: path,
+                   content_type: entry.client_type,
+                   filename: entry.client_name,
+                   size: entry.client_size
+                 }}
+              end)
+            end)
+            |> List.first()
+
+        _ ->
+          nil
+      end
+    end
 end

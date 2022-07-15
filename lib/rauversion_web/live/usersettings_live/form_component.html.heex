@@ -6,6 +6,7 @@
         id="contact-form"
         target={@myself}
         profile_changeset={@profile_changeset}
+        return_to={@return_to}
         uploads={@uploads}
       />
     <% end %>
@@ -16,6 +17,7 @@
         id="email-form"
         target={@myself}
         email_changeset={@email_changeset}
+        return_to={@return_to}
       />
     <% end %>
 
@@ -25,6 +27,7 @@
         id="security-form"
         target={@myself}
         password_changeset={@password_changeset}
+        return_to={@return_to}
       />
     <% end %>
 
