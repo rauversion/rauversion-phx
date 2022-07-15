@@ -25,11 +25,10 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
-import { Application } from "@hotwired/stimulus"
-
 import "./controllers"
 
 import InfiniteScroll from "./hooks/infinite_scroll"
+import Player from "./hooks/player"
 
 //import WaveSurfer from 'wavesurfer'
 
@@ -41,6 +40,7 @@ const store = create(
   persist(
     (set, get) => ({
       fishes: 0,
+      playlist: [],
       addAFish: () => set({ fishes: get().fishes + 1 }),
     }),
     {
@@ -59,7 +59,6 @@ subscribe((v)=> {
 setState({fishes: 1})
 
 window.s = store
-
 // import * as ActiveStorage from "@rails/activestorage"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
@@ -139,6 +138,9 @@ Hooks.AudioPlayer = {
   },
 }
 
+Hooks.Player = Player
+
+
 Hooks.InfiniteScroll = InfiniteScroll
 
 
@@ -149,6 +151,11 @@ window.addEventListener(`phx:remove-item`, (e) => {
   if(el) {
     el.remove()
   }
+})
+
+window.addEventListener(`phx:add-to-next`, (e) => {
+  console.log("ADD TO NEXT ITEM", e.detail)
+  store.setState({playlist: [e.detail.value, ...store.getState().playlist ]})
 })
 
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})

@@ -4,11 +4,9 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  # def mount(socket) do
-  #  require IEx
-  #  IEx.pry()
-  # end
+  alias Rauversion.Tracks
 
+  @impl true
   def update(assigns = %{current_user: nil}, socket) do
     {
       :ok,
@@ -18,7 +16,8 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     }
   end
 
-  def update(assigns = %{current_user: current_user}, socket) do
+  @impl true
+  def update(assigns = %{current_user: _current_user}, socket) do
     case assigns do
       %{current_user: current_user} ->
         repost =
@@ -46,6 +45,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     end
   end
 
+  @impl true
   def handle_event(
         "like-track",
         %{"id" => id},
@@ -66,19 +66,23 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     end
   end
 
+  @impl true
   def handle_event(
         "like-track",
-        %{"id" => id},
-        socket = %{assigns: %{track: track, current_user: nil}}
+        %{"id" => _id},
+        socket = %{assigns: %{track: _track, current_user: nil}}
       ) do
     # TODO: SHOW MODAL HERE
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event(
         "repost-track",
         %{"id" => id},
-        socket = %{assigns: %{track: track, current_user: current_user}}
+        socket = %{
+          assigns: %{track: track, current_user: current_user = %Rauversion.Accounts.User{}}
+        }
       ) do
     attrs = %{user_id: current_user.id, track_id: track.id}
 
@@ -93,15 +97,30 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     end
   end
 
+  @impl true
   def handle_event(
         "repost-track",
-        %{"id" => id},
-        socket = %{assigns: %{track: track, current_user: nil}}
+        %{"id" => _id},
+        socket = %{assigns: %{track: _track, current_user: nil}}
       ) do
     # TODO: SHOW MODAL HERE
     {:noreply, socket}
   end
 
+  @impl true
+  def handle_event("add-to-next", %{"id" => id}, socket) do
+    track = Tracks.get_track!(id) |> Rauversion.Repo.preload([:user, :mp3_audio_blob])
+
+    struct = %{
+      id: track.id,
+      title: track.title,
+      username: track.user.username
+    }
+
+    {:noreply, push_event(socket, "add-to-next", %{value: struct})}
+  end
+
+  @impl true
   def render(
         %{
           track: track,
@@ -256,6 +275,13 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 <span>Delete</span>
               <% end %>
             <% end %>
+          <% end %>
+
+          <%= link to: "#", phx_click: "add-to-next", phx_target: @myself, phx_value_id: track.id, class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
+            </svg>
+            <span>Add to next up</span>
           <% end %>
 
           <% #= link_to "Show this track", track, class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
