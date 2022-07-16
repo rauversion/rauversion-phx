@@ -93,13 +93,31 @@ defmodule RauversionWeb.TrackLive.Player do
   @impl true
   def handle_event("remove-from-next-up", %{"index" => index}, socket) do
     {i, _} = Integer.parse(index)
-    tracks = List.delete_at(socket.assigns.tracks, i)
-    track = Enum.at(tracks, i)
 
-    {:noreply,
-     socket
-     |> assign(:tracks, tracks)
-     |> assign(:track, track)}
+    tracks =
+      case List.delete_at(socket.assigns.tracks, i) do
+        [_ | _] = tracks -> tracks
+        _ -> socket.assigns.tracks
+      end
+
+    track =
+      case Enum.at(tracks, i) do
+        %Rauversion.Tracks.Track{} = t -> t
+        _ -> List.first(tracks)
+      end
+
+    if i == socket.assigns.index do
+      {:noreply,
+       socket
+       |> assign(:tracks, tracks)
+       |> assign(:track, track)
+       |> push_event("play-song", %{})}
+    else
+      {:noreply,
+       socket
+       |> assign(:tracks, tracks)
+       |> assign(:track, track)}
+    end
   end
 
   @impl true
