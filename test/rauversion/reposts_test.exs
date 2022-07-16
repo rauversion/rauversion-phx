@@ -19,7 +19,7 @@ defmodule Rauversion.RepostsTest do
     def valid_repost() do
       user = user_fixture(%{username: "miki"})
       track = track_fixture(%{user_id: user.id})
-      repost = repost_fixture(%{user_id: user.id, track_id: track.id})
+      repost_fixture(%{user_id: user.id, track_id: track.id})
     end
 
     test "list_reposts/0 returns all reposts" do
@@ -37,7 +37,7 @@ defmodule Rauversion.RepostsTest do
       track = track_fixture(%{user_id: user.id})
       valid_attrs = %{user_id: user.id, track_id: track.id}
 
-      assert {:ok, %Repost{} = repost} = Reposts.create_repost(valid_attrs)
+      assert {:ok, %Repost{} = _repost} = Reposts.create_repost(valid_attrs)
     end
 
     test "create_repost/1 with invalid data returns error changeset" do
@@ -48,7 +48,7 @@ defmodule Rauversion.RepostsTest do
       repost = valid_repost()
       update_attrs = %{}
 
-      assert {:ok, %Repost{} = repost} = Reposts.update_repost(repost, update_attrs)
+      assert {:ok, %Repost{} = _repost} = Reposts.update_repost(repost, update_attrs)
     end
 
     test "update_repost/2 with invalid data returns error changeset" do

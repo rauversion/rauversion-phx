@@ -54,7 +54,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
   @impl true
   def handle_event(
         "validate",
-        %{"_target" => ["track_comment", "body"], "track_comment" => %{"body" => body}},
+        %{"_target" => ["track_comment", "body"], "track_comment" => %{"body" => _body}},
         socket
       ) do
     {:noreply, socket}

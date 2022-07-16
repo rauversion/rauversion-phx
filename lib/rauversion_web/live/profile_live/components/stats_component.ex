@@ -4,7 +4,7 @@ defmodule RauversionWeb.ProfileLive.StatsComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track, profile: profile} = assigns) do
+  def render(%{track: _track, profile: profile} = assigns) do
     ~H"""
     <div class="grid grid-cols-3 divide-x">
       <div class="p-4">

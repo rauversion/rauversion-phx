@@ -24,7 +24,7 @@ defmodule Rauversion.Tracks do
   end
 
   def signed_id(track) do
-    token = Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", track.id)
+    Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", track.id)
   end
 
   def find_by_signed_id!(token) do
@@ -76,7 +76,10 @@ defmodule Rauversion.Tracks do
     |> Repo.preload(:user)
   end
 
-  def preload_tracks_preloaded_by_user(query, current_user_id = %Rauversion.Accounts.User{id: id}) do
+  def preload_tracks_preloaded_by_user(
+        query,
+        _current_user_id = %Rauversion.Accounts.User{id: id}
+      ) do
     likes_query =
       from pi in Rauversion.TrackLikes.TrackLike,
         where: pi.user_id == ^id
@@ -89,7 +92,7 @@ defmodule Rauversion.Tracks do
     |> Repo.preload(likes: likes_query, reposts: reposts_query)
   end
 
-  def preload_tracks_preloaded_by_user(query, current_user_id = nil) do
+  def preload_tracks_preloaded_by_user(query, _current_user_id = nil) do
     query
   end
 
