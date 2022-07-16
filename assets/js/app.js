@@ -112,7 +112,7 @@ window.addEventListener(`phx:add-to-next`, (e) => {
 
 window.addEventListener(`phx:playlist-clear`, (e) => {
   console.log("REMOVE PLAYLIST CLEAR", e.detail)
-  store.setState({playlist: e.detail})
+  store.setState({playlist: e.detail.ids})
 })
 
 window.addEventListener(`phx:remove-from-playlist`, (e) => {
