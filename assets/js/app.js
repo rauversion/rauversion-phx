@@ -75,72 +75,25 @@ let execJS = (selector, attr) => {
 let Hooks = {}
 
 
-Hooks.AudioPlayer = {
-  mounted(){
-    this.heightValue = 70
-    this.playerTarget = this.el
-    this.peaks = JSON.parse(this.el.dataset.audioPeaks)
-    this.url = this.el.dataset.audioUrl
-    this.playiconTarget = this.el.querySelector('[data-audio-target="playicon"]')
-    this.pauseiconTarget =  this.el.querySelector('[data-audio-target="pauseicon"]')
 
-    this._wave = WaveSurfer.create({
-      container: this.playerTarget,
-      backend: 'MediaElement',
-      waveColor: 'grey',
-      progressColor: 'tomato',
-      height: this.heightValue || 70,
-      //fillParent: false,
-      barWidth: 2,
-      //barHeight: 10, // the height of the wave
-      barGap: null,
-      minPxPerSec: 2,
-      pixelRatio: 10,
-      cursorWidth: 1,
-      cursorColor: "lightgray",
-      normalize: false,
-      responsive: true,
-      fillParent: true
-    })
-
-    console.log("VAUES",this.peaks)
-
-    if (!this.url) return 
-    
-    this._wave.load(this.url, this.peaks)
-
-    this._wave.on('pause', ()=> {
-      this.playiconTarget.style.display = 'block'
-      this.pauseiconTarget.style.display = 'none'
-    })
-
-    this._wave.on('play', ()=> {
-      this.playiconTarget.style.display = 'none'
-      this.pauseiconTarget.style.display = 'block'
-    })
-  },
-
-  wave(){
-    return this._wave
-  },
-
-  play(opts = {}){
-    this.wave().playPause()
-  },
-
-  pause(){
-    clearInterval(this.progressTimer)
-    this.player.pause()
-  },
-
-  stop(){
-    this.wave().stop()
-  },
-}
 
 Hooks.Player = Player
 Hooks.TrackHook = TrackHook
 Hooks.InfiniteScroll = InfiniteScroll
+
+Hooks.PlayerInitiator = {
+  mounted(){
+    this.updateFromStorage()  
+  },
+  updateFromStorage(){
+    // append a 0 to list because https://github.com/elixir-lang/elixir/wiki/FAQ#4-why-is-my-list-of-integers-printed-as-a-string
+    let ids = [...window.store.getState().playlist, 0 ]
+    ids = JSON.stringify(ids)
+    console.log("UPDATE FROM STORAGE", ids)
+
+    this.pushEvent("update-from-storage", {ids: ids } )
+  },
+}
 
 
 // handler for remove playlist, this is basically because we are using pxh-update=append on the playlist list
@@ -154,8 +107,27 @@ window.addEventListener(`phx:remove-item`, (e) => {
 
 window.addEventListener(`phx:add-to-next`, (e) => {
   console.log("ADD TO NEXT ITEM", e.detail)
-  store.setState({playlist: [e.detail.value, ...store.getState().playlist ]})
+  store.setState({playlist: [e.detail.value.id, ...store.getState().playlist ]})
 })
+
+window.addEventListener(`phx:playlist-clear`, (e) => {
+  console.log("REMOVE PLAYLIST CLEAR", e.detail)
+  store.setState({playlist: e.detail})
+})
+
+window.addEventListener(`phx:remove-from-playlist`, (e) => {
+  console.log("REMOVE PLAYLIST CLEAR", e.detail.index)
+  const index = parseInt(e.detail.index)
+  let ids = store.getState().playlist
+  
+  if (index > -1) { // only splice array when item is found
+    ids.splice(index, 1); // 2nd parameter means remove one item only
+    console.log("new list", ids)
+    store.setState({playlist: ids})
+  }
+})
+
+
 
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {
   _csrf_token: csrfToken,

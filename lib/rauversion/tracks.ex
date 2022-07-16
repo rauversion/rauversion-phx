@@ -66,7 +66,7 @@ defmodule Rauversion.Tracks do
   end
 
   def list_tracks_by_ids(ids) do
-    list_public_tracks() |> where([t], t.id == ^ids)
+    list_public_tracks() |> where([p], p.id in ^ids)
   end
 
   def list_tracks_by_username(user_id) do

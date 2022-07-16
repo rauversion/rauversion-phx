@@ -1,7 +1,7 @@
 defmodule RauversionWeb.TrackLive.Player do
   use RauversionWeb, :live_view
 
-  alias Rauversion.Tracks
+  alias Rauversion.{Tracks, Repo}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -37,18 +37,22 @@ defmodule RauversionWeb.TrackLive.Player do
 
     index =
       cond do
-        index > size -> size
-        index < 0 -> size
+        index > size -> 0
+        index < 0 -> 0
         true -> index
       end
 
     track = Enum.at(socket.assigns.tracks, index)
 
-    {:noreply,
-     socket
-     |> assign(:track, track)
-     |> assign(:index, index)
-     |> push_event("play-song", %{})}
+    if(index == socket.assigns.index) do
+      {:noreply, socket}
+    else
+      {:noreply,
+       socket
+       |> assign(:track, track)
+       |> assign(:index, index)
+       |> push_event("play-song", %{})}
+    end
   end
 
   @impl true
@@ -64,7 +68,11 @@ defmodule RauversionWeb.TrackLive.Player do
   @impl true
   def handle_event("clear-all", _, socket) do
     track = List.last(socket.assigns.tracks)
-    {:noreply, socket |> assign(:tracks, [track])}
+
+    {:noreply,
+     socket
+     |> assign(:tracks, [track])
+     |> push_event("playlist-clear", %{ids: [track.id]})}
   end
 
   @impl true
@@ -111,13 +119,29 @@ defmodule RauversionWeb.TrackLive.Player do
        socket
        |> assign(:tracks, tracks)
        |> assign(:track, track)
-       |> push_event("play-song", %{})}
+       |> push_event("play-song", %{})
+       |> push_event("remove-from-playlist", %{index: index})}
     else
       {:noreply,
        socket
        |> assign(:tracks, tracks)
-       |> assign(:track, track)}
+       |> assign(:track, track)
+       |> push_event("remove-from-playlist", %{index: index})}
     end
+  end
+
+  @impl true
+  def handle_event("update-from-storage", %{"ids" => stringified_ids}, socket) do
+    ids = Jason.decode!(stringified_ids)
+
+    tracks = Tracks.list_tracks_by_ids(ids) |> Repo.all()
+    track = List.first(tracks)
+
+    {:noreply,
+     socket
+     |> assign(:tracks, tracks)
+     |> assign(:track, track)
+     |> assign(:index, 0)}
   end
 
   @impl true
@@ -125,6 +149,7 @@ defmodule RauversionWeb.TrackLive.Player do
     ~H"""
     <div
       id="main-player"
+      phx-hook="PlayerInitiator"
       class="z-50 fixed bottom-0 w-full h-[6rem]-- py-2 bg-gray-900">
 
       <%= if @track do %>
@@ -189,7 +214,7 @@ defmodule RauversionWeb.TrackLive.Player do
 
                 <div class="flex items-center mx-2">
                   <div class="relative">
-                    <div class={" #{if @volume do "" else "hidden" end} h-[115px] absolute top-[-8em] left-[-25px] bg-white border shadow-md"}>
+                    <div class={" #{if @volume do "" else "hidden" end} h-[115px] absolute top-[-8em] left-[-25px] bg-white border shadow-md z-50"}>
                       <input
                         type="range"
                         min="0" max="1" step="0.1"

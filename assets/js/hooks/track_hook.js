@@ -92,24 +92,21 @@ Player = {
     const data = JSON.parse(this.peaks) 
     this._wave.load(this.url, data)
     
-    /*this._wave.on('pause', ()=> {
-      this.playiconTarget.style.display = 'none'
-      this.pauseiconTarget.style.display = 'block'
+    this._wave.on('ready', ()=> {
+      console.log("READY")
+      // sends the progress position to track_component
+      this._wave.drawer.wrapper.addEventListener('mouseup', (e)=> {
+       const trackId = this.el.dataset.trackId
+       const ev = new CustomEvent(`audio-process-mouseup`, {
+         detail: {
+          trackId: trackId,
+          postition: this._wave.drawer.lastPos,
+          percent: this._wave.backend.getPlayedPercents()
+        }
+       });
+       document.dispatchEvent(ev)
+      });
     })
-
-    this._wave.on('play', ()=> {
-      this.playiconTarget.style.display = 'block'
-      this.pauseiconTarget.style.display = 'none'
-    })*/
-
-    /*this._wave.on('audioprocess', (e)=> {
-      // console.log("AUDIO PROCESS", e)
-    })*/
-
-    /*this._wave.on('finish', (e) => {
-      console.log("FINISH PROCESS")
-      this.nextSong()
-    })*/
   },
   destroyWave() {
     this._wave && this._wave.destroy()

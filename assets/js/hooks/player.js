@@ -54,7 +54,6 @@ Player = {
         this.playSong()
       }, 400)
     })
-
     this._wave = null
     this.initWave()
   },
@@ -109,6 +108,7 @@ Player = {
 
     this._wave.on('ready', ()=> {
       console.log("READY")
+      // sends the progress position to track_component
       this._wave.drawer.wrapper.addEventListener('mouseup', (e)=> {
        const trackId = this.el.dataset.trackId
        const ev = new CustomEvent(`audio-process-${trackId}`, {
@@ -119,6 +119,11 @@ Player = {
        });
        document.dispatchEvent(ev)
       });
+    })
+
+    // receives audio-process progress from track hook
+    document.addEventListener('audio-process-mouseup', (e) => {
+      this._wave.drawer.progress(e.detail.percent)
     })
 
     this._wave.on('finish', (e) => {
