@@ -55,14 +55,14 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                     </div>
                     <div class="min-w-0 flex-1">
                       <p class="text-sm font-medium text-gray-900">
-                        <%= link "#{item.first_name} #{item.last_name}", to: Routes.profile_index_path(@socket, :index, item.username) %>
+                        <%= live_redirect "#{item.first_name} #{item.last_name}", to: Routes.profile_index_path(@socket, :index, item.username) %>
                       </p>
                       <p class="text-sm text-gray-500">
-                        <%= link "#{item.username}", to: Routes.profile_index_path(@socket, :index, item.username) %>
+                        <%= live_redirect "#{item.username}", to: Routes.profile_index_path(@socket, :index, item.username) %>
                       </p>
                     </div>
                     <div class="flex-shrink-0">
-                      <%= link to: "#", phx_click: "follow-account", phx_value_id: item.id, phx_target: @myself, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" do %>
+                      <%= live_redirect to: "#", phx_click: "follow-account", phx_value_id: item.id, phx_target: @myself, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" do %>
                         <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" x-description="Heroicon name: solid/plus-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>
