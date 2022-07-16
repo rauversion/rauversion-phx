@@ -18,9 +18,7 @@
     <p class="alert"></p>
     <%= @inner_content %>
 
-    <%= if Mix.env() in [:dev, :test] do %>
-      <%= live_render(@conn, RauversionWeb.TrackLive.Player, id: "global-main-player", session: %{}, sticky: true) %>
-    <% end %>
+    <%= live_render(@conn, RauversionWeb.TrackLive.Player, id: "global-main-player", session: %{}, sticky: true) %>
 
   </body>
 </html>
