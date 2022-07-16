@@ -53,7 +53,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
   - [ ] share button playlist/show
   - [x] playlist player
 - [ ] Fix specs on tests/rauversion-web
-- [ ] Make GithubActions work!
+- [x] Make GithubActions work!
 - [ ] Listening history
 - [ ] Give feedback on upload preprosessing
 - [ ] Refactor audio processing, add proceesing queue for the after upload
