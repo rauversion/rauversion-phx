@@ -152,33 +152,18 @@ Player = {
   },
   nextSong(){
     this.destroyWave()
-    const nextSong = window.store.getState().playlist[this.currentSongIndex + 1]
-    //if(nextSong){
-    //  this.currentSongIndex = this.currentSongIndex+1
-    //  this.currentSong = nextSong
-      this.pushEvent("request-song", {action: "next"} )
-    //} else {
-      console.log("no more songs to play")
-    //}
+    this.pushEvent("request-song", {action: "next"} )
+    console.log("no more songs to play")
   },
   prevSong(){
     this.destroyWave()
-
-    //const prevSong = window.store.getState().playlist[this.currentSongIndex - 1]
-    //if(prevSong){
-    //  this.currentSongIndex = this.currentSongIndex+1
-    //  this.currentSong = prevSong
-      this.pushEvent("request-song", {action: "prev"} )
-    //} else {
-    //  console.log("no more songs to play")
-    //}
+    this.pushEvent("request-song", {action: "prev"} )
   },
   playSong(){
     this._wave.playPause()
   },
   reconnected(){ },
   updated(){ }
-
 }
 
 export default Player
