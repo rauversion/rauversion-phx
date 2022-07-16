@@ -7,16 +7,8 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
 
   @impl true
   def mount(socket) do
-    # socket = assign(socket, :tracks, Tracks.list_tracks())
+    socket = assign(socket, :page, 1)
     {:ok, socket, temporary_assigns: [messages: []]}
-  end
-
-  @impl true
-  def handle_event("paginate", %{}, socket) do
-    {:noreply,
-     socket
-     |> assign(:page, socket.assigns.page + 1)
-     |> assign(:tracks, list_tracks(socket.assigns))}
   end
 
   @impl true
@@ -39,6 +31,14 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
       :cover_attachment,
       user: :avatar_attachment
     ])
+  end
+
+  @impl true
+  def handle_event("paginate", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:page, socket.assigns.page + 1)
+     |> assign(:tracks, list_tracks(socket.assigns))}
   end
 
   @impl true

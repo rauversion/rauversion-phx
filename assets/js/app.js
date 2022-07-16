@@ -29,6 +29,7 @@ import "./controllers"
 
 import InfiniteScroll from "./hooks/infinite_scroll"
 import Player from "./hooks/player"
+import TrackHook from "./hooks/track_hook"
 
 //import WaveSurfer from 'wavesurfer'
 
@@ -39,9 +40,9 @@ import { persist } from 'zustand/middleware'
 const store = create(
   persist(
     (set, get) => ({
-      fishes: 0,
+      volume: 0.9,
       playlist: [],
-      addAFish: () => set({ fishes: get().fishes + 1 }),
+      //addAFish: () => set({ fishes: get().fishes + 1 }),
     }),
     {
       name: 'rau-storage', // unique name
@@ -56,9 +57,8 @@ subscribe((v)=> {
   console.log("value changes", v)
 })
 
-setState({fishes: 1})
-
-window.s = store
+// setState({fishes: 1})
+window.store = store
 // import * as ActiveStorage from "@rails/activestorage"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
@@ -139,8 +139,7 @@ Hooks.AudioPlayer = {
 }
 
 Hooks.Player = Player
-
-
+Hooks.TrackHook = TrackHook
 Hooks.InfiniteScroll = InfiniteScroll
 
 
@@ -158,7 +157,10 @@ window.addEventListener(`phx:add-to-next`, (e) => {
   store.setState({playlist: [e.detail.value, ...store.getState().playlist ]})
 })
 
-let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {
+  _csrf_token: csrfToken,
+  //store: JSON.stringify(store.getState().playlist)
+}})
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()

@@ -158,9 +158,10 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
         <% # if track.audio.persisted? %>
           <%= content_tag :div, id: "track-player-#{track.id}",
-                                "phx-hooks-disabled": "AudioPlayer",
+                                "phx-hook": "TrackHook",
                                 "phx-update": "ignore",
-                                "data-controller": "audio",
+                                "data-controllersss": "audio",
+                                "data-audio-id": track.id,
                                 "data-audio-target": "player",
                                 "data-audio-height-value": 70,
                                 "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(track, :peaks)),

@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import WaveSurfer from 'wavesurfer'
+import WaveSurfer from 'wavesurfer.js'
 export default class extends Controller {
   static targets = ['player', 'play', 'playicon', 'pauseicon']
 

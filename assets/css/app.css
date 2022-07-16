@@ -101,366 +101,52 @@
 
 
 
-/* cassette */
 
-.cassette__media_button_wrapper {
-  display: inline-block;
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type='range'] {
+    overflow: hidden;
+    width: 80px;
+    -webkit-appearance: none;
+    background-color: #f7f70d;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #0a0801;
+    margin-top: -1px;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    width: 10px;
+    -webkit-appearance: none;
+    height: 10px;
+    cursor: ew-resize;
+    background: #f98b05;
+    box-shadow: -80px 0 0 80px #000;
+  }
+
 }
 
-.cassette__media_button {
-  padding-left: 11px;
-  padding-right: 11px;
-  margin-left: 4px;
-  margin-right: 4px;
-  cursor: pointer;
-  align-self: center;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-  height: 50px;
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #f98b05;
 }
 
-.cassette__media_button .foreground {
-  opacity: 0.8;
+input[type="range"]::-moz-range-track {
+  background-color: #0a0801;
 }
 
-.cassette__media_button:hover .foreground,
-.cassette__media_button.highlight .foreground {
-  opacity: 1;
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #f98b05;
 }
 
-.cassette__media_button:active .foreground {
-  opacity: 0.7;
+input[type="range"]::-ms-fill-upper {
+  background-color: #9a905d;
 }
 
-.cassette {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-  height: 100%;
+input[type="range"].vertical {
+  transform: rotate(270deg);
 }
-
-.cassette__control_bar {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-  flex-wrap: wrap-reverse;
-  -webkit-box-pack: center;
-  justify-content: center;
-  background-color: #333;
-}
-
-.cassette__control_bar>* {
-  height: 50px;
-}
-
-.cassette__media_progress_container {
-  position: relative;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  min-width: 300px;
-}
-
-.cassette__media_progress_bar {
-  height: 100%;
-}
-
-.cassette__media_progress_bar .progress {
-  background-color: rgba(127, 127, 127, 0.295);
-}
-
-.cassette__media_status_bar {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.cassette__media_info_marquee {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: 19.2px;
-  color: #fff;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-  -webkit-box-align: center;
-  align-items: center;
-}
-
-.cassette__media_info_marquee>* {
-  width: 100%;
-}
-
-.cassette__media_info_marquee>*>* {
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.cassette__media_time_progress {
-  margin-right: 20px;
-  align-self: center;
-  color: #fff;
-  font-size: 23px;
-}
-
-.cassette {
-  /* https://codepen.io/OxyDesign/pen/ojpepQ */
-}
-
-.cassette__play_pause_button {
-  background: none;
-  border: none;
-}
-
-.cassette__play_pause_button .foreground {
-  position: relative;
-  width: 30px;
-  height: 30px;
-}
-
-.cassette__play_pause_button .left,
-.cassette__play_pause_button .right {
-  position: absolute;
-  top: 0;
-  transition-property: width;
-  transition-duration: 0.25s;
-  transition-timing-function: ease;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.cassette__play_pause_button .left::after,
-.cassette__play_pause_button .right::after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  transition-property: border, height;
-  transition-duration: 0.25s;
-  transition-timing-function: ease;
-  border-style: solid;
-  border-width: 15px 30px;
-  border-color: transparent transparent transparent #fff;
-  width: 0;
-  height: 0;
-}
-
-.cassette__play_pause_button .left {
-  left: 0;
-}
-
-.cassette__play_pause_button .left::after {
-  left: 0;
-}
-
-.cassette__play_pause_button .right {
-  right: 0;
-}
-
-.cassette__play_pause_button .right::after {
-  right: -30px;
-}
-
-.cassette__play_pause_button.playing .left,
-.cassette__play_pause_button.playing .right {
-  width: 36%;
-}
-
-.cassette__play_pause_button.playing .left::after,
-.cassette__play_pause_button.playing .right::after {
-  border-width: 0 30px;
-  height: 30px;
-}
-
-.cassette__volume_control {
-  height: 50px;
-  position: relative;
-}
-
-.cassette__volume_control__volume_bar_container {
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-.cassette__volume_control__volume_bar_container.hiddenup,
-.cassette__volume_control__volume_bar_container.hiddenright {
-  visibility: hidden;
-}
-
-.cassette__volume_control__volume_bar_container.hiddenup,
-.cassette__volume_control__volume_bar_container.upabove {
-  width: 100%;
-  height: 158px;
-}
-
-.cassette__volume_control__volume_bar_container.hiddenright,
-.cassette__volume_control__volume_bar_container.rightabove,
-.cassette__volume_control__volume_bar_container.rightbelow {
-  width: 180px;
-  height: 78px;
-}
-
-.cassette__volume_control__volume_bar_container.hiddenup,
-.cassette__volume_control__volume_bar_container.hiddenright,
-.cassette__volume_control__volume_bar_container.upabove,
-.cassette__volume_control__volume_bar_container.rightabove {
-  bottom: 50px;
-}
-
-.cassette__volume_control__volume_bar_container.rightbelow {
-  top: 50px;
-}
-
-.cassette__volume_control__volume_bar {
-  position: absolute;
-  border-radius: 11px;
-  background-color: #333;
-  box-shadow: 1px 1px 6px 2px rgba(36, 36, 36, 0.8);
-}
-
-.cassette__volume_control__volume_bar.hiddenup,
-.cassette__volume_control__volume_bar.upabove {
-  bottom: 28px;
-  top: 50px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  width: 22px;
-}
-
-.cassette__volume_control__volume_bar.hiddenright,
-.cassette__volume_control__volume_bar.rightabove,
-.cassette__volume_control__volume_bar.rightbelow {
-  bottom: 28px;
-  top: 28px;
-  left: 50px;
-  right: 50px;
-}
-
-.cassette__volume_control__volume_bar .volume {
-  border-radius: 11px;
-  background-color: rgba(127, 127, 127, 0.295);
-}
-
-.cassette__volume_control__volume_bar .handle {
-  cursor: pointer;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background-color: rgba(127, 127, 127, 0.295);
-  box-shadow: 1px 1px 6px 0px rgba(51, 51, 51, 0.8);
-  position: relative;
-}
-
-.cassette__volume_control__volume_bar .handle>div {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background-color: #fff;
-  opacity: 0.8;
-}
-
-.cassette__volume_control__volume_bar .handle:hover>div,
-.cassette__volume_control__volume_bar .handle.highlight>div {
-  opacity: 1;
-}
-
-.cassette__volume_control__volume_bar .handle:active>div {
-  opacity: 1;
-}
-
-.cassette__material_toggle {
-  background: none;
-  border: none;
-}
-
-.cassette__material_toggle .inner {
-  margin-left: -8px;
-  margin-right: -8px;
-  width: 48px;
-  height: 42px;
-}
-
-.cassette__material_toggle svg {
-  fill: rgba(255, 255, 255, 0.5);
-}
-
-.cassette__material_toggle.on svg {
-  fill: #fff;
-}
-
-.cassette__skip_button {
-  background: none;
-  border: none;
-}
-
-.cassette__skip_button.back {
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-
-.cassette__skip_button .skip_button_inner {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-}
-
-.cassette__skip_button .right_facing_triangle {
-  width: 0;
-  height: 0;
-  border-left: 16px solid #fff;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-}
-
-.cassette__skip_button .vertical_bar {
-  width: 0;
-  height: 0;
-  margin-left: -3px;
-  border-left: 3px solid #fff;
-  border-top: 10px solid #fff;
-  border-bottom: 10px solid #fff;
-}
-
-.cassette__video_display_container {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-}
-
-.cassette__spacer {
-  width: 10px;
-}
-
-
-/*# sourceMappingURL=cassette-player.css.map*/
