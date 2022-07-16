@@ -24,11 +24,22 @@ defmodule RauversionWeb.TrackLive.Player do
   @impl true
   def handle_event("request-song", %{"action" => action}, socket) do
     # track = Tracks.get_track!(id) |> Rauversion.Repo.preload([:user, :mp3_audio_blob])
+    size = length(socket.assigns.tracks) - 1
 
     index =
       case action do
-        "next" -> socket.assigns.index + 1
-        "prev" -> socket.assigns.index - 1
+        "next" ->
+          socket.assigns.index + 1
+
+        "prev" ->
+          socket.assigns.index - 1
+      end
+
+    index =
+      cond do
+        index > size -> size
+        index < 0 -> size
+        true -> index
       end
 
     track = Enum.at(socket.assigns.tracks, index)
