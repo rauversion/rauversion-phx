@@ -49,7 +49,7 @@ defmodule Rauversion.UserFollowsTest do
         following_id: user2.id
       }
 
-      assert {:ok, %UserFollow{} = user_follow} = UserFollows.create_user_follow(valid_attrs)
+      assert {:ok, %UserFollow{} = _user_follow} = UserFollows.create_user_follow(valid_attrs)
     end
 
     test "create_user_follow/1 with invalid data returns error changeset" do
@@ -68,7 +68,7 @@ defmodule Rauversion.UserFollowsTest do
 
       update_attrs = %{}
 
-      assert {:ok, %UserFollow{} = user_follow} =
+      assert {:ok, %UserFollow{} = _user_follow} =
                UserFollows.update_user_follow(user_follow, update_attrs)
     end
 

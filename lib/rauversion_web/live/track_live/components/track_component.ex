@@ -19,7 +19,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   @impl true
   def update(assigns = %{current_user: _current_user}, socket) do
     case assigns do
-      %{current_user: current_user} ->
+      %{current_user: _current_user} ->
         repost =
           case assigns.track.reposts do
             [repost] -> repost
@@ -48,8 +48,10 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   @impl true
   def handle_event(
         "like-track",
-        %{"id" => id},
-        socket = %{assigns: %{track: track, current_user: current_user}}
+        %{"id" => _id},
+        socket = %{
+          assigns: %{track: track, current_user: current_user = %Rauversion.Accounts.User{}}
+        }
       ) do
     attrs = %{user_id: current_user.id, track_id: track.id}
 
@@ -70,7 +72,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   def handle_event(
         "like-track",
         %{"id" => _id},
-        socket = %{assigns: %{track: _track, current_user: nil}}
+        socket = %{assigns: %{track: _track, current_user: _user = nil}}
       ) do
     # TODO: SHOW MODAL HERE
     {:noreply, socket}
@@ -79,7 +81,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   @impl true
   def handle_event(
         "repost-track",
-        %{"id" => id},
+        %{"id" => _id},
         socket = %{
           assigns: %{track: track, current_user: current_user = %Rauversion.Accounts.User{}}
         }

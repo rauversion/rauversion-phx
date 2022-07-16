@@ -7,7 +7,7 @@ defmodule Rauversion.TrackCommentsTest do
     alias Rauversion.TrackComments.TrackComment
 
     import Rauversion.{
-      RepostsFixtures,
+      # RepostsFixtures,
       TracksFixtures,
       AccountsFixtures,
       TrackCommentsFixtures

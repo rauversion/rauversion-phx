@@ -97,7 +97,7 @@ defmodule Rauversion.PlaylistsTest do
           track_playlists: [%{track_id: track.id}]
         })
 
-      length(result.track_playlists) == 1
+      assert length(result.track_playlists) == 1
     end
   end
 end

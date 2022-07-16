@@ -8,7 +8,7 @@ defmodule Rauversion.TrackLikesTest do
 
     import Rauversion.{
       TrackLikesFixtures,
-      RepostsFixtures,
+      # RepostsFixtures,
       TracksFixtures,
       AccountsFixtures
     }
@@ -34,7 +34,7 @@ defmodule Rauversion.TrackLikesTest do
     test "create_track_like/1 with valid data creates a track_like", %{user: user, track: track} do
       valid_attrs = %{user_id: user.id, track_id: track.id}
 
-      assert {:ok, %TrackLike{} = track_like} = TrackLikes.create_track_like(valid_attrs)
+      assert {:ok, %TrackLike{} = _track_like} = TrackLikes.create_track_like(valid_attrs)
     end
 
     test "create_track_like/1 with invalid data returns error changeset" do
@@ -45,7 +45,7 @@ defmodule Rauversion.TrackLikesTest do
       track_like = track_like_fixture(%{user_id: user.id, track_id: track.id})
       update_attrs = %{}
 
-      assert {:ok, %TrackLike{} = track_like} =
+      assert {:ok, %TrackLike{} = _track_like} =
                TrackLikes.update_track_like(track_like, update_attrs)
     end
 

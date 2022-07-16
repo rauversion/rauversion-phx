@@ -12,14 +12,6 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
   end
 
   @impl true
-  def handle_event("paginate", %{}, socket) do
-    {:noreply,
-     socket
-     |> assign(:page, socket.assigns.page + 1)
-     |> assign(:tracks, list_tracks(socket.assigns))}
-  end
-
-  @impl true
   def update(assigns, socket) do
     tracks = list_tracks(assigns)
 
@@ -32,7 +24,15 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
 
   defp list_tracks(page) do
     Tracks.list_public_tracks()
-    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+    |> Repo.paginate(page: page, page_size: 5)
+  end
+
+  @impl true
+  def handle_event("paginate", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:page, socket.assigns.page + 1)
+     |> assign(:tracks, list_tracks(socket.assigns))}
   end
 
   @impl true

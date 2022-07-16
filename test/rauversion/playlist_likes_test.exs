@@ -37,7 +37,7 @@ defmodule Rauversion.PlaylistLikesTest do
     } do
       valid_attrs = %{user_id: user.id, playlist_id: playlist.id}
 
-      assert {:ok, %PlaylistLike{} = playlist_like} =
+      assert {:ok, %PlaylistLike{} = _playlist_like} =
                PlaylistLikes.create_playlist_like(valid_attrs)
     end
 
@@ -52,7 +52,7 @@ defmodule Rauversion.PlaylistLikesTest do
       playlist_like = playlist_like_fixture(%{user_id: user.id, playlist_id: playlist.id})
       update_attrs = %{}
 
-      assert {:ok, %PlaylistLike{} = playlist_like} =
+      assert {:ok, %PlaylistLike{} = _playlist_like} =
                PlaylistLikes.update_playlist_like(playlist_like, update_attrs)
     end
 

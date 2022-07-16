@@ -1,11 +1,11 @@
 defmodule Rauversion.PeaksGeneratorTest do
   use Rauversion.DataCase
 
-  alias Rauversion.Playlists
+  # alias Rauversion.Playlists
 
   describe "peaks generator" do
     test "peaks gen" do
-      assert [hd | rest] =
+      assert [_hd | rest] =
                Rauversion.Services.PeaksGenerator.run_audiowaveform("./test/files/audio.mp3", 3)
 
       IO.inspect(rest)
