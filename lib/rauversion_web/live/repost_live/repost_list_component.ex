@@ -77,6 +77,7 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
                     track={track}
                     repost={nil}
                     like={nil}
+                    ref={nil}
                     current_user={assigns[:current_user]}
                   />
                 <% end %>
