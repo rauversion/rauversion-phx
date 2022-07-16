@@ -4,7 +4,8 @@ defmodule Rauversion.PeaksGeneratorTest do
   # alias Rauversion.Playlists
 
   describe "peaks generator" do
-    test "peaks gen" do
+    @tag skip: "this test is incomplete - decide on final biz logic and assert"
+    test "peaks gen with audiowebsurfer" do
       assert [_hd | rest] =
                Rauversion.Services.PeaksGenerator.run_audiowaveform("./test/files/audio.mp3", 3)
 
@@ -13,9 +14,7 @@ defmodule Rauversion.PeaksGeneratorTest do
     end
 
     test "peaks gen ffprobe" do
-      a = Rauversion.Services.PeaksGenerator.run_ffprobe("./test/files/audio.mp3", 3)
-      require IEx
-      IEx.pry()
+      assert [_ | _] = Rauversion.Services.PeaksGenerator.run_ffprobe("./test/files/audio.mp3", 3)
     end
 
     test "desired pixels" do
