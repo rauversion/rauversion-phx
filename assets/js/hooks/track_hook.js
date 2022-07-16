@@ -21,6 +21,13 @@ Player = {
       this.pushEventTo("#main-player", "play-song", {id: this.el.dataset.audioId } )
     })
 
+    window.addEventListener(`phx:add-from-playlist`, (e) => {
+      console.log("ADD FROM PLAYLIST", e.detail)
+      this.pushEventTo("#main-player", "play-song", {id: e.detail.track_id } )
+    })
+
+
+
     //this.nextBtn = this.el.querySelector('[data-audio-target="next"]')
     //this.rewBtn = this.el.querySelector('[data-audio-target="rew"]')
 

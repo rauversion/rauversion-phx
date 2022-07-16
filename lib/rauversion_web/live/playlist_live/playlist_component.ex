@@ -89,7 +89,11 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     <li class="py-4">
                       <div class="flex items-center space-x-4">
                         <div class="flex-shrink-0">
-                          <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        <%= img_tag(Rauversion.Tracks.variant_url(
+                          track_playlists.track, "cover", %{resize_to_limit: "360x360"}),
+                          class: "h-8 w-8 rounded-full")
+                        %>
+
                         </div>
                         <div class="flex-1 min-w-0">
                           <p class="text-sm font-medium text-gray-900 truncate"><%= track_playlists.track.title %></p>

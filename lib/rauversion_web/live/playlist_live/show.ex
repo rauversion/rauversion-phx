@@ -33,18 +33,23 @@ defmodule RauversionWeb.PlaylistLive.Show do
       Rauversion.Tracks.get_track!(id)
       |> Rauversion.Repo.preload([:user, :mp3_audio_blob, :cover_blob])
 
-    {
-      :noreply,
-      push_event(
-        socket,
-        "change-playlist-track",
-        %{
-          track_id: track.id,
-          audio_peaks: Jason.encode!(Rauversion.Tracks.metadata(track, :peaks)),
-          audio_url: Rauversion.Tracks.blob_proxy_url(track, "mp3_audio")
-        }
-      )
-    }
+    {:noreply,
+     socket
+     |> assign(:track, track)
+     |> push_event("add-from-playlist", %{track_id: track.id})}
+
+    # {
+    #   :noreply,
+    #   push_event(
+    #     socket,
+    #     "change-playlist-track",
+    #     %{
+    #       track_id: track.id,
+    #       audio_peaks: Jason.encode!(Rauversion.Tracks.metadata(track, :peaks)),
+    #       audio_url: Rauversion.Tracks.blob_proxy_url(track, "mp3_audio")
+    #     }
+    #   )
+    # }
   end
 
   @impl true
