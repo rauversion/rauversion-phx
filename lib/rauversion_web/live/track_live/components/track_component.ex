@@ -7,109 +7,6 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   alias Rauversion.Tracks
 
   @impl true
-  def update(assigns = %{current_user: nil}, socket) do
-    {
-      :ok,
-      socket
-      |> assign(assigns)
-      |> assign(:repost, nil)
-    }
-  end
-
-  @impl true
-  def update(assigns = %{current_user: _current_user}, socket) do
-    case assigns do
-      %{current_user: _current_user} ->
-        repost =
-          case assigns.track.reposts do
-            [repost] -> repost
-            _ -> nil
-          end
-
-        like =
-          case assigns.track.likes do
-            [like] -> like
-            _ -> nil
-          end
-
-        {
-          :ok,
-          socket
-          |> assign(assigns)
-          |> assign(:repost, repost)
-          |> assign(:like, like)
-        }
-
-      _ ->
-        {:ok, socket |> assign(:repost, nil)}
-    end
-  end
-
-  @impl true
-  def handle_event(
-        "like-track",
-        %{"id" => _id},
-        socket = %{
-          assigns: %{track: track, current_user: current_user = %Rauversion.Accounts.User{}}
-        }
-      ) do
-    attrs = %{user_id: current_user.id, track_id: track.id}
-
-    case socket.assigns.like do
-      %Rauversion.TrackLikes.TrackLike{} = track_like ->
-        Rauversion.TrackLikes.delete_track_like(track_like)
-        {:noreply, assign(socket, :like, nil)}
-
-      _ ->
-        {:ok, %Rauversion.TrackLikes.TrackLike{} = track_like} =
-          Rauversion.TrackLikes.create_track_like(attrs)
-
-        {:noreply, assign(socket, :like, track_like)}
-    end
-  end
-
-  @impl true
-  def handle_event(
-        "like-track",
-        %{"id" => _id},
-        socket = %{assigns: %{track: _track, current_user: _user = nil}}
-      ) do
-    # TODO: SHOW MODAL HERE
-    {:noreply, socket}
-  end
-
-  @impl true
-  def handle_event(
-        "repost-track",
-        %{"id" => _id},
-        socket = %{
-          assigns: %{track: track, current_user: current_user = %Rauversion.Accounts.User{}}
-        }
-      ) do
-    attrs = %{user_id: current_user.id, track_id: track.id}
-
-    case socket.assigns.repost do
-      %Rauversion.Reposts.Repost{} = repost ->
-        Rauversion.Reposts.delete_repost(repost)
-        {:noreply, assign(socket, :repost, nil)}
-
-      _ ->
-        {:ok, %Rauversion.Reposts.Repost{} = repost} = Rauversion.Reposts.create_repost(attrs)
-        {:noreply, assign(socket, :repost, repost)}
-    end
-  end
-
-  @impl true
-  def handle_event(
-        "repost-track",
-        %{"id" => _id},
-        socket = %{assigns: %{track: _track, current_user: nil}}
-      ) do
-    # TODO: SHOW MODAL HERE
-    {:noreply, socket}
-  end
-
-  @impl true
   def handle_event("add-to-next", %{"id" => id}, socket) do
     track = Tracks.get_track!(id) |> Rauversion.Repo.preload([:user, :mp3_audio_blob])
 
@@ -126,14 +23,9 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   def render(
         %{
           track: track,
-          current_user: current_user,
-          repost: repost,
-          like: like
+          current_user: current_user
         } = assigns
       ) do
-    repost_class = active_button_class(repost)
-    like_class = active_button_class(like)
-
     ~H"""
     <div id={"track-item-#{track.id}"} class="flex flex-col sm:flex-row border rounded-md shadow-sm my-2">
       <div class="w-full sm:w-1/4 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
@@ -230,27 +122,19 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             track={track}
           />
 
-          <%= link to: "#", phx_click: "repost-track", phx_target: @myself, phx_value_id: track.id,
-            class: repost_class.class do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-            </svg>
-            <span>Repost</span>
-          <% end %>
+          <.live_component
+            id={"like-track-button-#{track.id}"}
+            module={RauversionWeb.TrackLive.LikeTrackButtonComponent}
+            track={track}
+            current_user={current_user}
+          />
 
-          <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: track.id,
-            class: like_class.class do %>
-            <%= if @like do %>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-              </svg>
-            <% else %>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            <% end %>
-            <span>Like</span>
-          <% end %>
+          <.live_component
+            id={"repost-track-button-#{track.id}"}
+            module={RauversionWeb.TrackLive.RepostTrackButtonComponent}
+            track={track}
+            current_user={current_user}
+          />
 
           <%= if current_user do %>
 

@@ -4,7 +4,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def update(assigns = %{current_user: nil}, socket) do
+  def update(assigns = %{current_user: _user = nil}, socket) do
     {
       :ok,
       socket
@@ -14,7 +14,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
 
   def update(assigns, socket) do
     case assigns do
-      %{current_user: _current_user} ->
+      %{current_user: _current_user = %Rauversion.Accounts.User{}} ->
         like =
           case assigns.playlist.likes do
             [like] -> like
@@ -58,7 +58,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
   def handle_event(
         "like-playlist",
         %{"id" => _id},
-        socket = %{assigns: %{playlist: _playlist, current_user: nil}}
+        socket = %{assigns: %{playlist: _playlist, current_user: _user = nil}}
       ) do
     # TODO: SHOW MODAL HERE
     {:noreply, socket}

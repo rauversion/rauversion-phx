@@ -1,7 +1,7 @@
 defmodule RauversionWeb.TrackLive.Show do
   use RauversionWeb, :live_view
 
-  alias Rauversion.{Tracks, Repo}
+  alias Rauversion.{Tracks, Repo, Accounts}
   alias RauversionWeb.TrackLive.Step
 
   @impl true
@@ -14,8 +14,29 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id} = _params, _, socket = %{assigns: %{live_action: :show}}) do
+  def handle_params(
+        %{"id" => id} = _params,
+        _,
+        socket = %{assigns: %{live_action: :show, current_user: _user = nil}}
+      ) do
     track = Tracks.get_track!(id) |> Repo.preload(:user)
+
+    {:noreply,
+     socket
+     |> assign(:page_title, page_title(socket.assigns.live_action))
+     |> assign(:track, track)}
+  end
+
+  @impl true
+  def handle_params(
+        %{"id" => id} = _params,
+        _,
+        socket = %{assigns: %{live_action: :show, current_user: user = %Accounts.User{}}}
+      ) do
+    track =
+      Tracks.get_track!(id)
+      |> Rauversion.Tracks.preload_tracks_preloaded_by_user(user)
+      |> Rauversion.Repo.preload([:user])
 
     {:noreply,
      socket

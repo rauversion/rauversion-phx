@@ -110,6 +110,7 @@ defmodule RauversionWeb.LiveHelpers do
       |> assign(:current_user, user)
     else
       socket
+      |> assign(:current_user, nil)
     end
   end
 
