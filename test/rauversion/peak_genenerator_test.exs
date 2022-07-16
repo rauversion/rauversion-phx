@@ -23,9 +23,6 @@ defmodule Rauversion.PeaksGeneratorTest do
 
       pixels_per_second =
         Rauversion.Services.PeaksGenerator.desired_pixels_per_second(desired_pixels, duration)
-
-      require IEx
-      IEx.pry()
     end
   end
 end

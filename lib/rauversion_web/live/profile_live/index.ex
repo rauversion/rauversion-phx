@@ -103,8 +103,6 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   def handle_params(%{"sort_by" => _sort_by}, _url, _socket) do
-    require IEx
-    IEx.pry()
     # post_id = socket.assigns.post.id
     # do something with sort_by
   end
