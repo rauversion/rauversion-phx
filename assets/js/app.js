@@ -59,6 +59,11 @@ subscribe((v)=> {
 
 // setState({fishes: 1})
 window.store = store
+
+if (!Array.isArray(store.getState().playlist)){
+  store.setState({playlist: []})
+}
+
 // import * as ActiveStorage from "@rails/activestorage"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
@@ -126,8 +131,6 @@ window.addEventListener(`phx:remove-from-playlist`, (e) => {
     store.setState({playlist: ids})
   }
 })
-
-
 
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {
   _csrf_token: csrfToken,
