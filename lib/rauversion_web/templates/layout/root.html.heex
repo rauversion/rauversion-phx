@@ -9,21 +9,6 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   
-    <!-- 
-      <link rel="stylesheet" href="https://unpkg.com/@cassette/player/dist/css/cassette-player.css">
-      
-      <script src="https://unpkg.com/react@16.8.6/umd/react.development.js"></script>
-      <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js"></script>
-      <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
-      <script src="https://unpkg.com/resize-observer-polyfill@1.5.1/dist/ResizeObserver.js"></script>
-
-      
-      <script src="https://unpkg.com/@cassette/core@2.0.0-beta.1/dist/es5/cassette-core.js"></script>
-      <script src="https://unpkg.com/@cassette/components@2.0.0-beta.1/dist/es5/cassette-components.js"></script>
-
-      
-      <script src="https://unpkg.com/@cassette/player@2.0.0-beta.1/dist/es5/cassette-player.js"></script>
-    -->
   </head>
   <body>
 
@@ -33,53 +18,10 @@
     <p class="alert"></p>
     <%= @inner_content %>
 
-    <%= if System.get_env("CHASKIQ_APP_ID") do %>
-      <script>
-        (function(d,t) {
-          var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-          g.src="https://app.chaskiq.io/embed.js"
-          s.parentNode.insertBefore(g,s);
-          g.onload=function(){
-            new window.ChaskiqMessengerEncrypted({
-              domain: 'https://app.chaskiq.io',
-              ws:  'wss://app.chaskiq.io/cable',
-              app_id: "<%= System.get_env("CHASKIQ_APP_ID") %>",
-              //data: "YOUR_ENCRYPTED_JWE_DATA",
-              //lang: "USER_LANG_OR_DEFAULTS_TO_BROWSER_LANG" 
-            })
-          }
-        })(document,"script");
-      </script>
+    <%= if Mix.env() in [:dev, :test] do %>
+      <%= live_render(@conn, RauversionWeb.TrackLive.Player, id: "global-main-player", session: %{}, sticky: true) %>
     <% end %>
 
-
-    <!--   
-    <div id="app"></div>
-    <script>
-      var MediaPlayer = cassettePlayer.MediaPlayer;
-
-      var playlist = [
-        {
-          url:
-            'http://localhost:4000/active_storage/blobs/proxy/SFMyNTY.eyJleHBpcmVzX2luIjpudWxsLCJtZXNzYWdlIjoiNDciLCJwdXJwb3NlIjpudWxsfQ.AO68siAf82PqS4YOCET8OZlUB3MoMCKPcOjnJv-4yYs/STE-064.mp3',
-          title: 'Big Buck Bunny'
-        }
-      ];
-
-      ReactDOM.render(
-        React.createElement(
-          MediaPlayer,
-          {
-            playlist: playlist,
-            showVideo: false
-          }
-        ),
-        document.getElementById('app')
-      );
-      
-    </script>
-    -->
-  
   </body>
 </html>
 

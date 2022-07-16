@@ -24,8 +24,18 @@ defmodule Rauversion.TracksTest do
     end
 
     test "list_tracks/0 returns all tracks", %{user: user} do
-      track = track_fixture(%{user_id: user.id})
-      assert Tracks.list_tracks() |> Repo.all() == [track]
+      track =
+        track_fixture(%{user_id: user.id})
+        |> Repo.preload([
+          :cover_attachment,
+          :cover_blob,
+          :mp3_audio_attachment,
+          :mp3_audio_blob,
+          user: [:avatar_attachment]
+        ])
+
+      assert Tracks.list_tracks()
+             |> Repo.all() == [track]
     end
 
     test "get_track!/1 returns the track with given id", %{user: user} do

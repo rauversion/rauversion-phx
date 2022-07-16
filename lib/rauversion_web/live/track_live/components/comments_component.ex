@@ -7,7 +7,25 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
   alias Rauversion.{Repo}
 
   @impl true
-  def update(assigns, socket) do
+  def update(assigns = assigns = %{current_user: nil}, socket) do
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:comment_changeset, nil)
+      |> assign(
+        :comments,
+        assigns.track
+        |> Ecto.assoc(:track_comments)
+        |> Repo.all()
+        |> Repo.preload(user: [:avatar_blob])
+      )
+      |> assign(:temporary_assigns, comments: [])
+    }
+  end
+
+  @impl true
+  def update(assigns = %{current_user: %Rauversion.Accounts.User{}}, socket) do
     comment_changeset =
       Rauversion.TrackComments.change_track_comment(
         %Rauversion.TrackComments.TrackComment{},
@@ -119,59 +137,55 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                         </div>
                     </div>
                   </li>
-
                 <% end %>
-
               </ul>
             </div>
 
+            <%= if assigns.comment_changeset do %>
+              <div class="mt-6">
+                <div class="flex space-x-3">
+                  <div class="flex-shrink-0">
+                    <div class="relative">
 
+                      <%= img_tag(Rauversion.Accounts.avatar_url(@current_user),
+                        class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
+                        alt: @current_user.username
+                        )
+                      %>
 
-            <div class="mt-6">
-              <div class="flex space-x-3">
-                <div class="flex-shrink-0">
-                  <div class="relative">
-
-                    <%= img_tag(Rauversion.Accounts.avatar_url(@current_user),
-                      class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
-                      alt: @current_user.username
-                      )
-                    %>
-
-                    <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
-                      <svg class="h-5 w-5 text-gray-400" x-description="Heroicon name: solid/chat-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
-                      </svg>
-                    </span>
+                      <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
+                        <svg class="h-5 w-5 text-gray-400" x-description="Heroicon name: solid/chat-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                        </svg>
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div class="min-w-0 flex-1">
 
-                  <.form
-                    let={f}
-                    for={@comment_changeset}
-                    id="track-form-2"
-                    phx-change="validate"
-                    phx-submit="save"
-                    phx-target={@myself}
-                    class="space-y-8 divide-y divide-gray-200"
-                  >
-                    <div>
-                      <label for="comment" class="sr-only">Comment</label>
-                      <%= textarea f, :body, rows: 3, class: "shadow-sm block w-full focus:ring-gray-900 focus:border-gray-900 sm:text-sm border border-gray-300 rounded-md", placeholder: "Leave a comment" %>
+                    <div class="min-w-0 flex-1">
+
+                      <.form
+                        let={f}
+                        for={@comment_changeset}
+                        id="track-form-2"
+                        phx-change="validate"
+                        phx-submit="save"
+                        phx-target={@myself}
+                        class="space-y-8 divide-y divide-gray-200"
+                      >
+                        <div>
+                          <label for="comment" class="sr-only">Comment</label>
+                          <%= textarea f, :body, rows: 3, class: "shadow-sm block w-full focus:ring-gray-900 focus:border-gray-900 sm:text-sm border border-gray-300 rounded-md", placeholder: "Leave a comment" %>
+                        </div>
+
+                        <div class="mt-6 flex items-center justify-end space-x-4 py-4">
+                          <%= submit "Comment", phx_disable_with: "Saving...", class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" %>
+                        </div>
+
+                      </.form>
                     </div>
-
-                    <div class="mt-6 flex items-center justify-end space-x-4 py-4">
-                      <%= submit "Comment", phx_disable_with: "Saving...", class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" %>
-                    </div>
-
-                  </.form>
                 </div>
               </div>
-            </div>
-
-
-
+            <% end %>
           </div>
         </div>
       </div>

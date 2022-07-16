@@ -13,7 +13,7 @@ InfiniteScroll = {
   mounted(){
     this.pending = this.page()
     
-    const target = this.el.dataset.phxComponent
+    const target = this.el?.attributes["phx-target"]?.nodeValue
     window.addEventListener("scroll", e => {
       if(this.pending == this.page() && scrollAt() > 90){
         console.log(this.el.dataset.paginateEnd)

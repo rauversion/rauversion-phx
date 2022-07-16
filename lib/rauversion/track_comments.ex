@@ -21,6 +21,11 @@ defmodule Rauversion.TrackComments do
     Repo.all(TrackComment)
   end
 
+  def list_track_comments_query do
+    from p in TrackComment,
+      preload: [user: [:avatar_blob]]
+  end
+
   @doc """
   Gets a single track_comment.
 

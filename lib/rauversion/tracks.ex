@@ -65,6 +65,10 @@ defmodule Rauversion.Tracks do
       ]
   end
 
+  def list_tracks_by_ids(ids) do
+    list_public_tracks() |> where([t], t.id == ^ids)
+  end
+
   def list_tracks_by_username(user_id) do
     Rauversion.Accounts.get_user_by_username(user_id)
     |> Ecto.assoc(:tracks)

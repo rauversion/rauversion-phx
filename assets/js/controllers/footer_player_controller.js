@@ -16,16 +16,6 @@ export default class extends Controller {
   }
 
   connect() {
-
-    this._listener = window.addEventListener(`phx:change-playlist-track`, (e)=>{
-      console.log(e.detail)
-      this.element.dataset.audioPeaks = e.detail.audio_peaks
-      this.element.dataset.audioUrl = e.detail.audio_url
-
-      this.destroyWave();
-      this.initWave();
-    })
-
     if(!this.data.get('url')) {
       console.error("skip player, no url found!")
       return
@@ -36,7 +26,6 @@ export default class extends Controller {
 
   disconnect() {
     this.destroyWave()
-    window.removeEventListener('phx:change-playlist-track', this._listener)
   }
 
   destroyWave() {
@@ -49,9 +38,9 @@ export default class extends Controller {
       backend: 'MediaElement',
       waveColor: 'grey',
       progressColor: 'tomato',
-      height: this.heightValue || 70,
+      height: 45,
       //fillParent: false,
-      barWidth: 2,
+      barWidth: 1,
       //barHeight: 10, // the height of the wave
       barGap: null,
       minPxPerSec: 2,

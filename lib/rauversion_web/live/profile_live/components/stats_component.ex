@@ -9,19 +9,19 @@ defmodule RauversionWeb.ProfileLive.StatsComponent do
     <div class="grid grid-cols-3 divide-x">
       <div class="p-4">
         <p class="text-base font-medium text-gray-900">Following</p>
-        <span class="text-base font-light text-gray-500">
+        <span class="text-base font-normal text-gray-500 text-xl ">
           <%= live_redirect Rauversion.UserFollows.followings_for(profile), to: Routes.follows_index_path(@socket, :followings, profile.username)  %>
         </span>
       </div>
       <div  class="p-4">
         <p class="text-base font-medium text-gray-900">Followers</p>
-        <span class="text-base font-light text-gray-500">
+        <span class="text-base font-normal text-gray-500 text-xl ">
           <%= live_redirect Rauversion.UserFollows.followers_for(profile), to: Routes.follows_index_path(@socket, :followers, profile.username)  %>
         </span>
       </div>
       <div  class="p-4">
         <p class="text-base font-medium text-gray-900">Tracks</p>
-        <span class="text-base font-light text-gray-500">
+        <span class="text-base font-normal text-gray-500 text-xl ">
           <%= Rauversion.Accounts.tracks_count(profile) %>
         </span>
       </div>

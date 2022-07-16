@@ -97,3 +97,56 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+
+
+
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type='range'] {
+    overflow: hidden;
+    width: 80px;
+    -webkit-appearance: none;
+    background-color: #f7f70d;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #0a0801;
+    margin-top: -1px;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    width: 10px;
+    -webkit-appearance: none;
+    height: 10px;
+    cursor: ew-resize;
+    background: #f98b05;
+    box-shadow: -80px 0 0 80px #000;
+  }
+
+}
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #f98b05;
+}
+
+input[type="range"]::-moz-range-track {
+  background-color: #0a0801;
+}
+
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #f98b05;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background-color: #9a905d;
+}
+
+input[type="range"].vertical {
+  transform: rotate(270deg);
+}
