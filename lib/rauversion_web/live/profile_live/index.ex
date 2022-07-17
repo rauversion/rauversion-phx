@@ -143,28 +143,4 @@ defmodule RauversionWeb.ProfileLive.Index do
       }
     ]
   end
-
-  # defp apply_action(socket, :new, _params) do
-  #  socket
-  #  |> assign(:page_title, "New Playlist")
-  #  |> assign(:profile, %Playlist{})
-  # end
-
-  # defp apply_action(socket, :index, _params) do
-  #  socket
-  #  |> assign(:page_title, "Listing Playlists")
-  #  |> assign(:profile, nil)
-  # end
-
-  # @impl true
-  # def handle_event("delete", %{"id" => id}, socket) do
-  #  playlist = Playlists.get_playlist!(id)
-  #  {:ok, _} = Playlists.delete_playlist(playlist)
-
-  #  {:noreply, assign(socket, :profiles, list_playlists())}
-  # end
-
-  # defp list_playlists do
-  #  Playlists.list_playlists()
-  # end
 end
