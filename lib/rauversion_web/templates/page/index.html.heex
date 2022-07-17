@@ -1,89 +1,91 @@
 <main>
   <!-- Hero -->
-  <div class="flex flex-col border-b border-gray-200 lg:border-0">
-    <nav aria-label="Offers" class="order-last lg:order-first hidden">
-      <div class="max-w-7xl mx-auto lg:px-8">
-        <ul role="list" class="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-y-0 lg:divide-x">
-          
-            <li class="flex flex-col">
-              <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
-                <p class="text-sm text-gray-500">
-                  Download the app
-                </p>
-                <p class="font-semibold text-gray-900">
-                  Get an exclusive $5 off code
-                </p>
-              </a>
-            </li>
-          
-            <li class="flex flex-col">
-              <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
-                <p class="text-sm text-gray-500">
-                  Return when you're ready
-                </p>
-                <p class="font-semibold text-gray-900">
-                  60 days of free returns
-                </p>
-              </a>
-            </li>
-          
-            <li class="flex flex-col">
-              <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
-                <p class="text-sm text-gray-500">
-                  Sign up for our newsletter
-                </p>
-                <p class="font-semibold text-gray-900">
-                  15% off your first order
-                </p>
-              </a>
-            </li>
-          
-        </ul>
-      </div>
-    </nav>
-
-    <div class="relative">
-      <div aria-hidden="true" class="hidden absolute w-1/2 h-full bg-gray-100 lg:block"></div>
-      <div class="relative bg-black lg:bg-transparent- ">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2">
-          <div class="max-w-2xl mx-auto py-6 lg:py-64 lg:max-w-none">
-            <div class="lg:pr-16">
-
-              <a href="/" class="text-white text-sm xl:text-xl font-extrabold">
-                RAUVERSION
-              </a>
-
-              <h1 class="tracking-tight text-gray-900 text-3xl xl:text-6xl
-              font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-orange-600">
-                Be your own music industry
-              </h1>
-              <p class="mt-4 text-xl text-gray-100 ">
-                Empowering independent music communities on the internet
-              </p>
-              <div class="mt-6">
-                <a href="/users/register" class="inline-block bg-orange-600 border border-transparent py-3 px-8 rounded-md font-medium text-white hover:bg-orange-700">
-                  Start now
+  <%= if !@current_user do %>
+    <div class="flex flex-col border-b border-gray-200 lg:border-0">
+      <nav aria-label="Offers" class="order-last lg:order-first hidden">
+        <div class="max-w-7xl mx-auto lg:px-8">
+          <ul role="list" class="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-y-0 lg:divide-x">
+            
+              <li class="flex flex-col">
+                <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
+                  <p class="text-sm text-gray-500">
+                    Download the app
+                  </p>
+                  <p class="font-semibold text-gray-900">
+                    Get an exclusive $5 off code
+                  </p>
                 </a>
+              </li>
+            
+              <li class="flex flex-col">
+                <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
+                  <p class="text-sm text-gray-500">
+                    Return when you're ready
+                  </p>
+                  <p class="font-semibold text-gray-900">
+                    60 days of free returns
+                  </p>
+                </a>
+              </li>
+            
+              <li class="flex flex-col">
+                <a href="#" class="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10">
+                  <p class="text-sm text-gray-500">
+                    Sign up for our newsletter
+                  </p>
+                  <p class="font-semibold text-gray-900">
+                    15% off your first order
+                  </p>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </nav>
+
+      <div class="relative">
+        <div aria-hidden="true" class="hidden absolute w-1/2 h-full bg-gray-100 lg:block"></div>
+        <div class="relative bg-black lg:bg-transparent- ">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2">
+            <div class="max-w-2xl mx-auto py-6 lg:py-64 lg:max-w-none">
+              <div class="lg:pr-16">
+
+                <a href="/" class="text-white text-sm xl:text-xl font-extrabold">
+                  RAUVERSION
+                </a>
+
+                <h1 class="tracking-tight text-gray-900 text-3xl xl:text-6xl
+                font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-orange-600">
+                  Be your own music industry
+                </h1>
+                <p class="mt-4 text-xl text-gray-100 ">
+                  Empowering independent music communities on the internet
+                </p>
+                <div class="mt-6">
+                  <a href="/users/register" class="inline-block bg-orange-600 border border-transparent py-3 px-8 rounded-md font-medium text-white hover:bg-orange-700">
+                    Start now
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="w-full h-48 sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full">
-        <img src={ Routes.static_path(@conn, "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png")} class="w-full h-full object-center object-cover" />
+        <div class="w-full h-48 sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full">
+          <img src={ Routes.static_path(@conn, "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png")} class="w-full h-full object-center object-cover" />
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
   <!-- Trending products -->
   <section aria-labelledby="trending-heading" class="bg-white">
     <div class="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:py-32 lg:px-8">
       <div class="px-4 flex items-center justify-between sm:px-6 lg:px-0">
         <h2 id="trending-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">Trending Albums</h2>
-        <a href="#" class="hidden sm:block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+        <%= live_redirect to: "/tracks", class: "hidden sm:block text-sm font-semibold text-orange-600 hover:text-orange-500" do %>
           See everything
           <span aria-hidden="true"> →</span>
-        </a>
+        <% end %>
       </div>
 
       <div class="mt-8 relative">
@@ -118,7 +120,7 @@
       </div>
 
       <div class="mt-12 px-4 sm:hidden">
-        <%= link to: "#", class: "text-sm font-semibold text-indigo-600 hover:text-indigo-500" do %>
+        <%= link to: "/tracks", class: "text-sm font-semibold text-orange-600 hover:text-orange-500" do %>
           See everything<span aria-hidden="true"> →</span>
         <% end %>
       </div>

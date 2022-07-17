@@ -3,10 +3,10 @@
       <div class="flex justify-between h-16">
         <div class="flex items-center px-2 lg:px-0">
           <div class="flex-shrink-0 flex items-center">
-            <a href="/" class="text-white text-2xl font-extrabold">
+            <%= live_redirect to: "/", class: "text-white text-2xl font-extrabold" do %>
               RAUVERSION
               <% #= image_tag url_for(current_user.avatar), class: "h-8 w-auto" if current_user&.avatar&.persisted? %>
-            </a>
+            <% end %>
           </div>
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
             
