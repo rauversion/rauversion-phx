@@ -6,11 +6,11 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
 
   def render(
         %{
-          uploads: uploads,
-          target: target,
-          track: track,
-          current_user: current_user,
-          changeset: changeset
+          uploads: _uploads,
+          target: _target,
+          track: _track,
+          current_user: _current_user,
+          changeset: _changeset
         } = assigns
       ) do
     ~H"""

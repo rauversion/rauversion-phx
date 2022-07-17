@@ -21,7 +21,7 @@ defmodule RauversionWeb.TrackLive.FormComponent do
   end
 
   @impl true
-  def handle_event("validate", %{"track" => track_params} = params, socket) do
+  def handle_event("validate", %{"track" => track_params} = _params, socket) do
     track_params = track_params |> Map.put("user_id", socket.assigns.current_user.id)
 
     changeset =
@@ -36,7 +36,7 @@ defmodule RauversionWeb.TrackLive.FormComponent do
   @impl true
   def handle_event(
         "save",
-        %{"track" => track_params} = params,
+        %{"track" => track_params} = _params,
         socket = %{
           assigns: %{
             step: %{name: "upload"},
@@ -76,6 +76,21 @@ defmodule RauversionWeb.TrackLive.FormComponent do
     save_track(socket, socket.assigns.action, track_params)
   end
 
+  defp handle_update(socket, track_params) do
+    track_params =
+      track_params
+      |> Map.put("cover", files_for(socket, :cover))
+      |> Map.put("audio", files_for(socket, :audio))
+
+    case Tracks.update_track(socket.assigns.track, track_params) do
+      {:ok, _track} ->
+        {:ok, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:error, assign(socket, :changeset, changeset)}
+    end
+  end
+
   defp save_track(socket, :edit, %{"track" => track_params}) do
     case handle_update(socket, track_params) do
       {:ok, response} ->
@@ -104,21 +119,6 @@ defmodule RauversionWeb.TrackLive.FormComponent do
 
       {:error, response} ->
         {:noreply, response}
-    end
-  end
-
-  defp handle_update(socket, track_params) do
-    track_params =
-      track_params
-      |> Map.put("cover", files_for(socket, :cover))
-      |> Map.put("audio", files_for(socket, :audio))
-
-    case Tracks.update_track(socket.assigns.track, track_params) do
-      {:ok, _track} ->
-        {:ok, socket}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:error, assign(socket, :changeset, changeset)}
     end
   end
 
@@ -157,22 +157,21 @@ defmodule RauversionWeb.TrackLive.FormComponent do
   defp files_for(socket, kind) do
     case uploaded_entries(socket, kind) do
       {[_ | _] = entries, []} ->
-        uploaded_files =
-          Enum.map(entries, fn entry ->
-            consume_uploaded_entry(socket, entry, fn %{path: path} = file ->
-              {:postpone,
-               %{
-                 path: path,
-                 content_type: entry.client_type,
-                 filename: entry.client_name,
-                 size: entry.client_size
-               }}
+        Enum.map(entries, fn entry ->
+          consume_uploaded_entry(socket, entry, fn %{path: path} = _file ->
+            {:postpone,
+             %{
+               path: path,
+               content_type: entry.client_type,
+               filename: entry.client_name,
+               size: entry.client_size
+             }}
 
-              # dest = Path.join("priv/static/uploads", Path.basename(path))
-              # File.cp!(path, dest)
-              # Routes.static_path(socket, "/uploads/#{Path.basename(dest)}")
-            end)
+            # dest = Path.join("priv/static/uploads", Path.basename(path))
+            # File.cp!(path, dest)
+            # Routes.static_path(socket, "/uploads/#{Path.basename(dest)}")
           end)
+        end)
 
       _ ->
         []

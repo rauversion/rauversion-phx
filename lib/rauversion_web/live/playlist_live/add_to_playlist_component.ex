@@ -13,7 +13,7 @@ defmodule RauversionWeb.PlaylistLive.AddToPlaylistComponent do
     }
   end
 
-  def handle_event("add-to-playlist", %{"track" => track_id}, socket) do
+  def handle_event("add-to-playlist", %{"track" => _track_id}, socket) do
     # track = Rauversion.Tracks.get_track!(track_id) |> Rauversion.Repo.preload(:user)
     {
       :noreply,

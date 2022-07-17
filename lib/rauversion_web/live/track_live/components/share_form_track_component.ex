@@ -6,7 +6,7 @@ defmodule RauversionWeb.TrackLive.ShareFormTrackComponent do
 
   def render(
         %{
-          track: track
+          track: _track
         } = assigns
       ) do
     ~H"""

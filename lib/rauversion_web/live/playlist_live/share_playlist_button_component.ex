@@ -22,6 +22,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistButtonComponent do
      )}
   end
 
+  @impl true
   def render(
         %{
           playlist: playlist

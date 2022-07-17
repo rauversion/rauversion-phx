@@ -33,6 +33,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
     {:noreply, socket |> assign(:collection, who_to_follow())}
   end
 
+  @impl true
   def render(%{collection: collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">

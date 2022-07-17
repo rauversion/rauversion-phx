@@ -2,10 +2,10 @@ defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Tracks, UserFollows, Repo, Reposts, Playlists}
+  alias Rauversion.{Accounts, Tracks, Repo}
 
   @impl true
-  def mount(_params = %{"username" => id}, session, socket) do
+  def mount(_params = %{"username" => id}, _session, socket) do
     socket =
       socket
       |> assign(:profile, Accounts.get_user_by_username(id))
@@ -100,11 +100,6 @@ defmodule RauversionWeb.ProfileLive.Index do
     socket
     |> assign(:title, "insights")
     |> assign(:data, menu(socket, id, "insights"))
-  end
-
-  def handle_params(%{"sort_by" => _sort_by}, _url, _socket) do
-    # post_id = socket.assigns.post.id
-    # do something with sort_by
   end
 
   defp menu(socket, id, kind) do

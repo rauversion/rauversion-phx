@@ -2,9 +2,7 @@ defmodule RauversionWeb.FollowsLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.Tracks.Track
-  alias Rauversion.{Repo, Tracks, Accounts, UserFollows}
-  alias RauversionWeb.TrackLive.Step
+  alias Rauversion.{Accounts, UserFollows}
 
   @impl true
   def mount(_params, _session, socket) do
