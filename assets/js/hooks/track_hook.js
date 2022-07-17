@@ -101,7 +101,7 @@ Player = {
       this._wave.drawer.wrapper.addEventListener('click', (e)=> {
 
         setTimeout(()=>{
-          const trackId = this.el.dataset.trackId
+          const trackId = this.el.dataset.audioId
           const ev = new CustomEvent(`audio-process-mouseup`, {
             detail: {
              trackId: trackId,
@@ -122,7 +122,7 @@ Player = {
     this._wave.playPause()
   },
   dispatchPause(){
-    const trackId = this.el.dataset.trackId
+    const trackId = this.el.dataset.audioId
     const ev = new CustomEvent(`audio-pause`, {
       detail: {
        trackId: trackId

@@ -129,12 +129,16 @@ Player = {
 
     // receives audio-process progress from track hook
     document.addEventListener('audio-process-mouseup', (e) => {
-      this._wave.drawer.progress(e.detail.percent)
+      if(e.detail.trackId == this.el.dataset.trackId){
+        this._wave.drawer.progress(e.detail.percent)
+      }
     })
 
     // receives pause
     document.addEventListener('audio-pause', (e) => {
-      this._wave.pause()
+      if(e.detail.trackId == this.el.dataset.trackId){
+        this._wave.pause()
+      }
     })
 
     this._wave.on('finish', (e) => {
