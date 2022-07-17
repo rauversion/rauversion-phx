@@ -54,7 +54,7 @@ defmodule Rauversion.Reposts do
       ]
   end
 
-  def get_reposts_by_user_id(user_id, current_user = nil) do
+  def get_reposts_by_user_id(user_id, _current_user = nil) do
     from p in Repost,
       where: p.user_id == ^user_id,
       preload: [track: [:user, :cover_blob, :mp3_audio_blob]]

@@ -13,7 +13,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
 
         <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
           <nav class="flex space-x-10">
-            <%= for %{name: name, url: url, selected: selected, kind: kind} <- assigns.data do %>
+            <%= for %{name: name, url: url, selected: selected, kind: _kind} <- assigns.data do %>
               <% #= selected %>
               <% #= kind %>
               <%= live_redirect name,

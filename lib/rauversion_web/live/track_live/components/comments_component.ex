@@ -7,7 +7,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
   alias Rauversion.{Repo}
 
   @impl true
-  def update(assigns = assigns = %{current_user: user = nil}, socket) do
+  def update(assigns = assigns = %{current_user: _user = nil}, socket) do
     {
       :ok,
       socket

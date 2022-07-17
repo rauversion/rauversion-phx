@@ -33,7 +33,7 @@ defmodule Rauversion.Accounts do
     |> Repo.aggregate(:count, :id)
   end
 
-  def unfollowed_users(user) do
+  def unfollowed_users(_user) do
     from(u in User,
       left_join: m in assoc(u, :followings),
       where: is_nil(m.id)

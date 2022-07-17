@@ -53,7 +53,7 @@ defmodule RauversionWeb.ActiveStorage.Representations.RedirectController do
 
       # attached = processed.__struct__.image(processed)
       url = processed.__struct__.url(processed)
-      redirect(conn, to: url) |> halt
+      redirect(conn, external: url) |> halt
       # @representation = conn.assigns.blob.representation(params["variation_key"]).processed
       # conn |> assign(:representation, representation)
     rescue

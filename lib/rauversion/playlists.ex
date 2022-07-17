@@ -21,7 +21,7 @@ defmodule Rauversion.Playlists do
     Repo.all(Playlist)
   end
 
-  def list_playlists_by_user(user, preloads = nil) do
+  def list_playlists_by_user(user, _preloads = nil) do
     from pi in Playlist,
       where: pi.user_id == ^user.id
   end
