@@ -3,10 +3,10 @@ defmodule Rauversion.Repo.Migrations.AddSettingsToUsers do
 
   def change do
     alter table(:users) do
-      add :notification_preferences, :map
       add :country, :string
       add :city, :string
       add :bio, :text
+      add :support_link, :string
     end
   end
 end
