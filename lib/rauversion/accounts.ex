@@ -162,8 +162,17 @@ defmodule Rauversion.Accounts do
     User.profile_changeset(user, attrs)
   end
 
+  def change_user_notifications(user, attrs \\ %{}) do
+    User.notifications_changeset(user, attrs)
+  end
+
   def update_user_profile(user, attrs \\ %{}) do
     User.profile_changeset(user, attrs)
+    |> Repo.update()
+  end
+
+  def update_notifications(user, attrs \\ %{}) do
+    User.notifications_changeset(user, attrs)
     |> Repo.update()
   end
 

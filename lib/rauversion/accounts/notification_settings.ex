@@ -48,6 +48,4 @@ defmodule Rauversion.Accounts.NotificationSettings do
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
   end
-
-  # TODO: this is the same as the track metadata, consider unify this
 end

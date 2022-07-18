@@ -5,7 +5,7 @@
         module={RauversionWeb.UsersettingsLive.ProfileForm}
         id="contact-form"
         target={@myself}
-        profile_changeset={@profile_changeset}
+        changeset={@changeset}
         return_to={@return_to}
         uploads={@uploads}
       />
@@ -16,7 +16,7 @@
         module={RauversionWeb.UsersettingsLive.EmailForm}
         id="email-form"
         target={@myself}
-        email_changeset={@email_changeset}
+        changeset={@changeset}
         return_to={@return_to}
       />
     <% end %>
@@ -26,7 +26,18 @@
         module={RauversionWeb.UsersettingsLive.SecurityForm}
         id="security-form"
         target={@myself}
-        password_changeset={@password_changeset}
+        changeset={@changeset}
+        return_to={@return_to}
+      />
+    <% end %>
+
+
+    <%= if @action == :notifications do %>
+      <.live_component
+        module={RauversionWeb.UsersettingsLive.NotificationsForm}
+        id="security-form"
+        target={@myself}
+        changeset={@changeset}
         return_to={@return_to}
       />
     <% end %>

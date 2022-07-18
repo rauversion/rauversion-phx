@@ -1,14 +1,14 @@
 defmodule RauversionWeb.UsersettingsLive.ProfileForm do
   use RauversionWeb, :live_component
 
-  def render(%{profile_changeset: _profile_changeset} = assigns) do
+  def render(%{changeset: _changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Account</h1>
 
     <.form
       let={f}
-      for={@profile_changeset}
+      for={@changeset}
       id="update_profile"
       phx-target={@target}
       phx-change="validate"
@@ -16,7 +16,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
       multipart={true}
       class="space-y-8 divide-y divide-gray-200"
       >
-      <%= if @profile_changeset.action do %>
+      <%= if @changeset.action do %>
         <div class="alert alert-danger">
           <p>Oops, something went wrong! Please check the errors below.</p>
         </div>
@@ -80,7 +80,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
           </label>
           <div class="mt-1 flex items-center">
 
-            <%= img_tag(Rauversion.Accounts.avatar_url(@profile_changeset.data),
+            <%= img_tag(Rauversion.Accounts.avatar_url(@changeset.data),
             class: "inline-block h-12 w-12 rounded-full")
             %>
 

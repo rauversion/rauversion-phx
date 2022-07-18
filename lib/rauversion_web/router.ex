@@ -100,6 +100,7 @@ defmodule RauversionWeb.Router do
     live "/users/settings", UserSettingsLive.Index, :profile
     live "/users/settings/email", UserSettingsLive.Index, :email
     live "/users/settings/security", UserSettingsLive.Index, :security
+    live "/users/settings/notifications", UserSettingsLive.Index, :notifications
 
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 

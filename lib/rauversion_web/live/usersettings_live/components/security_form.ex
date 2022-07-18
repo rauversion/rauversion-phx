@@ -2,20 +2,20 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
   use RauversionWeb, :live_component
 
   @impl true
-  def render(%{password_changeset: _password_changeset} = assigns) do
+  def render(%{changeset: _changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Security</h1>
 
     <.form
       let={f}
-      for={@password_changeset}
+      for={@changeset}
       id="update_password"
       phx-target={@target}
       phx-submit="save"
       class="space-y-8 divide-y divide-gray-200"
       >
-      <%= if @password_changeset.action do %>
+      <%= if @changeset.action do %>
         <div class="alert alert-danger">
           <p>Oops, something went wrong! Please check the errors below.</p>
         </div>

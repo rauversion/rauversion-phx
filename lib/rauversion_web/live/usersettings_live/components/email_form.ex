@@ -1,20 +1,20 @@
 defmodule RauversionWeb.UsersettingsLive.EmailForm do
   use RauversionWeb, :live_component
 
-  def render(%{email_changeset: _email_changeset} = assigns) do
+  def render(%{changeset: _changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Change Email</h1>
 
     <.form
       let={f}
-      for={@email_changeset}
+      for={@changeset}
       id="update_email"
       phx-target={@target}
       phx-submit="save"
       class="space-y-8 divide-y divide-gray-200"
     >
-    <%= if @email_changeset.action do %>
+    <%= if @changeset.action do %>
       <div class="alert alert-danger">
         <p>Oops, something went wrong! Please check the errors below.</p>
       </div>

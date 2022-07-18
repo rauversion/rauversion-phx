@@ -59,6 +59,14 @@ defmodule Rauversion.Accounts.User do
     |> process_avatar(attrs)
   end
 
+  def notifications_changeset(user, attrs, _opts \\ []) do
+    user
+    |> cast(attrs, [:username, :first_name, :last_name, :country, :bio, :city])
+    |> cast_embed(:notification_settings,
+      with: &Rauversion.Accounts.NotificationSettings.changeset/2
+    )
+  end
+
   def changeset(user, attrs, opts \\ []) do
     user
     |> validate_contact_fields(attrs)
