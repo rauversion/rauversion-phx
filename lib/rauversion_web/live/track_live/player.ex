@@ -92,10 +92,14 @@ defmodule RauversionWeb.TrackLive.Player do
     track = Tracks.get_track!(id) |> Rauversion.Repo.preload([:user, :mp3_audio_blob])
 
     tracks =
-      if(List.last(socket.assigns.tracks).id == track.id) do
-        socket.assigns.tracks
+      if Enum.any?(socket.assigns.tracks) do
+        if(List.last(socket.assigns.tracks).id == track.id) do
+          socket.assigns.tracks
+        else
+          socket.assigns.tracks ++ [track]
+        end
       else
-        socket.assigns.tracks ++ [track]
+        [track]
       end
 
     {:noreply,
