@@ -12,12 +12,12 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
       :ok,
       socket
       |> assign(assigns)
-      |> assign(:collection, who_to_follow())
+      |> assign(:collection, who_to_follow(assigns.current_user))
     }
   end
 
-  defp who_to_follow() do
-    Accounts.unfollowed_users(@profile)
+  defp who_to_follow(current_user) do
+    Accounts.unfollowed_users(current_user)
     |> Repo.paginate(page: 1, page_size: 5)
 
     # |> Rauversion.Repo.preload(:avatar_blob)
@@ -25,12 +25,13 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
 
   @impl true
   def handle_event("follow-account", %{"id" => id}, socket) do
-    UserFollows.create_user_follow(%{
-      follower_id: socket.assigns.current_user.id,
-      following_id: id
-    })
+    a =
+      UserFollows.create_user_follow(%{
+        follower_id: socket.assigns.current_user.id,
+        following_id: id
+      })
 
-    {:noreply, socket |> assign(:collection, who_to_follow())}
+    {:noreply, socket |> assign(:collection, who_to_follow(socket.assigns.current_user))}
   end
 
   @impl true
@@ -63,7 +64,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                       </p>
                     </div>
                     <div class="flex-shrink-0">
-                      <%= live_redirect to: "#", phx_click: "follow-account", phx_value_id: item.id, phx_target: @myself, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" do %>
+                      <%= link to: "#",  phx_click: "follow-account", phx_value_id: item.id, phx_target: @myself, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100" do %>
                         <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" x-description="Heroicon name: solid/plus-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>

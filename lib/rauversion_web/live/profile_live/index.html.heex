@@ -60,7 +60,7 @@
         />
       </div>
 
-      <%= if assigns[:current_user] do %>
+      <%= if assigns[:current_user] && @profile.id == @current_user.id do %>
         <section aria-labelledby="who-to-follow-heading">
           <.live_component
             module={RauversionWeb.ProfileLive.UserSuggestionComponent}
