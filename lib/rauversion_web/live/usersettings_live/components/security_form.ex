@@ -1,8 +1,6 @@
 defmodule RauversionWeb.UsersettingsLive.SecurityForm do
   use RauversionWeb, :live_component
 
-
-
   @impl true
   def render(%{password_changeset: _password_changeset} = assigns) do
     ~H"""
@@ -52,7 +50,7 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
       </div>
 
 
-      <div class="pt-8 flex justify-end">
+      <div class="pt-8 flex justify-end space-x-2">
         <%= live_redirect to: @return_to, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
           Cancel
         <% end %>
@@ -64,5 +62,4 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
     </div>
     """
   end
-
 end

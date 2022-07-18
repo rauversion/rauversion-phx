@@ -13,6 +13,14 @@ defmodule Rauversion.Accounts.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :country, :string
+    field :city, :string
+    field :bio, :string
+
+    embeds_one :notification_settings, Rauversion.Accounts.NotificationSettings,
+      on_replace: :update
+
+    # field :settings
 
     has_many :track_comments, Rauversion.TrackComments.TrackComment
     has_many :tracks, Rauversion.Tracks.Track, on_delete: :delete_all
@@ -59,6 +67,9 @@ defmodule Rauversion.Accounts.User do
 
   def process_avatar(user, attrs) do
     case attrs do
+      %{"avatar" => _avatar = nil} ->
+        user
+
       %{"avatar" => _avatar} ->
         blob =
           ActiveStorage.Blob.create_and_upload!(
@@ -107,7 +118,7 @@ defmodule Rauversion.Accounts.User do
 
   defp validate_contact_fields(changeset, attrs) do
     changeset
-    |> cast(attrs, [:username, :first_name, :last_name])
+    |> cast(attrs, [:username, :first_name, :last_name, :country, :bio, :city])
     |> validate_required([:username, :first_name, :last_name])
     |> unsafe_validate_unique(:username, Rauversion.Repo)
     |> unique_constraint(:username)
