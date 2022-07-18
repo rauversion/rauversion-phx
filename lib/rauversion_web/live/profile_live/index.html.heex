@@ -63,6 +63,12 @@
         />
       </div>
 
+      <%= if @profile.bio do %>
+        <p class="font-normal text-sm">
+          <%= @profile.bio %>
+        </p>
+      <% end  %>
+
       <%= if assigns[:current_user] && @profile.id == @current_user.id do %>
         <section aria-labelledby="who-to-follow-heading">
           <.live_component

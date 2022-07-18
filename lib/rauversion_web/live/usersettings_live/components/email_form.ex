@@ -1,20 +1,20 @@
 defmodule RauversionWeb.UsersettingsLive.EmailForm do
   use RauversionWeb, :live_component
 
-  def render(%{email_changeset: _email_changeset} = assigns) do
+  def render(%{changeset: _changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Change Email</h1>
 
     <.form
       let={f}
-      for={@email_changeset}
+      for={@changeset}
       id="update_email"
       phx-target={@target}
       phx-submit="save"
       class="space-y-8 divide-y divide-gray-200"
     >
-    <%= if @email_changeset.action do %>
+    <%= if @changeset.action do %>
       <div class="alert alert-danger">
         <p>Oops, something went wrong! Please check the errors below.</p>
       </div>
@@ -40,22 +40,9 @@ defmodule RauversionWeb.UsersettingsLive.EmailForm do
         <%= error_tag f, :current_password %>
       </div>
 
-      <div class="sm:col-span-6">
-        <label for="username" class="block text-sm font-medium text-blue-gray-900">
-          Username
-        </label>
-        <div class="mt-1 flex rounded-md shadow-sm">
-          <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-blue-gray-300 bg-blue-gray-50 text-blue-gray-500 sm:text-sm">
-            <% #= ENV['APP_DOMAIN']%>
-            <%= Application.get_env(:rauversion, :app_name) %>
-          </span>
-          <%= text_input f, :username, required: true, class: "flex-1 block w-full min-w-0 border-blue-gray-300 rounded-none rounded-r-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
-        </div>
-      </div>
-
     </div>
 
-    <div class="pt-8 flex justify-end">
+    <div class="pt-8 flex justify-end space-x-2">
       <%= live_redirect to: @return_to, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
         Cancel
       <% end %>

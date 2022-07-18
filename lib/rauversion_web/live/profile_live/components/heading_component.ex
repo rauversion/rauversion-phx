@@ -14,13 +14,22 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
               <%= img_tag(Rauversion.Accounts.avatar_url(@profile),
               class: "sm:w-48 sm:h-48 w-16 h-16 rounded-full") %>
             </div>
-            <div class="text-white mt-6">
-              <p class="sm:text-3xl text-lg font-extrabold">
+            <div class="text-white mt-6 space-y-2 flex flex-col justify-start items-start">
+              <p class="sm:text-3xl text-lg font-extrabold bg-black p-1 inline-block">
                 <%= @profile.username %>
               </p>
-              <p class="text-sm sm:text-xl font-extrabold">
-                Santiago, Chile
-              </p>
+              <%= if @profile.first_name || @profile.last_name do %>
+                <p class="sm:text-sm text-lg font-light bg-black p-1 inline-block">
+                  <%= @profile.first_name %>
+                  <%= @profile.last_name %>
+                </p>
+              <% end %>
+              <%= if @profile.city || @profile.country do %>
+                <p class="sm:text-sm text-lg font-light bg-black p-1 inline-block">
+                  <%= @profile.city %>
+                  <%= @profile.country %>
+                </p>
+              <% end %>
             </div>
           </div>
           <div class="hidden">bjkkjk</div>
