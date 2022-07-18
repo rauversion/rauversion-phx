@@ -34,17 +34,16 @@ defmodule Rauversion.UserFollows do
     |> Repo.aggregate(:count, :id)
   end
 
-  def followings_list_for(user) do
-    UserFollow
-    |> where(follower_id: ^user.id)
-    |> Repo.all()
-    |> Repo.preload([:following, :follower])
-  end
-
   def followings_for(user) do
     UserFollow
     |> where(follower_id: ^user.id)
     |> Repo.aggregate(:count, :id)
+  end
+
+  def following_for(follower_id, following_id) do
+    UserFollow
+    |> where(follower_id: ^follower_id, following_id: ^following_id)
+    |> Repo.one()
   end
 
   @doc """
