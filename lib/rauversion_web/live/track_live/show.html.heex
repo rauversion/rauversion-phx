@@ -204,8 +204,8 @@
           <dt class="text-sm font-medium text-gray-500">
             About
           </dt>
-          <dd class="mt-1 max-w-prose text-lg text-gray-900 space-y-5">
-            <%= text_to_html @track.description %>
+          <dd class="mt-1 max-w-prose text-lg text-gray-900 space-y-5 prose lg:prose-xl">
+            <%= SimplexFormat.text_to_html(@track.description, auto_link: true) %>
           </dd>
         </div>
 

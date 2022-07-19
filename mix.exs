@@ -57,6 +57,7 @@ defmodule Rauversion.MixProject do
       {:dotenv, "~> 3.0.0", only: [:dev, :test]},
       {:scrivener_ecto, "~> 2.0"},
       {:gen_smtp, "~> 1.2.0"},
+      {:simplex_format, "0.2.0"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
