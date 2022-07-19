@@ -14,7 +14,7 @@ defmodule Rauversion.PlaylistLikes.PlaylistLike do
     |> cast(attrs, [:user_id, :playlist_id])
     |> validate_required([:user_id, :playlist_id])
     |> prepare_changes(fn changeset ->
-      Ecto.assoc(changeset.data, :track)
+      Ecto.assoc(changeset.data, :playlist)
       |> Rauversion.Repo.update_all(inc: [likes_count: 1])
 
       changeset

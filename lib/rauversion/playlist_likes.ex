@@ -97,7 +97,12 @@ defmodule Rauversion.PlaylistLikes do
 
   """
   def delete_playlist_like(%PlaylistLike{} = playlist_like) do
-    Repo.delete(playlist_like)
+    res = Repo.delete(playlist_like)
+
+    Ecto.assoc(playlist_like, :playlist)
+    |> Rauversion.Repo.update_all(inc: [likes_count: -1])
+
+    res
   end
 
   @doc """
