@@ -24,7 +24,8 @@ defmodule RauversionWeb.PlaylistLive.Show do
      |> assign(:current_tab, "basic-info-tab")
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:playlist, playlist)
-     |> assign(:track, track)}
+     |> assign(:track, track)
+     |> assign(:meta_tags, metatags(playlist))}
   end
 
   @impl true
@@ -80,4 +81,13 @@ defmodule RauversionWeb.PlaylistLive.Show do
 
   defp page_title(:show), do: "Show Playlist"
   defp page_title(:edit), do: "Edit Playlist"
+
+  defp metatags(playlist) do
+    %{
+      title: "#{playlist.title} on Rauversion",
+      description: playlist.description
+      # url: "https://phoenix.meta.tags",
+      # image: "https://phoenix.meta.tags/logo.png"
+    }
+  end
 end

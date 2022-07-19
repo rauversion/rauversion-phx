@@ -58,6 +58,26 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :phoenix_meta_tags,
+  title: "Rauversion",
+  description:
+    "Rauversion is an open source platforms to build communities of musicians, podcasters and listeners. Is a self-hosted streaming music service owned by the people that use it – musicians, indie labels, fans + developers.",
+  url: "https://rauversion.com",
+  # image: "https://phoenix.meta.tags.default/logo.png",
+  "og:text": "Rauversion"
+
+# fb: %{
+#   name: "facebook",
+#   size: %{
+#     width: 100,
+#     height: 200,
+#     position: %{
+#       x: 10,
+#       y: 15
+#     }
+#   }
+# }
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

@@ -20,7 +20,7 @@ defmodule RauversionWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: RauversionWeb
-
+      use PhoenixMetaTags.TagController
       import Plug.Conn
       import RauversionWeb.Gettext
       alias RauversionWeb.Router.Helpers, as: Routes
@@ -33,6 +33,7 @@ defmodule RauversionWeb do
         root: "lib/rauversion_web/templates",
         namespace: RauversionWeb
 
+      use PhoenixMetaTags.TagView
       # Import convenience functions from controllers
       import Phoenix.Controller,
         only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
@@ -46,6 +47,10 @@ defmodule RauversionWeb do
     quote do
       use Phoenix.LiveView,
         layout: {RauversionWeb.LayoutView, "live.html"}
+
+      use PhoenixMetaTags.TagController
+
+      use PhoenixMetaTags.TagView
 
       unquote(view_helpers())
     end
