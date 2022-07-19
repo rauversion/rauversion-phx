@@ -113,7 +113,7 @@ defmodule RauversionWeb.TrackLive.Show do
   defp metatags(track) do
     %{
       title: "#{track.title} on Rauversion",
-      description: track.description
+      description: "Stream #{track.title} by #{track.user.username} on Rauversion."
       # url: "https://phoenix.meta.tags",
       # image: "https://phoenix.meta.tags/logo.png"
     }

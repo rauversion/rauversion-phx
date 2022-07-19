@@ -85,7 +85,8 @@ defmodule RauversionWeb.PlaylistLive.Show do
   defp metatags(playlist) do
     %{
       title: "#{playlist.title} on Rauversion",
-      description: playlist.description
+      description:
+        "Listen to #{playlist.title}, a playlist curated by #{playlist.user.username} on Rauversion."
       # url: "https://phoenix.meta.tags",
       # image: "https://phoenix.meta.tags/logo.png"
     }
