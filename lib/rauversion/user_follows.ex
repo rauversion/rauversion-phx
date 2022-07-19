@@ -28,6 +28,13 @@ defmodule Rauversion.UserFollows do
     |> Repo.preload([:following, :follower])
   end
 
+  def followings_list_for(user) do
+    UserFollow
+    |> where(follower_id: ^user.id)
+    |> Repo.all()
+    |> Repo.preload([:following, :follower])
+  end
+
   def followers_for(user) do
     UserFollow
     |> where(following_id: ^user.id)
