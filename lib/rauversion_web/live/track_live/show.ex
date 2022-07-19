@@ -24,7 +24,8 @@ defmodule RauversionWeb.TrackLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:track, track)}
+     |> assign(:track, track)
+     |> assign(:meta_tags, metatags(track))}
   end
 
   @impl true
@@ -41,7 +42,8 @@ defmodule RauversionWeb.TrackLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:track, track)}
+     |> assign(:track, track)
+     |> assign(:meta_tags, metatags(track))}
   end
 
   @impl true
@@ -107,4 +109,13 @@ defmodule RauversionWeb.TrackLive.Show do
   defp page_title(:private), do: "Show Track · private preview"
   defp page_title(:show), do: "Show Track"
   defp page_title(:edit), do: "Edit Track"
+
+  defp metatags(track) do
+    %{
+      title: "#{track.title} on Rauversion",
+      description: "Stream #{track.title} by #{track.user.username} on Rauversion."
+      # url: "https://phoenix.meta.tags",
+      # image: "https://phoenix.meta.tags/logo.png"
+    }
+  end
 end
