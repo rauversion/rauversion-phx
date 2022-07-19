@@ -61,8 +61,14 @@ defmodule Rauversion.TrackLikes do
            {:ok, nil}
          end)
          |> Repo.transaction() do
-      {:ok, %{counters: _, track_like: track_like}} -> {:ok, track_like}
-      err -> err
+      {:ok, %{counters: _, track_like: track_like}} ->
+        {:ok, track_like}
+
+      {:error, :track_like, err, %{}} ->
+        {:error, err}
+
+      err ->
+        err
     end
   end
 
