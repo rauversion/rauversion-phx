@@ -215,7 +215,7 @@
             module={RauversionWeb.TrackLive.CommentsComponent}
             id="track-comments"
             track={@track}
-            current_user={@socket.assigns |> Map.get(:current_user)}
+            current_user={@current_user}
           />
           
         </div>

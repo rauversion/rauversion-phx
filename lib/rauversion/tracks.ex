@@ -27,6 +27,10 @@ defmodule Rauversion.Tracks do
     Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", track.id)
   end
 
+  def get_track_query(id) do
+    from t in Track, where: t.id == ^id
+  end
+
   def find_by_signed_id!(token) do
     case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token, max_age: 86400) do
       {:ok, track_id} -> get_track!(track_id)
