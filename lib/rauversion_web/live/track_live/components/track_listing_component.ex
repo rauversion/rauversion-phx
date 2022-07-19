@@ -58,7 +58,8 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
       phx-hook="InfiniteScroll"
       phx-update="append"
       data-page={@page}
-      data-paginate-end={'assigns.playlists.total_pages == @page'}>
+      phx-target={@myself}
+      data-paginate-end={assigns.tracks.total_pages == @page}>
 
       <%= for track <- @tracks do %>
         <%= live_redirect to: Routes.track_show_path(@socket, :show, track), id: "track-item-#{track.id}" , class: "group" do %>
