@@ -20,6 +20,8 @@ defmodule Rauversion.Playlists.Playlist do
     # TODO: if user selects album on playlist_type, then the release_date should be required
     field :release_date, :utc_datetime
 
+    field :likes_count, :integer
+
     belongs_to :user, Rauversion.Accounts.User
     embeds_one :metadata, Rauversion.Playlists.PlaylistMetadata, on_replace: :delete
     has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all

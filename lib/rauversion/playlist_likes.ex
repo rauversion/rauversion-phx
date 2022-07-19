@@ -50,9 +50,20 @@ defmodule Rauversion.PlaylistLikes do
 
   """
   def create_playlist_like(attrs \\ %{}) do
-    %PlaylistLike{}
-    |> PlaylistLike.changeset(attrs)
-    |> Repo.insert()
+    case Ecto.Multi.new()
+         |> Ecto.Multi.insert(:playlist_like, %PlaylistLike{} |> PlaylistLike.changeset(attrs))
+         |> Ecto.Multi.run(:counters, fn _repo, %{playlist_like: playlist_like} ->
+           from(t in Rauversion.Playlists.Playlist,
+             where: t.id == ^playlist_like.playlist_id
+           )
+           |> Repo.update_all(inc: [likes_count: 1])
+
+           {:ok, nil}
+         end)
+         |> Repo.transaction() do
+      {:ok, %{counters: _, playlist_like: track_like}} -> {:ok, track_like}
+      err -> err
+    end
   end
 
   @doc """

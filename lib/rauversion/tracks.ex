@@ -87,17 +87,14 @@ defmodule Rauversion.Tracks do
         where: pi.user_id == ^id
 
     query
-    |> Map.put(
-      :preload,
-      [
-        :mp3_audio_blob,
-        :cover_blob,
-        :cover_attachment,
-        user: :avatar_attachment,
-        likes: likes_query,
-        reposts: reposts_query
-      ]
-    )
+    |> Ecto.Query.preload([
+      :mp3_audio_blob,
+      :cover_blob,
+      :cover_attachment,
+      user: :avatar_attachment,
+      likes: ^likes_query,
+      reposts: ^reposts_query
+    ])
   end
 
   def preload_tracks_preloaded_by_user(query, _current_user_id = nil) do
