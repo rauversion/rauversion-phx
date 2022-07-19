@@ -17,5 +17,11 @@ defmodule Rauversion.Reposts.Repost do
     repost
     |> cast(attrs, [:user_id, :track_id])
     |> validate_required([:user_id, :track_id])
+    |> prepare_changes(fn changeset ->
+      Ecto.assoc(changeset.data, :track)
+      |> Rauversion.Repo.update_all(inc: [reposts_count: 1])
+
+      changeset
+    end)
   end
 end

@@ -50,9 +50,26 @@ defmodule Rauversion.TrackLikes do
 
   """
   def create_track_like(attrs \\ %{}) do
-    %TrackLike{}
-    |> TrackLike.changeset(attrs)
-    |> Repo.insert()
+    case Ecto.Multi.new()
+         |> Ecto.Multi.insert(:track_like, %TrackLike{} |> TrackLike.changeset(attrs))
+         |> Ecto.Multi.run(:counters, fn _repo, %{track_like: track_like} ->
+           from(t in Rauversion.Tracks.Track,
+             where: t.id == ^track_like.track_id
+           )
+           |> Repo.update_all(inc: [likes_count: 1])
+
+           {:ok, nil}
+         end)
+         |> Repo.transaction() do
+      {:ok, %{counters: _, track_like: track_like}} ->
+        {:ok, track_like}
+
+      {:error, :track_like, err, %{}} ->
+        {:error, err}
+
+      err ->
+        err
+    end
   end
 
   @doc """
@@ -86,7 +103,12 @@ defmodule Rauversion.TrackLikes do
 
   """
   def delete_track_like(%TrackLike{} = track_like) do
-    Repo.delete(track_like)
+    res = Repo.delete(track_like)
+
+    Ecto.assoc(track_like, :track)
+    |> Rauversion.Repo.update_all(inc: [likes_count: -1])
+
+    res
   end
 
   def get_like_by_user_and_track(user_id, track_id) do

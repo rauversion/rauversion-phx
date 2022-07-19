@@ -22,6 +22,8 @@ defmodule Rauversion.Tracks.Track do
     field :private, :boolean, default: false
     field :slug, TitleSlug.Type
     field :title, :string
+    field :likes_count, :integer, default: 0
+    field :reposts_count, :integer, default: 0
 
     has_many :track_comments, Rauversion.TrackComments.TrackComment
     has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all

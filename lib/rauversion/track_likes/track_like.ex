@@ -1,6 +1,7 @@
 defmodule Rauversion.TrackLikes.TrackLike do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query, warn: false
 
   schema "track_likes" do
     # field :user_id, :id
