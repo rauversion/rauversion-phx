@@ -19,13 +19,13 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
                 <%= @profile.username %>
               </p>
               <%= if @profile.first_name || @profile.last_name do %>
-                <p class="sm:text-sm text-lg font-light bg-black p-1 inline-block">
+                <p class="sm:text-xs text-lg font-light bg-black p-1 inline-block">
                   <%= @profile.first_name %>
                   <%= @profile.last_name %>
                 </p>
               <% end %>
               <%= if @profile.city || @profile.country do %>
-                <p class="sm:text-sm text-lg font-light bg-black p-1 inline-block">
+                <p class="sm:text-xs text-lg font-light bg-black p-1 inline-block">
                   <%= @profile.city %>
                   <%= @profile.country %>
                 </p>
