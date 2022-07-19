@@ -97,17 +97,10 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   defp apply_action(socket, :tracks_all, %{"username" => id}) do
-    # profile = Accounts.get_user_by_username(id)
-    tracks =
-      Tracks.list_tracks_by_username(id)
-      |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user])
-      |> Repo.preload([:cover_blob, :mp3_audio_blob])
-
     socket
-    |> assign(:page_title, "Tracks all")
-    |> assign(:tracks, tracks)
-    |> assign(:title, "tracks_all")
-    |> assign(:data, menu(socket, id, "tracks_all"))
+    |> assign(:page_title, "All tracks")
+    |> assign(:title, "all")
+    |> assign(:data, menu(socket, id, "all"))
   end
 
   defp apply_action(socket, :reposts, %{"username" => id}) do

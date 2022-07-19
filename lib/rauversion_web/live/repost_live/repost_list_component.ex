@@ -6,29 +6,71 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
   alias Rauversion.{Tracks, Reposts, Repo}
 
   @impl true
-  def mount(socket) do
-    # socket = assign(socket, :tracks, Tracks.list_tracks())
-    {:ok, socket, temporary_assigns: [messages: []]}
+  def preload(assigns) do
+    assigns = List.first(assigns)
+    page = 1
+    reposts = list_tracks(page, assigns)
+    tracks_meta = track_meta(reposts)
+
+    [
+      Map.merge(assigns, %{
+        page: 1,
+        tracks:
+          reposts.entries
+          |> Enum.map(fn item -> item.track end),
+        track_meta: tracks_meta
+      })
+    ]
   end
 
   @impl true
-  def update(assigns, socket) do
-    reposts =
-      Reposts.get_reposts_by_user_id(assigns.profile.id, socket.assigns[:current_user])
-      # |> Rauversion.Repo.all()
-      # |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
-      # |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user].id)
-      |> Repo.paginate(page: 1, page_size: 5)
+  def mount(socket) do
+    # socket = assign(socket, :tracks, Tracks.list_tracks())
+    {:ok, socket, temporary_assigns: [tracks: []]}
+  end
 
-    tracks =
-      reposts.entries
-      |> Enum.map(fn item -> item.track end)
+  defp list_tracks(page, assigns) do
+    Reposts.get_reposts_by_user_id(assigns.profile.id, assigns[:current_user])
+    # |> Rauversion.Repo.all()
+    # |> Repo.preload(track: [:user, :cover_blob, :mp3_audio_blob])
+    # |> Tracks.preload_tracks_preloaded_by_user(socket.assigns[:current_user].id)
+    |> Repo.paginate(page: page, page_size: 5)
+  end
 
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign(page: 1)
-     |> assign(tracks: tracks)}
+  defp track_meta(tracks) do
+    %{
+      page_number: tracks.page_number,
+      page_size: tracks.page_size,
+      total_entries: tracks.total_entries,
+      total_pages: tracks.total_pages
+    }
+  end
+
+  # @impl true
+  # def update(assigns, socket) do
+  #  {:ok,
+  #   socket
+  #   |> assign(assigns)
+  #   |> assign(page: 1)
+  #   |> assign(tracks: tracks)}
+  # end
+
+  @impl true
+  def handle_event("paginate", %{}, socket) do
+    if socket.assigns.page == socket.assigns.track_meta.total_pages do
+      {:noreply, socket}
+    else
+      page = socket.assigns.page + 1
+
+      tracks = list_tracks(page, socket.assigns)
+      tracks_meta = track_meta(tracks)
+
+      {:noreply,
+       socket
+       |> assign(:page, page)
+       |> assign(:track_meta, tracks_meta)
+       |> assign(:tracks, tracks.entries |> Enum.map(fn item -> item.track end))}
+    end
   end
 
   @impl true
@@ -69,7 +111,8 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
                 phx-update="append"
                 data-page={@page}
                 phx-target={@myself}
-                data-paginate-end={'assigns.playlists.total_pages == @page'}>
+                data-total-pages={assigns.track_meta.total_pages}
+                data-paginate-end={assigns.track_meta.total_pages == @page}>
                 <%= for track <- @tracks do %>
                   <.live_component
                     module={RauversionWeb.TrackLive.TrackComponent}

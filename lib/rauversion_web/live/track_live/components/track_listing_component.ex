@@ -7,19 +7,25 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
 
   @impl true
   def mount(socket) do
-    # socket = assign(socket, :tracks, Tracks.list_tracks())
-    {:ok, socket, temporary_assigns: [messages: []]}
+    tracks = list_tracks(1)
+    tracks_meta = track_meta(tracks)
+
+    socket =
+      socket
+      |> assign(page: 1)
+      |> assign(:track_meta, tracks_meta)
+      |> assign(:tracks, tracks.entries)
+
+    {:ok, socket, temporary_assigns: [tracks: []]}
   end
 
-  @impl true
-  def update(assigns, socket) do
-    tracks = list_tracks(assigns)
-
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign(page: 1)
-     |> assign(tracks: tracks)}
+  defp track_meta(tracks) do
+    %{
+      page_number: tracks.page_number,
+      page_size: tracks.page_size,
+      total_entries: tracks.total_entries,
+      total_pages: tracks.total_pages
+    }
   end
 
   defp list_tracks(page) do
@@ -29,10 +35,25 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
 
   @impl true
   def handle_event("paginate", %{}, socket) do
-    {:noreply,
-     socket
-     |> assign(:page, socket.assigns.page + 1)
-     |> assign(:tracks, list_tracks(socket.assigns))}
+    if socket.assigns.page == socket.assigns.track_meta.total_pages do
+      {:noreply, socket}
+    else
+      page = socket.assigns.page + 1
+      tracks = list_tracks(page)
+
+      tracks_meta = %{
+        page_number: tracks.page_number,
+        page_size: tracks.page_size,
+        total_entries: tracks.total_entries,
+        total_pages: tracks.total_pages
+      }
+
+      {:noreply,
+       socket
+       |> assign(page: page)
+       |> assign(:track_meta, tracks_meta)
+       |> assign(tracks: tracks.entries)}
+    end
   end
 
   @impl true
@@ -59,7 +80,8 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
       phx-update="append"
       data-page={@page}
       phx-target={@myself}
-      data-paginate-end={assigns.tracks.total_pages == @page}>
+      data-total-pages={assigns.track_meta.total_pages}
+      data-paginate-end={assigns.track_meta.total_pages == @page}>
 
       <%= for track <- @tracks do %>
         <%= live_redirect to: Routes.track_show_path(@socket, :show, track), id: "track-item-#{track.id}" , class: "group" do %>

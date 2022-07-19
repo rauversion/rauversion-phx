@@ -72,8 +72,6 @@ defmodule Rauversion.Tracks do
   def list_tracks_by_username(user_id) do
     Rauversion.Accounts.get_user_by_username(user_id)
     |> Ecto.assoc(:tracks)
-    |> Repo.all()
-    |> Repo.preload(:user)
   end
 
   def preload_tracks_preloaded_by_user(
@@ -89,11 +87,30 @@ defmodule Rauversion.Tracks do
         where: pi.user_id == ^id
 
     query
-    |> Repo.preload(likes: likes_query, reposts: reposts_query)
+    |> Map.put(
+      :preload,
+      [
+        :mp3_audio_blob,
+        :cover_blob,
+        :cover_attachment,
+        user: :avatar_attachment,
+        likes: likes_query,
+        reposts: reposts_query
+      ]
+    )
   end
 
   def preload_tracks_preloaded_by_user(query, _current_user_id = nil) do
     query
+    |> Map.put(
+      :preload,
+      [
+        :mp3_audio_blob,
+        :cover_blob,
+        :cover_attachment,
+        user: :avatar_attachment
+      ]
+    )
   end
 
   @doc """
