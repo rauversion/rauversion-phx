@@ -64,6 +64,19 @@
                   page: 1,
                   current_user: assigns[:current_user]
                 )
+      "insights" ->
+              live_component(
+                  RauversionWeb.InsightsLive.InsightComponent,
+                  id: "profile-insights-#{@profile.id}",
+                  profile: @profile,
+                  title: @title,
+                  page: 1,
+                  playlists: [],
+                  track_meta: %{},
+                  page: 1,
+                  current_user: assigns[:current_user]
+                )
+      
       _ -> "no match on #{@title}"
     end  %>
     

@@ -22,6 +22,7 @@ defmodule Rauversion.Events.Event do
     field :search_engine, :boolean
     field :track_id, :integer
     field :user_id, :integer
+    field :resource_profile_id, :integer
     field :action, :string, virtual: true
     timestamps()
   end
@@ -47,6 +48,7 @@ defmodule Rauversion.Events.Event do
     :search_engine,
     :track_id,
     :user_id,
+    :resource_profile_id,
     :inserted_at,
     :updated_at
   ]

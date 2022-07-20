@@ -21,6 +21,7 @@ defmodule Rauversion.Repo.Migrations.CreateTrackEvent do
       add :bot, :boolean
       add :search_engine, :boolean
 
+      add :resource_profile_id, references(:users, on_delete: :nothing)
       add :user_id, references(:users, on_delete: :nothing)
       add :track_id, references(:tracks, on_delete: :nothing)
       add :playlist_id, references(:tracks, on_delete: :nothing)
@@ -28,6 +29,7 @@ defmodule Rauversion.Repo.Migrations.CreateTrackEvent do
       timestamps()
     end
 
+    create index(:listening_events, [:resource_profile_id])
     create index(:listening_events, [:user_id])
     create index(:listening_events, [:track_id])
     create index(:listening_events, [:playlist_id])

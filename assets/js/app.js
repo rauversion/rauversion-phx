@@ -31,8 +31,6 @@ import InfiniteScroll from "./hooks/infinite_scroll"
 import Player from "./hooks/player"
 import TrackHook from "./hooks/track_hook"
 
-//import WaveSurfer from 'wavesurfer'
-
 import create from 'zustand/vanilla'
 import { persist } from 'zustand/middleware'
 
@@ -78,9 +76,6 @@ let execJS = (selector, attr) => {
 }
 
 let Hooks = {}
-
-
-
 
 Hooks.Player = Player
 Hooks.TrackHook = TrackHook

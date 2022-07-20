@@ -40,6 +40,7 @@ defmodule RauversionWeb.EventsController do
       options
       |> Map.put(:session_id, "session_id")
       |> Map.put(:user_id, user_id)
+      |> Map.put(:resource_profile_id, track.user_id)
       |> Map.put(:inserted_at, DateTime.utc_now())
       |> Map.put(:updated_at, DateTime.utc_now())
 
