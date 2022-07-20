@@ -49,11 +49,11 @@ defmodule RauversionWeb.LiveHelpers do
         <% end %>
 
         <%= if @close_handler && !@return_to do %>
-          <a id="close" href="#" phx-click={"close-modal"} phx-target={@close_handler}>✖</a>
+          <a id="close" href="#" phx-click={"close-modal"} phx-target={@close_handler} class="phx-modal-close">✖</a>
         <% end %>
 
         <%= if !@close_handler && !@return_to do %>
-          <a id="close" href="#" class="phx-modal-close" phx-click={hide_modal()}>✖</a>
+          <a id="close" href="#" class="phx-modal-close" phx-click={hide_modal()} class="phx-modal-close">✖</a>
         <% end %>
 
         <%= render_slot(@inner_block) %>

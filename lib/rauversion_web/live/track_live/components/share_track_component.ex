@@ -4,16 +4,30 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
+  def iframe_code(socket, track = %Rauversion.Tracks.Track{private: false}) do
+    url = Routes.embed_url(socket, :private, Rauversion.Tracks.signed_id(track))
+    iframe_code_string(url, track)
+  end
+
+  def iframe_code(socket, track = %Rauversion.Tracks.Track{private: true}) do
+    url = Routes.embed_url(socket, :show, track)
+    iframe_code_string(url, track)
+  end
+
+  defp iframe_code_string(url, track) do
+    '<iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="#{url}"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="#{track.user.username}" title="#{track.user.username}" target="_blank" style="color: #cccccc; text-decoration: none;">#{track.user.username}</a> · <a href="#{url}" title="#{track.title}" target="_blank" style="color: #cccccc; text-decoration: none;">#{track.title}</a></div>'
+  end
+
   def render(%{track: track} = assigns) do
     ~H"""
       <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div class="mx-2 py-6">
           <div class="relative bg-white">
 
-            <nav class="flex space-x-4" aria-label="Tabs" data-controller="tabs">
+            <nav class="flex space-x-4 mt-2" aria-label="Tabs" data-controller="tabs">
               <a href="#" data-tab="#share-tab" data-action="click->tabs#changeTab" class="tab-link bg-orange-100 text-orange-700 px-3 py-2 font-medium text-sm rounded-md"> Share </a>
               <a href="#" data-tab="#embed-tab" data-action="click->tabs#changeTab" class="tab-link text-orange-500 hover:text-orange-700 px-3 py-2 font-medium text-sm rounded-md"> Embed </a>
-              <a href="#" data-tab="#message-tab" data-action="click->tabs#changeTab" class="tab-link text-orange-500 hover:text-orange-700 px-3 py-2 font-medium text-sm rounded-md"> Message </a>
+              <a href="#" data-tab="#message-tab" data-action="click->tabs#changeTab" class="hidden tab-link text-orange-500 hover:text-orange-700 px-3 py-2 font-medium text-sm rounded-md"> Message </a>
             </nav>
 
             <section id="share-tab" class="tab-pane block py-4">
@@ -98,19 +112,26 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
               <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
                 Embed
               </h2>
-              <input type="text"
-                value={Routes.embed_url(@socket, :show, track)}
-                class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
-              />
 
-              <input type="text"
-                value={Routes.embed_url(@socket, :private, Rauversion.Tracks.signed_id(track) )}
-                class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
-              />
+              <div>
+
+                <div data-controller="clipboard" data-clipboard-success-content="Copied!" class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text"
+                  value={iframe_code(@socket, track) |> to_string}
+                  data-clipboard-target="source"
+                  readonly=""
+                  class="py-3 px-2 outline-none flex-1 block rounded-none rounded-l-md sm:text-sm border border-gray-300">
+                  <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="inline-flex items-center px-3 focus:outline-none rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                    Copy to clipboard
+                  </button>
+                </div>
+
+              </div>
+
 
               <iframe
                 width="100%"
-                height="200"
+                height="100%"
                 scrolling="no"
                 frameborder="no"
                 allow="autoplay"
@@ -151,7 +172,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
               </p>
             </section>
 
-            <section id="message-tab" class="tab-pane hidden py-4">
+            <section id="message-tab" class="tab-pane hidden py-4 hidden">
               <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
                 Message
               </h2>

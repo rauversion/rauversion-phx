@@ -22,6 +22,16 @@ defmodule RauversionWeb.TrackLive.ShareTrackButtonComponent do
      )}
   end
 
+  @impl true
+  def handle_event("close-modal", %{}, socket) do
+    {
+      :noreply,
+      assign(socket, :action, nil)
+      |> assign(:share_track, nil)
+    }
+  end
+
+  @impl true
   def render(
         %{
           track: track
@@ -32,7 +42,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackButtonComponent do
     <div>
 
       <%= if @share_track do %>
-        <.modal return_to={Routes.profile_index_path(@socket, :index, track.user.username)}>
+        <.modal close_handler={@myself}>
           <.live_component
             id={"share-track-modal-#{@share_track.id}"}
             module={RauversionWeb.TrackLive.ShareTrackComponent}

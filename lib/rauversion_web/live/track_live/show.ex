@@ -78,6 +78,15 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
+  def handle_event("close-modal", %{}, socket) do
+    {
+      :noreply,
+      assign(socket, :action, nil)
+      |> assign(:share_track, nil)
+    }
+  end
+
+  @impl true
   def handle_event("metadata-tab" = tab, _, socket) do
     {:noreply, socket |> assign(:current_tab, tab)}
   end

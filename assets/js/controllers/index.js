@@ -1,5 +1,6 @@
 import { Application } from "@hotwired/stimulus"
 import Dropdown from "stimulus-dropdown"
+import Clipboard from 'stimulus-clipboard'
 import Audio from "./audio_controller"
 import Tabs from "./tabs_controller"
 import FooterPlayer from './footer_player_controller'
@@ -14,6 +15,7 @@ application.register("dropdown", Dropdown)
 application.register("audio", Audio)
 application.register("tabs", Tabs)
 application.register("player", FooterPlayer)
+application.register("clipboard", Clipboard)
 
 export { application }
 

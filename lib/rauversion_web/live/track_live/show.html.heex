@@ -17,7 +17,8 @@
 <% end %>
 
 <%= if @share_track do %>
-  <.modal return_to={Routes.profile_index_path(@socket, :index, @share_track.user.username)}>
+  <.modal 
+    close_handler={@myself}>
     <.live_component
       id={"share-track-modal-#{@share_track.id}"}
       module={RauversionWeb.TrackLive.ShareTrackComponent}
