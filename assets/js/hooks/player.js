@@ -155,6 +155,7 @@ Player = {
       detail: {}
     });
     document.dispatchEvent(ev)
+    this.trackEvent(trackId)
   },
   dispatchPause(){
     this.playiconTarget.style.display = 'none'
@@ -181,6 +182,11 @@ Player = {
   },
   playSong(){
     this._wave.playPause()
+  },
+  trackEvent(trackId) {
+    fetch(`/api/tracks/${trackId}/events`)
+      .then(response => response.json())
+      .then(data => console.log(data));
   },
   reconnected(){ },
   updated(){ }

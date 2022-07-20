@@ -78,6 +78,10 @@ config :phoenix_meta_tags,
 #   }
 # }
 
+# 30 mins
+config :geoip, cache_ttl_secs: 1800
+config :geoip, provider: :ipinfo, api_key: "your-api-key"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
