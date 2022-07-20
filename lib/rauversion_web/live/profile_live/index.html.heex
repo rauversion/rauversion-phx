@@ -82,43 +82,47 @@
     
   </div>
 
-  <aside class="hidden w-2/5 xl:block xl:col-span-4">
-    <div class="sticky top-4 space-y-4 p-4 bg-gray-50">
+  <%= if @title != "insights" do %>
 
-      <div class="p-4 border-l-1 border-l-gray-50">
-        <.live_component
-          module={RauversionWeb.ProfileLive.StatsComponent}
-          id={"track-#{@profile.id}-stats"}
-          profile={@profile}
-          track={"track"}
-        />
-      </div>
+    <aside class="hidden w-2/5 xl:block xl:col-span-4">
+      <div class="sticky top-4 space-y-4 p-4 bg-gray-50">
 
-      <%= if @profile.bio do %>
-        <p class="font-normal text-sm">
-          <%= @profile.bio %>
-        </p>
-      <% end  %>
-
-      <%= if assigns[:current_user] && @profile.id == @current_user.id do %>
-        <section aria-labelledby="who-to-follow-heading">
+        <div class="p-4 border-l-1 border-l-gray-50">
           <.live_component
-            module={RauversionWeb.ProfileLive.UserSuggestionComponent}
-            id={"track-#{@profile.id}-user-suggestion"}
+            module={RauversionWeb.ProfileLive.StatsComponent}
+            id={"track-#{@profile.id}-stats"}
             profile={@profile}
-            current_user={@current_user}
+            track={"track"}
+          />
+        </div>
+
+        <%= if @profile.bio do %>
+          <p class="font-normal text-sm">
+            <%= @profile.bio %>
+          </p>
+        <% end  %>
+
+        <%= if assigns[:current_user] && @profile.id == @current_user.id do %>
+          <section aria-labelledby="who-to-follow-heading">
+            <.live_component
+              module={RauversionWeb.ProfileLive.UserSuggestionComponent}
+              id={"track-#{@profile.id}-user-suggestion"}
+              profile={@profile}
+              current_user={@current_user}
+            />
+          </section>
+        <% end %>
+
+        <section aria-labelledby="trending-heading">
+          <.live_component
+            module={RauversionWeb.ProfileLive.TrendingComponent}
+            id={"track-#{@profile.id}-trending"}
+            track={"track"}
           />
         </section>
-      <% end %>
+      </div>
+    </aside>
 
-      <section aria-labelledby="trending-heading">
-        <.live_component
-          module={RauversionWeb.ProfileLive.TrendingComponent}
-          id={"track-#{@profile.id}-trending"}
-          track={"track"}
-        />
-      </section>
-    </div>
-  </aside>
+  <% end  %>
 
 </div>
