@@ -63,6 +63,7 @@ defmodule Rauversion.MixProject do
       {:remote_ip, "~> 1.0"},
       {:countries, "~> 1.6"},
       {:browser, "~> 0.4.4"},
+      {:timex, "~> 3.0"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"

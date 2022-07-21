@@ -20,9 +20,14 @@ defmodule Rauversion.Events.Event do
     field :device_type, :string
     field :bot, :boolean
     field :search_engine, :boolean
-    field :track_id, :integer
-    field :user_id, :integer
-    field :resource_profile_id, :integer
+    # field :track_id, :integer
+    belongs_to :track, Rauversion.Tracks.Track
+    # field :user_id, :integer
+    belongs_to :user, Rauversion.Accounts.User
+
+    # field :resource_profile_id, :integer
+    belongs_to :resource_profile, Rauversion.Accounts.User, foreign_key: :resource_profile_id
+
     field :action, :string, virtual: true
     timestamps()
   end

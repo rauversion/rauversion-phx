@@ -4,12 +4,12 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{profile: profile} = assigns) do
+  def render(%{profile: _profile} = assigns) do
     ~H"""
       <div class="mx-auto w-3/4">
         <div class="pt-4">
           <h3 class="text-lg leading-6 font-medium text-gray-900">Last 30 days</h3>
-          <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <dl class="hidden mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
               <dt class="text-sm font-medium text-gray-500 truncate">Total Listens</dt>
               <dd class="mt-1 text-3xl font-semibold text-gray-900">71,897</dd>
@@ -37,15 +37,13 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           </dl>
         </div>
 
-        <% #= Jason.encode! CountByDateQuery.row_counts_by_month() |> Rauversion.Repo.all() |> Map.new()  %>
-
-        <% #= Jason.encode! CountByDateQuery.row_counts_by_day() |> Rauversion.Repo.all() |> Map.new()  %>
-
-        <% #= Jason.encode! CountByDateQuery.row_counts_by_month() |> Rauversion.Repo.all() |> Map.new()  %>
-
         <div>
-          <div id="chart-line-container" class="shadow-lg rounded-lg overflow-hidden" phx-update="ignore" data-controller="chart">
-            <div class="py-3 px-5 bg-gray-50">Line chart</div>
+          <div id="chart-line-container"
+            class="shadow-lg rounded-lg overflow-hidden"
+            phx-update="ignore"
+            data-controller="chart"
+            data-chart-label-value="Last 12 months"
+            data-chart-points-value={Jason.encode!( CountByDateQuery.series_by_month(@profile.id) |> Rauversion.Repo.all())}>
             <canvas class="p-10" width="400" height="200" id="chartLine"></canvas>
           </div>
         </div>
@@ -66,22 +64,30 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
             <div class="flow-root mt-6">
               <ul role="list" class="-my-5 divide-y divide-gray-200">
-                <li class="py-4">
-                  <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <img class="h-8 w-8 rounded-sm" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="text-sm font-medium text-gray-900 truncate">Uncle Remus</p>
-                      <div class="text-sm text-gray-500 space-x-2 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                        </svg>
-                        <span>13 plays</span>
+                <%= for item <- CountByDateQuery.top_tracks(@profile.id) do %>
+                  <li class="py-4">
+                    <div class="flex items-center space-x-4">
+                      <div class="flex-shrink-0">
+
+                        <%= img_tag(Rauversion.Tracks.variant_url(
+                          item.track, "cover", %{resize_to_limit: "360x360"}),
+                          class: "h-8 w-8 rounded-xs")
+                        %>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate"><%= item.title %> </p>
+
+                        <div class="text-sm text-gray-500 space-x-2 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                          </svg>
+                          <span><%= item.count %> plays</span>
+                        </div>
+
                       </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                <% end %>
               </ul>
             </div>
             <div class="mt-6">
@@ -103,24 +109,26 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
             <div class="flow-root mt-6">
               <ul role="list" class="-my-5 divide-y divide-gray-200">
-                <li class="py-4">
-                  <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="text-sm font-medium text-gray-900 truncate">Leonard Krasner</p>
-
-                      <div class="text-sm text-gray-500 space-x-2 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                        </svg>
-                        <span>13 plays</span>
+                <%= for item <- CountByDateQuery.top_listeners(@profile.id) do %>
+                  <li class="py-4">
+                    <div class="flex items-center space-x-4">
+                      <div class="flex-shrink-0">
+                        <%= img_tag(Rauversion.Accounts.avatar_url(item.user), class: "h-8 w-8 rounded-full") %>
                       </div>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate"><%= item.user.username %> </p>
 
+                        <div class="text-sm text-gray-500 space-x-2 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                          </svg>
+                          <span><%= item.count %> plays</span>
+                        </div>
+
+                      </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                <% end %>
               </ul>
             </div>
             <div class="mt-6">
@@ -141,25 +149,29 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
             <div class="flow-root mt-6">
               <ul role="list" class="-my-5 divide-y divide-gray-200">
-                <li class="py-4">
-                  <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                      <img class="h-8 w-12 rounded-sm" src="https://countryflagsapi.com/png/chile" alt="">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="text-sm font-medium text-gray-900 truncate">Chile</p>
-                      <div class="text-sm text-gray-500 space-x-2 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                        </svg>
-                        <span>13 plays</span>
+                <%= for item <- CountByDateQuery.top_countries(@profile.id) do %>
+                  <li class="py-4">
+                    <div class="flex items-center space-x-4">
+                      <div class="flex-shrink-0">
+                        <%= if item.country do %>
+                          <img
+                            class="h-8 w-12 rounded-sm"
+                            src={"https://countryflagsapi.com/png/#{item.country}"}
+                            alt="">
+                        <% end %>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate"><%= item.country || "unknown" %></p>
+                        <div class="text-sm text-gray-500 space-x-2 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                          </svg>
+                          <span><%= item.count %> plays</span>
+                        </div>
                       </div>
                     </div>
-                    <div>
-                      <a href="#" class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50"> View </a>
-                    </div>
-                  </div>
-                </li>
+                  </li>
+                <% end %>
               </ul>
             </div>
             <div class="mt-6">

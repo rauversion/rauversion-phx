@@ -4,17 +4,21 @@ import Chart from 'chart.js/auto';
 
 export default class extends Controller {
 
-  connect(){
+  static values = {
+    points: Array,
+    label: String
+  }
 
-    const labels = ["January", "February", "March", "April", "May", "June"];
+  connect(){
+    const labels = this.pointsValue.map((s)=> s.day );
     const data = {
       labels: labels,
       datasets: [
         {
-          label: "My First dataset",
+          label: this.labelValue,
           backgroundColor: "hsl(252, 82.9%, 67.8%)",
           borderColor: "hsl(252, 82.9%, 67.8%)",
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: this.pointsValue.map((s)=> s.count ),
         },
       ],
     };

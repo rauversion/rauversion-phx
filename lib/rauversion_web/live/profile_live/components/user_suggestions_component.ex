@@ -25,11 +25,10 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
 
   @impl true
   def handle_event("follow-account", %{"id" => id}, socket) do
-    a =
-      UserFollows.create_user_follow(%{
-        follower_id: socket.assigns.current_user.id,
-        following_id: id
-      })
+    UserFollows.create_user_follow(%{
+      follower_id: socket.assigns.current_user.id,
+      following_id: id
+    })
 
     {:noreply, socket |> assign(:collection, who_to_follow(socket.assigns.current_user))}
   end
