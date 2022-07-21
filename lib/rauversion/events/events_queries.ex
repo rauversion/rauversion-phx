@@ -18,6 +18,7 @@ defmodule CountByDateQuery do
       join: t in Event,
       on: a.id == t.track_id and t.resource_profile_id == ^profile_id,
       group_by: [a.id],
+      limit: 10,
       select: %{
         count: count(t.id),
         title: a.title,
@@ -37,6 +38,7 @@ defmodule CountByDateQuery do
       join: t in Event,
       on: a.id == t.user_id and t.resource_profile_id == ^profile_id,
       group_by: [a.id],
+      limit: 10,
       select: %{
         count: count(t.id),
         user: a
@@ -53,6 +55,7 @@ defmodule CountByDateQuery do
     from(event in Event,
       where: event.resource_profile_id == ^profile_id,
       group_by: [event.country],
+      limit: 10,
       select: %{
         count: count(event.country),
         country: event.country
