@@ -5,6 +5,7 @@ defmodule Rauversion.Repo.Migrations.CreateTrackEvent do
     create table(:listening_events) do
       add :remote_ip, :string
       add :country, :string
+      add :city, :string
       add :ua, :string
       add :lang, :string
       add :referer, :string

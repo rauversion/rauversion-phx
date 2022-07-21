@@ -5,6 +5,7 @@ defmodule Rauversion.Events.Event do
   schema "listening_events" do
     field :remote_ip, :string
     field :country, :string
+    field :city, :string
     field :ua, :string
     field :lang, :string
     field :referer, :string
@@ -36,6 +37,7 @@ defmodule Rauversion.Events.Event do
   @optional_fields [
     :remote_ip,
     :country,
+    :city,
     :ua,
     :lang,
     :referer,
@@ -57,6 +59,13 @@ defmodule Rauversion.Events.Event do
     :inserted_at,
     :updated_at
   ]
+
+  def country_name(name) do
+    case Countries.filter_by(:alpha2, name) do
+      [%{name: country_name} | _] -> country_name
+      _ -> name
+    end
+  end
 
   def changeset(struct, attrs) do
     struct

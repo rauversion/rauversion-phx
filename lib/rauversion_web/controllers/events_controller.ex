@@ -2,7 +2,17 @@ defmodule RauversionWeb.EventsController do
   use RauversionWeb, :controller
 
   def show(conn, params = %{"track_id" => track_id}) do
-    # lookup = GeoIP.lookup("8.8.8.8")
+    remote_ip = conn.remote_ip |> Tuple.to_list() |> Enum.join(".")
+
+    lookup_data =
+      case GeoIP.lookup(remote_ip) do
+        {:ok, %{city: city, country: country}} ->
+          %{city: city, country: country}
+
+        _ ->
+          %{city: nil, country: nil}
+      end
+
     # require IEx
     # IEx.pry()
 
@@ -11,7 +21,8 @@ defmodule RauversionWeb.EventsController do
 
     options = %{
       remote_ip: conn.remote_ip |> Tuple.to_list() |> Enum.join("."),
-      country: "",
+      country: lookup_data.country,
+      city: lookup_data.city,
       ua: ua,
       lang: get_req_header(conn, "lang") |> List.last() || "en",
       referer: get_req_header(conn, "referer") |> List.last(),
