@@ -17,6 +17,7 @@ defmodule Rauversion.Application do
       Rauversion.Repo,
       # Start the Telemetry supervisor
       RauversionWeb.Telemetry,
+      Rauversion.Events.WriteBuffer,
       # Start the PubSub system
       {Phoenix.PubSub, name: Rauversion.PubSub},
       # Start the Endpoint (http/https)

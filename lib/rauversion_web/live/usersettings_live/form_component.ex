@@ -154,23 +154,6 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     {:noreply, socket}
   end
 
-  defp save_notifications(socket, :notifications, %{"user" => user_params}) do
-    user = socket.assigns.current_user
-
-    socket =
-      case Accounts.update_notifications(user, user_params) do
-        {:ok, _user} ->
-          socket
-          |> put_flash(:info, "User profile updated successfully.")
-          |> redirect(to: "/users/settings/notifications")
-
-        {:error, changeset} ->
-          socket |> assign(:changeset, changeset)
-      end
-
-    {:noreply, socket}
-  end
-
   defp save_profile(socket, :notifications, %{"user" => user_params}) do
     user = socket.assigns.current_user
 
@@ -180,6 +163,23 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
           socket
           |> put_flash(:info, "User profile updated successfully.")
           |> redirect(to: "/users/settings")
+
+        {:error, changeset} ->
+          socket |> assign(:changeset, changeset)
+      end
+
+    {:noreply, socket}
+  end
+
+  defp save_notifications(socket, :notifications, %{"user" => user_params}) do
+    user = socket.assigns.current_user
+
+    socket =
+      case Accounts.update_notifications(user, user_params) do
+        {:ok, _user} ->
+          socket
+          |> put_flash(:info, "User profile updated successfully.")
+          |> redirect(to: "/users/settings/notifications")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)
