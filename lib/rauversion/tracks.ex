@@ -230,11 +230,22 @@ defmodule Rauversion.Tracks do
     blob = Rauversion.Tracks.blob_for(track, :audio)
     service = blob |> ActiveStorage.Blob.service()
     path = service.__struct__.path_for(service, blob.key)
-    duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
-
-    data = Rauversion.Services.PeaksGenerator.run_audiowaveform(path, duration)
+    duration = blob_duration_metadata(blob)
+    data = Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration)
     # pass track.metadata.id is needed in order to merge the embedded_schema properly.
     update_track(track, %{metadata: %{id: track.metadata.id, peaks: data}})
+  end
+
+  def blob_duration_metadata(blob) do
+    metadata = ActiveStorage.Blob.metadata(blob)
+
+    case metadata do
+      %{"duration" => duration} ->
+        duration
+
+      _ ->
+        ActiveStorage.Blob.analyze(blob) |> ActiveStorage.Blob.metadata() |> Map.get("duration")
+    end
   end
 
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
