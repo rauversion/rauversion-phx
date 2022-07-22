@@ -239,7 +239,13 @@ defmodule Rauversion.Tracks do
         path = generate_local_copy(contents)
         data = Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration)
         # pass track.metadata.id is needed in order to merge the embedded_schema properly.
-        update_track(track, %{metadata: %{id: track.metadata.id, peaks: data}})
+        case track.metadata do
+          nil ->
+            update_track(track, %{metadata: %{peaks: data}})
+
+          metadata ->
+            update_track(track, %{metadata: %{id: metadata.id, peaks: data}})
+        end
 
       err ->
         IO.inspect(err)
