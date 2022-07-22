@@ -46,6 +46,11 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - [x] Paginate profile tracks /:username
 - [x] Paginate /tracks
 - [x] Centralized player, fixed (bottom) across navigation
+- [x] Make GithubActions work!
+- [x] Refactor audio processing, add proceesing queue for the after upload
+- [x] Telemetry for dashboard/ metrics / insights
+- [ ] A WYSIWYG editor for Markdown for Track/Playlist description
+  - [x] fallback to a formatted plain text with auto link
 - [ ] Playlists
   - [x] add to playlist select playlist / modal first tab
   - [ ] sort songs on playlist
@@ -53,14 +58,11 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
   - [ ] share button playlist/show
   - [x] playlist player
 - [ ] Fix specs on tests/rauversion-web
-- [x] Make GithubActions work!
 - [ ] Listening history
 - [ ] Give feedback on upload preprosessing
-- [ ] Refactor audio processing, add proceesing queue for the after upload
 - [ ] A logo for rauversion
 - [ ] Albums
-- [ ] A WYSIWYG editor for Markdown for Track/Playlist description
-- [ ] Telemetry for dashboard
+
 
 
 

@@ -64,9 +64,15 @@ defmodule Rauversion.MixProject do
       {:countries, "~> 1.6"},
       {:browser, "~> 0.4.4"},
       {:timex, "~> 3.0"},
+      {:oban, "~> 2.13"},
+      {:fsmx, "~> 0.2.0"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
+      },
+      {
+        :active_job,
+        git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_job", override: true
       }
       # {
       #  :active_job,
@@ -75,7 +81,8 @@ defmodule Rauversion.MixProject do
       # {:active_storage,
       # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"}
       # {:active_job,
-      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_job"}
+      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_job",
+      # override: true}
     ]
   end
 

@@ -46,6 +46,7 @@
 
       <div class="flex flex-col sm:flex-row mb-6">
         <div class="flex-grow bg-black items-center text-white">
+        <%= if Rauversion.Tracks.is_processed?(@track) do %>
           <img class="hidden h-32 w-full object-cover lg:h-48" 
             src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" alt="">
 
@@ -93,6 +94,21 @@
                 </div>
               </div>
             <% end %>
+
+          <% else %>
+
+            <div class='flex items-center'>
+              <span class="text-2xl text-center p-5 space-x-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <p>
+                  Hold on, this track is in <%= if @track.state do @track.state else "pending" end %> state
+                </p> 
+              </span>
+            </div>
+
+          <% end %>
         </div>
 
         <div class="w-1/4 hidden sm:block">
@@ -137,8 +153,6 @@
             </div>
             <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
               
-
-
               <.live_component
                 id={"share-track-button-#{@track.id}"}
                 module={RauversionWeb.TrackLive.ShareTrackButtonComponent}

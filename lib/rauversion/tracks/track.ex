@@ -15,6 +15,8 @@ defmodule Rauversion.Tracks.Track do
   schema "tracks" do
     field :caption, :string
     field :description, :string
+    field :state, :string, default: "pending"
+
     # field :metadata, :map, default: %{}
     embeds_one :metadata, Rauversion.Tracks.TrackMetadata, on_replace: :delete
 
@@ -60,6 +62,13 @@ defmodule Rauversion.Tracks.Track do
 
     timestamps()
   end
+
+  use Fsmx.Struct,
+    transitions: %{
+      "pending" => ["processing", "processed"],
+      "processing" => ["pending", "processed"],
+      "processed" => ["pending"]
+    }
 
   def record_type() do
     "Track"
@@ -113,21 +122,11 @@ defmodule Rauversion.Tracks.Track do
                 # copy temp file from live
                 file = generate_local_copy(file)
 
-                Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converting])
+                %{file: file, track_id: struct.data.id}
+                |> Rauversion.Workers.TrackProcessorWorker.new()
+                |> Oban.insert()
 
-                %{path: path, blob: blob} = convert_to_mp3(struct, file)
-
-                duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
-
-                Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converted])
-
-                case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
-                  [_ | _] = data ->
-                    put_change(struct, :metadata, %{peaks: data})
-
-                  _ ->
-                    struct
-                end
+                struct
               else
                 struct
               end
@@ -152,21 +151,53 @@ defmodule Rauversion.Tracks.Track do
     end
   end
 
+  def process_peaks(struct, blob, path) do
+    duration = blob |> ActiveStorage.Blob.metadata() |> Map.get("duration")
+
+    Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converted])
+
+    struct =
+      case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
+        [_ | _] = data ->
+          put_change(struct, :metadata, %{peaks: data})
+          |> put_change(:state, "processed")
+
+        _ ->
+          put_change(struct, :state, "processed")
+      end
+
+    struct |> Rauversion.Repo.update()
+  end
+
   def convert_to_mp3(struct, file) do
     IO.inspect("CONVERT MP3 #{file.path}")
     IO.inspect(File.exists?(file.path))
-    path = Rauversion.Services.Mp3Converter.run(file.path)
 
-    IO.inspect("CONVERTED MP3!! #{path}")
-    IO.inspect(File.exists?(path))
+    path = transform_to_mp3(file.path)
+    # audio_blob = create_and_analyze_audio(struct, file)
+    blob = create_and_analyze_audio(struct, file, "mp3_audio")
+    # create_and_analyze_audio(struct, file)
 
+    %{path: path, blob: blob}
+  end
+
+  def create_and_analyze_audio(struct, file, kind \\ "audio") do
     blob =
       Rauversion.BlobUtils.create_blob(file)
       |> ActiveStorage.Blob.analyze()
 
-    Rauversion.BlobUtils.attach_file(struct, "mp3_audio", blob)
+    Rauversion.BlobUtils.attach_file(struct, kind, blob)
 
-    %{path: path, blob: blob}
+    blob
+  end
+
+  def transform_to_mp3(path) do
+    IO.inspect("CONVERT MP3 #{path}")
+    IO.inspect(File.exists?(path))
+    path = Rauversion.Services.Mp3Converter.run(path)
+    IO.inspect("CONVERTED MP3!! #{path}")
+    IO.inspect(File.exists?(path))
+    path
   end
 
   def generate_local_copy(file) do

@@ -69,6 +69,10 @@ defmodule Rauversion.Tracks do
       ]
   end
 
+  def with_processed(query) do
+    query |> where([t], t.state == "processed")
+  end
+
   def list_tracks_by_ids(ids) do
     list_public_tracks() |> where([p], p.id in ^ids)
   end
@@ -252,6 +256,10 @@ defmodule Rauversion.Tracks do
         IO.puts("can't download the file")
         nil
     end
+  end
+
+  def is_processed?(track) do
+    track.state == "processed"
   end
 
   def blob_duration_metadata(blob) do
