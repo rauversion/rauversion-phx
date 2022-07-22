@@ -4,7 +4,7 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{profile: profile} = assigns) do
+  def render(%{profile: _profile} = assigns) do
     ~H"""
       <div class="sm:h-64 h-24 bg-black sticky top-0 z-40 sm:relative">
         <div class="flex justify-between">

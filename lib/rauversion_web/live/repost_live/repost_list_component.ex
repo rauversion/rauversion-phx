@@ -3,7 +3,7 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
-  alias Rauversion.{Tracks, Reposts, Repo}
+  alias Rauversion.{Reposts, Repo}
 
   @impl true
   def preload(assigns) do

@@ -41,7 +41,7 @@ defmodule Rauversion.Reposts do
     Repost |> where(user_id: ^user_id) |> where(track_id: ^track_id) |> Repo.one()
   end
 
-  def get_reposts_by_user_id(user_id, current_user = %Rauversion.Accounts.User{id: id}) do
+  def get_reposts_by_user_id(user_id, _current_user = %Rauversion.Accounts.User{id: id}) do
     from p in Repost,
       where: p.user_id == ^user_id,
       left_join: track in assoc(p, :track),

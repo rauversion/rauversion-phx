@@ -31,6 +31,13 @@ defmodule RauversionWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_api do
+    plug RemoteIp
+    plug :fetch_session
+    plug :fetch_current_user
+    plug :accepts, ["json", "html"]
+  end
+
   scope "/", RauversionWeb do
     pipe_through :browser
     get "/", PageController, :index
@@ -46,9 +53,11 @@ defmodule RauversionWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", RauversionWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", RauversionWeb do
+    pipe_through :browser_api
+    post "/tracks/:track_id/events", EventsController, :show
+    get "/tracks/:track_id/events", EventsController, :show
+  end
 
   # Enables LiveDashboard only for development
   #

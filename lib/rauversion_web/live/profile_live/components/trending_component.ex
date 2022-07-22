@@ -22,6 +22,7 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
     |> Rauversion.Repo.paginate(page: page, page_size: 5)
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
       <div class="bg-white border-t">
