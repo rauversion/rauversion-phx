@@ -46,4 +46,12 @@ config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo
 config :active_storage, repo: Rauversion.Repo
 
-config :rauversion, Oban, testing: :inline
+# config :rauversion, Oban, testing: :inline
+
+config :active_job, Oban,
+  testing: :inline,
+  repo: Rauversion.Repo,
+  notifier: Oban.Notifiers.PG,
+  peer: Oban.Peers.Global,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10]
