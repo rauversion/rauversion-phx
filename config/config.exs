@@ -66,6 +66,19 @@ config :phoenix_meta_tags,
   # image: "https://phoenix.meta.tags.default/logo.png",
   "og:text": "Rauversion"
 
+# config :rauversion, Oban,
+#  repo: Rauversion.Repo,
+#  plugins: [Oban.Plugins.Pruner],
+#  queues: [default: 10]
+
+config :active_job, Oban,
+  # testing: :inline,
+  repo: Rauversion.Repo,
+  notifier: Oban.Notifiers.PG,
+  peer: Oban.Peers.Global,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10]
+
 # fb: %{
 #   name: "facebook",
 #   size: %{
