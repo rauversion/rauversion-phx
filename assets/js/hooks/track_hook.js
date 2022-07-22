@@ -19,7 +19,9 @@ Player = {
 
     this.playing = false 
 
-    this.playBtn.addEventListener("click", (e)=>{
+    this.drawerListener = null
+
+    this.playBtnListener = this.playBtn.addEventListener("click", (e)=>{
       if(!this.playing){
         this.pushEventTo("#main-player", "play-song", {id: this.el.dataset.audioId } )
       } else {
@@ -27,32 +29,35 @@ Player = {
       }
     })
 
-    window.addEventListener(`phx:add-from-playlist`, (e) => {
+    this.addFromPlaylistListener = window.addEventListener(`phx:add-from-playlist`, (e) => {
       console.log("ADD FROM PLAYLIST", e.detail)
       this.pushEventTo("#main-player", "play-song", {id: e.detail.track_id } )
     })
 
-    document.addEventListener(`audio-process-${this.el.dataset.audioId}`, (e) => {
+    this.audioProcessListeners = 
+      document.addEventListener(`audio-process-${this.el.dataset.audioId}`, (e) => {
       // console.log("AUDIO PROCESS RECEIVED", e.detail)
       // this._wave.drawer.progressWave.style.width = `${e.detail}px`
       // this._wave.drawer.progress(e.detail)
       // this.drawer.progress(this.backend.getPlayedPercents());
       this._wave.drawer.progress(e.detail.percent)
-    });
+      })
 
-    document.addEventListener(`audio-process-${this.el.dataset.audioId}-play`, (e) => {
-      this.playiconTarget.style.display = 'block'
-      this.pauseiconTarget.style.display = 'none'
-      this.playing = true
-      this._wave.drawer.progress(e.detail.percent)
-    });
+    this.audioProcessPlayListeners = 
+      document.addEventListener(`audio-process-${this.el.dataset.audioId}-play`, (e) => {
+        this.playiconTarget.style.display = 'block'
+        this.pauseiconTarget.style.display = 'none'
+        this.playing = true
+        this._wave.drawer.progress(e.detail.percent)
+      })
 
-    document.addEventListener(`audio-process-${this.el.dataset.audioId}-pause`, (e) => {
-      this.playiconTarget.style.display = 'none'
-      this.pauseiconTarget.style.display = 'block'
-      this.playing = false
-      this._wave.drawer.progress(e.detail.percent)
-    });
+    this.audioProcessPauseListeners = 
+      document.addEventListener(`audio-process-${this.el.dataset.audioId}-pause`, (e) => {
+        this.playiconTarget.style.display = 'none'
+        this.pauseiconTarget.style.display = 'block'
+        this.playing = false
+        this._wave.drawer.progress(e.detail.percent)
+      })
 
     /*window.addEventListener(`phx:play-song`, (e) => {
       console.log("PLAY SONG", e.detail)
@@ -69,9 +74,20 @@ Player = {
     this.initWave()
 
   },
+  destroyed(){
+    this.playBtn.removeEventListener("click", this.playBtnListener)
+    this._wave && this._wave.drawer.wrapper.removeEventListener('click', this.drawerListener )
+    window.removeEventListener(`phx:add-from-playlist`, this.addFromPlaylistListener)
+    document.removeEventListener(`audio-process-${this.el.dataset.audioId}`, this.audioProcessListeners)
+    document.removeEventListener(`audio-process-${this.el.dataset.audioId}-play`, this.audioProcessPlayListeners)
+    document.removeEventListener(`audio-process-${this.el.dataset.audioId}-pause`, this.audioProcessPauseListeners)
+    this.destroyWave()
+  },
   initWave(){
     this.peaks = this.el.dataset.audioPeaks
     this.url = this.el.dataset.audioUrl
+
+    if(!this.url) return
 
     this._wave = WaveSurfer.create({
       container: this.playerTarget,
@@ -98,7 +114,7 @@ Player = {
     this._wave.on('ready', ()=> {
       console.log("READY")
       // sends the progress position to track_component
-      this._wave.drawer.wrapper.addEventListener('click', (e)=> {
+      this.drawerListener = this._wave.drawer.wrapper.addEventListener('click', (e)=> {
 
         setTimeout(()=>{
           const trackId = this.el.dataset.audioId
@@ -119,7 +135,7 @@ Player = {
     this._wave && this._wave.destroy()
   },
   playSong(){
-    this._wave.playPause()
+    this._wave && this._wave.playPause()
   },
   dispatchPause(){
     const trackId = this.el.dataset.audioId

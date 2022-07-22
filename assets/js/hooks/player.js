@@ -4,6 +4,8 @@ import WaveSurfer from 'wavesurfer.js'
 Player = {
   mounted(){
 
+    this.waveClickListener = null
+
     this.currentSongIndex = 0
     this.currentSong = window.store.getState().playlist[this.currentSongIndex]
 
@@ -19,32 +21,32 @@ Player = {
 
     this.playBtn = this.el.querySelector('[data-player-target="play"]')
 
-    this.playBtn.addEventListener("click", (e)=>{
+    this.playBtnListener = this.playBtn.addEventListener("click", (e)=>{
       this._wave.playPause()
     })
 
     this.nextBtn = this.el.querySelector('[data-player-target="next"]')
     this.rewBtn = this.el.querySelector('[data-player-target="rew"]')
 
-    this.nextBtn.addEventListener("click", (e)=>{
+    this.nextBtnClickListener = this.nextBtn.addEventListener("click", (e)=>{
       this.nextSong()
     })
 
-    this.rewBtn.addEventListener("click", (e)=>{
+    this.prevBtnClickListener = this.rewBtn.addEventListener("click", (e)=>{
       this.prevSong()
     })
 
-    this.range.addEventListener("change", (e)=>{
+    this.rangeChangeListener = this.range.addEventListener("change", (e)=>{
       window.store.setState({volume: e.target.value})
       this._wave.setVolume(e.target.value)
     })
 
-    window.addEventListener(`phx:add-to-next`, (e) => {
+    this.addToNextListener = window.addEventListener(`phx:add-to-next`, (e) => {
       console.log("ADD TO NEXT ITEM", e.detail)
       this.pushEvent("add-song", {id: e.detail.value.id } )
     })
 
-    window.addEventListener(`phx:play-song`, (e) => {
+    this.playSongListener = window.addEventListener(`phx:play-song`, (e) => {
       console.log("PLAY SONG", e.detail)
       // this.el.dataset.playerPeaks = e.detail.peaks
       // this.el.dataset.playerUrl = e.detail.url
@@ -56,6 +58,15 @@ Player = {
     })
     this._wave = null
     this.initWave()
+  },
+  destroyed(){
+    this.playBtn && this.playBtn.addEventListener("click", this.playBtnListener)
+    this.nextBtn && this.nextBtn.addEventListener("click", this.nextBtnClickListener)
+    this.rewBtn && this.rewBtn.addEventListener("click", this.prevBtnClickListener)
+    this.range && this.range.removeEventListener("change", this.rangeChangeListener )
+    this?._wave?.drawer?.wrapper?.removeEventListener("click", this.waveClickListener)
+    window.removeEventListener(`phx:add-to-next`, this.addToNextListener)
+    window.removeEventListener('phx:add-to-next', this.addToNextListener)
   },
   initWave(){
     this.peaks = this.el.dataset.playerPeaks
@@ -109,7 +120,7 @@ Player = {
     this._wave.on('ready', ()=> {
       console.log("READY")
       // sends the progress position to track_component
-      this._wave.drawer.wrapper.addEventListener('click', (e)=> {
+      this.waveClickListener = this._wave.drawer.wrapper.addEventListener('click', (e)=> {
 
         setTimeout(()=>{
 
