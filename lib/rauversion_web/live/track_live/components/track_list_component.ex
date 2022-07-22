@@ -37,11 +37,16 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
   #    |> assign(tracks: tracks)}
   # end
 
-  defp list_tracks(page, assigns) do
-    IO.inspect("OEIEIEIEIEIE")
-
+  defp list_tracks(page, assigns = %{current_user: %Rauversion.Accounts.User{}}) do
     Tracks.list_tracks_by_username(assigns.profile.username)
     |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
+    |> Repo.paginate(page: page, page_size: 5)
+  end
+
+  defp list_tracks(page, assigns = %{current_user: nil}) do
+    Tracks.list_tracks_by_username(assigns.profile.username)
+    |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
+    |> Tracks.with_processed()
     |> Repo.paginate(page: page, page_size: 5)
   end
 

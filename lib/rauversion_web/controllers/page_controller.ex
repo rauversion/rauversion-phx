@@ -12,6 +12,7 @@ defmodule RauversionWeb.PageController do
 
   defp list_tracks(page) do
     Rauversion.Tracks.list_public_tracks()
+    |> Rauversion.Tracks.with_processed()
     |> Rauversion.Repo.paginate(page: page, page_size: 5)
   end
 
