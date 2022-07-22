@@ -230,7 +230,7 @@ defmodule Rauversion.Tracks do
     # track = Rauversion.Tracks.get_track!(7) |> Rauversion.Repo.preload(:audio_blob)
     # Rauversion.Tracks.get_track!(7) |> Rauversion.Repo.preload(:audio_blob) |> Rauversion.Tracks.reprocess_peaks()
 
-    blob = Rauversion.Tracks.blob_for(track, :audio)
+    blob = Rauversion.Tracks.blob_for(track, :mp3_audio)
     # service = blob |> ActiveStorage.Blob.service()
 
     case ActiveStorage.Blob.download(blob) do
