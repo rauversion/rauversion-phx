@@ -49,6 +49,7 @@ defmodule Rauversion.Services.PeaksGenerator do
         _ -> nil
       end
     end)
+    |> Enum.filter(&(!is_nil(&1)))
     |> normalize
   end
 
