@@ -65,6 +65,7 @@ defmodule Rauversion.MixProject do
       {:browser, "~> 0.4.4"},
       {:timex, "~> 3.0"},
       {:oban, "~> 2.13"},
+      {:fsmx, "~> 0.2.0"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"

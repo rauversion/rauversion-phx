@@ -15,6 +15,8 @@ defmodule Rauversion.Tracks.Track do
   schema "tracks" do
     field :caption, :string
     field :description, :string
+    field :state, :string, default: "pending"
+
     # field :metadata, :map, default: %{}
     embeds_one :metadata, Rauversion.Tracks.TrackMetadata, on_replace: :delete
 
@@ -60,6 +62,13 @@ defmodule Rauversion.Tracks.Track do
 
     timestamps()
   end
+
+  use Fsmx.Struct,
+    transitions: %{
+      "pending" => ["processing", "processed"],
+      "processing" => ["pending", "processed"],
+      "processed" => ["pending"]
+    }
 
   def record_type() do
     "Track"
@@ -151,9 +160,10 @@ defmodule Rauversion.Tracks.Track do
       case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
         [_ | _] = data ->
           put_change(struct, :metadata, %{peaks: data})
+          |> put_change(:state, "processed")
 
         _ ->
-          struct
+          put_change(struct, :state, "processed")
       end
 
     struct |> Rauversion.Repo.update()
