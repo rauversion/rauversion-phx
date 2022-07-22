@@ -227,13 +227,25 @@ defmodule Rauversion.Tracks do
 
   # processes clip only for :local
   def reprocess_peaks(track) do
+    # track = Rauversion.Tracks.get_track!(7) |> Rauversion.Repo.preload(:audio_blob)
+    # Rauversion.Tracks.get_track!(7) |> Rauversion.Repo.preload(:audio_blob) |> Rauversion.Tracks.reprocess_peaks()
+
     blob = Rauversion.Tracks.blob_for(track, :audio)
-    service = blob |> ActiveStorage.Blob.service()
-    path = service.__struct__.path_for(service, blob.key)
-    duration = blob_duration_metadata(blob)
-    data = Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration)
-    # pass track.metadata.id is needed in order to merge the embedded_schema properly.
-    update_track(track, %{metadata: %{id: track.metadata.id, peaks: data}})
+    # service = blob |> ActiveStorage.Blob.service()
+
+    case ActiveStorage.Blob.download(blob) do
+      {:ok, contents} ->
+        duration = blob_duration_metadata(blob)
+        path = generate_local_copy(contents)
+        data = Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration)
+        # pass track.metadata.id is needed in order to merge the embedded_schema properly.
+        update_track(track, %{metadata: %{id: track.metadata.id, peaks: data}})
+
+      err ->
+        IO.inspect(err)
+        IO.puts("can't download the file")
+        nil
+    end
   end
 
   def blob_duration_metadata(blob) do
@@ -246,6 +258,14 @@ defmodule Rauversion.Tracks do
       _ ->
         ActiveStorage.Blob.analyze(blob) |> ActiveStorage.Blob.metadata() |> Map.get("duration")
     end
+  end
+
+  def generate_local_copy(contents) do
+    {:ok, fd, file_path} = Temp.open("my-file")
+    IO.puts(file_path)
+    IO.binwrite(fd, contents)
+    File.close(fd)
+    file_path
   end
 
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils

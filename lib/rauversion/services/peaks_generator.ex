@@ -40,6 +40,8 @@ defmodule Rauversion.Services.PeaksGenerator do
     IO.inspect(cmd)
     output = :os.cmd(cmd)
 
+    IO.inspect(output)
+
     Jason.decode!(output)["frames"]
     |> Enum.map(fn x ->
       case get_in(x, ["tags", "lavfi.astats.Overall.Peak_level"]) |> Float.parse() do
