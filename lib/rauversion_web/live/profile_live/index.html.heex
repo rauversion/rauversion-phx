@@ -78,8 +78,13 @@
                 )
       
       _ -> "no match on #{@title}"
+      
     end  %>
     
+  </div>
+
+  <div class="container" >
+    <video id="video-player" phx-hook="VideoStream" controls autoplay class="Player w-3/4"></video>
   </div>
 
   <%= if @title != "insights" do %>
