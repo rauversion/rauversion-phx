@@ -30,6 +30,7 @@ import "./controllers"
 import InfiniteScroll from "./hooks/infinite_scroll"
 import Player from "./hooks/player"
 import TrackHook from "./hooks/track_hook"
+import VideoStream from './hooks/streaming_video'
 
 import create from 'zustand/vanilla'
 import { persist } from 'zustand/middleware'
@@ -80,6 +81,7 @@ let Hooks = {}
 Hooks.Player = Player
 Hooks.TrackHook = TrackHook
 Hooks.InfiniteScroll = InfiniteScroll
+Hooks.VideoStream = VideoStream
 
 Hooks.PlayerInitiator = {
   mounted(){

@@ -40,14 +40,12 @@ defmodule RauversionWeb.Router do
 
   scope "/", RauversionWeb do
     pipe_through :browser
+    get "/video/:filename", HlsController, :index
     get "/", PageController, :index
   end
 
   scope "/", RauversionWeb do
     pipe_through :browser_embed
-
-    get "/video/:filename", HlsController, :index
-
     get "/embed/:track_id", EmbedController, :show
     get "/embed/:track_id/private", EmbedController, :private
 

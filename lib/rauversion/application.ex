@@ -15,6 +15,7 @@ defmodule Rauversion.Application do
     children = [
       # Start the Ecto repository
       Rauversion.Repo,
+      Rauversion.RtmpToHls,
       # Start the Telemetry supervisor
       RauversionWeb.Telemetry,
       Rauversion.Events.WriteBuffer,
