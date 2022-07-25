@@ -71,6 +71,10 @@ config :phoenix_meta_tags,
 #  plugins: [Oban.Plugins.Pruner],
 #  queues: [default: 10]
 
+config :mime, :types, %{
+  "audio/ogg" => ["ogg"]
+}
+
 config :active_job, Oban,
   # testing: :inline,
   repo: Rauversion.Repo,
