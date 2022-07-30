@@ -115,7 +115,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
               </div>
             </div>
 
-            <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+            <div class="border-t border-gray-200 px-4-- py-5-- sm:px-6--">
 
               <% # if notice.present? %>
                 <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
