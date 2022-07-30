@@ -27,10 +27,10 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         } = assigns
       ) do
     ~H"""
-    <div id={"track-item-#{track.id}"} class="flex flex-col sm:flex-row border rounded-md shadow-sm my-2">
-      <div class="w-full sm:w-1/4 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
+    <div id={"track-item-#{track.id}"} class="flex flex-col sm:flex-row border border-r-0 border-l-0 rounded-md- shadow-sm sm:shadow-md my-2">
+      <div class="w-full sm:w-44 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4-- px-4- sm:px-0">
 
-        <div class="group relative aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden">
+        <div class="group relative aspect-w-1 aspect-h-1 sm:rounded-none rounded-md-- bg-gray-100 overflow-hidden">
           <% #= image_tag url_for(track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
 
           <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "object-center object-cover group-hover:opacity-75") %>
@@ -62,7 +62,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                                 "data-audio-url": Rauversion.Tracks.blob_proxy_url(track, "mp3_audio"),
                                 class: "h-32"  do %>
             <div class='controls flex items-center'>
-              <span class="relative z-0 inline-flex py-2 px-2 sm:px-0">
+              <span class="sm:ml-4 relative z-0 inline-flex py-2 px-2 sm:px-0">
                 <button type="button"
                   data-action='audio#play'
                   data-audio-target="play"
@@ -132,7 +132,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
           <%= track.description %>
         </p>
 
-        <div class="p-2 sm:p-0 sm:pt-2 flex items-center space-x-1" data-turbo="false">
+        <div class="p-2 sm:ml-3 sm:p-0 sm:pt-2 flex items-center space-x-1" data-turbo="false">
           <% #= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
 
           <.live_component
@@ -187,7 +187,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
               <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
             </svg>
-            <span>Add to next up</span>
+            <span class="hidden sm:block">Add to next up</span>
           <% end %>
 
           <% #= link_to "Show this track", track, class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
