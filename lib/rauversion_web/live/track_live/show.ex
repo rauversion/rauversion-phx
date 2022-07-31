@@ -25,7 +25,7 @@ defmodule RauversionWeb.TrackLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:track, track)
-     |> assign(:meta_tags, metatags(track))}
+     |> assign(:meta_tags, metatags(socket, track))}
   end
 
   @impl true
@@ -44,7 +44,7 @@ defmodule RauversionWeb.TrackLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:track, track)
-     |> assign(:meta_tags, metatags(track))}
+     |> assign(:meta_tags, metatags(socket, track))}
   end
 
   @impl true
@@ -120,14 +120,15 @@ defmodule RauversionWeb.TrackLive.Show do
   defp page_title(:show), do: "Show Track"
   defp page_title(:edit), do: "Edit Track"
 
-  defp metatags(track) do
+  defp metatags(socket, track) do
     %{
       title: "#{track.title} on Rauversion",
       description: "Stream #{track.title} by #{track.user.username} on Rauversion.",
       image:
         Application.get_env(:rauversion, :domain) <>
           Rauversion.Tracks.variant_url(track, "cover", %{resize_to_limit: "360x360"}),
-      "twitter:player": Application.get_env(:rauversion, :domain) <> "/tracks/#{track.id}",
+      "twitter:player":
+        Application.get_env(:rauversion, :domain) <> Routes.embed_path(socket, :show, track),
       twitter: %{
         card: "player",
         player: %{
