@@ -123,7 +123,18 @@ defmodule RauversionWeb.TrackLive.Show do
   defp metatags(track) do
     %{
       title: "#{track.title} on Rauversion",
-      description: "Stream #{track.title} by #{track.user.username} on Rauversion."
+      description: "Stream #{track.title} by #{track.user.username} on Rauversion.",
+      image:
+        Application.get_env(:rauversion, :domain) <>
+          Rauversion.Tracks.variant_url(track, "cover", %{resize_to_limit: "360x360"}),
+      "twitter:player": Application.get_env(:rauversion, :domain) <> "/tracks/#{track.id}",
+      twitter: %{
+        card: "player",
+        player: %{
+          width: 480,
+          height: 480
+        }
+      }
       # url: "https://phoenix.meta.tags",
       # image: "https://phoenix.meta.tags/logo.png"
     }

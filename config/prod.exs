@@ -14,6 +14,7 @@ config :rauversion, RauversionWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
+config :rauversion, :domain, "https://rauversion.com"
 
 # Do not print debug messages in production
 config :logger, level: :info

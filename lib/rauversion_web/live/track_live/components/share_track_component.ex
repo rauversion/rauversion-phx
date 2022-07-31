@@ -45,7 +45,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                   <div class="flex items-center space-x-3">
                     <input
                       type="text"
-                      value={Routes.track_show_url(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
+                      value={Application.get_env(:rauversion, :domain) <> Routes.track_show_path(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
                       class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       readonly="readonly"/>
 
