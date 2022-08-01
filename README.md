@@ -12,6 +12,8 @@ Rauversion is built on Elixir with Phoenix framework.
 
 ## setup
 
+> OTP 24 and elixir 1.12.3 and up is required
+
 You can develop directly in a container with [vscode devcontainer](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) or [neovim devcontainer](https://github.com/jamestthompson3/nvim-remote-containers)
 
 To start your Phoenix server:

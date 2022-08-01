@@ -36,7 +36,7 @@ defmodule Rauversion.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.6.0"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.7.2"},
+      {:ecto_sql, "~> 3.8"},
       {:postgrex, ">= 0.0.0"},
       {:ecto_psql_extras, "~> 0.6"},
       {:phoenix_html, "~> 3.0"},
@@ -68,11 +68,16 @@ defmodule Rauversion.MixProject do
       {:fsmx, "~> 0.2.0"},
       {
         :active_storage,
-        git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_storage"
+        git: "https://github.com/chaskiq/ex-rails.git",
+        sparse: "apps/active_storage",
+        branch: "skip-oban-config"
       },
       {
         :active_job,
-        git: "https://github.com/chaskiq/ex-rails.git", sparse: "apps/active_job", override: true
+        git: "https://github.com/chaskiq/ex-rails.git",
+        sparse: "apps/active_job",
+        override: true,
+        branch: "skip-oban-config"
       }
       # {
       #  :active_job,

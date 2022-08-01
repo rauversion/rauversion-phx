@@ -48,10 +48,9 @@ config :active_storage, repo: Rauversion.Repo
 
 # config :rauversion, Oban, testing: :inline
 
-config :active_job, Oban,
-  testing: :inline,
+config :rauversion, Oban,
   repo: Rauversion.Repo,
-  notifier: Oban.Notifiers.PG,
-  peer: Oban.Peers.Global,
-  plugins: [Oban.Plugins.Pruner],
-  queues: [default: 10]
+  queues: false,
+  crontab: false,
+  plugins: false,
+  testing: :inline

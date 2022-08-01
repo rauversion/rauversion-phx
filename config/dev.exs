@@ -7,7 +7,10 @@ config :rauversion, Rauversion.Repo,
   database: "rauversion_phx_dev",
   hostname: System.get_env("DB_HOST", "localhost"),
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 10,
+  stacktrace: true
+
+config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
 
 config :rauversion, :domain, "https://rauversion.com"
 
@@ -71,6 +74,8 @@ config :logger, :console,
   format: "[$level] $message\n",
   truncate: :infinity
 
+config :logger, level: :debug
+
 config :rauversion, :app_name, "Rauversion.com"
 
 # Set a higher stacktrace during development. Avoid configuring such
@@ -79,6 +84,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :rauversion, Oban,
+  repo: Chaskiq.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10, events: 50, media: 20]
 
 # activestorage
 

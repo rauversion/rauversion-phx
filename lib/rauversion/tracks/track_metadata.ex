@@ -4,7 +4,7 @@ defmodule Rauversion.Tracks.TrackMetadata do
   # @primary_key false
 
   embedded_schema do
-    field :peaks, {:array, :float}
+    field :peaks, {:array, :float}, default: []
     field :contains_music, :boolean
     field :artist, :string
     field :publisher, :string
