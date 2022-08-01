@@ -7,9 +7,10 @@ config :rauversion, Rauversion.Repo,
   database: "rauversion_phx_dev",
   hostname: System.get_env("DB_HOST", "localhost"),
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 10,
+  stacktrace: true
 
-config :rauversion, :domain, "https://rauversion.com"
+config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -70,6 +71,8 @@ config :rauversion, RauversionWeb.Endpoint,
 config :logger, :console,
   format: "[$level] $message\n",
   truncate: :infinity
+
+config :logger, level: :debug
 
 config :rauversion, :app_name, "Rauversion.com"
 
