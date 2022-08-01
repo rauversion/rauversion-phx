@@ -38,10 +38,10 @@ defmodule RauversionWeb.Router do
     plug :accepts, ["json", "html"]
   end
 
-  scope "/", RauversionWeb do
-    pipe_through :browser
-    get "/", PageController, :index
-  end
+  # scope "/", RauversionWeb do
+  #  pipe_through :browser
+  #  get "/", PageController, :index
+  # end
 
   scope "/", RauversionWeb do
     pipe_through :browser_embed
@@ -106,6 +106,7 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    live "/", HomeLive.Index, :index
     live "/users/settings", UserSettingsLive.Index, :profile
     live "/users/settings/email", UserSettingsLive.Index, :email
     live "/users/settings/security", UserSettingsLive.Index, :security

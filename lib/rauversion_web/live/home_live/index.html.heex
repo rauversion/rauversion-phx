@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="w-full h-48 sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full">
-          <img src={ Routes.static_path(@conn, "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png")} class="w-full h-full object-center object-cover" />
+          <img src={ Routes.static_path(@socket, "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png")} class="w-full h-full object-center object-cover" />
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
                       <%= track.user.username %>
                     </p>
                     <h3 class="mt-1 font-semibold text-gray-900">
-                      <%= link to: Routes.track_show_path(@conn, :show, track) do %>
+                      <%= live_redirect to: Routes.track_show_path(@socket, :show, track) do %>
                         <span class="absolute inset-0"></span>
                         <%= track.title %>
                       <% end %>
@@ -120,7 +120,7 @@
       </div>
 
       <div class="mt-12 px-4 sm:hidden">
-        <%= link to: "/tracks", class: "text-sm font-semibold text-brand-600 hover:text-brand-500" do %>
+        <%= live_redirect to: "/tracks", class: "text-sm font-semibold text-brand-600 hover:text-brand-500" do %>
           See everything<span aria-hidden="true"> →</span>
         <% end %>
       </div>
@@ -135,19 +135,19 @@
 
         <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
           
-          <%= for track <- @tracks do %>
+          <%= for playlist <- @playlists do %>
             <div class="group relative">
               <div class="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover") %>
+                <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"), class: "w-full h-full object-center object-cover") %>
               </div>
 
               <h3 class="mt-6 text-sm text-gray-500">
-                <%= live_redirect to: Routes.track_show_path(@conn, :show, track) do %>
+                <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist) do %>
                   <span class="absolute inset-0"></span>
-                  <%= track.title %>
+                  <%= playlist.title %>
                 <% end %>
               </h3>
-              <p class="text-base font-semibold text-gray-900"><%= track.user.username %></p>
+              <p class="text-base font-semibold text-gray-900"><%= playlist.user.username %></p>
             </div>
           <% end %>
 

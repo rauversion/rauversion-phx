@@ -69,6 +69,10 @@ defmodule Rauversion.Tracks do
       ]
   end
 
+  def order_by_likes(query) do
+    query |> order_by([p], desc: p.likes_count)
+  end
+
   def with_processed(query) do
     query |> where([t], t.state == "processed")
   end

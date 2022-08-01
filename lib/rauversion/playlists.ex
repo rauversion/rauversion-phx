@@ -57,7 +57,12 @@ defmodule Rauversion.Playlists do
 
   def list_public_playlists() do
     from p in Playlist,
-      where: p.private == false
+      where: p.private == false,
+      preload: [:user, :cover_blob]
+  end
+
+  def order_by_likes(query) do
+    query |> order_by([p], desc: p.likes_count)
   end
 
   def get_public_playlist!(id) do
