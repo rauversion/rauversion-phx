@@ -199,7 +199,7 @@ defmodule RauversionWeb.TrackLive.Player do
             <button type="button"
               data-action='player#play'
               data-player-target="play"
-              class="relative inline-flex items-center px-2 py-2 rounded-full border border-orange-300 bg-orange-600 text-sm font-medium text-white hover:bg-orange-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-orange-700 focus:border-orange-400">
+              class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400">
               <span class="sr-only">Play</span>
               <svg data-player-target="playicon" style="display:none" viewBox="0 0 15 15" class="h-6 w-6"  fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 3v9m4-9v9" stroke="currentColor"></path></svg>
               <svg data-player-target="pauseicon"  viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
@@ -273,7 +273,7 @@ defmodule RauversionWeb.TrackLive.Player do
 
                     <button
                       type="button"
-                      class="hidden inline-block relative p-3 m-0 h-5 font-sans font-thin text-left text-orange-600 whitespace-nowrap bg-transparent rounded-sm border-0 border-solid cursor-pointer select-none box-border border-neutral-200 focus:border focus:border-solid focus:border-orange-600 focus:text-orange-600 hover:border hover:border-solid hover:border-orange-600 hover:text-orange-600"
+                      class="hidden inline-block relative p-3 m-0 h-5 font-sans font-thin text-left text-brand-600 whitespace-nowrap bg-transparent rounded-sm border-0 border-solid cursor-pointer select-none box-border border-neutral-200 focus:border focus:border-solid focus:border-brand-600 focus:text-brand-600 hover:border hover:border-solid hover:border-brand-600 hover:text-brand-600"
                       aria-describedby="tooltip-1455"
                       tabindex="0"
                       title="Unlike"

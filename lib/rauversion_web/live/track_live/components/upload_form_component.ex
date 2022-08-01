@@ -50,7 +50,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                       </svg>
                       <% #= @track.audio&.filename if @track.audio.persisted? %>
                       <div class="flex text-sm text-gray-600 py-3">
-                        <label class="relative cursor-pointer bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-500">
+                        <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                           <span>Upload a Audio file</span>
                           <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                           <%= live_file_input @uploads.audio,
@@ -97,10 +97,10 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
             <%= if @uploads.audio.entries |> Enum.any? do %>
               <div class="pt-5">
                 <div class="flex items-center justify-end">
-                  <%= live_redirect to: Routes.profile_index_path(@socket, :index, @current_user.username), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" do %>
+                  <%= live_redirect to: Routes.profile_index_path(@socket, :index, @current_user.username), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
                     Cancel
                   <%end %>
-                  <%= submit "Continue", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" %>
+                  <%= submit "Continue", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
                 </div>
               </div>
             <% end %>

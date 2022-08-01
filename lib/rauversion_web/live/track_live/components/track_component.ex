@@ -66,7 +66,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 <button type="button"
                   data-action='audio#play'
                   data-audio-target="play"
-                  class="relative inline-flex items-center px-2 py-2 rounded-full border border-orange-300 bg-orange-600 text-sm font-medium text-white hover:bg-orange-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-orange-700 focus:border-orange-400">
+                  class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400">
                   <span class="sr-only">Play</span>
                   <svg data-audio-target="playicon" style="display:none" viewBox="0 0 15 15" class="h-6 w-6"  fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 3v9m4-9v9" stroke="currentColor"></path></svg>
                   <svg data-audio-target="pauseicon"  viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
@@ -97,7 +97,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
                 <%= if track.private do %>
                   <div class="mr-2">
-                    <div class="bg-orange-500 text-white text-xs p-1 rounded-md inline-flex space-x-1 items-center">
+                    <div class="bg-brand-500 text-white text-xs p-1 rounded-md inline-flex space-x-1 items-center">
                       <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 7h4V6h-4v1zm4.5.5v3h1v-3h-1zM9.5 11h-4v1h4v-1zM5 10.5v-3H4v3h1zm.5.5a.5.5 0 01-.5-.5H4A1.5 1.5 0 005.5 12v-1zm4.5-.5a.5.5 0 01-.5.5v1a1.5 1.5 0 001.5-1.5h-1zM9.5 7a.5.5 0 01.5.5h1A1.5 1.5 0 009.5 6v1zm-4-1A1.5 1.5 0 004 7.5h1a.5.5 0 01.5-.5V6zm.5.5v-1H5v1h1zm3-1v1h1v-1H9zM7.5 4A1.5 1.5 0 019 5.5h1A2.5 2.5 0 007.5 3v1zM6 5.5A1.5 1.5 0 017.5 4V3A2.5 2.5 0 005 5.5h1z" fill="currentColor"></path></svg>
                       <span>private</span>
                     </div>

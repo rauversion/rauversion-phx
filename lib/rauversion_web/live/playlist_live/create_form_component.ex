@@ -12,8 +12,8 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
         <div class="relative bg-white">
 
           <nav class="flex space-x-4" aria-label="Tabs" data-controller="tabs">
-            <a href="#" phx-click={"add-to-tab"} phx-target={@ref} class={"#{if @tab === "add-to-tab" do "bg-orange-100 text-orange-700" else "text-orange-500 hover:text-orange-700" end } px-3 py-2 font-medium text-sm rounded-md"}> Add to playlist </a>
-            <a href="#" phx-click={"create-playlist-tab"} phx-target={@ref} class={"#{if @tab === "create-playlist-tab" do "bg-orange-100 text-orange-700" else "text-orange-500 hover:text-orange-700" end } px-3 py-2 font-medium text-sm rounded-md"}> Create a playlist </a>
+            <a href="#" phx-click={"add-to-tab"} phx-target={@ref} class={"#{if @tab === "add-to-tab" do "bg-brand-100 text-brand-700" else "text-brand-500 hover:text-brand-700" end } px-3 py-2 font-medium text-sm rounded-md"}> Add to playlist </a>
+            <a href="#" phx-click={"create-playlist-tab"} phx-target={@ref} class={"#{if @tab === "create-playlist-tab" do "bg-brand-100 text-brand-700" else "text-brand-500 hover:text-brand-700" end } px-3 py-2 font-medium text-sm rounded-md"}> Create a playlist </a>
           </nav>
 
           <section id="add-to-tab" class={"tab-pane py-4 #{if @tab === "add-to-tab" do "block" else "hidden" end }"}>
@@ -91,7 +91,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                     Playlist title
                   </label>
                   <div class="mt-1">
-                    <%= text_input f, :title, autocomplete: "given-name", class: "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+                    <%= text_input f, :title, autocomplete: "given-name", class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
                     <%= error_tag f, :title %>
                   </div>
                 </div>
@@ -105,14 +105,14 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                   </div>
 
                   <div class="flex items-center">
-                    <%= radio_button f, :private, true, class: "focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300" %>
+                    <%= radio_button f, :private, true, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
                     <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700">
                       Private
                     </label>
                   </div>
 
                   <div class="flex items-center">
-                    <%= radio_button f, :private, false, class: "focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300" %>
+                    <%= radio_button f, :private, false, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
                     <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
                       Public
                     </label>
@@ -120,7 +120,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                 </div>
 
                 <div class="sm:col-span-6 flex justify-end">
-                  <%= submit "Save", phx_disable_with: "Saving...", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" %>
+                  <%= submit "Save", phx_disable_with: "Saving...", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
                 </div>
 
                 <div class="sm:col-span-6">

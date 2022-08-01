@@ -19,7 +19,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
               <%= live_redirect name,
                 id: "profile-menu-#{name}",
                 to: url,
-                class: "text-base font-medium #{if selected do "border-b border-b-4 text-gray-800 hover:text-gray-900 border-orange-500 " else "text-gray-500 hover:text-gray-900" end}" %>
+                class: "text-base font-medium #{if selected do "border-b border-b-4 text-gray-800 hover:text-gray-900 border-brand-500 " else "text-gray-500 hover:text-gray-900" end}" %>
             <% end %>
           </nav>
 
@@ -27,14 +27,14 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
             <div class="flex items-center md:ml-12">
 
               <%= if @user_follow do %>
-                <%= link to: "#", phx_click: "unfollow-user", class: "inline-flex items-center px-4 py-2 border border-orange-300 shadow-sm text-base font-medium rounded-md text-orange-700 bg-white hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                <%= link to: "#", phx_click: "unfollow-user", class: "inline-flex items-center px-4 py-2 border border-brand-300 shadow-sm text-base font-medium rounded-md text-brand-700 bg-white hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewbox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   <span class="mx-2">Following</span>
                 <% end %>
               <% else %>
-                <%= link to: "#", phx_click: "follow-user", class: "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" do %>
+                <%= link to: "#", phx_click: "follow-user", class: "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" view-box="0 0 20 20" fill="currentColor">
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                   </svg>

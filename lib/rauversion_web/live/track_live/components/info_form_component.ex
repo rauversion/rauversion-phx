@@ -45,7 +45,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
 
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                   <div class="max-w-lg flex rounded-md shadow-sm">
-                    <%= text_input f, :title, class: "flex-1 block w-full focus:ring-orange-500 focus:border-orange-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" %>
+                    <%= text_input f, :title, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" %>
                     <%= error_tag f, :title %>
                   </div>
                 </div>
@@ -55,7 +55,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                 <%= label f, :description, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
 
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <%= textarea f, :description, class: "max-w-lg shadow-sm block w-full focus:ring-orange-500 focus:border-orange-500 sm:text-sm border border-gray-300 rounded-md" %>
+                  <%= textarea f, :description, class: "max-w-lg shadow-sm block w-full focus:ring-brand-500 focus:border-brand-500 sm:text-sm border border-gray-300 rounded-md" %>
                   <%= error_tag f, :description %>
                   <p class="mt-2 text-sm text-gray-500">Write the track's description.</p>
                 </div>
@@ -77,7 +77,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
 
 
                       <div class="flex text-sm text-gray-600 py-3">
-                        <label class="relative cursor-pointer bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-500">
+                        <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                           <span>Upload a track Cover</span>
                           <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                           <%= live_file_input @uploads.cover,
@@ -136,7 +136,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                       <div class="max-w-lg space-y-4">
                         <div class="relative flex items-start">
                           <div class="flex items-center h-5">
-                            <input id="comments" name="comments" type="checkbox" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300 rounded">
+                            <input id="comments" name="comments" type="checkbox" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded">
                           </div>
                           <div class="ml-3 text-sm">
                             <label for="comments" class="font-medium text-gray-700">Comments</label>
@@ -146,7 +146,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                         <div>
                           <div class="relative flex items-start">
                             <div class="flex items-center h-5">
-                              <input id="candidates" name="candidates" type="checkbox" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300 rounded">
+                              <input id="candidates" name="candidates" type="checkbox" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded">
                             </div>
                             <div class="ml-3 text-sm">
                               <label for="candidates" class="font-medium text-gray-700">Candidates</label>
@@ -157,7 +157,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                         <div>
                           <div class="relative flex items-start">
                             <div class="flex items-center h-5">
-                              <input id="offers" name="offers" type="checkbox" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300 rounded">
+                              <input id="offers" name="offers" type="checkbox" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded">
                             </div>
                             <div class="ml-3 text-sm">
                               <label for="offers" class="font-medium text-gray-700">Offers</label>
@@ -183,19 +183,19 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                         <p class="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p>
                         <div class="mt-4 space-y-4">
                           <div class="flex items-center">
-                            <input id="push-everything" name="push-notifications" type="radio" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300">
+                            <input id="push-everything" name="push-notifications" type="radio" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300">
                             <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700">
                               Everything
                             </label>
                           </div>
                           <div class="flex items-center">
-                            <input id="push-email" name="push-notifications" type="radio" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300">
+                            <input id="push-email" name="push-notifications" type="radio" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300">
                             <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
                               Same as email
                             </label>
                           </div>
                           <div class="flex items-center">
-                            <input id="push-nothing" name="push-notifications" type="radio" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300">
+                            <input id="push-nothing" name="push-notifications" type="radio" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300">
                             <label for="push-nothing" class="ml-3 block text-sm font-medium text-gray-700">
                               No push notifications
                             </label>
@@ -212,10 +212,10 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
 
         <div class="pt-5">
           <div class="flex justify-center">
-            <%= live_redirect to: "/", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" do %>
+            <%= live_redirect to: "/", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
               Cancel
             <%end %>
-            <%= submit "Save", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" %>
+            <%= submit "Save", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
           </div>
         </div>
 
