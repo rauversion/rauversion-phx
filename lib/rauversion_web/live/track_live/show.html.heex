@@ -27,14 +27,6 @@
   </.modal>
 <% end %>
 
-<div class="hidden">
-  <audio controls autoplay="false">
-    <source src={Application.get_env(:rauversion, :domain) <> Rauversion.Tracks.blob_proxy_url(@track, "mp3_audio")} type="audio/mpeg">
-    Your browser does not support the audio tag.
-  </audio>
-</div>
-
-
 <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
   <!-- Breadcrumb -->
   <nav class="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
