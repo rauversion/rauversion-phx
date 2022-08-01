@@ -56,6 +56,13 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
 
+config :rauversion, Oban,
+  repo: Chaskiq.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10, events: 50, media: 20],
+  notifier: Oban.Notifiers.PG,
+  peer: Oban.Peers.Global
+
 config :active_storage, :service, :amazon
 # config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo

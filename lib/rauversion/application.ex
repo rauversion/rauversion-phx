@@ -18,6 +18,7 @@ defmodule Rauversion.Application do
       # Start the Telemetry supervisor
       RauversionWeb.Telemetry,
       Rauversion.Events.WriteBuffer,
+      {Oban, Application.fetch_env!(:rauversion, Oban)},
       # Start the PubSub system
       {Phoenix.PubSub, name: Rauversion.PubSub},
       # Start the Endpoint (http/https)

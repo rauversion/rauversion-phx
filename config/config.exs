@@ -75,13 +75,6 @@ config :mime, :types, %{
   "audio/ogg" => ["ogg"]
 }
 
-config :rauversion, Oban,
-  repo: Chaskiq.Repo,
-  plugins: [Oban.Plugins.Pruner],
-  queues: [default: 10, events: 50, media: 20],
-  notifier: Oban.Notifiers.PG,
-  peer: Oban.Peers.Global
-
 # fb: %{
 #   name: "facebook",
 #   size: %{
