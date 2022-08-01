@@ -86,7 +86,7 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 config :rauversion, Oban,
-  repo: Chaskiq.Repo,
+  repo: Rauversion.Repo,
   plugins: [Oban.Plugins.Pruner],
   queues: [default: 10, events: 50, media: 20]
 

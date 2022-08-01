@@ -57,7 +57,7 @@ config :logger, level: :info
 # and configuration from environment variables.
 
 config :rauversion, Oban,
-  repo: Chaskiq.Repo,
+  repo: Rauversion.Repo,
   plugins: [Oban.Plugins.Pruner],
   queues: [default: 10, events: 50, media: 20],
   notifier: Oban.Notifiers.PG,
