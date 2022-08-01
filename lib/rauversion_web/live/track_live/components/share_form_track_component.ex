@@ -38,7 +38,7 @@ defmodule RauversionWeb.TrackLive.ShareFormTrackComponent do
             <div class="">
               <%= if @track.private do %>
                 <span
-                  class="inline-block relative p-1 mb-1 font-thin text-white bg-orange-600 rounded border border-transparent border-solid hover:bg-neutral-200 hover:text-neutral-400">
+                  class="inline-block relative p-1 mb-1 font-thin text-white bg-brand-600 rounded border border-transparent border-solid hover:bg-neutral-200 hover:text-neutral-400">
                   Private
                 </span>
               <% end %>

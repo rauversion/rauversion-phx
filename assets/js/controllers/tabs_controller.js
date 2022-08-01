@@ -21,11 +21,11 @@ export default class extends Controller {
 
 		
 		for (const tabLink of document.querySelectorAll(".tab-link")) {
-			tabLink.classList.remove("bg-orange-100", "text-orange-700");
-			tabLink.classList.add("text-orange-500", "hover:text-orange-700");
+			tabLink.classList.remove("bg-brand-100", "text-brand-700");
+			tabLink.classList.add("text-brand-500", "hover:text-brand-700");
 		}
 
-		e.target.classList.add("bg-orange-100", "text-orange-700")
+		e.target.classList.add("bg-brand-100", "text-brand-700")
 
 
 		const panes = document.querySelectorAll(".tab-pane")

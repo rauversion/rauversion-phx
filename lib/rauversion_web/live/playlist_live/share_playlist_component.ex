@@ -11,9 +11,9 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
           <div class="relative bg-white">
 
             <nav class="flex space-x-4" aria-label="Tabs" data-controller="tabs">
-              <a href="#" data-tab="#share-tab" data-action="click->tabs#changeTab" class="tab-link bg-orange-100 text-orange-700 px-3 py-2 font-medium text-sm rounded-md"> Share </a>
-              <a href="#" data-tab="#embed-tab" data-action="click->tabs#changeTab" class="tab-link text-orange-500 hover:text-orange-700 px-3 py-2 font-medium text-sm rounded-md"> Embed </a>
-              <a href="#" data-tab="#message-tab" data-action="click->tabs#changeTab" class="tab-link text-orange-500 hover:text-orange-700 px-3 py-2 font-medium text-sm rounded-md"> Message </a>
+              <a href="#" data-tab="#share-tab" data-action="click->tabs#changeTab" class="tab-link bg-brand-100 text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Share </a>
+              <a href="#" data-tab="#embed-tab" data-action="click->tabs#changeTab" class="tab-link text-brand-500 hover:text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Embed </a>
+              <a href="#" data-tab="#message-tab" data-action="click->tabs#changeTab" class="tab-link text-brand-500 hover:text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Message </a>
             </nav>
 
             <section id="share-tab" class="tab-pane block py-4">
@@ -32,7 +32,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                     <input
                       type="text"
                       value={Routes.playlist_show_url(@socket, :private, Rauversion.Playlists.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
-                      class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       readonly="readonly"/>
 
                     <label class="flex items-center space-x-2">
@@ -40,7 +40,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                         type="checkbox"
                         id=""
                         name="share_from"
-                        class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300 rounded"
+                        class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded"
                       />
                       <span class="">at</span>
                     </label>
@@ -48,7 +48,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                     <input
                       type="text"
                       value="0:00"
-                      class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
@@ -58,7 +58,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                 <br class="" />
                 You can reset the secret link if you want to revoke access.
               </div>
-              <div class="hidden mb-4 text-orange-600">
+              <div class="hidden mb-4 text-brand-600">
                 Are you sure you want to reset this link?<br class="" />
                 It will not be possible to access this track from any existing shares.
               </div>
@@ -69,14 +69,14 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
               <div class="text-zinc-800">
                 <button
                   type="button"
-                  class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                  class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
                   Reset secret link
                 </button>
 
                 <div class="hidden">
                   <button
                     type="button"
-                    class="inline-block relative py-px pr-3 pl-2 m-0 h-6 font-sans text-sm font-thin leading-5 text-center text-white whitespace-nowrap bg-orange-600 rounded-sm border border-orange-600 border-solid cursor-pointer select-none box-border focus:border-orange-600 focus:bg-orange-600 focus:text-white hover:border-orange-600 hover:bg-orange-600 hover:text-white">
+                    class="inline-block relative py-px pr-3 pl-2 m-0 h-6 font-sans text-sm font-thin leading-5 text-center text-white whitespace-nowrap bg-brand-600 rounded-sm border border-brand-600 border-solid cursor-pointer select-none box-border focus:border-brand-600 focus:bg-brand-600 focus:text-white hover:border-brand-600 hover:bg-brand-600 hover:text-white">
                     Reset
                   </button>
                   <button
@@ -100,12 +100,12 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
               </h2>
               <input type="text"
                 value={Routes.embed_url(@socket, :show, track)}
-                class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
               />
 
               <input type="text"
                 value={Routes.embed_url(@socket, :private_playlist, Rauversion.Playlists.signed_id(track) )}
-                class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
               />
 
               <iframe
