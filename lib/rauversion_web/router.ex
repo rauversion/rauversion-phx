@@ -106,7 +106,6 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    live "/", HomeLive.Index, :index
     live "/users/settings", UserSettingsLive.Index, :profile
     live "/users/settings/email", UserSettingsLive.Index, :email
     live "/users/settings/security", UserSettingsLive.Index, :security
@@ -131,6 +130,8 @@ defmodule RauversionWeb.Router do
 
   scope "/", RauversionWeb do
     pipe_through [:browser]
+
+    live "/", HomeLive.Index, :index
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new

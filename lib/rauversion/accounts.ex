@@ -38,7 +38,7 @@ defmodule Rauversion.Accounts do
       left_join: m in assoc(u, :followings),
       # on: [follower_id: ^user.id],
       where: is_nil(m.id),
-      preload: [:avatar_blob]
+      preload: [:avatar_blob, :avatar_attachment]
     )
   end
 
