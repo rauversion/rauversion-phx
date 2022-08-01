@@ -1,0 +1,75 @@
+<div>
+  <div class="sm:hidden">
+    <label for="tabs" class="sr-only">Select a tab</label>
+    <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+    <select id="tabs" name="tabs" class="block w-full focus:ring-brand-500 focus:border-brand-500 border-gray-300 rounded-md">
+      <option>Likes</option>
+      <option>Followers</option>
+      <option selected>Followings</option>
+      <option>Comments</option>
+    </select>
+  </div>
+
+  <div class="md:flex md:items-center md:justify-between md:space-x-5 py-4 px-4 bg-black text-white">
+    <div class="flex items-start space-x-5">
+      <div class="flex-shrink-0">
+        <div class="relative">
+          <%= img_tag(Rauversion.Accounts.avatar_url(@profile), class: "h-16 w-16 rounded-full") %>
+          <span class="absolute inset-0 shadow-inner rounded-full" aria-hidden="true"></span>
+        </div>
+      </div>
+      <!--
+        Use vertical padding to simulate center alignment when both lines of text are one line,
+        but preserve the same layout if the text wraps without making the image jump around.
+      -->
+      <div class="pt-1.5">
+        <h1 class="text-2xl font-bold"><%= @profile.username %></h1>
+      </div>
+    </div>
+    <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+      <%= live_redirect "Go to profile", to: Routes.profile_index_path(@socket, :index, @profile.username) , class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-brand-500" %>
+    </div>
+  </div>
+
+
+  <div class="hidden sm:block">
+    <div class="border-b border-gray-200">
+      <nav class="-mb-px flex" aria-label="Tabs">
+        <!-- Current: "border-brand-500 text-brand-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+        <%= live_redirect "Likes", to: Routes.follows_index_path(@socket, :likes, @profile.username), class: "#{if @follow_kind == :likes do "border-brand-500 text-brand-600" else "" end} border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %> 
+        <%= live_redirect "Followings", to: Routes.follows_index_path(@socket, :followings, @profile.username), class: "#{if @follow_kind == :following do "border-brand-500 text-brand-600" else "" end} border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
+        <%= live_redirect "Followers", to: Routes.follows_index_path(@socket, :followers, @profile.username), class: "#{if @follow_kind == :follower do "border-brand-500 text-brand-600" else "" end} w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
+        <%= live_redirect "Comments", to: Routes.follows_index_path(@socket, :comments, @profile.username), class: "#{if @follow_kind == :comments do "border-brand-500 text-brand-600" else "" end}  border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm" %>
+      </nav>
+    </div>
+  </div>
+
+  <div>
+
+    <%= case @follow_kind do 
+      :follower -> 
+        live_component(
+          RauversionWeb.FollowsLive.UserListComponent,
+          id: "user-list-#{@profile.id}",
+          track: "track",
+          profile: @profile,
+          kind: @follow_kind,
+          collection: @collection
+        )
+      :following -> 
+        live_component(
+          RauversionWeb.FollowsLive.UserListComponent,
+          id: "user-list-#{@profile.id}",
+          track: "track",
+          profile: @profile,
+          kind: @follow_kind,
+          collection: @collection
+        )
+      :likes -> "LIKES SOON!"
+      :comments -> "COMMENTS SOON!"
+      _ -> "nothing to display!"
+
+    end %>
+
+  </div>
+</div>
