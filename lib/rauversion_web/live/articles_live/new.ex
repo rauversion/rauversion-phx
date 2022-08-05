@@ -108,4 +108,12 @@ defmodule RauversionWeb.ArticlesLive.New do
     |> assign(:post, post)
     |> assign(:content, post.body)
   end
+
+  defp apply_action(socket, :edit, %{"slug" => id}) do
+    post = Posts.get_post_by_slug!(id)
+
+    socket
+    |> assign(:post, post)
+    |> assign(:content, post.body)
+  end
 end

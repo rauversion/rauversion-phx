@@ -77,6 +77,7 @@ defmodule Rauversion.Posts do
   def update_post(%Post{} = post, attrs) do
     post
     |> Post.changeset(attrs)
+    |> Post.process_cover(attrs)
     |> Repo.update()
   end
 

@@ -144,26 +144,4 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
-
-  # TODO: unify with the track form_component, same fn here
-  defp files_for(socket, kind) do
-    case uploaded_entries(socket, kind) do
-      {[_ | _] = entries, []} ->
-        uploaded_files =
-          Enum.map(entries, fn entry ->
-            consume_uploaded_entry(socket, entry, fn %{path: path} = file ->
-              {:postpone,
-               %{
-                 path: path,
-                 content_type: entry.client_type,
-                 filename: entry.client_name,
-                 size: entry.client_size
-               }}
-            end)
-          end)
-
-      _ ->
-        []
-    end
-  end
 end

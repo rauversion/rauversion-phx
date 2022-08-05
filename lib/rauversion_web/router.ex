@@ -142,6 +142,7 @@ defmodule RauversionWeb.Router do
     live "/articles", ArticlesLive.Index, :index
     live "/articles/new", ArticlesLive.New, :new
     live "/articles/edit/:id", ArticlesLive.New, :edit
+    live "/articles/:slug/edit", ArticlesLive.New, :edit
 
     live "/articles/:id", ArticlesLive.Show, :show
 
