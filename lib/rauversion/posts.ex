@@ -81,6 +81,13 @@ defmodule Rauversion.Posts do
     |> Repo.update()
   end
 
+  def update_post_attributes(%Post{} = post, attrs) do
+    post
+    |> Post.update_changeset(attrs)
+    |> Post.process_cover(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a post.
 
@@ -109,4 +116,14 @@ defmodule Rauversion.Posts do
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
+
+  defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
+
+  defdelegate blob_for(track, kind), to: Rauversion.BlobUtils
+
+  defdelegate blob_proxy_url(user, kind), to: Rauversion.BlobUtils
+
+  defdelegate variant_url(track, kind, options), to: Rauversion.BlobUtils
+
+  defdelegate blob_url_for(track, kind), to: Rauversion.BlobUtils
 end

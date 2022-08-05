@@ -27,14 +27,15 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
   end
 
   @impl true
-
   def handle_event("save", %{"post" => post_params}, socket) do
     post_params =
       post_params
-      |> Map.put("cover", files_for(socket, :cover))
+      |> Map.put("cover", List.first(files_for(socket, :cover)))
 
-    case Posts.update_post(socket.assigns.post, post_params) do
-      {:ok, _post} ->
+    case Posts.update_post_attributes(socket.assigns.post, post_params) do
+      {:ok, post} ->
+        IO.inspect(post)
+
         {
           :noreply,
           socket
@@ -43,6 +44,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect(changeset)
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end
@@ -101,9 +103,19 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                     <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
                       phx-drop-target={@uploads.cover.ref}>
                       <div class="space-y-1 text-center">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
+
+
+                        <%= if Rauversion.Posts.blob_for(@post, "cover") == nil do %>
+
+                          <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg>
+
+                        <% else %>
+
+                          <%= img_tag(Rauversion.Posts.variant_url( @post, "cover", %{resize_to_fill: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
+
+                        <% end %>
 
                         <div class="flex text-sm text-gray-600 py-3">
                           <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
@@ -161,7 +173,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                     <div class="mt-2 space-y-5">
                       <div class="relative flex items-start">
                         <div class="absolute flex h-5 items-center">
-                          <%= radio_button(f, :private, true, class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
+                          <%= radio_button(f, :private, false, class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
                         </div>
                         <div class="pl-7 text-sm">
                           <label for="privacy-public" class="font-medium text-gray-900"> Public access </label>
@@ -171,22 +183,11 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                       <div>
                         <div class="relative flex items-start">
                           <div class="absolute flex h-5 items-center">
-                            <%= radio_button(f, :private, false, class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
+                            <%= radio_button(f, :private, true, class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
                           </div>
                           <div class="pl-7 text-sm">
                             <label for="privacy-private-to-article" class="font-medium text-gray-900"> Private to article members </label>
                             <p id="privacy-private-to-article-description" class="text-gray-500">Only members of this article would be able to access.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="relative flex items-start">
-                          <div class="absolute flex h-5 items-center">
-                            <input id="privacy-private" name="privacy" aria-describedby="privacy-private-to-article-description" type="radio" class="h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500">
-                          </div>
-                          <div class="pl-7 text-sm">
-                            <label for="privacy-private" class="font-medium text-gray-900"> Private to you </label>
-                            <p id="privacy-private-description" class="text-gray-500">You are the only one able to access this article.</p>
                           </div>
                         </div>
                       </div>

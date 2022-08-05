@@ -1,6 +1,11 @@
+defmodule Rauversion.Posts.Post.TitleSlug do
+  use EctoAutoslugField.Slug, from: :title, to: :slug
+end
+
 defmodule Rauversion.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Rauversion.Posts.Post.TitleSlug
 
   use ActiveStorage.Attached.Model
   use ActiveStorage.Attached.HasOne, name: :cover, model: "Post"
@@ -10,9 +15,10 @@ defmodule Rauversion.Posts.Post do
     field :excerpt, :string
     field :slug, :string
     field :state, :string
-    field :title, :string
+    field :title, TitleSlug.Type
+
     # field :user_id, :id
-    field :private, :boolean
+    field :private, :boolean, default: true
     field :settings, :map
 
     belongs_to :user, Rauversion.Accounts.User
@@ -41,7 +47,9 @@ defmodule Rauversion.Posts.Post do
   def update_changeset(post, attrs) do
     post
     |> cast(attrs, [:title, :body, :excerpt, :slug, :state])
-    |> validate_required([:title, :body, :excerpt, :slug, :state])
+    |> validate_required([:title, :body, :excerpt])
+    |> TitleSlug.maybe_generate_slug()
+    |> TitleSlug.unique_constraint()
   end
 
   def process_cover(struct, attrs) do
