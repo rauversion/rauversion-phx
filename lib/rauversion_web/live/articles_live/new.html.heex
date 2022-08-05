@@ -1,0 +1,136 @@
+
+ <div class="mt-6- text-gray-500 flex ">
+
+  <div class="fixed bottom-[20] right-0">
+    <button phx-click="toggle-panel" class="p-4 bg-black text-white inline-flex space-x-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+    Article settings
+    </button>
+  </div>
+  <div
+    id="article-editor"
+    phx-hook="Editor"
+    phx-update="ignore"
+    data-controller="editor" 
+    data-field={Jason.encode!(@content)}
+    class="w-3/4 prose prose-brand prose-lg p-10 mx-auto ">
+  </div>
+
+  <%= if @open do %>
+    <div class="z-[500]-- pointer-events-none fixed-- inset-y-0 right-0 flex max-w-full pl-10 w-1/4">
+      <!--
+        Slide-over panel, show/hide based on slide-over state.
+
+        Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+          From: "translate-x-full"
+          To: "translate-x-0"
+        Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+          From: "translate-x-0"
+          To: "translate-x-full"
+      -->
+      <div class="z-[500] pointer-events-auto w-screen max-w-md h-screen fixed inset-y-0 right-0">
+        <form class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
+          <div class="h-0 flex-1 overflow-y-auto">
+            <div class="bg-brand-700 py-6 px-4 sm:px-6">
+              <div class="flex items-center justify-between">
+                <h2 class="text-lg font-medium text-white" id="slide-over-title"> New article </h2>
+                <div class="ml-3 flex h-7 items-center">
+                  <button phx-click="toggle-panel" type="button" class="rounded-md bg-brand-700 text-brand-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white" @click="open = false">
+                    <span class="sr-only">Close panel</span>
+                    <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-1">
+                <p class="text-sm text-brand-300">Get started by filling in the information below to create your new article.</p>
+              </div>
+            </div>
+            <div class="flex flex-1 flex-col justify-between">
+              <div class="divide-y divide-gray-200 px-4 sm:px-6">
+                <div class="space-y-6 pt-6 pb-5">
+                  <div>
+                    <label for="article-name" class="block text-sm font-medium text-gray-900"> Article title </label>
+                    <div class="mt-1">
+                      <input type="text" name="article-name" id="article-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm">
+                    </div>
+                  </div>
+                  <div>
+                    <label for="description" class="block text-sm font-medium text-gray-900"> Excerpt </label>
+                    <div class="mt-1">
+                      <textarea id="description" name="description" rows="4" class="block w-full rounded-md border border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm"></textarea>
+                    </div>
+                  </div>
+
+                  <fieldset>
+                    <legend class="text-sm font-medium text-gray-900">Privacy</legend>
+                    <div class="mt-2 space-y-5">
+                      <div class="relative flex items-start">
+                        <div class="absolute flex h-5 items-center">
+                          <input id="privacy-public" name="privacy" aria-describedby="privacy-public-description" type="radio" class="h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500" checked="">
+                        </div>
+                        <div class="pl-7 text-sm">
+                          <label for="privacy-public" class="font-medium text-gray-900"> Public access </label>
+                          <p id="privacy-public-description" class="text-gray-500">Everyone with the link will see this article.</p>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="relative flex items-start">
+                          <div class="absolute flex h-5 items-center">
+                            <input id="privacy-private-to-article" name="privacy" aria-describedby="privacy-private-to-article-description" type="radio" class="h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500">
+                          </div>
+                          <div class="pl-7 text-sm">
+                            <label for="privacy-private-to-article" class="font-medium text-gray-900"> Private to article members </label>
+                            <p id="privacy-private-to-article-description" class="text-gray-500">Only members of this article would be able to access.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="relative flex items-start">
+                          <div class="absolute flex h-5 items-center">
+                            <input id="privacy-private" name="privacy" aria-describedby="privacy-private-to-article-description" type="radio" class="h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500">
+                          </div>
+                          <div class="pl-7 text-sm">
+                            <label for="privacy-private" class="font-medium text-gray-900"> Private to you </label>
+                            <p id="privacy-private-description" class="text-gray-500">You are the only one able to access this article.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="pt-4 pb-6">
+                  <div class="flex text-sm">
+                    <a href="#" class="group inline-flex items-center font-medium text-brand-600 hover:text-brand-900">
+                      <svg class="h-5 w-5 text-brand-500 group-hover:text-brand-900" x-description="Heroicon name: solid/link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+                      </svg>
+                      <span class="ml-2"> Copy link </span>
+                    </a>
+                  </div>
+                  <div class="mt-4 flex text-sm">
+                    <a href="#" class="group inline-flex items-center text-gray-500 hover:text-gray-900">
+                      <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-500" x-description="Heroicon name: solid/question-mark-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+                      </svg>
+                      <span class="ml-2"> Learn more about sharing </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-shrink-0 justify-end px-4 py-4">
+            <button type="button" class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2" @click="open = false">Cancel</button>
+            <button type="submit" class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-brand-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  <% end %>
+
+</div>

@@ -30,6 +30,8 @@ import "./controllers"
 import InfiniteScroll from "./hooks/infinite_scroll"
 import Player from "./hooks/player"
 import TrackHook from "./hooks/track_hook"
+import Editor from "./hooks/editor"
+import ArticleContent from "./hooks/article_content"
 
 import create from 'zustand/vanilla'
 import { persist } from 'zustand/middleware'
@@ -80,6 +82,8 @@ let Hooks = {}
 Hooks.Player = Player
 Hooks.TrackHook = TrackHook
 Hooks.InfiniteScroll = InfiniteScroll
+Hooks.Editor = Editor
+Hooks.ArticleContent = ArticleContent
 
 Hooks.PlayerInitiator = {
   mounted(){

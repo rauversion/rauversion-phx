@@ -18,9 +18,9 @@
                 Account
               <% end %>
 
-              <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-              <% end %>
+              <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+                <% #= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+              <% # end %>
 
               <%= if !@current_user do %>
                 <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>

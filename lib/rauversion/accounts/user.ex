@@ -21,6 +21,7 @@ defmodule Rauversion.Accounts.User do
       on_replace: :update
 
     # field :settings
+    has_many :articles, Rauversion.Posts.Post, on_delete: :nilify_all
 
     has_many :track_comments, Rauversion.TrackComments.TrackComment
     has_many :tracks, Rauversion.Tracks.Track, on_delete: :delete_all

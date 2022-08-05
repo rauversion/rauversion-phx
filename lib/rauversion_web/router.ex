@@ -139,6 +139,12 @@ defmodule RauversionWeb.Router do
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
 
+    live "/articles", ArticlesLive.Index, :index
+    live "/articles/new", ArticlesLive.New, :new
+    live "/articles/edit/:id", ArticlesLive.New, :edit
+
+    live "/articles/:id", ArticlesLive.Show, :show
+
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id", TrackLive.Show, :show
     live "/tracks/:id/private", TrackLive.Show, :private
