@@ -10,7 +10,7 @@ defmodule RauversionWeb.Router do
   end
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {RauversionWeb.LayoutView, :root}
@@ -197,6 +197,13 @@ defmodule RauversionWeb.Router do
 
     # get  "/disk/:encoded_key/*filename" => "active_storage/disk#show", as: :rails_disk_service
     # put  "/disk/:encoded_token" => "active_storage/disk#update", as: :update_rails_disk_service
+
+    post(
+      "/active_storage/direct_uploads",
+      ActiveStorage.DirectUploadsController,
+      :create
+    )
+
     # post "/direct_uploads" => "active_storage/direct_uploads#create", as: :rails_direct_uploads
 
     # get "/:username", ProfileController, :show

@@ -63,8 +63,8 @@ Editor = {
   upload(file, cb){
     if(!file) return
     // your form needs the file_field direct_upload: true, which
-    //  provides data-direct-upload-url
-    const url = '/direct_uploads'
+    // provides data-direct-upload-url
+    const url = '/active_storage/direct_uploads'
     const upload = new DirectUpload(file, url)
   
     upload.create((error, blob) => {
