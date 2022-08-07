@@ -2,7 +2,7 @@ defmodule RauversionWeb.ArticlesLive.New do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Posts}
+  alias Rauversion.{Accounts, Posts, Repo}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -100,7 +100,7 @@ defmodule RauversionWeb.ArticlesLive.New do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
-    post = Posts.get_post!(id)
+    post = socket.assigns.current_user |> Ecto.assoc(:articles) |> Repo.get!(id)
 
     socket
     |> assign(:post, post)
@@ -108,7 +108,7 @@ defmodule RauversionWeb.ArticlesLive.New do
   end
 
   defp apply_action(socket, :edit, %{"slug" => id}) do
-    post = Posts.get_post_by_slug!(id)
+    post = socket.assigns.current_user |> Ecto.assoc(:articles) |> Repo.get_by!(%{slug: id})
 
     socket
     |> assign(:post, post)
