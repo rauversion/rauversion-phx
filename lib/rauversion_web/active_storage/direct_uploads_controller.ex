@@ -21,3 +21,61 @@
 #       })
 #     end
 # end
+
+defmodule RauversionWeb.ActiveStorage.DirectUploadsController do
+  use RauversionWeb, :controller
+
+  action_fallback RauversionWeb.FallbackController
+
+  def create(conn, params) do
+    blob = ActiveStorage.Blob.create_before_direct_upload!(blob_args(params))
+
+    conn
+    |> Plug.Conn.send_resp(200, Jason.encode!(direct_upload_json(blob), pretty: true))
+  end
+
+  defp blob_args(params) do
+    blob = params["blob"]
+
+    %{
+      "byte_size" => byte_size,
+      "checksum" => checksum,
+      "content_type" => content_type,
+      "filename" => filename
+    } = blob
+
+    [
+      filename: filename,
+      byte_size: byte_size,
+      checksum: checksum,
+      content_type: content_type,
+      metadata: "{}"
+    ]
+
+    # params.require(:blob).permit(:filename, :byte_size, :checksum, :content_type, metadata: {}).to_h.symbolize_keys
+  end
+
+  def direct_upload_json(blob) do
+    %{
+      id: blob.id,
+      key: blob.key,
+      filename: ActiveStorage.Blob.filename(blob).filename,
+      content_type: blob.content_type,
+      metadata: ActiveStorage.Blob.metadata(blob),
+      byte_size: blob.byte_size,
+      checksum: blob.checksum,
+      service_name: blob.service_name,
+      signed_id: ActiveStorage.Blob.signed_id(blob),
+      service_url: ActiveStorage.service_blob_url(blob),
+      direct_upload: %{
+        url: ActiveStorage.Blob.service_url_for_direct_upload(blob),
+        headers: ActiveStorage.Blob.service_headers_for_direct_upload(blob)
+      }
+    }
+
+    # blob.as_json(root: false, methods: :signed_id).merge(direct_upload: {
+    #  url: blob.service_url_for_direct_upload,
+    #  headers: blob.service_headers_for_direct_upload
+    # })
+  end
+end

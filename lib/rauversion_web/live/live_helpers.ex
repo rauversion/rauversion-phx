@@ -299,4 +299,29 @@ defmodule RauversionWeb.LiveHelpers do
       "text-brand-500 hover:text-brand-700"
     end
   end
+
+  # used in live views
+  def files_for(socket, kind) do
+    case uploaded_entries(socket, kind) do
+      {[_ | _] = entries, []} ->
+        Enum.map(entries, fn entry ->
+          consume_uploaded_entry(socket, entry, fn %{path: path} = _file ->
+            {:postpone,
+             %{
+               path: path,
+               content_type: entry.client_type,
+               filename: entry.client_name,
+               size: entry.client_size
+             }}
+
+            # dest = Path.join("priv/static/uploads", Path.basename(path))
+            # File.cp!(path, dest)
+            # Routes.static_path(socket, "/uploads/#{Path.basename(dest)}")
+          end)
+        end)
+
+      _ ->
+        []
+    end
+  end
 end

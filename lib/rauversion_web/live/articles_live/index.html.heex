@@ -1,0 +1,19 @@
+
+<div>
+    <%= case @kind do 
+      :published -> live_component(
+                  RauversionWeb.ArticlesLive.ArticlesListComponent,
+                  id: "all-posts-published",
+                  page: 1,
+                  current_user: assigns[:current_user]
+                )
+
+      :mine -> live_component(
+                  RauversionWeb.ArticlesLive.UserArticlesListComponent,
+                  id: "all-draft-posts-published",
+                  page: 1,
+                  current_user: assigns[:current_user]
+                )
+      _ -> "no match on #{@kind}"
+    end  %>
+</div>

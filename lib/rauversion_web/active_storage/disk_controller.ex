@@ -30,23 +30,57 @@ defmodule RauversionWeb.ActiveStorage.DiskController do
     end
   end
 
-  def named_disk_service(name) do
-    ActiveStorage.Blob.services().__struct__.fetch name do
-      ActiveStorage.Blob.service()
+  def update(conn, params) do
+    case decode_verified_token(params) do
+      {:ok, decoded} ->
+        [content_length] = get_req_header(conn, "content-length")
+
+        [mime_type] = get_req_header(conn, "content-type")
+
+        if acceptable_content?(decoded, content_length, mime_type) do
+          {:ok, body, _conn_details} = Plug.Conn.read_body(conn)
+          service_name = decoded["service_name"] || :local
+
+          service = named_disk_service(service_name)
+
+          service.__struct__.upload(
+            service,
+            decoded["key"],
+            {:string, body},
+            checksum: decoded["checksum"]
+          )
+
+          send_resp(conn, :ok, "")
+        else
+          send_resp(conn, :unprocessable_entity, "")
+        end
+
+      _ ->
+        send_resp(conn, :not_found, "")
     end
+
+    # rescue ActiveStorage::IntegrityError
+    #  head :unprocessable_entity
+  end
+
+  def named_disk_service(name) do
+    ActiveStorage.Blob.services().__struct__.fetch(
+      name,
+      fn -> ActiveStorage.Blob.service() end
+    )
   end
 
   def decode_verified_key(encoded_key) do
-    ActiveStorage.Verifier.verify(encoded_key, purpose: :blob_key)
+    ActiveStorage.Verifier.verify(encoded_key, "blob_key")
   end
 
   def decode_verified_token(params) do
-    ActiveStorage.verifier().verified(params[:encoded_token], purpose: :blob_token)
+    ActiveStorage.Verifier.verify(params["encoded_token"], "blob_token")
   end
 
-  def acceptable_content?(_token) do
-    # token[:content_type] == request.content_mime_type &&
-    #  token[:content_length] == request.content_length
+  def acceptable_content?(token, content_length, content_mime_type) do
+    token["content_type"] == content_mime_type &&
+      to_string(token["content_length"]) == content_length
   end
 
   defp error_response(conn, status, message) do

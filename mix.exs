@@ -84,7 +84,8 @@ defmodule Rauversion.MixProject do
       #  "0.1.1"
       # }
       # {:active_storage,
-      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"}
+      # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_storage"
+      # }
       # {:active_job,
       # path: "/Users/michelson/Documents/chaskiq/chaskiq-phoenix/ex_rails/apps/active_job",
       # override: true}

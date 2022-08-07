@@ -5,6 +5,7 @@ import Audio from "./audio_controller"
 import Tabs from "./tabs_controller"
 import FooterPlayer from './footer_player_controller'
 import Chart from './chart_controller'
+
 //import GeoChart from './geo_chart_controller'
 
 const application = Application.start()
@@ -18,7 +19,7 @@ application.register("audio", Audio)
 application.register("tabs", Tabs)
 application.register("player", FooterPlayer)
 application.register("clipboard", Clipboard)
-application.register("chart", Chart)
+// application.register("editor", Editor)
 // application.register("geo-chart", GeoChart)
 
 export { application }
