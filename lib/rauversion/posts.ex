@@ -21,6 +21,13 @@ defmodule Rauversion.Posts do
     Repo.all(Post)
   end
 
+  def list_posts(state) do
+    from(pi in Post,
+      where: pi.state == ^state
+    )
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single post.
 

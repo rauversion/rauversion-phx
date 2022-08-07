@@ -14,7 +14,7 @@ defmodule Rauversion.Posts.Post do
     field :body, :map
     field :excerpt, :string
     field :slug, :string
-    field :state, :string
+    field :state, :string, default: "draft"
     field :title, TitleSlug.Type
 
     # field :user_id, :id
@@ -32,6 +32,12 @@ defmodule Rauversion.Posts.Post do
 
     timestamps()
   end
+
+  use Fsmx.Struct,
+    transitions: %{
+      "draft" => ["published"],
+      "published" => ["draft"]
+    }
 
   def record_type() do
     "Post"

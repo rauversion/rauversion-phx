@@ -6,7 +6,7 @@ defmodule RauversionWeb.ArticlesLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(:posts, list_posts)}
+    {:ok, socket}
   end
 
   @impl true
@@ -24,10 +24,10 @@ defmodule RauversionWeb.ArticlesLive.Index do
   end
 
   defp apply_action(socket, :index, _) do
-    socket
+    socket |> assign(:kind, :published)
   end
 
-  defp list_posts() do
-    Posts.list_posts() |> Repo.preload(user: :avatar_blob)
+  defp apply_action(socket, :mine, _) do
+    socket |> assign(:kind, :mine)
   end
 end

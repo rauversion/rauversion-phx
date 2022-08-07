@@ -140,22 +140,21 @@ defmodule RauversionWeb.Router do
   scope "/active_storage", RauversionWeb do
     pipe_through [:active_storage]
 
-    get(
-      "/blobs/redirect/:signed_id/*filename",
-      ActiveStorage.Blobs.RedirectController,
-      :show
-    )
-
+    # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy
     get(
       "/blobs/proxy/:signed_id/*filename",
       ActiveStorage.Blobs.ProxyController,
       :show
     )
 
-    # get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
-
     # get "/blobs/redirect/:signed_id/*filename" => "active_storage/blobs/redirect#show", as: :rails_service_blob
-    # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy
+    get(
+      "/blobs/redirect/:signed_id/*filename",
+      ActiveStorage.Blobs.RedirectController,
+      :show
+    )
+
+    # get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
     # get "/blobs/:signed_id/*filename" => "active_storage/blobs/redirect#show"
 
     get(
@@ -207,6 +206,8 @@ defmodule RauversionWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
 
     live "/articles", ArticlesLive.Index, :index
+    live "/articles/mine", ArticlesLive.Index, :mine
+
     live "/articles/new", ArticlesLive.New, :new
     live "/articles/edit/:id", ArticlesLive.New, :edit
     live "/articles/:slug/edit", ArticlesLive.New, :edit
