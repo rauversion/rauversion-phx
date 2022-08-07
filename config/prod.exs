@@ -63,6 +63,7 @@ config :rauversion, Oban,
   notifier: Oban.Notifiers.PG,
   peer: Oban.Peers.Global
 
+config :active_storage, :host, "https://rauversion.com"
 config :active_storage, :service, :amazon
 # config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo

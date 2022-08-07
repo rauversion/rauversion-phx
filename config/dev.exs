@@ -12,8 +12,6 @@ config :rauversion, Rauversion.Repo,
 
 config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
 
-config :rauversion, :domain, "https://rauversion.com"
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -93,7 +91,8 @@ config :rauversion, Oban,
 # activestorage
 
 # :amazon
-config :active_storage, :service, :local
+config :active_storage, :host, "http://localhost:4000"
+config :active_storage, :service, :amazon
 config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo
 config :active_storage, repo: Rauversion.Repo

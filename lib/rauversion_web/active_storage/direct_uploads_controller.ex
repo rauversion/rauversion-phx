@@ -57,10 +57,19 @@ defmodule RauversionWeb.ActiveStorage.DirectUploadsController do
 
   def direct_upload_json(blob) do
     %{
+      id: blob.id,
+      key: blob.key,
+      filename: ActiveStorage.Blob.filename(blob).filename,
+      content_type: blob.content_type,
+      metadata: ActiveStorage.Blob.metadata(blob),
+      byte_size: blob.byte_size,
+      checksum: blob.checksum,
+      service_name: blob.service_name,
       signed_id: ActiveStorage.Blob.signed_id(blob),
+      service_url: ActiveStorage.service_blob_url(blob),
       direct_upload: %{
-        url: "ActiveStorage.Blob.url_for_direct_upload(blob)",
-        headers: "ActiveStorage.Blob.service_headers_for_direct_upload(blob)"
+        url: ActiveStorage.Blob.service_url_for_direct_upload(blob),
+        headers: ActiveStorage.Blob.service_headers_for_direct_upload(blob)
       }
     }
 

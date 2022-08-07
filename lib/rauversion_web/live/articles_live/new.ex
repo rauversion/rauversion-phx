@@ -74,8 +74,6 @@ defmodule RauversionWeb.ArticlesLive.New do
           assigns: %{post: %Posts.Post{} = post, current_user: %Accounts.User{} = current_user}
         }
       ) do
-    IO.inspect(socket.assigns.post)
-
     with {:ok, updated_post} <-
            Posts.update_post(post, %{
              user_id: current_user.id,

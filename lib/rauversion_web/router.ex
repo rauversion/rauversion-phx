@@ -19,6 +19,15 @@ defmodule RauversionWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :active_storage do
+    plug :accepts, ["html", "json"]
+    plug :fetch_session
+    # plug :fetch_live_flash
+    # plug :put_root_layout, {RauversionWeb.LayoutView, :root}
+    plug :put_secure_browser_headers
+    # plug :fetch_current_user
+  end
+
   pipeline :browser_embed do
     plug :accepts, ["html"]
     # plug :fetch_session
@@ -128,6 +137,64 @@ defmodule RauversionWeb.Router do
     live "/playlists/:id/show/edit", PlaylistLive.Show, :edit
   end
 
+  scope "/active_storage", RauversionWeb do
+    pipe_through [:active_storage]
+
+    get(
+      "/blobs/redirect/:signed_id/*filename",
+      ActiveStorage.Blobs.RedirectController,
+      :show
+    )
+
+    get(
+      "/blobs/proxy/:signed_id/*filename",
+      ActiveStorage.Blobs.ProxyController,
+      :show
+    )
+
+    # get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
+
+    # get "/blobs/redirect/:signed_id/*filename" => "active_storage/blobs/redirect#show", as: :rails_service_blob
+    # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy
+    # get "/blobs/:signed_id/*filename" => "active_storage/blobs/redirect#show"
+
+    get(
+      "/representations/redirect/:signed_blob_id/:variation_key/*filename",
+      ActiveStorage.Representations.RedirectController,
+      :show
+    )
+
+    get(
+      "/representations/proxy/:signed_blob_id/:variation_key/*filename",
+      ActiveStorage.Representations.ProxyController,
+      :show
+    )
+
+    # get "/representations/redirect/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/redirect#show", as: :rails_blob_representation
+    # get "/representations/proxy/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/proxy#show", as: :rails_blob_representation_proxy
+    # get "/representations/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/redirect#show"
+
+    # get  "/disk/:encoded_key/*filename" => "active_storage/disk#show", as: :rails_disk_service
+    # put  "/disk/:encoded_token" => "active_storage/disk#update", as: :update_rails_disk_service
+    get(
+      "/disk/:encoded_key/*filename",
+      ActiveStorage.DiskController,
+      :show
+    )
+
+    put(
+      "/disk/:encoded_token",
+      ActiveStorage.DiskController,
+      :update
+    )
+
+    post(
+      "/direct_uploads",
+      ActiveStorage.DirectUploadsController,
+      :create
+    )
+  end
+
   scope "/", RauversionWeb do
     pipe_through [:browser]
 
@@ -154,55 +221,6 @@ defmodule RauversionWeb.Router do
     live "/playlists", PlaylistLive.Index, :index
     live "/playlists/:id", PlaylistLive.Show, :show
     live "/playlists/:id/private", PlaylistLive.Show, :private
-
-    get(
-      "/active_storage/blobs/redirect/:signed_id/*filename",
-      ActiveStorage.Blobs.RedirectController,
-      :show
-    )
-
-    get(
-      "/active_storage/blobs/proxy/:signed_id/*filename",
-      ActiveStorage.Blobs.ProxyController,
-      :show
-    )
-
-    # get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
-
-    # get "/blobs/redirect/:signed_id/*filename" => "active_storage/blobs/redirect#show", as: :rails_service_blob
-    # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy
-    # get "/blobs/:signed_id/*filename" => "active_storage/blobs/redirect#show"
-
-    get(
-      "/active_storage/representations/redirect/:signed_blob_id/:variation_key/*filename",
-      ActiveStorage.Representations.RedirectController,
-      :show
-    )
-
-    get(
-      "/representations/proxy/:signed_blob_id/:variation_key/*filename",
-      ActiveStorage.Representations.ProxyController,
-      :show
-    )
-
-    # get "/representations/redirect/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/redirect#show", as: :rails_blob_representation
-    # get "/representations/proxy/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/proxy#show", as: :rails_blob_representation_proxy
-    # get "/representations/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/redirect#show"
-
-    get(
-      "/active_storage/disk/:encoded_key/*filename",
-      ActiveStorage.DiskController,
-      :show
-    )
-
-    # get  "/disk/:encoded_key/*filename" => "active_storage/disk#show", as: :rails_disk_service
-    # put  "/disk/:encoded_token" => "active_storage/disk#update", as: :update_rails_disk_service
-
-    post(
-      "/active_storage/direct_uploads",
-      ActiveStorage.DirectUploadsController,
-      :create
-    )
 
     # post "/direct_uploads" => "active_storage/direct_uploads#create", as: :rails_direct_uploads
 
