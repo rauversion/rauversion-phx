@@ -11,30 +11,36 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
      socket
      |> assign(assigns)
      |> assign(:tab, "draft")
-     |> assign(:posts, list_posts("draft"))}
+     |> assign(:posts, list_posts(assigns.current_user, "draft"))}
   end
 
   def handle_event("all" = tab, %{}, socket) do
-    {:noreply, assign(socket, tab: tab) |> assign(:posts, list_posts(tab))}
+    {:noreply,
+     assign(socket, tab: tab)
+     |> assign(:posts, list_posts(socket.assigns.current_user, tab))}
   end
 
   def handle_event("draft" = tab, %{}, socket) do
-    {:noreply, assign(socket, tab: tab) |> assign(:posts, list_posts(tab))}
+    {:noreply,
+     assign(socket, tab: tab)
+     |> assign(:posts, list_posts(socket.assigns.current_user, tab))}
   end
 
   def handle_event("published" = tab, %{}, socket) do
     {:noreply,
      assign(socket, tab: tab)
-     |> assign(:posts, list_posts(tab))}
+     |> assign(:posts, list_posts(socket.assigns.current_user, tab))}
   end
 
-  defp list_posts(tab) do
+  defp list_posts(user, tab) do
     case tab do
       "draft" ->
-        Posts.list_posts("draft") |> Repo.preload(user: :avatar_blob)
+        Posts.list_posts(user |> Ecto.assoc(:articles), "draft")
+        |> Repo.preload(user: :avatar_blob)
 
       "published" ->
-        Posts.list_posts("published") |> Repo.preload(user: :avatar_blob)
+        Posts.list_posts(user |> Ecto.assoc(:articles), "published")
+        |> Repo.preload(user: :avatar_blob)
 
       "all" ->
         Posts.list_posts() |> Repo.preload(user: :avatar_blob)

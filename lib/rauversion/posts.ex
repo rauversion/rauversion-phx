@@ -28,6 +28,12 @@ defmodule Rauversion.Posts do
     |> Repo.all()
   end
 
+  def list_posts(query, state) do
+    query
+    |> where([p], p.state == ^state)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single post.
 
