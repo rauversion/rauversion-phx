@@ -44,7 +44,7 @@
       </nav>
 
       <div class="relative">
-        <div aria-hidden="true" class="hidden absolute w-1/2 h-full bg-gray-100 lg:block"></div>
+        <div aria-hidden="true" class="hidden absolute w-1/2 h-full bg-gray-100 dark:bg-gray-900 lg:block"></div>
         <div class="relative bg-black lg:bg-transparent- ">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2">
             <div class="max-w-2xl mx-auto py-6 lg:py-64 lg:max-w-none">
@@ -95,7 +95,7 @@
             <%= for track <- @tracks do %>
               <li class="w-64 inline-flex flex-col text-center lg:w-auto">
                 <div class="group relative">
-                  <div class="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
+                  <div class="w-full bg-gray-200 dark:bg-gray-800 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
                     <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
                   </div>
                   <div class="mt-6">
