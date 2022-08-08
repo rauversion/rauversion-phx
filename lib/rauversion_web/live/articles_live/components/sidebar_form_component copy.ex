@@ -191,6 +191,23 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                           </div>
                         </div>
                       </div>
+
+                      <% # IO.inspect(f) %>
+                      <% #= f.data.state %>
+                      <% #= f.data.private %>
+
+                      <div>
+                        <div class="relative flex items-start">
+                          <div class="absolute flex h-5 items-center">
+                            <%= checkbox(f, :state, checked_value: "published", unchecked_value: "draft", class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
+                          </div>
+                          <div class="pl-7 text-sm">
+                            <label for="privacy-published-to-article" class="font-medium text-gray-900"> Published on platform </label>
+                            <p id="privacy-published-to-article-description" class="text-gray-500">Article will be plublished on blog listing.</p>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </fieldset>
                 </div>

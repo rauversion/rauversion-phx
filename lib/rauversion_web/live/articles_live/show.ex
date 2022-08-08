@@ -2,7 +2,7 @@ defmodule RauversionWeb.ArticlesLive.Show do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Posts}
+  alias Rauversion.{Accounts, Posts, Repo}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -25,7 +25,7 @@ defmodule RauversionWeb.ArticlesLive.Show do
   end
 
   defp apply_action(socket, :show, %{"id" => id}) do
-    post = Posts.get_post_by_slug!(id)
+    post = Posts.get_post_by_slug!(id) |> Repo.preload([:user])
     socket |> assign(:post, post)
   end
 end

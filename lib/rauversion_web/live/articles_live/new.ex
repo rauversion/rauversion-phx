@@ -12,7 +12,6 @@ defmodule RauversionWeb.ArticlesLive.New do
       :ok,
       socket
       |> assign(:open, false)
-      |> assign(:publish, false)
       |> assign(
         :post,
         Posts.new_post(%{})
@@ -65,32 +64,6 @@ defmodule RauversionWeb.ArticlesLive.New do
         # nil -> {:error, ...} an example that we can match here too
         {:noreply, socket}
     end
-  end
-
-  @impl true
-  def handle_event(
-        "publish",
-        params,
-        socket = %{
-          assigns: %{post: %Posts.Post{} = post, current_user: %Accounts.User{} = current_user}
-        }
-      ) do
-    {:noreply,
-     socket
-     |> assign(:publish, true)}
-  end
-
-  @impl true
-  def handle_event(
-        "cancel-publish-modal",
-        params,
-        socket = %{
-          assigns: %{post: %Posts.Post{} = post, current_user: %Accounts.User{} = current_user}
-        }
-      ) do
-    {:noreply,
-     socket
-     |> assign(:publish, false)}
   end
 
   @impl true
