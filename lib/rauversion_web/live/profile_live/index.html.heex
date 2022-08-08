@@ -17,7 +17,7 @@
 
 <div class="flex">
 
-  <div class="flex-grow">
+  <div class="flex-grow dark:bg-black dark:text-white">
 
     <%= case @title do 
       # TODO: this is the same as all, but eventually will list all only the pinned ones
@@ -84,10 +84,10 @@
 
   <%= if @title != "insights" do %>
 
-    <aside class="hidden w-2/5 xl:block xl:col-span-4">
-      <div class="sticky top-4 space-y-4 p-4 bg-gray-50">
+    <aside class="hidden w-2/5 xl:block xl:col-span-4 bg-gray-50 dark:bg-black">
+      <div class="sticky top-4 space-y-4 p-4 ">
 
-        <div class="p-4 border-l-1 border-l-gray-50">
+        <div class="p-4 border-l-1 border-l-gray-50 dark:border-l-gray-800">
           <.live_component
             module={RauversionWeb.ProfileLive.StatsComponent}
             id={"track-#{@profile.id}-stats"}

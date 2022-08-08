@@ -96,14 +96,14 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
     ~H"""
     <div class="">
       <div class="space-y-6 lg:col-start-1 lg:col-span-2">
-        <section aria-labelledby="applicant-information-title">
-          <div class="bg-white border-r">
+        <section aria-labelledby="track-list-title">
+          <div class="border-r-2--">
             <div class="px-4 py-5 sm:px-6">
               <div class="flex justify-between items-center">
                 <h1 class="font-bold text-4xl"><%= @title %></h1>
 
                 <%= live_patch to: Routes.track_new_path(@socket, :new),
-                 class: "inline-flex justify-between rounded-lg py-3 px-5 bg-black text-white block font-medium" do %>
+                 class: "inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium" do %>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                   </svg>
@@ -115,16 +115,10 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
               </div>
             </div>
 
-            <div class="border-t border-gray-200 px-4-- py-5-- sm:px-6--">
-
-              <% # if notice.present? %>
-                <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
-                  <% #= notice %>
-                </p>
-              <% # end %>
+            <div class="">
 
               <div id="infinite-scroll"
-                class="min-w-full"
+                class="min-w-full border-r-2"
                 phx-hook="InfiniteScroll"
                 phx-update="append"
                 data-page={@page}

@@ -26,18 +26,18 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
           <div class="sm:col-span-2">
-            <label for="cover-photo" class="block text-sm font-medium text-gray-700">
+            <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Cover photo
             </label>
             <div
             phx-drop-target={@uploads.cover.ref}
-            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md">
               <div class="space-y-1 text-center">
                 <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                   <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
                 <div class="flex text-sm text-gray-600">
-                  <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
+                  <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                     <span>Upload Cover</span>
                     <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                     <%= live_file_input @uploads.cover,
@@ -80,7 +80,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
             </div>
 
             <div class="space-y-2">
-              <%= label f, :private, "Privacy", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+              <%= label f, :private, "Privacy", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
 
               <div class="flex-col space-y-3">
                 <div class="flex space-x-2 items-center">
@@ -113,11 +113,11 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                   <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-900 truncate"><%= track.data.track.title %></p>
+                  <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= track.data.track.title %></p>
                   <p class="text-sm text-gray-500 truncate">--</p>
                 </div>
                 <div>
-                  <a href="#" phx-click="remove-track" target={@ref} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                  <a href="#" phx-click="remove-track" target={@ref} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 dark:border-gray-700 dark:border-gray-700 text-sm leading-5 font-medium rounded-full text-gray-700 dark:text-gray-300 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900">
                     remove
                   </a>
                 </div>
@@ -133,13 +133,13 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
         <%= inputs_for f, :metadata, fn i -> %>
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div class="sm:col-span-4">
-              <%= label i, :buy_link, class: "block text-sm font-medium text-gray-700" %>
-              <%= text_input i, :buy_link, class: "max-w-lg shadow-sm block w-full focus:ring-brand-500 focus:border-brand-500 sm:text-sm border border-gray-300 rounded-md" %>
+              <%= label i, :buy_link, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+              <%= text_input i, :buy_link, class: "max-w-lg shadow-sm block w-full focus:ring-brand-500 focus:border-brand-500 sm:text-sm border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-700 dark:text-gray-100" %>
               <%= error_tag i, :buy_link %>
             </div>
             <div class="sm:col-span-6">
-              <%= label i, :record_label, class: "block text-sm font-medium text-gray-700" %>
-              <%= text_input i, :record_label, class: "max-w-lg shadow-sm block w-full focus:ring-brand-500 focus:border-brand-500 sm:text-sm border border-gray-300 rounded-md" %>
+              <%= label i, :record_label, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+              <%= text_input i, :record_label, class: "max-w-lg shadow-sm block w-full focus:ring-brand-500 focus:border-brand-500 sm:text-sm border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-700 dark:text-gray-10" %>
               <%= error_tag i, :record_label %>
             </div>
           </div>
@@ -154,7 +154,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
               <%= radio_button i, :copyright, "common" %>
               <%= label i, "Creative commons" %>
 
-              <div class="text-sm text-gray-700 flex space-x-2 items-center">
+              <div class="text-sm text-gray-700 dark:text-gray-300 flex space-x-2 items-center">
                 <%= if i.params["copyright"] == "common" || (!i.params["copyright"] && i.data.copyright == "common")  do %>
                   <% #= i.params["noncommercial"] %>
 
@@ -222,7 +222,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
           <%= submit "Save", phx_disable_with: "Saving...",
           class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
 
-          <button type="submit" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+          <button type="submit" class="bg-white py-2 px-4 border border-gray-300 dark:border-gray-700 dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
             cancel
           </button>
         </div>

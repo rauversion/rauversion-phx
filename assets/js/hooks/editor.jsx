@@ -18,11 +18,11 @@ import { DirectUpload } from "@rails/activestorage"
 Editor = {
   mounted(){
     const wrapper = this.el;
-
     console.log("esoooo")
     
     render(
       <Dante 
+        theme={darkTheme}
         content={JSON.parse(wrapper.dataset.field)}
         widgets={[
           ImageBlockConfig({

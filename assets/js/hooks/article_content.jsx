@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Dante, {
+  darkTheme,
+  defaultTheme,
   ImageBlockConfig,
   CodeBlockConfig,
   DividerBlockConfig,
@@ -19,6 +21,7 @@ ArticleContent = {
     render(
       <Dante 
         readOnly={true}
+        theme={darkTheme}
         content={JSON.parse(wrapper.dataset.field)}
         widgets={[
           ImageBlockConfig({

@@ -17,7 +17,10 @@ defmodule RauversionWeb.ActiveStorage.Representations.RedirectController do
   action_fallback RauversionWeb.FallbackController
 
   def show(conn, params) do
-    conn |> set_blob(params) |> set_representation(params)
+    conn
+    |> put_resp_header("cache-control", "max-age=#{ActiveStorage.service_urls_expire_in()}")
+    |> set_blob(params)
+    |> set_representation(params)
 
     # def set_blob
     #  @blob = blob_scope.find_signed!(params[:signed_blob_id] || params[:signed_id])

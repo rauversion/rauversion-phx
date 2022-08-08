@@ -64,7 +64,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
 
       <div class="mb-2">
         <div class="">
-          <div class="border-b border-gray-200">
+          <div class="border-b border-gray-200 dark:border-gray-700">
             <nav class="-mb-px flex space-x-8" aria-label="Tabs">
               <a href="#" phx-click={"all"} phx-target={@myself}
               class={tab_class(@tab == "all")}>
@@ -89,8 +89,8 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
 
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
-          <h1 class="text-xl font-semibold text-gray-900"><%= String.capitalize(@tab) %> Articles</h1>
-          <p class="mt-2 text-sm text-gray-700">Your articles.</p>
+          <h1 class="text-xl font-semibold text-gray-900 dark:text-gray-100"><%= String.capitalize(@tab) %> Articles</h1>
+          <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">Your articles.</p>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <%= live_redirect "New article", to: Routes.articles_new_path(@socket, :new),
@@ -102,31 +102,31 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table class="min-w-full divide-y divide-gray-300">
+              <table class="min-w-full divide-y divide-gray-300 dark:text-gray-700">
                 <thead class="bg-gray-50">
                   <tr>
-                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Title</th>
-                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Author</th>
-                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Status</th>
-                    <th scope="col" class="relative py-3 pl-3 pr-4 sm:pr-6">
+                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-200 dark:bg-gray-900">Title</th>
+                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-200 dark:bg-gray-900">Author</th>
+                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-200 dark:bg-gray-900">Status</th>
+                    <th scope="col" class="relative py-3 pl-3 pr-4 sm:pr-6 dark:text-gray-200 dark:bg-gray-900 ">
                       <span class="sr-only">Edit</span>
                     </th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 bg-white">
+                <tbody class="divide-y divide-gray-200 bg-white dark:bg-black">
                   <%= for post <- @posts do %>
                     <tr>
-                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-200 dark:bg-gray-900 sm:pl-6">
                         <%= post.title || "-- untitled --Access" %>
                       </td>
 
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200 dark:bg-gray-900">
                         <%= post.user.username %>
                       </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200 dark:bg-gray-900">
                         <%= post.state %>
                       </td>
-                      <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                      <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 dark:text-gray-200 dark:bg-gray-900">
                         <%= live_redirect to: Routes.articles_new_path(@socket, :edit, post.id), class: "text-brand-600 hover:text-brand-900" do %>
                           Edit
                         <% end %>

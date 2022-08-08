@@ -8,7 +8,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
     ~H"""
       <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div class="mx-2 py-6">
-          <div class="relative bg-white">
+          <div class="relative">
 
             <nav class="flex space-x-4" aria-label="Tabs" data-controller="tabs">
               <a href="#" data-tab="#share-tab" data-action="click->tabs#changeTab" class="tab-link bg-brand-100 text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Share </a>
@@ -40,7 +40,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                         type="checkbox"
                         id=""
                         name="share_from"
-                        class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded"
+                        class="focus:ring-brand-500 h-4 w-4 text-brand-600 dark:text-brand-400 border-gray-300 rounded"
                       />
                       <span class="">at</span>
                     </label>
@@ -53,12 +53,12 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                   </div>
                 </div>
               </div>
-              <div class="text-sm text-gray-700 py-2">
+              <div class="text-sm text-gray-700 dark:text-gray-300 py-2">
                 This track is set to private and can only be shared using the secret link above.
                 <br class="" />
                 You can reset the secret link if you want to revoke access.
               </div>
-              <div class="hidden mb-4 text-brand-600">
+              <div class="hidden mb-4 text-brand-600 dark:text-brand-400">
                 Are you sure you want to reset this link?<br class="" />
                 It will not be possible to access this track from any existing shares.
               </div>
@@ -144,7 +144,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                 </a>
               </div>
 
-              <p class="text-sm text-gray-700 py-2">
+              <p class="text-sm text-gray-700 dark:text-gray-300 py-2">
                 This player uses cookies in accordance with our Cookies policy.
                 We may collect usage data for analytics purposes.
                 It is your responsibility to disclose this to visitors of any site where you embed the player.

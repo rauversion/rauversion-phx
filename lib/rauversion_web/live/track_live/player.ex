@@ -306,22 +306,22 @@ defmodule RauversionWeb.TrackLive.Player do
       <% end %>
 
       <%= if @slideover do %>
-        <div style="height: calc(100% - 64px);" class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <div style="height: calc(100% - 64px);" class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full bg-white dark:bg-black">
           <div class="pointer-events-auto w-screen max-w-md">
-            <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+            <div class="flex h-full flex-col overflow-y-scroll py-6 shadow-xl dark:border-l-2 dark:border-white">
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
-                  <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Next up</h2>
+                  <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100" id="slide-over-title">Next up</h2>
                   <button type="button"
                       phx-click="clear-all"
-                      class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       clear all
                     </button>
 
                   <div class="ml-3 flex h-7 items-center">
                     <button type="button"
                       phx-click="display-slideover"
-                      class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      class="rounded-md bg-white dark:bg-black text-gray-400 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <span class="sr-only">Close panel</span>
                       <!-- Heroicon name: outline/x -->
                       <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -342,7 +342,7 @@ defmodule RauversionWeb.TrackLive.Player do
 
                         <%= for {item, counter} <- Enum.with_index(@tracks) do %>
                          <% #= for item <- @tracks  do %>
-                          <li class={"py-4 px-2 #{if counter == @index do "bg-gray-100" else "" end }"}>
+                          <li class={"py-4 px-2 #{if counter == @index do "bg-gray-100 dark:bg-gray-900" else "" end }"}>
                             <div class="flex items-center space-x-4">
                               <div class="flex-shrink-0">
                                 <%= img_tag(Rauversion.Tracks.variant_url(
@@ -351,14 +351,14 @@ defmodule RauversionWeb.TrackLive.Player do
                                 %>
                               </div>
                               <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate"><%= item.title %></p>
+                                <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item.title %></p>
                                 <p class="text-sm text-gray-500 truncate"><%= item.user.username %></p>
                               </div>
                               <div class="">
                                 <a href="#"
                                   phx-click="remove-from-next-up"
                                   phx-value-index={counter}
-                                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 dark:border-gray-700 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
                                   remove from next up
                                 </a>
                               </div>

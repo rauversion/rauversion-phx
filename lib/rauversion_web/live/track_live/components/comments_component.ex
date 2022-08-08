@@ -85,7 +85,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
       <div>
         <div class="divide-y divide-gray-200">
           <div class="pb-4">
-            <h2 id="activity-title" class="text-lg font-medium text-gray-900">Activity</h2>
+            <h2 id="activity-title" class="text-lg font-medium text-gray-900 dark:text-gray-100">Activity</h2>
           </div>
           <div class="pt-6">
             <!-- Activity feed-->
@@ -120,15 +120,15 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                             <div>
                               <div class="text-sm">
                                 <%= live_redirect to: Routes.profile_index_path(@socket, :index, comment.user.username),
-                                  class: "font-medium text-gray-900" do %>
+                                  class: "font-medium text-gray-900 dark:text-gray-100" do %>
                                   <%= comment.user.username %>
                                 <% end %>
                               </div>
-                              <p class="mt-0.5 text-sm text-gray-500">
+                              <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
                                 Commented <%= comment.inserted_at %>
                               </p>
                             </div>
-                            <div class="mt-2 text-sm text-gray-700">
+                            <div class="mt-2 text-sm text-gray-700 dark:text-gray-300">
                               <p>
                                 <%= comment.body %>
                               </p>
@@ -174,7 +174,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                       >
                         <div>
                           <label for="comment" class="sr-only">Comment</label>
-                          <%= textarea f, :body, rows: 3, class: "shadow-sm block w-full focus:ring-gray-900 focus:border-gray-900 sm:text-sm border border-gray-300 rounded-md", placeholder: "Leave a comment" %>
+                          <%= textarea f, :body, rows: 3, class: "shadow-sm block w-full focus:ring-gray-900 focus:border-gray-900 sm:text-sm border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-100", placeholder: "Leave a comment" %>
                         </div>
 
                         <div class="mt-6 flex items-center justify-end space-x-4 py-4">

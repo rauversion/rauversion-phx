@@ -31,19 +31,19 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
 
         <div class="sm:col-span-3">
           <%= label f, :password, "New password", class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= password_input f, :password, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= password_input f, :password, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 dark:text-blue-gray-100 dark:bg-gray-900 focus:border-blue-500" %>
           <%= error_tag f, :password %>
         </div>
 
         <div class="sm:col-span-3">
           <%= label f, :password_confirmation, "Confirm new password", class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= password_input f, :password_confirmation, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= password_input f, :password_confirmation, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 dark:text-blue-gray-100 dark:bg-gray-900 focus:border-blue-500" %>
           <%= error_tag f, :password_confirmation %>
         </div>
 
         <div class="sm:col-span-3">
           <%= label f, :current_password, for: "current_password_for_password", class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= password_input f, :current_password, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= password_input f, :current_password, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
           <%= error_tag f, :current_password %>
         </div>
 
@@ -51,10 +51,10 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
 
 
       <div class="pt-8 flex justify-end space-x-2">
-        <%= live_redirect to: @return_to, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
+        <%= live_redirect to: @return_to, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
           Cancel
         <% end %>
-        <%= submit "Change password", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+        <%= submit "Change password", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
       </div>
 
     </.form>
