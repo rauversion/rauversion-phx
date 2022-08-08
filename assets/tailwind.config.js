@@ -8,7 +8,12 @@ module.exports = {
     '../lib/*_web/**/*.*ex'
   ],
   theme: {
+    fontFamily: {
+      sans: ["'DM Sans'", 'sans-serif'],
+      serif: ["'DM Sans'", 'sans-serif'],
+    },
     extend: {
+      
       colors: {
         brand: {
           50:  "#fff7ed",
