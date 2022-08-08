@@ -77,6 +77,10 @@ defmodule Rauversion.Tracks do
     query |> where([t], t.state == "processed")
   end
 
+  def published(query) do
+    query |> where([t], t.private == false)
+  end
+
   def list_tracks_by_ids(ids) do
     list_public_tracks() |> where([p], p.id in ^ids)
   end
