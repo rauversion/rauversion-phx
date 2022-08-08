@@ -306,7 +306,7 @@ defmodule RauversionWeb.TrackLive.Player do
       <% end %>
 
       <%= if @slideover do %>
-        <div style="height: calc(100% - 64px);" class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 bg-white dark:bg-black">
+        <div style="height: calc(100% - 64px);" class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full bg-white dark:bg-black">
           <div class="pointer-events-auto w-screen max-w-md">
             <div class="flex h-full flex-col overflow-y-scroll py-6 shadow-xl dark:border-l-2 dark:border-white">
               <div class="px-4 sm:px-6">
