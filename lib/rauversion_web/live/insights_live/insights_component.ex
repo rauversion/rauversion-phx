@@ -50,7 +50,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
         <div class="grid grid-cols-2 gap-4">
 
-          <div class="p-4 shadow-lg rounded-lg overflow-hidden">
+          <div class="p-4 shadow-lg rounded-lg overflow-hidden bg-gray-900">
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
@@ -63,7 +63,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
 
             <div class="flow-root mt-6">
-              <ul role="list" class="-my-5 divide-y divide-gray-200">
+              <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-700">
                 <%= for item <- CountByDateQuery.top_tracks(@profile.id) do %>
                   <li class="py-4">
                     <div class="flex items-center space-x-4">
@@ -96,7 +96,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           </div>
 
 
-          <div class="p-4 shadow-lg rounded-lg overflow-hidden">
+          <div class="p-4 shadow-lg rounded-lg overflow-hidden bg-gray-900">
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
@@ -108,7 +108,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
             </div>
 
             <div class="flow-root mt-6">
-              <ul role="list" class="-my-5 divide-y divide-gray-200">
+              <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-700">
                 <%= for item <- CountByDateQuery.top_listeners(@profile.id) do %>
                   <li class="py-4">
                     <div class="flex items-center space-x-4">
@@ -137,7 +137,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           </div>
 
 
-          <div id="gep-chart-wrapper" class="p-4 col-span-2 shadow-lg rounded-lg overflow-hidden">
+          <div id="gep-chart-wrapper" class="p-4 col-span-2 shadow-lg rounded-lg overflow-hidden bg-gray-900">
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                 Top Locations
@@ -148,7 +148,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
             </div>
 
             <div class="flow-root mt-6">
-              <ul role="list" class="-my-5 divide-y divide-gray-200">
+              <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-700">
                 <%= for item <- CountByDateQuery.top_countries(@profile.id) do %>
                   <li class="py-4">
                     <div class="flex items-center space-x-4">
