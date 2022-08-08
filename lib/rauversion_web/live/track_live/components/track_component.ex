@@ -30,7 +30,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
     <div id={"track-item-#{track.id}"} class="flex flex-col sm:flex-row border border-r-0 border-l-0 dark:border-gray-700 rounded-md- shadow-sm sm:shadow-md my-2">
       <div class="w-full sm:w-44 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4-- px-4- sm:px-0">
 
-        <div class="group relative aspect-w-1 aspect-h-1 sm:rounded-none rounded-md-- bg-gray-100 overflow-hidden">
+        <div class="group relative aspect-w-1 aspect-h-1 sm:rounded-none rounded-md-- bg-gray-100 dark:bg-gray-900 overflow-hidden">
           <% #= image_tag url_for(track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
 
           <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "object-center object-cover group-hover:opacity-75") %>
