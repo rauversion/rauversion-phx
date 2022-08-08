@@ -1,4 +1,4 @@
-<main>
+<main class="dark:bg-black">
   <!-- Hero -->
   <%= if !@current_user do %>
     <div class="flex flex-col border-b border-gray-200 lg:border-0">
@@ -11,7 +11,7 @@
                   <p class="text-sm text-gray-500">
                     Download the app
                   </p>
-                  <p class="font-semibold text-gray-900">
+                  <p class="font-semibold text-gray-900 dark:text-gray-100">
                     Get an exclusive $5 off code
                   </p>
                 </a>
@@ -22,7 +22,7 @@
                   <p class="text-sm text-gray-500">
                     Return when you're ready
                   </p>
-                  <p class="font-semibold text-gray-900">
+                  <p class="font-semibold text-gray-900 dark:text-gray-100">
                     60 days of free returns
                   </p>
                 </a>
@@ -33,7 +33,7 @@
                   <p class="text-sm text-gray-500">
                     Sign up for our newsletter
                   </p>
-                  <p class="font-semibold text-gray-900">
+                  <p class="font-semibold text-gray-900 dark:text-gray-100">
                     15% off your first order
                   </p>
                 </a>
@@ -54,7 +54,7 @@
                   RAUVERSION
                 </a>
 
-                <h1 class="tracking-tight text-gray-900 text-3xl xl:text-6xl
+                <h1 class="tracking-tight text-gray-900 dark:text-gray-100 text-3xl xl:text-6xl
                 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-200 to-brand-600">
                   Be your own music industry
                 </h1>
@@ -78,10 +78,10 @@
   <% end %>
 
   <!-- Trending products -->
-  <section aria-labelledby="trending-heading" class="bg-white">
+  <section aria-labelledby="trending-heading" class="bg-white dark:bg-black">
     <div class="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:py-32 lg:px-8">
       <div class="px-4 flex items-center justify-between sm:px-6 lg:px-0">
-        <h2 id="trending-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">Trending Albums</h2>
+        <h2 id="trending-heading" class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">Trending Albums</h2>
         <%= live_redirect to: "/tracks", class: "hidden sm:block text-sm font-semibold text-brand-600 hover:text-brand-500" do %>
           See everything
           <span aria-hidden="true"> →</span>
@@ -102,13 +102,13 @@
                     <p class="text-sm text-gray-500">
                       <%= track.user.username %>
                     </p>
-                    <h3 class="mt-1 font-semibold text-gray-900">
+                    <h3 class="mt-1 font-semibold text-gray-900 dark:text-gray-100">
                       <%= live_redirect to: Routes.track_show_path(@socket, :show, track) do %>
                         <span class="absolute inset-0"></span>
                         <%= track.title %>
                       <% end %>
                     </h3>
-                    <p class="mt-1 text-gray-900 hidden">
+                    <p class="mt-1 text-gray-900 dark:text-gray-100 hidden">
                       PRICE ?
                     </p>
                   </div>
@@ -128,10 +128,10 @@
   </section>
 
   <%= if Enum.any?(@playlists) do %>
-    <section aria-labelledby="collections-heading" class="bg-gray-100">
+    <section aria-labelledby="collections-heading" class="bg-gray-100 dark:bg-gray-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
-          <h2 id="collections-playlists" class="text-2xl font-extrabold text-gray-900">Playlists</h2>
+          <h2 id="collections-playlists" class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">Playlists</h2>
 
           <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-5 lg:gap-x-6">
             
@@ -147,7 +147,7 @@
                     <%= playlist.title %>
                   <% end %>
                 </h3>
-                <p class="text-base font-semibold text-gray-900"><%= playlist.user.username %></p>
+                <p class="text-base font-semibold text-gray-900 dark:text-gray-100"><%= playlist.user.username %></p>
               </div>
             <% end %>
 
@@ -158,10 +158,10 @@
   <% end  %>
 
   <%= if @users do %>
-    <section aria-labelledby="collections-heading" class="bg-gray-100">
+    <section aria-labelledby="collections-heading" class="bg-gray-100 dark:bg-black">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24 lg:pb-32 lg:pt-6 pt-4">
         <div class="max-w-2xl mx-auto lg:max-w-none">
-          <h2 id="collections-users" class="text-2xl font-extrabold text-gray-900">
+          <h2 id="collections-users" class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">
             Artists You Should Know
           </h2>
 
@@ -178,7 +178,7 @@
                       <span class="absolute inset-0"></span>
                       <%= user.username %>
                     </h3>
-                    <p class="text-center text-base font-semibold text-gray-900"><%= user.username %></p>
+                    <p class="text-center text-base font-semibold text-gray-900 dark:text-gray-100"><%= user.username %></p>
                 <% end %>
               </div>
             <% end %>

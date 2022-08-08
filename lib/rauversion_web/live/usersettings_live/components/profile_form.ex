@@ -85,7 +85,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
             %>
 
             <div class="ml-4 flex space-x-2">
-              <div class="relative bg-white py-2 px-3 border border-blue-gray-300 rounded-md shadow-sm flex items-center cursor-pointer hover:bg-blue-gray-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-blue-gray-50 focus-within:ring-blue-500">
+              <div class="relative py-2 px-3 border border-blue-gray-300 rounded-md shadow-sm flex items-center cursor-pointer hover:bg-blue-gray-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-blue-gray-50 focus-within:ring-blue-500">
                 <%= label f, :avatar, class: "relative text-sm font-medium text-blue-gray-900 pointer-events-none" do %>
                     <span>Change</span>
                     <span class="sr-only"> user photo</span>

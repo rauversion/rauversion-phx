@@ -45,7 +45,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
           <div class="hidden sm:block">
             <% #= @current_tab %>
             <nav class="flex space-x-4" aria-label="Tabs" data-controller-dis="tabs">
-              <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->
+              <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700 dark:text-gray-300" -->
               <a href="#" phx-click="basic-info-tab" class={"#{active_tab_link?(@current_tab, "basic-info-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Basic Info </a>
               <a href="#" phx-click="metadata-tab" class={"#{active_tab_link?(@current_tab, "metadata-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Metadata </a>
               <a href="#" phx-click="permissions-tab" class={"#{active_tab_link?(@current_tab, "permissions-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"} aria-current="page"> Permissions </a>
@@ -56,7 +56,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
               <div class="pt-8 space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div>
                   <div>
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                       Profile <%= @track.id %>
                       <%= @track.title %>
                     </h3>
@@ -67,7 +67,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
                   <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                      <%= label f, :title, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+                      <%= label f, :title, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
                       <div class="mt-1 sm:mt-0 sm:col-span-2">
                         <div class="max-w-lg flex rounded-md shadow-sm">
                           <%= text_input f, :title, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" %>
@@ -77,7 +77,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                      <%= label f, :description, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+                      <%= label f, :description, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
                       <div class="mt-1 sm:mt-0 sm:col-span-2">
                         <div class="max-w-lg flex rounded-md shadow-sm">
                           <%= textarea f, :description, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" %>
@@ -87,7 +87,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                      <label for="cover-photo" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                      <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
                         Cover photo
                       </label>
 
@@ -100,7 +100,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                             </svg>
 
                             <div class="flex text-sm text-gray-600 py-3">
-                              <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
+                              <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                                 <span>Upload a track Cover</span>
                                 <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                                 <%= live_file_input @uploads.cover,
@@ -135,7 +135,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                      <%= label f, :private, "Privacy", class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+                      <%= label f, :private, "Privacy", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
 
                       <div class="flex-col space-y-3">
                         <div class="flex space-x-2 items-center">
@@ -166,7 +166,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
               <div id="metadata" class={"tab-pane #{ active_tab_for?(@current_tab, "metadata-tab") }"}>
                 <div class="pt-8">
                   <div>
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                       Metadata information
                     </h3>
                     <p class="mt-1 text-sm text-gray-500">
@@ -189,7 +189,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                       <%= radio_button i, :copyright, "common" %>
                       <%= label i, "Creative commons" %>
 
-                      <div class="text-sm text-gray-700 flex space-x-2 items-center">
+                      <div class="text-sm text-gray-700 dark:text-gray-300 flex space-x-2 items-center">
                         <%= if i.params["copyright"] == "common" || (!i.params["copyright"] && i.data.copyright == "common")  do %>
                           <% #= i.params["noncommercial"] %>
 
@@ -270,7 +270,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
         <div class="pt-5">
           <div class="flex justify-center">
-            <%= live_redirect to: "/", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
+            <%= live_redirect to: "/", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
               Cancel
             <%end %>
             <%= submit "Save", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>

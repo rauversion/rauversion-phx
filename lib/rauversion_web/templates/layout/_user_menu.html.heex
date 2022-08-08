@@ -83,21 +83,21 @@
               </button>
                 <div
                   data-dropdown-target="menu"
-                  class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-black ring-1 ring-black ring-opacity-5 focus:outline-none"
                   data-transition-enter-from="opacity-0 scale-95"
                   data-transition-enter-to="opacity-100 scale-100"
                   data-transition-leave-from="opacity-100 scale-100"
                   data-transition-leave-to="opacity-0 scale-95"
                   >
-                  <div class="block px-4 py-2 text-sm text-gray-700">
+                  <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                     <%= live_redirect "Settings", 
                         to: "/users/settings", 
-                       class: "block px-4 py-2 text-sm text-gray-700"  %>
-                    <%= live_redirect "Profile", to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700" %>
+                       class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
+                    <%= live_redirect "Profile", to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
 
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700">Support</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700">License</a>
-                    <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700" %>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
+                    <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                   </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
 
     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
       <div class="mx-2 py-6">
-        <div class="relative bg-white">
+        <div class="relative">
 
           <nav class="flex space-x-4" aria-label="Tabs" data-controller="tabs">
             <a href="#" phx-click={"add-to-tab"} phx-target={@ref} class={"#{if @tab === "add-to-tab" do "bg-brand-100 text-brand-700" else "text-brand-500 hover:text-brand-700" end } px-3 py-2 font-medium text-sm rounded-md"}> Add to playlist </a>
@@ -32,7 +32,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                           <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                         </div>
                         <div class="flex-1 min-w-0">
-                          <p class="text-sm font-medium text-gray-900 truncate"><%= item.title %></p>
+                          <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item.title %></p>
                           <p class="text-sm text-gray-500 truncate"></p>
                         </div>
                         <div>
@@ -136,7 +136,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                               <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                             </div>
                             <div class="flex-1 min-w-0">
-                              <p class="text-sm font-medium text-gray-900 truncate">
+                              <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                                 <%= @new_track.title %>
                               </p>
                               <p class="text-sm text-gray-500 truncate"><%= @new_track.user.username %></p>

@@ -52,7 +52,7 @@ defmodule RauversionWeb.PlaylistLive.AddToPlaylistComponent do
         "phx-click": "add-to-playlist",
         "phx-target": @myself,
         "phx-value-track": @track.id,
-        class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+        class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
         <span>Add to playlist</span>
       <% end %>
     </div>

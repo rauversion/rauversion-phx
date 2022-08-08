@@ -37,13 +37,13 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   def render(%{collection: collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">
-        <div class="bg-white border-t">
+        <div class="bg-white border-t dark:bg-gray-900">
           <div class="p-6">
-            <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
+            <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900 dark:text-gray-100">
               Who to follow
             </h2>
             <div class="mt-6 flow-root">
-              <ul role="list" class="-my-4 divide-y divide-gray-200">
+              <ul role="list" class="-my-4 divide-y divide-gray-200 dark:divide-gray-800">
 
                 <%= for item <- collection do %>
                   <li class="flex items-center py-4 space-x-3">
@@ -55,7 +55,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
 
                     </div>
                     <div class="min-w-0 flex-1">
-                      <p class="text-sm font-medium text-gray-900">
+                      <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
                         <%= live_redirect "#{item.first_name} #{item.last_name}", to: Routes.profile_index_path(@socket, :index, item.username) %>
                       </p>
                       <p class="text-sm text-gray-500">
@@ -78,7 +78,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
               </ul>
             </div>
             <div class="mt-6">
-              <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+              <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50  dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
                 View all
               </a>
             </div>

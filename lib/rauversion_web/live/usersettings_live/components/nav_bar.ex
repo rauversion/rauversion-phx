@@ -76,7 +76,7 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
 
   def render(assigns) do
     ~H"""
-    <nav aria-label="Sections" class="hidden flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col">
+    <nav aria-label="Sections" class="hidden flex-shrink-0 w-96 border-r border-blue-gray-200 xl:flex xl:flex-col">
       <div class="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">
         <p class="text-lg font-medium text-blue-gray-900">Settings</p>
       </div>

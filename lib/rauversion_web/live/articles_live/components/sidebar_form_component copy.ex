@@ -62,7 +62,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
           From: "translate-x-0"
           To: "translate-x-full"
       -->
-      <div class="z-[500] pointer-events-auto w-screen max-w-md h-screen fixed inset-y-0 right-0">
+      <div class="z-[500] dark:border-l-2 dark:border-white pointer-events-auto w-screen max-w-md h-screen fixed inset-y-0 right-0">
 
         <.form
           let={f}
@@ -72,7 +72,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
           phx-change="validate"
           phx-submit="save"
           multipart={true}
-          class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
+          class="flex h-full flex-col divide-y divide-gray-200 dark:divide-gray-800 dark:bg-black bg-white shadow-xl"
         >
           <div class="h-0 flex-1 overflow-y-auto">
             <div class="bg-brand-700 py-6 px-4 sm:px-6">
@@ -91,23 +91,23 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                 <p class="text-sm text-brand-300">Get started by filling in the information below to create your new article.</p>
               </div>
             </div>
-            <div class="flex flex-1 flex-col justify-between">
+            <div class="flex flex-1 flex-col justify-between dark:bg-black dark:text-white">
               <div class="divide-y divide-gray-200 px-4 sm:px-6">
 
-                <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                  <label for="cover-photo" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5">
+                  <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
                     Cover photo
                   </label>
 
                   <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+                    <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md"
                       phx-drop-target={@uploads.cover.ref}>
                       <div class="space-y-1 text-center">
 
 
                         <%= if Rauversion.Posts.blob_for(@post, "cover") == nil do %>
 
-                          <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                          <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-100" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                           </svg>
 
@@ -117,8 +117,8 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
 
                         <% end %>
 
-                        <div class="flex text-sm text-gray-600 py-3">
-                          <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
+                        <div class="flex text-sm text-gray-600 dark:text-gray-400 py-3">
+                          <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                             <span>Upload a track Cover</span>
                             <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                             <%= live_file_input @uploads.cover,
@@ -154,29 +154,29 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
 
                 <div class="space-y-6 pt-6 pb-5">
                   <div>
-                    <%= label f, :title, class: "block text-sm font-medium text-gray-900" %>
+                    <%= label f, :title, class: "block text-sm font-medium text-gray-900 dark:text-gray-100" %>
                     <div class="mt-1">
-                      <%= text_input f, :title, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm" %>
+                      <%= text_input f, :title, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm dark:bg-gray-900 dark:text-gray-100" %>
                       <%= error_tag f, :title %>
                     </div>
                   </div>
                   <div>
-                    <%= label f, :excerpt, class: "block text-sm font-medium text-gray-900" %>
+                    <%= label f, :excerpt, class: "block text-sm font-medium text-gray-900 dark:text-gray-100" %>
                     <div class="mt-1">
-                      <%= textarea f, :excerpt, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm" %>
+                      <%= textarea f, :excerpt, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm dark:bg-gray-900 dark:text-gray-100" %>
                       <%= error_tag f, :excerpt %>
                     </div>
                   </div>
 
                   <fieldset>
-                    <legend class="text-sm font-medium text-gray-900">Privacy</legend>
+                    <legend class="text-sm font-medium text-gray-900 dark:text-gray-100">Privacy</legend>
                     <div class="mt-2 space-y-5">
                       <div class="relative flex items-start">
                         <div class="absolute flex h-5 items-center">
                           <%= radio_button(f, :private, false, class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
                         </div>
                         <div class="pl-7 text-sm">
-                          <label for="privacy-public" class="font-medium text-gray-900"> Public access </label>
+                          <label for="privacy-public" class="font-medium text-gray-900 dark:text-gray-100"> Public access </label>
                           <p id="privacy-public-description" class="text-gray-500">Everyone with the link will see this article.</p>
                         </div>
                       </div>
@@ -186,7 +186,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                             <%= radio_button(f, :private, true, class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
                           </div>
                           <div class="pl-7 text-sm">
-                            <label for="privacy-private-to-article" class="font-medium text-gray-900"> Private to article members </label>
+                            <label for="privacy-private-to-article" class="font-medium text-gray-900 dark:text-gray-100"> Private to article members </label>
                             <p id="privacy-private-to-article-description" class="text-gray-500">Only members of this article would be able to access.</p>
                           </div>
                         </div>
@@ -202,7 +202,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                             <%= checkbox(f, :state, checked_value: "published", unchecked_value: "draft", class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
                           </div>
                           <div class="pl-7 text-sm">
-                            <label for="privacy-published-to-article" class="font-medium text-gray-900"> Published on platform </label>
+                            <label for="privacy-published-to-article" class="font-medium text-gray-900 dark:text-gray-100"> Published on platform </label>
                             <p id="privacy-published-to-article-description" class="text-gray-500">Article will be plublished on blog listing.</p>
                           </div>
                         </div>
@@ -222,8 +222,8 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                     </a>
                   </div>
                   <div class="mt-4 flex text-sm">
-                    <a href="#" class="group inline-flex items-center text-gray-500 hover:text-gray-900">
-                      <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-500" x-description="Heroicon name: solid/question-mark-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <a href="#" class="group inline-flex items-center text-gray-500 hover:text-gray-900 dark:text-gray-100">
+                      <svg class="h-5 w-5 text-gray-400 dark:text-gray-100 group-hover:text-gray-500" x-description="Heroicon name: solid/question-mark-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
                       </svg>
                       <span class="ml-2"> Learn more about sharing </span>
@@ -234,10 +234,10 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
               </div>
             </div>
           </div>
-          <div class="flex flex-shrink-0 justify-end px-4 py-4">
+          <div class="flex flex-shrink-0 justify-end px-4 py-4 dark:bg-gray-900">
             <button
               type="button"
-              class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+              class="rounded-md border border-gray-300 bg-white dark:border-gray-700 dark:bg-black py-2 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
               phx-click="toggle-panel">
               Cancel
             </button>

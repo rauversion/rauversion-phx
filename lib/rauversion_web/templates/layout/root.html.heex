@@ -10,7 +10,7 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
     <%= render_tags_all(assigns[:meta_tags] || %{})%>
   </head>
-  <body>
+  <body class="dark">
 
     <%= render "_user_menu.html", assigns %>
 

@@ -6,7 +6,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
 
   def render(%{data: _data} = assigns) do
     ~H"""
-    <div class="relative bg-white">
+    <div class="relative dark:bg-black">
     <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
     <div class="z-20 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
@@ -19,7 +19,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
               <%= live_redirect name,
                 id: "profile-menu-#{name}",
                 to: url,
-                class: "text-base font-medium #{if selected do "border-b border-b-4 text-gray-800 hover:text-gray-900 border-brand-500 " else "text-gray-500 hover:text-gray-900" end}" %>
+                class: "text-base font-medium #{if selected do "border-b border-b-4 text-gray-800 hover:text-gray-900 border-brand-500 dark:text-gray-200 dark:hover:text-gray-100 dark:border-brand-300 " else "text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100" end}" %>
             <% end %>
           </nav>
 

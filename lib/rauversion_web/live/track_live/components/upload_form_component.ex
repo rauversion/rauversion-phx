@@ -30,7 +30,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5 flex justify-center">
           <div class="flex-col">
             <div class="text-center">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
+              <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                 Drag and drop your tracks & albums here
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
@@ -42,15 +42,15 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
               <div class="flex-col">
 
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                  <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md">
                     <div class="space-y-1 text-center">
 
                       <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                       </svg>
                       <% #= @track.audio&.filename if @track.audio.persisted? %>
-                      <div class="flex text-sm text-gray-600 py-3">
-                        <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
+                      <div class="flex text-sm text-gray-600 text-gray-300 py-3">
+                        <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                           <span>Upload a Audio file</span>
                           <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                           <%= live_file_input @uploads.audio,
@@ -85,7 +85,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
               </div>
             </div>
 
-            <div class="flex items-center space-x-2 text-sm text-gray-600 my-2">
+            <div class="flex items-center space-x-2 text-sm text-gray-600 text-gray-300 my-2">
               <%= label f, :private, "Privacy:" %>
               <%= label f, :private, "Private" %>
               <%= radio_button(f, :private, true) %>

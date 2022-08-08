@@ -8,31 +8,31 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
     ~H"""
       <div class="mx-auto w-3/4">
         <div class="pt-4">
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Last 30 days</h3>
+          <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Last 30 days</h3>
           <dl class="hidden mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
               <dt class="text-sm font-medium text-gray-500 truncate">Total Listens</dt>
-              <dd class="mt-1 text-3xl font-semibold text-gray-900">71,897</dd>
+              <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">71,897</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
               <dt class="text-sm font-medium text-gray-500 truncate">Likes</dt>
-              <dd class="mt-1 text-3xl font-semibold text-gray-900">58.16%</dd>
+              <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">58.16%</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
               <dt class="text-sm font-medium text-gray-500 truncate">Reposts</dt>
-              <dd class="mt-1 text-3xl font-semibold text-gray-900">24.57%</dd>
+              <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">24.57%</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
               <dt class="text-sm font-medium text-gray-500 truncate">Downloads</dt>
-              <dd class="mt-1 text-3xl font-semibold text-gray-900">24.57%</dd>
+              <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">24.57%</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
               <dt class="text-sm font-medium text-gray-500 truncate">Comments</dt>
-              <dd class="mt-1 text-3xl font-semibold text-gray-900">24.57%</dd>
+              <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">24.57%</dd>
             </div>
           </dl>
         </div>
@@ -53,7 +53,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           <div class="p-4 shadow-lg rounded-lg overflow-hidden">
 
             <div class="-px-4 py-5 -sm:px-6">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
+              <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                 Top tracks
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
@@ -75,7 +75,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                         %>
                       </div>
                       <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 truncate"><%= item.title %> </p>
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item.title %> </p>
 
                         <div class="text-sm text-gray-500 space-x-2 flex items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -99,7 +99,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           <div class="p-4 shadow-lg rounded-lg overflow-hidden">
 
             <div class="-px-4 py-5 -sm:px-6">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
+              <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                 Top Listeners
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
@@ -116,7 +116,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                         <%= img_tag(Rauversion.Accounts.avatar_url(item.user), class: "h-8 w-8 rounded-full") %>
                       </div>
                       <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 truncate"><%= item.user.username %> </p>
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item.user.username %> </p>
 
                         <div class="text-sm text-gray-500 space-x-2 flex items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -139,7 +139,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
           <div id="gep-chart-wrapper" class="p-4 col-span-2 shadow-lg rounded-lg overflow-hidden">
             <div class="-px-4 py-5 -sm:px-6">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
+              <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                 Top Locations
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
@@ -161,7 +161,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                         <% end %>
                       </div>
                       <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 truncate"><%= Rauversion.Events.Event.country_name(item.country) || "unknown" %></p>
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= Rauversion.Events.Event.country_name(item.country) || "unknown" %></p>
                         <div class="text-sm text-gray-500 space-x-2 flex items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />

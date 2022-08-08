@@ -79,7 +79,7 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
     <div class="">
       <div class="space-y-6 lg:col-start-1 lg:col-span-2">
         <section aria-labelledby="applicant-information-title">
-          <div class="bg-white border-r">
+          <div class="border-r">
             <div class="px-4 py-5 sm:px-6">
               <div class="flex justify-between items-center">
                 <h1 class="font-bold text-4xl"><%= @title %></h1>
@@ -98,12 +98,6 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
             </div>
 
             <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-
-              <% # if notice.present? %>
-                <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
-                  <% #= notice %>
-                </p>
-              <% # end %>
 
               <div id="infinite-scroll"
                 class="min-w-full"

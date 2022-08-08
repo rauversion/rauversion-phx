@@ -76,16 +76,20 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.node-codeBlock {
+  border: 2px solid #fff;
+}
+
 .phx-modal-content {
-  background-color: #fefefe;
+  /*background-color: #fefefe;*/
   margin: 15vh auto;
   padding: 20px;
-  border: 1px solid #888;
+  /*border: 1px solid #888;*/
   width: 80%;
 }
 
 .phx-modal-close {
-  color: #aaa;
+  /*color: #aaa;*/
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -93,7 +97,7 @@
 
 .phx-modal-close:hover,
 .phx-modal-close:focus {
-  color: black;
+  /*color: black;**/
   text-decoration: none;
   cursor: pointer;
 }

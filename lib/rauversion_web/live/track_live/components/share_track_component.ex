@@ -22,7 +22,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
     ~H"""
       <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div class="mx-2 py-6">
-          <div class="relative bg-white">
+          <div class="relative">
 
             <nav class="flex space-x-4 mt-2" aria-label="Tabs" data-controller="tabs">
               <a href="#" data-tab="#share-tab" data-action="click->tabs#changeTab" class="tab-link bg-brand-100 text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Share </a>
@@ -46,7 +46,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                     <input
                       type="text"
                       value={Application.get_env(:rauversion, :domain) <> Routes.track_show_path(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
-                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
                       readonly="readonly"/>
 
                     <label class="flex items-center space-x-2">
@@ -62,17 +62,17 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                     <input
                       type="text"
                       value="0:00"
-                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
                     />
                   </div>
                 </div>
               </div>
-              <div class="text-sm text-gray-700 py-2">
+              <div class="text-sm text-gray-700 dark:text-gray-300 py-2">
                 This track is set to private and can only be shared using the secret link above.
                 <br class="" />
                 You can reset the secret link if you want to revoke access.
               </div>
-              <div class="hidden mb-4 text-brand-600">
+              <div class="hidden mb-4 text-brand-600 dark:text-brand-400">
                 Are you sure you want to reset this link?<br class="" />
                 It will not be possible to access this track from any existing shares.
               </div>
@@ -120,8 +120,8 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                   value={iframe_code(@socket, track) |> to_string}
                   data-clipboard-target="source"
                   readonly=""
-                  class="py-3 px-2 outline-none flex-1 block rounded-none rounded-l-md sm:text-sm border border-gray-300">
-                  <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="inline-flex items-center px-3 focus:outline-none rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                  class="py-3 px-2 outline-none flex-1 block rounded-none rounded-l-md sm:text-sm border border-gray-300 dark:bg-gray-900 dark:text-gray-100">
+                  <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="inline-flex items-center px-3 focus:outline-none rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500    dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 text-sm">
                     Copy to clipboard
                   </button>
                 </div>
@@ -165,7 +165,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                 </a>
               </div>
 
-              <p class="text-sm text-gray-700 py-2">
+              <p class="text-sm text-gray-700 dark:text-gray-300 dark:text-gray-300 py-2">
                 This player uses cookies in accordance with our Cookies policy.
                 We may collect usage data for analytics purposes.
                 It is your responsibility to disclose this to visitors of any site where you embed the player.
