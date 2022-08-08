@@ -39,38 +39,38 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
               <% #= ENV['APP_DOMAIN']%>
               <%= Application.get_env(:rauversion, :app_name, "rauversion.com") %>
             </span>
-            <%= text_input f, :username, required: true, class: "flex-1 block w-full min-w-0 border-blue-gray-300 rounded-none rounded-r-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+            <%= text_input f, :username, required: true, class: "flex-1 block w-full min-w-0 border-blue-gray-300 rounded-none rounded-r-md text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
           </div>
         </div>
 
         <div class="sm:col-span-3">
           <%= label f, :first_name, class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= text_input f, :first_name, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= text_input f, :first_name, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
           <%= error_tag f, :first_name %>
         </div>
 
         <div class="sm:col-span-3">
           <%= label f, :last_name, class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= text_input f, :last_name, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= text_input f, :last_name, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
           <%= error_tag f, :last_name %>
         </div>
 
         <div class="sm:col-span-3">
           <%= label f, :country, class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= text_input f, :country, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= text_input f, :country, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
           <%= error_tag f, :country %>
         </div>
 
         <div class="sm:col-span-3">
           <%= label f, :city, class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= text_input f, :city, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= text_input f, :city, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
           <%= error_tag f, :city %>
         </div>
 
 
         <div class="sm:col-span-6">
           <%= label f, :bio, class: "block text-sm font-medium text-blue-gray-900" %>
-          <%= textarea f, :bio, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
+          <%= textarea f, :bio, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" %>
           <%= error_tag f, :bio %>
         </div>
 
@@ -105,10 +105,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
       </div>
 
       <div class="pt-8 flex justify-end space-x-2">
-        <%= live_redirect to: @return_to, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
-          Cancel
-        <% end %>
-        <%= submit "Change information", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+        <%= submit "Change information", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
       </div>
     </.form>
     </div>

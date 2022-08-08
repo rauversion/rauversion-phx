@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -10,7 +10,7 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
     <%= render_tags_all(assigns[:meta_tags] || %{})%>
   </head>
-  <body class="dark">
+  <body class="dark:bg-black dark:text-white">
 
     <%= render "_user_menu.html", assigns %>
 

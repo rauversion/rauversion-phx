@@ -96,8 +96,8 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
     ~H"""
     <div class="">
       <div class="space-y-6 lg:col-start-1 lg:col-span-2">
-        <section aria-labelledby="applicant-information-title">
-          <div class="border-r">
+        <section aria-labelledby="track-list-title">
+          <div class="border-r-2--">
             <div class="px-4 py-5 sm:px-6">
               <div class="flex justify-between items-center">
                 <h1 class="font-bold text-4xl"><%= @title %></h1>
@@ -118,7 +118,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
             <div class="">
 
               <div id="infinite-scroll"
-                class="min-w-full"
+                class="min-w-full border-r-2"
                 phx-hook="InfiniteScroll"
                 phx-update="append"
                 data-page={@page}
