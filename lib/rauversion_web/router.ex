@@ -122,6 +122,11 @@ defmodule RauversionWeb.Router do
 
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
+    live "/articles/mine", ArticlesLive.Index, :mine
+    live "/articles/new", ArticlesLive.New, :new
+    live "/articles/edit/:id", ArticlesLive.New, :edit
+    live "/articles/:slug/edit", ArticlesLive.New, :edit
+
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
 
@@ -206,12 +211,6 @@ defmodule RauversionWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
 
     live "/articles", ArticlesLive.Index, :index
-    live "/articles/mine", ArticlesLive.Index, :mine
-
-    live "/articles/new", ArticlesLive.New, :new
-    live "/articles/edit/:id", ArticlesLive.New, :edit
-    live "/articles/:slug/edit", ArticlesLive.New, :edit
-
     live "/articles/:id", ArticlesLive.Show, :show
 
     live "/tracks", TrackLive.Index, :index
