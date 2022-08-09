@@ -1,11 +1,11 @@
 <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <!--<img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-brand-600.svg" alt="Workflow">-->
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Reset Password</h2>
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">Reset Password</h2>
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <div class="bg-white dark:bg-gray-900 py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
       <.form let={f} 
         for={@changeset} 
@@ -18,18 +18,18 @@
           <% end %>
 
         <div>
-          <%= label f, :password, "Password", class: "block text-sm font-medium text-gray-700" %> 
+          <%= label f, :password, "Password", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %> 
           <div class="mt-1">
-            <%= password_input f, :password, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
+            <%= password_input f, :password, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
             <%= error_tag f, :password %>
             <!-- <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm"> -->
           </div>
         </div>
 
         <div>
-          <%= label f, :password_confirmation, "Confirm new password", class: "block text-sm font-medium text-gray-700" %> 
+          <%= label f, :password_confirmation, "Confirm new password", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %> 
           <div class="mt-1">
-            <%= password_input f, :password_confirmation, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
+            <%= password_input f, :password_confirmation, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
             <%= error_tag f, :password_confirmation %>
             <!-- <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm">-->
           </div>
@@ -43,10 +43,10 @@
       <div class="mt-6">
         <div class="relative">
           <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-gray-300"></div>
+            <div class="w-full border-t border-gray-300 dark:border-gray-700"></div>
           </div>
           <div class="relative flex justify-center text-sm">
-            <span class="px-2 bg-white text-gray-500"> Or continue with </span>
+            <span class="px-2 bg-white dark:bg-black text-gray-500"> Or continue with </span>
             <%= link "Register", to: Routes.user_registration_path(@conn, :new) %>
             <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
             <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>

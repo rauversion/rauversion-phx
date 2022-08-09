@@ -119,13 +119,14 @@
           <%= live_redirect "Tracks", to: "/tracks", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
           <%= live_redirect "Account", to: "/users/settings", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
 
-          <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-            <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
-          <% end %>
+          <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <% #= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+          <% # end %>
 
-          <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
-          <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
-        
+          <%= if !@current_user do %>
+            <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+            <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+          <% end %>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-500">
         <div class="flex items-center px-4">
@@ -149,7 +150,7 @@
 
           <%= if @current_user do %>
             <%= live_redirect "Settings", to: "/users/settings", class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
-            <%= live_redirect "profile", to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+            <%= live_redirect "Profile", to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
             <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800">Support</a>
             <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800">License</a>
             <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>

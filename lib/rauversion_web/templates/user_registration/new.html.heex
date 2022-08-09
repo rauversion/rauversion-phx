@@ -3,8 +3,8 @@
     <div class="mx-auto w-full max-w-sm lg:w-96">
       <div>
         <img class="h-12 w-auto" src="https://via.placeholder.com/600.svg" alt="Logo">
-        <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-        <p class="hidden mt-2 text-sm text-gray-600">
+        <h2 class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">Sign in to your account</h2>
+        <p class="hidden mt-2 text-sm text-gray-600 dark:text-gray-400">
           Or
           <a href="#" class="font-medium text-brand-600 hover:text-brand-500"> start your 14-day free trial </a>
         </p>
@@ -13,7 +13,7 @@
       <div class="mt-8">
         <div class="hidden">
           <div>
-            <p class="text-sm font-medium text-gray-700">Sign in with</p>
+            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Sign in with</p>
 
             <div class="mt-1 grid grid-cols-3 gap-3">
               <div>
@@ -68,9 +68,9 @@
             <% end %>
 
             <div>
-               <%= label f, :email, "Email Address", class: "block text-sm font-medium text-gray-700"  %>
+               <%= label f, :email, "Email Address", class: "block text-sm font-medium text-gray-700 dark:text-gray-300"  %>
               <div class="mt-1">
-                <%= email_input f, :email, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
+                <%= email_input f, :email, required: true, class: "dark:bg-gray-900 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
                 <div class="mt-4">
                   <%= error_tag f, :email %>
                 </div>
@@ -79,9 +79,9 @@
             </div>
 
             <div class="space-y-1">
-              <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
+              <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300"> Password </label>
               <div class="mt-1">
-                <%= password_input f, :password, required: true, autocomplete: false, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
+                <%= password_input f, :password, required: true, autocomplete: false, class: "dark:bg-gray-900 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
                 <div class="mt-4">
                   <%= error_tag f, :password %>
                 </div>
@@ -89,9 +89,9 @@
             </div>
 
             <div class="space-y-1">
-              <label for="username" class="block text-sm font-medium text-gray-700"> Username </label>
+              <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300"> Username </label>
               <div class="mt-1">
-                <%= text_input f, :username, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
+                <%= text_input f, :username, required: true, class: "dark:bg-gray-900 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
                 <div class="mt-4">
                   <%= error_tag f, :username %>
                 </div>
@@ -100,7 +100,7 @@
 
             <div class="flex items-center justify-between">
               <div class="text-sm">
-                <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "font-medium text-brand-600 hover:text-brand-500" %> |
+                <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "font-medium text-brand-600 dark:text-brand-400 hover:text-brand-500" %> |
                 <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new), class: "font-medium text-brand-600 hover:text-brand-500" %>
               </div>
             </div>

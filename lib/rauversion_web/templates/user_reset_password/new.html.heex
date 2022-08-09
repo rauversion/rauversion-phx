@@ -2,11 +2,11 @@
 <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <!--<img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-brand-600.svg" alt="Workflow">-->
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Forgot your password?</h2>
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">Forgot your password?</h2>
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <div class="bg-white dark:bg-gray-900 py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
       <.form let={f} 
           for={:user} 
@@ -14,9 +14,9 @@
           class="space-y-6">
 
         <div>
-          <%= label f, :email, "Email address", class: "block text-sm font-medium text-gray-700" %> 
+          <%= label f, :email, "Email address", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %> 
           <div class="mt-1">
-            <%= email_input f, :email, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm" %>
+            <%= email_input f, :email, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm dark:bg-black" %>
             <!-- <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm"> -->
           </div>
         </div>
