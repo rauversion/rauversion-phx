@@ -39,7 +39,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
         <div>
           <div id="chart-line-container"
-            class="shadow-lg rounded-lg overflow-hidden"
+            class="shadow-lg rounded-lg overflow-hidden my-4 dark:bg-gray-900"
             phx-update="ignore"
             data-controller="chart"
             data-chart-label-value="Last 12 months"
@@ -50,7 +50,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
         <div class="grid grid-cols-2 gap-4">
 
-          <div class="p-4 shadow-lg rounded-lg overflow-hidden bg-gray-900">
+          <div class="p-4 shadow-lg rounded-lg overflow-hidden dark:bg-gray-900">
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
@@ -96,7 +96,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           </div>
 
 
-          <div class="p-4 shadow-lg rounded-lg overflow-hidden bg-gray-900">
+          <div class="p-4 shadow-lg rounded-lg overflow-hidden dark:bg-gray-900">
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
@@ -137,7 +137,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           </div>
 
 
-          <div id="gep-chart-wrapper" class="p-4 col-span-2 shadow-lg rounded-lg overflow-hidden bg-gray-900">
+          <div id="gep-chart-wrapper" class="p-4 col-span-2 shadow-lg rounded-lg overflow-hidden dark:bg-gray-900">
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                 Top Locations

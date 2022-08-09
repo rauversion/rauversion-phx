@@ -19,6 +19,7 @@ application.register("audio", Audio)
 application.register("tabs", Tabs)
 application.register("player", FooterPlayer)
 application.register("clipboard", Clipboard)
+application.register("chart", Chart)
 // application.register("editor", Editor)
 // application.register("geo-chart", GeoChart)
 
