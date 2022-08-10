@@ -166,7 +166,11 @@ Player = {
       detail: {}
     });
     document.dispatchEvent(ev)
-    this.trackEvent(trackId)
+    //setTimeout(()=>{
+      // if(this.)
+      this.trackEvent(trackId)
+    //}, 2000)
+    
   },
   dispatchPause(){
     this.playiconTarget.style.display = 'none'

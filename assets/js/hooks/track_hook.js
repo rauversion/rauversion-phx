@@ -36,7 +36,8 @@ Player = {
 
     this.audioProcessListeners = 
       document.addEventListener(`audio-process-${this.el.dataset.audioId}`, (e) => {
-      // console.log("AUDIO PROCESS RECEIVED", e.detail)
+        //console.log("AUDIO PROCESS RECEIVED", e.detail)
+        // console.log("AUDIO PROCESS RECEIVED", e.detail)
       // this._wave.drawer.progressWave.style.width = `${e.detail}px`
       // this._wave.drawer.progress(e.detail)
       // this.drawer.progress(this.backend.getPlayedPercents());
@@ -45,6 +46,7 @@ Player = {
 
     this.audioProcessPlayListeners = 
       document.addEventListener(`audio-process-${this.el.dataset.audioId}-play`, (e) => {
+        console.log("RECEIVED AUDIO PROCESS PLAY", e.detail)
         this.playiconTarget.style.display = 'block'
         this.pauseiconTarget.style.display = 'none'
         this.playing = true
@@ -53,6 +55,7 @@ Player = {
 
     this.audioProcessPauseListeners = 
       document.addEventListener(`audio-process-${this.el.dataset.audioId}-pause`, (e) => {
+        console.log("RECEIVED AUDIO PROCESS PAUSE", e.detail)
         this.playiconTarget.style.display = 'none'
         this.pauseiconTarget.style.display = 'block'
         this.playing = false
