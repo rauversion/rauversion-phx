@@ -70,7 +70,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                       <%= label f, :title, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
                       <div class="mt-1 sm:mt-0 sm:col-span-2">
                         <div class="max-w-lg flex rounded-md shadow-sm">
-                          <%= text_input f, :title, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" %>
+                          <%= text_input f, :title, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 dark:bg-gray-900 dark:text-gray-100" %>
                           <%= error_tag f, :title %>
                         </div>
                       </div>
@@ -80,7 +80,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                       <%= label f, :description, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
                       <div class="mt-1 sm:mt-0 sm:col-span-2">
                         <div class="max-w-lg flex rounded-md shadow-sm">
-                          <%= textarea f, :description, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300" %>
+                          <%= textarea f, :description, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 dark:bg-gray-900 dark:text-gray-100" %>
                           <%= error_tag f, :description %>
                         </div>
                       </div>
@@ -270,7 +270,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
         <div class="pt-5">
           <div class="flex justify-center">
-            <%= live_redirect to: "/", class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
+            <%= live_redirect to: "/", class: "bg-white dark:bg-black py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
               Cancel
             <%end %>
             <%= submit "Save", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>

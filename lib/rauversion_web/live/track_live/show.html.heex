@@ -31,8 +31,8 @@
   <!-- Breadcrumb -->
   <nav class="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
     <%= live_redirect  to: Routes.profile_index_path(@socket, :index, @track.user.username), 
-    class: "inline-flex items-center space-x-3 text-sm font-medium text-gray-900" do %>
-      <svg class="-ml-2 h-5 w-5 text-gray-400" x-description="Heroicon name: solid/chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    class: "inline-flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-gray-100" do %>
+      <svg class="-ml-2 h-5 w-5 text-gray-400 dark:text-gray-600" x-description="Heroicon name: solid/chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
       </svg>
       <span>Tracks</span>
@@ -144,7 +144,7 @@
           </div>
           <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
             <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
-              <h1 class="text-2xl font-bold text-gray-900 truncate">
+              <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
                 <%= if @track.user do %>
                 <%= live_redirect @track.user.username, to: Routes.profile_index_path(@socket, :index, @track.user.username) %>
                 <% end  %>
