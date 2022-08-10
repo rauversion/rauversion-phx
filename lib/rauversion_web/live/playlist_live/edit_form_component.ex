@@ -7,7 +7,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
   def render(assigns) do
     ~H"""
 
-    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+    <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
       <.form
       let={f}
       for={@changeset}
@@ -102,7 +102,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
 
       <div id="tracks-info" class={"tab-pane #{ active_tab_for?(@current_tab, "tracks-tab")}"}>
 
-        <ul role="list" class="-my-5 divide-y divide-gray-200 my-4">
+        <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800 my-4">
           <%= inputs_for f, :track_playlists, fn track -> %>
 
             <%= hidden_input track, :track_id %>

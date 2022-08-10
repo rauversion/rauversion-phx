@@ -113,7 +113,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
                     </th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 bg-white dark:bg-black">
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-800 bg-white dark:bg-black">
                   <%= for post <- @posts do %>
                     <tr>
                       <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-200 dark:bg-gray-900 sm:pl-6">

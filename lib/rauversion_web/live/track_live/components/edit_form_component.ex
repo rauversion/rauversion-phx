@@ -24,7 +24,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
         phx-change="validate"
         phx-submit="save"
         multipart={true}
-        class="space-y-8 divide-y divide-gray-200"
+        class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800"
       >
 
         <div>
@@ -53,7 +53,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
             </nav>
 
             <div id="basic-info" class={"tab-pane #{ active_tab_for?(@current_tab, "basic-info-tab") }"}>
-              <div class="pt-8 space-y-8 divide-y divide-gray-200 sm:space-y-5">
+              <div class="pt-8 space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
                 <div>
                   <div>
                     <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">

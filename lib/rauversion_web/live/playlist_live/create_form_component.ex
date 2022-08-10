@@ -7,7 +7,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
   def render(assigns) do
     ~H"""
 
-    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+    <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
       <div class="mx-2 py-6">
         <div class="relative">
 
@@ -24,7 +24,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
 
             <div class="sm:col-span-6">
               <div class="flow-root mt-6">
-                <ul role="list" class="-my-5 divide-y divide-gray-200">
+                <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for item <- @playlists do %>
                     <li class="py-4">
                       <div class="flex items-center space-x-4">
@@ -125,7 +125,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
 
                 <div class="sm:col-span-6">
                   <div class="flow-root mt-6">
-                    <ul role="list" class="-my-5 divide-y divide-gray-200">
+                    <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                       <%= inputs_for f, :track_playlists, fn track -> %>
 
                         <%= hidden_input track, :track_id %>

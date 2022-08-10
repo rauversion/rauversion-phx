@@ -12,7 +12,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistShowItemsComponent do
             <div class="flex flex-col">
               <div class="space-y-2">
 
-                <ul role="list" class="-my-5 divide-y divide-gray-200">
+                <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for track_playlists <- @playlist.track_playlists do %>
                     <li class="py-4">
                       <div class="flex items-center space-x-4">

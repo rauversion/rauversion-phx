@@ -92,7 +92,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
               </div>
             </div>
             <div class="flex flex-1 flex-col justify-between dark:bg-black dark:text-white">
-              <div class="divide-y divide-gray-200 px-4 sm:px-6">
+              <div class="divide-y divide-gray-200 dark:divide-gray-800 px-4 sm:px-6">
 
                 <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5">
                   <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">

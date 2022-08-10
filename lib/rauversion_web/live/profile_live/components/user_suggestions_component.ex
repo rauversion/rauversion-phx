@@ -43,7 +43,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
               Who to follow
             </h2>
             <div class="mt-6 flow-root">
-              <ul role="list" class="-my-4 divide-y divide-gray-200 dark:divide-gray-800">
+              <ul role="list" class="-my-4 divide-y divide-gray-200 dark:divide-gray-800 dark:divide-gray-800">
 
                 <%= for item <- collection do %>
                   <li class="flex items-center py-4 space-x-3">

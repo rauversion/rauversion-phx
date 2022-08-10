@@ -33,7 +33,7 @@ defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
       id="update_email"
       phx-target={@target}
       phx-submit="save"
-      class="space-y-8 divide-y divide-gray-200"
+      class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800"
     >
     <%= if @changeset.action do %>
       <div class="alert alert-danger">

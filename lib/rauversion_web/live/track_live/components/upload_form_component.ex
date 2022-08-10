@@ -24,7 +24,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
         phx-change="validate"
         phx-submit="save"
         multipart={true}
-        class="space-y-8 divide-y divide-gray-200"
+        class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800"
       >
 
         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5 flex justify-center">

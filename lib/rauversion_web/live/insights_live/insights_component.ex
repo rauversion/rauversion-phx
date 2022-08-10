@@ -148,7 +148,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
             </div>
 
             <div class="flow-root mt-6">
-              <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-700">
+              <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                 <%= for item <- CountByDateQuery.top_countries(@profile.id) do %>
                   <li class="py-4">
                     <div class="flex items-center space-x-4">

@@ -83,7 +83,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
     ~H"""
     <section aria-labelledby="activity-title" class="mt-8 xl:mt-10">
       <div>
-        <div class="divide-y divide-gray-200">
+        <div class="divide-y divide-gray-200 dark:divide-gray-800">
           <div class="pb-4">
             <h2 id="activity-title" class="text-lg font-medium text-gray-900 dark:text-gray-100">Activity</h2>
           </div>
@@ -170,7 +170,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                         phx-change="validate"
                         phx-submit="save"
                         phx-target={@myself}
-                        class="space-y-8 divide-y divide-gray-200"
+                        class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800"
                       >
                         <div>
                           <label for="comment" class="sr-only">Comment</label>

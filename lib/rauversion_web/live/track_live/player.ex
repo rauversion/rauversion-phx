@@ -338,7 +338,7 @@ defmodule RauversionWeb.TrackLive.Player do
 
 
                     <div class="flow-root mt-6">
-                      <ul role="list" class="-my-5 divide-y divide-gray-200 h-full">
+                      <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800 h-full">
 
                         <%= for {item, counter} <- Enum.with_index(@tracks) do %>
                          <% #= for item <- @tracks  do %>

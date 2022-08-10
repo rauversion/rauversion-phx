@@ -24,10 +24,10 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
         phx-change="validate"
         phx-submit="save"
         multipart={true}
-        class="space-y-8 divide-y divide-gray-200"
+        class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800"
       >
 
-        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+        <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
           <div>
             <div>
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
@@ -114,7 +114,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
             </div>
           </div>
 
-          <div class="hidden divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+          <div class="hidden divide-y divide-gray-200 dark:divide-gray-800 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
             <div>
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                 Notifications

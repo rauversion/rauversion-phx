@@ -20,7 +20,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
 
   def render(%{track: track} = assigns) do
     ~H"""
-      <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+      <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
         <div class="mx-2 py-6">
           <div class="relative">
 

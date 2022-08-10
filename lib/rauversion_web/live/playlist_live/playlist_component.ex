@@ -84,7 +84,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     to: Routes.playlist_show_path(@socket, :show, @playlist)
                   %>
                 </h3>
-                <ul role="list" class="-my-5 divide-y divide-gray-200">
+                <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for track_playlists <- @playlist.track_playlists do %>
                     <li class="py-4">
                       <div class="flex items-center space-x-4">

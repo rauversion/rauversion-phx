@@ -31,7 +31,7 @@ defmodule RauversionWeb.PlaylistLive.AddToPlaylistComponent do
 
   def render(assigns) do
     ~H"""
-    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+    <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
 
       <%= if @action == "add" do %>
         <.modal close_handler={@myself}>
