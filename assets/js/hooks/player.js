@@ -21,32 +21,34 @@ Player = {
 
     this.playBtn = this.el.querySelector('[data-player-target="play"]')
 
-    this.playBtnListener = this.playBtn.addEventListener("click", (e)=>{
+    this.playBtnListener = (e)=>{
       this._wave.playPause()
-    })
+    }
+    
 
     this.nextBtn = this.el.querySelector('[data-player-target="next"]')
     this.rewBtn = this.el.querySelector('[data-player-target="rew"]')
 
-    this.nextBtnClickListener = this.nextBtn.addEventListener("click", (e)=>{
+    this.nextBtnClickListener = (e)=>{
       this.nextSong()
-    })
-
-    this.prevBtnClickListener = this.rewBtn.addEventListener("click", (e)=>{
+    }
+    
+    this.prevBtnClickListener = (e)=>{
       this.prevSong()
-    })
+    }
 
-    this.rangeChangeListener = this.range.addEventListener("change", (e)=>{
+    this.rangeChangeListener = (e)=>{
       window.store.setState({volume: e.target.value})
       this._wave.setVolume(e.target.value)
-    })
+    }
+    
 
-    this.addToNextListener = window.addEventListener(`phx:add-to-next`, (e) => {
+    this.addToNextListener = (e) => {
       console.log("ADD TO NEXT ITEM", e.detail)
       this.pushEvent("add-song", {id: e.detail.value.id } )
-    })
-
-    this.playSongListener = window.addEventListener(`phx:play-song`, (e) => {
+    }
+    
+    this.playSongListener = (e) => {
       console.log("PLAY SONG", e.detail)
       // this.el.dataset.playerPeaks = e.detail.peaks
       // this.el.dataset.playerUrl = e.detail.url
@@ -55,7 +57,15 @@ Player = {
         this.initWave();
         this.playSong()
       }, 400)
-    })
+    }
+
+    this.playBtn.addEventListener("click", this.playBtnListener)
+    this.nextBtn.addEventListener("click", this.nextBtnClickListener)
+    this.rewBtn.addEventListener("click", this.prevBtnClickListener)
+    this.range.addEventListener("change", this.rangeChangeListener)
+    window.addEventListener(`phx:add-to-next`, this.addToNextListener)
+    window.addEventListener(`phx:play-song`, this.playSongListener)
+    
     this._wave = null
     this.initWave()
   },
@@ -118,7 +128,7 @@ Player = {
     })
 
     this._wave.on('ready', ()=> {
-      console.log("READY")
+      console.log("PLAYER READY")
       // sends the progress position to track_component
       this.waveClickListener = this._wave.drawer.wrapper.addEventListener('click', (e)=> {
 

@@ -21,63 +21,57 @@ Player = {
 
     this.drawerListener = null
 
-    this.playBtnListener = this.playBtn.addEventListener("click", (e)=>{
+    this.playBtnListener = (e)=>{
       if(!this.playing){
         this.pushEventTo("#main-player", "play-song", {id: this.el.dataset.audioId } )
       } else {
         this.dispatchPause()
       }
-    })
+    }
+    
+    this.playBtn.addEventListener("click", this.playBtnListener)
 
-    this.addFromPlaylistListener = window.addEventListener(`phx:add-from-playlist`, (e) => {
+    this.addFromPlaylistListener = (e) => {
       console.log("ADD FROM PLAYLIST", e.detail)
       this.pushEventTo("#main-player", "play-song", {id: e.detail.track_id } )
-    })
+    }
 
-    this.audioProcessListeners = 
-      document.addEventListener(`audio-process-${this.el.dataset.audioId}`, (e) => {
-        //console.log("AUDIO PROCESS RECEIVED", e.detail)
-        // console.log("AUDIO PROCESS RECEIVED", e.detail)
+    this.audioProcessListeners = (e) => {
+      //console.log("AUDIO PROCESS RECEIVED", e.detail)
+      // console.log("AUDIO PROCESS RECEIVED", e.detail)
       // this._wave.drawer.progressWave.style.width = `${e.detail}px`
       // this._wave.drawer.progress(e.detail)
       // this.drawer.progress(this.backend.getPlayedPercents());
       this._wave.drawer.progress(e.detail.percent)
-      })
+    }
 
-    this.audioProcessPlayListeners = 
-      document.addEventListener(`audio-process-${this.el.dataset.audioId}-play`, (e) => {
-        console.log("RECEIVED AUDIO PROCESS PLAY", e.detail)
-        this.playiconTarget.style.display = 'block'
-        this.pauseiconTarget.style.display = 'none'
-        this.playing = true
-        this._wave.drawer.progress(e.detail.percent)
-      })
+    this.audioProcessPlayListeners = (e) => {
+      console.log("RECEIVED AUDIO PROCESS PLAY FOR", this.el.dataset.audioId ,  e.detail)
+      this.playiconTarget.style.display = 'block'
+      this.pauseiconTarget.style.display = 'none'
+      this.playing = true
+      this._wave.drawer.progress(e.detail.percent)
+    }
 
-    this.audioProcessPauseListeners = 
-      document.addEventListener(`audio-process-${this.el.dataset.audioId}-pause`, (e) => {
-        console.log("RECEIVED AUDIO PROCESS PAUSE", e.detail)
-        this.playiconTarget.style.display = 'none'
-        this.pauseiconTarget.style.display = 'block'
-        this.playing = false
-        this._wave.drawer.progress(e.detail.percent)
-      })
+    this.audioProcessPauseListeners = (e) => {
+      console.log("RECEIVED AUDIO PROCESS PAUSE", this.el.dataset.audioId, e.detail)
+      this.playiconTarget.style.display = 'none'
+      this.pauseiconTarget.style.display = 'block'
+      this.playing = false
+      this._wave.drawer.progress(e.detail.percent)
+    }
 
-    /*window.addEventListener(`phx:play-song`, (e) => {
-      console.log("PLAY SONG", e.detail)
-      // this.el.dataset.playerPeaks = e.detail.peaks
-      // this.el.dataset.playerUrl = e.detail.url
-      setTimeout(()=>{
-        this.destroyWave();
-        this.initWave();
-        // this.playSong()
-      }, 400)
-    })*/
+    window.addEventListener(`phx:add-from-playlist`, this.addFromPlaylistListener )
+    document.addEventListener(`audio-process-${this.el.dataset.audioId}`, this.audioProcessListeners)
+    document.addEventListener(`audio-process-${this.el.dataset.audioId}-play`, this.audioProcessPlayListeners)
+    document.addEventListener(`audio-process-${this.el.dataset.audioId}-pause`, this.audioProcessPauseListeners)
 
     this._wave = null
     this.initWave()
 
   },
   destroyed(){
+    console.log("REMOVING LISTENERS FOR", this.el.dataset.audioId)
     this.playBtn.removeEventListener("click", this.playBtnListener)
     this._wave && this._wave.drawer.wrapper.removeEventListener('click', this.drawerListener )
     window.removeEventListener(`phx:add-from-playlist`, this.addFromPlaylistListener)
@@ -115,7 +109,7 @@ Player = {
     this._wave.load(this.url, data)
     
     this._wave.on('ready', ()=> {
-      console.log("READY")
+      console.log("TRACK HOOK READY")
       // sends the progress position to track_component
       this.drawerListener = this._wave.drawer.wrapper.addEventListener('click', (e)=> {
 
