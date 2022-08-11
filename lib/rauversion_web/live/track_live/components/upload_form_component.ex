@@ -31,10 +31,10 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
           <div class="flex-col">
             <div class="text-center">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                Drag and drop your tracks & albums here
+              <%= gettext "Drag and drop your tracks & albums here" %>
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Provide FLAC, WAV, ALAC, or AIFF for highest audio quality.
+              <%= gettext "Provide FLAC, WAV, ALAC, or AIFF for highest audio quality." %>
               </p>
             </div>
 
@@ -51,14 +51,14 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                       <% #= @track.audio&.filename if @track.audio.persisted? %>
                       <div class="flex text-sm text-gray-600 text-gray-300 py-3">
                         <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
-                          <span>Upload a Audio file</span>
+                          <span><%= gettext "Upload a Audio file" %></span>
                           <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                           <%= live_file_input @uploads.audio,
                             # id: "track_cover",
                             class: "hidden"
                           %>
                         </label>
-                        <p class="pl-1">or drag and drop</p>
+                        <p class="pl-1"><%= gettext "or drag and drop" %></p>
                       </div>
 
                       <div>
@@ -77,7 +77,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                       </div>
 
                       <p class="text-xs text-gray-500">
-                        Audio, up to 200MB
+                      <%= gettext "Audio, up to 200MB" %>
                       </p>
                     </div>
                   </div>
@@ -100,7 +100,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                   <%= live_redirect to: Routes.profile_index_path(@socket, :index, @current_user.username), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
                     Cancel
                   <%end %>
-                  <%= submit "Continue", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
+                  <%= submit gettext("Continue"), phx_disable_with: gettext("Saving..."), class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
                 </div>
               </div>
             <% end %>

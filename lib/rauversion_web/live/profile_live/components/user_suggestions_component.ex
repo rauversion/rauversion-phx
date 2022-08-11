@@ -40,7 +40,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
         <div class="bg-white border-t dark:bg-gray-900">
           <div class="p-6">
             <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900 dark:text-gray-100">
-              Who to follow
+            <%= gettext "Who to follow" %>
             </h2>
             <div class="mt-6 flow-root">
               <ul role="list" class="-my-4 divide-y divide-gray-200 dark:divide-gray-800 dark:divide-gray-800">
@@ -68,7 +68,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>
                         <span>
-                          Follow
+                        <%= gettext "Follow" %>
                         </span>
                       <% end %>
                     </div>
@@ -79,7 +79,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
             </div>
             <div class="mt-6">
               <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50  dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
-                View all
+              <%= gettext "View all" %>
               </a>
             </div>
           </div>

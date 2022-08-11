@@ -27,7 +27,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
 
           <div class="sm:col-span-2">
             <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Cover photo
+            <%= gettext "Cover photo" %>
             </label>
             <div
             phx-drop-target={@uploads.cover.ref}
@@ -38,7 +38,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                 </svg>
                 <div class="flex text-sm text-gray-600">
                   <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
-                    <span>Upload Cover</span>
+                    <span><%= gettext "Upload Cover" %></span>
                     <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                     <%= live_file_input @uploads.cover,
                       # id: "track_cover",
@@ -64,7 +64,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                 </div>
 
                 <p class="text-xs text-gray-500">
-                  PNG, JPG, GIF up to 10MB
+                <%= gettext "PNG, JPG, GIF up to 10MB" %>
                 </p>
               </div>
             </div>
@@ -118,7 +118,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                 </div>
                 <div>
                   <a href="#" phx-click="remove-track" target={@ref} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 dark:border-gray-700 dark:border-gray-700 text-sm leading-5 font-medium rounded-full text-gray-700 dark:text-gray-300 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900">
-                    remove
+                  <%= gettext "remove" %>
                   </a>
                 </div>
               </div>
@@ -223,7 +223,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
           class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
 
           <button type="submit" class="bg-white py-2 px-4 border border-gray-300 dark:border-gray-700 dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
-            cancel
+          <%= gettext "Cancel" %>
           </button>
         </div>
       </div>

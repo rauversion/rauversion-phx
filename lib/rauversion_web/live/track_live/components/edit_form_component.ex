@@ -29,16 +29,16 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
         <div>
           <div class="sm:hidden">
-            <label for="tabs" class="sr-only">Select a tab</label>
+            <label for="tabs" class="sr-only"><%= gettext "Select a tab" %></label>
             <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
             <select id="tabs" name="tabs" class="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
-              <option>Basic Info</option>
+              <option><%= gettext "Basic Info" %></option>
 
-              <option>Metadata</option>
+              <option><%= gettext "Metadata" %></option>
 
-              <option selected>Permissions</option>
+              <option selected><%= gettext "Permissions" %></option>
 
-              <option>Share</option>
+              <option><%= gettext "Share" %></option>
             </select>
           </div>
 
@@ -46,10 +46,10 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
             <% #= @current_tab %>
             <nav class="flex space-x-4" aria-label="Tabs" data-controller-dis="tabs">
               <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700 dark:text-gray-300" -->
-              <a href="#" phx-click="basic-info-tab" class={"#{active_tab_link?(@current_tab, "basic-info-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Basic Info </a>
-              <a href="#" phx-click="metadata-tab" class={"#{active_tab_link?(@current_tab, "metadata-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Metadata </a>
-              <a href="#" phx-click="permissions-tab" class={"#{active_tab_link?(@current_tab, "permissions-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"} aria-current="page"> Permissions </a>
-              <a href="#" phx-click="share-tab" class={"#{active_tab_link?(@current_tab, "share-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Share </a>
+              <a href="#" phx-click="basic-info-tab" class={"#{active_tab_link?(@current_tab, "basic-info-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> <%= gettext "Basic Info" %> </a>
+              <a href="#" phx-click="metadata-tab" class={"#{active_tab_link?(@current_tab, "metadata-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> <%= gettext "Metadata" %> </a>
+              <a href="#" phx-click="permissions-tab" class={"#{active_tab_link?(@current_tab, "permissions-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"} aria-current="page"> <%= gettext "Permissions" %> </a>
+              <a href="#" phx-click="share-tab" class={"#{active_tab_link?(@current_tab, "share-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> <%= gettext "Share" %> </a>
             </nav>
 
             <div id="basic-info" class={"tab-pane #{ active_tab_for?(@current_tab, "basic-info-tab") }"}>
@@ -57,11 +57,10 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                 <div>
                   <div>
                     <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                      Profile <%= @track.id %>
-                      <%= @track.title %>
+                      <%= gettext "Profile %{title}", track_id: @track.title %>
                     </h3>
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                      This information will be displayed publicly so be careful what you share.
+                    <%= gettext "This information will be displayed publicly so be careful what you share." %>
                     </p>
                   </div>
 
@@ -88,7 +87,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                       <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
-                        Cover photo
+                      <%= gettext "Cover photo" %>
                       </label>
 
                       <div class="mt-1 sm:mt-0 sm:col-span-2">
@@ -101,14 +100,14 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
                             <div class="flex text-sm text-gray-600 py-3">
                               <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
-                                <span>Upload a track Cover</span>
+                                <span><%= gettext "Upload a track Cover" %></span>
                                 <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                                 <%= live_file_input @uploads.cover,
                                   # id: "track_cover",
                                   class: "hidden"
                                 %>
                               </label>
-                              <p class="pl-1">or drag and drop</p>
+                              <p class="pl-1"><%= gettext "or drag and drop" %></p>
                             </div>
 
                             <div>
@@ -127,7 +126,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                             </div>
 
                             <p class="text-xs text-gray-500">
-                              PNG, JPG, GIF up to 10MB
+                            <%= gettext "PNG, JPG, GIF up to 10MB" %>
                             </p>
                           </div>
                         </div>
@@ -167,10 +166,10 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                 <div class="pt-8">
                   <div>
                     <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                      Metadata information
+                    <%= gettext "Metadata information" %>
                     </h3>
                     <p class="mt-1 text-sm text-gray-500">
-                     Track information
+                    <%= gettext "Track information" %>
                     </p>
                   </div>
                   <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -182,12 +181,12 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                   <div class="my-4 py-4 border-t flex space-x-4 items-center">
                     <div class="space-x-2 flex items-center">
                       <%= radio_button i, :copyright, "all-rights" %>
-                      <%= label i, "All rights reserved" %>
+                      <%= label i, gettext("All rights reserved") %>
                     </div>
 
                     <div class="space-x-2 flex items-center">
                       <%= radio_button i, :copyright, "common" %>
-                      <%= label i, "Creative commons" %>
+                      <%= label i, gettext("Creative commons") %>
 
                       <div class="text-sm text-gray-700 dark:text-gray-300 flex space-x-2 items-center">
                         <%= if i.params["copyright"] == "common" || (!i.params["copyright"] && i.data.copyright == "common")  do %>
@@ -238,7 +237,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                             <% end %>
                           </div>
 
-                          some rights reserved
+                          <%= gettext "some rights reserved" %>
                         <% end %>
                       </div>
                     </div>
@@ -262,7 +261,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
             <% end %>
 
             <div id="share" class={"tab-pane #{ active_tab_for?(@current_tab, "share-tab")}"}>
-              share controls
+            <%= gettext "share controls" %>
             </div>
 
           </div>
@@ -271,9 +270,9 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
         <div class="pt-5">
           <div class="flex justify-center">
             <%= live_redirect to: "/", class: "bg-white dark:bg-black py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
-              Cancel
+            <%= gettext "Cancel" %>
             <%end %>
-            <%= submit "Save", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
+            <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
           </div>
         </div>
 

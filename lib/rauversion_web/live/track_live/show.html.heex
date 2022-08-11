@@ -35,7 +35,7 @@
       <svg class="-ml-2 h-5 w-5 text-gray-400 dark:text-gray-600" x-description="Heroicon name: solid/chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
       </svg>
-      <span>Tracks</span>
+      <span><%= gettext "Tracks" %></span>
     <% end %>
   </nav>
 
@@ -75,7 +75,7 @@
                     data-action='audio#pause' 
                     data-audio-target="pause"
                     class="hidden -ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                    <span class="sr-only">Next</span>
+                    <span class="sr-only"><%= gettext "Next" %></span>
                   
                     <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path></svg>
                   </button>
@@ -102,7 +102,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 <p>
-                  Hold on, this track is in <%= if @track.state do @track.state else "pending" end %> state
+                  <%= gettext "Hold on, this track is in %{state} state", state: @track.state || "pending" %>
                 </p> 
               </span>
             </div>
@@ -125,9 +125,10 @@
               <div class="p-4 bg-white bg-opacity-60 text-sm">
                 <a href="#" class="font-medium text-gray-900">
                   <span class="absolute inset-0" aria-hidden="true"></span>
-                  Upload image
+                  <%= gettext "Upload image" %>
                 </a>
-                <p aria-hidden="true" class="mt-0.5 text-gray-700 sm:mt-1">Listen now</p>
+                <p aria-hidden="true" class="mt-0.5 text-gray-700 sm:mt-1">
+                <%= gettext "Listen now" %></p>
               </div>
             </div>
           </div>
@@ -177,7 +178,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
-                  <span>Edit</span>
+                  <span><%= gettext "Edit" %></span>
                 <% end %>
               </div>
 
@@ -202,11 +203,11 @@
           <nav class="-mb-px flex space-x-8" aria-label="Tabs">
             
               <a href="#" class="border-pink-500 text-gray-900 dark:text-gray-100 dark:hover:text-gray-300 dark:hover:border-gray-700 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" x-state:on="Current" x-state:off="Default" aria-current="page" x-state-description="Current: &quot;border-pink-500 text-gray-900&quot;, Default: &quot;border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300&quot;">
-                Comments
+                <%= gettext "Comments" %>
               </a>
             
               <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300 dark:hover:border-gray-700 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" x-state-description="undefined: &quot;border-pink-500 text-gray-900&quot;, undefined: &quot;border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300&quot;">
-                Insights
+                <%= gettext "Insights" %>
               </a>
             
           </nav>
@@ -218,7 +219,7 @@
       <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
         <div class="sm:col-span-2">
           <dt class="text-sm font-medium text-gray-500">
-            About
+            <%= gettext "About" %>
           </dt>
           <dd class="mt-1 max-w-prose text-lg text-gray-900 dark:text-gray-100 space-y-5 prose lg:prose-xl">
             <%= SimplexFormat.text_to_html(@track.description, auto_link: true) %>

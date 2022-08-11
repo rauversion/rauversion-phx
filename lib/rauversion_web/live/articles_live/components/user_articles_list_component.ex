@@ -68,17 +68,17 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
             <nav class="-mb-px flex space-x-8" aria-label="Tabs">
               <a href="#" phx-click={"all"} phx-target={@myself}
               class={tab_class(@tab == "all")}>
-                My Articles
+                <%= gettext "My Articles" %>
               </a>
 
               <a href="#" phx-click={"draft"} phx-target={@myself}
               class={tab_class(@tab == "draft")}>
-                Drafts
+                <%= gettext "Drafts" %>
               </a>
 
               <a href="#" phx-click={"published"} phx-target={@myself}
               class={tab_class(@tab == "published")}>
-                Published
+                <%= gettext "Published" %>
               </a>
 
             </nav>
@@ -90,7 +90,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-xl font-semibold text-gray-900 dark:text-gray-100"><%= String.capitalize(@tab) %> Articles</h1>
-          <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">Your articles.</p>
+          <p class="mt-2 text-sm text-gray-700 dark:text-gray-300"><%= gettext "Your articles." %></p>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <%= live_redirect "New article", to: Routes.articles_new_path(@socket, :new),
@@ -109,7 +109,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
                     <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-200 dark:bg-gray-900">Author</th>
                     <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-200 dark:bg-gray-900">Status</th>
                     <th scope="col" class="relative py-3 pl-3 pr-4 sm:pr-6 dark:text-gray-200 dark:bg-gray-900 ">
-                      <span class="sr-only">Edit</span>
+                      <span class="sr-only"><%= gettext "Edit" %></span>
                     </th>
                   </tr>
                 </thead>
@@ -128,7 +128,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
                       </td>
                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 dark:text-gray-200 dark:bg-gray-900">
                         <%= live_redirect to: Routes.articles_new_path(@socket, :edit, post.id), class: "text-brand-600 hover:text-brand-900" do %>
-                          Edit
+                          <%= gettext "Edit" %>
                         <% end %>
                       </td>
                     </tr>
