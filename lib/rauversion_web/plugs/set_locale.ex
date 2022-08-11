@@ -10,13 +10,6 @@ defmodule RauversionWeb.Plugs.SetLocale do
   def call(%Plug.Conn{params: %{"locale" => locale}} = conn, _options)
       when locale in @supported_locales do
     RauversionWeb.Gettext |> Gettext.put_locale(locale)
-
-    conn
-  end
-
-  def call(%Plug.Conn{params: %{"locale" => locale}} = conn, _options)
-      when locale in @supported_locales do
-    RauversionWeb.Gettext |> Gettext.put_locale(locale)
     conn |> put_resp_cookie("locale", locale, max_age: 365 * 24 * 60 * 60)
   end
 

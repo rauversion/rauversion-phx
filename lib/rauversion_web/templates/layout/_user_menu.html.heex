@@ -4,7 +4,7 @@
         <div class="flex items-center px-2 lg:px-0">
           <div class="flex-shrink-0 flex items-center">
             <%= live_redirect to: "/", class: "text-white text-2xl font-extrabold" do %>
-              RAUVERSION <%= Gettext.get_locale %>
+              RAUVERSION <%= RauversionWeb.Gettext |> Gettext.get_locale %>
               <% #= image_tag url_for(current_user.avatar), class: "h-8 w-auto" if current_user&.avatar&.persisted? %>
             <% end %>
           </div>
@@ -101,8 +101,11 @@
                     <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                   
                   
-                    <%= new_locale @conn, :en, "English", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                    <%= new_locale @conn, :ru, "Russian", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    <div class="flex items-center space-x-2">
+                      <%= new_locale @conn, :en, "EN", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                      <%= new_locale @conn, :es, "ES", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                      <%= new_locale @conn, :"pt-br", "PT", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    </div>
                   </div>
                 </div>
             </div>
