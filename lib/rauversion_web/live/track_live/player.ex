@@ -225,7 +225,7 @@ defmodule RauversionWeb.TrackLive.Player do
 
                 <div class="flex items-center mx-2">
                   <div class="relative">
-                    <div class={" #{if @volume do "" else "hidden" end} h-[115px] absolute top-[-8em] left-[-25px] bg-white border shadow-md z-50"}>
+                    <div class={" #{if @volume do "" else "hidden" end} h-[115px] absolute top-[-8em] left-[-25px] bg-white dark:bg-gray-900 border dark:border-0 shadow-md z-50"}>
                       <input
                         type="range"
                         min="0" max="1" step="0.1"

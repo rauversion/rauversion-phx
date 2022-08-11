@@ -59,13 +59,42 @@ Player = {
       }, 400)
     }
 
+    this.waveClickListener = (e)=> {
+
+      setTimeout(()=>{
+
+        const trackId = this.el.dataset.trackId
+        const ev = new CustomEvent(`audio-process-${trackId}`, {
+          detail: {
+           postition: this._wave.drawer.lastPos,
+           percent: this._wave.backend.getPlayedPercents()
+         }
+        });
+        document.dispatchEvent(ev)
+
+      }, 20)
+
+    }
+
+    this.mouseUpHandler = (e) => {
+      if(e.detail.trackId == this.el.dataset.trackId){
+        this._wave.drawer.progress(e.detail.percent)
+      }
+    }
+
+    this.audioPauseHandler = (e) => {
+      if(e.detail.trackId == this.el.dataset.trackId){
+        this._wave.pause()
+      }
+    }
+
     this.playBtn.addEventListener("click", this.playBtnListener)
     this.nextBtn.addEventListener("click", this.nextBtnClickListener)
     this.rewBtn.addEventListener("click", this.prevBtnClickListener)
     this.range.addEventListener("change", this.rangeChangeListener)
     window.addEventListener(`phx:add-to-next`, this.addToNextListener)
     window.addEventListener(`phx:play-song`, this.playSongListener)
-    
+
     this._wave = null
     this.initWave()
   },
@@ -75,6 +104,12 @@ Player = {
     this.rewBtn && this.rewBtn.addEventListener("click", this.prevBtnClickListener)
     this.range && this.range.removeEventListener("change", this.rangeChangeListener )
     this?._wave?.drawer?.wrapper?.removeEventListener("click", this.waveClickListener)
+
+    // receives audio-process progress from track hook
+    document.removeEventListener('audio-process-mouseup', this.mouseUpHandler)
+    // receives pause
+    document.removeEventListener('audio-pause', this.audioPauseHandler)
+
     window.removeEventListener(`phx:add-to-next`, this.addToNextListener)
     window.removeEventListener('phx:add-to-next', this.addToNextListener)
   },
@@ -130,37 +165,15 @@ Player = {
     this._wave.on('ready', ()=> {
       console.log("PLAYER READY")
       // sends the progress position to track_component
-      this.waveClickListener = this._wave.drawer.wrapper.addEventListener('click', (e)=> {
 
-        setTimeout(()=>{
-
-          const trackId = this.el.dataset.trackId
-          const ev = new CustomEvent(`audio-process-${trackId}`, {
-            detail: {
-             postition: this._wave.drawer.lastPos,
-             percent: this._wave.backend.getPlayedPercents()
-           }
-          });
-          document.dispatchEvent(ev)
-
-        }, 20)
-
-      });
+      this._wave.drawer.wrapper.addEventListener('click', this.waveClickListener)
     })
 
     // receives audio-process progress from track hook
-    document.addEventListener('audio-process-mouseup', (e) => {
-      if(e.detail.trackId == this.el.dataset.trackId){
-        this._wave.drawer.progress(e.detail.percent)
-      }
-    })
+    document.addEventListener('audio-process-mouseup', this.mouseUpHandler)
 
     // receives pause
-    document.addEventListener('audio-pause', (e) => {
-      if(e.detail.trackId == this.el.dataset.trackId){
-        this._wave.pause()
-      }
-    })
+    document.addEventListener('audio-pause', this.audioPauseHandler)
 
     this._wave.on('finish', (e) => {
       console.log("FINISH PROCESS")
