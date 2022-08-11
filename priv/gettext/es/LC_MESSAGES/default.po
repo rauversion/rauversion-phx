@@ -927,7 +927,7 @@ msgstr ""
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:14
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:120
 msgid "Tracks"
-msgstr "Pistas"
+msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/profile_live/components/trending_component.ex:31
