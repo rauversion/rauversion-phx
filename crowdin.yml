@@ -1,5 +1,7 @@
 files:
 
-  - source: "/priv/gettext/en/**/*.po",
-    translation" : "/priv/gettext/%two_letters_code%/LC_MESSAGES/%original_file_name%",
+  - source: "/priv/gettext/default.pot",
+    translation" : "/priv/gettext/%two_letters_code%/LC_MESSAGES/default.po",
 
+  - source: "/priv/gettext/errors.pot",
+    translation" : "/priv/gettext/%two_letters_code%/LC_MESSAGES/errors.po",
