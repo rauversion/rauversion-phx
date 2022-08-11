@@ -34,7 +34,7 @@
       <h1>
         <%= live_redirect to: Routes.profile_index_path(@socket, :index, @post.user.username) do %>
           <span class="block text-base text-center text-brand-600 font-semibold tracking-wide uppercase">
-          By <%= @post.user.username %>
+          <%= gettext "By %{name}!", name: @post.user.username %>
           </span>
         <% end %>
         <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">

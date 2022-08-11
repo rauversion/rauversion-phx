@@ -192,7 +192,7 @@ defmodule RauversionWeb.TrackLive.Player do
               data-action='player#pause'
               data-player-target="pause"
               class="hidden -ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-              <span class="sr-only">Next</span>
+              <span class="sr-only"><%= gettext "Next" %></span>
               <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path></svg>
             </button>
 
@@ -200,7 +200,7 @@ defmodule RauversionWeb.TrackLive.Player do
               data-action='player#play'
               data-player-target="play"
               class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400">
-              <span class="sr-only">Play</span>
+              <span class="sr-only"><%= gettext "Play" %></span>
               <svg data-player-target="playicon" style="display:none" viewBox="0 0 15 15" class="h-6 w-6"  fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 3v9m4-9v9" stroke="currentColor"></path></svg>
               <svg data-player-target="pauseicon"  viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
             </button>
@@ -278,7 +278,7 @@ defmodule RauversionWeb.TrackLive.Player do
                       tabindex="0"
                       title="Unlike"
                       aria-label="Unlike">
-                      Liked
+                      <%= gettext "Liked" %>
                     </button>
 
                     <button
@@ -287,7 +287,7 @@ defmodule RauversionWeb.TrackLive.Player do
                       tabindex="0"
                       title="Follow"
                       aria-label="Follow">
-                      Follow
+                      <%= gettext "Follow" %>
                     </button>
 
                     <button phx-click="display-slideover">
@@ -315,14 +315,14 @@ defmodule RauversionWeb.TrackLive.Player do
                   <button type="button"
                       phx-click="clear-all"
                       class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                      clear all
+                      <%= gettext "clear all" %>
                     </button>
 
                   <div class="ml-3 flex h-7 items-center">
                     <button type="button"
                       phx-click="display-slideover"
                       class="rounded-md bg-white dark:bg-black text-gray-400 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                      <span class="sr-only">Close panel</span>
+                      <span class="sr-only"><%= gettext "Close panel" %></span>
                       <!-- Heroicon name: outline/x -->
                       <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -359,7 +359,7 @@ defmodule RauversionWeb.TrackLive.Player do
                                   phx-click="remove-from-next-up"
                                   phx-value-index={counter}
                                   class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 dark:border-gray-700 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
-                                  remove from next up
+                                  <%= gettext "remove from next up" %>
                                 </a>
                               </div>
                             </div>

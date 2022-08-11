@@ -7,26 +7,26 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
       %{
         to: "/users/settings",
         namespace: :profile,
-        title: "Account",
-        sub: "Basic Account Information."
+        title: gettext("Account"),
+        sub: gettext("Basic Account Information.")
       },
       %{
         to: "/users/settings/email",
         namespace: :email,
-        title: "Change Email",
-        sub: "Change Email information."
+        title: gettext("Change Email"),
+        sub: gettext("Change Email information.")
       },
       %{
         to: "/users/settings/security",
         namespace: :security,
-        title: "Security",
-        sub: "Change your credentials"
+        title: gettext("Security"),
+        sub: gettext("Change your credentials")
       },
       %{
         to: "/users/settings/notifications",
         namespace: :notifications,
-        title: "Notifications",
-        sub: "Change your notification preferences."
+        title: gettext("Notifications"),
+        sub: gettext("Change your notification preferences.")
       }
     ]
   end

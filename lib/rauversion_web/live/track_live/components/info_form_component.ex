@@ -35,7 +35,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                 <%= @track.title %>
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                This information will be displayed publicly so be careful what you share.
+              <%= gettext "This information will be displayed publicly so be careful what you share." %>
               </p>
             </div>
 
@@ -57,14 +57,16 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                   <%= textarea f, :description, class: "max-w-lg shadow-sm block w-full focus:ring-brand-500 focus:border-brand-500 sm:text-sm border border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
                   <%= error_tag f, :description %>
-                  <p class="mt-2 text-sm text-gray-500">Write the track's description.</p>
+                  <p class="mt-2 text-sm text-gray-500">
+                    <%= gettext "Write the track's description." %>
+                  </p>
                 </div>
 
               </div>
 
               <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
-                  Cover photo
+                <%= gettext "Cover photo" %>
                 </label>
 
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
@@ -78,14 +80,14 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
 
                       <div class="flex text-sm text-gray-600 py-3">
                         <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
-                          <span>Upload a track Cover</span>
+                          <span><%= gettext "Upload a track Cover" %></span>
                           <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                           <%= live_file_input @uploads.cover,
                             # id: "track_cover",
                             class: "hidden"
                           %>
                         </label>
-                        <p class="pl-1">or drag and drop</p>
+                        <p class="pl-1"><%= gettext "or drag and drop" %></p>
                       </div>
 
                       <div>
@@ -105,7 +107,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
 
 
                       <p class="text-xs text-gray-500">
-                        PNG, JPG, GIF up to 10MB
+                      <%= gettext "PNG, JPG, GIF up to 10MB" %>
                       </p>
                     </div>
                   </div>
@@ -117,10 +119,10 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
           <div class="hidden divide-y divide-gray-200 dark:divide-gray-800 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
             <div>
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                Notifications
+              <%= gettext "Notifications" %>
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                We'll always let you know about important changes, but you pick what else you want to hear about.
+              <%= gettext "We'll always let you know about important changes, but you pick what else you want to hear about." %>
               </p>
             </div>
             <div class="space-y-6 sm:space-y-5 divide-y divide-gray-200">
@@ -129,7 +131,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                   <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
                     <div>
                       <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700 dark:text-gray-300" id="label-email">
-                        By Email
+                      <%= gettext "By Email" %>
                       </div>
                     </div>
                     <div class="mt-4 sm:mt-0 sm:col-span-2">
@@ -139,8 +141,11 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                             <input id="comments" name="comments" type="checkbox" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded">
                           </div>
                           <div class="ml-3 text-sm">
-                            <label for="comments" class="font-medium text-gray-700 dark:text-gray-300">Comments</label>
-                            <p class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
+                            <label for="comments" class="font-medium text-gray-700 dark:text-gray-300">
+                            <%= gettext "Comments" %>
+                            </label>
+                            <p class="text-gray-500">
+                            <%= gettext "Get notified when someones posts a comment on a posting." %></p>
                           </div>
                         </div>
                         <div>
@@ -150,7 +155,8 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                             </div>
                             <div class="ml-3 text-sm">
                               <label for="candidates" class="font-medium text-gray-700 dark:text-gray-300">Candidates</label>
-                              <p class="text-gray-500">Get notified when a candidate applies for a job.</p>
+                              <p class="text-gray-500">
+                              <%= gettext "Get notified when a candidate applies for a job." %></p>
                             </div>
                           </div>
                         </div>
@@ -160,8 +166,12 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                               <input id="offers" name="offers" type="checkbox" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded">
                             </div>
                             <div class="ml-3 text-sm">
-                              <label for="offers" class="font-medium text-gray-700 dark:text-gray-300">Offers</label>
-                              <p class="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
+                              <label for="offers" class="font-medium text-gray-700 dark:text-gray-300">
+                                <%= gettext "Offers" %>
+                              </label>
+                              <p class="text-gray-500">
+                                <%= gettext "Get notified when a candidate accepts or rejects an offer." %>
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -175,29 +185,30 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                   <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
                     <div>
                       <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700 dark:text-gray-300" id="label-notifications">
-                        Push Notifications
+                      <%= gettext "Push Notifications" %>
                       </div>
                     </div>
                     <div class="sm:col-span-2">
                       <div class="max-w-lg">
-                        <p class="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p>
+                        <p class="text-sm text-gray-500">
+                        <%= gettext "These are delivered via SMS to your mobile phone." %></p>
                         <div class="mt-4 space-y-4">
                           <div class="flex items-center">
                             <input id="push-everything" name="push-notifications" type="radio" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300">
                             <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                              Everything
+                              <%= gettext "Everything" %>
                             </label>
                           </div>
                           <div class="flex items-center">
                             <input id="push-email" name="push-notifications" type="radio" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300">
                             <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                              Same as email
+                              <%= gettext "Same as email" %>
                             </label>
                           </div>
                           <div class="flex items-center">
                             <input id="push-nothing" name="push-notifications" type="radio" class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300">
                             <label for="push-nothing" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                              No push notifications
+                            <%= gettext "No push notifications" %>
                             </label>
                           </div>
                         </div>
@@ -213,9 +224,9 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
         <div class="pt-5">
           <div class="flex justify-center">
             <%= live_redirect to: "/", class: "bg-white py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
-              Cancel
+            <%= gettext "Cancel" %>
             <%end %>
-            <%= submit "Save", phx_disable_with: "Saving...", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
+            <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
           </div>
         </div>
 

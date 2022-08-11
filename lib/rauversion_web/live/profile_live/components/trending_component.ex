@@ -28,7 +28,7 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
       <div class="bg-white border-t dark:bg-black dark:border-gray-600">
         <div class="p-6">
           <h2 id="trending-heading" class="text-base font-medium text-gray-900 dark:text-gray-100">
-            Trending
+          <%= gettext "Trending" %>
           </h2>
           <div class="mt-6 flow-root">
             <ul role="list" class="-my-4 divide-y divide-gray-200 dark:divide-gray-800 ">
@@ -61,7 +61,7 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
           </div>
           <div class="mt-6">
             <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50  dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
-              View all
+            <%= gettext "View all" %>
             </a>
           </div>
         </div>

@@ -37,7 +37,7 @@ defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
     >
     <%= if @changeset.action do %>
       <div class="alert alert-danger">
-        <p>Oops, something went wrong! Please check the errors below.</p>
+        <p><%= gettext "Oops, something went wrong! Please check the errors below." %></p>
       </div>
     <% end %>
 
@@ -45,8 +45,8 @@ defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
 
     <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
       <div class="sm:col-span-6">
-        <h2 class="text-xl font-medium text-blue-gray-900">Notifications</h2>
-        <p class="mt-1 text-sm text-blue-gray-500">Notification settings.</p>
+        <h2 class="text-xl font-medium text-blue-gray-900"><%= gettext "Notifications" %></h2>
+        <p class="mt-1 text-sm text-blue-gray-500"><%= gettext "Notification settings." %></p>
       </div>
 
       <%= inputs_for f, :notification_settings, fn item -> %>
@@ -57,7 +57,7 @@ defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
     </div>
 
     <div class="pt-8 flex justify-end space-x-2">
-      <%= submit "Update Notifications", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= submit gettext("Update Notifications"), phx_disable_with: gettext("Saving..."), class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
     </div>
 
     </.form>

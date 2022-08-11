@@ -87,7 +87,7 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
           <% end %>
           <span class="flex space-x-1">
             <span><%= track.likes_count %></span>
-            <span class="hidden sm:block">Like</span>
+            <span class="hidden sm:block"><%= gettext "Like" %></span>
           </span>
         <% end %>
       </div>

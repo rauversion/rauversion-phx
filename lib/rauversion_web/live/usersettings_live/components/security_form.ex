@@ -17,7 +17,7 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
       >
       <%= if @changeset.action do %>
         <div class="alert alert-danger">
-          <p>Oops, something went wrong! Please check the errors below.</p>
+          <p><%= gettext "Oops, something went wrong! Please check the errors below." %></p>
         </div>
       <% end %>
 
@@ -25,18 +25,18 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
 
       <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
         <div class="sm:col-span-6">
-          <h2 class="text-xl font-medium text-blue-gray-900">Change Password</h2>
-          <p class="mt-1 text-sm text-blue-gray-500">This information will be displayed publicly so be careful what you share.</p>
+          <h2 class="text-xl font-medium text-blue-gray-900"><%= gettext "Change Password" %></h2>
+          <p class="mt-1 text-sm text-blue-gray-500"><%= gettext "This information will be displayed publicly so be careful what you share." %></p>
         </div>
 
         <div class="sm:col-span-3">
-          <%= label f, :password, "New password", class: "block text-sm font-medium text-blue-gray-900" %>
+          <%= label f, :password, gettext("New password"), class: "block text-sm font-medium text-blue-gray-900" %>
           <%= password_input f, :password, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 dark:text-blue-gray-100 dark:bg-gray-900 focus:border-blue-500" %>
           <%= error_tag f, :password %>
         </div>
 
         <div class="sm:col-span-3">
-          <%= label f, :password_confirmation, "Confirm new password", class: "block text-sm font-medium text-blue-gray-900" %>
+          <%= label f, :password_confirmation, gettext("Confirm new password"), class: "block text-sm font-medium text-blue-gray-900" %>
           <%= password_input f, :password_confirmation, required: true, class: "mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 dark:text-blue-gray-100 dark:bg-gray-900 focus:border-blue-500" %>
           <%= error_tag f, :password_confirmation %>
         </div>
@@ -54,7 +54,7 @@ defmodule RauversionWeb.UsersettingsLive.SecurityForm do
         <%= live_redirect to: @return_to, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
           Cancel
         <% end %>
-        <%= submit "Change password", phx_disable_with: "Saving...", class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+        <%= submit gettext("Change password"), phx_disable_with: gettext("Saving..."), class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
       </div>
 
     </.form>

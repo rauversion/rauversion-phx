@@ -85,7 +85,9 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
       <div>
         <div class="divide-y divide-gray-200 dark:divide-gray-800">
           <div class="pb-4">
-            <h2 id="activity-title" class="text-lg font-medium text-gray-900 dark:text-gray-100">Activity</h2>
+            <h2 id="activity-title" class="text-lg font-medium text-gray-900 dark:text-gray-100">
+              <%= gettext "Activity" %>
+            </h2>
           </div>
           <div class="pt-6">
             <!-- Activity feed-->
@@ -178,7 +180,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                         </div>
 
                         <div class="mt-6 flex items-center justify-end space-x-4 py-4">
-                          <%= submit "Comment", phx_disable_with: "Saving...", class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" %>
+                          <%= submit gettext("Comment"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" %>
                         </div>
 
                       </.form>

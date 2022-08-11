@@ -11,27 +11,33 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Last 30 days</h3>
           <dl class="hidden mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-              <dt class="text-sm font-medium text-gray-500 truncate">Total Listens</dt>
+              <dt class="text-sm font-medium text-gray-500 truncate">
+              <%= gettext "Total Listens" %>
+              </dt>
               <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">71,897</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-              <dt class="text-sm font-medium text-gray-500 truncate">Likes</dt>
+              <dt class="text-sm font-medium text-gray-500 truncate">
+              <%= gettext "Likes" %>
+              </dt>
               <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">58.16%</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-              <dt class="text-sm font-medium text-gray-500 truncate">Reposts</dt>
+              <dt class="text-sm font-medium text-gray-500 truncate">
+              <%= gettext "Reposts" %>
+              </dt>
               <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">24.57%</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-              <dt class="text-sm font-medium text-gray-500 truncate">Downloads</dt>
+              <dt class="text-sm font-medium text-gray-500 truncate"><%= gettext "Downloads" %></dt>
               <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">24.57%</dd>
             </div>
 
             <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-              <dt class="text-sm font-medium text-gray-500 truncate">Comments</dt>
+              <dt class="text-sm font-medium text-gray-500 truncate"><%= gettext "Comments" %></dt>
               <dd class="mt-1 text-3xl font-semibold text-gray-900 dark:text-gray-100">24.57%</dd>
             </div>
           </dl>
@@ -54,10 +60,10 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                Top tracks
+              <%= gettext "Top tracks" %>
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Last 12 months
+              <%= gettext "Last 12 months" %>
               </p>
             </div>
 
@@ -81,7 +87,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
                           </svg>
-                          <span><%= item.count %> plays</span>
+                          <span><%= gettext "plays %{count}", count: item.count %></span>
                         </div>
 
                       </div>
@@ -91,7 +97,9 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
               </ul>
             </div>
             <div class="mt-6 hidden">
-              <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> View all </a>
+              <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+              <%= gettext "View all" %>
+              </a>
             </div>
           </div>
 
@@ -100,10 +108,10 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                Top Listeners
+              <%= gettext "Top Listeners" %>
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Last 12 months
+              <%= gettext "Last 12 months" %>
               </p>
             </div>
 
@@ -122,7 +130,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
                           </svg>
-                          <span><%= item.count %> plays</span>
+                          <span><%= gettext "plays %{count}", count: item.count %></span>
                         </div>
 
                       </div>
@@ -132,7 +140,9 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
               </ul>
             </div>
             <div class="mt-6 hidden">
-              <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> View all </a>
+              <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                <%= gettext "View all" %>
+              </a>
             </div>
           </div>
 
@@ -140,10 +150,10 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           <div id="gep-chart-wrapper" class="p-4 col-span-2 shadow-lg rounded-lg overflow-hidden dark:bg-gray-900">
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                Top Locations
+                <%= gettext "Top Locations" %>
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Personal details and application.
+              <%= gettext "Personal details and application." %>
               </p>
             </div>
 
@@ -166,7 +176,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
                           </svg>
-                          <span><%= item.count %> plays</span>
+                          <span><%= gettext "plays %{count}", count: item.count %></span>
                         </div>
                       </div>
                     </div>
@@ -175,7 +185,9 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
               </ul>
             </div>
             <div class="mt-6 hidden">
-              <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> View all </a>
+              <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                <%= gettext "View all" %>
+              </a>
             </div>
           </div>
         </div>

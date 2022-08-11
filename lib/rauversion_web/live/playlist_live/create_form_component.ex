@@ -19,7 +19,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
           <section id="add-to-tab" class={"tab-pane py-4 #{if @tab === "add-to-tab" do "block" else "hidden" end }"}>
 
             <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
-              Add to playlist
+            <%= gettext "Add to playlist" %>
             </h2>
 
             <div class="sm:col-span-6">
@@ -44,7 +44,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                               phx-value-playlist={item.id}
                               phx-value-track-playlist={List.first(item.track_playlists).id}
                               class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                              Remove
+                              <%= gettext "Remove" %>
                             </a>
                           <% else %>
                             <a href="#"
@@ -52,7 +52,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                               phx-target={@ref}
                               phx-value-playlist={item.id}
                               class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                              Add
+                              <%= gettext "Add" %>
                             </a>
                           <% end %>
                         </div>
@@ -62,7 +62,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                 </ul>
               </div>
               <div class="mt-6">
-                <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> View all </a>
+                <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> <%= gettext "View all" %> </a>
               </div>
             </div>
 
@@ -80,7 +80,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
               phx-submit="save">
 
               <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
-                Create playlist
+              <%= gettext "Create playlist" %>
               </h2>
 
               <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -88,7 +88,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                 <div class="sm:col-span-6">
 
                   <label for="title" class="block text-sm font-medium text-gray-700">
-                    Playlist title
+                  <%= gettext "Playlist title" %>
                   </label>
                   <div class="mt-1">
                     <%= text_input f, :title, autocomplete: "given-name", class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
@@ -100,27 +100,27 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
 
                   <div class="flex items-center">
                     <label for="push-everything" class="block text-md font-bold text-gray-700">
-                      Privacy
+                    <%= gettext "Privacy" %>
                     </label>
                   </div>
 
                   <div class="flex items-center">
                     <%= radio_button f, :private, true, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
                     <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700">
-                      Private
+                    <%= gettext "Private" %>
                     </label>
                   </div>
 
                   <div class="flex items-center">
                     <%= radio_button f, :private, false, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
                     <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
-                      Public
+                    <%= gettext "Public" %>
                     </label>
                   </div>
                 </div>
 
                 <div class="sm:col-span-6 flex justify-end">
-                  <%= submit "Save", phx_disable_with: "Saving...", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
+                  <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
                 </div>
 
                 <div class="sm:col-span-6">
@@ -143,7 +143,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                             </div>
                             <div>
                               <a href="#" phx-click="remove-track" target={@ref} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                                remove
+                              <%= gettext "remove" %>
                               </a>
                             </div>
                           </div>
