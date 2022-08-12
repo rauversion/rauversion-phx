@@ -105,9 +105,7 @@ Player = {
     this.range && this.range.removeEventListener("change", this.rangeChangeListener )
     this?._wave?.drawer?.wrapper?.removeEventListener("click", this.waveClickListener)
 
-    // receives audio-process progress from track hook
     document.removeEventListener('audio-process-mouseup', this.mouseUpHandler)
-    // receives pause
     document.removeEventListener('audio-pause', this.audioPauseHandler)
 
     window.removeEventListener(`phx:add-to-next`, this.addToNextListener)
