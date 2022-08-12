@@ -27,7 +27,7 @@ config :rauversion, RauversionWeb.Endpoint,
 config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Local
 
 # https://lokalise.com/blog/localization-of-phoenix-applications/
-config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt-br), default_locale: "en"
+config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: "en"
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-08-12 00:49\n"
+"PO-Revision-Date: 2022-08-12 01:56\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -75,7 +75,7 @@ msgstr "Configuración del artículo"
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component copy.ex:225
 #, elixir-autogen, elixir-format
 msgid "Article will be plublished on blog listing."
-msgstr "El artículo será plubled en la lista de blogs."
+msgstr "El artículo será publicado en la lista de artículos."
 
 #: lib/rauversion_web/live/home_live/index.html.heex:168
 #, elixir-autogen, elixir-format
@@ -292,140 +292,140 @@ msgstr "Incrustar"
 #: lib/rauversion_web/live/home_live/index.html.heex:63
 #, elixir-autogen, elixir-format
 msgid "Empowering independent music communities on the internet"
-msgstr ""
+msgstr "Potenciar comunidades musicales independientes en Internet"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component copy.ex:191
 #, elixir-autogen, elixir-format
 msgid "Everyone with the link will see this article."
-msgstr ""
+msgstr "Todo el mundo con el enlace verá este artículo."
 
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:199
 #, elixir-autogen, elixir-format
 msgid "Everything"
-msgstr ""
+msgstr "Todo"
 
 #: lib/rauversion_web/live/profile_live/components/menu_component.ex:41
 #: lib/rauversion_web/live/profile_live/components/user_suggestions_component.ex:71
 #: lib/rauversion_web/live/track_live/player.ex:290
 #, elixir-autogen, elixir-format
 msgid "Follow"
-msgstr ""
+msgstr "Seguir"
 
 #: lib/rauversion_web/live/follows_live/index.html.heex:41
 #: lib/rauversion_web/live/profile_live/components/stats_component.ex:17
 #, elixir-autogen, elixir-format
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #: lib/rauversion_web/live/profile_live/components/menu_component.ex:34
 #: lib/rauversion_web/live/profile_live/components/stats_component.ex:11
 #, elixir-autogen, elixir-format
 msgid "Following"
-msgstr ""
+msgstr "Siguiendo"
 
 #: lib/rauversion_web/live/follows_live/index.html.heex:40
 #, elixir-autogen, elixir-format
 msgid "Followings"
-msgstr ""
+msgstr "Siguiendo"
 
 #: lib/rauversion_web/templates/user_registration/new.html.heex:107
 #: lib/rauversion_web/templates/user_session/new.html.heex:60
 #, elixir-autogen, elixir-format
 msgid "Forgot your password?"
-msgstr ""
+msgstr "¿Olvidaste tu contraseña?"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:15
 #, elixir-autogen, elixir-format
 msgid "Get an exclusive $5 off code"
-msgstr ""
+msgstr "Obtén un código exclusivo de 5 $"
 
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:173
 #, elixir-autogen, elixir-format
 msgid "Get notified when a candidate accepts or rejects an offer."
-msgstr ""
+msgstr "Recibe notificaciones cuando un candidato acepte o rechace una oferta."
 
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:159
 #, elixir-autogen, elixir-format
 msgid "Get notified when a candidate applies for a job."
-msgstr ""
+msgstr "Recibir notificaciones cuando un candidato solicite un empleo."
 
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:148
 #, elixir-autogen, elixir-format
 msgid "Get notified when someones posts a comment on a posting."
-msgstr ""
+msgstr "Recibe notificaciones cuando alguien publique un comentario en una publicación."
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component copy.ex:92
 #, elixir-autogen, elixir-format
 msgid "Get started by filling in the information below to create your new article."
-msgstr ""
+msgstr "Comienza rellenando la siguiente información para crear tu nuevo artículo."
 
 #: lib/rauversion_web/live/follows_live/index.html.heex:30
 #, elixir-autogen, elixir-format
 msgid "Go to profile"
-msgstr ""
+msgstr "Ir al perfil"
 
 #: lib/rauversion_web/live/track_live/components/share_form_track_component.ex:51
 #, elixir-autogen, elixir-format
 msgid "Go to your track"
-msgstr ""
+msgstr "Ir a tu canción"
 
 #: lib/rauversion_web/live/track_live/components/track_component.ex:123
 #: lib/rauversion_web/live/track_live/show.html.heex:105
 #, elixir-autogen, elixir-format
 msgid "Hold on, this track is in %{state} state"
-msgstr ""
+msgstr "Espere, esta pista está en estado %{state}"
 
 #: lib/rauversion_web/live/track_live/show.html.heex:210
 #, elixir-autogen, elixir-format
 msgid "Insights"
-msgstr ""
+msgstr "Imágenes"
 
 #: lib/rauversion_web/live/insights_live/insights_component.ex:66
 #: lib/rauversion_web/live/insights_live/insights_component.ex:114
 #, elixir-autogen, elixir-format
 msgid "Last 12 months"
-msgstr ""
+msgstr "Últimos 12 meses"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component copy.ex:252
 #, elixir-autogen, elixir-format
 msgid "Learn more about sharing "
-msgstr ""
+msgstr "Más información sobre compartir "
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:156
 #, elixir-autogen, elixir-format
 msgid "License"
-msgstr ""
+msgstr "Licencia"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:150
 #: lib/rauversion_web/live/playlist_live/show.html.heex:157
 #: lib/rauversion_web/live/track_live/components/like_track_button_component.ex:90
 #, elixir-autogen, elixir-format
 msgid "Like"
-msgstr ""
+msgstr "Me gusta"
 
 #: lib/rauversion_web/live/track_live/player.ex:281
 #, elixir-autogen, elixir-format
 msgid "Liked"
-msgstr ""
+msgstr "Me gustó"
 
 #: lib/rauversion_web/live/follows_live/index.html.heex:39
 #: lib/rauversion_web/live/insights_live/insights_component.ex:22
 #, elixir-autogen, elixir-format
 msgid "Likes"
-msgstr ""
+msgstr "Me gusta"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:28
 #: lib/rauversion_web/live/track_live/components/share_form_track_component.ex:77
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:42
 #, elixir-autogen, elixir-format
 msgid "Link"
-msgstr ""
+msgstr "Enlace"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:114
 #: lib/rauversion_web/live/track_live/show.html.heex:131
 #, elixir-autogen, elixir-format
 msgid "Listen now"
-msgstr ""
+msgstr "Escucha ahora"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:27
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:129
@@ -436,57 +436,57 @@ msgstr ""
 #: lib/rauversion_web/templates/user_reset_password/new.html.heex:32
 #, elixir-autogen, elixir-format
 msgid "Log in"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:101
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:157
 #, elixir-autogen, elixir-format
 msgid "Log out"
-msgstr ""
+msgstr "Cerrar sesión"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:155
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:30
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:177
 #, elixir-autogen, elixir-format
 msgid "Message"
-msgstr ""
+msgstr "Mensaje"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:37
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:50
 #, elixir-autogen, elixir-format
 msgid "Metadata"
-msgstr ""
+msgstr "Metadatos"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:169
 #, elixir-autogen, elixir-format
 msgid "Metadata information"
-msgstr ""
+msgstr "Información de metadatos"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:71
 #, elixir-autogen, elixir-format
 msgid "My Articles"
-msgstr ""
+msgstr "Mis artículos"
 
 #: lib/rauversion_web/live/playlist_live/index.html.heex:48
 #, elixir-autogen, elixir-format
 msgid "New Playlist"
-msgstr ""
+msgstr "Nueva lista"
 
 #: lib/rauversion_web/live/repost_live/repost_list_component.ex:92
 #: lib/rauversion_web/live/track_live/components/track_list_component.ex:111
 #, elixir-autogen, elixir-format
 msgid "New Track"
-msgstr ""
+msgstr "Nueva pista"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component copy.ex:80
 #, elixir-autogen, elixir-format
 msgid "New article"
-msgstr ""
+msgstr "Nuevo artículo"
 
 #: lib/rauversion_web/live/usersettings_live/components/security_form.ex:33
 #, elixir-autogen, elixir-format
 msgid "New password"
-msgstr ""
+msgstr "Nueva contraseña"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:84
 #: lib/rauversion_web/live/track_live/components/track_component.ex:79
@@ -494,39 +494,39 @@ msgstr ""
 #: lib/rauversion_web/live/track_live/show.html.heex:78
 #, elixir-autogen, elixir-format
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:211
 #, elixir-autogen, elixir-format
 msgid "No push notifications"
-msgstr ""
+msgstr "Notificaciones push"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:80
 #, elixir-autogen, elixir-format
 msgid "Notificaitons"
-msgstr ""
+msgstr "Notificaciones"
 
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:49
 #, elixir-autogen, elixir-format
 msgid "Notification settings."
-msgstr ""
+msgstr "Ajustes de notificaciones."
 
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:122
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:28
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:48
 #, elixir-autogen, elixir-format
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaciones push"
 
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:170
 #, elixir-autogen, elixir-format
 msgid "Offers"
-msgstr ""
+msgstr "Ofertas"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component copy.ex:205
 #, elixir-autogen, elixir-format
 msgid "Only members of this article would be able to access."
-msgstr ""
+msgstr "Sólo los miembros de este artículo podrían acceder."
 
 #: lib/rauversion_web/live/usersettings_live/components/email_form.ex:19
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:40
@@ -536,22 +536,22 @@ msgstr ""
 #: lib/rauversion_web/templates/user_reset_password/edit.html.heex:17
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
-msgstr ""
+msgstr "¡Vaya, algo salió mal! Por favor revisa los siguientes errores."
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:61
 #, elixir-autogen, elixir-format
 msgid "Open menu"
-msgstr ""
+msgstr "Abrir menú"
 
 #: lib/rauversion_web/templates/user_registration/new.html.heex:9
 #, elixir-autogen, elixir-format
 msgid "Or"
-msgstr ""
+msgstr "O"
 
 #: lib/rauversion_web/templates/user_session/new.html.heex:78
 #, elixir-autogen, elixir-format
 msgid "Or continue with"
-msgstr ""
+msgstr "O continuar con"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component copy.ex:156
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:67
@@ -559,23 +559,23 @@ msgstr ""
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:110
 #, elixir-autogen, elixir-format
 msgid "PNG, JPG, GIF up to 10MB"
-msgstr ""
+msgstr "PNG, JPG, GIF hasta 10MB"
 
 #: lib/rauversion_web/templates/user_session/new.html.heex:40
 #, elixir-autogen, elixir-format
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:39
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:51
 #, elixir-autogen, elixir-format
 msgid "Permissions"
-msgstr ""
+msgstr "Permisos"
 
 #: lib/rauversion_web/live/insights_live/insights_component.ex:156
 #, elixir-autogen, elixir-format
 msgid "Personal details and application."
-msgstr ""
+msgstr "Datos personales y aplicación."
 
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:79
 #, elixir-autogen, elixir-format

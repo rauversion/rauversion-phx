@@ -40,7 +40,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
         <div class="bg-white border-t dark:bg-gray-900">
           <div class="p-6">
             <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900 dark:text-gray-100">
-            <%= gettext "Who to follow" %>
+            <%= gettext("Who to follow") %>
             </h2>
             <div class="mt-6 flow-root">
               <ul role="list" class="-my-4 divide-y divide-gray-200 dark:divide-gray-800 dark:divide-gray-800">

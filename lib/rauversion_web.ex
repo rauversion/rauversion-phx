@@ -52,6 +52,7 @@ defmodule RauversionWeb do
 
       use PhoenixMetaTags.TagView
 
+      on_mount RauversionWeb.RestoreLocale
       unquote(view_helpers())
     end
   end
