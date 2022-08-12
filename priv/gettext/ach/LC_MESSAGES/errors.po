@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: e4a2284fe193910780e80c8258fd279f\n"
+"X-Crowdin-Project-ID: 1\n"
+"X-Crowdin-Language: ach\n"
+"X-Crowdin-File: /main/priv/gettext/errors.pot\n"
+"X-Crowdin-File-ID: 11\n"
+"Project-Id-Version: e4a2284fe193910780e80c8258fd279f\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Acholi\n"
+"Language: ach_UG\n"
+"PO-Revision-Date: 2022-08-12 00:49\n"
+
+msgid "can't be blank"
+msgstr "crwdns385:0crwdne385:0"
+
+msgid "has already been taken"
+msgstr "crwdns387:0crwdne387:0"
+
+msgid "is invalid"
+msgstr "crwdns389:0crwdne389:0"
+
+msgid "must be accepted"
+msgstr "crwdns391:0crwdne391:0"
+
+msgid "has invalid format"
+msgstr "crwdns393:0crwdne393:0"
+
+msgid "has an invalid entry"
+msgstr "crwdns395:0crwdne395:0"
+
+msgid "is reserved"
+msgstr "crwdns397:0crwdne397:0"
+
+msgid "does not match confirmation"
+msgstr "crwdns399:0crwdne399:0"
+
+msgid "is still associated with this entry"
+msgstr "crwdns401:0crwdne401:0"
+
+msgid "are still associated with this entry"
+msgstr "crwdns403:0crwdne403:0"
+
+msgid "should be %{count} character(s)"
+msgid_plural "should be %{count} character(s)"
+msgstr[0] "crwdns405:1%{count}crwdne405:1"
+msgstr[1] "crwdns405:5%{count}crwdne405:5"
+
+msgid "should have %{count} item(s)"
+msgid_plural "should have %{count} item(s)"
+msgstr[0] "crwdns407:1%{count}crwdne407:1"
+msgstr[1] "crwdns407:5%{count}crwdne407:5"
+
+msgid "should be at least %{count} character(s)"
+msgid_plural "should be at least %{count} character(s)"
+msgstr[0] "crwdns409:1%{count}crwdne409:1"
+msgstr[1] "crwdns409:5%{count}crwdne409:5"
+
+msgid "should have at least %{count} item(s)"
+msgid_plural "should have at least %{count} item(s)"
+msgstr[0] "crwdns411:1%{count}crwdne411:1"
+msgstr[1] "crwdns411:5%{count}crwdne411:5"
+
+msgid "should be at most %{count} character(s)"
+msgid_plural "should be at most %{count} character(s)"
+msgstr[0] "crwdns413:1%{count}crwdne413:1"
+msgstr[1] "crwdns413:5%{count}crwdne413:5"
+
+msgid "should have at most %{count} item(s)"
+msgid_plural "should have at most %{count} item(s)"
+msgstr[0] "crwdns415:1%{count}crwdne415:1"
+msgstr[1] "crwdns415:5%{count}crwdne415:5"
+
+msgid "must be less than %{number}"
+msgstr "crwdns417:0%{number}crwdne417:0"
+
+msgid "must be greater than %{number}"
+msgstr "crwdns419:0%{number}crwdne419:0"
+
+msgid "must be less than or equal to %{number}"
+msgstr "crwdns421:0%{number}crwdne421:0"
+
+msgid "must be greater than or equal to %{number}"
+msgstr "crwdns423:0%{number}crwdne423:0"
+
+msgid "must be equal to %{number}"
+msgstr "crwdns425:0%{number}crwdne425:0"
+
