@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: e4a2284fe193910780e80c8258fd279f\n"
+"X-Crowdin-Project-ID: 1\n"
+"X-Crowdin-Language: pt\n"
+"X-Crowdin-File: /main/priv/gettext/errors.pot\n"
+"X-Crowdin-File-ID: 11\n"
+"Project-Id-Version: e4a2284fe193910780e80c8258fd279f\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Portuguese\n"
+"Language: pt_PT\n"
+"PO-Revision-Date: 2022-08-12 00:49\n"
+
+msgid "can't be blank"
+msgstr ""
+
+msgid "has already been taken"
+msgstr ""
+
+msgid "is invalid"
+msgstr ""
+
+msgid "must be accepted"
+msgstr ""
+
+msgid "has invalid format"
+msgstr ""
+
+msgid "has an invalid entry"
+msgstr ""
+
+msgid "is reserved"
+msgstr ""
+
+msgid "does not match confirmation"
+msgstr ""
+
+msgid "is still associated with this entry"
+msgstr ""
+
+msgid "are still associated with this entry"
+msgstr ""
+
+msgid "should be %{count} character(s)"
+msgid_plural "should be %{count} character(s)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "should have %{count} item(s)"
+msgid_plural "should have %{count} item(s)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "should be at least %{count} character(s)"
+msgid_plural "should be at least %{count} character(s)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "should have at least %{count} item(s)"
+msgid_plural "should have at least %{count} item(s)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "should be at most %{count} character(s)"
+msgid_plural "should be at most %{count} character(s)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "should have at most %{count} item(s)"
+msgid_plural "should have at most %{count} item(s)"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "must be less than %{number}"
+msgstr ""
+
+msgid "must be greater than %{number}"
+msgstr ""
+
+msgid "must be less than or equal to %{number}"
+msgstr ""
+
+msgid "must be greater than or equal to %{number}"
+msgstr ""
+
+msgid "must be equal to %{number}"
+msgstr ""
+
