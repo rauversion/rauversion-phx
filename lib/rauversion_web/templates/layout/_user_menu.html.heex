@@ -100,7 +100,6 @@
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
                     <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                   
-                  
                     <div class="flex items-center space-x-2">
                       <%= new_locale @conn, :en, "EN", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                       <%= new_locale @conn, :es, "ES", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
