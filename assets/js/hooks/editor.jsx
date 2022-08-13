@@ -48,7 +48,14 @@ Editor = {
               placeholder: "Paste a link to embed content from another site (e.g. Twitter) and press Enter"
             },
           }),
-          VideoBlockConfig(),
+          VideoBlockConfig({
+            options: {
+              endpoint: "/oembed?url=",
+              placeholder:
+                "Paste a YouTube, Vine, Vimeo, or other video link, and press Enter",
+              caption: "Type caption for embed (optional)",
+            },
+          }),
           GiphyBlockConfig(),
           VideoRecorderBlockConfig({
             options: {
