@@ -1,0 +1,118 @@
+
+ <div class="mt-6- text-gray-500 flex dark:bg-black dark:text-white ">
+
+  <div class="fixed bottom-[20] right-0 ">
+
+    <div class=" mr-10 flex items-center mt-4">
+      <button phx-click="toggle-panel" 
+        class="p-4 text-black dark:text-white hover:text-gray-500 inline-flex space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <span><%= gettext "Article settings" %></span>
+      </button>
+    </div>
+  </div>
+
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="playlist-form"
+    phx-target={@ref}
+    phx-change="validate"
+    phx-submit="save">
+
+    <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
+    <%= gettext "Create playlist" %>
+    </h2>
+
+    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+      <div class="sm:col-span-6">
+
+        <label for="title" class="block text-sm font-medium text-gray-700">
+        <%= gettext "Playlist title" %>
+        </label>
+        <div class="mt-1">
+          <%= text_input f, :title, autocomplete: "given-name", class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+          <%= error_tag f, :title %>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+
+        <div class="flex items-center">
+          <label for="push-everything" class="block text-md font-bold text-gray-700">
+          <%= gettext "Privacy" %>
+          </label>
+        </div>
+
+        <div class="flex items-center">
+          <%= radio_button f, :private, true, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
+          <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700">
+          <%= gettext "Private" %>
+          </label>
+        </div>
+
+        <div class="flex items-center">
+          <%= radio_button f, :private, false, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
+          <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
+          <%= gettext "Public" %>
+          </label>
+        </div>
+      </div>
+
+      <div class="sm:col-span-6 flex justify-end">
+        <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
+      </div>
+
+      <div class="sm:col-span-6">
+        <div class="flow-root mt-6">
+          <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
+            <%= inputs_for f, :track_playlists, fn track -> %>
+
+              <%= hidden_input track, :track_id %>
+
+              <li class="py-4">
+                <div class="flex items-center space-x-4">
+                  <div class="flex-shrink-0">
+                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                      <%= @new_track.title %>
+                    </p>
+                    <p class="text-sm text-gray-500 truncate"><%= @new_track.user.username %></p>
+                  </div>
+                  <div>
+                    <a href="#" phx-click="remove-track" target={@ref} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                    <%= gettext "remove" %>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="mt-6">
+          <a href="#" class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> View all </a>
+        </div>
+      </div>
+    </div>
+
+  </.form>
+
+
+
+
+  <%= if @open do %>
+    <.live_component
+      module={RauversionWeb.EventsLive.SidebarFormComponent}
+      id={:article_sidebar_form}
+      post={@post}
+      current_user={@current_user}
+    />
+  <% end %>
+</div>

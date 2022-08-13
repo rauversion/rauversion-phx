@@ -1,6 +1,6 @@
 # This genserver was taken from plausible source code:
 # https://github.com/plausible/analytics/blob/83df555f55d07b091af1512e3af6948e3dde2bba/lib/plausible/event/write_buffer.ex
-defmodule Rauversion.Events.WriteBuffer do
+defmodule Rauversion.TrackingEvents.WriteBuffer do
   use GenServer
   require Logger
   @flush_interval_ms 5_000

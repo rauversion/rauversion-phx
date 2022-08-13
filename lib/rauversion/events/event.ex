@@ -2,74 +2,44 @@ defmodule Rauversion.Events.Event do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "listening_events" do
-    field :remote_ip, :string
-    field :country, :string
+  schema "event" do
+    field :age_requirement, :string
+    field :attendee_list_settings, :map
     field :city, :string
-    field :ua, :string
-    field :lang, :string
-    field :referer, :string
-    field :utm_medium, :string
-    field :utm_source, :string
-    field :utm_campaign, :string
-    field :utm_content, :string
-    field :utm_term, :string
-    field :browser_name, :string
-    field :browser_version, :string
-    field :modern, :boolean
-    field :platform, :string
-    field :device_type, :string
-    field :bot, :boolean
-    field :search_engine, :boolean
-    # field :track_id, :integer
-    belongs_to :track, Rauversion.Tracks.Track
-    # field :user_id, :integer
-    belongs_to :user, Rauversion.Accounts.User
+    field :country, :string
+    field :description, :string
+    field :eticket, :boolean, default: false
+    field :event, :string
+    field :event_capacity, :boolean, default: false
+    field :event_capacity_limit, :integer
+    field :event_ends, :naive_datetime
+    field :event_settings, :map
+    field :event_short_link, :string
+    field :event_start, :utc_datetime
+    field :location, :string
+    field :online, :boolean, default: false
+    field :order_form, :map
+    field :postal, :string
+    field :private, :boolean, default: false
+    field :province, :string
+    field :slug, :string
+    field :state, :string
+    field :street, :string
+    field :street_number, :string
+    field :tax_rates_settings, :map
+    field :timezone, :string
+    field :title, :string
+    field :widget_button, :map
+    field :will_call, :boolean, default: false
+    field :user_id, :id
 
-    # field :resource_profile_id, :integer
-    belongs_to :resource_profile, Rauversion.Accounts.User, foreign_key: :resource_profile_id
-
-    field :action, :string, virtual: true
     timestamps()
   end
 
-  @required_fields []
-  @optional_fields [
-    :remote_ip,
-    :country,
-    :city,
-    :ua,
-    :lang,
-    :referer,
-    :utm_medium,
-    :utm_source,
-    :utm_campaign,
-    :utm_content,
-    :utm_term,
-    :browser_name,
-    :browser_version,
-    :modern,
-    :platform,
-    :device_type,
-    :bot,
-    :search_engine,
-    :track_id,
-    :user_id,
-    :resource_profile_id,
-    :inserted_at,
-    :updated_at
-  ]
-
-  def country_name(name) do
-    case Countries.filter_by(:alpha2, name) do
-      [%{name: country_name} | _] -> country_name
-      _ -> name
-    end
-  end
-
-  def changeset(struct, attrs) do
-    struct
-    |> cast(attrs, @required_fields ++ @optional_fields)
-    |> validate_required(@required_fields)
+  @doc false
+  def changeset(event, attrs) do
+    event
+    |> cast(attrs, [:event, :title, :description, :slug, :state, :timezone, :event_start, :event_ends, :private, :online, :location, :street, :street_number, :country, :city, :province, :postal, :age_requirement, :event_capacity, :event_capacity_limit, :eticket, :will_call, :order_form, :widget_button, :event_short_link, :tax_rates_settings, :attendee_list_settings, :event_settings])
+    |> validate_required([:event, :title, :description, :slug, :state, :timezone, :event_start, :event_ends, :private, :online, :location, :street, :street_number, :country, :city, :province, :postal, :age_requirement, :event_capacity, :event_capacity_limit, :eticket, :will_call, :order_form, :widget_button, :event_short_link, :tax_rates_settings, :attendee_list_settings, :event_settings])
   end
 end

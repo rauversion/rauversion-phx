@@ -65,8 +65,8 @@ defmodule RauversionWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", RauversionWeb do
     pipe_through :browser_api
-    post "/tracks/:track_id/events", EventsController, :show
-    get "/tracks/:track_id/events", EventsController, :show
+    post "/tracks/:track_id/events", TrackingEventsController, :show
+    get "/tracks/:track_id/events", TrackingEventsController, :show
   end
 
   # Enables LiveDashboard only for development
@@ -129,6 +129,11 @@ defmodule RauversionWeb.Router do
     live "/articles/new", ArticlesLive.New, :new
     live "/articles/edit/:id", ArticlesLive.New, :edit
     live "/articles/:slug/edit", ArticlesLive.New, :edit
+
+    live "/events/mine", EventsLive.Index, :mine
+    live "/events/new", EventsLive.New, :new
+    live "/events/edit/:id", EventsLive.New, :edit
+    live "/events/:slug/edit", EventsLive.New, :edit
 
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
@@ -215,6 +220,9 @@ defmodule RauversionWeb.Router do
 
     live "/articles", ArticlesLive.Index, :index
     live "/articles/:id", ArticlesLive.Show, :show
+
+    live "/events", EventsLive.Index, :index
+    live "/events/:id", EventsLive.Show, :show
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id", TrackLive.Show, :show

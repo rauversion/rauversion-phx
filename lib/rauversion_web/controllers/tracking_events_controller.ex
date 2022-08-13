@@ -1,4 +1,4 @@
-defmodule RauversionWeb.EventsController do
+defmodule RauversionWeb.TrackingEventsController do
   use RauversionWeb, :controller
 
   def show(conn, params = %{"track_id" => track_id}) do
@@ -56,13 +56,13 @@ defmodule RauversionWeb.EventsController do
       |> Map.put(:updated_at, DateTime.utc_now())
 
     event =
-      Rauversion.Events.Event.changeset(
-        %Rauversion.Events.Event{},
+      Rauversion.TrackingEvents.Event.changeset(
+        %Rauversion.TrackingEvents.Event{},
         options
       )
 
     event
-    |> Rauversion.Events.WriteBuffer.insert()
+    |> Rauversion.TrackingEvents.WriteBuffer.insert()
 
     conn |> Plug.Conn.send_resp(200, Jason.encode!(options, pretty: true))
   end
