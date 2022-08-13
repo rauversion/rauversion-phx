@@ -623,10 +623,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
-dante3@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/dante3/-/dante3-1.1.1.tgz#9dee5ebf42aa3cc24385bc5ed9033c74d32f4fae"
-  integrity sha512-eYNWCa3Xmc2hTIukASqsAkG1JDE4h1FagQ7YY0dYa/xOWVDBfxil/SGSlwDFr5ksqAfoXMALPVW0P3KjOI6Ugw==
+dante3@^1.1.3:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/dante3/-/dante3-1.1.2.tgz#5e2d50f3d5f4431586623f20f4a00afb559dd310"
+  integrity sha512-ORmJSen6czLl1p5lPbm8Ek8XphtrVFlaW9LADPll5Tqh58UnFR8tDGWTv0/uE4GC00vHAxBVVh1r3CQtNQ18bw==
   dependencies:
     "@emotion/core" "^11.0.0"
     "@emotion/react" "^11.4.0"

@@ -119,7 +119,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
             <div class="">
 
               <div id="infinite-scroll"
-                class="min-w-full sm:border-r-2"
+                class="min-w-full"
                 phx-hook="InfiniteScroll"
                 phx-update="append"
                 data-page={@page}

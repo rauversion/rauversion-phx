@@ -121,6 +121,8 @@ defmodule RauversionWeb.Router do
     live "/users/settings/security", UserSettingsLive.Index, :security
     live "/users/settings/notifications", UserSettingsLive.Index, :notifications
 
+    get "/oembed", OEmbedController, :create
+
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     live "/articles/mine", ArticlesLive.Index, :mine
