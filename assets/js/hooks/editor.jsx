@@ -46,7 +46,21 @@ Editor = {
           EmbedBlockConfig(),
           VideoBlockConfig(),
           GiphyBlockConfig(),
-          VideoRecorderBlockConfig(),
+          VideoRecorderBlockConfig({
+            options: {
+              upload_handler: (file, ctx) => {
+                console.log("UPLOADED VIDEO FILE!!!!", file)
+                
+                this.upload(file, (blob)=>{
+                  console.log(blob)
+                  console.log(ctx)
+                  ctx.updateAttributes({
+                    url: blob.service_url
+                  })
+                })
+              }
+            }
+          }),
           SpeechToTextBlockConfig(),
         ]}
         onUpdate={(editor)=>{
