@@ -1,4 +1,4 @@
-defmodule Rauversion.Repo.Migrations.CreatePost do
+defmodule Rauversion.Repo.Migrations.CreatePreviewCards do
   use Ecto.Migration
 
   def change do
@@ -9,8 +9,8 @@ defmodule Rauversion.Repo.Migrations.CreatePost do
       add :type, :string
       add :author_name, :string
       add :author_url, :string
-      add :html, :string
-      add :image, :text
+      add :html, :text
+      add :image, :string
 
       timestamps()
     end
