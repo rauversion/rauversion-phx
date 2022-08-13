@@ -11,6 +11,7 @@ config :rauversion, Rauversion.Repo,
   stacktrace: true
 
 config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
+config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -73,8 +74,6 @@ config :logger, :console,
   truncate: :infinity
 
 config :logger, level: :debug
-
-config :rauversion, :app_name, "Rauversion.com"
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
