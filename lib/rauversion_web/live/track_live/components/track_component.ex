@@ -27,7 +27,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         } = assigns
       ) do
     ~H"""
-    <div id={"track-item-#{track.id}"} class="flex flex-col sm:flex-row border border-r-0 border-l-0 dark:border-gray-700 rounded-md- shadow-sm sm:shadow-md my-2">
+    <div id={"track-item-#{track.id}"} class="flex flex-col sm:flex-row border-0 border-r-0- border-l-0- mx-2 rounded-lg dark:bg-gray-900 dark:border-gray-800 rounded-md- shadow-sm sm:shadow-md my-2">
       <div class="w-full sm:w-44 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4-- px-4- sm:px-0">
 
         <div class="group relative aspect-w-1 aspect-h-1 sm:rounded-none rounded-md-- bg-gray-100 dark:bg-gray-900 overflow-hidden">

@@ -42,7 +42,7 @@ defmodule Rauversion.MixProject do
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.0"},
-      {:floki, ">= 0.30.0", only: :test},
+      {:floki, ">= 0.30.0", override: true},
       {:phoenix_live_dashboard, "~> 0.6"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
@@ -66,6 +66,8 @@ defmodule Rauversion.MixProject do
       {:timex, "~> 3.0"},
       {:oban, "~> 2.13"},
       {:fsmx, "~> 0.2.0"},
+      {:oembed, "~> 0.4.1"},
+      {:tesla, "~> 1.4"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git",

@@ -18,7 +18,6 @@ import { DirectUpload } from "@rails/activestorage"
 Editor = {
   mounted(){
     const wrapper = this.el;
-    console.log("esoooo")
     
     render(
       <Dante 
@@ -43,7 +42,12 @@ Editor = {
           CodeBlockConfig(),
           DividerBlockConfig(),
           PlaceholderBlockConfig(),
-          EmbedBlockConfig(),
+          EmbedBlockConfig({
+            options: {
+              endpoint: "/oembed?url=",
+              placeholder: "Paste a link to embed content from another site (e.g. Twitter) and press Enter"
+            },
+          }),
           VideoBlockConfig(),
           GiphyBlockConfig(),
           VideoRecorderBlockConfig({
