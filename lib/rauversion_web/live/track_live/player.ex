@@ -161,7 +161,7 @@ defmodule RauversionWeb.TrackLive.Player do
     <div
       id="main-player"
       phx-hook="PlayerInitiator"
-      class="z-50 fixed bottom-0 w-full h-[6rem]-- py-2 bg-gray-900">
+      class="z-50 fixed bottom-0 w-full h-[6rem]-- py-2 bg-gray-900 border-t border-gray-800">
 
       <%= if @track do %>
         <div

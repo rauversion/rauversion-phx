@@ -134,6 +134,13 @@ defmodule RauversionWeb.Router do
     live "/events/new", EventsLive.New, :new
     live "/events/edit/:id", EventsLive.New, :edit
     live "/events/:slug/edit", EventsLive.New, :edit
+    live "/events/:slug/edit/schedule", EventsLive.New, :schedule
+    live "/events/:slug/edit/tickets", EventsLive.New, :tickets
+    live "/events/:slug/edit/order_form", EventsLive.New, :order_form
+    live "/events/:slug/edit/widgets", EventsLive.New, :widgets
+    live "/events/:slug/edit/tax", EventsLive.New, :tax
+    live "/events/:slug/edit/attendees", EventsLive.New, :attendees
+    live "/events/:slug/edit/sponsors", EventsLive.New, :sponsors
 
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit

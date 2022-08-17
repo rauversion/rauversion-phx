@@ -36,6 +36,7 @@ defmodule Rauversion.Events do
 
   """
   def get_event!(id), do: Repo.get!(Event, id)
+  def get_by_slug!(id), do: Repo.get_by!(Event, slug: id)
 
   @doc """
   Creates a event.

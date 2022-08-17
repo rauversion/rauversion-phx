@@ -2,8 +2,7 @@ defmodule Rauversion.Repo.Migrations.CreateEvent do
   use Ecto.Migration
 
   def change do
-    create table(:event) do
-      add :event, :string
+    create table(:events) do
       add :title, :string
       add :description, :text
       add :slug, :string
@@ -16,6 +15,8 @@ defmodule Rauversion.Repo.Migrations.CreateEvent do
       add :location, :string
       add :street, :string
       add :street_number, :string
+      add :lat, :decimal
+      add :lng, :decimal
       add :country, :string
       add :city, :string
       add :province, :string
@@ -30,12 +31,14 @@ defmodule Rauversion.Repo.Migrations.CreateEvent do
       add :event_short_link, :string
       add :tax_rates_settings, :map
       add :attendee_list_settings, :map
+      add :scheduling_settings, :map
       add :event_settings, :map
+      add :tickets, :map
       add :user_id, references(:users, on_delete: :nothing)
 
       timestamps()
     end
 
-    create index(:event, [:user_id])
+    create index(:events, [:user_id])
   end
 end

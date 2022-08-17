@@ -33,6 +33,8 @@ config :active_storage, :services,
     root: "tmp/storage"
   ]
 
+config :rauversion, google_maps_key: System.get_env("GOOGLE_MAPS_KEY")
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration

@@ -99,21 +99,21 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                 <div class="flex items-center space-x-2">
 
                   <div class="flex items-center">
-                    <label for="push-everything" class="block text-md font-bold text-gray-700">
+                    <label for="push-everything" class="block text-md font-bold text-gray-700 dark:text-gray-300">
                     <%= gettext "Privacy" %>
                     </label>
                   </div>
 
                   <div class="flex items-center">
                     <%= radio_button f, :private, true, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
-                    <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700">
+                    <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
                     <%= gettext "Private" %>
                     </label>
                   </div>
 
                   <div class="flex items-center">
                     <%= radio_button f, :private, false, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
-                    <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
+                    <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
                     <%= gettext "Public" %>
                     </label>
                   </div>
