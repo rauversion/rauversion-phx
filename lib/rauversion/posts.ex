@@ -17,21 +17,26 @@ defmodule Rauversion.Posts do
       [%Post{}, ...]
 
   """
-  def list_posts do
-    Repo.all(Post)
-  end
+
+  # def list_posts do
+  #  Repo.all(Post)
+  # end
 
   def list_posts(state) do
     from(pi in Post,
-      where: pi.state == ^state
+      where: pi.state == ^state,
+      preload: [user: :avatar_blob]
     )
-    |> Repo.all()
+
+    # |> Repo.all()
   end
 
   def list_posts(query, state) do
     query
     |> where([p], p.state == ^state)
-    |> Repo.all()
+    |> preload(user: :avatar_blob)
+
+    # |> Repo.all()
   end
 
   @doc """
