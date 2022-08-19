@@ -14,6 +14,14 @@
                   page: 1,
                   current_user: assigns[:current_user]
                 )
+
+      :category -> live_component(
+                  RauversionWeb.ArticlesLive.CategoryComponent,
+                  id: "all-draft-posts-published",
+                  page: 1,
+                  category_slug: @category_slug,
+                  current_user: assigns[:current_user]
+                )
       _ -> "no match on #{@kind}"
     end  %>
 </div>

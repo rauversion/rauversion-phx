@@ -4,14 +4,14 @@ defmodule Rauversion.PreviewCards do
   alias Rauversion.Repo
 
   schema "preview_cards" do
-    field :author_name, :string
-    field :author_url, :string
-    field :description, :string
-    field :html, :string
-    field :title, :string
-    field :type, :string
-    field :url, :string
-    field :image, :string
+    field(:author_name, :string)
+    field(:author_url, :string)
+    field(:description, :string)
+    field(:html, :string)
+    field(:title, :string)
+    field(:type, :string)
+    field(:url, :string)
+    field(:image, :string)
     timestamps()
   end
 
@@ -70,7 +70,7 @@ defmodule Rauversion.PreviewCards do
     %{html: struct.html}
   end
 
-  def as_oembed_json(struct, opts \\ {}) do
+  def as_oembed_json(struct, _opts \\ {}) do
     %{
       url: struct.url,
       title: struct.title,

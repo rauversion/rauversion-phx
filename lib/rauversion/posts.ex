@@ -25,7 +25,7 @@ defmodule Rauversion.Posts do
   def list_posts(state) do
     from(pi in Post,
       where: pi.state == ^state,
-      preload: [user: :avatar_blob]
+      preload: [:category, user: :avatar_blob]
     )
 
     # |> Repo.all()
@@ -34,9 +34,14 @@ defmodule Rauversion.Posts do
   def list_posts(query, state) do
     query
     |> where([p], p.state == ^state)
-    |> preload(user: :avatar_blob)
+    |> preload([:category, user: :avatar_blob])
 
     # |> Repo.all()
+  end
+
+  def with_category(query, category) do
+    query
+    |> where([c], c.category_id == ^category.id)
   end
 
   @doc """
@@ -133,6 +138,17 @@ defmodule Rauversion.Posts do
   """
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
+  end
+
+  def date(date, format \\ :short) do
+    case Cldr.DateTime.to_string(
+           date,
+           Rauversion.Cldr,
+           format: format
+         ) do
+      {:ok, d} -> d
+      _ -> date
+    end
   end
 
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils

@@ -68,6 +68,7 @@ defmodule Rauversion.MixProject do
       {:fsmx, "~> 0.2.0"},
       {:oembed, "~> 0.4.1"},
       {:tesla, "~> 1.4"},
+      {:ex_cldr_dates_times, "~> 2.0"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git",

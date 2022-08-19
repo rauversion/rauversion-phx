@@ -2,7 +2,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TaxFormComponent do
   use RauversionWeb, :live_component
 
   @impl true
-  def handle_event("validate", event_params, socket) do
+  def handle_event("validate", _event_params, socket) do
     # changeset =
     #  socket.assigns.event
     #  |> Events.change_event(event_params)

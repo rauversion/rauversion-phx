@@ -27,6 +27,10 @@ defmodule RauversionWeb.ArticlesLive.Index do
     socket |> assign(:kind, :published)
   end
 
+  defp apply_action(socket, :category, %{"id" => category_slug}) do
+    socket |> assign(:kind, :category) |> assign(:category_slug, category_slug)
+  end
+
   defp apply_action(socket, :mine, _) do
     socket |> assign(:kind, :mine)
   end

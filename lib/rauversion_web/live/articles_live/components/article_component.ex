@@ -15,7 +15,7 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
         <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) , class: "block w-full #{image_height_class}" do %>
           <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
           <%= img_tag(Rauversion.Tracks.variant_url(
-            @post, "cover", %{resize_to_limit: "360x360"}),
+            @post, "cover", %{resize_to_limit: "500x500"}),
             class: "transition-all",
             style: "position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
           )
@@ -25,9 +25,9 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
       </div>
 
       <div>
-        <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) do %>
+        <%= live_redirect to: Routes.articles_index_path(@socket, :category, @post.category.slug) do %>
           <span class="inline-block mt-5 text-xs font-medium tracking-wider uppercase  text-emerald-700">
-            Personal Growth
+            <%= @post.category.name %>
           </span>
         <% end %>
       </div>
@@ -39,7 +39,7 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
       </h2>
 
       <div class={ if assigns[:hide_excerpt], do: "hidden" }>
-        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400 line-clamp-3">
+        <p class="mt-2 text-md text-gray-500 dark:text-gray-200 line-clamp-3">
           <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) do %>
             <%= @post.excerpt %>
           <% end %>
@@ -51,19 +51,17 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
           <div class="relative flex-shrink-0 w-5 h-5">
             <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
 
-            <%= img_tag(Rauversion.Tracks.variant_url(
-              @post.user, "avatar", %{resize_to_limit: "30x30"}),
-              class: "rounded-full",
-              )
-            %>
+            <% #= img_tag(Rauversion.Tracks.variant_url(@post.user, "avatar", %{resize_to_limit: "30x30"}), class: "rounded-full" ) %>
+
+            <%= img_tag(Rauversion.Accounts.avatar_url(@post.user), class: "rounded-full") %>
 
             </span>
           </div>
           <span class="text-sm"><%= @post.user.username %></span>
         </div>
         <span class="text-xs text-gray-300 dark:text-gray-600">•</span>
-        <time class="text-sm" datetime="2022-05-20T09:33:00Z">
-          May 20, 2022
+        <time class="text-sm" datetime={@post.inserted_at}>
+          <%= Rauversion.Posts.date(@post.inserted_at, :y_mm_md) %>
         </time>
       </div>
 

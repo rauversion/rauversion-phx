@@ -59,7 +59,7 @@
                                 "data-audio-height-value": 250,
                                 "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(@track, :peaks)),
                                 "data-audio-url": Rauversion.Tracks.blob_proxy_url(@track, "mp3_audio") do %>
-              <div class='controls flex items-center'>
+              <div class='controls flex items-center mb-4'>
                 <span class="relative z-0 inline-flex ml-2 pl-6 pt-6">
                   <button type="button" 
                   data-action='audio#play' 

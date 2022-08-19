@@ -45,6 +45,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
     end
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
       <div class="p-5">

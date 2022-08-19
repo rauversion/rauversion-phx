@@ -92,10 +92,8 @@ Player = {
       waveColor: 'grey',
       progressColor: 'tomato',
       height: this.height || 45,
-      //fillParent: false,
-      barWidth: 1,
-      //barHeight: 10, // the height of the wave
-      barGap: null,
+      barWidth: 2,
+      barGap: 3,
       minPxPerSec: 2,
       pixelRatio: 10,
       cursorWidth: 1,

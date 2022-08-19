@@ -72,9 +72,7 @@ defmodule Rauversion.TrackingEvents.WriteBuffer do
             &(Map.from_struct(&1) |> Map.delete(:__meta__) |> Map.get(:changes))
           )
 
-        # IO.inspect("EVENTS!!!!")
-        # IO.inspect(events)
-        Rauversion.Repo.insert_all(Rauversion.Events.Event, events)
+        Rauversion.Repo.insert_all(Rauversion.TrackingEvents.Event, events)
     end
   end
 end

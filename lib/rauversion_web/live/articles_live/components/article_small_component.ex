@@ -9,13 +9,12 @@ defmodule RauversionWeb.Live.ArticlesLive.ArticleSmallComponent do
           </div>
 
           <div class="col-span-full p-0 mb-auto text-white box-border">
-            <a
-              classss="hidden mb-4 w-20 bg-transparent border-b border-red-500 border-solid duration-200 md:block box-border hover:text-black focus:text-black"
-              href="/news/swizz-beatz-and-timbaland-sue-triller-for-dollar28-million-demand-payment-for-verzuz-sale/">
+            <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) do %>
               <h2 class="mt-0 mb-2 font-sans text-base not-italic font-semibold leading-5 normal-case box-border lg:text-4xl-- lg:leading-5 md:mb-4 md:font-sans md:text-4xl-- md:font-bold md:normal-case md:not-italic md:leading-5">
-                Swizz Beatz and Timbaland Sue Triller for $28 Million Over Verzuz Sale
+                <%= @post.title %>
               </h2>
-            </a>
+            <% end %>
+
             <div class="cursor-pointer box-border">
               <div class="mb-1 box-border">
                 <div class="box-border">
@@ -28,7 +27,7 @@ defmodule RauversionWeb.Live.ArticlesLive.ArticleSmallComponent do
                       <span itemprop="name" class="leading-5 box-border">
                         <span class="inline-block not-italic normal-case box-border text-gray-300">
                           <span class="m-0 not-italic normal-case box-border">By </span>
-                            Evan Minsker
+                            <%= @post.user.username %>
                           </span>
                         </span>
                     </p>

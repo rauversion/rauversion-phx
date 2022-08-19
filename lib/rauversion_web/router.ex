@@ -226,6 +226,8 @@ defmodule RauversionWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
 
     live "/articles", ArticlesLive.Index, :index
+    live "/articles/category/:id", ArticlesLive.Index, :category
+
     live "/articles/:id", ArticlesLive.Show, :show
 
     live "/events", EventsLive.Index, :index
