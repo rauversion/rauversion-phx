@@ -32,7 +32,8 @@ config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale
 config :ex_cldr,
   default_locale: "en",
   default_backend: Rauversion.Cldr,
-  json_library: Jason
+  json_library: Jason,
+  data_dir: "./priv/cldr"
 
 # cacertfile: "path/to/cacertfile"
 
