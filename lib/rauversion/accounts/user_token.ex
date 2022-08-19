@@ -6,6 +6,7 @@ defmodule Rauversion.Accounts.UserToken do
   @hash_algorithm :sha256
   @rand_size 32
 
+  @invite_validity_in_days 7
   # It is very important to keep the reset password token expiry short,
   # since someone with access to the email may take over the account.
   @reset_password_validity_in_days 1
@@ -45,6 +46,9 @@ defmodule Rauversion.Accounts.UserToken do
     token = :crypto.strong_rand_bytes(@rand_size)
     {token, %UserToken{token: token, context: "session", user_id: user.id}}
   end
+
+  # Added the “invitation” case in the days_for_context validation time
+  defp days_for_context("invitation"), do: @invite_validity_in_days
 
   @doc """
   Checks if the token is valid and returns its underlying lookup query.

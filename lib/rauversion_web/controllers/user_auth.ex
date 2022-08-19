@@ -122,6 +122,19 @@ defmodule RauversionWeb.UserAuth do
   end
 
   @doc """
+  Used for routes that require the user to not be authenticated.
+  """
+  def redirect_if_disabled_registrations(conn, _opts) do
+    if Application.get_env(:rauversion, :disabled_registrations) != "false" do
+      conn
+      |> redirect(to: signed_in_path(conn))
+      |> halt()
+    else
+      conn
+    end
+  end
+
+  @doc """
   Used for routes that require the user to be authenticated.
 
   If you want to enforce the user email is confirmed before

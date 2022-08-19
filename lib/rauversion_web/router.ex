@@ -101,16 +101,27 @@ defmodule RauversionWeb.Router do
   ## Authentication routes
 
   scope "/", RauversionWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [
+      :browser,
+      :redirect_if_user_is_authenticated,
+      :redirect_if_disabled_registrations
+    ]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
+  end
+
+  scope "/", RauversionWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
+
+    get "/users/invite/:token", UserInvitationController, :accept
+    put "/users/invite/:token/:id/invite_update", UserInvitationController, :update_user
   end
 
   scope "/", RauversionWeb do
