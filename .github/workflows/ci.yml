@@ -38,7 +38,7 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
           otp-version: '25'
-          elixir-version: '1.12'
+          elixir-version: '1.13'
       - run: mix deps.get
       - run: mix ecto.create ; mix ecto.migrate
       # for now we will run only backend tests
