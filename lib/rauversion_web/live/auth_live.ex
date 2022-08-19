@@ -1,5 +1,5 @@
 defmodule RauversionWeb.UserLiveAuth do
-  import Phoenix.LiveView
+  # import Phoenix.LiveView
 
   def on_mount(:default, _params, session, socket) do
     socket = socket |> RauversionWeb.LiveHelpers.get_user_by_session(session)

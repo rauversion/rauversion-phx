@@ -55,7 +55,7 @@ defmodule RauversionWeb.TrackLive.RepostTrackButtonComponent do
   def handle_event(
         "repost-track",
         %{"id" => _id},
-        socket = %{assigns: %{track: _track, current_user: user = nil}}
+        socket = %{assigns: %{track: _track, current_user: _user = nil}}
       ) do
     # TODO: SHOW MODAL HERE
     {:noreply, socket}

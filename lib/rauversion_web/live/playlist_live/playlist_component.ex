@@ -35,7 +35,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
 
   def handle_event(
         "like-playlist",
-        %{"id" => id},
+        %{"id" => _id},
         socket = %{
           assigns: %{playlist: playlist, current_user: current_user = %Rauversion.Accounts.User{}}
         }

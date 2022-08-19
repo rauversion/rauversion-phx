@@ -26,6 +26,9 @@ jobs:
       - uses: mfinelli/setup-imagemagick@v1
       - uses: FedericoCarboni/setup-ffmpeg@v1
 
+      - name: installs certs
+        run: sudo apt-get install ca-certificates -y
+
       - name: installs lame
         run: sudo apt-get update -y; sudo apt-get install -y lame
       
@@ -34,8 +37,8 @@ jobs:
 
       - uses: erlef/setup-beam@v1
         with:
-          otp-version: '24'
-          elixir-version: '1.12'
+          otp-version: '25'
+          elixir-version: '1.13'
       - run: mix deps.get
       - run: mix ecto.create ; mix ecto.migrate
       # for now we will run only backend tests

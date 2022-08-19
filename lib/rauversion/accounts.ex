@@ -33,7 +33,7 @@ defmodule Rauversion.Accounts do
     |> Repo.aggregate(:count, :id)
   end
 
-  def unfollowed_users(user) do
+  def unfollowed_users(_user) do
     from(u in User,
       left_join: m in assoc(u, :followings),
       # on: [follower_id: ^user.id],
@@ -441,5 +441,58 @@ defmodule Rauversion.Accounts do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+  end
+
+  # invitations
+
+  def change_user_invitation(%User{} = user, attrs \\ %{}) do
+    User.invitation_changeset(user, attrs)
+  end
+
+  def deliver_user_invitation_instructions(%User{} = user, invitation_url_fun)
+      when is_function(invitation_url_fun, 1) do
+    if user.confirmed_at do
+      {:error, :already_confirmed}
+    else
+      {encoded_token, user_token} = UserToken.build_email_token(user, "invitation")
+      Repo.insert!(user_token)
+      UserNotifier.deliver_invitation_instructions(user, invitation_url_fun.(encoded_token))
+    end
+  end
+
+  def fetch_user_from_invitation(token) do
+    with {:ok, query} <- UserToken.verify_email_token_query(token, "invitation"),
+         %User{} = user <- Repo.one(query) do
+      {:ok, user}
+    else
+      _ -> :error
+    end
+  end
+
+  def accept_invitation(token, user_params) do
+    with {:ok, query} <- UserToken.verify_email_token_query(token, "invitation"),
+         %User{} = user <- Repo.one(query),
+         {:ok, changeset} <- valid_invitation_changeset(user, user_params),
+         {:ok, %{user: user}} <- Repo.transaction(accept_invitation_multi(user, changeset)) do
+      {:ok, user}
+    else
+      {:error, %Ecto.Changeset{} = ch} -> {:error, ch}
+      _ -> :error
+    end
+  end
+
+  defp valid_invitation_changeset(user, params) do
+    changeset = User.accept_invitation_changeset(user, params)
+
+    case changeset.valid? do
+      true -> {:ok, changeset}
+      false -> {:error, changeset}
+    end
+  end
+
+  defp accept_invitation_multi(user, user_update_changeset) do
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:user, user_update_changeset)
+    |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, ["invitation"]))
   end
 end

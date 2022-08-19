@@ -6,6 +6,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
 
   alias Rauversion.{Posts}
 
+  @impl true
   def update(%{post: post} = assigns, socket) do
     changeset = Posts.change_post(post)
 
@@ -49,6 +50,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
     end
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div class="z-[500]-- pointer-events-none fixed-- inset-y-0 right-0 flex max-w-full pl-10 w-1/4">
@@ -231,6 +233,13 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                     </div>
                   </fieldset>
                 </div>
+
+                <%= form_input_renderer(f, %{
+                  name: :category_id,
+                  type: :select,
+                  options: Rauversion.Categories.list_categories |> Enum.map(fn x -> {x.name, x.id} end),
+                  wrapper_class: ""
+                }) %>
 
                 <div class="pt-4 pb-6">
                   <div class="flex text-sm">

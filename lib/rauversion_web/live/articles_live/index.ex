@@ -2,8 +2,6 @@ defmodule RauversionWeb.ArticlesLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Repo, Accounts, Posts}
-
   @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}
@@ -25,6 +23,10 @@ defmodule RauversionWeb.ArticlesLive.Index do
 
   defp apply_action(socket, :index, _) do
     socket |> assign(:kind, :published)
+  end
+
+  defp apply_action(socket, :category, %{"id" => category_slug}) do
+    socket |> assign(:kind, :category) |> assign(:category_slug, category_slug)
   end
 
   defp apply_action(socket, :mine, _) do

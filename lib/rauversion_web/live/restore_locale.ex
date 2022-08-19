@@ -1,5 +1,5 @@
 defmodule RauversionWeb.RestoreLocale do
-  import Phoenix.LiveView
+  # import Phoenix.LiveView
 
   def on_mount(:default, _params, %{"locale" => locale} = _session, socket) do
     Gettext.put_locale(RauversionWeb.Gettext, locale)

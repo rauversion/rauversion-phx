@@ -4,7 +4,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Posts, Repo}
+  alias Rauversion.Posts
 
   def update(assigns, socket) do
     {:ok,
@@ -36,14 +36,14 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
     case tab do
       "draft" ->
         Posts.list_posts(user |> Ecto.assoc(:articles), "draft")
-        |> Repo.preload(user: :avatar_blob)
+        |> Rauversion.Repo.paginate(page: 1, page_size: 3)
 
       "published" ->
         Posts.list_posts(user |> Ecto.assoc(:articles), "published")
-        |> Repo.preload(user: :avatar_blob)
+        |> Rauversion.Repo.paginate(page: 1, page_size: 3)
 
       "all" ->
-        Posts.list_posts() |> Repo.preload(user: :avatar_blob)
+        Posts.list_posts() |> Rauversion.Repo.paginate(page: 1, page_size: 3)
     end
   end
 

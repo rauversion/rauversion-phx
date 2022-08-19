@@ -22,6 +22,7 @@ defmodule Rauversion.Posts.Post do
     field :settings, :map
 
     belongs_to :user, Rauversion.Accounts.User
+    belongs_to :category, Rauversion.Categories.Category
 
     has_one(:cover_attachment, ActiveStorage.Attachment,
       where: [record_type: "Post", name: "cover"],
@@ -46,13 +47,13 @@ defmodule Rauversion.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body, :excerpt, :private, :slug, :state, :user_id])
+    |> cast(attrs, [:title, :body, :excerpt, :private, :slug, :state, :user_id, :category_id])
     |> validate_required([:body])
   end
 
   def update_changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body, :excerpt, :slug, :state])
+    |> cast(attrs, [:title, :body, :excerpt, :slug, :state, :category_id])
     |> validate_required([:title, :body, :excerpt])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()

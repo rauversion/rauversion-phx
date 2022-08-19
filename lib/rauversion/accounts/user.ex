@@ -40,6 +40,8 @@ defmodule Rauversion.Accounts.User do
     has_many :liked_tracks, Rauversion.TrackLikes.TrackLike, on_delete: :delete_all
     has_many :reposted_tracks, Rauversion.Reposts.Repost, on_delete: :delete_all
 
+    has_many :events, Rauversion.Events.Event, on_delete: :delete_all
+
     has_one(:avatar_attachment, ActiveStorage.Attachment,
       where: [record_type: "User", name: "avatar"],
       foreign_key: :record_id

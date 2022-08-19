@@ -1,6 +1,6 @@
 # This genserver was taken from plausible source code:
 # https://github.com/plausible/analytics/blob/83df555f55d07b091af1512e3af6948e3dde2bba/lib/plausible/event/write_buffer.ex
-defmodule Rauversion.Events.WriteBuffer do
+defmodule Rauversion.TrackingEvents.WriteBuffer do
   use GenServer
   require Logger
   @flush_interval_ms 5_000
@@ -72,9 +72,7 @@ defmodule Rauversion.Events.WriteBuffer do
             &(Map.from_struct(&1) |> Map.delete(:__meta__) |> Map.get(:changes))
           )
 
-        # IO.inspect("EVENTS!!!!")
-        # IO.inspect(events)
-        Rauversion.Repo.insert_all(Rauversion.Events.Event, events)
+        Rauversion.Repo.insert_all(Rauversion.TrackingEvents.Event, events)
     end
   end
 end

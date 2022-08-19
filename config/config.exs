@@ -29,6 +29,16 @@ config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Local
 # https://lokalise.com/blog/localization-of-phoenix-applications/
 config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: "en"
 
+config :ex_cldr,
+  default_locale: "en",
+  default_backend: Rauversion.Cldr,
+  json_library: Jason
+
+# data_dir: "./priv/cldr",
+# force_locale_download: Mix.env() == :prod
+
+# cacertfile: "path/to/cacertfile"
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 

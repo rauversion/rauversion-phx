@@ -17,7 +17,7 @@ defmodule Rauversion.Application do
       Rauversion.Repo,
       # Start the Telemetry supervisor
       RauversionWeb.Telemetry,
-      Rauversion.Events.WriteBuffer,
+      Rauversion.TrackingEvents.WriteBuffer,
       {Oban, Application.fetch_env!(:rauversion, Oban)},
       # Start the PubSub system
       {Phoenix.PubSub, name: Rauversion.PubSub},

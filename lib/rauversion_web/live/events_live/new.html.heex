@@ -1,0 +1,57 @@
+
+<div class="flex-1 flex xl:overflow-hidden">
+
+  <.live_component module={RauversionWeb.EventsLive.NavBar} 
+    id="nav_bar"
+    event={@event} 
+    live_action={@live_action} 
+  />
+
+  <% #= @live_action %>
+  <div class="mt-6- text-gray-500 flex dark:bg-black dark:text-white ">
+
+    <%= case @live_action do 
+      :new -> live_component(
+                  RauversionWeb.Live.EventsLive.Components.FormComponent,
+                  id: "all-track-#{@event.id}",
+                  event: @event,
+                  changeset: @changeset,
+                  uploads: @uploads
+                )
+      :edit -> live_component(
+                  RauversionWeb.Live.EventsLive.Components.FormComponent,
+                  id: "all-track-#{@event.id}",
+                  event: @event,
+                  changeset: @changeset,
+                  uploads: @uploads
+                )
+      :schedule -> live_component(
+                RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent,
+                id: "scheduling-form",
+                event: @event,
+                changeset: @changeset
+              )
+      :tickets -> live_component(
+                RauversionWeb.Live.EventsLive.Components.TicketsFormComponent,
+                id: "tickets-form",
+                event: @event,
+                changeset: @changeset
+              )
+      :tax -> live_component(
+                RauversionWeb.Live.EventsLive.Components.TaxFormComponent,
+                id: "tax-form",
+                event: @event,
+                changeset: @changeset
+              )
+      :attendees -> live_component(
+                      RauversionWeb.Live.EventsLive.Components.AttendeesComponent,
+                      id: "attendees"
+                    )
+      _ -> "no section for #{@live_action}"
+
+     end %>
+
+
+  </div>
+
+</div>

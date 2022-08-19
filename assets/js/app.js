@@ -36,6 +36,13 @@ import ArticleContent from "./hooks/article_content"
 import create from 'zustand/vanilla'
 import { persist } from 'zustand/middleware'
 
+window.dispatchMapsEvent = function (...args) {
+  const event = document.createEvent("Events")
+  event.initEvent("google-maps-callback", true, true)
+  event.args = args
+  window.dispatchEvent(event)
+}
+
 
 const store = create(
   persist(

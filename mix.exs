@@ -7,6 +7,7 @@ defmodule Rauversion.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
+      # ++ [:cldr],
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -20,7 +21,7 @@ defmodule Rauversion.MixProject do
   def application do
     [
       mod: {Rauversion.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:ex_cldr, :logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -68,6 +69,7 @@ defmodule Rauversion.MixProject do
       {:fsmx, "~> 0.2.0"},
       {:oembed, "~> 0.4.1"},
       {:tesla, "~> 1.4"},
+      {:ex_cldr_dates_times, "~> 2.0"},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git",

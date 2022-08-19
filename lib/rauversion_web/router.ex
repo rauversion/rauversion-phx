@@ -65,8 +65,8 @@ defmodule RauversionWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", RauversionWeb do
     pipe_through :browser_api
-    post "/tracks/:track_id/events", EventsController, :show
-    get "/tracks/:track_id/events", EventsController, :show
+    post "/tracks/:track_id/events", TrackingEventsController, :show
+    get "/tracks/:track_id/events", TrackingEventsController, :show
   end
 
   # Enables LiveDashboard only for development
@@ -101,16 +101,27 @@ defmodule RauversionWeb.Router do
   ## Authentication routes
 
   scope "/", RauversionWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [
+      :browser,
+      :redirect_if_user_is_authenticated,
+      :redirect_if_disabled_registrations
+    ]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
+  end
+
+  scope "/", RauversionWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
+
+    get "/users/invite/:token", UserInvitationController, :accept
+    put "/users/invite/:token/:id/invite_update", UserInvitationController, :update_user
   end
 
   scope "/", RauversionWeb do
@@ -129,6 +140,18 @@ defmodule RauversionWeb.Router do
     live "/articles/new", ArticlesLive.New, :new
     live "/articles/edit/:id", ArticlesLive.New, :edit
     live "/articles/:slug/edit", ArticlesLive.New, :edit
+
+    live "/events/mine", EventsLive.Index, :mine
+    live "/events/new", EventsLive.New, :new
+    live "/events/edit/:id", EventsLive.New, :edit
+    live "/events/:slug/edit", EventsLive.New, :edit
+    live "/events/:slug/edit/schedule", EventsLive.New, :schedule
+    live "/events/:slug/edit/tickets", EventsLive.New, :tickets
+    live "/events/:slug/edit/order_form", EventsLive.New, :order_form
+    live "/events/:slug/edit/widgets", EventsLive.New, :widgets
+    live "/events/:slug/edit/tax", EventsLive.New, :tax
+    live "/events/:slug/edit/attendees", EventsLive.New, :attendees
+    live "/events/:slug/edit/sponsors", EventsLive.New, :sponsors
 
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
@@ -214,7 +237,12 @@ defmodule RauversionWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
 
     live "/articles", ArticlesLive.Index, :index
+    live "/articles/category/:id", ArticlesLive.Index, :category
+
     live "/articles/:id", ArticlesLive.Show, :show
+
+    live "/events", EventsLive.Index, :index
+    live "/events/:id", EventsLive.Show, :show
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id", TrackLive.Show, :show

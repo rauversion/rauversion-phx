@@ -1,7 +1,7 @@
 defmodule Rauversion.PostsTest do
   use Rauversion.DataCase
 
-  alias Rauversion.Posts
+  alias Rauversion.{Posts, Repo}
 
   describe "post" do
     alias Rauversion.Posts.Post
@@ -11,8 +11,8 @@ defmodule Rauversion.PostsTest do
     @invalid_attrs %{body: nil, excerpt: nil, slug: nil, state: nil, title: nil}
 
     test "list_posts/0 returns all post" do
-      post = post_fixture()
-      assert Posts.list_posts() == [post]
+      post = post_fixture() |> Repo.preload([:user, :category])
+      assert Posts.list_posts("draft") |> Repo.all() == [post]
     end
 
     test "get_post!/1 returns the post with given id" do
@@ -25,7 +25,6 @@ defmodule Rauversion.PostsTest do
         body: %{},
         excerpt: "some excerpt",
         slug: "some slug",
-        state: "some state",
         title: "some title"
       }
 
@@ -33,7 +32,7 @@ defmodule Rauversion.PostsTest do
       assert post.body == %{}
       assert post.excerpt == "some excerpt"
       assert post.slug == "some slug"
-      assert post.state == "some state"
+      assert post.state == "draft"
       assert post.title == "some title"
     end
 
@@ -48,7 +47,7 @@ defmodule Rauversion.PostsTest do
         body: %{},
         excerpt: "some updated excerpt",
         slug: "some updated slug",
-        state: "some updated state",
+        state: "published",
         title: "some updated title"
       }
 
@@ -56,7 +55,7 @@ defmodule Rauversion.PostsTest do
       assert post.body == %{}
       assert post.excerpt == "some updated excerpt"
       assert post.slug == "some updated slug"
-      assert post.state == "some updated state"
+      assert post.state == "published"
       assert post.title == "some updated title"
     end
 
