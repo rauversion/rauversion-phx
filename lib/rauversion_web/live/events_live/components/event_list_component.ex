@@ -24,7 +24,7 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
         <div>
           <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl"><%= gettext("Upcoming Events") %></h2>
           <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
-            <%= gettext "Selected articles & reviews from Rauversion community and editorial" %>
+            <%= gettext "Upcoming Events from the Rauversion community" %>
           </p>
         </div>
 
@@ -44,11 +44,11 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
                   </h3>
 
                   <p class="text-gray-500 italic">
-                    <%= event.city %> <%= event.country %>
+                    <%= event.province %> <%= event.city %> <%= event.country %>
                   </p>
 
                   <p class="mt-2 font-medium text-gray-900 dark:text-gray-100">
-                    <%= event.event_start %>
+                    <%= Rauversion.Events.event_dates(event) %>
                   </p>
                 <% end %>
 
