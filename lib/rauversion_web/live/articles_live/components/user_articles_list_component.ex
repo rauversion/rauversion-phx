@@ -36,14 +36,14 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
     case tab do
       "draft" ->
         Posts.list_posts(user |> Ecto.assoc(:articles), "draft")
-        |> Rauversion.Repo.paginate(page: 1, page_size: 3)
+        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
 
       "published" ->
         Posts.list_posts(user |> Ecto.assoc(:articles), "published")
-        |> Rauversion.Repo.paginate(page: 1, page_size: 3)
+        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
 
       "all" ->
-        Posts.list_posts() |> Rauversion.Repo.paginate(page: 1, page_size: 3)
+        Posts.list_posts() |> Rauversion.Repo.paginate(page: 1, page_size: 30)
     end
   end
 
