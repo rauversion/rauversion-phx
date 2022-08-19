@@ -33,7 +33,8 @@ config :ex_cldr,
   default_locale: "en",
   default_backend: Rauversion.Cldr,
   json_library: Jason,
-  data_dir: "./priv/cldr"
+  data_dir: "./priv/cldr",
+  force_locale_download: Mix.env() == :prod
 
 # cacertfile: "path/to/cacertfile"
 

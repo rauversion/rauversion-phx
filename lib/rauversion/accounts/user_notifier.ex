@@ -17,6 +17,23 @@ defmodule Rauversion.Accounts.UserNotifier do
     end
   end
 
+  def deliver_invitation_instructions(user, url) do
+    deliver(user.email, "Confirmation instructions", """
+
+    ==============================
+
+    Hi #{user.email},
+
+    You can confirm your account by visiting the URL below:
+
+    #{url}
+
+    If you didn't create an account with us, please ignore this.
+
+    ==============================
+    """)
+  end
+
   @doc """
   Deliver instructions to confirm account.
   """
