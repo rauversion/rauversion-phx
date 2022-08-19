@@ -21,7 +21,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
     [%{name: "Steven McHail", title: "Designer at Globex Corporation"}]
   end
 
-  def handle_event("day", params, socket) do
+  def handle_event("day", _params, socket) do
     {:noreply, assign(:day, List.first(socket.assigns.days))}
   end
 

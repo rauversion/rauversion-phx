@@ -60,13 +60,6 @@ defmodule Rauversion.TrackingEvents.Event do
     :updated_at
   ]
 
-  def country_name(name) do
-    case Countries.filter_by(:alpha2, name) do
-      [%{name: country_name} | _] -> country_name
-      _ -> name
-    end
-  end
-
   def changeset(struct, attrs) do
     struct
     |> cast(attrs, @required_fields ++ @optional_fields)

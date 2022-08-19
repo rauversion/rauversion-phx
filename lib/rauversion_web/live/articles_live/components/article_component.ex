@@ -4,8 +4,6 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Posts, Repo}
-
   def render(assigns) do
     image_height_class = assigns |> Map.get(:image_class) || "h-32"
 

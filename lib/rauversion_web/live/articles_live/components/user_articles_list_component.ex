@@ -4,7 +4,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Posts, Repo}
+  alias Rauversion.Posts
 
   def update(assigns, socket) do
     {:ok,

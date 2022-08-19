@@ -11,7 +11,6 @@ defmodule Rauversion.CategoriesFixtures do
     {:ok, category} =
       attrs
       |> Enum.into(%{
-        category: "some category",
         name: "some name",
         slug: "some slug"
       })

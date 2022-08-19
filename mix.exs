@@ -7,7 +7,8 @@ defmodule Rauversion.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers() ++ [:cldr],
+      # ++ [:cldr],
+      compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -20,7 +21,7 @@ defmodule Rauversion.MixProject do
   def application do
     [
       mod: {Rauversion.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:ex_cldr, :logger, :runtime_tools, :os_mon]
     ]
   end
 

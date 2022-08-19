@@ -33,9 +33,10 @@ defmodule Rauversion.Events.Event do
     field :eticket, :boolean, default: false
     field :event_capacity, :boolean, default: false
     field :event_capacity_limit, :integer
-    field :event_ends, :naive_datetime
+    field :event_ends, :utc_datetime
+    field :event_start, :utc_datetime
+
     field :event_short_link, :string
-    field :event_start, :naive_datetime
     field :online, :boolean, default: false
     field :private, :boolean, default: false
     field :slug, :string

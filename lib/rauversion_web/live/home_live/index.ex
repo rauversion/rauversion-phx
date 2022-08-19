@@ -2,7 +2,7 @@ defmodule RauversionWeb.HomeLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, UserFollows, Repo, Playlists, Tracks}
+  alias Rauversion.{Playlists, Tracks, Accounts, Repo}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -24,13 +24,13 @@ defmodule RauversionWeb.HomeLive.Index do
     |> Repo.paginate(page: page, page_size: 6)
   end
 
-  defp list_users(page, current_user = nil) do
+  defp list_users(_page, _current_user = nil) do
     nil
   end
 
   defp list_users(page, current_user = %Accounts.User{}) do
     Accounts.unfollowed_users(current_user)
-    |> Repo.paginate(page: 1, page_size: 5)
+    |> Repo.paginate(page: page, page_size: 5)
   end
 
   @impl true

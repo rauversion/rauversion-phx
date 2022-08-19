@@ -2,7 +2,7 @@ defmodule RauversionWeb.ArticlesLive.Show do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Posts, Repo}
+  alias Rauversion.{Posts, Repo}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -34,7 +34,7 @@ defmodule RauversionWeb.ArticlesLive.Show do
     |> assign(:meta_tags, metatags(socket, post))
   end
 
-  defp metatags(socket, post) do
+  defp metatags(_socket, post) do
     %{
       title: "#{post.title} on Rauversion",
       description: "Read #{post.title} by #{post.user.username} on Rauversion.",

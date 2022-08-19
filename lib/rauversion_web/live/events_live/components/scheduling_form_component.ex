@@ -22,6 +22,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
       <div class="p-5">

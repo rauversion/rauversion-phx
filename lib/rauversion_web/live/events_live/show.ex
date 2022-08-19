@@ -2,7 +2,7 @@ defmodule RauversionWeb.EventsLive.Show do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Events, Repo}
+  alias Rauversion.{Events, Repo}
 
   @impl true
   def mount(_params, _session, socket) do

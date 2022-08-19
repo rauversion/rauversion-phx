@@ -14,7 +14,6 @@ defmodule Rauversion.PostsFixtures do
         body: %{},
         excerpt: "some excerpt",
         slug: "some slug",
-        state: "some state",
         title: "some title"
       })
       |> Rauversion.Posts.create_post()

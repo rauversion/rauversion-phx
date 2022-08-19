@@ -18,11 +18,11 @@ defmodule Rauversion.Posts do
 
   """
 
-  # def list_posts do
-  #  Repo.all(Post)
-  # end
+  def all_posts do
+    Repo.all(Post)
+  end
 
-  def list_posts(state) do
+  def list_posts(state \\ "published") do
     from(pi in Post,
       where: pi.state == ^state,
       preload: [:category, user: :avatar_blob]

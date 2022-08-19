@@ -2,8 +2,6 @@ defmodule RauversionWeb.ArticlesLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Repo, Accounts, Posts}
-
   @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}

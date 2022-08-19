@@ -2,7 +2,7 @@ defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Accounts, Tracks, Repo, UserFollows}
+  alias Rauversion.{Accounts, Tracks, UserFollows}
 
   @impl true
   def mount(_params = %{"username" => id}, _session, socket) do

@@ -3,7 +3,7 @@ defmodule RauversionWeb.OEmbedController do
   alias Rauversion.Services.FetchCardLink
   alias Rauversion.PreviewCards
 
-  def create(conn, params = %{"url" => url}) do
+  def create(conn, _params = %{"url" => url}) do
     case FetchCardLink.call(url) do
       record ->
         conn

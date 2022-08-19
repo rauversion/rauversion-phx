@@ -4,8 +4,6 @@ defmodule RauversionWeb.ArticlesLive.ArticlesBlockComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Posts, Repo}
-
   def render(assigns) do
     ~H"""
       <div class="relative flex flex-wrap items-end w-full dark:text-white">

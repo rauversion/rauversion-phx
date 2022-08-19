@@ -14,7 +14,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
   end
 
   @impl true
-  def handle_event("validate", event_params, socket) do
+  def handle_event("validate", _event_params, socket) do
     # changeset =
     #  socket.assigns.event
     #  |> Events.change_event(event_params)

@@ -114,4 +114,11 @@ defmodule Rauversion.Events do
       _ -> struct.event_start
     end
   end
+
+  def country_name(name) do
+    case Countries.filter_by(:alpha2, name) do
+      [%{name: country_name} | _] -> country_name
+      _ -> name
+    end
+  end
 end

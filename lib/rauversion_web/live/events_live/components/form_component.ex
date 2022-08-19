@@ -78,7 +78,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
                 <%= text_input f,
                 :location, placeholder: "type location",
                 "data-gmaps-target": "field",
-                "autocomplete": "false",
+                autocomplete: "false",
                 "data-action": "keydown->maps#preventSubmit",
                 class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
               </div>
@@ -89,35 +89,35 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
 
             <%= text_input f, :lat,
               "data-gmaps-target": "latitude",
-              "autocomplete": "false",
+              autocomplete: "false",
               "data-action": "keydown->maps#preventSubmit",
               class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
             %>
 
             <%= text_input f, :lng,
               "data-gmaps-target": "longitude",
-              "autocomplete": "false",
+              autocomplete: "false",
               "data-action": "keydown->maps#preventSubmit",
               class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
             %>
 
             <%= text_input f, :country,
               "data-gmaps-target": "country",
-              "autocomplete": "false",
+              autocomplete: "false",
               "data-action": "keydown->maps#preventSubmit",
               class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
             %>
 
             <%= text_input f, :city,
               "data-gmaps-target": "city",
-              "autocomplete": "false",
+              autocomplete: "false",
               "data-action": "keydown->maps#preventSubmit",
               class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
             %>
 
             <%= text_input f, :province,
               "data-gmaps-target": "province",
-              "autocomplete": "false",
+              autocomplete: "false",
               "data-action": "keydown->maps#preventSubmit",
               class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
             %>

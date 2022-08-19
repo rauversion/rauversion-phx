@@ -8,7 +8,7 @@ defmodule Rauversion.CategoriesTest do
 
     import Rauversion.CategoriesFixtures
 
-    @invalid_attrs %{category: nil, name: nil, slug: nil}
+    @invalid_attrs %{name: nil, slug: nil}
 
     test "list_categories/0 returns all categories" do
       category = category_fixture()
@@ -21,10 +21,9 @@ defmodule Rauversion.CategoriesTest do
     end
 
     test "create_category/1 with valid data creates a category" do
-      valid_attrs = %{category: "some category", name: "some name", slug: "some slug"}
+      valid_attrs = %{name: "some name", slug: "some slug"}
 
       assert {:ok, %Category{} = category} = Categories.create_category(valid_attrs)
-      assert category.category == "some category"
       assert category.name == "some name"
       assert category.slug == "some slug"
     end
@@ -35,10 +34,9 @@ defmodule Rauversion.CategoriesTest do
 
     test "update_category/2 with valid data updates the category" do
       category = category_fixture()
-      update_attrs = %{category: "some updated category", name: "some updated name", slug: "some updated slug"}
+      update_attrs = %{name: "some updated name", slug: "some updated slug"}
 
       assert {:ok, %Category{} = category} = Categories.update_category(category, update_attrs)
-      assert category.category == "some updated category"
       assert category.name == "some updated name"
       assert category.slug == "some updated slug"
     end

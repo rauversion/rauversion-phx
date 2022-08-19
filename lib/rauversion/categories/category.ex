@@ -3,7 +3,6 @@ defmodule Rauversion.Categories.Category do
   import Ecto.Changeset
 
   schema "categories" do
-    field :category, :string
     field :name, :string
     field :slug, :string
 
@@ -13,7 +12,7 @@ defmodule Rauversion.Categories.Category do
   @doc false
   def changeset(category, attrs) do
     category
-    |> cast(attrs, [:category, :name, :slug])
-    |> validate_required([:category, :name, :slug])
+    |> cast(attrs, [:name, :slug])
+    |> validate_required([:name, :slug])
   end
 end
