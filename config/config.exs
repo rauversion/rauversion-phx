@@ -31,7 +31,10 @@ config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale
 
 config :ex_cldr,
   default_locale: "en",
-  default_backend: Rauversion.Cldr
+  default_backend: Rauversion.Cldr,
+  json_library: Jason
+
+# cacertfile: "path/to/cacertfile"
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
