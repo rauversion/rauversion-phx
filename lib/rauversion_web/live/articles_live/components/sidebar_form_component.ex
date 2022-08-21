@@ -8,6 +8,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
 
   @impl true
   def update(%{post: post} = assigns, socket) do
+    post = Posts.get_post!(post.id)
     changeset = Posts.change_post(post)
 
     {:ok,
