@@ -40,7 +40,7 @@ defmodule Rauversion.Services.PeaksGenerator do
     IO.inspect(cmd)
     output = :os.cmd(cmd)
 
-    IO.inspect(output)
+    # IO.inspect(output)
 
     Jason.decode!(output)["frames"]
     |> Enum.map(fn x ->
@@ -74,13 +74,13 @@ defmodule Rauversion.Services.PeaksGenerator do
 
   def normalize(input) do
     {min, max} = Enum.min_max(input)
-    {new_min, new_max} = {0, 1}
+    {new_min, new_max} = {-1, 1}
 
     Enum.map(
       input,
       &((new_min + (&1 - min) / (max - min) * (new_max - new_min))
         |> Decimal.from_float()
-        |> Decimal.round(1)
+        |> Decimal.round(3)
         |> Decimal.to_float())
     )
   end
