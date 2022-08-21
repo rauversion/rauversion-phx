@@ -14,12 +14,13 @@ defmodule Rauversion.Events.Event do
     field :age_requirement, :string
 
     field :attendee_list_settings, :map
-    field :event_settings, :map
     field :order_form, :map
     field :tax_rates_settings, :map
     field :widget_button, :map
+
     embeds_many :scheduling_settings, Rauversion.Events.Schedule
     embeds_many :tickets, Rauversion.Events.Ticket
+    embeds_one :event_settings, Rauversion.Events.Settings
 
     field :city, :string
     field :country, :string
@@ -95,7 +96,6 @@ defmodule Rauversion.Events.Event do
       :event_short_link,
       :tax_rates_settings,
       :attendee_list_settings,
-      :event_settings,
       :user_id
     ])
     |> validate_required([
@@ -130,6 +130,7 @@ defmodule Rauversion.Events.Event do
     ])
     |> cast_embed(:scheduling_settings, with: &Rauversion.Events.Schedule.changeset/2)
     |> cast_embed(:tickets, with: &Rauversion.Events.Ticket.changeset/2)
+    |> cast_embed(:event_settings, with: &Rauversion.Events.Settings.changeset/2)
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
   end

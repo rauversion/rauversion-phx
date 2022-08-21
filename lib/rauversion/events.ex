@@ -21,6 +21,27 @@ defmodule Rauversion.Events do
     Repo.all(Event)
   end
 
+  def all_events do
+    Repo.all(Event)
+  end
+
+  def list_events(state \\ "published") do
+    from(pi in Event,
+      where: pi.state == ^state,
+      preload: [:category, user: :avatar_blob]
+    )
+
+    # |> Repo.all()
+  end
+
+  def list_events(query, state) do
+    query
+    |> where([p], p.state == ^state)
+    |> preload(user: :avatar_blob)
+
+    # |> Repo.all()
+  end
+
   @doc """
   Gets a single event.
 
@@ -112,6 +133,13 @@ defmodule Rauversion.Events do
     case Cldr.Interval.to_string(struct.event_start, struct.event_ends, Rauversion.Cldr) do
       {:ok, d} -> d
       _ -> struct.event_start
+    end
+  end
+
+  def simple_date_for(date) do
+    case Cldr.DateTime.to_string(date, format: :ed) do
+      {:ok, d} -> d
+      _ -> date
     end
   end
 

@@ -13,19 +13,41 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
   end
 
   @impl true
-  def handle_event("validate", event_params, socket) do
-    changeset =
-      socket.assigns.event
-      |> Rauversion.Events.change_event(event_params)
-      |> Map.put(:action, :validate)
+  def handle_event("validate", _event_params, socket) do
+    # changeset =
+    #  socket.assigns.event
+    #  |> Events.change_event(event_params)
+    #  |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
+    # {:noreply, assign(socket, :changeset, changeset)}
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("save", event_params, socket) do
+    save_event(socket, :edit, event_params)
+  end
+
+  defp save_event(socket, :edit, %{"event" => event_params}) do
+    case Rauversion.Events.update_event(socket.assigns.event, event_params) do
+      {:ok, _event} ->
+        {
+          :noreply,
+          socket
+          |> put_flash(:info, "Playlist updated successfully")
+          # |> push_redirect(to: socket.assigns.return_to)
+        }
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, :changeset, changeset)}
+    end
   end
 
   @impl true
   def render(assigns) do
     ~H"""
-      <div class="p-5">
+      <div class="p-5 w-full">
         <.form
           let={f}
           for={@changeset}
@@ -39,19 +61,17 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           </h2>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
-
-              <%= inputs_for f, :scheduling_settings, fn i -> %>
-                <div class="sm:col-span-6 flex justify-end space-x-3">
-                  <%= form_input_renderer(i, %{type: :datetime_input, name: :event_start, wrapper_class: nil}) %>
-                  <%= form_input_renderer(i, %{type: :datetime_input, name: :event_ends, wrapper_class: nil}) %>
-                  <%= form_input_renderer(f, %{type: :select, options: [
-                    [key: "Daily", value: "daily"],
-                    [key: "Weekly", value: "weekly"],
-                    [key: "Once", value: "once"],
-                  ], wrapper_class: nil, name: :schedule_type }) %>
-                </div>
-              <% end %>
+            <%= inputs_for f, :scheduling_settings, fn i -> %>
+              <%= form_input_renderer(i, %{type: :text_input, name: :name, wrapper_class: "sm:col-span-6"}) %>
+              <%= form_input_renderer(i, %{type: :datetime_input, name: :start_date, wrapper_class: "sm:col-span-3"}) %>
+              <%= form_input_renderer(i, %{type: :datetime_input, name: :end_date, wrapper_class: "sm:col-span-3"}) %>
+              <%= form_input_renderer(i, %{type: :select, options: [
+                [key: "Daily", value: "daily"],
+                [key: "Weekly", value: "weekly"],
+                [key: "Once", value: "once"],
+              ], wrapper_class: "sm:col-span-6", name: :schedule_type }) %>
+              <%= form_input_renderer(i, %{type: :textarea, name: :description, wrapper_class: "sm:col-span-6"}) %>
+            <% end %>
           </div>
 
             <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">

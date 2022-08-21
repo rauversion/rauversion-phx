@@ -126,6 +126,21 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
               <div class="w-full h-64" data-gmaps-target="map"></div>
             </div>
 
+          </div>
+
+
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+            <%= inputs_for f, :event_settings, fn i -> %>
+              <%= form_input_renderer(i, %{type: :text_input, name: :participant_label, wrapper_class: "sm:col-span-6"}) %>
+              <%= form_input_renderer(i, %{type: :textarea, name: :participant_description, wrapper_class: "sm:col-span-6"}) %>
+              <%= form_input_renderer(i, %{type: :checkbox, name: :accept_sponsors, wrapper_class: "sm:col-span-6"}) %>
+              <%= form_input_renderer(i, %{type: :text_input, name: :sponsors_label, wrapper_class: "sm:col-span-6"}) %>
+              <%= form_input_renderer(i, %{type: :textarea, name: :sponsors_description, wrapper_class: "sm:col-span-6"}) %>
+              <%= form_input_renderer(i, %{type: :text_input, name: :scheduling_label, wrapper_class: "sm:col-span-6"}) %>
+              <%= form_input_renderer(i, %{type: :textarea, name: :scheduling_description, wrapper_class: "sm:col-span-6"}) %>
+            <% end %>
+
             <div class="sm:col-span-6 flex justify-end">
               <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
             </div>

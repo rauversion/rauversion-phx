@@ -1,49 +1,47 @@
 defmodule RauversionWeb.EventsLive.UserEventsListComponent do
-  # If you generated an app with mix phx.new --live,
-  # the line below would be: use MyAppWeb, :live_component
-  # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Posts, Repo}
+  alias Rauversion.{Events, Repo}
 
   def update(assigns, socket) do
     {:ok,
      socket
      |> assign(assigns)
      |> assign(:tab, "draft")
-     |> assign(:posts, list_posts(assigns.current_user, "draft"))}
+     |> assign(:events, list_events(assigns.current_user, "draft"))}
   end
 
   def handle_event("all" = tab, %{}, socket) do
     {:noreply,
      assign(socket, tab: tab)
-     |> assign(:posts, list_posts(socket.assigns.current_user, tab))}
+     |> assign(:events, list_events(socket.assigns.current_user, tab))}
   end
 
   def handle_event("draft" = tab, %{}, socket) do
     {:noreply,
      assign(socket, tab: tab)
-     |> assign(:posts, list_posts(socket.assigns.current_user, tab))}
+     |> assign(:events, list_events(socket.assigns.current_user, tab))}
   end
 
   def handle_event("published" = tab, %{}, socket) do
     {:noreply,
      assign(socket, tab: tab)
-     |> assign(:posts, list_posts(socket.assigns.current_user, tab))}
+     |> assign(:events, list_events(socket.assigns.current_user, tab))}
   end
 
-  defp list_posts(user, tab) do
+  defp list_events(user, tab) do
     case tab do
       "draft" ->
-        Posts.list_posts(user |> Ecto.assoc(:articles), "draft")
-        |> Repo.preload(user: :avatar_blob)
+        Events.list_events(user |> Ecto.assoc(:events), "draft")
+        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
 
       "published" ->
-        Posts.list_posts(user |> Ecto.assoc(:articles), "published")
-        |> Repo.preload(user: :avatar_blob)
+        Events.list_events(user |> Ecto.assoc(:events), "published")
+        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
 
       "all" ->
-        Posts.list_posts() |> Repo.preload(user: :avatar_blob)
+        Events.list_events()
+        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
     end
   end
 
@@ -68,7 +66,7 @@ defmodule RauversionWeb.EventsLive.UserEventsListComponent do
             <nav class="-mb-px flex space-x-8" aria-label="Tabs">
               <a href="#" phx-click={"all"} phx-target={@myself}
               class={tab_class(@tab == "all")}>
-                <%= gettext "My Articles" %>
+                <%= gettext "My Events" %>
               </a>
 
               <a href="#" phx-click={"draft"} phx-target={@myself}
@@ -89,11 +87,11 @@ defmodule RauversionWeb.EventsLive.UserEventsListComponent do
 
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
-          <h1 class="text-xl font-semibold text-gray-900 dark:text-gray-100"><%= String.capitalize(@tab) %> Articles</h1>
+          <h1 class="text-xl font-semibold text-gray-900 dark:text-gray-100"><%= String.capitalize(@tab) %> Events</h1>
           <p class="mt-2 text-sm text-gray-700 dark:text-gray-300"><%= gettext "Your articles." %></p>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <%= live_redirect "New article", to: Routes.articles_new_path(@socket, :new),
+          <%= live_redirect "New event", to: Routes.events_new_path(@socket, :new),
             class: "inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 sm:w-auto"
           %>
         </div>
@@ -114,20 +112,20 @@ defmodule RauversionWeb.EventsLive.UserEventsListComponent do
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-800 bg-white dark:bg-black">
-                  <%= for post <- @posts do %>
+                  <%= for event <- @events do %>
                     <tr>
                       <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-200 dark:bg-gray-900 sm:pl-6">
-                        <%= post.title || "-- untitled --Access" %>
+                        <%= event.title || "-- untitled --Access" %>
                       </td>
 
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200 dark:bg-gray-900">
-                        <%= post.user.username %>
+                        <%= event.user.username %>
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200 dark:bg-gray-900">
-                        <%= post.state %>
+                        <%= event.state %>
                       </td>
                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 dark:text-gray-200 dark:bg-gray-900">
-                        <%= live_redirect to: Routes.articles_new_path(@socket, :edit, post.id), class: "text-brand-600 hover:text-brand-900" do %>
+                        <%= live_redirect to: Routes.events_new_path(@socket, :edit, event.slug), class: "text-brand-600 hover:text-brand-900" do %>
                           <%= gettext "Edit" %>
                         <% end %>
                       </td>

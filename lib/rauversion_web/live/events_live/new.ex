@@ -59,10 +59,12 @@ defmodule RauversionWeb.EventsLive.New do
 
     case Events.update_event(socket.assigns.event, event_params) do
       {:ok, _event} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "Playlist updated successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+        {
+          :noreply,
+          socket
+          |> put_flash(:info, "Playlist updated successfully")
+          # |> push_redirect(to: socket.assigns.return_to)
+        }
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
