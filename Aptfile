@@ -3,11 +3,3 @@ libid3tag0-dev
 libsndfile1-dev
 libgd-dev
 lame
-
-
-libboost-filesystem-dev
-libboost-program-options-dev
-libboost-regex-dev
-
-:repo:deb http://ppa.launchpad.net/chris-needham/ppa/ubuntu bionic main
-audiowebform
