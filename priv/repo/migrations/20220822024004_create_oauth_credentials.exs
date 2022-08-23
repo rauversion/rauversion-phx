@@ -4,7 +4,7 @@ defmodule Rauversion.Repo.Migrations.CreateOauthCredentials do
   def change do
     create table(:oauth_credentials) do
       add :uid, :string
-      add :token, :string
+      add :token, :string, size: 3000
       add :data, :map
       add :provider, :string
       add :user_id, references(:users, on_delete: :nothing)

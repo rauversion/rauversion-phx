@@ -12,7 +12,7 @@ Rauversion is built on Elixir with Phoenix framework.
 
 ## setup
 
-> OTP 24 and elixir 1.12.3 and up is required
+> OTP 25 and elixir 1.13.4 and up is required
 
 You can develop directly in a container with [vscode devcontainer](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) or [neovim devcontainer](https://github.com/jamestthompson3/nvim-remote-containers)
 
@@ -26,50 +26,6 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-## images
-
-### TODO
-- [x] User account
-- [x] File uploads Avatar
-- [x] User auth
-- [x] Tracks
-- [x] Add metadata form step
-- [x] Embed at /embed/:track_id
-- [x] Embed at /embed/:track_id/private with signed_id
-- [x] Filter public/private tracks (where: private: true)
-- [x] Reposts
-- [x] Likes
-- [x] Private preview on show
-- [x] Followers / Followings
-- [x] load waveform data as data
-- [x] Range responses
-- [x] Fix specs on tests/rauversion
-- [x] Paginate profile tracks /:username
-- [x] Paginate /tracks
-- [x] Centralized player, fixed (bottom) across navigation
-- [x] Make GithubActions work!
-- [x] Refactor audio processing, add proceesing queue for the after upload
-- [x] Telemetry for dashboard/ metrics / insights
-- [ ] A WYSIWYG editor for Markdown for Track/Playlist description
-  - [x] fallback to a formatted plain text with auto link
-- [ ] Playlists
-  - [x] add to playlist select playlist / modal first tab
-  - [ ] sort songs on playlist
-  - [ ] like button playlist/show
-  - [ ] share button playlist/show
-  - [x] playlist player
-- [ ] Fix specs on tests/rauversion-web
-- [ ] Listening history
-- [ ] Give feedback on upload preprosessing
-- [ ] A logo for rauversion
-- [ ] Albums
-
-
-
-
-
-
 # Setup:
 
 ### Generate fake accounts
