@@ -145,7 +145,11 @@ defmodule RauversionWeb.TrackLive.Player do
   def handle_event("update-from-storage", %{"ids" => stringified_ids}, socket) do
     ids = Jason.decode!(stringified_ids)
 
-    tracks = Tracks.list_tracks_by_ids(ids) |> Repo.all()
+    tracks =
+      Tracks.list_tracks_by_ids(ids)
+      # |> Repo.preload([:user, :mp3_audio_blob])
+      |> Repo.all()
+
     track = List.first(tracks)
 
     {:noreply,

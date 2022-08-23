@@ -443,6 +443,79 @@ defmodule Rauversion.Accounts do
     |> Repo.insert()
   end
 
+  def find_by_credential_uid(uid) do
+    Rauversion.OauthCredentials.get_oauth_credential_by_uid!(uid) |> Repo.preload(:user)
+  end
+
+  def get_or_create_user(user_data) do
+    # %{
+    #  avatar: "https://lh3.googleusercontent.com/a-/AFdZucqqdrPKRYQdJKA2ClMex-anYYwHjRrihFERqtcvcw=s96-c",
+    #  email: "miguelmichelson@gmail.com",
+    #  id: "gakETMlISPCYrkeR6SlYHA",
+    #  name: "miguel michelson"
+    # }
+    case find_by_credential_uid(user_data.id) do
+      %Rauversion.OauthCredentials.OauthCredential{user: user} ->
+        {:ok, %{user: user}}
+
+      nil ->
+        create_user_from_identity(user_data)
+    end
+  end
+
+  def create_user_from_identity(user_data = %{email: _email = nil}) do
+    {:error, %{user_data: user_data}}
+  end
+
+  def create_user_from_identity(user_data = %{email: email}) when is_binary(email) do
+    [username, _] = email |> String.split("@")
+
+    # returns user and data, in case user exists the attrs are empty
+    user_changeset =
+      case get_user_by_email(user_data.email) do
+        %User{} = user ->
+          Rauversion.Accounts.User.oauth_registration_update(user, %{})
+
+        _ ->
+          attrs = %{
+            email: user_data.email,
+            username: username,
+            first_name: user_data.name,
+            password: "123456"
+          }
+
+          Rauversion.Accounts.User.oauth_registration(%User{}, attrs)
+      end
+
+    Ecto.Multi.new()
+    |> Ecto.Multi.insert_or_update(
+      :user,
+      user_changeset
+    )
+    |> Ecto.Multi.run(:credential, fn _repo, %{user: user} ->
+      create_oauth_credential(user, user_data)
+      |> Repo.insert()
+    end)
+    |> Repo.transaction()
+  end
+
+  def create_oauth_credential(user, user_data) do
+    credentials_attrs = %{
+      uid: user_data.id,
+      token: user_data.credentials.token
+    }
+
+    Rauversion.OauthCredentials.change_oauth_credential(
+      %Rauversion.OauthCredentials.OauthCredential{},
+      credentials_attrs
+      |> Map.merge(%{
+        user_id: user.id,
+        provider: to_string(user_data.provider),
+        data: Map.from_struct(user_data.credentials)
+      })
+    )
+  end
+
   # invitations
 
   def change_user_invitation(%User{} = user, attrs \\ %{}) do

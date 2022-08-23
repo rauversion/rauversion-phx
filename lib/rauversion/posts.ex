@@ -22,7 +22,7 @@ defmodule Rauversion.Posts do
     Repo.all(Post)
   end
 
-  def list_posts(state \\ "published") do
+  def list_posts(state) when is_binary(state) do
     from(pi in Post,
       where: pi.state == ^state,
       preload: [:category, user: :avatar_blob]
@@ -31,12 +31,21 @@ defmodule Rauversion.Posts do
     # |> Repo.all()
   end
 
+  def list_posts(state) when is_nil(state) do
+    from(pi in Post,
+      preload: [:category, user: :avatar_blob]
+    )
+  end
+
+  def list_posts(query, state) when is_nil(state) do
+    query
+    |> preload([:category, user: :avatar_blob])
+  end
+
   def list_posts(query, state) do
     query
     |> where([p], p.state == ^state)
     |> preload([:category, user: :avatar_blob])
-
-    # |> Repo.all()
   end
 
   def with_category(query, category) do
