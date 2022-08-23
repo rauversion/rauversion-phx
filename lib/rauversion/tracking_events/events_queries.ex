@@ -2,7 +2,7 @@ defmodule CountByDateQuery do
   import Ecto.Query
   use Timex
   alias Rauversion.Repo
-  alias Rauversion.Events.Event
+  alias Rauversion.TrackingEvents.Event
   alias Rauversion.Tracks.Track
   alias Rauversion.Accounts.User
 
