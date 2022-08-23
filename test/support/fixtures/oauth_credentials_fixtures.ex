@@ -11,9 +11,10 @@ defmodule Rauversion.OauthCredentialsFixtures do
     {:ok, oauth_credential} =
       attrs
       |> Enum.into(%{
-        data: %{},
+        data: %{token: "1234433"},
         token: "some token",
-        uid: "some uid"
+        uid: "some uid",
+        provider: "foo"
       })
       |> Rauversion.OauthCredentials.create_oauth_credential()
 
