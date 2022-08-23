@@ -43,7 +43,8 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
         |> Rauversion.Repo.paginate(page: 1, page_size: 30)
 
       "all" ->
-        Posts.list_posts() |> Rauversion.Repo.paginate(page: 1, page_size: 30)
+        Posts.list_posts(user |> Ecto.assoc(:articles), nil)
+        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
     end
   end
 
