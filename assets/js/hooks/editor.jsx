@@ -1,5 +1,6 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
+
 import Dante, {
   defaultTheme, 
   darkTheme,
@@ -18,8 +19,8 @@ import { DirectUpload } from "@rails/activestorage"
 Editor = {
   mounted(){
     const wrapper = this.el;
-    
-    render(
+    const root = createRoot(wrapper);
+    root.render(
       <Dante 
         theme={darkTheme}
         content={JSON.parse(wrapper.dataset.field)}
@@ -79,8 +80,7 @@ Editor = {
           //wrapper.dataset.field = editor.getHTML()
 
           this.pushEvent("update-content", {content: editor.getJSON() } )
-      }}/>,
-      wrapper
+      }}/>
     );
 
   },

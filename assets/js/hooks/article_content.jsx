@@ -1,5 +1,7 @@
 import React from 'react';
-import { render } from 'react-dom';
+
+import { createRoot } from 'react-dom/client';
+
 import Dante, {
   darkTheme,
   defaultTheme,
@@ -17,8 +19,9 @@ import Dante, {
 ArticleContent = {
   mounted(){
     const wrapper = this.el;
+    const root = createRoot(wrapper);
 
-    render(
+    root.render(
       <Dante 
         readOnly={true}
         theme={darkTheme}
@@ -48,8 +51,7 @@ ArticleContent = {
           VideoRecorderBlockConfig(),
           SpeechToTextBlockConfig(),
         ]}
-      />,
-      wrapper
+      />
     );
 
   },
