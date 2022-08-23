@@ -37,6 +37,14 @@ config :rauversion, google_maps_key: System.get_env("GOOGLE_MAPS_KEY")
 
 config :rauversion, disabled_registrations: System.get_env("DISABLED_REGISTRATIONS", "false")
 
+config :ueberauth, Ueberauth.Strategy.Zoom.OAuth,
+  client_id: System.get_env("ZOOM_CLIENT_ID"),
+  client_secret: System.get_env("ZOOM_CLIENT_SECRET")
+
+config :ueberauth, Ueberauth.Strategy.Twitter.OAuth,
+  client_id: System.get_env("TWITTER_CLIENT_ID"),
+  client_secret: System.get_env("TWITTER_CLIENT_SECRET")
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration

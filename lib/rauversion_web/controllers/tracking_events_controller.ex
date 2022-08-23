@@ -13,9 +13,6 @@ defmodule RauversionWeb.TrackingEventsController do
           %{city: nil, country: nil}
       end
 
-    # require IEx
-    # IEx.pry()
-
     track = Rauversion.Tracks.get_track!(track_id)
     ua = get_req_header(conn, "user-agent") |> List.last()
 

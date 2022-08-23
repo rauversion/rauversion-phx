@@ -17,6 +17,9 @@ defmodule Rauversion.Accounts.User do
     field :city, :string
     field :bio, :string
 
+    has_many :oauth_credentials, Rauversion.OauthCredentials.OauthCredential,
+      on_delete: :delete_all
+
     embeds_one :notification_settings, Rauversion.Accounts.NotificationSettings,
       on_replace: :update
 
@@ -76,6 +79,25 @@ defmodule Rauversion.Accounts.User do
     |> registration_changeset(attrs, opts)
   end
 
+  def oauth_registration_update(user, attrs) do
+    user
+    |> cast(attrs, [:email, :username, :first_name, :last_name])
+    |> validate_required([:username])
+    |> validate_email()
+    |> unique_constraint(:username)
+    |> validate_contact_fields(attrs)
+  end
+
+  def oauth_registration(user, attrs) do
+    user
+    |> cast(attrs, [:email, :password, :username, :first_name, :last_name])
+    |> validate_required([:username])
+    |> validate_email()
+    |> validate_password([])
+    |> unique_constraint(:username)
+    |> validate_contact_fields(attrs)
+  end
+
   def process_avatar(user, attrs) do
     case attrs do
       %{"avatar" => _avatar = nil} ->
@@ -130,7 +152,7 @@ defmodule Rauversion.Accounts.User do
   defp validate_contact_fields(changeset, attrs) do
     changeset
     |> cast(attrs, [:username, :first_name, :last_name, :country, :bio, :city])
-    |> validate_required([:username, :first_name, :last_name])
+    |> validate_required([:username, :first_name])
     |> unsafe_validate_unique(:username, Rauversion.Repo)
     |> unique_constraint(:username)
   end

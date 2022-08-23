@@ -70,6 +70,8 @@ defmodule Rauversion.MixProject do
       {:oembed, "~> 0.4.1"},
       {:tesla, "~> 1.4"},
       {:ex_cldr_dates_times, "~> 2.0"},
+      {:oauth2, "~> 1.0 or ~> 2.0"},
+      {:ueberauth, "~> 0.7", override: true},
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git",

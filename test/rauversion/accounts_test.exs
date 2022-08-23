@@ -505,4 +505,34 @@ defmodule Rauversion.AccountsTest do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
+
+  describe "oauth creds" do
+    test "create new user by credentials" do
+      data = %{
+        avatar:
+          "https://lh3.googleusercontent.com/a-/AFdZucqqdrPKRYQdJKA2ClMex-anYYwHjRrihFERqtcvcw=s96-c",
+        email: "miguelmichelson@gmail.com",
+        id: "1234",
+        name: "miguel michelson",
+        provider: :zoom,
+        credentials: %Ueberauth.Auth.Credentials{
+          expires: true,
+          expires_at: 1_661_145_146,
+          other: %{},
+          refresh_token: "xxxxx",
+          scopes: ["meeting:read", "meeting:write", "user:read", "user_info:read"],
+          secret: nil,
+          token: "xxx",
+          token_type: "Bearer"
+        }
+      }
+
+      assert {:ok, %{credential: cred, user: _user}} =
+               Rauversion.Accounts.get_or_create_user(data)
+
+      assert cred.provider == "zoom"
+
+      assert {:ok, %{user: _user}} = Rauversion.Accounts.get_or_create_user(data)
+    end
+  end
 end

@@ -53,6 +53,13 @@ defmodule RauversionWeb.Router do
   #  get "/", PageController, :index
   # end
 
+  scope "/auth", RauversionWeb do
+    pipe_through :browser
+
+    get "/:provider", OAuthController, :request
+    get "/:provider/callback", OAuthController, :callback
+  end
+
   scope "/", RauversionWeb do
     pipe_through :browser_embed
     get "/embed/:track_id", EmbedController, :show
