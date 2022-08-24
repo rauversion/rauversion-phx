@@ -22,7 +22,7 @@ defmodule Ueberauth.Strategy.Stripe do
     module = option(conn, :oauth2_module)
 
     params = [
-      scope: "email identify",
+      scope: "read_write",
       state: "state"
     ]
 
@@ -41,7 +41,11 @@ defmodule Ueberauth.Strategy.Stripe do
   def handle_callback!(%Plug.Conn{params: %{"code" => code}} = conn) do
     params = [code: code]
     module = option(conn, :oauth2_module)
-    opts = [redirect_uri: callback_url(conn)]
+
+    opts = [
+      redirect_uri: callback_url(conn),
+      headers: [{"authorization", "Bearer #{System.get_env("STRIPE_CLIENT_SECRET")}"}]
+    ]
 
     case apply(module, :get_token, [params, opts]) do
       {:ok, %{token: %OAuth2.AccessToken{} = token}} ->
@@ -98,11 +102,11 @@ defmodule Ueberauth.Strategy.Stripe do
     user = conn.private.stripe_user
 
     %Info{
-      email: user["email"],
+      email: nil,
       first_name: nil,
-      image: user["pic_url"],
+      image: nil,
       last_name: nil,
-      nickname: user["username"]
+      nickname: nil
     }
   end
 
@@ -123,7 +127,7 @@ defmodule Ueberauth.Strategy.Stripe do
   defp fetch_user(conn, token) do
     module = option(conn, :oauth2_module)
 
-    case apply(module, :get, [token, "/api/users/@me"]) do
+    case apply(module, :get, [token, "https://api.stripe.com/v1/account"]) do
       {:ok, %{status_code: 200, body: user}} ->
         put_private(conn, :stripe_user, user)
 

@@ -1,4 +1,4 @@
-defmodule Ueberauth.Strategy.Discord.OAuthStrategy do
+defmodule Ueberauth.Strategy.Stripe.OAuthStrategy do
   alias OAuth2.Client
 
   @callback client(Keyword.t()) :: Client.t()

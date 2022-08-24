@@ -1,14 +1,14 @@
-defmodule Ueberauth.Strategy.Discord.OAuth do
+defmodule Ueberauth.Strategy.Stripe.OAuth do
   @moduledoc """
-  An implementation of OAuth2 for Discord.
+  An implementation of OAuth2 for Stripe.
   To add your `client_id` and `client_secret` include these values in your configuration.
-      config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
+      config :ueberauth, Ueberauth.Strategy.Stripe.OAuth,
         client_id: System.get_env("ZOOM_CLIENT_ID"),
         client_secret: System.get_env("ZOOM_CLIENT_SECRET")
   """
   use OAuth2.Strategy
 
-  alias Ueberauth.Strategy.Discord.OAuthStrategy
+  alias Ueberauth.Strategy.Stripe.OAuthStrategy
 
   @behaviour OAuthStrategy
 
@@ -22,8 +22,8 @@ defmodule Ueberauth.Strategy.Discord.OAuth do
   # Public API
 
   @doc """
-  Construct a client for requests to Discord.
-  This will be setup automatically for you in `Ueberauth.Strategy.Discord`.
+  Construct a client for requests to Stripe.
+  This will be setup automatically for you in `Ueberauth.Strategy.Stripe`.
   These options are only useful for usage outside the normal callback phase of Ueberauth.
   """
   @impl OAuthStrategy
@@ -74,6 +74,14 @@ defmodule Ueberauth.Strategy.Discord.OAuth do
 
   @impl OAuth2.Strategy
   def get_token(client, params, headers) do
+    # special thing, pass the secret key as the token for basic auth
+    client =
+      client
+      |> Map.merge(%{
+        client_id: System.get_env("STRIPE_CLIENT_SECRET"),
+        client_secret: ""
+      })
+
     client
     |> put_header("accept", "application/json")
     |> OAuth2.Strategy.AuthCode.get_token(params, headers)
