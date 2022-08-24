@@ -17,6 +17,7 @@ defmodule Rauversion.Repo.Migrations.CreateEvent do
       add :street_number, :string
       add :lat, :decimal
       add :lng, :decimal
+      add :venue, :string
       add :country, :string
       add :city, :string
       add :province, :string

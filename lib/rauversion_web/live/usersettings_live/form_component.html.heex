@@ -42,4 +42,14 @@
       />
     <% end %>
 
+    <%= if @action == :integrations do %>
+      <.live_component
+        module={RauversionWeb.UsersettingsLive.IntegrationsForm}
+        id="integrations"
+        target={@myself}
+        current_user={@current_user}
+        return_to={@return_to}
+      />
+    <% end %>
+
   </div>

@@ -138,6 +138,7 @@ defmodule RauversionWeb.Router do
     live "/users/settings/email", UserSettingsLive.Index, :email
     live "/users/settings/security", UserSettingsLive.Index, :security
     live "/users/settings/notifications", UserSettingsLive.Index, :notifications
+    live "/users/settings/integrations", UserSettingsLive.Index, :integrations
 
     get "/oembed", OEmbedController, :create
 

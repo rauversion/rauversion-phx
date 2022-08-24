@@ -24,6 +24,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
 
             <%= form_input_renderer(f, %{type: :textarea, name: :description, wrapper_class: "sm:col-span-3"}) %>
 
+            <%= form_input_renderer(f, %{type: :text_input, name: :venue, wrapper_class: "sm:col-span-3"}) %>
+
             <div class="sm:col-span-3 space-y-3">
               <%= form_input_renderer(f, %{type: :upload, uploads: @uploads}) %>
             </div>

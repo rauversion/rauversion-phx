@@ -22,6 +22,7 @@ defmodule Rauversion.Events.Event do
     embeds_many :tickets, Rauversion.Events.Ticket
     embeds_one :event_settings, Rauversion.Events.Settings
 
+    field :venue, :string
     field :city, :string
     field :country, :string
     field :location, :string
@@ -68,6 +69,7 @@ defmodule Rauversion.Events.Event do
   def changeset(event, attrs) do
     event
     |> cast(attrs, [
+      :venue,
       :title,
       :description,
       :slug,
