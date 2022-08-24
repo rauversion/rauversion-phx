@@ -106,6 +106,15 @@
               <li class="w-64 inline-flex flex-col text-center lg:w-auto">
                 <div class="group relative">
                   <div class="w-full bg-gray-200 dark:bg-gray-800 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
+                    
+                    <div class="group-hover:absolute group-hover:z-10 w-full h-full flex justify-center items-center">
+                      <button class="flex justify-center items-center w-24 h-24 rounded-full bg-brand-500 border-4 border-brand-100 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                        </svg>
+                      </button>
+                    </div>
+
                     <%= img_tag(Rauversion.Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
                   </div>
                   <div class="mt-6">
@@ -148,6 +157,15 @@
             <%= for playlist <- @playlists do %>
               <div class="group relative">
                 <div class="relative w-full h-80 bg-white dark:bg-black rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                  
+                  <div class="group-hover:absolute group-hover:z-10 w-full h-full flex justify-center items-center">
+                    <button class="flex justify-center items-center w-24 h-24 rounded-full bg-brand-500 border-4 border-brand-100 focus:outline-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                      </svg>
+                    </button>
+                  </div>
+                  
                   <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"), class: "w-full h-full object-center object-cover") %>
                 </div>
 
