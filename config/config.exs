@@ -33,7 +33,8 @@ config :ueberauth, Ueberauth,
   providers: [
     zoom: {Ueberauth.Strategy.Zoom, [ignores_csrf_attack: true]},
     twitter: {Ueberauth.Strategy.Twitter, [ignores_csrf_attack: true]},
-    discord: {Ueberauth.Strategy.Discord, [ignores_csrf_attack: true]}
+    discord: {Ueberauth.Strategy.Discord, [ignores_csrf_attack: true]},
+    stripe: {Ueberauth.Strategy.Stripe, [ignores_csrf_attack: true]}
     # facebook: { Ueberauth.Strategy.Facebook, [ opt1: "value", opts2: "value" ] },
     # github: { Ueberauth.Strategy.Github, [ opt1: "value", opts2: "value" ] }
   ]

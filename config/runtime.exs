@@ -49,6 +49,10 @@ config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
   client_id: System.get_env("DISCORD_CLIENT_ID"),
   client_secret: System.get_env("DISCORD_CLIENT_SECRET")
 
+config :ueberauth, Ueberauth.Strategy.Stripe.OAuth,
+  client_id: System.get_env("STRIPE_CLIENT_ID"),
+  client_secret: System.get_env("STRIPE_CLIENT_SECRET")
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration
