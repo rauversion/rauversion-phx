@@ -99,9 +99,9 @@ Player = {
     this.initWave()
   },
   destroyed(){
-    this.playBtn && this.playBtn.addEventListener("click", this.playBtnListener)
-    this.nextBtn && this.nextBtn.addEventListener("click", this.nextBtnClickListener)
-    this.rewBtn && this.rewBtn.addEventListener("click", this.prevBtnClickListener)
+    this.playBtn && this.playBtn.removeEventListener("click", this.playBtnListener)
+    this.nextBtn && this.nextBtn.removeEventListener("click", this.nextBtnClickListener)
+    this.rewBtn && this.rewBtn.removeEventListener("click", this.prevBtnClickListener)
     this.range && this.range.removeEventListener("change", this.rangeChangeListener )
     this?._wave?.drawer?.wrapper?.removeEventListener("click", this.waveClickListener)
 
