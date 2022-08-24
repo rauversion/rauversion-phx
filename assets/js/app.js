@@ -32,6 +32,7 @@ import Player from "./hooks/player"
 import TrackHook from "./hooks/track_hook"
 import Editor from "./hooks/editor"
 import ArticleContent from "./hooks/article_content"
+import PlayButton from "./hooks/play_button"
 
 import create from 'zustand/vanilla'
 import { persist } from 'zustand/middleware'
@@ -86,6 +87,7 @@ let execJS = (selector, attr) => {
 
 let Hooks = {}
 
+Hooks.PlayButton = PlayButton
 Hooks.Player = Player
 Hooks.TrackHook = TrackHook
 Hooks.InfiniteScroll = InfiniteScroll
