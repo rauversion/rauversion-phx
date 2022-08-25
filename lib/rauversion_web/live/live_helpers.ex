@@ -207,6 +207,7 @@ defmodule RauversionWeb.LiveHelpers do
             <%= assigns.field.hint %>
           </p>
         <% end %>
+        <%= error_tag @form, @field.name %>
       </div>
     """
   end
@@ -225,6 +226,7 @@ defmodule RauversionWeb.LiveHelpers do
             <%= assigns.field.hint %>
           </p>
         <% end %>
+        <%= error_tag @form, @field.name %>
       </div>
     """
   end
@@ -243,6 +245,8 @@ defmodule RauversionWeb.LiveHelpers do
             <%= assigns.field.hint %>
           </p>
         <% end %>
+        <%= error_tag @form, @field.name %>
+
       </div>
     """
   end
@@ -261,6 +265,7 @@ defmodule RauversionWeb.LiveHelpers do
             <%= assigns.field.hint %>
           </p>
         <% end %>
+        <%= error_tag @form, @field.name %>
       </div>
     """
   end
@@ -278,7 +283,10 @@ defmodule RauversionWeb.LiveHelpers do
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
             <%= assigns.field.hint %>
           </p>
+
         <% end %>
+        <%= error_tag @form, @field.name %>
+
       </div>
     """
   end
@@ -297,6 +305,7 @@ defmodule RauversionWeb.LiveHelpers do
             <%= assigns.field.hint %>
           </p>
         <% end %>
+        <%= error_tag @form, @field.name %>
       </div>
     """
   end
