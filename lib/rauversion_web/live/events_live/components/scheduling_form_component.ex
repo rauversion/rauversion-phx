@@ -1,27 +1,88 @@
 defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
   use RauversionWeb, :live_component
 
+  alias Rauversion.Events
+
   @impl true
   def handle_event("add-feature", _, socket) do
     socket =
       update(socket, :changeset, fn changeset ->
-        existing = Ecto.Changeset.get_field(changeset, :scheduling_settings, [])
-        Ecto.Changeset.put_embed(changeset, :scheduling_settings, existing ++ [%{}])
+        changeset
+        |> EctoNestedChangeset.append_at(:scheduling_settings, %{})
       end)
 
     {:noreply, socket}
   end
 
   @impl true
-  def handle_event("validate", _event_params, socket) do
-    # changeset =
-    #  socket.assigns.event
-    #  |> Events.change_event(event_params)
-    #  |> Map.put(:action, :validate)
+  def handle_event("add-feature-scheduling", %{"id" => index}, socket) do
+    index = String.to_integer(index)
 
-    # {:noreply, assign(socket, :changeset, changeset)}
+    socket =
+      update(socket, :changeset, fn changeset ->
+        changeset
+        |> EctoNestedChangeset.append_at(
+          [:scheduling_settings, index, :schedulings],
+          %Rauversion.Events.Scheduling{}
+        )
+
+        # |> prepend_at([:posts, 0, :comments], %Comment{body: "ecneitaP"})
+        # |> delete_at([:posts, 0, :comments, 1], mode: {:action, :delete})
+        # |> insert_at([:posts, 1], %Post{title: "have"})
+        # |> append_at([:posts, 2, :comments], %Comment{body: "my"})
+        # |> update_at([:posts, 0, :comments, 0, :body], &String.reverse/1)
+        # |> Ecto.Changeset.apply_changes()
+      end)
 
     {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("delete-item", %{"index" => index}, socket) do
+    index = String.to_integer(index)
+
+    socket =
+      update(socket, :changeset, fn changeset ->
+        EctoNestedChangeset.delete_at(
+          changeset,
+          [:scheduling_settings, index]
+        )
+      end)
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event(
+        "delete-scheduling-item",
+        %{"setting-index" => setting_index, "scheduling-index" => index},
+        socket
+      ) do
+    setting_index = String.to_integer(setting_index)
+    index = String.to_integer(index)
+
+    IO.inspect("#{setting_index}, #{index}")
+
+    socket =
+      update(socket, :changeset, fn changeset ->
+        EctoNestedChangeset.delete_at(
+          changeset,
+          [:scheduling_settings, setting_index, :schedulings, index]
+        )
+      end)
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("validate", %{"event" => event_params}, socket) do
+    changeset =
+      socket.assigns.event
+      |> Events.change_event(event_params)
+      |> Map.put(:action, :validate)
+
+    # IO.inspect(changeset)
+    {:noreply, assign(socket, :changeset, changeset)}
   end
 
   @impl true
@@ -35,11 +96,13 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
         {
           :noreply,
           socket
-          |> put_flash(:info, "Playlist updated successfully")
+          |> put_flash(:info, "Event updated successfully")
           # |> push_redirect(to: socket.assigns.return_to)
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect("ERROOROR changeset")
+        IO.inspect(changeset)
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end
@@ -56,29 +119,38 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           phx-change="validate"
           phx-submit="save">
 
-          <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
+          <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
             <%= gettext "Create Event" %>
           </h2>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <%= inputs_for f, :scheduling_settings, fn i -> %>
-              <%= form_input_renderer(i, %{type: :text_input, name: :name, wrapper_class: "sm:col-span-6"}) %>
-              <%= form_input_renderer(i, %{type: :datetime_input, name: :start_date, wrapper_class: "sm:col-span-3"}) %>
-              <%= form_input_renderer(i, %{type: :datetime_input, name: :end_date, wrapper_class: "sm:col-span-3"}) %>
-              <%= form_input_renderer(i, %{type: :select, options: [
-                [key: "Daily", value: "daily"],
-                [key: "Weekly", value: "weekly"],
-                [key: "Once", value: "once"],
-              ], wrapper_class: "sm:col-span-6", name: :schedule_type }) %>
-              <%= form_input_renderer(i, %{type: :textarea, name: :description, wrapper_class: "sm:col-span-6"}) %>
-            <% end %>
-          </div>
 
-            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-6">
 
-            <a href="#" type="button" phx-target={@myself} phx-click="add-feature"> add </a>
+              <%= for i <- inputs_for(f, :scheduling_settings) do %>
+                <%= live_component RauversionWeb.EventsLive.Components.SchedulingSettingsForm,
+                  id: "aoaoa-#{i.index}",
+                  f: i,
+                  target: @myself
+                %>
+              <% end %>
 
-            <div class="sm:col-span-6 flex justify-end">
+            </div>
+
+            <div class="sm:col-span-6 flex justify-end space-x-2">
+              <button
+                type="button"
+                class="inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium"
+                phx-target={@myself}
+                phx-click="add-feature">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3" />
+                </svg>
+
+                <span>Add</span>
+              </button>
+
               <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
             </div>
 

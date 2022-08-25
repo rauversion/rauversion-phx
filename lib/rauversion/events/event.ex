@@ -18,7 +18,7 @@ defmodule Rauversion.Events.Event do
     field :tax_rates_settings, :map
     field :widget_button, :map
 
-    embeds_many :scheduling_settings, Rauversion.Events.Schedule
+    embeds_many :scheduling_settings, Rauversion.Events.Schedule, on_replace: :delete
     embeds_many :tickets, Rauversion.Events.Ticket
     embeds_one :event_settings, Rauversion.Events.Settings
 

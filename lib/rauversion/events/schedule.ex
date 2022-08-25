@@ -8,11 +8,13 @@ defmodule Rauversion.Events.Schedule do
     field :schedule_type, :string
     field :name, :string
     field :description, :string
+    embeds_many :schedulings, Rauversion.Events.Scheduling, on_replace: :delete
   end
 
   def changeset(struct, attrs) do
     struct
     |> cast(attrs, [:start_date, :end_date, :schedule_type, :name, :description])
+    |> cast_embed(:schedulings, with: &Rauversion.Events.Scheduling.changeset/2)
     |> validate_required([:start_date, :end_date, :schedule_type, :name])
   end
 end

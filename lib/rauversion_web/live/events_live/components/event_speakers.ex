@@ -108,7 +108,6 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
           <div class="lg:col-span-3">
             <%= if @day do %>
               <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3 [&amp;:not(:focus-visible)]:focus:outline-none"
-                id="headlessui-tabs-panel-:Rql9m:"
                 role="tabpanel">
 
                 <%= for performer <- @day.performers do %>
@@ -304,7 +303,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                 </p>
 
                 <ol role="list" class="mt-10 space-y-8 dark:bg-black/60 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
-                  <li aria-label="Steven McHail talking about Not so one-time payments at 9:00AM - 10:00AM PST">
+                  <li>
                     <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Steven McHail</h4>
                     <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">
                       Not so one-time payments
