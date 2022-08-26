@@ -47,6 +47,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           changeset,
           [:scheduling_settings, index]
         )
+        |> Ecto.Changeset.apply_changes()
+        |> Ecto.Changeset.change()
       end)
 
     {:noreply, socket}
@@ -69,6 +71,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           changeset,
           [:scheduling_settings, setting_index, :schedulings, index]
         )
+        |> Ecto.Changeset.apply_changes()
+        |> Ecto.Changeset.change()
       end)
 
     {:noreply, socket}

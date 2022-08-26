@@ -6,13 +6,13 @@ defmodule RauversionWeb.EventsLive.Components.SchedulingSettingsForm do
     ~H"""
       <div class="border mt-6 p-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 dark:bg-black rounded-md">
           <%= form_input_renderer(@f, %{type: :text_input, name: :name, wrapper_class: "sm:col-span-6"}) %>
-          <%= form_input_renderer(@f, %{type: :datetime_input, name: :start_date, wrapper_class: "sm:col-span-1"}) %>
-          <%= form_input_renderer(@f, %{type: :datetime_input, name: :end_date, wrapper_class: "sm:col-span-1"}) %>
+          <%= form_input_renderer(@f, %{type: :datetime_input, name: :start_date, wrapper_class: "sm:col-span-2"}) %>
+          <%= form_input_renderer(@f, %{type: :datetime_input, name: :end_date, wrapper_class: "sm:col-span-2"}) %>
           <%= form_input_renderer(@f, %{type: :select, options: [
             [key: "Daily", value: "daily"],
             [key: "Weekly", value: "weekly"],
             [key: "Once", value: "once"],
-          ], wrapper_class: "sm:col-span-4", name: :schedule_type }) %>
+          ], wrapper_class: "sm:col-span-2", name: :schedule_type }) %>
           <%= form_input_renderer(@f, %{type: :textarea, name: :description, wrapper_class: "sm:col-span-6"}) %>
 
           <%= for i <- inputs_for(@f, :schedulings) do %>
