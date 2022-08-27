@@ -8,6 +8,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
     socket =
       update(socket, :changeset, fn changeset ->
         changeset
+        |> Ecto.Changeset.apply_changes()
+        |> Ecto.Changeset.change()
         |> EctoNestedChangeset.append_at(:scheduling_settings, %{})
       end)
 
@@ -21,17 +23,12 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
     socket =
       update(socket, :changeset, fn changeset ->
         changeset
+        |> Ecto.Changeset.apply_changes()
+        |> Ecto.Changeset.change()
         |> EctoNestedChangeset.append_at(
           [:scheduling_settings, index, :schedulings],
           %Rauversion.Events.Scheduling{}
         )
-
-        # |> prepend_at([:posts, 0, :comments], %Comment{body: "ecneitaP"})
-        # |> delete_at([:posts, 0, :comments, 1], mode: {:action, :delete})
-        # |> insert_at([:posts, 1], %Post{title: "have"})
-        # |> append_at([:posts, 2, :comments], %Comment{body: "my"})
-        # |> update_at([:posts, 0, :comments, 0, :body], &String.reverse/1)
-        # |> Ecto.Changeset.apply_changes()
       end)
 
     {:noreply, socket}
@@ -43,12 +40,10 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
 
     socket =
       update(socket, :changeset, fn changeset ->
-        EctoNestedChangeset.delete_at(
-          changeset,
-          [:scheduling_settings, index]
-        )
+        changeset
         |> Ecto.Changeset.apply_changes()
         |> Ecto.Changeset.change()
+        |> EctoNestedChangeset.delete_at([:scheduling_settings, index])
       end)
 
     {:noreply, socket}
@@ -67,12 +62,15 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
 
     socket =
       update(socket, :changeset, fn changeset ->
-        EctoNestedChangeset.delete_at(
-          changeset,
-          [:scheduling_settings, setting_index, :schedulings, index]
-        )
+        changeset
         |> Ecto.Changeset.apply_changes()
         |> Ecto.Changeset.change()
+        |> EctoNestedChangeset.delete_at([
+          :scheduling_settings,
+          setting_index,
+          :schedulings,
+          index
+        ])
       end)
 
     {:noreply, socket}
