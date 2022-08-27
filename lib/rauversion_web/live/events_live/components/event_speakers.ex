@@ -115,7 +115,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                     <div class="group relative h-[17.5rem] transform overflow-hidden rounded-4xl">
                       <div class="absolute top-0 left-0 right-4 bottom-6 rounded-4xl border transition duration-300 group-hover:scale-95 xl:right-6 border-brand-300"></div>
                       <div class="absolute inset-0 bg-indigo-50" style="clip-path:url(#:R9m:-0)">
-                        <img alt="" sizes="(min-width: 1280px) 17.5rem, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=256&amp;q=75 256w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=384&amp;q=75 384w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=640&amp;q=75 640w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=750&amp;q=75 750w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=828&amp;q=75 828w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=1080&amp;q=75 1080w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=1200&amp;q=75 1200w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=1920&amp;q=75 1920w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=2048&amp;q=75 2048w, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=3840&amp;q=75 3840w" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsteven-mchail.4e94472e.jpg&amp;w=3840&amp;q=75" width="1120" height="560" decoding="async" data-nimg="future" class="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-110">
+                        <!--<img alt="">-->
                       </div>
                     </div>
                     <h3 class="mt-8 font-display text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
@@ -149,12 +149,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
 
       <div class="relative mt-14 sm:mt-24">
         <div class="absolute inset-x-0 -top-40 -bottom-32 overflow-hidden bg-gray-900">
-          <img alt="" src="/_next/static/media/background.6c3571e0.jpg"
-            width="918" height="1495"
-            decoding="async"
-            data-nimg="future"
-            class="absolute left-full top-0 -translate-x-1/2 sm:left-1/2 sm:translate-y-[-15%] sm:translate-x-[-20%] md:translate-x-0 lg:translate-x-[5%] lg:translate-y-[4%] xl:translate-y-[-8%] xl:translate-x-[27%]"
-          loading="lazy">
+          <!--<img >-->
           <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black"></div>
           <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black"></div>
         </div>
@@ -162,48 +157,42 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
 
           <div class="mx-auto grid max-w-2xl grid-cols-1 gap-y-6 sm:grid-cols-2 lg:hidden">
-            <div class="-mx-4 flex gap-x-4 gap-y-10 overflow-x-auto pl-4 pb-4 sm:mx-0 sm:flex-col sm:pb-0 sm:pl-0 sm:pr-8" role="tablist" aria-orientation="vertical">
-              <div class="relative w-3/4 flex-none pr-4 sm:w-auto sm:pr-0">
-                <h3 class="text-2xl font-semibold tracking-tight text-brand-900 dark:text-brand-100">
-                  <time datetime="2022-04-04">
-                    <button class="[&amp;:not(:focus-visible)]:focus:outline-none"
-                        role="tab"
-                        type="button"
-                        aria-selected="true"
-                        tabindex="0"
-                        aria-controls="headlessui-tabs-panel-:R1kqdm:">
-                      <span class="absolute inset-0"></span>April 4 </button>
-                  </time>
-                </h3>
-                <p class="mt-1.5 text-base tracking-tight text-brand-900 dark:text-brand-100">
-                  The first day of the conference is focused on dark patterns for ecommerce.
-                </p>
-              </div>
-              <div class="relative w-3/4 flex-none pr-4 sm:w-auto sm:pr-0 opacity-70">
-                <h3 class="text-2xl font-semibold tracking-tight text-brand-900">
-                  <time datetime="2022-04-05">
-                    <button class="[&amp;:not(:focus-visible)]:focus:outline-none" id="headlessui-tabs-tab-:R6cqdm:" role="tab" type="button" aria-selected="false" tabindex="-1">
-                      <span class="absolute inset-0"></span>April 5 </button>
-                  </time>
-                </h3>
-                <p class="mt-1.5 text-base tracking-tight text-brand-900">Next we spend the day talking about deceiving people with technology.</p>
-              </div>
-              <div class="relative w-3/4 flex-none pr-4 sm:w-auto sm:pr-0 opacity-70">
-                <h3 class="text-2xl font-semibold tracking-tight text-brand-900">
-                  <time datetime="2022-04-06">
-                    <button class="[&amp;:not(:focus-visible)]:focus:outline-none" id="headlessui-tabs-tab-:R7cqdm:" role="tab" type="button" aria-selected="false" tabindex="-1">
-                      <span class="absolute inset-0"></span>April 6 </button>
-                  </time>
-                </h3>
-                <p class="mt-1.5 text-base tracking-tight text-brand-900">We close out the event previewing new techniques that are still in development.</p>
-              </div>
+            <div class="-mx-4 flex gap-x-4 gap-y-10 overflow-x-auto pl-4 pb-4 sm:mx-0 sm:flex-col sm:pb-0 sm:pl-0 sm:pr-8"
+              role="tablist"
+              aria-orientation="vertical">
+              <%= for day <- @days do %>
+                <div class="relative w-3/4 flex-none pr-4 sm:w-auto sm:pr-0">
+                  <h3 class="text-2xl font-semibold tracking-tight text-brand-900 dark:text-brand-100">
+                    <time datetime="2022-04-04">
+                      <button class="[&amp;:not(:focus-visible)]:focus:outline-none"
+                          role="tab"
+                          type="button"
+                          aria-selected="true"
+                          tabindex="0">
+                        <span class="absolute inset-0"></span>
+                        <time datetime={day.start_date}>
+                          <%= Events.simple_date_for(day.start_date) %>
+                        </time>
+                        </button>
+                    </time>
+                  </h3>
+                  <p class="mt-1.5 text-base tracking-tight text-brand-900 dark:text-brand-100">
+                    <%= @day.description %>
+                  </p>
+                </div>
+              <% end %>
             </div>
             <div>
-              <div class="[&amp;:not(:focus-visible)]:focus:outline-none" id="headlessui-tabs-panel-:R1kqdm:" role="tabpanel" tabindex="0" aria-labelledby="headlessui-tabs-tab-:R5cqdm:">
+              <%= for scheduling <- @days |> Enum.map(fn x -> x.schedulings end) |> List.flatten do %>
+              <div class="[&amp;:not(:focus-visible)]:focus:outline-none" role="tabpanel" tabindex="0">
                 <ol role="list" class="space-y-8 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
-                  <li aria-label="Steven McHail talking about Not so one-time payments at 9:00AM - 10:00AM PST">
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Steven McHail</h4>
-                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">Not so one-time payments</p>
+                  <li aria-label={"#{scheduling.title} #{scheduling.short_description} at 9:00AM - 10:00AM PST"}>
+                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">
+                      <%= scheduling.title %>
+                    </h4>
+                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">
+                      <%= scheduling.short_description %>
+                    </p>
                     <p class="mt-1 font-mono text-sm text-slate-500">
                       <time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>
                       <!-- -->-
@@ -212,80 +201,11 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                       <!-- -->PST
                     </p>
                   </li>
-                  <li aria-label="Jaquelin Isch talking about The finer print at 10:00AM - 11:00AM PST">
-                    <div class="mx-auto mb-8 h-px w-48 bg-indigo-500/10"></div>
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Jaquelin Isch</h4>
-                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">The finer print</p>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
-                      <time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>
-                      <!-- -->-
-                      <!-- -->
-                      <time datetime="2022-04-04T11:00AM-08:00">11:00AM</time>
-                      <!-- -->PST
-                    </p>
-                  </li>
-                  <li aria-label="Dianne Guilianelli talking about Post-purchase blackmail at 11:00AM - 12:00PM PST">
-                    <div class="mx-auto mb-8 h-px w-48 bg-indigo-500/10"></div>
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Dianne Guilianelli</h4>
-                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">Post-purchase blackmail</p>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
-                      <time datetime="2022-04-04T11:00AM-08:00">11:00AM</time>
-                      <!-- -->-
-                      <!-- -->
-                      <time datetime="2022-04-04T12:00PM-08:00">12:00PM</time>
-                      <!-- -->PST
-                    </p>
-                  </li>
-                  <li aria-label="Lunch talking about null at 12:00PM - 1:00PM PST">
-                    <div class="mx-auto mb-8 h-px w-48 bg-indigo-500/10"></div>
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Lunch</h4>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
-                      <time datetime="2022-04-04T12:00PM-08:00">12:00PM</time>
-                      <!-- -->-
-                      <!-- -->
-                      <time datetime="2022-04-04T1:00PM-08:00">1:00PM</time>
-                      <!-- -->PST
-                    </p>
-                  </li>
-                  <li aria-label="Ronni Cantadore talking about Buy or die at 1:00PM - 2:00PM PST">
-                    <div class="mx-auto mb-8 h-px w-48 bg-indigo-500/10"></div>
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Ronni Cantadore</h4>
-                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">Buy or die</p>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
-                      <time datetime="2022-04-04T1:00PM-08:00">1:00PM</time>
-                      <!-- -->-
-                      <!-- -->
-                      <time datetime="2022-04-04T2:00PM-08:00">2:00PM</time>
-                      <!-- -->PST
-                    </p>
-                  </li>
-                  <li aria-label="Erhart Cockrin talking about In-person cancellation at 2:00PM - 3:00PM PST">
-                    <div class="mx-auto mb-8 h-px w-48 bg-indigo-500/10"></div>
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Erhart Cockrin</h4>
-                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">In-person cancellation</p>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
-                      <time datetime="2022-04-04T2:00PM-08:00">2:00PM</time>
-                      <!-- -->-
-                      <!-- -->
-                      <time datetime="2022-04-04T3:00PM-08:00">3:00PM</time>
-                      <!-- -->PST
-                    </p>
-                  </li>
-                  <li aria-label="Parker Johnson talking about The pay/cancel switcheroo at 3:00PM - 4:00PM PST">
-                    <div class="mx-auto mb-8 h-px w-48 bg-indigo-500/10"></div>
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Parker Johnson</h4>
-                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">The pay/cancel switcheroo</p>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
-                      <time datetime="2022-04-04T3:00PM-08:00">3:00PM</time>
-                      <!-- -->-
-                      <!-- -->
-                      <time datetime="2022-04-04T4:00PM-08:00">4:00PM</time>
-                      <!-- -->PST
-                    </p>
-                  </li>
                 </ol>
               </div>
+              <% end %>
             </div>
+
           </div>
 
           <div class="hidden lg:grid lg:grid-cols-3 lg:gap-x-8">
@@ -302,21 +222,27 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                   <%= day.description %>
                 </p>
 
-                <ol role="list" class="mt-10 space-y-8 dark:bg-black/60 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
-                  <li>
-                    <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">Steven McHail</h4>
-                    <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">
-                      Not so one-time payments
-                    </p>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
-                      <time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>
-                      <!-- -->-
-                      <!-- -->
-                      <time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>
-                      <!-- -->PST
-                    </p>
-                  </li>
-                </ol>
+                <%= if Enum.any?(day.schedulings) do %>
+                  <ol role="list" class="mt-10 space-y-8 dark:bg-black/60 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
+                    <%= for scheduling <- day.schedulings do %>
+                      <li>
+                        <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">
+                          <%= scheduling.title %>
+                        </h4>
+                        <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">
+                          <%= scheduling.short_description %>
+                        </p>
+                        <p class="mt-1 font-mono text-sm text-slate-500">
+                          <time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>
+                          <!-- -->-
+                          <!-- -->
+                          <time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>
+                          <!-- -->PST
+                        </p>
+                      </li>
+                    <% end %>
+                  </ol>
+                <% end %>
 
               </section>
             <% end %>

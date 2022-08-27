@@ -1,28 +1,29 @@
 defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
   use RauversionWeb, :live_component
+  alias Rauversion.Events
 
   @impl true
-  def handle_event("add-feature", _, socket) do
+  def handle_event("add-ticket", _, socket) do
     socket =
       update(socket, :changeset, fn changeset ->
-        existing = Ecto.Changeset.get_field(changeset, :tickets, [])
-        Ecto.Changeset.put_embed(changeset, :tickets, existing ++ [%{}])
+        changeset
+        |> Ecto.Changeset.apply_changes()
+        |> Ecto.Changeset.change()
+        |> EctoNestedChangeset.append_at(:event_tickets, %{})
       end)
 
-    IO.inspect(socket)
     {:noreply, socket}
   end
 
   @impl true
-  def handle_event("validate", _event_params, socket) do
-    # changeset =
-    #  socket.assigns.event
-    #  |> Events.change_event(event_params)
-    #  |> Map.put(:action, :validate)
+  def handle_event("validate", %{"event" => event_params}, socket) do
+    changeset =
+      socket.assigns.event
+      |> Events.change_event(event_params)
+      |> Map.put(:action, :validate)
 
-    # {:noreply, assign(socket, :changeset, changeset)}
-
-    {:noreply, socket}
+    # IO.inspect(changeset)
+    {:noreply, assign(socket, :changeset, changeset)}
   end
 
   @impl true
@@ -62,120 +63,149 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
           </h2>
 
 
-          <%= inputs_for f, :tickets, fn i -> %>
-            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
-              <%= form_input_renderer(i, %{
-                type: :text_input,
-                name: :title,
-                wrapper_class: "sm:col-span-6",
-                hint: gettext("Ticket Type. For Example: General Admission, VIP Admission ...")
-              }) %>
-
-              <div class="sm:col-span-6 flex items-start space-x-4">
-                <%= form_input_renderer(i, %{
-                  type: :number_input,
-                  name: :price,
-                  wrapper_class: "w-1/4",
-                  hint: gettext("All prices are in U.S. Dollars ($). To select a different currency, click here.")
-                  })
-                %>
+          <%= inputs_for f, :event_tickets, fn i -> %>
+            <div class="border-2 rounded-md p-4">
+              <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
                 <%= form_input_renderer(i, %{
-                  type: :number_input,
-                  name: :quantity,
-                  wrapper_class: "w-1/4",
-                  hint: gettext("Total number of tickets.")
+                  type: :text_input,
+                  name: :title,
+                  wrapper_class: "sm:col-span-6",
+                  hint: gettext("Ticket Type. For Example: General Admission, VIP Admission ...")
                 }) %>
+
+                <div class="sm:col-span-6 flex items-start space-x-4">
+                  <%= form_input_renderer(i, %{
+                    type: :number_input,
+                    name: :price,
+                    wrapper_class: "w-1/4",
+                    hint: gettext("All prices are in U.S. Dollars ($). To select a different currency, click here.")
+                    })
+                  %>
+
+                  <%= form_input_renderer(i, %{
+                    type: :number_input,
+                    name: :qty,
+                    wrapper_class: "w-1/4",
+                    hint: gettext("Total number of tickets.")
+                  }) %>
+                </div>
+
+                <%= form_input_renderer(i, %{
+                  type: :datetime_input,
+                  name: :selling_start,
+                  wrapper_class: "sm:col-span-2"
+                }) %>
+
+                <%= form_input_renderer(i, %{
+                  type: :datetime_input,
+                  name: :selling_end,
+                  wrapper_class: "sm:col-span-2"
+                }) %>
+
+                <%= form_input_renderer(i, %{
+                  type: :textarea,
+                  name: :short_description,
+                  wrapper_class: "sm:col-span-6",
+                  hint: gettext("Optional short description will be displayed next to this ticket on the Event page.")
+                }) %>
+
               </div>
 
-              <%= form_input_renderer(i, %{
-                type: :datetime_input,
-                name: :selling_start,
-                wrapper_class: "sm:col-span-2"
-              }) %>
+              <%= inputs_for i, :settings, fn ii -> %>
+                <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
-              <%= form_input_renderer(i, %{
-                type: :datetime_input,
-                name: :selling_ends,
-                wrapper_class: "sm:col-span-2"
-              }) %>
 
-              <%= form_input_renderer(i, %{
-                type: :textarea,
-                name: :description,
-                wrapper_class: "sm:col-span-6",
-                hint: gettext("Optional short description will be displayed next to this ticket on the Event page.")
-              }) %>
+                  <%= form_input_renderer(ii, %{
+                    type: :checkbox,
+                    name: :show_sell_until,
+                    wrapper_class: "sm:col-span-6",
+                    hint: gettext("Show the Sell Until date on the event page.")
+                  }) %>
 
-              <%= form_input_renderer(i, %{
-                type: :checkbox,
-                name: :show_sell_until,
-                wrapper_class: "sm:col-span-6",
-                hint: gettext("Show the Sell Until date on the event page.")
-              }) %>
+                  <%= form_input_renderer(ii, %{
+                    type: :checkbox,
+                    name: :show_after_sold_out,
+                    wrapper_class: "sm:col-span-6",
+                    hint: gettext("Display with a \"Sold out\" message after ticket quantity runs out.")
+                    })
+                  %>
 
-              <%= form_input_renderer(i, %{
-                type: :checkbox,
-                name: :show_after_sold_out,
-                wrapper_class: "sm:col-span-6",
-                hint: gettext("Display with a \"Sold out\" message after ticket quantity runs out.")
-                })
-              %>
+                  <%= form_input_renderer(ii, %{type: :select, options: [
+                      [key: "Pass all fees to the buyer", value: "pass_all"],
+                      [key: "Absorb service and Credit card fees", value: "absorb_all"],
+                      [key: "Pass Service fee to the buyer and Absorb Credit Card fee", value: "absorb_merchant"],
+                    ],
+                    wrapper_class: "sm:col-span-6",
+                    name: :fees })
+                  %>
 
-              <%= form_input_renderer(f, %{type: :select, options: [
-                  [key: "Pass all fees to the buyer", value: "pass_all"],
-                  [key: "Absorb service and Credit card fees", value: "absorb_all"],
-                  [key: "Pass Service fee to the buyer and Absorb Credit Card fee", value: "absorb_merchant"],
-                ],
-                wrapper_class: "sm:col-span-6",
-                name: :fees })
-              %>
+                  <%= form_input_renderer(ii, %{
+                    type: :checkbox,
+                    name: :hidden,
+                    wrapper_class: "sm:col-span-4",
+                    label: "Hide Ticket?",
+                    hint: gettext("Check to hide this ticket on your Event page and make it available via a direct link only.")
+                  }) %>
 
-              <%= form_input_renderer(i, %{
-                type: :checkbox,
-                name: :hidden,
-                wrapper_class: "sm:col-span-4",
-                label: "Hide Ticket?",
-                hint: gettext("Check to hide this ticket on your Event page and make it available via a direct link only.")
-              }) %>
+                  <%= form_input_renderer(ii, %{
+                    type: :number_input,
+                    name: :max_tickets_per_order,
+                    wrapper_class: "sm:col-span-3",
+                    hint: gettext("Leave blank unless there is a Maximum number of tickets customer is limited to.")
+                  }) %>
 
-              <%= form_input_renderer(i, %{
-                type: :number_input,
-                name: :max_tickets_per_order,
-                wrapper_class: "sm:col-span-3",
-                hint: gettext("Leave blank unless there is a Maximum number of tickets customer is limited to.")
-              }) %>
+                  <%= form_input_renderer(ii, %{
+                    type: :number_input,
+                    name: :min_tickets_per_order,
+                    wrapper_class: "sm:col-span-3",
+                    hint: gettext("Leave blank unless there is a Minimum amount of tickets customer has to order.")
+                    })
+                  %>
 
-              <%= form_input_renderer(i, %{
-                type: :number_input,
-                name: :min_tickets_per_order,
-                wrapper_class: "sm:col-span-3",
-                hint: gettext("Leave blank unless there is a Minimum amount of tickets customer has to order.")
-                })
-              %>
+                  <%= form_input_renderer(ii, %{
+                    type: :textarea,
+                    name: :after_purchase_message,
+                    wrapper_class: "sm:col-span-4",
+                    hint: gettext("Additional message to include on the purchased ticket")
+                  }) %>
 
-              <%= form_input_renderer(i, %{
-                type: :textarea,
-                name: :after_purchase_message,
-                wrapper_class: "sm:col-span-4",
-                hint: gettext("Additional message to include on the purchased ticket")
-              }) %>
+                  <%= form_input_renderer(ii, %{type: :select, options: [
+                    [key: "All channels", value: "all"],
+                    [key: "Event page only", value: "event_page"],
+                    [key: "Box office only", value: "box_office"],
+                    ],
+                    wrapper_class: "sm:col-span-4",
+                    name: :sales_channel }) %>
+                </div>
+              <% end %>
 
-              <%= form_input_renderer(i, %{type: :select, options: [
-                [key: "All channels", value: "all"],
-                [key: "Event page only", value: "event_page"],
-                [key: "Box office only", value: "box_office"],
-                ],
-                wrapper_class: "sm:col-span-4",
-                name: :sales_channel }) %>
+              <button type="button"
+                phx-click="delete-ticket"
+                phx-target={@myself}
+                class="mt-2 inline-flex justify-center items-center dark:border-2 dark:border-red-600 rounded-lg py-2 px-2 bg-black text-red-600 block text-sm"
+                phx-value-index={i.index}>
+                Delete Ticket
+              </button>
+
             </div>
           <% end %>
 
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
-            <a href="#" type="button" phx-target={@myself} phx-click="add-feature"> add </a>
+            <button
+                type="button"
+                class="inline-flex justify-start space-x-2 dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium"
+                phx-target={@myself}
+                phx-click="add-ticket">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3" />
+                </svg>
+
+                <span><%= gettext("Add new Ticket") %></span>
+              </button>
 
             <div class="sm:col-span-6 flex justify-end">
               <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>

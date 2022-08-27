@@ -251,6 +251,7 @@ defmodule RauversionWeb.Router do
 
     live "/events", EventsLive.Index, :index
     live "/events/:id", EventsLive.Show, :show
+    live "/events/:id/tickets", TicketsLive.Index, :index
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id", TrackLive.Show, :show
