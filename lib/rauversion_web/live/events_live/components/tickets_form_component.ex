@@ -16,6 +16,28 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
   end
 
   @impl true
+  def handle_event(
+        "delete-ticket",
+        %{"index" => index},
+        socket
+      ) do
+    index = String.to_integer(index)
+
+    socket =
+      update(socket, :changeset, fn changeset ->
+        changeset
+        |> Ecto.Changeset.apply_changes()
+        |> Ecto.Changeset.change()
+        |> EctoNestedChangeset.delete_at([
+          :event_tickets,
+          index
+        ])
+      end)
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("validate", %{"event" => event_params}, socket) do
     changeset =
       socket.assigns.event

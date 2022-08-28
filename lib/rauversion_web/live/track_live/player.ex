@@ -171,7 +171,6 @@ defmodule RauversionWeb.TrackLive.Player do
         <div
           id="main-player-component"
           phx-hook="Player"
-          data-controller-disss="player"
           data-track-id={@track.id}
           data-player-peaks={ Jason.encode!(Rauversion.Tracks.metadata(@track, :peaks))}
           data-player-url={ Rauversion.Tracks.blob_proxy_url(@track, "mp3_audio")}
