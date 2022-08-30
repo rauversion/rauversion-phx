@@ -1,0 +1,90 @@
+# Rauversion
+
+```elixir
+path = :os.cmd('echo $PATH')
+System.put_env("PATH", "/usr/local/bin:#{path}")
+```
+
+## Reprocess Track
+
+```elixir
+:os.cmd('echo $PATH')
+```
+
+```elixir
+# IO.inspect(:os.cmd('ffprobe -v'))
+user = Rauversion.Accounts.get_user!(56)
+```
+
+```elixir
+track = Rauversion.Tracks.get_track!(89)
+```
+
+```elixir
+Rauversion.Tracks.reprocess_peaks(track)
+```
+
+## Count Queries & Series
+
+```elixir
+CountByDateQuery.top_listeners(user.id)
+|> Enum.map(fn x -> %{count: x.count, user: x.user.username} end)
+```
+
+```elixir
+CountByDateQuery.top_countries(user.id)
+```
+
+```elixir
+CountByDateQuery.series_by_month(user.id) |> Rauversion.Repo.all()
+```
+
+## Stripe account
+
+```elixir
+client = Rauversion.Stripe.Client.new()
+c = Rauversion.OauthCredentials.get_oauth_credential!(1)
+```
+
+### Account
+
+```elixir
+stripe_account = Rauversion.Stripe.Client.accounts(client, c.uid)
+```
+
+### balance
+
+```elixir
+Rauversion.Stripe.Client.balance(client, c.uid)
+```
+
+### Add charge
+
+https://stripe.com/docs/connect/destination-charges
+
+```elixir
+IO.inspect(c.uid)
+
+Rauversion.Stripe.Client.payment_intent(
+  client,
+  %{
+    "amount" => 1000,
+    "currency" => "usd",
+    "automatic_payment_methods" => %{"enabled" => true},
+    "transfer_data" => %{
+      "amount" => "890",
+      "destination" => c.uid
+    }
+  }
+)
+```
+
+### Balance Transactions
+
+```elixir
+Rauversion.Stripe.Client.balance_transactions(client, c.uid)
+```
+
+```elixir
+Rauversion.Stripe.Client.list_charges(client, c.uid)
+```
