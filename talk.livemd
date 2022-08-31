@@ -88,3 +88,5 @@ Rauversion.Stripe.Client.balance_transactions(client, c.uid)
 ```elixir
 Rauversion.Stripe.Client.list_charges(client, c.uid)
 ```
+
+## Section
