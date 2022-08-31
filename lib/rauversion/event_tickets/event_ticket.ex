@@ -14,7 +14,7 @@ defmodule Rauversion.EventTickets.EventTicket do
     # field :event_id, :id
 
     belongs_to :event, Rauversion.Events.Event
-    embeds_one :settings, Rauversion.Events.Ticket
+    embeds_one :settings, Rauversion.Events.Ticket, on_replace: :delete
 
     timestamps()
   end
