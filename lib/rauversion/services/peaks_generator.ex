@@ -1,5 +1,4 @@
 defmodule Rauversion.Services.PeaksGenerator do
-  # TODO: idea calculate duration to have 1000 data points
   def run_audiowaveform(file, duration) do
     desired_pixels = 500
 

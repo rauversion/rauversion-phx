@@ -16,7 +16,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
       phx-change="validate"
       phx-submit="save">
 
-      <nav class="flex space-x-4" aria-label="Tabs" data-controller-dis="tabs">
+      <nav class="flex space-x-4" aria-label="Tabs">
         <a href="#" phx-click="basic-info-tab" class={"#{active_tab_link?(@current_tab, "basic-info-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Basic Info </a>
         <a href="#" phx-click="tracks-tab" class={"#{active_tab_link?(@current_tab, "tracks-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"} aria-current="page"> Tracks </a>
         <a href="#" phx-click="metadata-tab" class={"#{active_tab_link?(@current_tab, "metadata-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Metadata </a>

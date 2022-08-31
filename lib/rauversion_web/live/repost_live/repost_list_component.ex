@@ -97,7 +97,7 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
               </div>
             </div>
 
-            <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+            <div class="border-t dark:border-gray-700 border-gray-200 px-4 py-5 sm:px-6">
 
               <div id="infinite-scroll"
                 class="min-w-full"

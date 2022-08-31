@@ -82,7 +82,7 @@ defmodule RauversionWeb.EventsLive.New do
          |> push_redirect(to: "/events/#{event.slug}/edit")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset)
+        # IO.inspect(changeset)
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
@@ -132,7 +132,11 @@ defmodule RauversionWeb.EventsLive.New do
   end
 
   defp edit_response(socket, id) do
-    event = socket.assigns.current_user |> Ecto.assoc(:events) |> Repo.get_by!(%{slug: id})
+    event =
+      socket.assigns.current_user
+      |> Ecto.assoc(:events)
+      |> Repo.get_by!(%{slug: id})
+      |> Repo.preload(:event_tickets)
 
     socket
     |> assign(:changeset, Events.change_event(event, %{}))

@@ -54,7 +54,6 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
           <%= content_tag :div, id: "track-player-#{track.id}",
                                 "phx-hook": "TrackHook",
                                 "phx-update": "ignore",
-                                "data-controllersss": "audio",
                                 "data-audio-id": track.id,
                                 "data-audio-target": "player",
                                 "data-audio-height-value": 70,

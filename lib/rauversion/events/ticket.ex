@@ -3,12 +3,6 @@ defmodule Rauversion.Events.Ticket do
   import Ecto.Changeset
 
   embedded_schema do
-    field :title, :string
-    field :price, :decimal
-    field :quantity, :integer
-    field :short_description, :string
-    field :selling_start, :utc_datetime
-    field :selling_ends, :utc_datetime
     field :show_sell_until, :boolean
     field :show_after_sold_out, :boolean
     field :fee_type, :string
@@ -22,12 +16,6 @@ defmodule Rauversion.Events.Ticket do
   def changeset(struct, attrs) do
     struct
     |> cast(attrs, [
-      :title,
-      :price,
-      :quantity,
-      :short_description,
-      :selling_start,
-      :selling_ends,
       :show_sell_until,
       :show_after_sold_out,
       :fee_type,
@@ -37,6 +25,6 @@ defmodule Rauversion.Events.Ticket do
       :sales_channel,
       :after_purchase_message
     ])
-    |> validate_required([:title, :price, :quantity])
+    |> validate_required([])
   end
 end

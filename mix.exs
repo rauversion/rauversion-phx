@@ -39,6 +39,8 @@ defmodule Rauversion.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.8"},
       {:ecto_nested_changeset, "~> 0.2.0"},
+      {:cloak_ecto, "~> 1.2.0"},
+      {:number, "~> 1.0.3"},
       {:postgrex, ">= 0.0.0"},
       {:ecto_psql_extras, "~> 0.6"},
       {:phoenix_html, "~> 3.0"},
