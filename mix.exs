@@ -76,6 +76,10 @@ defmodule Rauversion.MixProject do
       {:oauth2, "~> 1.0 or ~> 2.0"},
       {:ueberauth, "~> 0.7", override: true},
       {
+        :transbank,
+        git: "https://github.com/elixircl/transbank-elixir.git", branch: "main"
+      },
+      {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git",
         sparse: "apps/active_storage",

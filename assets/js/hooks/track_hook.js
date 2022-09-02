@@ -126,10 +126,10 @@ Player = {
     })
   },
   destroyWave() {
-    this?._wave.destroy()
+    this?._wave?.destroy()
   },
   playSong(){
-    this?._wave.playPause()
+    this?._wave?.playPause()
   },
   dispatchPause(){
     const trackId = this.el.dataset.audioId
