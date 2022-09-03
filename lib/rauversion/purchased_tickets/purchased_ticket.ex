@@ -15,7 +15,7 @@ defmodule Rauversion.PurchasedTickets.PurchasedTicket do
   @doc false
   def changeset(purchased_ticket, attrs) do
     purchased_ticket
-    |> cast(attrs, [:state, :data, :event_ticket_id, :user_id, :purchase_order_id])
+    |> cast(attrs, [:state, :event_ticket_id, :user_id, :purchase_order_id])
     |> cast_embed(:data,
       with: &Rauversion.PurchasedTickets.PurchasedTicketData.changeset/2
     )
