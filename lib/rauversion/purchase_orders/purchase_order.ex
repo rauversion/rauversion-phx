@@ -31,11 +31,10 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrderTickets do
   embedded_schema do
     field :ticket_id, :integer
     field :count, :integer
-    field :amount, :decimal
   end
 
   @required_fields []
-  @optional_fields [:ticket_id, :count, :decimal]
+  @optional_fields [:ticket_id, :count]
 
   def changeset(struct, attrs) do
     struct

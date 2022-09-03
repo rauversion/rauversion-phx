@@ -155,6 +155,20 @@ event = Events.get_event!(2)
 
 ## Event Ticket Order
 
+### Referencias
+
+* https://ticketplus.cl/events/pedro-piedra-gira-buena-suerte
+
+* https://www.ecopass.cl/precios
+
+* https://www.passline.com/
+
+* https://ticketstripe.com/login/auth
+
+* https://app.tickettailor.com/box-office/payment-methods
+
+<!-- livebook:{"break_markdown":true} -->
+
 ### Stripe test cards
 
 > Visa  4242424242424242    3 dígitos aleatorios    Cualquier fecha futura

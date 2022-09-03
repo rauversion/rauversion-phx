@@ -70,6 +70,7 @@ defmodule Rauversion.MixProject do
       {:timex, "~> 3.0"},
       {:oban, "~> 2.13"},
       {:fsmx, "~> 0.2.0"},
+      {:qrcode_ex, "~> 0.1.0"},
       {:oembed, "~> 0.4.1"},
       {:tesla, "~> 1.4"},
       {:ex_cldr_dates_times, "~> 2.0"},
