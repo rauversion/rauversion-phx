@@ -17,6 +17,8 @@ defmodule Rauversion.Accounts.User do
     field :city, :string
     field :bio, :string
 
+    has_many :purchase_orders, Rauversion.PurchaseOrders.PurchaseOrder, on_delete: :delete_all
+
     has_many :oauth_credentials, Rauversion.OauthCredentials.OauthCredential,
       on_delete: :delete_all
 

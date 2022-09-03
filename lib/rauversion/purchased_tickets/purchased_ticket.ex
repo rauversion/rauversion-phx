@@ -3,17 +3,42 @@ defmodule Rauversion.PurchasedTickets.PurchasedTicket do
   import Ecto.Changeset
 
   schema "purchased_tickets" do
-    field :data, :map
-    field :state, :string
+    field :state, :string, default: "pending"
+    belongs_to :purchase_order, Rauversion.PurchaseOrders.PurchaseOrder
     belongs_to :user, Rauversion.Accounts.User
     belongs_to :event_ticket, Rauversion.EventTickets.EventTicket
+    embeds_one :data, Rauversion.PurchasedTickets.PurchasedTicketData, on_replace: :update
+
     timestamps()
   end
 
   @doc false
   def changeset(purchased_ticket, attrs) do
     purchased_ticket
-    |> cast(attrs, [:state, :data, :event_ticket_id, :user_id])
-    |> validate_required([:state, :data, :event_ticket_id, :user_id])
+    |> cast(attrs, [:state, :data, :event_ticket_id, :user_id, :purchase_order_id])
+    |> cast_embed(:data,
+      with: &Rauversion.PurchasedTickets.PurchasedTicketData.changeset/2
+    )
+    |> validate_required([:state, :event_ticket_id, :user_id, :purchase_order_id])
+  end
+end
+
+defmodule Rauversion.PurchasedTickets.PurchasedTicketData do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  embedded_schema do
+    field :price, :decimal
+  end
+
+  @required_fields []
+  @optional_fields [
+    :price
+  ]
+
+  def changeset(struct, attrs) do
+    struct
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 end

@@ -45,7 +45,8 @@
               )
       :attendees -> live_component(
                       RauversionWeb.Live.EventsLive.Components.AttendeesComponent,
-                      id: "attendees"
+                      id: "attendees",
+                      event: @event
                     )
       _ -> "no section for #{@live_action}"
 

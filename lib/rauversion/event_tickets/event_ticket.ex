@@ -15,6 +15,7 @@ defmodule Rauversion.EventTickets.EventTicket do
 
     belongs_to :event, Rauversion.Events.Event
     embeds_one :settings, Rauversion.Events.Ticket, on_replace: :delete
+    has_many :purchased_tickets, Rauversion.PurchasedTickets.PurchasedTicket
 
     timestamps()
   end

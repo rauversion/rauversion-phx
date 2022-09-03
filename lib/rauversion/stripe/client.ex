@@ -109,7 +109,7 @@ defmodule Rauversion.Stripe.Client do
   -d reverse_transfer=true \
   """
 
-  def payment_intent(
+  def refunds(
         client,
         params = %{
           "charge" => _charge_id,
@@ -117,6 +117,31 @@ defmodule Rauversion.Stripe.Client do
         }
       ) do
     post(client, "/refunds", params, [])
+  end
+
+  @doc """
+  https://stripe.com/docs/connect/creating-a-payments-page?ui=checkout&destination-or-direct=direct-charges
+  """
+  def create_session(
+        client,
+        account,
+        params
+      ) do
+    # post(client, "/checkout/sessions", params, [])
+
+    prepare_request(client, :post, "/checkout/sessions", account, params)
+
+    #  curl https://api.stripe.com/v1/checkout/sessions \
+    # -u sk_test_51La9aMCM97FuPMA98QN5mL06tlCXp6UQbrvm4U3vLUvrhNPkC7VMBayrapx6DaI9Zc1gMy9ZuPLBqFPcwJvzmXMB0058FygMKs: \
+    # -d "line_items[][name]"="Kavholm rental" \
+    # -d "line_items[][amount]"=1000 \
+    # -d "line_items[][currency]"="usd" \
+    # -d "line_items[][quantity]"=1 \
+    # -d "payment_intent_data[application_fee_amount]"=123 \
+    # -d "payment_intent_data[transfer_data][destination]"="{{CONNECTED_STRIPE_ACCOUNT_ID}}" \
+    # -d "mode"="payment" \
+    # -d "success_url"="https://example.com/success" \
+    # -d "cancel_url"="https://example.com/cancel"
   end
 
   def balance_transactions(client, account, limit \\ 3) do

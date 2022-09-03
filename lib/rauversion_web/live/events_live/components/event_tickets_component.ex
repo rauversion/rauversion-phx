@@ -1,6 +1,7 @@
 defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   use RauversionWeb, :live_component
-  alias Rauversion.PurchasedTickets
+  alias Rauversion.{PurchasedTickets, PurchaseOrders}
+  alias Rauversion.PurchaseOrders.{PurchaseOrder}
   alias Rauversion.PurchasedTickets.PurchasedTicket
 
   @impl true
@@ -10,10 +11,19 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
       socket
       |> assign(assigns)
       |> assign(:open, false)
+      |> assign(:result, 0)
       |> assign(:tickets, get_public_tickets(assigns.event))
+      |> assign(:purchase, nil)
       |> assign(
         :changeset,
-        PurchasedTickets.change_purchased_ticket(%PurchasedTicket{})
+        %PurchaseOrder{}
+        |> PurchaseOrders.change_purchase_order(%{
+          data:
+            get_public_tickets(assigns.event)
+            |> Enum.map(fn x -> %{ticket_id: x.id, count: 0} end)
+        })
+
+        # PurchasedTickets.change_purchased_ticket(%PurchasedTicket{})
       )
     }
   end
@@ -31,19 +41,64 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   end
 
   @impl true
+  def handle_event("save", %{"purchase_order" => purchase_order}, socket) do
+    IO.inspect(socket.assigns.changeset)
+
+    if socket.assigns.changeset.valid? do
+      {:ok, a} =
+        Rauversion.PurchaseOrders.create_purchase_order(
+          %{
+            "user_id" => socket.assigns.current_user.id
+          }
+          |> Map.merge(purchase_order)
+        )
+
+      {:ok, data} =
+        Rauversion.PurchaseOrders.create_stripe_session(
+          a,
+          socket.assigns.event
+        )
+
+      {:ok, order_with_payment_id} =
+        Rauversion.PurchaseOrders.update_purchase_order(a, %{
+          "payment_id" => data["id"],
+          "payment_provider" => "stripe"
+        })
+
+      {:noreply,
+       assign(socket, :purchase, order_with_payment_id)
+       |> redirect(external: data["url"])}
+    else
+      {:noreply, socket}
+    end
+  end
+
+  @impl true
   def handle_event("close-modal", %{}, socket) do
     {:noreply, socket |> assign(:open, false)}
   end
 
   @impl true
-  def handle_event("validate", %{"purchased_ticket" => event_params}, socket) do
+  def handle_event(
+        "validate",
+        %{"purchase_order" => purchase_order},
+        socket
+      ) do
     changeset =
-      %PurchasedTicket{}
-      |> PurchasedTickets.change_purchased_ticket(event_params)
+      %Rauversion.PurchaseOrders.PurchaseOrder{
+        user_id: socket.assigns.current_user.id
+      }
+      |> Rauversion.PurchaseOrders.change_purchase_order(purchase_order)
       |> Map.put(:action, :validate)
 
     # IO.inspect(changeset)
-    {:noreply, assign(socket, :changeset, changeset)}
+
+    {:noreply,
+     assign(socket, :changeset, changeset)
+     |> assign(
+       :result,
+       Rauversion.PurchaseOrders.calculate_total(changeset |> Ecto.Changeset.apply_changes())
+     )}
   end
 
   @impl true
@@ -61,54 +116,113 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                      <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
-                        <thead class="bg-gray-50-- dark:bg-gray-900--">
+                      <%= if @purchase |> is_nil do %>
+                        <.form let={f} for={@changeset}
+                          phx-change="validate"
+                          phx-target={@myself}
+                          phx-submit="save">
+                            <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
+                                <thead class="bg-gray-50-- dark:bg-gray-900--">
 
-                          <tr>
-                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:pl-6">Name</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Price</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">QTY</th>
-                          </tr>
+                                  <tr>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:pl-6">Name</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Price</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">QTY</th>
+                                  </tr>
 
-                        </thead>
+                                </thead>
 
-                        <tbody class="divide-y divide-gray-200 dark:divide-gray-900-- bg-white-- dark:bg-gray-800--">
-                          <%= for ticket <- @tickets do %>
-                            <tr>
-                              <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                                <div class="flex items-center">
-                                  <div class="ml-4">
-                                    <div class="font-medium text-gray-900 dark:text-gray-100">
-                                      <%= ticket.title %>
-                                    </div>
-                                    <div class="text-gray-500 dark:text-gray-400">
-                                      <%= ticket.short_description %>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
-                                <div class="text-gray-900 dark:text-gray-100 text-2xl">
-                                  <%= Number.Currency.number_to_currency(ticket.price) %>
-                                </div>
-                              </td>
-                              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
-                                <div class="flex justify-start items-center space-x-3">
-                                  <.form let={f} for={@changeset}
-                                    phx-change="validate"
-                                    phx-target={@myself}
-                                    phx-submit="save">
-                                    <%= label f, :x %>
-                                    <%= text_input f, :qty, class: "bg-gray-700 border rounded-sm", type: :number %>
-                                    <%= submit "Save", class: "inline-flex items-center rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-black px-3 py-2 text-sm font-medium leading-4 text-gray-700 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30" %>
-                                  </.form>
-                                </div>
-                              </td>
-                            </tr>
-                          <% end %>
-                        </tbody>
-                      </table>
+                                <tbody class="divide-y divide-gray-200 dark:divide-gray-900-- bg-white-- dark:bg-gray-800--">
+
+                                  <%= inputs_for f, :data, fn i -> %>
+
+                                  <% ticket = Rauversion.EventTickets.get_event_ticket!(i.params["ticket_id"])
+
+                                  # ticket = Rauversion.EventTickets.get_event_ticket!(i.ticket_id) %>
+
+                                  <% #= for ticket <- @tickets do %>
+                                    <tr>
+                                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                        <div class="flex items-center">
+                                          <div class="">
+                                            <div class="font-medium text-gray-900 dark:text-gray-100">
+                                              <%= ticket.title %>
+                                            </div>
+                                            <div class="text-gray-500 dark:text-gray-400">
+                                              <%= ticket.short_description %>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                        <div class="text-gray-900 dark:text-gray-100 text-2xl">
+                                          <%= Number.Currency.number_to_currency(ticket.price) %>
+                                        </div>
+                                      </td>
+                                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                        <div class="flex justify-start items-center space-x-3">
+                                            <%= label i, :x %>
+                                            <%= text_input i, :count, class: "bg-gray-700 border rounded-sm", type: :number %>
+                                            <%= error_tag i, :count %>
+                                            <%= text_input i, :ticket_id, value: ticket.id %>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  <% end %>
+
+
+                                  <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+
+                                    </td>
+
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+
+                                    </td>
+
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                      <div class="flex justify-end">
+                                        <h2 class="text-2xl">
+                                          <%= Number.Currency.number_to_currency(@result) %>
+                                        </h2>
+                                      </div>
+                                    </td>
+                                  </tr>
+
+
+                                  <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+
+                                    </td>
+
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                    </td>
+
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                      <div class="flex justify-end">
+                                        <%= if @changeset.valid? do %>
+                                          is valid!
+                                        <% else %>
+                                          no valid!
+                                        <% end %>
+                                        <%= submit "Place order",
+                                          disabled: !@changeset.valid?,
+                                          class: "inline-flex items-center rounded-md border border-brand-300 dark:border-brand-700 bg-brand-600 dark:bg-brand-600 px-4 py-4 text-sm font-medium leading-4 text-brand-100 dark:text-brand-100 shadow-sm hover:bg-brand-50 dark:hover:bg-brand-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
+                                        %>
+                                      </div>
+                                    </td>
+                                  </tr>
+
+                                </tbody>
+
+
+                              </table>
+                        </.form>
+                      <% else %>
+                        ya papoooo!
+                      <% end %>
                     </div>
+
                   </div>
                 </div>
               </div>

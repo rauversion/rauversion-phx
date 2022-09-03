@@ -25,7 +25,6 @@ Player = {
       this._wave.playPause()
     }
     
-
     this.nextBtn = this.el.querySelector('[data-player-target="next"]')
     this.rewBtn = this.el.querySelector('[data-player-target="rew"]')
 
@@ -42,7 +41,6 @@ Player = {
       this._wave.setVolume(e.target.value)
     }
     
-
     this.addToNextListener = (e) => {
       console.log("ADD TO NEXT ITEM", e.detail)
       this.pushEvent("add-song", {id: e.detail.value.id } )
