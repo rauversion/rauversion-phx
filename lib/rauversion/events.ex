@@ -25,7 +25,7 @@ defmodule Rauversion.Events do
     Repo.all(Event)
   end
 
-  def list_events(state \\ "published") do
+  def list_events(state \\ "published") when is_binary(state) do
     from(pi in Event,
       where: pi.state == ^state,
       preload: [:category, user: :avatar_blob]
@@ -37,6 +37,14 @@ defmodule Rauversion.Events do
   def list_events(query, state) do
     query
     |> where([p], p.state == ^state)
+    |> preload(user: :avatar_blob)
+
+    # |> Repo.all()
+  end
+
+  def list_events(user = %Rauversion.Accounts.User{}) do
+    user
+    |> Ecto.assoc(:events)
     |> preload(user: :avatar_blob)
 
     # |> Repo.all()

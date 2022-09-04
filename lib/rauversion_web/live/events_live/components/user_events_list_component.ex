@@ -40,7 +40,7 @@ defmodule RauversionWeb.EventsLive.UserEventsListComponent do
         |> Rauversion.Repo.paginate(page: 1, page_size: 30)
 
       "all" ->
-        Events.list_events()
+        Events.list_events(user)
         |> Rauversion.Repo.paginate(page: 1, page_size: 30)
     end
   end

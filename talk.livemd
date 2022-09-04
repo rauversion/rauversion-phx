@@ -167,6 +167,9 @@ event = Events.get_event!(2)
 
 * https://app.tickettailor.com/box-office/payment-methods
 
+Transbank:
+https://jumpseller.cl/support/webpay-webservices-pst/#:~:text=32889344%20es%20el%20c%C3%B3digo%20identificador%20de%20JUMPSELLER%20en%20Transbank.
+
 <!-- livebook:{"break_markdown":true} -->
 
 ### Stripe test cards
@@ -228,3 +231,10 @@ from(a in Rauversion.Events.Event,
 |> Repo.all()
 |> Repo.preload([:user])
 ```
+
+### ticket process design
+
+* choose tickets
+* order created
+
+### controller ticket access

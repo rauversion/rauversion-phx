@@ -73,6 +73,24 @@ defmodule Rauversion.PurchasedTickets do
     |> Repo.update()
   end
 
+  def check_in_purchased_ticket(%PurchasedTicket{} = purchased_ticket) do
+    purchased_ticket
+    |> PurchasedTicket.check_in_changeset(%{
+      checked_in: true,
+      checked_in_at: DateTime.utc_now()
+    })
+    |> Repo.update()
+  end
+
+  def uncheck_in_purchased_ticket(%PurchasedTicket{} = purchased_ticket) do
+    purchased_ticket
+    |> PurchasedTicket.uncheck_in_changeset(%{
+      checked_in: false,
+      checked_in_at: nil
+    })
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a purchased_ticket.
 
@@ -100,5 +118,26 @@ defmodule Rauversion.PurchasedTickets do
   """
   def change_purchased_ticket(%PurchasedTicket{} = purchased_ticket, attrs \\ %{}) do
     PurchasedTicket.changeset(purchased_ticket, attrs)
+  end
+
+  def url_for_ticket(purchased_ticket) do
+    message = signed_id(purchased_ticket)
+
+    RauversionWeb.Router.Helpers.qr_index_path(
+      RauversionWeb.Endpoint,
+      :index,
+      signed_id(purchased_ticket)
+    )
+  end
+
+  def signed_id(purchased_ticket) do
+    Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", purchased_ticket.id)
+  end
+
+  def find_by_signed_id!(token) do
+    case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token, max_age: 86400) do
+      {:ok, purchased_ticket_id} -> get_purchased_ticket!(purchased_ticket_id)
+      _ -> nil
+    end
   end
 end

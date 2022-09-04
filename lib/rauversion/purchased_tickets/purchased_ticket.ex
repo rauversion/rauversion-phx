@@ -4,6 +4,8 @@ defmodule Rauversion.PurchasedTickets.PurchasedTicket do
 
   schema "purchased_tickets" do
     field :state, :string, default: "pending"
+    field :checked_in, :boolean
+    field :checked_in_at, :utc_datetime
     belongs_to :purchase_order, Rauversion.PurchaseOrders.PurchaseOrder
     belongs_to :user, Rauversion.Accounts.User
     belongs_to :event_ticket, Rauversion.EventTickets.EventTicket
@@ -20,6 +22,18 @@ defmodule Rauversion.PurchasedTickets.PurchasedTicket do
       with: &Rauversion.PurchasedTickets.PurchasedTicketData.changeset/2
     )
     |> validate_required([:state, :event_ticket_id, :user_id, :purchase_order_id])
+  end
+
+  def check_in_changeset(purchased_ticket, attrs) do
+    purchased_ticket
+    |> cast(attrs, [:checked_in, :checked_in_at])
+    |> validate_required([:checked_in, :checked_in_at])
+  end
+
+  def uncheck_in_changeset(purchased_ticket, attrs) do
+    purchased_ticket
+    |> cast(attrs, [:checked_in, :checked_in_at])
+    |> validate_required([])
   end
 end
 

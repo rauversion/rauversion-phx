@@ -30,9 +30,10 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
             <thead class="bg-gray-50 dark:bg-gray-800">
               <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:pl-6">Name</th>
-                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 lg:table-cell">Title</th>
+                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 lg:table-cell">Price</th>
                 <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:table-cell">Email</th>
-                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Role</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Status</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Checked in</th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                   <span class="sr-only">Edit</span>
                 </th>
@@ -57,7 +58,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
                   </td>
                   <td class="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-300 sm:table-cell"><%= ticket.user.email %></td>
                   <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300"><%= ticket.state %></td>
+                  <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300"><%= ticket.checked_in_at %></td>
                   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                    <%= live_redirect "view", to: Rauversion.PurchasedTickets.url_for_ticket(ticket) %>
                     <a href="#" class="text-brand-600 hover:text-brand-900">Refund<span class="sr-only"></span></a>
                   </td>
                 </tr>

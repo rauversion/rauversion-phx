@@ -1,0 +1,95 @@
+# Rauversion
+
+## Events
+
+```elixir
+alias Rauversion.Events
+event = Events.get_event!(2)
+user = Rauversion.Accounts.get_user!(56)
+```
+
+## Event Ticket Order
+
+### Referencias
+
+* https://ticketplus.cl/events/pedro-piedra-gira-buena-suerte
+
+* https://www.ecopass.cl/precios
+
+* https://www.passline.com/
+
+* https://ticketstripe.com/login/auth
+
+* https://app.tickettailor.com/box-office/payment-methods
+
+Transbank:
+https://jumpseller.cl/support/webpay-webservices-pst/#:~:text=32889344%20es%20el%20c%C3%B3digo%20identificador%20de%20JUMPSELLER%20en%20Transbank.
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Stripe test cards
+
+> Visa  4242424242424242    3 dígitos aleatorios    Cualquier fecha futura
+
+```elixir
+event = event |> Rauversion.Repo.preload(:event_tickets)
+# R.recompile()
+
+Rauversion.PurchaseOrders.change_purchase_order(
+  %Rauversion.PurchaseOrders.PurchaseOrder{user_id: user.id},
+  %{
+    data: event.event_tickets |> Enum.map(fn x -> %{ticket_id: x.id, count: 10} end)
+  }
+)
+|> Ecto.Changeset.apply_changes()
+```
+
+```elixir
+Rauversion.EventTickets.get_event_ticket!(1)
+```
+
+```elixir
+import Ecto.Query, warn: false
+alias Rauversion.Repo
+
+Rauversion.Events.get_event!(2)
+|> Ecto.assoc(:user)
+|> Repo.one()
+|> Ecto.assoc(:oauth_credentials)
+|> Ecto.Query.where([c], c.provider == ^"stripe")
+|> Repo.one()
+```
+
+### Get Stripe payment session
+
+```elixir
+session_id = "cs_test_b10J3S60VmGmNA2zXWpKRMIQb4SMj1wp04ReCAo6OsiyeU3Q8kdcOJpoqO"
+
+order = Rauversion.PurchaseOrders.get_purchase_order_by_stripe_payment!(session_id)
+```
+
+```elixir
+from(a in Rauversion.Events.Event,
+  where: a.id == ^2,
+  join: t in Rauversion.EventTickets.EventTicket,
+  on: a.id == t.event_id,
+  join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+  on: t.id == pt.event_ticket_id,
+  # group_by: [pt.id],
+  limit: 10,
+  select: pt
+  # order_by: [desc: count(t.id)],
+  # preload: [
+  #  :user
+  # ]
+)
+|> Repo.all()
+|> Repo.preload([:user])
+```
+
+### ticket process design
+
+* choose tickets
+* order created
+
+### controller ticket access

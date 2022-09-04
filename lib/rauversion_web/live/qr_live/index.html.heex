@@ -1,41 +1,48 @@
 
+<div>
 
-<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"> 
-  <div class="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-900 dark:border-2 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-md sm:p-6">
-    <div class="flex flex-col">
+  <div class="bg-white dark:bg-black">
+    <div class="mx-auto max-w-7xl py-12 px-4 text-center sm:px-6 lg:py-16 lg:px-8">
+      
+      <%= if assigns.current_user && @ticket.event_ticket.event.user_id == assigns.current_user.id do %>
 
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+          <span class="block">The status of this ticket is?</span>
+          <%= if @ticket.checked_in_at  do %>
+            <span class="block text-green-600">
+              CHECKED IN
+            </span>
+          <% else %>
+            <span class="block text-yellow-600">
+              NOT CHECKED IN
+            </span>
+          <% end %>
+        </h2>
 
-      <div class="flex items-center space-x-2">
-
-        <div class="flex self-auto items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
-          <div class="text-green-600 dark:text-green-400 flex items-center justify-center">
-            <%= raw @qr %>
+        <div class="mt-8 flex justify-center">
+          <div class="inline-flex rounded-md shadow space-x-3">
+            <%= if !@ticket.checked_in do %>
+              <a href="#" phx-click="check-in" class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700">
+                Confirm Check in
+              </a>
+            <% else %>
+              <a href="#" phx-click="reenable" class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700">
+                Un check!
+              </a>
+            <% end %>
           </div>
         </div>
 
-        <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
-          <%= @ticket.user.email %>
-          <%= @ticket.state %>
-        </h3>
-      </div>
-
-      <div class="mt-3 text-center sm:mt-5">
-        <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
-          <%= @ticket.event_ticket.event.title %>
-        </h3>
-        <div class="mt-2">
-          <p class="text-sm text-gray-500 dark:text-gray-300">
-            <%= Rauversion.Events.event_dates(@ticket.event_ticket.event) %>
-          </p>
-        </div>
-      </div>
-
-    </div>
-    <div class="mt-5 sm:mt-6">
-      <%= live_redirect to: Routes.events_show_path(@socket, :show, @ticket.event_ticket.event.slug), 
-        class: "inline-flex w-full justify-center rounded-md border border-transparent bg-brand-600 dark:bg-brand-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-brand-700 dark:hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-600 focus:ring-offset-2 sm:text-sm" do %>
-        <%= gettext("Go to Event") %>
       <% end %>
+      
     </div>
   </div>
+
+  <.live_component 
+    module={ RauversionWeb.QrLive.Components.TicketComponent} 
+    qr={@qr}
+    id={@ticket.id}
+    ticket={@ticket}
+  />
+
 </div>
