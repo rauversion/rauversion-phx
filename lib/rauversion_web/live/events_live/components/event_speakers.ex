@@ -176,7 +176,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                         </button>
                     </time>
                   </h3>
-                  <p class="mt-1.5 text-base tracking-tight text-brand-900 dark:text-brand-100">
+                  <p class="mt-1.5 text-base tracking-tight text-brand-900 dark:text-brand-100 break-words">
                     <%= @day.description %>
                   </p>
                 </div>
@@ -185,7 +185,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
             <div>
               <%= for scheduling <- @days |> Enum.map(fn x -> x.schedulings end) |> List.flatten do %>
               <div class="[&amp;:not(:focus-visible)]:focus:outline-none" role="tabpanel" tabindex="0">
-                <ol role="list" class="space-y-8 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
+                <ol role="list" class="space-y-8 bg-white/60 dark:bg-white/10 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
                   <li aria-label={"#{scheduling.title} #{scheduling.short_description} at 9:00AM - 10:00AM PST"}>
                     <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">
                       <%= scheduling.title %>
@@ -193,7 +193,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                     <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">
                       <%= scheduling.short_description %>
                     </p>
-                    <p class="mt-1 font-mono text-sm text-slate-500">
+                    <p class="mt-1 font-mono text-sm text-gray-500 dark:text-gray-300">
                       <time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>
                       <!-- -->-
                       <!-- -->
@@ -232,7 +232,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                         <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">
                           <%= scheduling.short_description %>
                         </p>
-                        <p class="mt-1 font-mono text-sm text-slate-500">
+                        <p class="mt-1 font-mono text-sm text-gray-500 dark:text-gray-300">
                           <time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>
                           <!-- -->-
                           <!-- -->

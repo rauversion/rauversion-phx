@@ -92,15 +92,15 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                 <%= form_input_renderer(i, %{
                   type: :text_input,
                   name: :title,
-                  wrapper_class: "sm:col-span-6",
+                  wrapper_class: "sm:col-span-3",
                   hint: gettext("Ticket Type. For Example: General Admission, VIP Admission ...")
                 }) %>
 
-                <div class="sm:col-span-6 flex items-start space-x-4">
+                <div class="sm:col-span-3 flex items-start space-x-4">
                   <%= form_input_renderer(i, %{
                     type: :number_input,
                     name: :price,
-                    wrapper_class: "w-1/4",
+                    wrapper_class: "w-1/2",
                     hint: gettext("All prices are in U.S. Dollars ($). To select a different currency, click here.")
                     })
                   %>
@@ -108,7 +108,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                   <%= form_input_renderer(i, %{
                     type: :number_input,
                     name: :qty,
-                    wrapper_class: "w-1/4",
+                    wrapper_class: "w-1/2",
                     hint: gettext("Total number of tickets.")
                   }) %>
                 </div>
@@ -116,13 +116,13 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                 <%= form_input_renderer(i, %{
                   type: :datetime_input,
                   name: :selling_start,
-                  wrapper_class: "sm:col-span-2"
+                  wrapper_class: "sm:col-span-1"
                 }) %>
 
                 <%= form_input_renderer(i, %{
                   type: :datetime_input,
                   name: :selling_end,
-                  wrapper_class: "sm:col-span-2"
+                  wrapper_class: "sm:col-span-1"
                 }) %>
 
                 <%= form_input_renderer(i, %{
@@ -141,14 +141,14 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                   <%= form_input_renderer(ii, %{
                     type: :checkbox,
                     name: :show_sell_until,
-                    wrapper_class: "sm:col-span-6",
+                    wrapper_class: "sm:col-span-3",
                     hint: gettext("Show the Sell Until date on the event page.")
                   }) %>
 
                   <%= form_input_renderer(ii, %{
                     type: :checkbox,
                     name: :show_after_sold_out,
-                    wrapper_class: "sm:col-span-6",
+                    wrapper_class: "sm:col-span-3",
                     hint: gettext("Display with a \"Sold out\" message after ticket quantity runs out.")
                     })
                   %>
@@ -188,7 +188,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                   <%= form_input_renderer(ii, %{
                     type: :textarea,
                     name: :after_purchase_message,
-                    wrapper_class: "sm:col-span-4",
+                    wrapper_class: "sm:col-span-6",
                     hint: gettext("Additional message to include on the purchased ticket")
                   }) %>
 
@@ -205,7 +205,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
               <button type="button"
                 phx-click="delete-ticket"
                 phx-target={@myself}
-                class="mt-2 inline-flex justify-center items-center dark:border-2 dark:border-red-600 rounded-lg py-2 px-2 bg-black text-red-600 block text-sm"
+                class="mt-2 inline-flex justify-center items-center border-2 border-red-600 rounded-lg py-2 px-2 bg-black text-red-600 block text-sm"
                 phx-value-index={i.index}>
                 Delete Ticket
               </button>

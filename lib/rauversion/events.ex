@@ -119,6 +119,7 @@ defmodule Rauversion.Events do
   def update_event(%Event{} = event, attrs) do
     event
     |> Event.changeset(attrs)
+    |> Event.process_one_upload(attrs, "cover")
     |> Repo.update()
   end
 

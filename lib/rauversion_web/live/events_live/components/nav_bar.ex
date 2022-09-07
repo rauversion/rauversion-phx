@@ -57,9 +57,9 @@ defmodule RauversionWeb.EventsLive.NavBar do
 
   def item_class(action, kind) do
     if action == kind do
-      "dark:bg-black dark:text-gray-100 bg-gray-50 bg-opacity-50 flex p-6 border-b border-gray-gray-200 dark:border-gray-800"
+      "bg-white text-gray-900 dark:bg-black dark:text-gray-100 bg-gray-50 bg-opacity-50-- flex p-6 border-b border-gray-gray-200 dark:border-gray-800"
     else
-      "dark:bg-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:bg-opacity-50 flex p-6 border-b border-blue-gray-200 dark:border-gray-800"
+      "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:bg-opacity-50- flex p-6 border-b border-blue-gray-200 dark:border-gray-800"
     end
   end
 
