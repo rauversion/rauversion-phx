@@ -102,12 +102,14 @@ Player = {
     this.rewBtn && this.rewBtn.removeEventListener("click", this.prevBtnClickListener)
     this.range && this.range.removeEventListener("change", this.rangeChangeListener )
     this?._wave?.drawer?.wrapper?.removeEventListener("click", this.waveClickListener)
-
+    
     document.removeEventListener('audio-process-mouseup', this.mouseUpHandler)
     document.removeEventListener('audio-pause', this.audioPauseHandler)
 
     window.removeEventListener(`phx:add-to-next`, this.addToNextListener)
-    window.removeEventListener('phx:add-to-next', this.addToNextListener)
+    window.removeEventListener(`phx:play-song`, this.playSongListener)
+
+    this.destroyWave()
   },
   initWave(){
     this.peaks = this.el.dataset.playerPeaks
@@ -201,9 +203,7 @@ Player = {
     document.dispatchEvent(ev)
   },
   destroyWave() {
-    if(this._wave) {
-      this._wave.destroy()
-    }
+    this?._wave?.destroy()
   },
   nextSong(){
     this.destroyWave()

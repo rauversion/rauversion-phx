@@ -14,6 +14,7 @@ defmodule Rauversion.PurchasedTicketsTest do
 
     @invalid_attrs %{data: nil, state: nil}
 
+    @tag :skip
     test "list_purchased_tickets/0 returns all purchased_tickets" do
       event = event_fixture()
       user = user_fixture()
