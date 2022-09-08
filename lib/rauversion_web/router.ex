@@ -67,6 +67,8 @@ defmodule RauversionWeb.Router do
 
     get "/embed/sets/:playlist_id", EmbedController, :show_playlist
     get "/embed/sets/:playlist_id/private", EmbedController, :private_playlist
+
+    post "/webhooks/stripe", WebhooksController, :create
   end
 
   # Other scopes may use custom stacks.
@@ -134,6 +136,8 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    live "/tickets/qr/:signed_id", QrLive.Index, :index
+
     live "/users/settings", UserSettingsLive.Index, :profile
     live "/users/settings/email", UserSettingsLive.Index, :email
     live "/users/settings/security", UserSettingsLive.Index, :security
@@ -153,6 +157,11 @@ defmodule RauversionWeb.Router do
     live "/events/new", EventsLive.New, :new
     live "/events/edit/:id", EventsLive.New, :edit
     live "/events/:slug/edit", EventsLive.New, :edit
+
+    live "/events/:slug/payment_success", EventsLive.Show, :payment_success
+    live "/events/:slug/payment_failure", EventsLive.Show, :payment_fail
+    live "/events/:slug/payment_cancel", EventsLive.Show, :payment_cancel
+
     live "/events/:slug/edit/schedule", EventsLive.New, :schedule
     live "/events/:slug/edit/tickets", EventsLive.New, :tickets
     live "/events/:slug/edit/order_form", EventsLive.New, :order_form

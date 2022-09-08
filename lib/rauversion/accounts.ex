@@ -516,6 +516,13 @@ defmodule Rauversion.Accounts do
     )
   end
 
+  def get_oauth_credential(user, provider) do
+    user
+    |> Ecto.assoc(:oauth_credentials)
+    |> where([c], c.provider == ^provider)
+    |> Repo.one()
+  end
+
   # invitations
 
   def change_user_invitation(%User{} = user, attrs \\ %{}) do

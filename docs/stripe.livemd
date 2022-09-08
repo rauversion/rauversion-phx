@@ -1,0 +1,97 @@
+# Rauversion
+
+## Stripe account
+
+```elixir
+client = Rauversion.Stripe.Client.new()
+c = Rauversion.OauthCredentials.get_oauth_credential!(1)
+```
+
+### Account
+
+```elixir
+stripe_account = Rauversion.Stripe.Client.accounts(client, c.uid)
+```
+
+### balance
+
+```elixir
+Rauversion.Stripe.Client.balance(client, c.uid)
+```
+
+### Add charge
+
+https://stripe.com/docs/connect/destination-charges
+
+```elixir
+IO.inspect(c.uid)
+
+@doc """
+Rauversion.Stripe.Client.payment_intent(
+  client,
+  %{
+    "amount" => 1000,
+    "currency" => "usd",
+    "automatic_payment_methods" => %{"enabled" => true},
+    "transfer_data" => %{
+      "amount" => "890",
+      "destination" => c.uid
+    }
+  }
+)
+"""
+```
+
+Session create
+
+```elixir
+IO.inspect(c.uid)
+
+Rauversion.Stripe.Client.create_session(
+  client,
+  c.uid,
+  %{
+    "line_items" => %{
+      "0" => %{
+        "quantity" => 10,
+        "price_data" => %{
+          "unit_amount" => 10000,
+          "currency" => "usd",
+          "product_data" => %{
+            "name" => "prod name",
+            "description" => "prod desc"
+          }
+        }
+      }
+    },
+    "payment_intent_data" => %{
+      "application_fee_amount" => 100
+      # "transfer_data"=> %{
+      #  "destination"=> c.uid
+      # }
+    },
+    "mode" => "payment",
+    "success_url" => "https://aa.com/success_url",
+    "cancel_url" => "https://aa.com/cancel_url"
+  }
+)
+```
+
+```elixir
+a =
+  [%{a: 1, b: 2}, %{a: 44, b: 42}]
+  |> Enum.with_index()
+  |> Enum.reduce(%{}, fn {x, i}, acc ->
+    acc |> Map.merge(%{"#{i}" => x})
+  end)
+```
+
+### Balance Transactions
+
+```elixir
+# Rauversion.Stripe.Client.balance_transactions(client, c.uid)
+```
+
+```elixir
+# Rauversion.Stripe.Client.list_charges(client, c.uid)
+```

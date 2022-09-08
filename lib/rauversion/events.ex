@@ -25,7 +25,7 @@ defmodule Rauversion.Events do
     Repo.all(Event)
   end
 
-  def list_events(state \\ "published") do
+  def list_events(state \\ "published") when is_binary(state) do
     from(pi in Event,
       where: pi.state == ^state,
       preload: [:category, user: :avatar_blob]
@@ -40,6 +40,33 @@ defmodule Rauversion.Events do
     |> preload(user: :avatar_blob)
 
     # |> Repo.all()
+  end
+
+  def list_events(user = %Rauversion.Accounts.User{}) do
+    user
+    |> Ecto.assoc(:events)
+    |> preload(user: :avatar_blob)
+
+    # |> Repo.all()
+  end
+
+  def list_tickets(event) do
+    from(a in Rauversion.Events.Event,
+      where: a.id == ^event.id,
+      join: t in Rauversion.EventTickets.EventTicket,
+      on: a.id == t.event_id,
+      join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+      on: t.id == pt.event_ticket_id,
+      # group_by: [pt.id],
+      limit: 10,
+      select: pt
+      # order_by: [desc: count(t.id)],
+      # preload: [
+      #  :user
+      # ]
+    )
+    |> Repo.all()
+    |> Repo.preload([:user, :event_ticket])
   end
 
   @doc """
@@ -92,6 +119,7 @@ defmodule Rauversion.Events do
   def update_event(%Event{} = event, attrs) do
     event
     |> Event.changeset(attrs)
+    |> Event.process_one_upload(attrs, "cover")
     |> Repo.update()
   end
 
@@ -131,8 +159,11 @@ defmodule Rauversion.Events do
 
   def event_dates(struct) do
     case Cldr.Interval.to_string(struct.event_start, struct.event_ends, Rauversion.Cldr) do
-      {:ok, d} -> d
-      _ -> struct.event_start
+      {:ok, d} ->
+        d
+
+      e ->
+        struct.event_start
     end
   end
 

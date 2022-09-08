@@ -6,7 +6,6 @@ defmodule RauversionWeb.EventsLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    # @current_user
     {:ok, socket |> assign(:open, false)}
   end
 
@@ -27,5 +26,10 @@ defmodule RauversionWeb.EventsLive.Show do
   defp apply_action(socket, :show, %{"id" => id}) do
     event = Events.get_by_slug!(id) |> Repo.preload([:user])
     socket |> assign(:event, event)
+  end
+
+  defp apply_action(socket, :payment_success, %{"slug" => id}) do
+    event = Events.get_by_slug!(id) |> Repo.preload([:user])
+    socket |> assign(:event, event) |> assign(:payment_success, true)
   end
 end

@@ -25,7 +25,6 @@ Player = {
       this._wave.playPause()
     }
     
-
     this.nextBtn = this.el.querySelector('[data-player-target="next"]')
     this.rewBtn = this.el.querySelector('[data-player-target="rew"]')
 
@@ -42,7 +41,6 @@ Player = {
       this._wave.setVolume(e.target.value)
     }
     
-
     this.addToNextListener = (e) => {
       console.log("ADD TO NEXT ITEM", e.detail)
       this.pushEvent("add-song", {id: e.detail.value.id } )
@@ -104,12 +102,14 @@ Player = {
     this.rewBtn && this.rewBtn.removeEventListener("click", this.prevBtnClickListener)
     this.range && this.range.removeEventListener("change", this.rangeChangeListener )
     this?._wave?.drawer?.wrapper?.removeEventListener("click", this.waveClickListener)
-
+    
     document.removeEventListener('audio-process-mouseup', this.mouseUpHandler)
     document.removeEventListener('audio-pause', this.audioPauseHandler)
 
     window.removeEventListener(`phx:add-to-next`, this.addToNextListener)
-    window.removeEventListener('phx:add-to-next', this.addToNextListener)
+    window.removeEventListener(`phx:play-song`, this.playSongListener)
+
+    this.destroyWave()
   },
   initWave(){
     this.peaks = this.el.dataset.playerPeaks
@@ -203,9 +203,7 @@ Player = {
     document.dispatchEvent(ev)
   },
   destroyWave() {
-    if(this._wave) {
-      this._wave.destroy()
-    }
+    this?._wave?.destroy()
   },
   nextSong(){
     this.destroyWave()

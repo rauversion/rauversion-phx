@@ -3,6 +3,17 @@
 ```elixir
 path = :os.cmd('echo $PATH')
 System.put_env("PATH", "/usr/local/bin:#{path}")
+
+defmodule R do
+  def recompile() do
+    Mix.Task.reenable("app.start")
+    Mix.Task.reenable("compile")
+    Mix.Task.reenable("compile.all")
+    compilers = Mix.compilers()
+    Enum.each(compilers, &Mix.Task.reenable("compile.#{&1}"))
+    Mix.Task.run("compile.all")
+  end
+end
 ```
 
 ## Reprocess Track
@@ -65,6 +76,7 @@ https://stripe.com/docs/connect/destination-charges
 ```elixir
 IO.inspect(c.uid)
 
+@doc """
 Rauversion.Stripe.Client.payment_intent(
   client,
   %{
@@ -77,16 +89,152 @@ Rauversion.Stripe.Client.payment_intent(
     }
   }
 )
+"""
+```
+
+Session create
+
+```elixir
+IO.inspect(c.uid)
+
+Rauversion.Stripe.Client.create_session(
+  client,
+  c.uid,
+  %{
+    "line_items" => %{
+      "0" => %{
+        "quantity" => 10,
+        "price_data" => %{
+          "unit_amount" => 10000,
+          "currency" => "usd",
+          "product_data" => %{
+            "name" => "prod name",
+            "description" => "prod desc"
+          }
+        }
+      }
+    },
+    "payment_intent_data" => %{
+      "application_fee_amount" => 100
+      # "transfer_data"=> %{
+      #  "destination"=> c.uid
+      # }
+    },
+    "mode" => "payment",
+    "success_url" => "https://aa.com/success_url",
+    "cancel_url" => "https://aa.com/cancel_url"
+  }
+)
+```
+
+```elixir
+a =
+  [%{a: 1, b: 2}, %{a: 44, b: 42}]
+  |> Enum.with_index()
+  |> Enum.reduce(%{}, fn {x, i}, acc ->
+    acc |> Map.merge(%{"#{i}" => x})
+  end)
 ```
 
 ### Balance Transactions
 
 ```elixir
-Rauversion.Stripe.Client.balance_transactions(client, c.uid)
+# Rauversion.Stripe.Client.balance_transactions(client, c.uid)
 ```
 
 ```elixir
-Rauversion.Stripe.Client.list_charges(client, c.uid)
+# Rauversion.Stripe.Client.list_charges(client, c.uid)
 ```
 
-## Section
+## Events
+
+```elixir
+alias Rauversion.Events
+event = Events.get_event!(2)
+```
+
+## Event Ticket Order
+
+### Referencias
+
+* https://ticketplus.cl/events/pedro-piedra-gira-buena-suerte
+
+* https://www.ecopass.cl/precios
+
+* https://www.passline.com/
+
+* https://ticketstripe.com/login/auth
+
+* https://app.tickettailor.com/box-office/payment-methods
+
+Transbank:
+https://jumpseller.cl/support/webpay-webservices-pst/#:~:text=32889344%20es%20el%20c%C3%B3digo%20identificador%20de%20JUMPSELLER%20en%20Transbank.
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Stripe test cards
+
+> Visa  4242424242424242    3 dígitos aleatorios    Cualquier fecha futura
+
+```elixir
+event = event |> Rauversion.Repo.preload(:event_tickets)
+# R.recompile()
+
+Rauversion.PurchaseOrders.change_purchase_order(
+  %Rauversion.PurchaseOrders.PurchaseOrder{user_id: user.id},
+  %{
+    data: event.event_tickets |> Enum.map(fn x -> %{ticket_id: x.id, count: 10} end)
+  }
+)
+|> Ecto.Changeset.apply_changes()
+```
+
+```elixir
+Rauversion.EventTickets.get_event_ticket!(1)
+```
+
+```elixir
+import Ecto.Query, warn: false
+alias Rauversion.Repo
+
+Rauversion.Events.get_event!(2)
+|> Ecto.assoc(:user)
+|> Repo.one()
+|> Ecto.assoc(:oauth_credentials)
+|> Ecto.Query.where([c], c.provider == ^"stripe")
+|> Repo.one()
+```
+
+### Get Stripe payment session
+
+```elixir
+session_id = "cs_test_b10J3S60VmGmNA2zXWpKRMIQb4SMj1wp04ReCAo6OsiyeU3Q8kdcOJpoqO"
+
+order = Rauversion.PurchaseOrders.get_purchase_order_by_stripe_payment!(session_id)
+```
+
+```elixir
+from(a in Rauversion.Events.Event,
+  where: a.id == ^2,
+  join: t in Rauversion.EventTickets.EventTicket,
+  on: a.id == t.event_id,
+  join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+  on: t.id == pt.event_ticket_id,
+  # group_by: [pt.id],
+  limit: 10,
+  select: pt
+  # order_by: [desc: count(t.id)],
+  # preload: [
+  #  :user
+  # ]
+)
+|> Repo.all()
+|> Repo.preload([:user])
+```
+
+### ticket process design
+
+* choose tickets
+* order created
+
+### controller ticket access

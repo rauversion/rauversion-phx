@@ -54,7 +54,7 @@ defmodule RauversionWeb.UserResetPasswordControllerTest do
 
     test "renders reset password", %{conn: conn, token: token} do
       conn = get(conn, Routes.user_reset_password_path(conn, :edit, token))
-      assert html_response(conn, 200) =~ "Reset password"
+      assert html_response(conn, 200) =~ "Reset Password"
     end
 
     test "does not render reset password with invalid token", %{conn: conn} do
@@ -93,14 +93,14 @@ defmodule RauversionWeb.UserResetPasswordControllerTest do
       conn =
         put(conn, Routes.user_reset_password_path(conn, :update, token), %{
           "user" => %{
-            "password" => "too short",
+            "password" => "short",
             "password_confirmation" => "does not match"
           }
         })
 
       response = html_response(conn, 200)
-      assert response =~ "Reset password"
-      assert response =~ "should be at least 12 character(s)"
+      assert response =~ "Reset Password"
+      assert response =~ "should be at least 6 character(s)"
       assert response =~ "does not match password"
     end
 

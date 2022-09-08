@@ -1,6 +1,18 @@
 defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
   use RauversionWeb, :live_component
 
+  def update(assigns, socket) do
+    {:ok,
+     socket
+     |> assign(assigns)
+     |> assign(:attendees, list_posts(assigns.event))}
+  end
+
+  defp list_posts(event) do
+    Rauversion.Events.list_tickets(event)
+    # Events.list_event() |> Repo.preload(user: :avatar_blob)
+  end
+
   def render(assigns) do
     ~H"""
       <div class="px-4 sm:px-6 lg:px-8 w-full">
@@ -18,34 +30,41 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
             <thead class="bg-gray-50 dark:bg-gray-800">
               <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:pl-6">Name</th>
-                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 lg:table-cell">Title</th>
+                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 lg:table-cell">Price</th>
                 <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:table-cell">Email</th>
-                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Role</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Status</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Checked in</th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                   <span class="sr-only">Edit</span>
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200 bg-white dark:bg-gray-900">
-              <tr>
-                <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-100 sm:w-auto sm:max-w-none sm:pl-6">
-                  Lindsay Walton
-                  <dl class="font-normal lg:hidden">
-                    <dt class="sr-only">Title</dt>
-                    <dd class="mt-1 truncate text-gray-700 dark:text-gray-300">Front-end Developer</dd>
-                    <dt class="sr-only sm:hidden">Email</dt>
-                    <dd class="mt-1 truncate text-gray-500 sm:hidden">lindsay.walton@example.com</dd>
-                  </dl>
-                </td>
-                <td class="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-300 lg:table-cell">Front-end Developer</td>
-                <td class="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-300 sm:table-cell">lindsay.walton@example.com</td>
-                <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300">Member</td>
-                <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                  <a href="#" class="text-brand-600 hover:text-brand-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
-                </td>
-              </tr>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-800 bg-white dark:bg-gray-900">
+              <%= for ticket <- @attendees do %>
 
-              <!-- More people... -->
+                <tr>
+                  <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-100 sm:w-auto sm:max-w-none sm:pl-6">
+                    <%= ticket.user.username %>
+                    <dl class="font-normal lg:hidden">
+                      <dt class="sr-only">Status</dt>
+                      <dd class="mt-1 truncate text-gray-700 dark:text-gray-300"><%= ticket.state %></dd>
+                      <dt class="sr-only sm:hidden">Email</dt>
+                      <dd class="mt-1 truncate text-gray-500 sm:hidden"><%= ticket.user.email %></dd>
+                    </dl>
+                  </td>
+                  <td class="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-300 lg:table-cell">
+                    <%= Number.Currency.number_to_currency(ticket.event_ticket.price) %>
+                    <% #= ticket.event_ticket.currency %>
+                  </td>
+                  <td class="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-300 sm:table-cell"><%= ticket.user.email %></td>
+                  <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300"><%= ticket.state %></td>
+                  <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300"><%= ticket.checked_in_at %></td>
+                  <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                    <%= live_redirect "view", to: Rauversion.PurchasedTickets.url_for_ticket(ticket) %>
+                    <a href="#" class="text-brand-600 hover:text-brand-900">Refund<span class="sr-only"></span></a>
+                  </td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>
