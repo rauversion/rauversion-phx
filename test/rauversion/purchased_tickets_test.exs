@@ -31,9 +31,14 @@ defmodule Rauversion.PurchasedTicketsTest do
 
       Rauversion.PurchaseOrders.generate_purchased_tickets(order)
 
-      tickets = user |> Ecto.assoc(:purchased_tickets) |> Rauversion.Repo.all()
+      tickets =
+        user
+        |> Ecto.assoc(:purchased_tickets)
+        |> Rauversion.Repo.all()
+        |> Rauversion.Repo.preload([:purchase_order, :user])
 
-      assert PurchasedTickets.list_purchased_tickets() == tickets
+      assert PurchasedTickets.list_purchased_tickets()
+             |> Rauversion.Repo.preload([:purchase_order, :user]) == tickets
     end
 
     test "get_purchased_ticket!/1 returns the purchased_ticket with given id" do
