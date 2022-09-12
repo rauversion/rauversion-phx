@@ -22,7 +22,8 @@ defmodule Ueberauth.Strategy.Twitch do
     module = option(conn, :oauth2_module)
 
     params = [
-      scope: "channel:manage:broadcast channel:manage:videos user:read:email",
+      scope:
+        "channel:manage:broadcast channel:manage:videos user:read:email channel:read:stream_key",
       state: "state"
     ]
 

@@ -58,6 +58,7 @@ defmodule RauversionWeb.Router do
 
     get "/:provider", OAuthController, :request
     get "/:provider/callback", OAuthController, :callback
+    get "/:provider/revoke", OAuthController, :revoke
   end
 
   scope "/", RauversionWeb do
