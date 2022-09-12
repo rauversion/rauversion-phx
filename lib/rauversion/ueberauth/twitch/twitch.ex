@@ -21,7 +21,12 @@ defmodule Ueberauth.Strategy.Twitch do
 
     module = option(conn, :oauth2_module)
 
-    redirect!(conn, apply(module, :authorize_url!, [[], opts]))
+    params = [
+      scope: "channel:manage:broadcast channel:manage:videos user:read:email",
+      state: "state"
+    ]
+
+    redirect!(conn, apply(module, :authorize_url!, [params, opts]))
   end
 
   defp put_state_option(opts, %{params: %{"state" => state}}) do
@@ -41,7 +46,7 @@ defmodule Ueberauth.Strategy.Twitch do
     case apply(module, :get_token, [params, opts]) do
       {:ok, %{token: %OAuth2.AccessToken{} = token}} ->
         conn
-        |> put_private(:zoom_token, token)
+        |> put_private(:twitch_token, token)
         |> fetch_user(token)
 
       err ->
@@ -57,24 +62,23 @@ defmodule Ueberauth.Strategy.Twitch do
   @doc false
   def handle_cleanup!(conn) do
     conn
-    |> put_private(:zoom_user, nil)
-    |> put_private(:zoom_token, nil)
+    |> put_private(:twitch_user, nil)
+    |> put_private(:twitch_token, nil)
   end
 
   @doc """
   Fetches the uid field from the response.
   """
   def uid(conn) do
-    conn.private.zoom_user["id"]
+    conn.private.twitch_user["id"]
   end
 
   @doc """
   Includes the credentials from the Twitch response.
   """
   def credentials(conn) do
-    token = conn.private.zoom_token
-    scope_string = token.other_params["scope"] || ""
-    scopes = String.split(scope_string, " ")
+    token = conn.private.twitch_token
+    scopes = token.other_params["scope"] || []
 
     %Credentials{
       expires: !!token.expires_at,
@@ -90,18 +94,12 @@ defmodule Ueberauth.Strategy.Twitch do
   Fetches the fields to populate the info section of the `Ueberauth.Auth` struct.
   """
   def info(conn) do
-    user = conn.private.zoom_user
+    user = conn.private.twitch_user
 
     %Info{
       email: user["email"],
-      first_name: user["first_name"],
-      image: user["pic_url"],
-      last_name: user["last_name"],
-      name: user["first_name"] <> " " <> user["last_name"],
-      urls: %{
-        personal_meeting_url: user["personal_meeting_url"],
-        vanity_url: user["vanity_url"]
-      }
+      image: user["profile_image_url"],
+      name: user["displayname"]
     }
   end
 
@@ -111,8 +109,8 @@ defmodule Ueberauth.Strategy.Twitch do
   def extra(conn) do
     %Extra{
       raw_info: %{
-        token: conn.private.zoom_token,
-        user: conn.private.zoom_user
+        token: conn.private.twitch_token,
+        user: conn.private.twitch_user
       }
     }
   end
@@ -122,9 +120,18 @@ defmodule Ueberauth.Strategy.Twitch do
   defp fetch_user(conn, token) do
     module = option(conn, :oauth2_module)
 
-    case apply(module, :get, [token, "/v2/users/me"]) do
-      {:ok, %{status_code: 200, body: user}} ->
-        put_private(conn, :zoom_user, user)
+    client_id =
+      Application.get_env(:ueberauth, Ueberauth.Strategy.Twitch.OAuth)
+      |> Keyword.get(:client_id)
+
+    headers = [
+      {"authorization", "Bearer #{token.access_token}"},
+      {"client-id", client_id}
+    ]
+
+    case apply(module, :get, [token, "/users", headers]) do
+      {:ok, %{status_code: 200, body: %{"data" => [user]}}} ->
+        put_private(conn, :twitch_user, user)
 
       err ->
         handle_failure(conn, err)

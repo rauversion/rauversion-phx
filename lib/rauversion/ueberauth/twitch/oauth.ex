@@ -3,8 +3,8 @@ defmodule Ueberauth.Strategy.Twitch.OAuth do
   An implementation of OAuth2 for Twitch.
   To add your `client_id` and `client_secret` include these values in your configuration.
       config :ueberauth, Ueberauth.Strategy.Twitch.OAuth,
-        client_id: System.get_env("ZOOM_CLIENT_ID"),
-        client_secret: System.get_env("ZOOM_CLIENT_SECRET")
+        client_id: System.get_env("TWITCH_CLIENT_ID"),
+        client_secret: System.get_env("TWITCH_CLIENT_SECRET")
   """
   use OAuth2.Strategy
 
@@ -14,9 +14,9 @@ defmodule Ueberauth.Strategy.Twitch.OAuth do
 
   @defaults [
     strategy: __MODULE__,
-    site: "https://id.twitch.tv",
-    authorize_url: "/oauth2/authorize",
-    token_url: "/oauth2/token"
+    site: "https://api.twitch.tv/helix",
+    authorize_url: "https://id.twitch.tv/oauth2/authorize",
+    token_url: "https://id.twitch.tv/oauth2/token"
   ]
 
   # Public API
@@ -76,6 +76,8 @@ defmodule Ueberauth.Strategy.Twitch.OAuth do
   def get_token(client, params, headers) do
     client
     |> put_header("accept", "application/json")
+    |> put_param(:client_secret, client.client_secret)
+    |> put_param(:client_id, client.client_id)
     |> OAuth2.Strategy.AuthCode.get_token(params, headers)
   end
 
