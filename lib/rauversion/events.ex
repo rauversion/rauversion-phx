@@ -162,13 +162,13 @@ defmodule Rauversion.Events do
       {:ok, d} ->
         d
 
-      e ->
+      _ ->
         struct.event_start
     end
   end
 
   def simple_date_for(date) do
-    case Cldr.DateTime.to_string(date, format: :ed) do
+    case Cldr.Date.to_string(date, format: :ed) do
       {:ok, d} -> d
       _ -> date
     end
