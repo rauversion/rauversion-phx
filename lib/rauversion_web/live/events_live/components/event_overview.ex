@@ -8,8 +8,12 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
       <div class="bg-gray-50- dark:bg-gray-900- pt-12 sm:pt-16">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="mx-auto max-w-4xl text-center">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">Trusted by developers from over 80 planets</h2>
-            <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 dark:text-gray-300 dark:text-gray-300 sm:mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.</p>
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+              Event overview
+            </h2>
+            <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 dark:text-gray-300 dark:text-gray-300 sm:mt-4">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.
+            </p>
           </div>
         </div>
         <div class="mt-10 bg-white dark:bg-black pb-12 sm:pb-16">
@@ -31,7 +35,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
                       <%= gettext("Tickets sold") %>
                     </dt>
                     <dd class="order-1 text-5xl font-bold tracking-tight text-brand-600 dark:text-brand-400">
-                      0
+                      <%= Rauversion.Events.purchased_tickets_count(@event) %>
                     </dd>
                   </div>
                   <div class="flex flex-col border-t border-gray-100 dark:border-gray-900 p-6 text-center sm:border-0 sm:border-l">

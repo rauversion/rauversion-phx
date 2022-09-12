@@ -1,7 +1,7 @@
 
 <div>
 
-  <header class="relative z-50 pb-11 lg:pt-11">
+  <header class="relative z-10 pb-11 lg:pt-11">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-center sm:justify-between lg:flex-nowrap">
       
       <!--<div class="mt-10 lg:mt-0 lg:grow lg:basis-0">
@@ -81,7 +81,7 @@
                 <%= gettext("People Attending") %>
               </dt>
               <dd class="mt-0.5 text-xl sm:text-2xl font-semibold tracking-tight text-brand-100">
-                2,091
+                <%= attending_people(@event) %>
               </dd>
             </div>
 

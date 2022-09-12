@@ -69,6 +69,21 @@ defmodule Rauversion.Events do
     |> Repo.preload([:user, :event_ticket])
   end
 
+  def purchased_tickets(event) do
+    from(a in Rauversion.Events.Event,
+      where: a.id == ^event.id,
+      join: t in Rauversion.EventTickets.EventTicket,
+      on: a.id == t.event_id,
+      join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+      on: t.id == pt.event_ticket_id,
+      select: count(pt)
+    )
+  end
+
+  def purchased_tickets_count(event) do
+    purchased_tickets(event) |> Repo.one()
+  end
+
   @doc """
   Gets a single event.
 
