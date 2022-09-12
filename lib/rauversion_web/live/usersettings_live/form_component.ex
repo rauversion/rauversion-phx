@@ -40,6 +40,11 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     |> assign(:changeset, Accounts.change_user_notifications(user))
   end
 
+  defp get_change_set(:transbank, socket, user) do
+    socket
+    |> assign(:changeset, Accounts.change_user_notifications(user))
+  end
+
   defp get_change_set(:integrations, socket, user) do
     socket
   end
@@ -65,6 +70,15 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
         socket = %{assigns: %{action: :notifications}}
       ) do
     save_notifications(socket, socket.assigns.action, params)
+  end
+
+  @impl true
+  def handle_event(
+        "save",
+        %{"action" => "update_transbank_settings"} = params,
+        socket = %{assigns: %{action: :transbank}}
+      ) do
+    save_transbank(socket, socket.assigns.action, params)
   end
 
   @impl true
@@ -184,6 +198,23 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
           socket
           |> put_flash(:info, "User profile updated successfully.")
           |> redirect(to: "/users/settings/notifications")
+
+        {:error, changeset} ->
+          socket |> assign(:changeset, changeset)
+      end
+
+    {:noreply, socket}
+  end
+
+  defp save_transbank(socket, :transbank, %{"user" => user_params}) do
+    user = socket.assigns.current_user
+
+    socket =
+      case Accounts.update_transbank(user, user_params) do
+        {:ok, _user} ->
+          socket
+          |> put_flash(:info, "User profile updated successfully.")
+          |> redirect(to: "/users/settings/transbank")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)

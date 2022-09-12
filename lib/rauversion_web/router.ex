@@ -154,6 +154,7 @@ defmodule RauversionWeb.Router do
     live "/users/settings/security", UserSettingsLive.Index, :security
     live "/users/settings/notifications", UserSettingsLive.Index, :notifications
     live "/users/settings/integrations", UserSettingsLive.Index, :integrations
+    live "/users/settings/transbank", UserSettingsLive.Index, :transbank
 
     get "/oembed", OEmbedController, :create
 

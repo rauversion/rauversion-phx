@@ -33,6 +33,12 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
         namespace: :integrations,
         title: gettext("Integrations"),
         sub: gettext("Manage your external integrations.")
+      },
+      %{
+        to: "/users/settings/transbank",
+        namespace: :integrations,
+        title: gettext("Transbank settings"),
+        sub: gettext("Manage your transbank commerce (Chile only).")
       }
     ]
   end

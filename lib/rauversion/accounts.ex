@@ -176,6 +176,11 @@ defmodule Rauversion.Accounts do
     |> Repo.update()
   end
 
+  def update_transbank(user, attrs \\ %{}) do
+    User.transbank_changeset(user, attrs)
+    |> Repo.update()
+  end
+
   def avatar_url(user) do
     # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
     case user do

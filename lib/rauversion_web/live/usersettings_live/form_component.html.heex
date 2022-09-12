@@ -51,5 +51,15 @@
         return_to={@return_to}
       />
     <% end %>
+    
+    <%= if @action == :transbank do %>
+      <.live_component
+        module={RauversionWeb.UsersettingsLive.TransbankForm}
+        id="security-form"
+        target={@myself}
+        changeset={@changeset}
+        return_to={@return_to}
+      />
+    <% end %>
 
   </div>

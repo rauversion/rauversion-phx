@@ -1,13 +1,18 @@
 <div class="flex-1 flex xl:overflow-hidden">
   <!-- Secondary sidebar -->
-  <.live_component module={RauversionWeb.UserSettingsLive.NavBar} id="nav_bar" live_action={@live_action} />
+  <.live_component 
+    module={RauversionWeb.UserSettingsLive.NavBar} 
+    id="nav_bar" 
+    live_action={@live_action} 
+  />
 
   <!-- Main content -->
-    <.live_component
-      module={RauversionWeb.UsersettingsLive.FormComponent}
-      id={@current_user.id || "profile-form"}
-      action={@live_action} 
-      current_user={@current_user} />
+  <.live_component
+    module={RauversionWeb.UsersettingsLive.FormComponent}
+    id={@current_user.id || "profile-form"}
+    action={@live_action} 
+    current_user={@current_user} 
+  />
   
 </div>
 

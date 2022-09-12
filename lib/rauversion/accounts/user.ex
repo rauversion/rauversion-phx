@@ -23,6 +23,8 @@ defmodule Rauversion.Accounts.User do
     embeds_one :notification_settings, Rauversion.Accounts.NotificationSettings,
       on_replace: :update
 
+    embeds_one :settings, Rauversion.Accounts.Settings, on_replace: :update
+
     # field :settings
     has_many :articles, Rauversion.Posts.Post, on_delete: :nilify_all
 
@@ -74,6 +76,14 @@ defmodule Rauversion.Accounts.User do
     |> cast(attrs, [:username, :first_name, :last_name, :country, :bio, :city])
     |> cast_embed(:notification_settings,
       with: &Rauversion.Accounts.NotificationSettings.changeset/2
+    )
+  end
+
+  def transbank_changeset(user, attrs, _opts \\ []) do
+    user
+    |> cast(attrs, [:username, :first_name, :last_name, :country, :bio, :city])
+    |> cast_embed(:settings,
+      with: &Rauversion.Accounts.Settings.changeset/2
     )
   end
 
