@@ -169,6 +169,7 @@ defmodule RauversionWeb.Router do
     live "/events/new", EventsLive.New, :new
     live "/events/edit/:id", EventsLive.New, :edit
     live "/events/:slug/edit", EventsLive.New, :edit
+    live "/events/:slug/overview", EventsLive.New, :overview
 
     live "/events/:slug/payment_success", EventsLive.Show, :payment_success
     live "/events/:slug/payment_failure", EventsLive.Show, :payment_fail
@@ -273,6 +274,8 @@ defmodule RauversionWeb.Router do
     live "/events", EventsLive.Index, :index
     live "/events/:id", EventsLive.Show, :show
     live "/events/:id/tickets", TicketsLive.Index, :index
+
+    live "/purchases/tickets", MyTicketsLive.Index, :index
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id", TrackLive.Show, :show

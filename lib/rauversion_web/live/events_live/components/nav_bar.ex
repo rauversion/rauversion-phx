@@ -5,6 +5,12 @@ defmodule RauversionWeb.EventsLive.NavBar do
   def menu_items(event) do
     [
       %{
+        to: "/events/#{event.slug}/overview",
+        namespace: :overview,
+        title: gettext("Event Overview"),
+        sub: gettext("Event Overview.")
+      },
+      %{
         to: "/events/#{event.slug}/edit",
         namespace: :edit,
         title: gettext("Edit event"),

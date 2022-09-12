@@ -4,7 +4,7 @@ defmodule RauversionWeb.UsersettingsLive.TransbankForm do
   def render(%{changeset: changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-    <h1 class="text-3xl font-extrabold text-blue-gray-900">Account</h1>
+    <h1 class="text-3xl font-extrabold text-blue-gray-900">Transbank Commerce Settings</h1>
 
     <.form
       let={f}
@@ -16,7 +16,6 @@ defmodule RauversionWeb.UsersettingsLive.TransbankForm do
       class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800"
       >
 
-      transbank form
       <%= if @changeset.action do %>
         <div class="alert alert-danger">
           <p><%= gettext "Oops, something went wrong! Please check the errors below." %></p>

@@ -164,12 +164,11 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                             <%= label i, :x %>
                                             <%= text_input i, :count, class: "bg-gray-700 border rounded-sm", type: :number %>
                                             <%= error_tag i, :count %>
-                                            <%= text_input i, :ticket_id, value: ticket.id %>
+                                            <%= hidden_input i, :ticket_id, value: ticket.id %>
                                         </div>
                                       </td>
                                     </tr>
                                   <% end %>
-
 
                                   <tr>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">

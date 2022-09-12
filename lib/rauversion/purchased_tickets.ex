@@ -37,6 +37,10 @@ defmodule Rauversion.PurchasedTickets do
   """
   def get_purchased_ticket!(id), do: Repo.get!(PurchasedTicket, id)
 
+  def get_checked_in(query) do
+    query |> where(checked_in: true)
+  end
+
   @doc """
   Creates a purchased_ticket.
 

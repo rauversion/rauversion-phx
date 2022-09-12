@@ -8,7 +8,7 @@
   />
 
   <% #= @live_action %>
-  <div class="mt-6- text-gray-500 flex dark:bg-black dark:text-white w-full ">
+  <div class="mt-6- text-gray-500 flex-- dark:bg-black dark:text-white w-full ">
 
     <div class="flex flex-col">
       <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, @event.slug), 
@@ -21,16 +21,23 @@
       <% end %>
 
       <%= case @live_action do 
+
+        :overview -> live_component(
+                    RauversionWeb.Live.EventsLive.Components.EventOverview,
+                    id: "event-edit-#{@event.id}",
+                    event: @event
+                  )
+
         :new -> live_component(
                     RauversionWeb.Live.EventsLive.Components.FormComponent,
-                    id: "all-track-#{@event.id}",
+                    id: "event-edit-#{@event.id}",
                     event: @event,
                     changeset: @changeset,
                     uploads: @uploads
                   )
         :edit -> live_component(
                     RauversionWeb.Live.EventsLive.Components.FormComponent,
-                    id: "all-track-#{@event.id}",
+                    id: "event-edit-#{@event.id}",
                     event: @event,
                     changeset: @changeset,
                     uploads: @uploads

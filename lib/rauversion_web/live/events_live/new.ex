@@ -99,6 +99,10 @@ defmodule RauversionWeb.EventsLive.New do
     edit_response(socket, id)
   end
 
+  defp apply_action(socket, :overview, %{"slug" => id}) do
+    edit_response(socket, id)
+  end
+
   defp apply_action(socket, :tickets, %{"slug" => id}) do
     edit_response(socket, id)
   end

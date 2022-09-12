@@ -99,11 +99,16 @@
                   data-transition-leave-to="opacity-0 scale-95"
                   >
                   <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-900">
+                                        <%= live_redirect gettext("My Tracks"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+
+                    <%= live_redirect gettext("My Articles"), to: "/articles/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    <%= live_redirect gettext("My Events"), to: "/events/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <%= live_redirect gettext("Settings"), 
                         to: "/users/settings", 
                        class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
-                    <%= live_redirect gettext("Profile"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
 
+                    <div class="border-1" />
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
                     <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
