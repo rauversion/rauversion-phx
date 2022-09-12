@@ -48,6 +48,7 @@ defmodule Rauversion.MixProject do
       {:phoenix_live_view, "~> 0.17.0"},
       {:floki, ">= 0.30.0", override: true},
       {:phoenix_live_dashboard, "~> 0.6"},
+      {:mux, "~> 1.8.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:telemetry_metrics, "~> 0.6"},

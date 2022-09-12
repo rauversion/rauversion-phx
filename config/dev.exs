@@ -10,6 +10,11 @@ config :rauversion, Rauversion.Repo,
   pool_size: 10,
   stacktrace: true
 
+# config/dev.exs
+config :mux,
+  access_token_id: System.get_env("MUX_TOKEN_ID"),
+  access_token_secret: System.get_env("MUX_TOKEN_SECRET")
+
 config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
 config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
 

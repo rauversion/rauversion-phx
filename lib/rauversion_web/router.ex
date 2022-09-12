@@ -136,6 +136,16 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    get "/webpayplus/mall/create", TbkController, :mall_create
+    post "/webpayplus/mall/create", TbkController, :send_mall_create
+    post "/webpayplus/mall/return_url", TbkController, :mall_commit
+    get "/webpayplus/mall/return_url", TbkController, :mall_commit
+
+    live "/streams/:id", StreamsLive.Show, :show
+
+    get "/webpayplus/mall/status/:token", TbkController, :mall_status
+    post "/webpayplus/mall/refund", TbkController, :mall_refund
+
     live "/tickets/qr/:signed_id", QrLive.Index, :index
 
     live "/users/settings", UserSettingsLive.Index, :profile

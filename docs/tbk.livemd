@@ -1,0 +1,37 @@
+# Rauversion
+
+## Transbank account
+
+Card type   Detail  Outcome
+VISA                 4051 8856 0044 6623         CVV 123  any expiration date   Generate approved transactions.
+
+AMEX                 3700 0000 0002 032          CVV 1234 any expiration date   Generate approved transactions.
+
+MASTERCARD         5186 0595 5959 0568         CVV 123  any expiration date Generate declined transactions.
+
+Redcompra            4051 8842 3993 7763                    Genera transacciones aprobadas (para operaciones que permiten débito Redcompra)
+
+Redcompra            4511 3466 6003 7060                    Genera transacciones aprobadas (para operaciones que permiten débito Redcompra)
+
+Redcompra            5186 0085 4123 3829                  Genera transacciones rechazadas (para operaciones que permiten débito Redcompra)
+
+Prepago VISA         4051 8860 0005 6590         CVV 123  cualquier fecha de expiración Generate approved transactions.
+
+Prepago MASTERCARD  5186 1741 1062 9480        CVV 123
+
+cualquier fecha de expiración   Generate declined transactions.
+When an authentication form with RUT and password appears, RUT 11.111.111-1 and password 123 must be used .
+
+<!-- livebook:{"break_markdown":true} -->
+
+### STATUS OF TRANSATION
+
+```elixir
+commerce_code = Transbank.Common.IntegrationCommerceCodes.webpay_plus_mall()
+api_key = Transbank.Common.IntegrationApiKeys.webpay()
+environment = Transbank.Webpay.WebpayPlus.MallTransaction.default_environment()
+trx = Transbank.Webpay.WebpayPlus.MallTransaction.new(commerce_code, api_key, environment)
+token = "01abd19e55cbd787859f2345ae09b8c9c52e22388d72921c074ddb6d42c6aecf"
+
+Transbank.Webpay.WebpayPlus.MallTransaction.status(trx, token)
+```
