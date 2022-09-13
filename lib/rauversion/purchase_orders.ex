@@ -107,6 +107,7 @@ defmodule Rauversion.PurchaseOrders do
 
   def calculate_total(order) do
     order.data
+    |> Enum.filter(fn x -> x.count != 0 end)
     |> Enum.map(fn x ->
       ticket = Rauversion.EventTickets.get_event_ticket!(x.ticket_id)
       Decimal.to_float(ticket.price) * x.count
@@ -122,6 +123,7 @@ defmodule Rauversion.PurchaseOrders do
 
     line_items =
       order.data
+      |> Enum.filter(fn x -> x.count != 0 end)
       |> Enum.with_index()
       |> Enum.reduce(%{}, fn {x, i}, acc ->
         ticket = Rauversion.EventTickets.get_event_ticket!(x.ticket_id)
@@ -132,7 +134,7 @@ defmodule Rauversion.PurchaseOrders do
             "quantity" => x.count,
             "price_data" => %{
               "unit_amount" => Decimal.to_integer(ticket.price) * 100,
-              "currency" => "usd",
+              "currency" => event.event_settings.ticket_currency,
               "product_data" => %{
                 "name" => ticket.title,
                 "description" => ticket.short_description

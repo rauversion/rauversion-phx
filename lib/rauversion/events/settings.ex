@@ -9,8 +9,11 @@ defmodule Rauversion.Events.Settings do
     field :sponsors_label, :string
     field :sponsors_description, :string
 
+    field :payment_gateway, :string
+
     field :scheduling_label, :string
     field :scheduling_description, :string
+    field :ticket_currency, :string
   end
 
   @required_fields []
@@ -21,7 +24,9 @@ defmodule Rauversion.Events.Settings do
     :sponsors_label,
     :sponsors_description,
     :scheduling_label,
-    :scheduling_description
+    :scheduling_description,
+    :payment_gateway,
+    :ticket_currency
   ]
 
   def changeset(struct, attrs) do

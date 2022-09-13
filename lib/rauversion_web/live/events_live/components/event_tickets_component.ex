@@ -42,8 +42,6 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
   @impl true
   def handle_event("save", %{"purchase_order" => purchase_order}, socket) do
-    IO.inspect(socket.assigns.changeset)
-
     if socket.assigns.changeset.valid? do
       {:ok, a} =
         Rauversion.PurchaseOrders.create_purchase_order(

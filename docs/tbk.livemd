@@ -35,3 +35,9 @@ token = "01abd19e55cbd787859f2345ae09b8c9c52e22388d72921c074ddb6d42c6aecf"
 
 Transbank.Webpay.WebpayPlus.MallTransaction.status(trx, token)
 ```
+
+```elixir
+a = %{data: [%{count: 0, ticket_id: 1}, %{count: 0, ticket_id: 2}]}
+
+a[:data] |> Enum.filter(fn x -> x.count != 0 end)
+```

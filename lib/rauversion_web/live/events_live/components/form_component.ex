@@ -1,6 +1,17 @@
 defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
   use RauversionWeb, :live_component
 
+  def has_stripe?(user_id) do
+    case Rauversion.Accounts.find_by_credential_provider("stripe", user_id) do
+      %Rauversion.OauthCredentials.OauthCredential{} -> false
+      _ -> true
+    end
+  end
+
+  def has_transbank?(user) do
+    !(user.settings.tbk_commerce_code |> is_binary())
+  end
+
   def render(assigns) do
     ~H"""
       <div class="p-5">
@@ -24,12 +35,20 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
 
             <%= form_input_renderer(f, %{type: :datetime_input, name: :event_start, wrapper_class: "sm:col-span-3"}) %>
             <%= form_input_renderer(f, %{type: :datetime_input, name: :event_ends, wrapper_class: "sm:col-span-3"}) %>
-
-
             <%= form_input_renderer(f, %{type: :textarea, name: :description, wrapper_class: "sm:col-span-6"}) %>
 
             <div class="sm:col-span-3 space-y-3 flex flex-col justify-between">
               <%= form_input_renderer(f, %{type: :text_input, name: :venue, wrapper_class: ""}) %>
+              <%= form_input_renderer(f, %{type: :select, options: [
+                [key: "All ages", value: "all", disabled: true],
+                [key: "13+", value: "13"],
+                [key: "16+", value: "16"],
+                [key: "17+", value: "17"],
+                [key: "18+", value: "18"],
+                [key: "19+", value: "19"],
+                [key: "20+", value: "20"],
+                [key: "21+", value: "21"]
+              ], wrapper_class: nil, name: :age_requirement }) %>
 
               <div class="flex items-center space-x-2">
                 <div class="flex items-center">
@@ -53,16 +72,35 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
                 </div>
               </div>
 
-              <%= form_input_renderer(f, %{type: :select, options: [
-                [key: "All ages", value: "all", disabled: true],
-                [key: "13+", value: "13"],
-                [key: "16+", value: "16"],
-                [key: "17+", value: "17"],
-                [key: "18+", value: "18"],
-                [key: "19+", value: "19"],
-                [key: "20+", value: "20"],
-                [key: "21+", value: "21"]
-              ], wrapper_class: nil, name: :age_requirement }) %>
+              <div class="flex items-center justify-between space-x-2">
+                <%= inputs_for f, :event_settings, fn i -> %>
+                  <div class="sm:w-1/2 flex flex-col justify-start space-y-2">
+                    <%= form_input_renderer(i, %{type: :select, options: [
+                        [key: "none", value: "none"],
+                        [key: "stripe", value: "stripe", disabled: has_stripe?(@event.user_id)],
+                        [key: "transbank", value: "transbank", disabled: has_transbank?(@current_user)]
+                      ], wrapper_class: nil,
+                      name: :payment_gateway,
+                      hint: gettext("para transbank usaremos tu codigo de comercio de los ajustes") })
+                    %>
+                  </div>
+                  <div class="sm:w-1/2 flex flex-col justify-start space-y-2">
+                    <%= form_input_renderer(i,
+                      %{
+                        type: :select,
+                        options: [
+                          [key: "clp", value: "clp", disabled: false],
+                          [key: "usd", value: "usd", disabled: false],
+                          [key: "eur", value: "eur", disabled: false]
+                        ],
+                        wrapper_class: nil,
+                        name: :ticket_currency
+                      })
+                  %>
+
+                  </div>
+                <% end %>
+              </div>
 
             </div>
 
@@ -134,7 +172,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
             </div>
 
           </div>
-
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 

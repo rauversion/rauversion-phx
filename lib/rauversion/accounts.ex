@@ -452,6 +452,13 @@ defmodule Rauversion.Accounts do
     Rauversion.OauthCredentials.get_oauth_credential_by_uid!(uid) |> Repo.preload(:user)
   end
 
+  def find_by_credential_provider(provider, user_id) do
+    Repo.get_by(Rauversion.OauthCredentials.OauthCredential, %{
+      provider: provider,
+      user_id: user_id
+    })
+  end
+
   def get_or_create_user(user_data) do
     # %{
     #  avatar: "https://lh3.googleusercontent.com/a-/AFdZucqqdrPKRYQdJKA2ClMex-anYYwHjRrihFERqtcvcw=s96-c",

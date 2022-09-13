@@ -33,14 +33,16 @@
                     id: "event-edit-#{@event.id}",
                     event: @event,
                     changeset: @changeset,
-                    uploads: @uploads
+                    uploads: @uploads,
+                    current_user: @current_user
                   )
         :edit -> live_component(
                     RauversionWeb.Live.EventsLive.Components.FormComponent,
                     id: "event-edit-#{@event.id}",
                     event: @event,
                     changeset: @changeset,
-                    uploads: @uploads
+                    uploads: @uploads,
+                    current_user: @current_user
                   )
         :schedule -> live_component(
                   RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent,

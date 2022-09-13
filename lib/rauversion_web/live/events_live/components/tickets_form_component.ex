@@ -86,7 +86,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
 
 
           <%= inputs_for f, :event_tickets, fn i -> %>
-            <div class="border-2 rounded-md p-4">
+            <div class="border-2 rounded-md p-4 my-4">
               <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
                 <%= form_input_renderer(i, %{
@@ -101,7 +101,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                     type: :number_input,
                     name: :price,
                     wrapper_class: "w-1/2",
-                    hint: gettext("All prices are in U.S. Dollars ($). To select a different currency, click here.")
+                    hint: gettext("All prices are in $%{ccy}.", %{ccy: f.data.event_settings.ticket_currency})
                     })
                   %>
 

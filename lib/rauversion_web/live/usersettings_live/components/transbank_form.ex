@@ -52,6 +52,17 @@ defmodule RauversionWeb.UsersettingsLive.TransbankForm do
             </div>
           </div>
 
+          <div class="sm:col-span-6 relative flex items-start">
+            <div class="absolute flex h-5 items-center">
+              <%= checkbox(ff, :tbk_test_mode, class: "h-4 w-4 border-gray-300 text-brand-600 focus:ring-brand-500") %>
+            </div>
+            <div class="pl-7 text-sm">
+              <label for="privacy-published-to-article" class="font-medium text-gray-900 dark:text-gray-100">
+                <%= gettext "Test mode" %>
+              </label>
+            </div>
+          </div>
+
 
         </div>
       <% end %>
