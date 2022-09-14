@@ -43,29 +43,12 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   @impl true
   def handle_event("save", %{"purchase_order" => purchase_order}, socket) do
     if socket.assigns.changeset.valid? do
-      {:ok, a} =
-        Rauversion.PurchaseOrders.create_purchase_order(
-          %{
-            "user_id" => socket.assigns.current_user.id
-          }
-          |> Map.merge(purchase_order)
-        )
-
-      {:ok, data} =
-        Rauversion.PurchaseOrders.create_stripe_session(
-          a,
-          socket.assigns.event
-        )
-
-      {:ok, order_with_payment_id} =
-        Rauversion.PurchaseOrders.update_purchase_order(a, %{
-          "payment_id" => data["id"],
-          "payment_provider" => "stripe"
-        })
+      %{url: url, order: order_with_payment_id} =
+        order_session(socket.assigns.event, purchase_order, socket.assigns.current_user.id)
 
       {:noreply,
        assign(socket, :purchase, order_with_payment_id)
-       |> redirect(external: data["url"])}
+       |> redirect(external: url)}
     else
       {:noreply, socket}
     end
@@ -97,6 +80,95 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
        :result,
        Rauversion.PurchaseOrders.calculate_total(changeset |> Ecto.Changeset.apply_changes())
      )}
+  end
+
+  def order_session(
+        event = %{event_settings: %{payment_gateway: "stripe"}},
+        purchase_order,
+        user_id
+      ) do
+    {:ok, a} =
+      Rauversion.PurchaseOrders.create_purchase_order(
+        %{
+          "user_id" => user_id
+        }
+        |> Map.merge(purchase_order)
+      )
+
+    {:ok, data} =
+      Rauversion.PurchaseOrders.create_stripe_session(
+        a,
+        event
+      )
+
+    {:ok, order_with_payment_id} =
+      Rauversion.PurchaseOrders.update_purchase_order(a, %{
+        "payment_id" => data["id"],
+        "payment_provider" => "stripe"
+      })
+
+    %{url: data["url"], order: order_with_payment_id}
+  end
+
+  def order_session(
+        event = %{event_settings: %{payment_gateway: "transbank"}},
+        purchase_order,
+        user_id
+      ) do
+    {:ok, a} =
+      Rauversion.PurchaseOrders.create_purchase_order(
+        %{
+          "user_id" => user_id,
+          "payment_id" => "xxxxx",
+          "payment_provider" => "transbank"
+        }
+        |> Map.merge(purchase_order)
+      )
+
+    commerce_code = Transbank.Common.IntegrationCommerceCodes.webpay_plus_mall()
+    api_key = Transbank.Common.IntegrationApiKeys.webpay()
+
+    environment =
+      case event.user.settings.test_mode do
+        true -> Transbank.Webpay.WebpayPlus.MallTransaction.default_environment()
+        _ -> :production
+      end
+
+    return_url =
+      RauversionWeb.Router.Helpers.events_show_url(
+        RauversionWeb.Endpoint,
+        :payment_success,
+        event.slug
+      )
+
+    trx =
+      Transbank.Webpay.WebpayPlus.MallTransaction.new(
+        commerce_code,
+        api_key,
+        environment
+      )
+
+    session_id = "#{a.id}-#{user_id}"
+    buy_order = "#{a.id}"
+
+    details = [
+      %{
+        amount: Rauversion.PurchaseOrders.calculate_total(a),
+        commerce_code: event.user.settings.tbk_commerce_code,
+        buy_order: a.id
+      }
+    ]
+
+    {:ok, resp} =
+      Transbank.Webpay.WebpayPlus.MallTransaction.create(
+        trx,
+        buy_order,
+        session_id,
+        return_url,
+        details
+      )
+
+    %{url: resp["url"] <> "?token_ws=#{resp["token"]}", order: a}
   end
 
   @impl true

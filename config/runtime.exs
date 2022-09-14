@@ -65,6 +65,9 @@ config :ueberauth, Ueberauth.Strategy.Twitch.OAuth,
   client_id: System.get_env("TWITCH_CLIENT_ID"),
   client_secret: System.get_env("TWITCH_CLIENT_SECRET")
 
+config :transbank, mall_id: System.get_env("TBK_MALL_ID")
+config :transbank, commerce_id: System.get_env("TBK_COMMERCE_ID")
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration

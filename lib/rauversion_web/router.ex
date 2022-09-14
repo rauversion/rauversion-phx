@@ -20,6 +20,17 @@ defmodule RauversionWeb.Router do
     plug RauversionWeb.Plugs.SetLocale
   end
 
+  # without protect_from_forgery
+  pipeline :browser_unprotected do
+    plug :accepts, ["html", "json"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, {RauversionWeb.LayoutView, :root}
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+    plug RauversionWeb.Plugs.SetLocale
+  end
+
   pipeline :active_storage do
     plug :accepts, ["html", "json"]
     plug :fetch_session

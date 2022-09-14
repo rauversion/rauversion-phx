@@ -89,9 +89,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
                       %{
                         type: :select,
                         options: [
-                          [key: "clp", value: "clp", disabled: false],
-                          [key: "usd", value: "usd", disabled: false],
-                          [key: "eur", value: "eur", disabled: false]
+                          [key: "CLP", value: "clp", disabled: false],
+                          [key: "USD", value: "usd", disabled: false],
+                          [key: "EUR", value: "eur", disabled: false]
                         ],
                         wrapper_class: nil,
                         name: :ticket_currency

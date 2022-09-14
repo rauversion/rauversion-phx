@@ -206,4 +206,46 @@ defmodule Rauversion.PurchaseOrders do
     end)
     |> Repo.transaction()
   end
+
+  # transbank
+  def commit_order(event, token) do
+    commerce_code = Application.get_env(:transbank, :mall_id)
+    api_key = Transbank.Common.IntegrationApiKeys.webpay()
+
+    environment =
+      case event.user.settings.test_mode do
+        true -> Transbank.Webpay.WebpayPlus.MallTransaction.default_environment()
+        _ -> :production
+      end
+
+    trx = Transbank.Webpay.WebpayPlus.MallTransaction.new(commerce_code, api_key, environment)
+    {:ok, data} = Transbank.Webpay.WebpayPlus.MallTransaction.commit(trx, token)
+
+    # TODO: save data on some transacion table?
+
+    result =
+      Rauversion.PurchaseOrders.get_purchase_order!(data["buy_order"])
+      |> generate_purchased_tickets()
+
+    # %{
+    #   "accounting_date" => "0913",
+    #   "buy_order" => "39",
+    #   "card_detail" => %{"card_number" => "6623"},
+    #   "details" => [
+    #     %{
+    #       "amount" => 160,
+    #       "authorization_code" => "1213",
+    #       "buy_order" => "39",
+    #       "commerce_code" => "597055555536",
+    #       "installments_number" => 0,
+    #       "payment_type_code" => "VN",
+    #       "response_code" => 0,
+    #       "status" => "AUTHORIZED"
+    #     }
+    #   ],
+    #   "session_id" => "39-1",
+    #   "transaction_date" => "2022-09-14T02:58:39.305Z",
+    #   "vci" => "TSY"
+    # }
+  end
 end
