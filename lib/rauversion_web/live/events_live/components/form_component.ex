@@ -25,7 +25,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
           data-action="google-maps-callback@window->maps#initializeMap"
           >
 
-          <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
+          <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
             <%= gettext "Create Event" %>
           </h2>
 

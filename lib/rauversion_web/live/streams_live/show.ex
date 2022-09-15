@@ -19,6 +19,7 @@ defmodule RauversionWeb.StreamsLive.Show do
     socket |> assign(:id, id)
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div class="mx-auto w-3/4 py-2">

@@ -122,7 +122,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           phx-submit="save">
 
           <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
-            <%= gettext "Create Event" %>
+            <%= gettext "Add Schedulings" %>
           </h2>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">

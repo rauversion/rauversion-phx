@@ -151,6 +151,10 @@ defmodule RauversionWeb.Router do
     get "/webpayplus/mall/create", TbkController, :mall_create
     post "/webpayplus/mall/create", TbkController, :send_mall_create
     post "/webpayplus/mall/return_url", TbkController, :mall_commit
+
+    post "/webpayplus/mall/events/:id/return_url", TbkController, :mall_events_commit
+    get "/webpayplus/mall/events/:id/return_url", TbkController, :mall_events_commit
+
     get "/webpayplus/mall/return_url", TbkController, :mall_commit
 
     live "/streams/:id", StreamsLive.Show, :show

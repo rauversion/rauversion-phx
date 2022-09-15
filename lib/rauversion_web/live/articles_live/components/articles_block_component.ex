@@ -32,7 +32,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesBlockComponent do
           </p>
 
           <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug), class: "inline-flex items-center py-4 mt-3 text-xs font-bold tracking-widest text-black uppercase transition duration-500 ease-in-out transform border-b-2 border-black dark:border-white dark:text-white hover:text-gray-600 hover:border-gray-600" do %>
-            Listen Now
+            <%= gettext("Read Now") %>
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>

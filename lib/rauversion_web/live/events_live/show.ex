@@ -33,9 +33,6 @@ defmodule RauversionWeb.EventsLive.Show do
 
     a = Rauversion.PurchaseOrders.commit_order(event, token)
 
-    require IEx
-    IEx.pry()
-
     socket |> assign(:event, event) |> assign(:payment_success, true)
   end
 

@@ -62,7 +62,7 @@ defmodule RauversionWeb.EventsLive.New do
         {
           :noreply,
           socket
-          |> put_flash(:info, "Playlist updated successfully")
+          |> put_flash(:info, "Event updated successfully")
           # |> push_redirect(to: socket.assigns.return_to)
         }
 

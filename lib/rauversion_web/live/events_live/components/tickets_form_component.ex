@@ -80,10 +80,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
           phx-change="validate"
           phx-submit="save">
 
-          <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
+          <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
             <%= gettext "Create Tickets" %>
           </h2>
-
 
           <%= inputs_for f, :event_tickets, fn i -> %>
             <div class="border-2 rounded-md p-4 my-4">

@@ -47,4 +47,15 @@ Transbank.Webpay.WebpayPlus.MallTransaction.status(trx, token)
 a = %{data: [%{count: 0, ticket_id: 1}, %{count: 0, ticket_id: 2}]}
 
 a[:data] |> Enum.filter(fn x -> x.count != 0 end)
+
+Enum.to_list(1..1)
+```
+
+```elixir
+{platform_fee, _} = Float.parse(Application.get_env(:rauversion, :platform_event_fee))
+total = 2000
+fee_amount = total / (platform_fee * 100.0)
+
+platform_fee
+Kernel.round(fee_amount)
 ```

@@ -36,7 +36,7 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
       },
       %{
         to: "/users/settings/transbank",
-        namespace: :integrations,
+        namespace: :transbank,
         title: gettext("Transbank settings"),
         sub: gettext("Manage your transbank commerce (Chile only).")
       }
@@ -90,14 +90,17 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
         """
+
+      _ ->
+        nil
     end
   end
 
   def render(assigns) do
     ~H"""
-    <nav aria-label="Sections" class="hidden flex-shrink-0 w-96 border-r border-blue-gray-200 xl:flex xl:flex-col">
-      <div class="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">
-        <p class="text-lg font-medium text-blue-gray-900">Settings</p>
+    <nav aria-label="Sections" class="hidden flex-shrink-0 w-96 border-r border-gray-200 dark:border-gray-800 xl:flex xl:flex-col">
+      <div class="flex-shrink-0 h-16 px-6 border-b- border-gray-200 dark:border-gray-800 flex items-center">
+        <p class="text-lg font-medium text-gray-900 dark:text-gray-100">Settings</p>
       </div>
 
       <div class="flex-1 min-h-0 overflow-y-auto">
@@ -105,8 +108,8 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
           <%= live_redirect to: item.to, class: item_class(@live_action, item.namespace) do %>
             <%= icon_for(item.namespace) %>
             <div class="ml-3 text-sm">
-              <p class="font-medium text-blue-gray-900"><%= item.title %> </p>
-              <p class="mt-1 text-blue-gray-500"><%= item.sub %></p>
+              <p class="font-medium text-gray-900 dark:text-gray-100"><%= item.title %> </p>
+              <p class="mt-1 text-gray-500 dark:text-gray-300"><%= item.sub %></p>
             </div>
           <% end %>
         <% end %>

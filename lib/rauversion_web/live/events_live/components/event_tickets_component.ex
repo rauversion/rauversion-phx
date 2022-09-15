@@ -1,8 +1,7 @@
 defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   use RauversionWeb, :live_component
-  alias Rauversion.{PurchasedTickets, PurchaseOrders}
+  alias Rauversion.{PurchaseOrders}
   alias Rauversion.PurchaseOrders.{PurchaseOrder}
-  alias Rauversion.PurchasedTickets.PurchasedTicket
 
   @impl true
   def update(assigns, socket) do
@@ -14,6 +13,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
       |> assign(:result, 0)
       |> assign(:tickets, get_public_tickets(assigns.event))
       |> assign(:purchase, nil)
+      |> assign(:status, nil)
       |> assign(
         :changeset,
         %PurchaseOrder{}
@@ -43,12 +43,19 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   @impl true
   def handle_event("save", %{"purchase_order" => purchase_order}, socket) do
     if socket.assigns.changeset.valid? do
-      %{url: url, order: order_with_payment_id} =
-        order_session(socket.assigns.event, purchase_order, socket.assigns.current_user.id)
+      with %{url: url, order: order_with_payment_id} <-
+             order_session(socket.assigns.event, purchase_order, socket.assigns.current_user.id) do
+        {:noreply,
+         assign(socket, :purchase, order_with_payment_id)
+         |> redirect(external: url)}
+      else
+        {:error, err} ->
+          {:noreply, assign(socket, :status, err)}
 
-      {:noreply,
-       assign(socket, :purchase, order_with_payment_id)
-       |> redirect(external: url)}
+        # nil -> {:error, ...} an example that we can match here too
+        _ ->
+          {:noreply, assign(socket, :status, "no sabemos que pasó")}
+      end
     else
       {:noreply, socket}
     end
@@ -87,27 +94,13 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
         purchase_order,
         user_id
       ) do
-    {:ok, a} =
-      Rauversion.PurchaseOrders.create_purchase_order(
-        %{
-          "user_id" => user_id
-        }
-        |> Map.merge(purchase_order)
-      )
+    case Rauversion.PurchaseOrders.create_stripe_order(event, purchase_order, user_id) do
+      {:ok, %{response: resp, order: order}} ->
+        %{url: resp["url"], order: order}
 
-    {:ok, data} =
-      Rauversion.PurchaseOrders.create_stripe_session(
-        a,
-        event
-      )
-
-    {:ok, order_with_payment_id} =
-      Rauversion.PurchaseOrders.update_purchase_order(a, %{
-        "payment_id" => data["id"],
-        "payment_provider" => "stripe"
-      })
-
-    %{url: data["url"], order: order_with_payment_id}
+      _ ->
+        nil
+    end
   end
 
   def order_session(
@@ -115,60 +108,19 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
         purchase_order,
         user_id
       ) do
-    {:ok, a} =
-      Rauversion.PurchaseOrders.create_purchase_order(
-        %{
-          "user_id" => user_id,
-          "payment_id" => "xxxxx",
-          "payment_provider" => "transbank"
-        }
-        |> Map.merge(purchase_order)
-      )
+    case Rauversion.PurchaseOrders.create_transbank_order(event, purchase_order, user_id) do
+      {:ok, %{gen_ticket: %{response: resp, order: order}}} ->
+        %{url: resp["url"] <> "?token_ws=#{resp["token"]}", order: order}
 
-    commerce_code = Transbank.Common.IntegrationCommerceCodes.webpay_plus_mall()
-    api_key = Transbank.Common.IntegrationApiKeys.webpay()
+      {:error, :gen_ticket, err, _} ->
+        {:error, err}
 
-    environment =
-      case event.user.settings.test_mode do
-        true -> Transbank.Webpay.WebpayPlus.MallTransaction.default_environment()
-        _ -> :production
-      end
+      e ->
+        IO.inspect(e)
+        {:error, "chuchuc"}
+    end
 
-    return_url =
-      RauversionWeb.Router.Helpers.events_show_url(
-        RauversionWeb.Endpoint,
-        :payment_success,
-        event.slug
-      )
-
-    trx =
-      Transbank.Webpay.WebpayPlus.MallTransaction.new(
-        commerce_code,
-        api_key,
-        environment
-      )
-
-    session_id = "#{a.id}-#{user_id}"
-    buy_order = "#{a.id}"
-
-    details = [
-      %{
-        amount: Rauversion.PurchaseOrders.calculate_total(a),
-        commerce_code: event.user.settings.tbk_commerce_code,
-        buy_order: a.id
-      }
-    ]
-
-    {:ok, resp} =
-      Transbank.Webpay.WebpayPlus.MallTransaction.create(
-        trx,
-        buy_order,
-        session_id,
-        return_url,
-        details
-      )
-
-    %{url: resp["url"] <> "?token_ws=#{resp["token"]}", order: a}
+    # %{url: resp["url"] <> "?token_ws=#{resp["token"]}", order: a}
   end
 
   @impl true
@@ -186,6 +138,9 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                      <%= if @status do %>
+                        <%= @status %>
+                      <% end %>
                       <%= if @purchase |> is_nil do %>
                         <.form let={f} for={@changeset}
                           phx-change="validate"
@@ -227,6 +182,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                                         <div class="text-gray-900 dark:text-gray-100 text-2xl">
                                           <%= Number.Currency.number_to_currency(ticket.price) %>
+                                          <%= @event.event_settings.ticket_currency %>
                                         </div>
                                       </td>
                                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">

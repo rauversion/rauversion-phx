@@ -125,8 +125,6 @@ defmodule Rauversion.PurchasedTickets do
   end
 
   def url_for_ticket(purchased_ticket) do
-    message = signed_id(purchased_ticket)
-
     RauversionWeb.Router.Helpers.qr_index_path(
       RauversionWeb.Endpoint,
       :index,

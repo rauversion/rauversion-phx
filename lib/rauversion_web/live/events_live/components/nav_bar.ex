@@ -28,12 +28,12 @@ defmodule RauversionWeb.EventsLive.NavBar do
         title: gettext("Tickets"),
         sub: gettext("Change Email information.")
       },
-      %{
-        to: "/events/#{event.slug}/edit/widgets",
-        namespace: :widgets,
-        title: gettext("Widgets"),
-        sub: gettext("Change your credentials")
-      },
+      # %{
+      #  to: "/events/#{event.slug}/edit/widgets",
+      #  namespace: :widgets,
+      #  title: gettext("Widgets"),
+      #  sub: gettext("Change your credentials")
+      # },
       %{
         to: "/events/#{event.slug}/edit/tax",
         namespace: :tax,

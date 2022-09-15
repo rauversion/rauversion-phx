@@ -101,6 +101,14 @@ defmodule RauversionWeb.TbkController do
     |> render("mall_transaction_committed.html")
   end
 
+  def mall_events_commit(conn, %{"id" => id, "token_ws" => token}) do
+    event = Rauversion.Events.get_by_slug!(id) |> Rauversion.Repo.preload([:user])
+
+    a = Rauversion.PurchaseOrders.commit_order(event, token)
+
+    conn |> redirect(to: "/events/#{event.slug}/payment_success")
+  end
+
   def mall_status do
     # @token = params[:token]
     # @resp = Transbank.Webpay.WebpayPlus.MallTransaction.status(token: @token)

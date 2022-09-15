@@ -24,11 +24,6 @@
               <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
                 <% #= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
               <% # end %>
-
-              <%= if !@current_user do %>
-                <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-                <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-              <% end  %>
           </div>
         </div>
 
@@ -56,8 +51,13 @@
               <%= gettext "upload" %>
             </span>
           <% end %>
+
+          <%= if !@current_user do %>
+            <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+            <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+          <% end  %>
         </div>
-        
+
         <div class="flex items-center lg:hidden">
           <!-- Mobile menu button -->
           <button type="button" 
