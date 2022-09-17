@@ -91,4 +91,21 @@ defmodule Rauversion.BlobUtils do
     blob = blob_for(track, kind)
     ActiveStorage.blob_proxy_url(blob)
   end
+
+  def process_one_upload(struct, attrs, kind) do
+    case struct do
+      %{valid?: true} ->
+        case attrs do
+          %{^kind => [file | _]} ->
+            Rauversion.BlobUtils.attach_file_with_blob(struct, kind, file)
+            struct
+
+          _ ->
+            struct
+        end
+
+      _ ->
+        struct
+    end
+  end
 end

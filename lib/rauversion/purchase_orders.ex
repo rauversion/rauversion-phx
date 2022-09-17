@@ -315,6 +315,9 @@ defmodule Rauversion.PurchaseOrders do
   end
 
   def create_transbank_order(event, purchase_order, user_id) do
+    # uuid implementations
+
+    # filename = :os.system_time
     # id = :crypto.strong_rand_bytes(20) |> Base.url_encode64 |> binary_part(0, 20)
 
     Multi.new()
