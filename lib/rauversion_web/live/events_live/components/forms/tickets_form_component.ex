@@ -59,7 +59,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
         {
           :noreply,
           socket
-          |> put_flash(:info, "Playlist updated successfully")
+          |> put_flash(:info, "Tickets updated successfully")
           # |> push_redirect(to: socket.assigns.return_to)
         }
 

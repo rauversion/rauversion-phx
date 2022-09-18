@@ -106,7 +106,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
 
 
             <div class="sm:col-span-3 space-y-3">
-              <%= form_input_renderer(f, %{type: :upload, uploads: @uploads}) %>
+              <%= form_input_renderer(f, %{type: :upload, uploads: @uploads, name: :cover}) %>
             </div>
 
           </div>

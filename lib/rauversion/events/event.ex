@@ -18,6 +18,8 @@ defmodule Rauversion.Events.Event do
     field :tax_rates_settings, :map
     field :widget_button, :map
 
+    has_many :event_hosts, Rauversion.EventHosts.EventHost, on_replace: :delete
+
     has_many :event_tickets, Rauversion.EventTickets.EventTicket, on_replace: :delete
 
     embeds_many :scheduling_settings, Rauversion.Events.Schedule, on_replace: :delete
@@ -134,6 +136,7 @@ defmodule Rauversion.Events.Event do
     ])
     |> cast_embed(:scheduling_settings, with: &Rauversion.Events.Schedule.changeset/2)
     # |> cast_embed(:tickets, with: &Rauversion.Events.Ticket.changeset/2)
+    |> cast_assoc(:event_hosts, with: &Rauversion.EventHosts.EventHost.changeset/2)
     |> cast_assoc(:event_tickets, with: &Rauversion.EventTickets.EventTicket.changeset/2)
     |> cast_embed(:event_settings, with: &Rauversion.Events.Settings.changeset/2)
     |> TitleSlug.maybe_generate_slug()

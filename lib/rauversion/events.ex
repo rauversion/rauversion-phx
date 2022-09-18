@@ -101,6 +101,25 @@ defmodule Rauversion.Events do
   def get_event!(id), do: Repo.get!(Event, id)
   def get_by_slug!(id), do: Repo.get_by!(Event, slug: id)
 
+  def get_host!(event, id) do
+    event |> Ecto.assoc(:event_hosts) |> where([c], c.id == ^id) |> Repo.one()
+  end
+
+  def get_hosts(event, listed \\ true) do
+    event
+    |> Ecto.assoc(:event_hosts)
+    |> where([c], c.listed_on_page == ^listed)
+    |> Repo.all()
+    |> Repo.preload([:avatar_blob, :avatar_attachment])
+  end
+
+  def hosts_count(event, listed \\ true) do
+    event
+    |> Ecto.assoc(:event_hosts)
+    |> where([c], c.listed_on_page == ^listed)
+    |> Repo.aggregate(:count, :id)
+  end
+
   @doc """
   Creates a event.
 
@@ -182,8 +201,8 @@ defmodule Rauversion.Events do
     end
   end
 
-  def simple_date_for(date) do
-    case Cldr.Date.to_string(date, format: :ed) do
+  def simple_date_for(date, format \\ :long) do
+    case Cldr.Date.to_string(date, format: format) do
       {:ok, d} -> d
       _ -> date
     end

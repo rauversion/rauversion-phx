@@ -24,7 +24,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TaxFormComponent do
         {
           :noreply,
           socket
-          |> put_flash(:info, "Playlist updated successfully")
+          |> put_flash(:info, "Taxes updated successfully")
           # |> push_redirect(to: socket.assigns.return_to)
         }
 
