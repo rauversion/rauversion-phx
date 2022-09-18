@@ -1,7 +1,7 @@
 defmodule RauversionWeb.EventsLive.UserEventsListComponent do
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Events, Repo}
+  alias Rauversion.{Events}
 
   def update(assigns, socket) do
     {:ok,

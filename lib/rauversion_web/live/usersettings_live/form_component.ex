@@ -45,7 +45,7 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     |> assign(:changeset, Accounts.change_user_notifications(user))
   end
 
-  defp get_change_set(:integrations, socket, user) do
+  defp get_change_set(:integrations, socket, _user) do
     socket
   end
 
