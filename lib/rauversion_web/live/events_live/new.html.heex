@@ -67,6 +67,14 @@
                         id: "attendees",
                         event: @event
                       )
+
+        :hosts -> live_component(
+                        RauversionWeb.Live.EventsLive.Components.HostsComponent,
+                        id: "hosts",
+                        event: @event,
+                        changeset: @changeset
+                      )
+
         _ -> "no section for #{@live_action}"
 
       end %>

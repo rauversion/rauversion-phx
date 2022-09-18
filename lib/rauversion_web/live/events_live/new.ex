@@ -107,6 +107,10 @@ defmodule RauversionWeb.EventsLive.New do
     edit_response(socket, id)
   end
 
+  defp apply_action(socket, :hosts, %{"slug" => id}) do
+    edit_response(socket, id)
+  end
+
   defp apply_action(socket, :order_form, %{"slug" => id}) do
     edit_response(socket, id)
   end
@@ -140,7 +144,7 @@ defmodule RauversionWeb.EventsLive.New do
       socket.assigns.current_user
       |> Ecto.assoc(:events)
       |> Repo.get_by!(%{slug: id})
-      |> Repo.preload(:event_tickets)
+      |> Repo.preload([:event_tickets, :event_hosts])
 
     socket
     |> assign(:changeset, Events.change_event(event, %{}))

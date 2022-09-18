@@ -31,7 +31,7 @@ defmodule RauversionWeb.EventsLive.Show do
   defp apply_action(socket, :payment_success, %{"slug" => id, "token_ws" => token}) do
     event = Events.get_by_slug!(id) |> Repo.preload([:user])
 
-    a = Rauversion.PurchaseOrders.commit_order(event, token)
+    Rauversion.PurchaseOrders.commit_order(event, token)
 
     socket |> assign(:event, event) |> assign(:payment_success, true)
   end

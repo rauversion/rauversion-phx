@@ -77,7 +77,9 @@ defmodule RauversionWeb.TrackLive.Player do
 
   @impl true
   def handle_event("add-song", %{"id" => id}, socket) do
-    track = Tracks.get_track!(id) |> Rauversion.Repo.preload([:user, :mp3_audio_blob])
+    track =
+      Tracks.get_track!(id)
+      |> Rauversion.Repo.preload([:user, :mp3_audio_blob, :cover_blob, :cover_attachment])
 
     {
       :noreply,
@@ -89,7 +91,9 @@ defmodule RauversionWeb.TrackLive.Player do
 
   @impl true
   def handle_event("play-song", %{"id" => id}, socket) do
-    track = Tracks.get_track!(id) |> Rauversion.Repo.preload([:user, :mp3_audio_blob])
+    track =
+      Tracks.get_track!(id)
+      |> Rauversion.Repo.preload([:user, :mp3_audio_blob, :cover_blob, :cover_attachment])
 
     tracks =
       if Enum.any?(socket.assigns.tracks) do
@@ -147,8 +151,8 @@ defmodule RauversionWeb.TrackLive.Player do
 
     tracks =
       Tracks.list_tracks_by_ids(ids)
-      # |> Repo.preload([:user, :mp3_audio_blob])
       |> Repo.all()
+      |> Repo.preload([:user, :mp3_audio_blob, :cover_blob, :cover_attachment])
 
     track = List.first(tracks)
 

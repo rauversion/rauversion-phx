@@ -61,23 +61,6 @@ defmodule Rauversion.Playlists.Playlist do
     |> TitleSlug.unique_constraint()
   end
 
-  def process_one_upload(struct, attrs, kind) do
-    case struct do
-      %{valid?: true} ->
-        case attrs do
-          %{^kind => [file | _]} ->
-            Rauversion.BlobUtils.attach_file_with_blob(struct, kind, file)
-            struct
-
-          _ ->
-            struct
-        end
-
-      _ ->
-        struct
-    end
-  end
-
   def form_definitions() do
     [
       %{

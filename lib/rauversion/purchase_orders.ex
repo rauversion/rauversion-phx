@@ -233,7 +233,7 @@ defmodule Rauversion.PurchaseOrders do
             0 ->
               :noop
 
-            i ->
+            _ ->
               t = Rauversion.EventTickets.get_event_ticket!(ticket.ticket_id)
               IO.inspect("CREANDO TICKETE")
 
@@ -281,9 +281,8 @@ defmodule Rauversion.PurchaseOrders do
 
     # TODO: save data on some transacion table?
 
-    result =
-      Rauversion.PurchaseOrders.get_purchase_order!(data["buy_order"])
-      |> generate_purchased_tickets()
+    Rauversion.PurchaseOrders.get_purchase_order!(data["buy_order"])
+    |> generate_purchased_tickets()
 
     # %{
     #   "accounting_date" => "0913",
@@ -315,6 +314,9 @@ defmodule Rauversion.PurchaseOrders do
   end
 
   def create_transbank_order(event, purchase_order, user_id) do
+    # uuid implementations
+
+    # filename = :os.system_time
     # id = :crypto.strong_rand_bytes(20) |> Base.url_encode64 |> binary_part(0, 20)
 
     Multi.new()

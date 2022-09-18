@@ -23,6 +23,12 @@ defmodule RauversionWeb.EventsLive.NavBar do
         sub: gettext("Basic Account Information.")
       },
       %{
+        to: "/events/#{event.slug}/edit/hosts",
+        namespace: :hosts,
+        title: gettext("Hosts & Managers"),
+        sub: gettext("Add hosts, special guests, and event managers.")
+      },
+      %{
         to: "/events/#{event.slug}/edit/tickets",
         namespace: :tickets,
         title: gettext("Tickets"),
@@ -34,30 +40,30 @@ defmodule RauversionWeb.EventsLive.NavBar do
       #  title: gettext("Widgets"),
       #  sub: gettext("Change your credentials")
       # },
-      %{
-        to: "/events/#{event.slug}/edit/tax",
-        namespace: :tax,
-        title: gettext("Tax"),
-        sub: gettext("Change your notification preferences.")
-      },
+      # %{
+      #  to: "/events/#{event.slug}/edit/tax",
+      #  namespace: :tax,
+      #  title: gettext("Tax"),
+      #  sub: gettext("Change your notification preferences.")
+      # },
       %{
         to: "/events/#{event.slug}/edit/attendees",
         namespace: :attendees,
         title: gettext("Attendees"),
         sub: gettext("Change your notification preferences.")
-      },
-      %{
-        to: "/events/#{event.slug}/edit/email_attendees",
-        namespace: :email_attendees,
-        title: gettext("Email Attendees"),
-        sub: gettext("Change your notification preferences.")
-      },
-      %{
-        to: "/events/#{event.slug}/edit/sponsors",
-        namespace: :sponsors,
-        title: gettext("Promoters"),
-        sub: gettext("Change your notification preferences.")
       }
+      # %{
+      #  to: "/events/#{event.slug}/edit/email_attendees",
+      #  namespace: :email_attendees,
+      #  title: gettext("Email Attendees"),
+      #  sub: gettext("Change your notification preferences.")
+      # },
+      # %{
+      #  to: "/events/#{event.slug}/edit/sponsors",
+      #  namespace: :sponsors,
+      #  title: gettext("Promoters"),
+      #  sub: gettext("Change your notification preferences.")
+      # }
     ]
   end
 
@@ -133,6 +139,13 @@ defmodule RauversionWeb.EventsLive.NavBar do
         ~H"""
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+          </svg>
+        """
+
+      :hosts ->
+        ~H"""
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
           </svg>
         """
 
