@@ -70,7 +70,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:228
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:50
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:52
 msgid "Article will be plublished on blog listing."
 msgstr ""
 
@@ -146,7 +146,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:108
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:71
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:73
 msgid "Change information"
 msgstr ""
 
@@ -540,7 +540,7 @@ msgstr ""
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:40
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:21
 #: lib/rauversion_web/live/usersettings_live/components/security_form.ex:20
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:21
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:23
 #: lib/rauversion_web/templates/user_registration/new.html.heex:70
 #: lib/rauversion_web/templates/user_reset_password/edit.html.heex:17
 msgid "Oops, something went wrong! Please check the errors below."
@@ -768,7 +768,7 @@ msgstr ""
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:60
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:108
 #: lib/rauversion_web/live/usersettings_live/components/security_form.ex:57
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:71
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:73
 msgid "Saving..."
 msgstr ""
 
@@ -1291,7 +1291,7 @@ msgid "Checked in tickets"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:32
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:34
 msgid "Código transbank de producción de 12 dígitos"
 msgstr ""
 
@@ -1368,7 +1368,7 @@ msgid "My Tracks"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:47
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:49
 msgid "PST enabled"
 msgstr ""
 
@@ -1403,7 +1403,7 @@ msgid "Sign in with Zoom"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:61
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:63
 msgid "Test mode"
 msgstr ""
 
@@ -1418,7 +1418,7 @@ msgid "Tickets sold"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:31
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:33
 msgid "Transbank Commerce code"
 msgstr ""
 
@@ -1440,4 +1440,9 @@ msgstr ""
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:84
 msgid "para transbank usaremos tu codigo de comercio de los ajustes"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:8
+msgid "Transbank Commerce Settings"
 msgstr ""

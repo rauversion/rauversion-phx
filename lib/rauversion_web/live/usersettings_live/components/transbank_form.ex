@@ -4,7 +4,9 @@ defmodule RauversionWeb.UsersettingsLive.TransbankForm do
   def render(%{changeset: _changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-    <h1 class="text-3xl font-extrabold text-blue-gray-900">Transbank Commerce Settings</h1>
+    <h1 class="text-3xl font-extrabold text-blue-gray-900">
+      <%= gettext "Transbank Commerce Settings" %>
+    </h1>
 
     <.form
       let={f}
