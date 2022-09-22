@@ -537,6 +537,13 @@ defmodule Rauversion.Accounts do
 
   # invitations
 
+  def invite_user(%User{} = user, attrs \\ %{}) do
+    attrs = Map.merge(attrs, %{password: "123456", password_confirmation: "123456"})
+
+    User.invitation_changeset(user, attrs)
+    |> Repo.insert!()
+  end
+
   def change_user_invitation(%User{} = user, attrs \\ %{}) do
     User.invitation_changeset(user, attrs)
   end

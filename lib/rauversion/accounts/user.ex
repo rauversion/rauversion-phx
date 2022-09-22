@@ -93,6 +93,22 @@ defmodule Rauversion.Accounts.User do
     |> registration_changeset(attrs, opts)
   end
 
+  def invitation_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:email, :password])
+    |> validate_email()
+    |> validate_password([])
+  end
+
+  def accept_invitation_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:username, :password])
+    |> validate_required([:username])
+    |> unsafe_validate_unique(:username, Rauversion.Repo)
+    |> unique_constraint(:username)
+    |> validate_password([])
+  end
+
   def oauth_registration_update(user, attrs) do
     user
     |> cast(attrs, [:email, :username, :first_name, :last_name])

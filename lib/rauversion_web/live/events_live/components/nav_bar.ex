@@ -157,8 +157,20 @@ defmodule RauversionWeb.EventsLive.NavBar do
   def render(assigns) do
     ~H"""
     <nav aria-label="Sections" class="hidden flex-shrink-0 w-96 border-r-gray-500 border-blue-gray-600 xl:flex xl:flex-col">
-      <div class="flex-shrink-0 h-16 px-6 border-b border-blue-gray-600 flex items-center">
+      <div class="flex-shrink-0 h-16 px-6 border-b border-blue-gray-600 flex items-center justify-between">
         <p class="text-lg font-medium text-blue-gray-900">Settings</p>
+
+        <%= if @event.id do %>
+          <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, @event.slug),
+            class: "inline-flex items-center justify-center rounded-md border border-transparent text-sm bg-white px-2 py-2 font-medium text-gray-900 hover:bg-gray-50" do %>
+            View event
+            <svg class="-mr-1 ml-3 h-5 w-5 text-gray-400" x-description="Heroicon name: mini/arrow-top-right-on-square" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" clip-rule="evenodd"></path>
+              <path fill-rule="evenodd" d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" clip-rule="evenodd"></path>
+            </svg>
+          <% end %>
+        <% end %>
+
       </div>
 
       <div class="flex-1 min-h-0 overflow-y-auto bg-gray-900">

@@ -11,6 +11,7 @@ defmodule Rauversion.EventTickets.EventTicket do
     field :selling_start, :utc_datetime
     field :short_description, :string
     field :title, :string
+    # field :free, :boolean
     # field :event_id, :id
 
     belongs_to :event, Rauversion.Events.Event
@@ -33,6 +34,7 @@ defmodule Rauversion.EventTickets.EventTicket do
       :selling_end,
       :short_description,
       :event_id
+      # :free
     ])
     |> cast_embed(:settings, with: &Rauversion.Events.Ticket.changeset/2)
     |> validate_required([

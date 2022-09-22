@@ -148,6 +148,9 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    get "/users/invite", UserInvitationController, :new
+    post "/users/invite", UserInvitationController, :create
+
     get "/webpayplus/mall/create", TbkController, :mall_create
     post "/webpayplus/mall/create", TbkController, :send_mall_create
     post "/webpayplus/mall/return_url", TbkController, :mall_commit

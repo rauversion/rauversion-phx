@@ -3,6 +3,7 @@ defmodule RauversionWeb.UserInvitationController do
 
   alias Rauversion.Accounts
   alias Rauversion.Accounts.User
+  alias RauversionWeb.UserAuth
 
   def new(conn, _params) do
     changeset = Accounts.change_user_invitation(%User{})
@@ -39,16 +40,19 @@ defmodule RauversionWeb.UserInvitationController do
   end
 
   def update_user(conn, %{"user" => user_params, "token" => token}) do
+    IO.inspect(user_params)
+
     case Accounts.accept_invitation(token, user_params) do
       {:ok, user} ->
         {:ok, _} =
           Accounts.deliver_user_confirmation_instructions(
             user,
-            &Routes.user_confirmation_url(conn, :confirm, &1)
+            &Routes.user_confirmation_url(conn, :edit, &1)
           )
 
         conn
         |> put_flash(:info, "User registered successfully.")
+        |> UserAuth.log_in_user(user)
         |> redirect(to: "/")
 
       {:error, %Ecto.Changeset{} = changeset} ->
