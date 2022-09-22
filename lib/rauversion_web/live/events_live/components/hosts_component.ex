@@ -8,7 +8,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:upload_modal, nil)}
+     |> assign(:upload_modal, nil)
+     |> assign(:new_modal, nil)}
   end
 
   @impl true
@@ -34,7 +35,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
 
   @impl true
   def handle_event("close-modal", %{}, socket) do
-    {:noreply, assign(socket, :upload_modal, nil)}
+    {:noreply,
+     assign(socket, :upload_modal, nil)
+     |> assign(:new_modal, nil)}
   end
 
   @impl true
@@ -80,6 +83,11 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
     save_event(socket, :edit, event_params)
   end
 
+  @impl true
+  def handle_event("new-modal", _, socket) do
+    {:noreply, assign(socket, :new_modal, true)}
+  end
+
   def find_host(event, id) do
     Rauversion.Events.get_host!(event, id)
   end
@@ -103,10 +111,43 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
     save_event(socket, :edit, %{"event" => %{"event_hosts" => []}})
   end
 
+  def get_hosts(event) do
+    Rauversion.Events.get_hosts(event)
+  end
+
   @impl true
   def render(assigns) do
     ~H"""
     <div class="p-5 w-full">
+
+        <%= if @new_modal do %>
+
+          <.modal close_handler={@myself} w_class={"w-1/4"}>
+            <.form
+              let={f}
+              for={:new_user}
+              phx-target={@myself}
+              id="hosts-form"
+              phx-change="validate"
+              phx-submit="save">
+              <div class="space-y-3">
+                <%= gettext("Add a host to highlight them on the event page or to get help managing the event.") %>
+                <%= form_input_renderer(f, %{type: :text_input, name: :email, wrapper_class: "", placeholder: "email"}) %>
+                <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
+              </div>
+            </.form>
+          </.modal>
+
+        <% end %>
+
+        <%= for host <- get_hosts(@event) do %>
+          <div>
+            <%= host.name %>
+            <%= if host.user do %>
+              user: <%= host.user.username %>
+            <% end %>
+          </div>
+        <% end %>
 
         <%= if @upload_modal do %>
           <.modal close_handler={@myself}>
@@ -118,6 +159,14 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
 
           </.modal>
         <% end %>
+
+        <button type="button"
+          phx-click="new-modal"
+          phx-target={@myself}
+          class="mt-2 inline-flex justify-center items-center border-2 border-white-600 rounded-lg py-2 px-2 bg-black text-white-600 block text-sm"
+          >
+          <%= gettext("New host") %>
+        </button>
 
         <.form
           let={f}
@@ -136,8 +185,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
             <div class="sm:col-span-6">
 
               <%= inputs_for f, :event_hosts, fn i -> %>
-
-
                 <div class="border-2 rounded-md p-4 my-4">
                   <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
@@ -190,9 +237,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
                   </button>
 
                 </div>
-
               <% end %>
-
             </div>
 
             <div class="sm:col-span-6 flex justify-end space-x-2">

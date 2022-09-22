@@ -41,7 +41,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TaxFormComponent do
           let={f}
           for={@changeset}
           phx-target={@myself}
-          id="playlist-form"
+          id="tax-form"
           phx-change="validate"
           phx-submit="save">
 

@@ -117,7 +117,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           let={f}
           for={@changeset}
           phx-target={@myself}
-          id="playlist-form"
+          id="scheduling-form"
           phx-change="validate"
           phx-submit="save">
 

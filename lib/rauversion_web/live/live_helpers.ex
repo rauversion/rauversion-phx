@@ -1,6 +1,7 @@
 defmodule RauversionWeb.LiveHelpers do
   import Phoenix.LiveView
   import Phoenix.LiveView.Helpers
+  import Phoenix.Component
   import Phoenix.HTML.Form
   import RauversionWeb.ErrorHelpers
   import RauversionWeb.Gettext
@@ -31,12 +32,13 @@ defmodule RauversionWeb.LiveHelpers do
   def modal(assigns) do
     assigns = assign_new(assigns, :return_to, fn -> nil end)
     assigns = assign_new(assigns, :close_handler, fn -> nil end)
+    assigns = assign_new(assigns, :w_class, fn -> "w-3/4" end)
 
     ~H"""
     <div id="modal" class="phx-modal fade-in" phx-remove={hide_modal()}>
       <div
         id="modal-content"
-        class="phx-modal-content fade-in-scale dark:bg-black dark:text-gray-100 border-4 border-white"
+        class={"phx-modal-content #{@w_class} fade-in-scale dark:bg-black dark:text-gray-100 border-4 border-white"}
         phx-click-away={JS.dispatch("click", to: "#close")}
         phx-window-keydown={JS.dispatch("click", to: "#close")}
         phx-key="escape"
@@ -183,7 +185,7 @@ defmodule RauversionWeb.LiveHelpers do
         data_phx_update: "ignore"
       )
 
-    assigns = LiveView.assign(%{__changed__: nil}, attrs: attrs)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, attrs: attrs)
 
     ~H"""
       <audio controls>
@@ -194,7 +196,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :text_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -213,7 +215,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :number_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -232,7 +234,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :date_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -252,7 +254,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :datetime_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -271,7 +273,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :select}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -292,7 +294,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :date_select}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -311,7 +313,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :radio}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={"#{@field.wrapper_class}"}>
@@ -342,7 +344,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :checkbox}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={"#{@field.wrapper_class}"}>
@@ -371,7 +373,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :textarea}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -391,7 +393,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :upload, name: name}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
 
@@ -461,7 +463,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def render_attribution_fields(f) do
-    assigns = LiveView.assign(%{__changed__: nil}, f: f)
+    assigns = Phoenix.Component.assign(%{__changed__: nil}, f: f)
 
     ~H"""
     <%= if Map.get(f.params, "copyright") == "common" || (Map.get(f.data, :copyright) == "common" && Map.get(f.params, "copyright") != "common") do %>

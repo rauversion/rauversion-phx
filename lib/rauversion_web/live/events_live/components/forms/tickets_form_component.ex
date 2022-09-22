@@ -104,7 +104,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
           let={f}
           for={@changeset}
           phx-target={@myself}
-          id="playlist-form"
+          id="tickets-form"
           phx-change="validate"
           phx-submit="save">
 

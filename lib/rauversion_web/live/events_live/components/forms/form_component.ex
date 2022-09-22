@@ -18,7 +18,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
         <.form
           let={f}
           for={@changeset}
-          id="playlist-form"
+          id="events-form"
           phx-change="validate"
           phx-submit="save"
           data-controller="gmaps"
