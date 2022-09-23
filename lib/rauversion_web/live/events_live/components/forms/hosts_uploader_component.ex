@@ -57,7 +57,7 @@ defmodule RauversionWeb.EventsLive.Components.HostsUploaderComponent do
         let={f}
         for={@changeset}
         phx-target={@myself}
-        id="playlist-form"
+        id="hosts-managers-form"
         phx-change="validate"
         phx-submit="save">
 

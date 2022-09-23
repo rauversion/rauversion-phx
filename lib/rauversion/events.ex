@@ -105,12 +105,19 @@ defmodule Rauversion.Events do
     event |> Ecto.assoc(:event_hosts) |> where([c], c.id == ^id) |> Repo.one()
   end
 
-  def get_hosts(event, listed \\ true) do
+  def get_hosts(event) do
+    event
+    |> Ecto.assoc(:event_hosts)
+    |> Repo.all()
+    |> Repo.preload([:avatar_blob, :avatar_attachment, :user])
+  end
+
+  def get_hosts(event, listed) do
     event
     |> Ecto.assoc(:event_hosts)
     |> where([c], c.listed_on_page == ^listed)
     |> Repo.all()
-    |> Repo.preload([:avatar_blob, :avatar_attachment])
+    |> Repo.preload([:avatar_blob, :avatar_attachment, :user])
   end
 
   def hosts_count(event, listed \\ true) do
