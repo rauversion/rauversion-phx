@@ -173,7 +173,7 @@ defmodule RauversionWeb.EventsLive.NavBar do
 
       </div>
 
-      <div class="flex-1 min-h-0 overflow-y-auto bg-gray-900">
+      <div class="flex-1 min-h-0 overflow-y-auto dark:bg-gray-900 ">
         <%= for item <- menu_items(@event) do %>
           <%= live_redirect to: item.to, class: item_class(@live_action, item.namespace) do %>
             <%= icon_for(item.namespace) %>

@@ -37,6 +37,7 @@ defmodule Rauversion.Accounts do
     from(u in User,
       left_join: m in assoc(u, :followings),
       # on: [follower_id: ^user.id],
+      where: not is_nil(u.username),
       where: is_nil(m.id),
       preload: [:avatar_blob, :avatar_attachment]
     )
@@ -538,10 +539,10 @@ defmodule Rauversion.Accounts do
   # invitations
 
   def invite_user(%User{} = user, attrs \\ %{}) do
-    attrs = Map.merge(attrs, %{password: "123456", password_confirmation: "123456"})
+    attrs = Map.merge(attrs, %{password: SecureRandom.urlsafe_base64(10)})
 
     User.invitation_changeset(user, attrs)
-    |> Repo.insert!()
+    |> Repo.insert()
   end
 
   def change_user_invitation(%User{} = user, attrs \\ %{}) do

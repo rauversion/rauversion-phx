@@ -244,7 +244,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
               <button type="button"
                 phx-click="delete-ticket"
                 phx-target={@myself}
-                class="mt-2 inline-flex justify-center items-center border-2 border-red-600 rounded-lg py-2 px-2 bg-black text-red-600 block text-sm"
+                class="mt-2 inline-flex justify-center items-center border-2 border-red-600 rounded-lg py-2 px-2 dark:bg-black text-red-600 block text-sm"
                 phx-value-index={i.index}>
                 Delete Ticket
               </button>
