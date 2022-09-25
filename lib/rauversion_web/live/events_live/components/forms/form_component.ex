@@ -2,9 +2,15 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
   use RauversionWeb, :live_component
 
   def has_stripe?(user_id) do
-    case Rauversion.Accounts.find_by_credential_provider("stripe", user_id) do
-      %Rauversion.OauthCredentials.OauthCredential{} -> false
-      _ -> true
+    case user_id do
+      nil ->
+        false
+
+      _ ->
+        case Rauversion.Accounts.find_by_credential_provider("stripe", user_id) do
+          %Rauversion.OauthCredentials.OauthCredential{} -> false
+          _ -> true
+        end
     end
   end
 

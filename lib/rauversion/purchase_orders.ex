@@ -220,7 +220,6 @@ defmodule Rauversion.PurchaseOrders do
     {:ok, %{resp: data, order: order_with_payment_id}}
   end
 
-  # TODO: fix duplicated generation of event ticket
   def generate_purchased_tickets(order) do
     Multi.new()
     |> Multi.run(:purchased_tickets, fn _repo, _ ->
@@ -258,8 +257,19 @@ defmodule Rauversion.PurchaseOrders do
         end)
 
       case errs do
-        true -> {:error, nil}
-        false -> {:ok, nil}
+        true ->
+          {:error, nil}
+
+        false ->
+          {:ok,
+           purchased_tickets
+           |> Enum.map(fn x ->
+             case x do
+               {:ok, r} -> r
+               _ -> nil
+             end
+           end)
+           |> Enum.filter(fn x -> x end)}
       end
     end)
     |> Repo.transaction()
@@ -396,6 +406,35 @@ defmodule Rauversion.PurchaseOrders do
         _ ->
           {:ok, %{response: resp, order: order}}
       end
+    end)
+    |> Repo.transaction()
+  end
+
+  def create_free_ticket_order(
+        event,
+        ticket_id,
+        user_id
+      ) do
+    IO.inspect(event)
+    IO.inspect(ticket_id)
+
+    data = [%{"ticket_id" => ticket_id, "count" => 1}]
+
+    Multi.new()
+    |> Multi.insert(
+      :purchase_order,
+      PurchaseOrder.changeset(
+        %PurchaseOrder{},
+        %{
+          "user_id" => user_id,
+          "payment_id" => "e-#{event.id}-",
+          "payment_provider" => "none"
+        }
+        |> Map.merge(%{"data" => data})
+      )
+    )
+    |> Multi.run(:create_tickets, fn _repo, %{purchase_order: order} ->
+      generate_purchased_tickets(order)
     end)
     |> Repo.transaction()
   end

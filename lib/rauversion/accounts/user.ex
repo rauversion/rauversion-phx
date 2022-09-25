@@ -6,6 +6,7 @@ defmodule Rauversion.Accounts.User do
   use ActiveStorage.Attached.HasOne, name: :avatar, model: "User"
 
   schema "users" do
+    field :type, :string
     field :first_name, :string
     field :last_name, :string
     field :username, :string

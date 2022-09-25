@@ -518,4 +518,13 @@ defmodule RauversionWeb.LiveHelpers do
         []
     end
   end
+
+  def is_creator?(current_user) do
+    case current_user.type do
+      "user" -> false
+      "artist" -> true
+      "manager" -> true
+      "admin" -> true
+    end
+  end
 end

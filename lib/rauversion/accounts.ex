@@ -494,7 +494,7 @@ defmodule Rauversion.Accounts do
             email: user_data.email,
             username: username,
             first_name: user_data.name,
-            password: "123456"
+            password: SecureRandom.urlsafe_base64(10)
           }
 
           Rauversion.Accounts.User.oauth_registration(%User{}, attrs)
@@ -594,5 +594,15 @@ defmodule Rauversion.Accounts do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, user_update_changeset)
     |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, ["invitation"]))
+  end
+
+  # tickets
+
+  def get_event_ticket(current_user, ticket) do
+    ticket
+    |> Ecto.assoc(:purchased_tickets)
+    |> where([p], p.event_ticket_id == ^ticket.id)
+    |> limit(1)
+    |> Repo.one()
   end
 end
