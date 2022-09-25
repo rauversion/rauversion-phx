@@ -131,10 +131,10 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
                 "data-gmaps-target": "field",
                 autocomplete: "false",
                 "data-action": "keydown->maps#preventSubmit",
-                class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
+                class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
               </div>
                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-                  Type the event address, and confirm the prompt
+                  <%= gettext("Type the event address, and confirm the prompt") %>
                 </p>
             </div>
 
@@ -170,7 +170,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
               "data-gmaps-target": "province",
               autocomplete: "false",
               "data-action": "keydown->maps#preventSubmit",
-              class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
+              class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
             %>
 
             <div class="sm:col-span-6" phx-update="ignore" id="main-map">

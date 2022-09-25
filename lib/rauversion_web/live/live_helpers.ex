@@ -202,7 +202,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
+          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -240,7 +240,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -260,7 +260,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= datetime_local_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= datetime_local_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -279,7 +279,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -300,7 +300,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1 flex space-x-1 items-center">
-          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -380,7 +380,7 @@ defmodule RauversionWeb.LiveHelpers do
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
           <%= textarea @form, @field.name, placeholder: Map.get(@field, :placeholder),
-          class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
+          class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -403,7 +403,7 @@ defmodule RauversionWeb.LiveHelpers do
       </label>
 
       <div class="mt-1 sm:mt-0 sm:col-span-2">
-        <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md"
+        <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md"
           phx-drop-target={@field.uploads[name].ref}>
           <div class="space-y-1 text-center">
 
