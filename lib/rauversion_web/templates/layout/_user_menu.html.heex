@@ -17,8 +17,16 @@
                 <%= gettext "Tracks" %>
               <% end %>
             
-              <%= live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
-                <%= gettext "Account" %>
+              <% #= live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+                <% #= gettext "Account" %>
+              <% # end %>
+
+              <%= live_redirect to: "/events", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+                <%= gettext "Events" %>
+              <% end %>
+
+              <%= live_redirect to: "/articles", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+                <%= gettext "Magazine" %>
               <% end %>
 
               <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
@@ -59,21 +67,15 @@
         </div>
 
         <div class="flex items-center lg:hidden">
-          <!-- Mobile menu button -->
           <button type="button" 
-          data-action="dropdown#toggle click@window->dropdown#hide"
-          class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" 
-          aria-controls="mobile-menu" 
-          @click="open = !open" 
-          aria-expanded="false" x-bind:aria-expanded="open.toString()">
+            data-action="dropdown#toggle click@window->dropdown#hide"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" 
+            aria-controls="mobile-menu">
             <span class="sr-only"><%= gettext "Open menu" %></span>
-            <svg x-description="Icon when menu is closed.
-
-              Heroicon name: outline/menu" x-state:on="Menu open" x-state:off="Menu closed" class="h-6 w-6 block"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <svg class="h-6 w-6 block"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
-              <svg x-description="Icon when menu is open.
-              Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <svg class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
@@ -82,29 +84,36 @@
         <div class="hidden lg:ml-4 lg:flex lg:items-center z-50">
           <%= if @current_user do %>
             <div data-controller="dropdown" class="relative">
-              <button type="button"
-                data-action="dropdown#toggle click@window->dropdown#hide" 
-                class="flex-shrink-0 bg-gray-500 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
-                <span class="sr-only"><%= gettext "Notificaitons" %></span>
+              <div class="flex items-center space-x-1">
+                <button type="button"
+                  data-action="dropdown#toggle click@window->dropdown#hide" 
+                  class="flex-shrink-0 bg-gray-500 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
+                  <span class="sr-only"><%= gettext "Notificaitons" %></span>
 
-                <%= img_tag(Rauversion.Accounts.avatar_url(@current_user), class: "h-6 w-6 rounded-full") %>
+                  <%= img_tag(Rauversion.Accounts.avatar_url(@current_user), 
+                    class: "h-6 w-6 rounded-full") 
+                  %>
+                </button>
 
-              </button>
+                <span class="text-sm">
+                  <%= @current_user.username || @current_user.email %>
+                </span>
+              </div>
+
                 <div
                   data-dropdown-target="menu"
                   class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                   data-transition-enter-from="opacity-0 scale-95"
                   data-transition-enter-to="opacity-100 scale-100"
                   data-transition-leave-from="opacity-100 scale-100"
-                  data-transition-leave-to="opacity-0 scale-95"
-                  >
+                  data-transition-leave-to="opacity-0 scale-95">
                   <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-900 bg-white">
 
-                    <%= if is_creator?(@current_user) do %>
+                    <% #= if is_creator?(@current_user) do %>
                       <%= live_redirect gettext("My Tracks"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                       <%= live_redirect gettext("My Articles"), to: "/articles/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                       <%= live_redirect gettext("My Events"), to: "/events/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                    <% end %>
+                    <% #end %>
                     <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <%= live_redirect gettext("Settings"), 
                         to: "/users/settings", 

@@ -7,10 +7,9 @@ defmodule RauversionWeb.ProfileLive.HeadingComponent do
   def render(%{profile: _profile} = assigns) do
     ~H"""
       <div class="sm:h-64 h-24 bg-black sticky top-0 z-40 sm:relative">
-        <div class="flex justify-between">
+        <div class="flex justify-between bg-cover bg-center" style={"background: url('#{Rauversion.BlobUtils.variant_url(@profile, :profile_header, %{resize_to_fill: "2480x520"} )}')"}>
           <div class="flex">
             <div class="m-4">
-
               <%= img_tag(Rauversion.Accounts.avatar_url(@profile),
               class: "sm:w-48 sm:h-48 w-16 h-16 rounded-full") %>
             </div>

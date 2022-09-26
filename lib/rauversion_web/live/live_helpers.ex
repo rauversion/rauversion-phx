@@ -399,7 +399,7 @@ defmodule RauversionWeb.LiveHelpers do
 
     <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5">
       <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
-        <%= gettext "Cover photo" %>
+        <%= field[:label] || gettext( "Cover photo") %>
       </label>
 
       <div class="mt-1 sm:mt-0 sm:col-span-2">
@@ -423,7 +423,7 @@ defmodule RauversionWeb.LiveHelpers do
             <div class="flex text-sm text-gray-600 dark:text-gray-400 py-3">
               <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                 <span>
-                  <%= gettext "Upload a track Cover" %>
+                  <%= gettext( "Upload a %{subject}", %{subject: field[:label] || "Track" }) %>
                 </span>
                 <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                 <%= live_file_input @field.uploads[name],
@@ -452,7 +452,7 @@ defmodule RauversionWeb.LiveHelpers do
             </div>
 
             <p class="text-xs text-gray-500 dark:text-gray-300">
-              <%= gettext "PNG, JPG, GIF up to 10MB" %>
+              <%= @field[:permitted_extensions_label] || gettext("PNG, JPG, GIF up to 10MB") %>
             </p>
           </div>
         </div>

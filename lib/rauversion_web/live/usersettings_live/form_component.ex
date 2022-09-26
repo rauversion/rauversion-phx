@@ -23,6 +23,7 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     socket
     |> assign(:changeset, Accounts.change_user_profile(user))
     |> allow_upload(:avatar, accept: ~w(.jpg .jpeg .png), max_entries: 1)
+    |> allow_upload(:profile_header, accept: ~w(.jpg .jpeg .png), max_entries: 1)
   end
 
   defp get_change_set(:email, socket, user) do
@@ -156,14 +157,20 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
 
   defp save_profile(socket, :profile, %{"user" => user_params}) do
     user = socket.assigns.current_user
-    user_params = user_params |> Map.put("avatar", file_for(socket, :avatar))
+
+    user_params =
+      user_params
+      |> Map.put("avatar", files_for(socket, :avatar))
+      |> Map.put("profile_header", files_for(socket, :profile_header))
+
+    IO.inspect(user_params)
 
     socket =
       case Accounts.update_user_profile(user, user_params) do
         {:ok, _user} ->
           socket
           |> put_flash(:info, "User profile updated successfully.")
-          |> redirect(to: "/users/settings")
+          |> push_redirect(to: "/users/settings")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)
@@ -221,26 +228,5 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
       end
 
     {:noreply, socket}
-  end
-
-  defp file_for(socket, kind) do
-    case uploaded_entries(socket, kind) do
-      {[_ | _] = entries, []} ->
-        Enum.map(entries, fn entry ->
-          consume_uploaded_entry(socket, entry, fn %{path: path} ->
-            {:postpone,
-             %{
-               path: path,
-               content_type: entry.client_type,
-               filename: entry.client_name,
-               size: entry.client_size
-             }}
-          end)
-        end)
-        |> List.first()
-
-      _ ->
-        nil
-    end
   end
 end
