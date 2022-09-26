@@ -20,6 +20,17 @@ defmodule RauversionWeb.Router do
     plug RauversionWeb.Plugs.SetLocale
   end
 
+  # without protect_from_forgery
+  pipeline :browser_unprotected do
+    plug :accepts, ["html", "json"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, {RauversionWeb.LayoutView, :root}
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+    plug RauversionWeb.Plugs.SetLocale
+  end
+
   pipeline :active_storage do
     plug :accepts, ["html", "json"]
     plug :fetch_session
@@ -58,6 +69,7 @@ defmodule RauversionWeb.Router do
 
     get "/:provider", OAuthController, :request
     get "/:provider/callback", OAuthController, :callback
+    get "/:provider/revoke", OAuthController, :revoke
   end
 
   scope "/", RauversionWeb do
@@ -136,6 +148,23 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    get "/users/invite", UserInvitationController, :new
+    post "/users/invite", UserInvitationController, :create
+
+    get "/webpayplus/mall/create", TbkController, :mall_create
+    post "/webpayplus/mall/create", TbkController, :send_mall_create
+    post "/webpayplus/mall/return_url", TbkController, :mall_commit
+
+    post "/webpayplus/mall/events/:id/return_url", TbkController, :mall_events_commit
+    get "/webpayplus/mall/events/:id/return_url", TbkController, :mall_events_commit
+
+    get "/webpayplus/mall/return_url", TbkController, :mall_commit
+
+    live "/streams/:id", StreamsLive.Show, :show
+
+    get "/webpayplus/mall/status/:token", TbkController, :mall_status
+    post "/webpayplus/mall/refund", TbkController, :mall_refund
+
     live "/tickets/qr/:signed_id", QrLive.Index, :index
 
     live "/users/settings", UserSettingsLive.Index, :profile
@@ -143,6 +172,7 @@ defmodule RauversionWeb.Router do
     live "/users/settings/security", UserSettingsLive.Index, :security
     live "/users/settings/notifications", UserSettingsLive.Index, :notifications
     live "/users/settings/integrations", UserSettingsLive.Index, :integrations
+    live "/users/settings/transbank", UserSettingsLive.Index, :transbank
 
     get "/oembed", OEmbedController, :create
 
@@ -157,6 +187,7 @@ defmodule RauversionWeb.Router do
     live "/events/new", EventsLive.New, :new
     live "/events/edit/:id", EventsLive.New, :edit
     live "/events/:slug/edit", EventsLive.New, :edit
+    live "/events/:slug/overview", EventsLive.New, :overview
 
     live "/events/:slug/payment_success", EventsLive.Show, :payment_success
     live "/events/:slug/payment_failure", EventsLive.Show, :payment_fail
@@ -169,6 +200,7 @@ defmodule RauversionWeb.Router do
     live "/events/:slug/edit/tax", EventsLive.New, :tax
     live "/events/:slug/edit/attendees", EventsLive.New, :attendees
     live "/events/:slug/edit/sponsors", EventsLive.New, :sponsors
+    live "/events/:slug/edit/hosts", EventsLive.New, :hosts
 
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
@@ -261,6 +293,8 @@ defmodule RauversionWeb.Router do
     live "/events", EventsLive.Index, :index
     live "/events/:id", EventsLive.Show, :show
     live "/events/:id/tickets", TicketsLive.Index, :index
+
+    live "/purchases/tickets", MyTicketsLive.Index, :index
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id", TrackLive.Show, :show

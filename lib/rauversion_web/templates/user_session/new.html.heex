@@ -80,9 +80,9 @@
           </div>
         </div>
 
-        <div class="mt-6 grid grid-cols-3 gap-3">
+        <div class="mt-6 grid grid-cols-4 gap-3">
           <div>
-            <a href="/auth/zoom?state=rauv" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+            <a href="/auth/zoom?state=rauv" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
               <span class="sr-only"><%= gettext "Sign in with Zoom" %></span>
               <svg class="w-6 h-5" fill="currentColor" viewBox="0 0 32 32">
                   <path id="zoom" d="M20.10554,4H11.89446A7.89446,7.89446,0,0,0,4,11.89446v8.21108A7.89446,7.89446,0,0,0,11.89446,28h8.21108A7.89446,7.89446,0,0,0,28,20.10554V11.89446A7.89446,7.89446,0,0,0,20.10554,4Zm-.73777,15.08546A1.11957,1.11957,0,0,1,18.2482,20.205h-6.981a2.68441,2.68441,0,0,1-2.68441-2.68442V13.027a1.232,1.232,0,0,1,1.232-1.232h6.70857a2.84437,2.84437,0,0,1,2.84438,2.84438Zm4.14163.40563a.71395.71395,0,0,1-1.21817.50544l-1.88257-1.87807a1.65461,1.65461,0,0,1-.486-1.1714V15.213a1.65463,1.65463,0,0,1,.486-1.1714l1.88257-1.87806a.71394.71394,0,0,1,1.21817.50543Z"/>
@@ -91,7 +91,7 @@
           </div>
 
           <div>
-            <a href="/auth/twitter?state=rauv" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+            <a href="/auth/twitter?state=rauv" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
               <span class="sr-only"><%= gettext "Sign in with Twitter" %></span>
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
@@ -100,7 +100,7 @@
           </div>
 
           <div>
-            <a href="/auth/discord/" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+            <a href="/auth/discord/" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
               <span class="sr-only"><%= gettext "Sign in with Discord" %></span>
               <svg class="w-5 h-5" viewBox="0 -28.5 256 256"  fill="currentColor">
                 <g>
@@ -109,6 +109,18 @@
               </svg>
             </a>
           </div>
+
+
+          <div>
+            <a href="/auth/twitch/" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
+              <span class="sr-only"><%= gettext "Sign in with Twitch" %></span>
+              <svg class="w-5 h-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0H3.857zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142v6.286z"/>
+                <path d="M11.857 3.143h-1.143V6.57h1.143V3.143zm-3.143 0H7.571V6.57h1.143V3.143z"/>
+              </svg>
+            </a>
+          </div>
+
         </div>
       </div>
     </div>

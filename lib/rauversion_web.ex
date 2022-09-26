@@ -53,6 +53,8 @@ defmodule RauversionWeb do
       use PhoenixMetaTags.TagView
 
       on_mount RauversionWeb.RestoreLocale
+      alias RauversionWeb.Router.Helpers, as: Routes
+
       unquote(view_helpers())
     end
   end
@@ -89,6 +91,7 @@ defmodule RauversionWeb do
 
       # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
       import Phoenix.LiveView.Helpers
+      import Phoenix.Component
       import RauversionWeb.LiveHelpers
 
       # Import basic rendering functionality (render, render_layout, etc)

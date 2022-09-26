@@ -17,15 +17,14 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
     event.scheduling_settings
     |> Enum.map(fn x ->
       %{
-        day: Events.simple_date_for(x.start_date),
-        performers: performers()
+        day: Events.simple_date_for(x.start_date)
       }
       |> Map.merge(x)
     end)
   end
 
-  defp performers() do
-    [%{name: "Steven McHail", title: "Designer at Globex Corporation"}]
+  defp performers(event) do
+    Rauversion.Events.get_hosts(event)
   end
 
   def handle_event("day", _params, socket) do
@@ -96,7 +95,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                     <time
                       datetime={day.start_date}
                       class="mt-1.5 block text-2xl font-semibold tracking-tight text-brand-900 dark:text-brand-100">
-                      <%= day.day %>
+                      <%= Rauversion.Events.simple_date_for(day.day) %>
                     </time>
                   </div>
                 </div>
@@ -110,19 +109,19 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
               <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3 [&amp;:not(:focus-visible)]:focus:outline-none"
                 role="tabpanel">
 
-                <%= for performer <- @day.performers do %>
+                <%= for performer <- performers(@event) do %>
                   <div>
                     <div class="group relative h-[17.5rem] transform overflow-hidden rounded-4xl">
                       <div class="absolute top-0 left-0 right-4 bottom-6 rounded-4xl border transition duration-300 group-hover:scale-95 xl:right-6 border-brand-300"></div>
                       <div class="absolute inset-0 bg-indigo-50" style="clip-path:url(#:R9m:-0)">
-                        <!--<img alt="">-->
+                        <%= img_tag(Rauversion.BlobUtils.variant_url( performer, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75") %>
                       </div>
                     </div>
                     <h3 class="mt-8 font-display text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
                       <%= performer.name %>
                     </h3>
                     <p class="mt-1 text-base tracking-tight text-slate-500 dark:text-slate-300">
-                      <%= performer.title %>
+                      <%= performer.description %>
                     </p>
                   </div>
                 <% end %>

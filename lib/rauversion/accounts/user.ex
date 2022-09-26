@@ -4,8 +4,10 @@ defmodule Rauversion.Accounts.User do
 
   use ActiveStorage.Attached.Model
   use ActiveStorage.Attached.HasOne, name: :avatar, model: "User"
+  use ActiveStorage.Attached.HasOne, name: :profile_header, model: "User"
 
   schema "users" do
+    field :type, :string
     field :first_name, :string
     field :last_name, :string
     field :username, :string
@@ -22,6 +24,8 @@ defmodule Rauversion.Accounts.User do
 
     embeds_one :notification_settings, Rauversion.Accounts.NotificationSettings,
       on_replace: :update
+
+    embeds_one :settings, Rauversion.Accounts.Settings, on_replace: :update
 
     # field :settings
     has_many :articles, Rauversion.Posts.Post, on_delete: :nilify_all
@@ -56,6 +60,13 @@ defmodule Rauversion.Accounts.User do
 
     has_one(:avatar_blob, through: [:avatar_attachment, :blob])
 
+    has_one(:profile_header_attachment, ActiveStorage.Attachment,
+      where: [record_type: "User", name: "profile_header"],
+      foreign_key: :record_id
+    )
+
+    has_one(:profile_header_blob, through: [:profile_header_attachment, :blob])
+
     timestamps()
   end
 
@@ -66,7 +77,8 @@ defmodule Rauversion.Accounts.User do
   def profile_changeset(user, attrs, _opts \\ []) do
     user
     |> validate_contact_fields(attrs)
-    |> process_avatar(attrs)
+    |> Rauversion.BlobUtils.process_one_upload(attrs, "avatar")
+    |> Rauversion.BlobUtils.process_one_upload(attrs, "profile_header")
   end
 
   def notifications_changeset(user, attrs, _opts \\ []) do
@@ -77,10 +89,34 @@ defmodule Rauversion.Accounts.User do
     )
   end
 
+  def transbank_changeset(user, attrs, _opts \\ []) do
+    user
+    |> cast(attrs, [:username, :first_name, :last_name, :country, :bio, :city])
+    |> cast_embed(:settings,
+      with: &Rauversion.Accounts.Settings.changeset/2
+    )
+  end
+
   def changeset(user, attrs, opts \\ []) do
     user
     |> validate_contact_fields(attrs)
     |> registration_changeset(attrs, opts)
+  end
+
+  def invitation_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:email, :password])
+    |> validate_email()
+    |> validate_password([])
+  end
+
+  def accept_invitation_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:username, :password])
+    |> validate_required([:username])
+    |> unsafe_validate_unique(:username, Rauversion.Repo)
+    |> unique_constraint(:username)
+    |> validate_password([])
   end
 
   def oauth_registration_update(user, attrs) do
@@ -100,31 +136,6 @@ defmodule Rauversion.Accounts.User do
     |> validate_password([])
     |> unique_constraint(:username)
     |> validate_contact_fields(attrs)
-  end
-
-  def process_avatar(user, attrs) do
-    case attrs do
-      %{"avatar" => _avatar = nil} ->
-        user
-
-      %{"avatar" => _avatar} ->
-        blob =
-          ActiveStorage.Blob.create_and_upload!(
-            %ActiveStorage.Blob{},
-            io: {:path, attrs["avatar"].path},
-            filename: attrs["avatar"].filename,
-            content_type: attrs["avatar"].content_type,
-            identify: true
-          )
-
-        avatar = user.data.__struct__.avatar(user.data)
-        avatar.__struct__.attach(avatar, blob)
-
-        user
-
-      _ ->
-        user
-    end
   end
 
   @doc """

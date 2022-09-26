@@ -18,6 +18,8 @@ defmodule Rauversion.Events.Event do
     field :tax_rates_settings, :map
     field :widget_button, :map
 
+    has_many :event_hosts, Rauversion.EventHosts.EventHost, on_replace: :delete
+
     has_many :event_tickets, Rauversion.EventTickets.EventTicket, on_replace: :delete
 
     embeds_many :scheduling_settings, Rauversion.Events.Schedule, on_replace: :delete
@@ -134,27 +136,11 @@ defmodule Rauversion.Events.Event do
     ])
     |> cast_embed(:scheduling_settings, with: &Rauversion.Events.Schedule.changeset/2)
     # |> cast_embed(:tickets, with: &Rauversion.Events.Ticket.changeset/2)
+    |> cast_assoc(:event_hosts, with: &Rauversion.EventHosts.EventHost.changeset/2)
     |> cast_assoc(:event_tickets, with: &Rauversion.EventTickets.EventTicket.changeset/2)
     |> cast_embed(:event_settings, with: &Rauversion.Events.Settings.changeset/2)
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
-  end
-
-  def process_one_upload(struct, attrs, kind) do
-    case struct do
-      %{valid?: true} ->
-        case attrs do
-          %{^kind => [file | _]} ->
-            Rauversion.BlobUtils.attach_file_with_blob(struct, kind, file)
-            struct
-
-          _ ->
-            struct
-        end
-
-      _ ->
-        struct
-    end
   end
 
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils

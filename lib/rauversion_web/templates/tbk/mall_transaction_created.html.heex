@@ -1,0 +1,15 @@
+
+<div class="mx-auto w-3/4 bg-black">
+  <h1> Ejemplo Webpay Plus Transacción Mall</h1>
+
+  <%= Jason.encode!(@data) %>
+
+  <.form let={f} 
+    for={:tbk}
+    action={@data["url"]}
+    method={"post"}
+    class="flex flex-col space-y-3">
+    <input class="bg-gray-500" name="token_ws" value={ @data["token"]}>
+    <button type="submit">Enviar datos</button>
+  </.form>
+</div>

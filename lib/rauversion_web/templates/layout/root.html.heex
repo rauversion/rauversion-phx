@@ -7,7 +7,10 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">-->
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
 
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Rauversion" %>
@@ -15,7 +18,7 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
     <%= render_tags_all(assigns[:meta_tags] || %{})%>
   </head>
-  <body class="dark:bg-black dark:text-white">
+  <body class="dark:bg-black dark:text-white font-sans antialiased">
 
     <%= render "_user_menu.html", assigns %>
 

@@ -1,6 +1,7 @@
 defmodule RauversionWeb.LiveHelpers do
   import Phoenix.LiveView
   import Phoenix.LiveView.Helpers
+  import Phoenix.Component
   import Phoenix.HTML.Form
   import RauversionWeb.ErrorHelpers
   import RauversionWeb.Gettext
@@ -31,12 +32,13 @@ defmodule RauversionWeb.LiveHelpers do
   def modal(assigns) do
     assigns = assign_new(assigns, :return_to, fn -> nil end)
     assigns = assign_new(assigns, :close_handler, fn -> nil end)
+    assigns = assign_new(assigns, :w_class, fn -> "w-3/4" end)
 
     ~H"""
     <div id="modal" class="phx-modal fade-in" phx-remove={hide_modal()}>
       <div
         id="modal-content"
-        class="phx-modal-content fade-in-scale dark:bg-black dark:text-gray-100 border-4 border-white"
+        class={"phx-modal-content #{@w_class} fade-in-scale bg-white text-gray-900 dark:bg-black dark:text-gray-100 border-2 border-black dark:border-white"}
         phx-click-away={JS.dispatch("click", to: "#close")}
         phx-window-keydown={JS.dispatch("click", to: "#close")}
         phx-key="escape"
@@ -183,7 +185,7 @@ defmodule RauversionWeb.LiveHelpers do
         data_phx_update: "ignore"
       )
 
-    assigns = LiveView.assign(%{__changed__: nil}, attrs: attrs)
+    assigns = assign(%{__changed__: nil}, attrs: attrs)
 
     ~H"""
       <audio controls>
@@ -194,13 +196,13 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :text_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
+          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -213,7 +215,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :number_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -232,13 +234,13 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :date_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -252,13 +254,13 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :datetime_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= datetime_local_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= datetime_local_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -271,13 +273,13 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :select}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
-          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -292,13 +294,13 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :date_select}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1 flex space-x-1 items-center">
-          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
+          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -311,7 +313,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :radio}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={"#{@field.wrapper_class}"}>
@@ -342,7 +344,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :checkbox}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={"#{@field.wrapper_class}"}>
@@ -371,14 +373,14 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :textarea}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1">
           <%= textarea @form, @field.name, placeholder: Map.get(@field, :placeholder),
-          class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
+          class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -390,23 +392,23 @@ defmodule RauversionWeb.LiveHelpers do
     """
   end
 
-  def form_input_renderer(f, field = %{type: :upload}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+  def form_input_renderer(f, field = %{type: :upload, name: name}) do
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
 
     <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5">
       <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
-        <%= gettext "Cover photo" %>
+        <%= field[:label] || gettext( "Cover photo") %>
       </label>
 
       <div class="mt-1 sm:mt-0 sm:col-span-2">
-        <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md"
-          phx-drop-target={@field.uploads.cover.ref}>
+        <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md"
+          phx-drop-target={@field.uploads[name].ref}>
           <div class="space-y-1 text-center">
 
 
-            <%= if Rauversion.Posts.blob_for(@form.data, "cover") == nil do %>
+            <%= if Rauversion.BlobUtils.blob_for(@form.data, "#{name}") == nil do %>
 
               <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-100" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -414,17 +416,17 @@ defmodule RauversionWeb.LiveHelpers do
 
             <% else %>
 
-              <%= img_tag(Rauversion.Posts.variant_url( @form.data, "cover", %{resize_to_fill: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
+              <%= img_tag(Rauversion.BlobUtils.variant_url( @form.data, "#{name}", %{resize_to_fill: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
 
             <% end %>
 
             <div class="flex text-sm text-gray-600 dark:text-gray-400 py-3">
               <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                 <span>
-                  <%= gettext "Upload a track Cover" %>
+                  <%= gettext( "Upload a %{subject}", %{subject: field[:label] || "Track" }) %>
                 </span>
                 <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
-                <%= live_file_input @field.uploads.cover,
+                <%= live_file_input @field.uploads[name],
                   # id: "track_cover",
                   class: "hidden"
                 %>
@@ -435,7 +437,7 @@ defmodule RauversionWeb.LiveHelpers do
             </div>
 
             <div>
-              <%= for entry <- @field.uploads.cover.entries do %>
+              <%= for entry <- @field.uploads[name].entries do %>
                 <div class="flex items-center space-x-2">
                   <%= live_img_preview entry, width: 300 %>
                   <div class="text-xl font-bold">
@@ -444,13 +446,13 @@ defmodule RauversionWeb.LiveHelpers do
                 </div>
               <% end  %>
 
-              <%= for {_ref, msg, } <- @field.uploads.cover.errors do %>
+              <%= for {_ref, msg, } <- @field.uploads[name].errors do %>
                 <%= Phoenix.Naming.humanize(msg) %>
               <% end %>
             </div>
 
             <p class="text-xs text-gray-500 dark:text-gray-300">
-              <%= gettext "PNG, JPG, GIF up to 10MB" %>
+              <%= @field[:permitted_extensions_label] || gettext("PNG, JPG, GIF up to 10MB") %>
             </p>
           </div>
         </div>
@@ -461,7 +463,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def render_attribution_fields(f) do
-    assigns = LiveView.assign(%{__changed__: nil}, f: f)
+    assigns = assign(%{__changed__: nil}, f: f)
 
     ~H"""
     <%= if Map.get(f.params, "copyright") == "common" || (Map.get(f.data, :copyright) == "common" && Map.get(f.params, "copyright") != "common") do %>
@@ -514,6 +516,21 @@ defmodule RauversionWeb.LiveHelpers do
 
       _ ->
         []
+    end
+  end
+
+  def is_creator?(current_user) do
+    case current_user.type do
+      "user" -> false
+      nil -> false
+      _ -> true
+    end
+  end
+
+  def is_admin?(current_user) do
+    case current_user.type do
+      "admin" -> true
+      _ -> false
     end
   end
 end

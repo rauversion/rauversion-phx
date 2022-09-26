@@ -37,6 +37,10 @@ defmodule Rauversion.PurchasedTickets do
   """
   def get_purchased_ticket!(id), do: Repo.get!(PurchasedTicket, id)
 
+  def get_checked_in(query) do
+    query |> where(checked_in: true)
+  end
+
   @doc """
   Creates a purchased_ticket.
 
@@ -121,8 +125,6 @@ defmodule Rauversion.PurchasedTickets do
   end
 
   def url_for_ticket(purchased_ticket) do
-    message = signed_id(purchased_ticket)
-
     RauversionWeb.Router.Helpers.qr_index_path(
       RauversionWeb.Endpoint,
       :index,

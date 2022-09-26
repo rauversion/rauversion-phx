@@ -62,7 +62,7 @@ defmodule RauversionWeb.EventsLive.New do
         {
           :noreply,
           socket
-          |> put_flash(:info, "Playlist updated successfully")
+          |> put_flash(:info, "Event updated successfully")
           # |> push_redirect(to: socket.assigns.return_to)
         }
 
@@ -78,7 +78,7 @@ defmodule RauversionWeb.EventsLive.New do
       {:ok, event} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Repost created successfully")
+         |> put_flash(:info, "Event created successfully")
          |> push_redirect(to: "/events/#{event.slug}/edit")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -99,7 +99,15 @@ defmodule RauversionWeb.EventsLive.New do
     edit_response(socket, id)
   end
 
+  defp apply_action(socket, :overview, %{"slug" => id}) do
+    edit_response(socket, id)
+  end
+
   defp apply_action(socket, :tickets, %{"slug" => id}) do
+    edit_response(socket, id)
+  end
+
+  defp apply_action(socket, :hosts, %{"slug" => id}) do
     edit_response(socket, id)
   end
 
@@ -136,7 +144,7 @@ defmodule RauversionWeb.EventsLive.New do
       socket.assigns.current_user
       |> Ecto.assoc(:events)
       |> Repo.get_by!(%{slug: id})
-      |> Repo.preload(:event_tickets)
+      |> Repo.preload([:event_tickets, :event_hosts])
 
     socket
     |> assign(:changeset, Events.change_event(event, %{}))

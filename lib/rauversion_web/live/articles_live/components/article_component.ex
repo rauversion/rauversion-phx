@@ -10,7 +10,7 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
     ~H"""
     <div class="cursor-pointer group">
       <div class="relative overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800 hover:scale-105 aspect-square">
-        <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) , class: "block w-full #{image_height_class}" do %>
+        <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug), class: "block w-full #{image_height_class}" do %>
           <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
           <%= img_tag(Rauversion.Tracks.variant_url(
             @post, "cover", %{resize_to_limit: "500x500"}),
@@ -30,11 +30,13 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
         <% end %>
       </div>
 
-      <h2 class="mt-2 text-lg font-semibold tracking-normal text-brand-primary dark:text-white">
-        <span class={" #{if assigns[:truncate_title], do: "truncate"} bg-gradient-to-r from-green-200 to-green-100 dark:from-purple-800 dark:to-purple-900 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]"}>
-        <%= @post.title %>
-        </span>
-      </h2>
+      <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug), class: "block" do %>
+        <h2 class="mt-2 text-lg font-semibold tracking-normal text-brand-primary dark:text-white">
+          <span class={" #{if assigns[:truncate_title], do: "truncate"} bg-gradient-to-r from-green-200 to-green-100 dark:from-purple-800 dark:to-purple-900 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]"}>
+          <%= @post.title %>
+          </span>
+        </h2>
+      <% end %>
 
       <div class={ if assigns[:hide_excerpt], do: "hidden" }>
         <p class="mt-2 text-md text-gray-500 dark:text-gray-200 line-clamp-3">

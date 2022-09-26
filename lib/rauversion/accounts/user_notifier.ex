@@ -24,11 +24,9 @@ defmodule Rauversion.Accounts.UserNotifier do
 
     Hi #{user.email},
 
-    You can confirm your account by visiting the URL below:
+    You have been invited to Rauversion, You can confirm your account by visiting the URL below:
 
     #{url}
-
-    If you didn't create an account with us, please ignore this.
 
     ==============================
     """)

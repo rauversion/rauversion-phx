@@ -1,0 +1,27 @@
+# Accounts
+
+```elixir
+alias Rauversion.Accounts
+alias Rauversion.Accounts.User
+```
+
+## send invitation
+
+```elixir
+user = Accounts.invite_user(%User{}, %{email: "aa8a@bbb.cl"})
+```
+
+```elixir
+alias RauversionWeb.Router.Helpers, as: Routes
+
+conn = RauversionWeb.Endpoint
+
+Accounts.deliver_user_invitation_instructions(
+  user,
+  &Routes.user_invitation_url(conn, :accept, &1)
+)
+```
+
+```elixir
+Routes.user_invitation_path(conn, :update_user, "123", 1, [])
+```

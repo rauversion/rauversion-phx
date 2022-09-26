@@ -61,6 +61,15 @@ config :ueberauth, Ueberauth.Strategy.Stripe.OAuth,
   client_id: System.get_env("STRIPE_CLIENT_ID"),
   client_secret: System.get_env("STRIPE_CLIENT_SECRET")
 
+config :ueberauth, Ueberauth.Strategy.Twitch.OAuth,
+  client_id: System.get_env("TWITCH_CLIENT_ID"),
+  client_secret: System.get_env("TWITCH_CLIENT_SECRET")
+
+config :rauversion, tbk_mall_id: System.get_env("TBK_MALL_ID")
+# rau own commerce to send fees to
+config :rauversion, tbk_commerce_id: System.get_env("TBK_COMMERCE_ID")
+config :rauversion, tbk_api_key: System.get_env("TBK_API_KEY")
+config :rauversion, platform_event_fee: System.get_env("PLATFORM_EVENTS_FEE")
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration

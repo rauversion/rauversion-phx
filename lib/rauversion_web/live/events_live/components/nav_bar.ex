@@ -5,6 +5,12 @@ defmodule RauversionWeb.EventsLive.NavBar do
   def menu_items(event) do
     [
       %{
+        to: "/events/#{event.slug}/overview",
+        namespace: :overview,
+        title: gettext("Event Overview"),
+        sub: gettext("Event Overview.")
+      },
+      %{
         to: "/events/#{event.slug}/edit",
         namespace: :edit,
         title: gettext("Edit event"),
@@ -17,41 +23,47 @@ defmodule RauversionWeb.EventsLive.NavBar do
         sub: gettext("Basic Account Information.")
       },
       %{
+        to: "/events/#{event.slug}/edit/hosts",
+        namespace: :hosts,
+        title: gettext("Hosts & Managers"),
+        sub: gettext("Add hosts, special guests, and event managers.")
+      },
+      %{
         to: "/events/#{event.slug}/edit/tickets",
         namespace: :tickets,
         title: gettext("Tickets"),
         sub: gettext("Change Email information.")
       },
-      %{
-        to: "/events/#{event.slug}/edit/widgets",
-        namespace: :widgets,
-        title: gettext("Widgets"),
-        sub: gettext("Change your credentials")
-      },
-      %{
-        to: "/events/#{event.slug}/edit/tax",
-        namespace: :tax,
-        title: gettext("Tax"),
-        sub: gettext("Change your notification preferences.")
-      },
+      # %{
+      #  to: "/events/#{event.slug}/edit/widgets",
+      #  namespace: :widgets,
+      #  title: gettext("Widgets"),
+      #  sub: gettext("Change your credentials")
+      # },
+      # %{
+      #  to: "/events/#{event.slug}/edit/tax",
+      #  namespace: :tax,
+      #  title: gettext("Tax"),
+      #  sub: gettext("Change your notification preferences.")
+      # },
       %{
         to: "/events/#{event.slug}/edit/attendees",
         namespace: :attendees,
         title: gettext("Attendees"),
         sub: gettext("Change your notification preferences.")
-      },
-      %{
-        to: "/events/#{event.slug}/edit/email_attendees",
-        namespace: :email_attendees,
-        title: gettext("Email Attendees"),
-        sub: gettext("Change your notification preferences.")
-      },
-      %{
-        to: "/events/#{event.slug}/edit/sponsors",
-        namespace: :sponsors,
-        title: gettext("Promoters"),
-        sub: gettext("Change your notification preferences.")
       }
+      # %{
+      #  to: "/events/#{event.slug}/edit/email_attendees",
+      #  namespace: :email_attendees,
+      #  title: gettext("Email Attendees"),
+      #  sub: gettext("Change your notification preferences.")
+      # },
+      # %{
+      #  to: "/events/#{event.slug}/edit/sponsors",
+      #  namespace: :sponsors,
+      #  title: gettext("Promoters"),
+      #  sub: gettext("Change your notification preferences.")
+      # }
     ]
   end
 
@@ -130,6 +142,13 @@ defmodule RauversionWeb.EventsLive.NavBar do
           </svg>
         """
 
+      :hosts ->
+        ~H"""
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+          </svg>
+        """
+
       _ ->
         ""
     end
@@ -138,18 +157,32 @@ defmodule RauversionWeb.EventsLive.NavBar do
   def render(assigns) do
     ~H"""
     <nav aria-label="Sections" class="hidden flex-shrink-0 w-96 border-r-gray-500 border-blue-gray-600 xl:flex xl:flex-col">
-      <div class="flex-shrink-0 h-16 px-6 border-b border-blue-gray-600 flex items-center">
+      <div class="flex-shrink-0 h-16 px-6 border-b border-blue-gray-600 flex items-center justify-between">
         <p class="text-lg font-medium text-blue-gray-900">Settings</p>
+
+        <%= if @event.id do %>
+          <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, @event.slug),
+            class: "inline-flex items-center justify-center rounded-md border border-transparent text-sm bg-white px-2 py-2 font-medium text-gray-900 hover:bg-gray-50" do %>
+            View event
+            <svg class="-mr-1 ml-3 h-5 w-5 text-gray-400" x-description="Heroicon name: mini/arrow-top-right-on-square" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" clip-rule="evenodd"></path>
+              <path fill-rule="evenodd" d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" clip-rule="evenodd"></path>
+            </svg>
+          <% end %>
+        <% end %>
+
       </div>
 
-      <div class="flex-1 min-h-0 overflow-y-auto bg-gray-900">
-        <%= for item <- menu_items(@event) do %>
-          <%= live_redirect to: item.to, class: item_class(@live_action, item.namespace) do %>
-            <%= icon_for(item.namespace) %>
-            <div class="ml-3 text-sm">
-              <p class="font-medium text-blue-gray-900"><%= item.title %> </p>
-              <p class="mt-1 text-blue-gray-500"><%= item.sub %></p>
-            </div>
+      <div class="flex-1 min-h-0 overflow-y-auto dark:bg-gray-900 ">
+        <%= if @event.id do %>
+          <%= for item <- menu_items(@event) do %>
+            <%= live_redirect to: item.to, class: item_class(@live_action, item.namespace) do %>
+              <%= icon_for(item.namespace) %>
+              <div class="ml-3 text-sm">
+                <p class="font-medium text-blue-gray-900"><%= item.title %> </p>
+                <p class="mt-1 text-blue-gray-500"><%= item.sub %></p>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

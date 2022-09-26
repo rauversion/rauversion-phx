@@ -21,8 +21,7 @@ defmodule Rauversion.PeaksGeneratorTest do
       desired_pixels = 500
       duration = 3600
 
-      pixels_per_second =
-        Rauversion.Services.PeaksGenerator.desired_pixels_per_second(desired_pixels, duration)
+      Rauversion.Services.PeaksGenerator.desired_pixels_per_second(desired_pixels, duration)
     end
   end
 end

@@ -69,6 +69,21 @@ defmodule Rauversion.Events do
     |> Repo.preload([:user, :event_ticket])
   end
 
+  def purchased_tickets(event) do
+    from(a in Rauversion.Events.Event,
+      where: a.id == ^event.id,
+      join: t in Rauversion.EventTickets.EventTicket,
+      on: a.id == t.event_id,
+      join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+      on: t.id == pt.event_ticket_id,
+      select: count(pt)
+    )
+  end
+
+  def purchased_tickets_count(event) do
+    purchased_tickets(event) |> Repo.one()
+  end
+
   @doc """
   Gets a single event.
 
@@ -85,6 +100,32 @@ defmodule Rauversion.Events do
   """
   def get_event!(id), do: Repo.get!(Event, id)
   def get_by_slug!(id), do: Repo.get_by!(Event, slug: id)
+
+  def get_host!(event, id) do
+    event |> Ecto.assoc(:event_hosts) |> where([c], c.id == ^id) |> Repo.one()
+  end
+
+  def get_hosts(event) do
+    event
+    |> Ecto.assoc(:event_hosts)
+    |> Repo.all()
+    |> Repo.preload([:avatar_blob, :avatar_attachment, :user])
+  end
+
+  def get_hosts(event, listed) do
+    event
+    |> Ecto.assoc(:event_hosts)
+    |> where([c], c.listed_on_page == ^listed)
+    |> Repo.all()
+    |> Repo.preload([:avatar_blob, :avatar_attachment, :user])
+  end
+
+  def hosts_count(event, listed \\ true) do
+    event
+    |> Ecto.assoc(:event_hosts)
+    |> where([c], c.listed_on_page == ^listed)
+    |> Repo.aggregate(:count, :id)
+  end
 
   @doc """
   Creates a event.
@@ -119,7 +160,7 @@ defmodule Rauversion.Events do
   def update_event(%Event{} = event, attrs) do
     event
     |> Event.changeset(attrs)
-    |> Event.process_one_upload(attrs, "cover")
+    |> Rauversion.BlobUtils.process_one_upload(attrs, "cover")
     |> Repo.update()
   end
 
@@ -162,13 +203,13 @@ defmodule Rauversion.Events do
       {:ok, d} ->
         d
 
-      e ->
+      _ ->
         struct.event_start
     end
   end
 
-  def simple_date_for(date) do
-    case Cldr.DateTime.to_string(date, format: :ed) do
+  def simple_date_for(date, format \\ :long) do
+    case Cldr.Date.to_string(date, format: format) do
       {:ok, d} -> d
       _ -> date
     end

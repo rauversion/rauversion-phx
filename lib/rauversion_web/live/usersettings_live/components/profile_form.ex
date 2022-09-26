@@ -4,7 +4,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
   def render(%{changeset: _changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-    <h1 class="text-3xl font-extrabold text-blue-gray-900">Account</h1>
+    <h1 class="text-3xl font-extrabold text-blue-gray-900"><%= gettext("Account") %></h1>
 
     <.form
       let={f}
@@ -100,6 +100,11 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
               </button>
             </div>
           </div>
+        </div>
+
+
+        <div class="sm:col-span-6">
+          <%= form_input_renderer(f, %{type: :upload, uploads: @uploads, name: :profile_header}) %>
         </div>
 
       </div>
