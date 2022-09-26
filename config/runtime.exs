@@ -33,13 +33,19 @@ config :active_storage, :services,
     root: "tmp/storage"
   ]
 
-config :rauversion, Rauversion.Vault,
-  ciphers: [
-    default: {
-      Cloak.Ciphers.AES.GCM,
-      tag: "AES.GCM.V1", key: Base.decode64!(System.get_env("VAULT_KEY"))
-    }
-  ]
+key = System.get_env("VAULT_KEY")
+with {:ok, key} <- Base.decode64(key) do
+  config :rauversion, Rauversion.Vault,
+    ciphers: [
+      default: {
+        Cloak.Ciphers.AES.GCM,
+        tag: "AES.GCM.V1", key: key
+      }
+    ]
+else _ ->
+  raise "Invalid key #{key} - please set env variable VAULT_KEY. You can generate one using: `elixir --eval 'IO.puts Base.encode64(:crypto.strong_rand_bytes(32))'`"
+end
+
 
 config :rauversion, google_maps_key: System.get_env("GOOGLE_MAPS_KEY")
 
@@ -149,4 +155,10 @@ if config_env() == :prod do
     # ],
     retries: 2,
     no_mx_lookups: false
+
+else
+
+    config :rauversion, Rauversion.Repo,
+      password: System.get_env("POSTGRES_PASSWORD", "postgres")
+
 end
