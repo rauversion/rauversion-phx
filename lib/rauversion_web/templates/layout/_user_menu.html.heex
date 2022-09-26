@@ -84,6 +84,7 @@
         <div class="hidden lg:ml-4 lg:flex lg:items-center z-50">
           <%= if @current_user do %>
             <div data-controller="dropdown" class="relative">
+
               <div class="flex items-center space-x-1">
                 <button type="button"
                   data-action="dropdown#toggle click@window->dropdown#hide" 
@@ -117,7 +118,7 @@
                       <%= live_redirect gettext("My Articles"), to: "/articles/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                       <%= live_redirect gettext("My Events"), to: "/events/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <% end %>
-                    
+
                     <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <%= live_redirect gettext("Settings"), 
                         to: "/users/settings", 
