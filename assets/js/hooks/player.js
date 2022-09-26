@@ -64,7 +64,7 @@ Player = {
         const trackId = this.el.dataset.trackId
         const ev = new CustomEvent(`audio-process-${trackId}`, {
           detail: {
-           postition: this._wave.drawer.lastPos,
+           position: this._wave.drawer.lastPos,
            percent: this._wave.backend.getPlayedPercents()
          }
         });
@@ -153,7 +153,7 @@ Player = {
       // console.log("AUDIO PROCESS", e)
       const ev = new CustomEvent(`audio-process-${trackId}`, {
         detail: {
-          postition: this._wave.drawer.lastPos,
+          position: this._wave.drawer.lastPos,
           percent: this._wave.backend.getPlayedPercents()
         }
       });

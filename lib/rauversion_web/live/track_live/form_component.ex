@@ -127,7 +127,7 @@ defmodule RauversionWeb.TrackLive.FormComponent do
       %{name: "upload"} ->
         case Tracks.create_track(track_params) do
           {:ok, track} ->
-            IO.inspect("SUCCESSS!")
+            IO.inspect("SUCCESS!")
 
             step = %Step{name: "info", prev: "upload", next: "share"}
 

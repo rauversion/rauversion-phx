@@ -65,7 +65,7 @@ Player = {
         const ev = new CustomEvent(`audio-process-mouseup`, {
           detail: {
            trackId: trackId,
-           postition: this._wave.drawer.lastPos,
+           position: this._wave.drawer.lastPos,
            percent: this._wave.backend.getPlayedPercents()
          }
         });
