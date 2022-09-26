@@ -10,12 +10,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-09-26 06:24\n"
+"PO-Revision-Date: 2022-09-26 08:30\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "15% off your first order"
-msgstr "15% de descuento en tu primer pedido"
+msgstr "15% de descuento para tu primer pedido"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:26
 #, elixir-autogen, elixir-format
@@ -1144,405 +1144,405 @@ msgstr "¡Guardado con éxito!"
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:231
 #, elixir-autogen, elixir-format
 msgid "Additional message to include on the purchased ticket"
-msgstr ""
+msgstr "Mensaje adicional para incluir en el ticket comprado"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:52
 #, elixir-autogen, elixir-format
 msgid "Attendees"
-msgstr ""
+msgstr "Asistentes"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:208
 #, elixir-autogen, elixir-format
 msgid "Check to hide this ticket on your Event page and make it available via a direct link only."
-msgstr ""
+msgstr "Marca para ocultar este ticket en tu página del evento y ponerlo disponible a través de un enlace directo solamente."
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:35
 #, elixir-autogen, elixir-format
 msgid "Create Event"
-msgstr ""
+msgstr "Crear Evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:112
 #, elixir-autogen, elixir-format
 msgid "Create Tickets"
-msgstr ""
+msgstr "Crear Tickets"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:190
 #, elixir-autogen, elixir-format
 msgid "Display with a \"Sold out\" message after ticket quantity runs out."
-msgstr ""
+msgstr "Mostrar con un mensaje \"Vendido\" después de que se acabe la cantidad de tickets."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:16
 #, elixir-autogen, elixir-format
 msgid "Edit event"
-msgstr ""
+msgstr "Editar evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:89
 #, elixir-autogen, elixir-format
 msgid "For example: Ticket Sales"
-msgstr ""
+msgstr "Por ejemplo: Venta de tickets"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:172
 #: lib/rauversion_web/live/events_live/show.html.heex:65
 #, elixir-autogen, elixir-format
 msgid "Get your tickets"
-msgstr ""
+msgstr "Obtén tus tickets"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:223
 #, elixir-autogen, elixir-format
 msgid "Leave blank unless there is a Maximum number of tickets customer is limited to."
-msgstr ""
+msgstr "Dejar en blanco a menos que haya un número máximo de tickets al cliente está limitado."
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:215
 #, elixir-autogen, elixir-format
 msgid "Leave blank unless there is a Minimum amount of tickets customer has to order."
-msgstr ""
+msgstr "Dejar en blanco a menos que haya una cantidad mínima de tickets que el cliente tenga que pedir."
 
 #: lib/rauversion_web/live/events_live/show.html.heex:99
 #, elixir-autogen, elixir-format
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:170
 #, elixir-autogen, elixir-format
 msgid "Optional short description will be displayed next to this ticket on the Event page."
-msgstr ""
+msgstr "Opcional descripción corta se mostrará junto a este ticket en la página del evento."
 
 #: lib/rauversion_web/live/events_live/show.html.heex:81
 #, elixir-autogen, elixir-format
 msgid "People Attending"
-msgstr ""
+msgstr "Gente atendiendo"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:22
 #, elixir-autogen, elixir-format
 msgid "Schedule"
-msgstr ""
+msgstr "Programar"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:183
 #, elixir-autogen, elixir-format
 msgid "Show the Sell Until date on the event page."
-msgstr ""
+msgstr "Mostrar la venta hasta la fecha en la página del evento."
 
 #: lib/rauversion_web/live/events_live/show.html.heex:72
 #, elixir-autogen, elixir-format
 msgid "Speakers"
-msgstr ""
+msgstr "Ponentes"
 
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:49
 #, elixir-autogen, elixir-format
 msgid "Tax options"
-msgstr ""
+msgstr "Opciones de impuestos"
 
 #: lib/rauversion_web/live/articles_live/components/articles_list_component.ex:67
 #, elixir-autogen, elixir-format
 msgid "The Latest"
-msgstr ""
+msgstr "Lo último"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:133
 #, elixir-autogen, elixir-format
 msgid "Ticket Type. For Example: General Admission, VIP Admission ..."
-msgstr ""
+msgstr "Tipo de ticket. Por ejemplo: Admisión General, Admisión VIP..."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:34
 #: lib/rauversion_web/live/my_tickets_live/index.ex:64
 #: lib/rauversion_web/live/my_tickets_live/index.ex:82
 #, elixir-autogen, elixir-format
 msgid "Tickets"
-msgstr ""
+msgstr "Tickets"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:150
 #, elixir-autogen, elixir-format
 msgid "Total number of tickets."
-msgstr ""
+msgstr "Número total de Tickets."
 
 #: lib/rauversion_web/live/events_live/components/event_list_component.ex:25
 #, elixir-autogen, elixir-format
 msgid "Upcoming Events"
-msgstr ""
+msgstr "Próximos eventos"
 
 #: lib/rauversion_web/live/events_live/components/event_list_component.ex:27
 #, elixir-autogen, elixir-format
 msgid "Upcoming Events from the Rauversion community"
-msgstr ""
+msgstr "Próximos eventos de la comunidad Rauversion"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:90
 #, elixir-autogen, elixir-format
 msgid "Venue"
-msgstr ""
+msgstr "Lugar"
 
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:125
 #, elixir-autogen, elixir-format
 msgid "Add Schedulings"
-msgstr ""
+msgstr "Añadir Programaciones"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:29
 #, elixir-autogen, elixir-format
 msgid "Add hosts, special guests, and event managers."
-msgstr ""
+msgstr "Añade anfitriones, invitados especiales y gestores de eventos."
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:269
 #, elixir-autogen, elixir-format
 msgid "Add new Ticket"
-msgstr ""
+msgstr "Añadir nuevo Ticket"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:142
 #, elixir-autogen, elixir-format
 msgid "All prices are in $%{ccy}."
-msgstr ""
+msgstr "Todos los precios están en $%{ccy}."
 
 #: lib/rauversion_web/live/my_tickets_live/index.ex:90
 #, elixir-autogen, elixir-format
 msgid "All your Tickets"
-msgstr ""
+msgstr "Obtén tus tickets"
 
 #: lib/rauversion_web/live/my_tickets_live/index.ex:95
 #, elixir-autogen, elixir-format
 msgid "Checked in tickets"
-msgstr ""
+msgstr "Tickets facturados"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:34
 #, elixir-autogen, elixir-format
 msgid "Código transbank de producción de 12 dígitos"
-msgstr ""
+msgstr "Codigo transbank de producción de 12 dígitos"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:10
 #, elixir-autogen, elixir-format
 msgid "Event Overview"
-msgstr ""
+msgstr "Resumen de eventos"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:11
 #, elixir-autogen, elixir-format
 msgid "Event Overview."
-msgstr ""
+msgstr "Vista general de eventos."
 
 #: lib/rauversion_web/live/qr_live/components/ticket_component.ex:54
 #, elixir-autogen, elixir-format
 msgid "Go to Event"
-msgstr ""
+msgstr "Ir al evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:65
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:327
 #, elixir-autogen, elixir-format
 msgid "Host & Managers"
-msgstr ""
+msgstr "Anfitrión y administradores"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:286
 #, elixir-autogen, elixir-format
 msgid "Host Name"
-msgstr ""
+msgstr "Nombre de host"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:293
 #, elixir-autogen, elixir-format
 msgid "Host description."
-msgstr ""
+msgstr "Descripción del anfitrión."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:28
 #, elixir-autogen, elixir-format
 msgid "Hosts & Managers"
-msgstr ""
+msgstr "Anfitrión y administradores"
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:34
 #, elixir-autogen, elixir-format
 msgid "Integrations"
-msgstr ""
+msgstr "Integraciones"
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:35
 #, elixir-autogen, elixir-format
 msgid "Manage your external integrations."
-msgstr ""
+msgstr "Gestione sus integraciones externas."
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:41
 #, elixir-autogen, elixir-format
 msgid "Manage your transbank commerce (Chile only)."
-msgstr ""
+msgstr "Gestione su comercio transbancario (sólo Chile)."
 
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:69
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:119
 #, elixir-autogen, elixir-format
 msgid "My Events"
-msgstr ""
+msgstr "Mis eventos"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:122
 #, elixir-autogen, elixir-format
 msgid "My Purchases"
-msgstr ""
+msgstr "Mis compras"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:114
 #, elixir-autogen, elixir-format
 msgid "My Tracks"
-msgstr ""
+msgstr "Mis Pistas"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:49
 #, elixir-autogen, elixir-format
 msgid "PST enabled"
-msgstr ""
+msgstr "PST activado"
 
 #: lib/rauversion_web/live/events_live/components/event_overview.ex:43
 #, elixir-autogen, elixir-format
 msgid "Page visitors"
-msgstr ""
+msgstr "Visitas de página"
 
 #: lib/rauversion_web/live/my_tickets_live/index.ex:54
 #, elixir-autogen, elixir-format
 msgid "Purchases"
-msgstr ""
+msgstr "Mis compras"
 
 #: lib/rauversion_web/live/articles_live/components/articles_block_component.ex:35
 #, elixir-autogen, elixir-format
 msgid "Read Now"
-msgstr ""
+msgstr "Leer ahora"
 
 #: lib/rauversion_web/templates/user_session/new.html.heex:104
 #, elixir-autogen, elixir-format
 msgid "Sign in with Discord"
-msgstr ""
+msgstr "Iniciar sesión con GitHub"
 
 #: lib/rauversion_web/templates/user_session/new.html.heex:116
 #, elixir-autogen, elixir-format
 msgid "Sign in with Twitch"
-msgstr ""
+msgstr "Iniciar sesión con Twitch"
 
 #: lib/rauversion_web/templates/user_session/new.html.heex:86
 #, elixir-autogen, elixir-format
 msgid "Sign in with Zoom"
-msgstr ""
+msgstr "Iniciar sesión con Zoom"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:63
 #, elixir-autogen, elixir-format
 msgid "Test mode"
-msgstr ""
+msgstr "Modo de prueba"
 
 #: lib/rauversion_web/live/events_live/components/event_overview.ex:27
 #, elixir-autogen, elixir-format
 msgid "Tickets sales"
-msgstr ""
+msgstr "Venta de tickets"
 
 #: lib/rauversion_web/live/events_live/components/event_overview.ex:35
 #, elixir-autogen, elixir-format
 msgid "Tickets sold"
-msgstr ""
+msgstr "Tickets vendidos"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:33
 #, elixir-autogen, elixir-format
 msgid "Transbank Commerce code"
-msgstr ""
+msgstr "Código de transacción comercial"
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:40
 #, elixir-autogen, elixir-format
 msgid "Transbank settings"
-msgstr ""
+msgstr "Ajustes de Transbank"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:301
 #, elixir-autogen, elixir-format
 msgid "if checked Host will be listed on Event's page."
-msgstr ""
+msgstr "si se marca el Host se mostrará en la página del evento."
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:309
 #, elixir-autogen, elixir-format
 msgid "if checked the Host will have manager access to event."
-msgstr ""
+msgstr "si se marca el Host tendrá acceso del administrador al evento."
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:90
 #, elixir-autogen, elixir-format
 msgid "para transbank usaremos tu codigo de comercio de los ajustes"
-msgstr ""
+msgstr "para transbank usaremos tu codigo de comercio de los ajustes"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:8
 #, elixir-autogen, elixir-format
 msgid "Transbank Commerce Settings"
-msgstr ""
+msgstr "Código de transacción comercial"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:251
 #, elixir-autogen, elixir-format
 msgid "Add a host to highlight them on the event page or to get help managing the event."
-msgstr ""
+msgstr "Añade un host para resaltarlo en la página del evento o para obtener ayuda en la gestión del evento."
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:88
 #, elixir-autogen, elixir-format
 msgid "Free ticket"
-msgstr ""
+msgstr "Ticket gratis"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:248
 #, elixir-autogen, elixir-format
 msgid "Free ticket already added"
-msgstr ""
+msgstr "Ticket gratuito ya añadido"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:258
 #, elixir-autogen, elixir-format
 msgid "Get your FREE ticket"
-msgstr ""
+msgstr "Obtén tus tickets"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:29
 #, elixir-autogen, elixir-format
 msgid "In order to upload music and create events you need to access as an artist account"
-msgstr ""
+msgstr "Para subir música y crear eventos necesitas acceder como una cuenta de artista"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:197
 #, elixir-autogen, elixir-format
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:335
 #, elixir-autogen, elixir-format
 msgid "New host"
-msgstr ""
+msgstr "Nuevo host"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:92
 #, elixir-autogen, elixir-format
 msgid "Paid ticket"
-msgstr ""
+msgstr "Ticket pagado"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:198
 #, elixir-autogen, elixir-format
 msgid "Price"
-msgstr ""
+msgstr "Precio"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:199
 #, elixir-autogen, elixir-format
 msgid "QTY"
-msgstr ""
+msgstr "CANTIDAD"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:26
 #, elixir-autogen, elixir-format
 msgid "Ready to dive in?"
-msgstr ""
+msgstr "¿Listo para bucear?"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:330
 #, elixir-autogen, elixir-format
 msgid "The ticket purchase was successfully completed, it willappear in your purchasessection"
-msgstr ""
+msgstr "La compra del ticket se completó con éxito, aparecerá en su sección de compras"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:324
 #, elixir-autogen, elixir-format
 msgid "Ticket purchase complete"
-msgstr ""
+msgstr "Compra de entradas completa"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:137
 #, elixir-autogen, elixir-format
 msgid "Type the event address, and confirm the prompt"
-msgstr ""
+msgstr "Escriba la dirección del evento y confirme el aviso"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:335
 #, elixir-autogen, elixir-format
 msgid "go to ticket"
-msgstr ""
+msgstr "ir al ticket"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:25
 #, elixir-autogen, elixir-format
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:29
 #, elixir-autogen, elixir-format
 msgid "Magazine"
-msgstr ""
+msgstr "Revista"
 
 #: lib/rauversion_web/live/live_helpers.ex:426
 #, elixir-autogen, elixir-format
 msgid "Upload a %{subject}"
-msgstr ""
+msgstr "Subir un %{subject}"
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:122
 #, elixir-autogen, elixir-format
 msgid "You need to be login before get tickets"
-msgstr ""
+msgstr "Necesitas iniciar sesión antes de obtener tickets"
 
