@@ -94,7 +94,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   def handle_event(
         "validate",
         %{"purchase_order" => purchase_order},
-        socket
+        socket = %{assigns: %{current_user: %Rauversion.Accounts.User{}}}
       ) do
     changeset =
       %Rauversion.PurchaseOrders.PurchaseOrder{
@@ -103,14 +103,24 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
       |> Rauversion.PurchaseOrders.change_purchase_order(purchase_order)
       |> Map.put(:action, :validate)
 
-    # IO.inspect(changeset)
-
     {:noreply,
      assign(socket, :changeset, changeset)
      |> assign(
        :result,
        Rauversion.PurchaseOrders.calculate_total(changeset |> Ecto.Changeset.apply_changes())
      )}
+  end
+
+  @impl true
+  def handle_event(
+        "validate",
+        %{"purchase_order" => _purchase_order},
+        socket = %{assigns: %{current_user: nil}}
+      ) do
+    {:noreply,
+     socket
+     |> put_flash(:info, gettext("You need to be login before get tickets"))
+     |> redirect(to: "/users/log_in")}
   end
 
   def order_session(
