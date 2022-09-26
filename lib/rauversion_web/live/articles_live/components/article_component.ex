@@ -23,10 +23,12 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
       </div>
 
       <div>
-        <%= live_redirect to: Routes.articles_index_path(@socket, :category, @post.category.slug) do %>
-          <span class="inline-block mt-5 text-xs font-medium tracking-wider uppercase  text-emerald-700">
-            <%= @post.category.name %>
-          </span>
+        <%= if @post.category do %>
+          <%= live_redirect to: Routes.articles_index_path(@socket, :category, @post.category.slug) do %>
+            <span class="inline-block mt-5 text-xs font-medium tracking-wider uppercase  text-emerald-700">
+              <%= @post.category.name %>
+            </span>
+          <% end %>
         <% end %>
       </div>
 
