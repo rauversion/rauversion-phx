@@ -72,12 +72,14 @@ defmodule RauversionWeb.ProfileLive.Index do
 
     cond do
       user_id == socket.assigns.profile.id ->
-        {:noreply,
-         assign(
-           socket,
-           :tracks,
-           socket.assigns.tracks |> Enum.filter(fn t -> t.id != deleted_track.id end)
-         )}
+        {:noreply, socket}
+
+      # {:noreply,
+      # assign(
+      #   socket,
+      #   :tracks,
+      #   socket.assigns.tracks |> Enum.filter(fn t -> t.id != deleted_track.id end)
+      # )}
 
       true ->
         {:noreply, socket}
