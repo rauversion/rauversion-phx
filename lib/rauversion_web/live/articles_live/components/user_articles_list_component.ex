@@ -132,8 +132,10 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
                           <%= gettext "Edit" %>
                         <% end %>
 
-                        <%= live_redirect to: Routes.articles_show_path(@socket, :show, post.slug), class: "text-brand-600 hover:text-brand-900 pl-2" do %>
-                          <%= gettext "View Article" %>
+                        <%= if post.slug do %>
+                          <%= live_redirect to: Routes.articles_show_path(@socket, :show, post.slug), class: "text-brand-600 hover:text-brand-900 pl-2" do %>
+                            <%= gettext "View Article" %>
+                          <% end %>
                         <% end %>
                       </td>
                     </tr>
