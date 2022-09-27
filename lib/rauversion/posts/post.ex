@@ -53,7 +53,7 @@ defmodule Rauversion.Posts.Post do
 
   def update_changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body, :excerpt, :slug, :state, :category_id])
+    |> cast(attrs, [:title, :body, :excerpt, :slug, :state, :category_id, :private])
     |> validate_required([:title, :body, :excerpt])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
