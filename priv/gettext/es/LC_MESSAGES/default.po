@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-09-26 08:30\n"
+"PO-Revision-Date: 2022-10-03 05:19\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -919,7 +919,7 @@ msgid "This player uses cookies in accordance with our Cookies policy.\n"
 "            It is your responsibility to disclose this to visitors of any site where you embed the player."
 msgstr "Este reproductor utiliza cookies de acuerdo con nuestra política de cookies.\n"
 "            Podemos recopilar datos de uso con fines analíticos.\n"
-"            Es su responsabilidad divulgar esto a los visitantes de cualquier sitio donde incorporen al jugador."
+"            Es su responsabilidad divulgar esto a los visitantes de cualquier sitio donde incorporen al reproductor de audio."
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:57
 #, elixir-autogen, elixir-format
