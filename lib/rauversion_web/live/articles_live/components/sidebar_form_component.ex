@@ -131,11 +131,8 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                             <span>
                               <%= gettext "Upload a track Cover" %>
                             </span>
-                            <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
-                            <%= live_file_input @uploads.cover,
-                              # id: "track_cover",
-                              class: "hidden"
-                            %>
+                            <.live_file_input upload={@uploads.cover} class="hidden" />
+                            <% #= live_file_input @uploads.cover, class: "hidden" %>
                           </label>
                           <p class="pl-1">
                             <%= gettext "or drag and drop" %>
@@ -145,7 +142,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                         <div>
                           <%= for entry <- @uploads.cover.entries do %>
                             <div class="flex items-center space-x-2">
-                              <%= live_img_preview entry, width: 300 %>
+                              <.live_img_preview entry={entry} width={300} />
                               <div class="text-xl font-bold">
                                 <%= entry.progress %>%
                               </div>

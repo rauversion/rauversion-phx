@@ -91,7 +91,8 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
                     <span class="sr-only"><%= gettext "user photo" %></span>
                 <% end %>
                 <div phx-drop-target={@uploads.avatar.ref}>
-                  <%= live_file_input @uploads.avatar, class: "absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"%>
+                  <.live_file_input upload={@uploads.avatar} class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" />
+                  <% #= live_file_input @uploads.avatar, class: "absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"%>
                 </div>
               </div>
 
