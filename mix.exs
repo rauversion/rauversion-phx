@@ -45,7 +45,7 @@ defmodule Rauversion.MixProject do
       {:ecto_psql_extras, "~> 0.6"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.18.0"},
+      {:phoenix_live_view, "~> 0.18.2"},
       {:floki, ">= 0.30.0", override: true},
       {:phoenix_live_dashboard, "~> 0.7"},
       {:mux, "~> 1.8.0"},
