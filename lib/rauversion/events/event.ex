@@ -1,5 +1,18 @@
 defmodule Rauversion.Events.Event.TitleSlug do
   use EctoAutoslugField.Slug, from: :title, to: :slug
+
+  def build_slug(sources) do
+    # See docs:
+    # https://hexdocs.pm/ecto_autoslug_field/EctoAutoslugField.SlugBase.html#build_slug/1
+    # => will receive default slug: my-todo
+    slug = super(sources)
+
+    if Rauversion.Events.get_by_slug!(slug) do
+      slug <> "-" <> Ecto.UUID.generate()
+    else
+      slug
+    end
+  end
 end
 
 defmodule Rauversion.Events.Event do
@@ -46,7 +59,7 @@ defmodule Rauversion.Events.Event do
     field :online, :boolean, default: false
     field :private, :boolean, default: false
     field :slug, :string
-    field :state, :string
+    field :state, :string, default: "draft"
     field :street, :string
     field :street_number, :string
     field :timezone, :string
