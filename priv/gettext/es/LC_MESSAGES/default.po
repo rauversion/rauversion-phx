@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-03 05:19\n"
+"PO-Revision-Date: 2022-10-06 05:03\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -72,7 +72,7 @@ msgstr "¿Está seguro de que desea restablecer este enlace?<br /> No será posi
 msgid "Article settings"
 msgstr "Configuración del artículo"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:228
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:230
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:52
 #, elixir-autogen, elixir-format
 msgid "Article will be plublished on blog listing."
@@ -116,7 +116,7 @@ msgstr "¡Por %{name}!"
 msgid "By Email"
 msgstr "Por Email"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:276
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:278
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:226
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:84
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:273
@@ -170,7 +170,7 @@ msgstr "Cambiar tus credenciales"
 msgid "Change your notification preferences."
 msgstr "Cambie sus preferencias de notificación."
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:86
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:88
 #: lib/rauversion_web/live/track_live/player.ex:332
 #, elixir-autogen, elixir-format
 msgid "Close panel"
@@ -209,7 +209,7 @@ msgstr "Información de contacto"
 msgid "Continue"
 msgstr "Continuar"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:252
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:254
 #, elixir-autogen, elixir-format
 msgid "Copy link"
 msgstr "Copiar enlace"
@@ -219,7 +219,7 @@ msgstr "Copiar enlace"
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:105
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:107
 #: lib/rauversion_web/live/live_helpers.ex:402
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:30
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:90
@@ -305,7 +305,7 @@ msgstr "Incrustar"
 msgid "Empowering independent music communities on the internet"
 msgstr "Potenciar comunidades musicales independientes en Internet"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:194
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:196
 #, elixir-autogen, elixir-format
 msgid "Everyone with the link will see this article."
 msgstr "Todo el mundo con el enlace verá este artículo."
@@ -365,7 +365,7 @@ msgstr "Recibir notificaciones cuando un candidato solicite un empleo."
 msgid "Get notified when someones posts a comment on a posting."
 msgstr "Recibe notificaciones cuando alguien publique un comentario en una publicación."
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:95
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:97
 #, elixir-autogen, elixir-format
 msgid "Get started by filling in the information below to create your new article."
 msgstr "Comienza rellenando la siguiente información para crear tu nuevo artículo."
@@ -397,7 +397,7 @@ msgstr "Imágenes"
 msgid "Last 12 months"
 msgstr "Últimos 12 meses"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:262
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:264
 #, elixir-autogen, elixir-format
 msgid "Learn more about sharing "
 msgstr "Más información sobre compartir "
@@ -490,7 +490,7 @@ msgstr "Nueva lista"
 msgid "New Track"
 msgstr "Nueva pista"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:83
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:85
 #, elixir-autogen, elixir-format
 msgid "New article"
 msgstr "Nuevo artículo"
@@ -535,7 +535,7 @@ msgstr "Notificaciones push"
 msgid "Offers"
 msgstr "Ofertas"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:208
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:210
 #, elixir-autogen, elixir-format
 msgid "Only members of this article would be able to access."
 msgstr "Sólo los miembros de este artículo podrían acceder."
@@ -568,7 +568,7 @@ msgstr "O"
 msgid "Or continue with"
 msgstr "O continuar con"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:159
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:161
 #: lib/rauversion_web/live/live_helpers.ex:455
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:67
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:129
@@ -629,7 +629,7 @@ msgstr "Privado"
 msgid "Private Share"
 msgstr "Compartir Privado"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:205
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:207
 #, elixir-autogen, elixir-format
 msgid "Private to article members "
 msgstr "Miembros privados al artículo "
@@ -655,7 +655,7 @@ msgstr "Proporcionar FLAC, WAV, ALAC o AIFF para la máxima calidad de audio."
 msgid "Public"
 msgstr "Público"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:191
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:193
 #, elixir-autogen, elixir-format
 msgid "Public access"
 msgstr "Acceso público"
@@ -666,7 +666,7 @@ msgstr "Acceso público"
 msgid "Published"
 msgstr "Publicado"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:225
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:227
 #, elixir-autogen, elixir-format
 msgid "Published on platform"
 msgstr "Publicado en la plataforma"
@@ -742,7 +742,7 @@ msgstr "Volver cuando estés listo"
 msgid "Same as email"
 msgstr "Igual que el correo"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:279
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:281
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:201
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
@@ -759,7 +759,7 @@ msgstr "Igual que el correo"
 msgid "Save"
 msgstr "Guardar"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:279
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:281
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:201
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
@@ -993,7 +993,7 @@ msgstr "Subir portada"
 msgid "Upload a Audio file"
 msgstr "Subir un archivo de audio"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:130
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:132
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:103
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:83
 #, elixir-autogen, elixir-format
@@ -1068,7 +1068,7 @@ msgstr "en"
 msgid "clear all"
 msgstr "borrar todo"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:139
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:141
 #: lib/rauversion_web/live/live_helpers.ex:435
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:110
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:90
@@ -1471,7 +1471,7 @@ msgstr "Ticket gratuito ya añadido"
 msgid "Get your FREE ticket"
 msgstr "Obtén tus tickets"
 
-#: lib/rauversion_web/live/track_live/form_component.html.heex:29
+#: lib/rauversion_web/live/track_live/form_component.html.heex:30
 #, elixir-autogen, elixir-format
 msgid "In order to upload music and create events you need to access as an artist account"
 msgstr "Para subir música y crear eventos necesitas acceder como una cuenta de artista"
@@ -1501,7 +1501,7 @@ msgstr "Precio"
 msgid "QTY"
 msgstr "CANTIDAD"
 
-#: lib/rauversion_web/live/track_live/form_component.html.heex:26
+#: lib/rauversion_web/live/track_live/form_component.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "Ready to dive in?"
 msgstr "¿Listo para bucear?"
@@ -1545,4 +1545,33 @@ msgstr "Subir un %{subject}"
 #, elixir-autogen, elixir-format
 msgid "You need to be login before get tickets"
 msgstr "Necesitas iniciar sesión antes de obtener tickets"
+
+#: lib/rauversion_web/live/track_live/form_component.html.heex:98
+#: lib/rauversion_web/live/track_live/form_component.html.heex:111
+#, elixir-autogen, elixir-format
+msgid "Please send us an email showing us your work"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/form_component.html.heex:102
+#: lib/rauversion_web/live/track_live/form_component.html.heex:112
+#, elixir-autogen, elixir-format
+msgid "Request an artist account"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/form_component.html.heex:95
+#: lib/rauversion_web/live/track_live/form_component.html.heex:110
+#, elixir-autogen, elixir-format
+msgid "Tracks uploads are not allowed on your account type"
+msgstr ""
+
+#: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:137
+#, elixir-autogen, elixir-format
+msgid "View Article"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/form_component.html.heex:94
+#: lib/rauversion_web/live/track_live/form_component.html.heex:109
+#, elixir-autogen, elixir-format
+msgid "¿Want to upload your music?"
+msgstr ""
 
