@@ -1,6 +1,8 @@
 defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
   use RauversionWeb, :live_component
 
+  alias Rauversion.Accounts.Settings
+
   def has_stripe?(user_id) do
     case user_id do
       nil ->
@@ -15,7 +17,14 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
   end
 
   def has_transbank?(user) do
-    !(user.settings.tbk_commerce_code |> is_binary())
+    with %{settings: settings = %Settings{tbk_commerce_code: tbk_code}} <-
+           user do
+      !(tbk_code |> is_binary())
+    else
+      _ -> nil
+    end
+
+    #!(user.settings.tbk_commerce_code |> is_binary())
   end
 
   def render(assigns) do

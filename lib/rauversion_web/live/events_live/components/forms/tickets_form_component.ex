@@ -78,7 +78,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
           _ -> 0
         end
       else
-        Decimal.to_integer(i.data.price)
+        if i.data.price, do: Decimal.to_integer(i.data.price), else: 0
       end
 
     ~H"""
