@@ -7,7 +7,7 @@ defmodule Rauversion.Events.Event.TitleSlug do
     # => will receive default slug: my-todo
     slug = super(sources)
 
-    if Rauversion.Events.get_by_slug!(slug) do
+    if Rauversion.Events.get_by_slug(slug) do
       slug <> "-" <> Ecto.UUID.generate()
     else
       slug

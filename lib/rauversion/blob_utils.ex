@@ -93,11 +93,11 @@ defmodule Rauversion.BlobUtils do
   end
 
   def process_one_upload(struct, attrs, kind) do
-    IO.inspect(struct)
+    # IO.inspect(struct)
 
     case struct do
       %{valid?: true} ->
-        IO.inspect(attrs)
+        # IO.inspect(attrs)
 
         case attrs do
           %{^kind => [file | _]} ->
