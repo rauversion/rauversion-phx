@@ -97,6 +97,11 @@ defmodule Rauversion.Accounts.User do
     )
   end
 
+  def type_changeset(user, attrs, _opts \\ []) do
+    user
+    |> cast(attrs, [:type])
+  end
+
   def changeset(user, attrs, opts \\ []) do
     user
     |> validate_contact_fields(attrs)
