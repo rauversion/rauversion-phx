@@ -67,10 +67,10 @@ defmodule Rauversion.BlobUtils do
     end
   end
 
-  def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}) do
+  def variant_url(track, kind, options \\ %{resize_to_limit: "100x100"}, fallback \\ nil) do
     case blob_for(track, kind) do
       nil ->
-        fallback_image()
+        if fallback, do: fallback.(), else: fallback_image()
 
       blob ->
         variant =
@@ -93,8 +93,12 @@ defmodule Rauversion.BlobUtils do
   end
 
   def process_one_upload(struct, attrs, kind) do
+    # IO.inspect(struct)
+
     case struct do
       %{valid?: true} ->
+        # IO.inspect(attrs)
+
         case attrs do
           %{^kind => [file | _]} ->
             Rauversion.BlobUtils.attach_file_with_blob(struct, kind, file)

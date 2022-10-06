@@ -54,7 +54,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
         "border-brand-500 text-brand-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium"
 
       true ->
-        "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium"
+        "border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium"
     end
   end
 
@@ -127,9 +127,15 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200 dark:bg-gray-900">
                         <%= post.state %>
                       </td>
-                      <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 dark:text-gray-200 dark:bg-gray-900">
+                      <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 dark:text-gray-200 dark:bg-gray-900 divide-x space-x-2">
                         <%= live_redirect to: Routes.articles_new_path(@socket, :edit, post.id), class: "text-brand-600 hover:text-brand-900" do %>
                           <%= gettext "Edit" %>
+                        <% end %>
+
+                        <%= if post.slug do %>
+                          <%= live_redirect to: Routes.articles_show_path(@socket, :show, post.slug), class: "text-brand-600 hover:text-brand-900 pl-2" do %>
+                            <%= gettext "View Article" %>
+                          <% end %>
                         <% end %>
                       </td>
                     </tr>

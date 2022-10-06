@@ -37,6 +37,7 @@ defmodule Rauversion.Accounts do
     from(u in User,
       left_join: m in assoc(u, :followings),
       # on: [follower_id: ^user.id],
+      where: not is_nil(u.username),
       where: is_nil(m.id),
       preload: [:avatar_blob, :avatar_attachment]
     )
@@ -493,7 +494,7 @@ defmodule Rauversion.Accounts do
             email: user_data.email,
             username: username,
             first_name: user_data.name,
-            password: "123456"
+            password: SecureRandom.urlsafe_base64(10)
           }
 
           Rauversion.Accounts.User.oauth_registration(%User{}, attrs)
@@ -538,10 +539,10 @@ defmodule Rauversion.Accounts do
   # invitations
 
   def invite_user(%User{} = user, attrs \\ %{}) do
-    attrs = Map.merge(attrs, %{password: "123456", password_confirmation: "123456"})
+    attrs = Map.merge(attrs, %{password: SecureRandom.urlsafe_base64(10)})
 
     User.invitation_changeset(user, attrs)
-    |> Repo.insert!()
+    |> Repo.insert()
   end
 
   def change_user_invitation(%User{} = user, attrs \\ %{}) do
@@ -593,5 +594,15 @@ defmodule Rauversion.Accounts do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, user_update_changeset)
     |> Ecto.Multi.delete_all(:tokens, UserToken.user_and_contexts_query(user, ["invitation"]))
+  end
+
+  # tickets
+
+  def get_event_ticket(current_user, ticket) do
+    ticket
+    |> Ecto.assoc(:purchased_tickets)
+    |> where([p], p.event_ticket_id == ^ticket.id)
+    |> limit(1)
+    |> Repo.one()
   end
 end

@@ -42,7 +42,7 @@ defmodule Rauversion.PreviewCards do
   end
 
   def create(attrs \\ %{}) do
-    IO.inspect(attrs)
+    # IO.inspect(attrs)
 
     %Rauversion.PreviewCards{}
     |> changeset(attrs)

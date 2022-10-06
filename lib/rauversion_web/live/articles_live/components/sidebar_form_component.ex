@@ -34,9 +34,11 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
       post_params
       |> Map.put("cover", List.first(files_for(socket, :cover)))
 
+    IO.inspect(post_params)
+
     case Posts.update_post_attributes(socket.assigns.post, post_params) do
       {:ok, post} ->
-        IO.inspect(post)
+        # IO.inspect(post)
 
         {
           :noreply,

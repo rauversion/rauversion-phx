@@ -100,6 +100,7 @@ defmodule Rauversion.Events do
   """
   def get_event!(id), do: Repo.get!(Event, id)
   def get_by_slug!(id), do: Repo.get_by!(Event, slug: id)
+  def get_by_slug(id), do: Repo.get_by(Event, slug: id)
 
   def get_host!(event, id) do
     event |> Ecto.assoc(:event_hosts) |> where([c], c.id == ^id) |> Repo.one()

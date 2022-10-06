@@ -27,7 +27,8 @@ defmodule Rauversion.Tracks.Track do
     field :likes_count, :integer, default: 0
     field :reposts_count, :integer, default: 0
 
-    has_many :track_comments, Rauversion.TrackComments.TrackComment
+    has_many :listening_events, Rauversion.TrackingEvents.Event, on_delete: :delete_all
+    has_many :track_comments, Rauversion.TrackComments.TrackComment, on_delete: :delete_all
     has_many :track_playlists, Rauversion.TrackPlaylists.TrackPlaylist, on_delete: :delete_all
     has_many :playlists, through: [:track_playlists, :playlist]
 

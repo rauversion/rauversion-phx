@@ -73,7 +73,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
     like_class = active_button_class(like)
 
     ~H"""
-      <div class="my-2 p-2 border shadow-xs mx-3" id={"playlist-item-#{@playlist.id}"}>
+      <div class="my-2 p-2 border-- rounded-md shadow-xs mx-3 dark:bg-gray-900" id={"playlist-item-#{@playlist.id}"}>
         <div class="flex space-x-3">
           <div class="w-32 h-32 bg-red-600"></div>
           <div class="flex-grow">
@@ -97,7 +97,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                         </div>
                         <div class="flex-1 min-w-0">
                           <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= track_playlists.track.title %></p>
-                          <p class="text-sm text-gray-500 truncate"><%= @playlist.user.username  %></p>
+                          <p class="text-sm text-gray-500 dark:text-gray-300 truncate"><%= @playlist.user.username  %></p>
                         </div>
                         <!--
                         <div>

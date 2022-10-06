@@ -53,6 +53,8 @@ defmodule RauversionWeb do
       use PhoenixMetaTags.TagView
 
       on_mount RauversionWeb.RestoreLocale
+      alias RauversionWeb.Router.Helpers, as: Routes
+
       unquote(view_helpers())
     end
   end

@@ -78,7 +78,7 @@ defmodule RauversionWeb.EventsLive.New do
       {:ok, event} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Repost created successfully")
+         |> put_flash(:info, "Event created successfully")
          |> push_redirect(to: "/events/#{event.slug}/edit")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
