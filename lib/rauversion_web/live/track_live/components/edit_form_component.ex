@@ -101,11 +101,8 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                             <div class="flex text-sm text-gray-600 py-3">
                               <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                                 <span><%= gettext "Upload a track Cover" %></span>
-                                <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
-                                <%= live_file_input @uploads.cover,
-                                  # id: "track_cover",
-                                  class: "hidden"
-                                %>
+                                <.live_file_input upload={@uploads.cover} class="hidden" />
+                                <% #= live_file_input @uploads.cover, class: "hidden" %>
                               </label>
                               <p class="pl-1"><%= gettext "or drag and drop" %></p>
                             </div>
@@ -113,7 +110,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                             <div>
                               <%= for entry <- @uploads.cover.entries do %>
                                 <div class="flex items-center space-x-2">
-                                  <%= live_img_preview entry, width: 300 %>
+                                  <.live_img_preview entry={entry} width={300} />
                                   <div class="text-xl font-bold">
                                     <%= entry.progress %>%
                                   </div>

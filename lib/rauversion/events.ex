@@ -199,8 +199,12 @@ defmodule Rauversion.Events do
     |> Event.changeset(attrs)
   end
 
+  def event_dates(struct = %{event_start: event_start = nil, event_ends: event_ends = nil}) do
+    ""
+  end
+
   def event_dates(struct) do
-    case Cldr.Interval.to_string(struct.event_start, struct.event_ends, Rauversion.Cldr) do
+    case Cldr.Date.Interval.to_string(struct.event_start, struct.event_ends, Rauversion.Cldr) do
       {:ok, d} ->
         d
 

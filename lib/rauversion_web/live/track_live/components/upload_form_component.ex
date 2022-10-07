@@ -52,11 +52,8 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                       <div class="flex text-sm text-gray-600 text-gray-300 py-3">
                         <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                           <span><%= gettext "Upload a Audio file" %></span>
-                          <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
-                          <%= live_file_input @uploads.audio,
-                            # id: "track_cover",
-                            class: "hidden"
-                          %>
+                          <.live_file_input upload={@uploads.audio} class="hidden" />
+                          <% #= live_file_input @uploads.audio, class: "hidden" %>
                         </label>
                         <p class="pl-1"><%= gettext "or drag and drop" %></p>
                       </div>

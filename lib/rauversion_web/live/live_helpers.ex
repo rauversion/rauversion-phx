@@ -426,10 +426,8 @@ defmodule RauversionWeb.LiveHelpers do
                   <%= gettext( "Upload a %{subject}", %{subject: field[:label] || "Track" }) %>
                 </span>
                 <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
-                <%= live_file_input @field.uploads[name],
-                  # id: "track_cover",
-                  class: "hidden"
-                %>
+                <.live_file_input upload={@field.uploads[name]} class="hidden" />
+                <% #= live_file_input @field.uploads[name], class: "hidden" %>
               </label>
               <p class="pl-1">
                 <%= gettext "or drag and drop" %>
@@ -439,7 +437,7 @@ defmodule RauversionWeb.LiveHelpers do
             <div>
               <%= for entry <- @field.uploads[name].entries do %>
                 <div class="flex items-center space-x-2">
-                  <%= live_img_preview entry, width: 300 %>
+                  <.live_img_preview entry={entry} width={300} />
                   <div class="text-xl font-bold">
                     <%= entry.progress %>%
                   </div>

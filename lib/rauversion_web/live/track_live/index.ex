@@ -59,13 +59,7 @@ defmodule RauversionWeb.TrackLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:tracks, list_tracks(socket.assigns.page))
     |> assign(:page_title, "Listing Tracks")
     |> assign(:track, nil)
-  end
-
-  defp list_tracks(page) do
-    Tracks.list_public_tracks()
-    |> Rauversion.Repo.paginate(page: page, page_size: 5)
   end
 end
