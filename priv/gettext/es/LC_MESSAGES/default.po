@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-06 05:03\n"
+"PO-Revision-Date: 2022-10-06 06:04\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1550,28 +1550,28 @@ msgstr "Necesitas iniciar sesión antes de obtener tickets"
 #: lib/rauversion_web/live/track_live/form_component.html.heex:111
 #, elixir-autogen, elixir-format
 msgid "Please send us an email showing us your work"
-msgstr ""
+msgstr "Por favor, envíanos un email mostrándonos tu trabajo"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:102
 #: lib/rauversion_web/live/track_live/form_component.html.heex:112
 #, elixir-autogen, elixir-format
 msgid "Request an artist account"
-msgstr ""
+msgstr "Solicitar una cuenta de artista"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:95
 #: lib/rauversion_web/live/track_live/form_component.html.heex:110
 #, elixir-autogen, elixir-format
 msgid "Tracks uploads are not allowed on your account type"
-msgstr ""
+msgstr "No se permiten las subidas de pistas en tu tipo de cuenta"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:137
 #, elixir-autogen, elixir-format
 msgid "View Article"
-msgstr ""
+msgstr "Ver artículo"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:94
 #: lib/rauversion_web/live/track_live/form_component.html.heex:109
 #, elixir-autogen, elixir-format
 msgid "¿Want to upload your music?"
-msgstr ""
+msgstr "¿Quieres subir tu música?"
 
