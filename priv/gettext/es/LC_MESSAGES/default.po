@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-07 13:21\n"
+"PO-Revision-Date: 2022-10-07 14:22\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -941,7 +941,7 @@ msgstr "Top oyentes"
 #: lib/rauversion_web/live/insights_live/insights_component.ex:153
 #, elixir-autogen, elixir-format
 msgid "Top Locations"
-msgstr "Mejores recurrentes"
+msgstr "Locaciones recurrentes"
 
 #: lib/rauversion_web/live/insights_live/insights_component.ex:63
 #, elixir-autogen, elixir-format
