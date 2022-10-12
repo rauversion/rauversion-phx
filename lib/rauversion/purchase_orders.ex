@@ -290,9 +290,14 @@ defmodule Rauversion.PurchaseOrders do
     {:ok, data} = Transbank.Webpay.WebpayPlus.MallTransaction.commit(trx, token)
 
     # TODO: save data on some transacion table?
+    case data do
+      %{"vci" => "TSY"} ->
+        Rauversion.PurchaseOrders.get_purchase_order!(data["buy_order"])
+        |> generate_purchased_tickets()
 
-    Rauversion.PurchaseOrders.get_purchase_order!(data["buy_order"])
-    |> generate_purchased_tickets()
+      _ ->
+        {:error, nil}
+    end
 
     # %{
     #   "accounting_date" => "0913",

@@ -32,15 +32,15 @@ api_key = Transbank.Common.IntegrationApiKeys.webpay()
 environment = Transbank.Webpay.WebpayPlus.MallTransaction.default_environment()
 trx = Transbank.Webpay.WebpayPlus.MallTransaction.new(commerce_code, api_key, environment)
 # token = "01abd19e55cbd787859f2345ae09b8c9c52e22388d72921c074ddb6d42c6aecf"
-token = "01ab5bd6112f806c74b54ec640de73373a86190444b03d75973633367a100d62"
+# token = "01ab5bd6112f806c74b54ec640de73373a86190444b03d75973633367a100d62"
 
-trx = Transbank.Webpay.WebpayPlus.MallTransaction.new(commerce_code, api_key, environment)
+# trx = Transbank.Webpay.WebpayPlus.MallTransaction.new(commerce_code, api_key, environment)
 
-{:ok, data} = Transbank.Webpay.WebpayPlus.MallTransaction.commit(trx, token)
+# {:ok, data} = Transbank.Webpay.WebpayPlus.MallTransaction.commit(trx, token)
 
-IO.inspect(data)
+# IO.inspect(data)
 
-Transbank.Webpay.WebpayPlus.MallTransaction.status(trx, token)
+# Transbank.Webpay.WebpayPlus.MallTransaction.status(trx, token)
 ```
 
 ```elixir

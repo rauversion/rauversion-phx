@@ -160,10 +160,10 @@ defmodule RauversionWeb.Router do
 
     get "/webpayplus/mall/return_url", TbkController, :mall_commit
 
-    live "/streams/:id", StreamsLive.Show, :show
-
     get "/webpayplus/mall/status/:token", TbkController, :mall_status
     post "/webpayplus/mall/refund", TbkController, :mall_refund
+
+    live "/streams/:id", StreamsLive.Show, :show
 
     live "/tickets/qr/:signed_id", QrLive.Index, :index
 

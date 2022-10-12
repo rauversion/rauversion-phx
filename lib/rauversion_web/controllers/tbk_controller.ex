@@ -104,9 +104,10 @@ defmodule RauversionWeb.TbkController do
   def mall_events_commit(conn, %{"id" => id, "token_ws" => token}) do
     event = Rauversion.Events.get_by_slug!(id) |> Rauversion.Repo.preload([:user])
 
-    a = Rauversion.PurchaseOrders.commit_order(event, token)
-
-    conn |> redirect(to: "/events/#{event.slug}/payment_success")
+    case Rauversion.PurchaseOrders.commit_order(event, token) do
+      {:ok} -> conn |> redirect(to: "/events/#{event.slug}/payment_success")
+      _ -> conn |> redirect(to: "/events/#{event.slug}/payment_failure")
+    end
   end
 
   def mall_status do
