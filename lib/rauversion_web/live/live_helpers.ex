@@ -531,4 +531,11 @@ defmodule RauversionWeb.LiveHelpers do
       _ -> false
     end
   end
+
+  def simple_date_for(date, format \\ :long) do
+    case Cldr.Date.to_string(date, format: format) do
+      {:ok, d} -> d
+      _ -> date
+    end
+  end
 end

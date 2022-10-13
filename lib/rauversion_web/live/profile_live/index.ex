@@ -113,7 +113,6 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   defp apply_action(socket, :albums, %{"username" => id}) do
-    # profile = Accounts.get_user_by_username(id)
     socket
     |> assign(:title, "albums")
     |> assign(:data, menu(socket, id, "albums"))
@@ -158,12 +157,12 @@ defmodule RauversionWeb.ProfileLive.Index do
         selected: kind == "tracks_all",
         kind: kind
       },
-      # %{
-      #  name: "Albums",
-      #  url: Routes.profile_index_path(socket, :albums, id),
-      #  selected: kind == "albums",
-      #  kind: kind
-      # },
+      %{
+        name: "Albums",
+        url: Routes.profile_index_path(socket, :albums, id),
+        selected: kind == "albums",
+        kind: kind
+      },
       %{
         name: "Playlists",
         url: Routes.profile_index_path(socket, :playlists, id),

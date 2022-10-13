@@ -56,7 +56,22 @@
                 live_component(
                   RauversionWeb.PlaylistLive.PlaylistListComponent,
                   id: "all-reposts-#{@profile.id}",
+                  section: "playlists",
                   profile: @profile,
+                  title: @title,
+                  page: 1,
+                  playlists: [],
+                  track_meta: %{},
+                  page: 1,
+                  current_user: assigns[:current_user]
+                )
+
+      "albums" ->
+                live_component(
+                  RauversionWeb.PlaylistLive.PlaylistListComponent,
+                  id: "all-reposts-#{@profile.id}",
+                  profile: @profile,
+                  section: "albums",
                   title: @title,
                   page: 1,
                   playlists: [],

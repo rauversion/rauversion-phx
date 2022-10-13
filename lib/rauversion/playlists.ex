@@ -24,7 +24,30 @@ defmodule Rauversion.Playlists do
   def list_playlists_by_user(user, _preloads = nil) do
     from pi in Playlist,
       where: pi.user_id == ^user.id,
+      where: pi.playlist_type == ^"playlist",
       preload: [:user, track_playlists: [track: [:cover_blob, :mp3_audio_blob]]]
+  end
+
+  def list_albums_by_user(user, _preloads = nil) do
+    from pi in Playlist,
+      where: pi.user_id == ^user.id,
+      where: pi.playlist_type not in ^"playlist",
+      preload: [:user, track_playlists: [track: [:cover_blob, :mp3_audio_blob]]]
+  end
+
+  def list_albums_by_user(user, _current_user = %Rauversion.Accounts.User{id: id}) do
+    likes_query =
+      from pi in Rauversion.PlaylistLikes.PlaylistLike,
+        where: pi.user_id == ^id
+
+    from pi in Playlist,
+      where: pi.user_id == ^user.id,
+      where: pi.playlist_type != ^"playlist",
+      preload: [
+        :user,
+        likes: ^likes_query,
+        track_playlists: [track: [:cover_blob, :mp3_audio_blob]]
+      ]
   end
 
   def list_playlists_by_user(user, _current_user = %Rauversion.Accounts.User{id: id}) do
@@ -34,6 +57,7 @@ defmodule Rauversion.Playlists do
 
     from pi in Playlist,
       where: pi.user_id == ^user.id,
+      where: pi.playlist_type == ^"playlist",
       preload: [
         :user,
         likes: ^likes_query,
@@ -177,6 +201,14 @@ defmodule Rauversion.Playlists do
     case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token, max_age: 86400) do
       {:ok, playlist_id} -> get_playlist!(playlist_id)
       _ -> nil
+    end
+  end
+
+  def is_album?(struct) do
+    case struct.playlist_type do
+      "playlist" -> false
+      nil -> false
+      _ -> true
     end
   end
 

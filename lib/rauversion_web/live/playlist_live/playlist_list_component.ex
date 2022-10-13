@@ -36,7 +36,15 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
     {:ok, socket, temporary_assigns: [tracks: []]}
   end
 
-  defp list_playlists(page, assigns) do
+  defp list_playlists(page, assigns = %{section: "albums"}) do
+    Rauversion.Playlists.list_albums_by_user(
+      assigns.profile,
+      assigns[:current_user]
+    )
+    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+  end
+
+  defp list_playlists(page, assigns = %{section: "playlists"}) do
     Rauversion.Playlists.list_playlists_by_user(
       assigns.profile,
       assigns[:current_user]

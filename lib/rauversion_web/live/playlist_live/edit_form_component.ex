@@ -27,7 +27,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
 
           <div class="sm:col-span-2">
             <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            <%= gettext "Cover photo" %>
+              <%= gettext "Cover photo" %>
             </label>
             <div
             phx-drop-target={@uploads.cover.ref}
@@ -40,7 +40,6 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                   <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                     <span><%= gettext "Upload Cover" %></span>
                     <.live_file_input upload={@uploads.cover} class="hidden" />
-                    <% #= live_file_input @uploads.cover, class: "hidden" %>
                   </label>
                   <p class="pl-1">or drag and drop</p>
                 </div>
@@ -71,7 +70,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
           <div class="sm:col-span-4">
 
             <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <%= for field <- Rauversion.Playlists.Playlist.form_definitions() do %>
+              <%= for field <- Rauversion.Playlists.Playlist.form_definitions(@changeset) do %>
                 <%= form_input_renderer(f, field) %>
               <% end %>
             </div>

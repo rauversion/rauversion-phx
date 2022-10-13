@@ -91,8 +91,9 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                   <%= gettext "Playlist title" %>
                   </label>
                   <div class="mt-1">
-                    <%= text_input f, :title, autocomplete: "given-name", class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
-                    <%= error_tag f, :title %>
+                    <%= form_input_renderer(f, %{type: :text_input, name: :title, wrapper_class: ""}) %>
+                    <% #= text_input f, :title, autocomplete: "given-name", class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+                    <% #= error_tag f, :title %>
                   </div>
                 </div>
 

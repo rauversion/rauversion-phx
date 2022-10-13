@@ -14,8 +14,9 @@ defmodule Rauversion.Playlists.Playlist do
     field :description, :string
     field :slug, :string
     field :title, TitleSlug.Type
-    field :private, :boolean
+    field :private, :boolean, default: false
     field :genre, :string
+    field :custom_genre, :string
     field :playlist_type, :string
     # TODO: if user selects album on playlist_type, then the release_date should be required
     field :release_date, :utc_datetime
@@ -51,17 +52,53 @@ defmodule Rauversion.Playlists.Playlist do
       :title,
       :user_id,
       :genre,
+      :custom_genre,
       :playlist_type,
       :release_date
     ])
     |> cast_embed(:metadata, with: &Rauversion.Playlists.PlaylistMetadata.changeset/2)
     |> cast_assoc(:track_playlists)
     |> validate_required([:title, :user_id])
+    |> validate_by_type()
+    |> validate_by_genre()
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
   end
 
-  def form_definitions() do
+  defp validate_by_genre(changeset) do
+    case get_field(changeset, :genre) do
+      "Custom" ->
+        changeset
+        |> validate_required([:custom_genre],
+          message: "Please enter a value."
+        )
+
+      _ ->
+        changeset
+    end
+  end
+
+  defp validate_by_type(changeset) do
+    case get_field(changeset, :playlist_type) do
+      "playlist" ->
+        changeset
+
+      # require release date for everything else
+      _ ->
+        changeset
+        |> validate_required([:release_date],
+          message: "Please enter a value."
+        )
+
+        # :option ->
+        #  changeset |> validate_required([:option_id], message: "Please enter a value.")
+
+        # _ ->
+        #  changeset
+    end
+  end
+
+  def form_definitions(changeset) do
     [
       %{
         name: :title,
@@ -82,14 +119,34 @@ defmodule Rauversion.Playlists.Playlist do
       %{
         name: :release_date,
         wrapper_class: "sm:col-span-2",
-        type: :date_input
+        type: :datetime_input
       },
       %{
         name: :genre,
         wrapper_class: "sm:col-span-3",
         type: :select,
-        options: Rauversion.CategoryTypes.genres()
-      }
+        options: ["", "Custom"] ++ Rauversion.CategoryTypes.genres()
+      },
+      custom_genre_field(changeset)
     ]
+    |> Enum.filter(fn x -> !is_nil(x) end)
+  end
+
+  def custom_genre_field(changeset) do
+    case is_custom_genre?(changeset) do
+      true ->
+        %{
+          name: :custom_genre,
+          wrapper_class: "sm:col-span-3",
+          type: :text_input
+        }
+
+      _ ->
+        nil
+    end
+  end
+
+  def is_custom_genre?(changeset) do
+    get_field(changeset, :genre) == "Custom"
   end
 end

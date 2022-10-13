@@ -79,7 +79,7 @@
                     type="button" 
                     data-action='audio#pause' 
                     data-audio-target="pause"
-                    class="hidden -ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-sm font-medium text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-900 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    class="hidden -ml-px relative inline-flex-- items-center px-2 py-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-sm font-medium text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-900 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                     <span class="sr-only"><%= gettext "Next" %></span>
                   
                     <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path></svg>
@@ -89,6 +89,11 @@
                 <div class="ml-2 pl-6 pt-6">
                   <h4 class="text-lg font-bold">
                     <%= live_redirect @playlist.title, to: Routes.track_show_path(@socket, :show, @playlist) %>
+                    <%= if Rauversion.Playlists.is_album?(@playlist) do %>
+                      <span class="text-xs dark:text-gray-600 font-thin">
+                        Album <%= simple_date_for(@playlist.release_date, :short) %>
+                      </span>
+                    <% end %>
                   </h4>
                   <%= if @playlist.user do %>
                     <h5 class="text-sm font-">
