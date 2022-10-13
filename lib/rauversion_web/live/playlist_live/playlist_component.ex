@@ -9,6 +9,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
       :ok,
       socket
       |> assign(assigns)
+      |> assign(:like, nil)
     }
   end
 

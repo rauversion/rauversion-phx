@@ -23,7 +23,8 @@ defmodule Rauversion.Playlists do
 
   def list_playlists_by_user(user, _preloads = nil) do
     from pi in Playlist,
-      where: pi.user_id == ^user.id
+      where: pi.user_id == ^user.id,
+      preload: [:user, track_playlists: [track: [:cover_blob, :mp3_audio_blob]]]
   end
 
   def list_playlists_by_user(user, _current_user = %Rauversion.Accounts.User{id: id}) do

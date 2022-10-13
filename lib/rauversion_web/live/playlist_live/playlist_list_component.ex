@@ -3,7 +3,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
-  alias Rauversion.{Playlists}
+  alias Rauversion.{Playlists, Repo}
 
   # @impl true
   # def update(assigns, socket) do

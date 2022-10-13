@@ -6,15 +6,15 @@ defmodule RauversionWeb.PlaylistLive.PlaylistShowItemsComponent do
 
   def render(assigns) do
     ~H"""
-      <div class="my-2 p-2 border shadow-xs mx-3">
+      <div class="my-2 border dark:border-gray-800 shadow-xs mx-3 dark:bg-gray-900 rounded-md">
         <div class="flex space-x-3">
           <div class="flex-grow">
             <div class="flex flex-col">
               <div class="space-y-2">
 
-                <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for track_playlists <- @playlist.track_playlists do %>
-                    <li class="py-4">
+                    <li class="p-4 dark:hover:bg-gray-800">
                       <div class="flex items-center space-x-4">
                         <div class="flex-1 min-w-0">
                           <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
