@@ -80,10 +80,15 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
           <div class="flex-grow">
             <div class="flex flex-col">
               <div class="space-y-2">
-                <h3 class="mt-3- text-xl font-extrabold tracking-tight text-slate-900 dark:text-gray-100">
+                <h3 class="flex items-center space-x-2 mt-3- text-xl font-extrabold tracking-tight text-slate-900 dark:text-gray-100">
                   <%= live_redirect @playlist.title,
                     to: Routes.playlist_show_path(@socket, :show, @playlist)
                   %>
+                  <%= if Rauversion.Playlists.is_album?(@playlist) do %>
+                      <span class="text-xs dark:text-gray-600 font-thin">
+                        Album <%= simple_date_for(@playlist.release_date, :short) %>
+                      </span>
+                    <% end %>
                 </h3>
                 <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for track_playlists <- @playlist.track_playlists do %>
