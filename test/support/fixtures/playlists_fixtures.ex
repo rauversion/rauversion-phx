@@ -14,7 +14,8 @@ defmodule Rauversion.PlaylistsFixtures do
         description: "some description",
         metadata: %{},
         slug: "some slug",
-        title: "some title"
+        title: "some title",
+        playlist_type: "playlist"
       })
       |> Rauversion.Playlists.create_playlist()
 

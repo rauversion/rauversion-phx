@@ -40,7 +40,8 @@ defmodule Rauversion.PlaylistsTest do
         description: "some description",
         metadata: %{},
         slug: "some slug",
-        title: "some title"
+        title: "some title",
+        playlist_type: "playlist"
       }
 
       assert {:ok, playlist} = Playlists.create_playlist(valid_attrs)
@@ -94,7 +95,8 @@ defmodule Rauversion.PlaylistsTest do
         Playlists.create_playlist(%{
           title: "foo",
           user_id: user.id,
-          track_playlists: [%{track_id: track.id}]
+          track_playlists: [%{track_id: track.id}],
+          playlist_type: "playlist"
         })
 
       assert length(result.track_playlists) == 1
