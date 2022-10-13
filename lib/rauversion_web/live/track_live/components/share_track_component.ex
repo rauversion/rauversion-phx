@@ -5,12 +5,15 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
   use RauversionWeb, :live_component
 
   def iframe_code(socket, track = %Rauversion.Tracks.Track{private: false}) do
-    url = Routes.embed_url(socket, :private, Rauversion.Tracks.signed_id(track))
+    url =
+      Application.get_env(:rauversion, :domain) <>
+        Routes.embed_path(socket, :private, Rauversion.Tracks.signed_id(track))
+
     iframe_code_string(url, track)
   end
 
   def iframe_code(socket, track = %Rauversion.Tracks.Track{private: true}) do
-    url = Routes.embed_url(socket, :show, track)
+    url = Application.get_env(:rauversion, :domain) <> Routes.embed_path(socket, :show, track)
     iframe_code_string(url, track)
   end
 
