@@ -75,6 +75,8 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through :browser_embed
     get "/embed/:track_id", EmbedController, :show
+    get "/oembed/:track_id", EmbedController, :oembed_show
+    get "/oembed/:track_id/private", EmbedController, :oembed_private_show
     get "/embed/:track_id/private", EmbedController, :private
 
     get "/embed/sets/:playlist_id", EmbedController, :show_playlist
@@ -204,6 +206,8 @@ defmodule RauversionWeb.Router do
 
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
+
+    get "/tracks/:id/oembed.xml", TracksController, :oembed
 
     live "/tracks/:id/show/edit", TrackLive.Show, :edit
 

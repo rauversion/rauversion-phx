@@ -25,6 +25,10 @@ defmodule RauversionWeb.TrackLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:track, track)
+     |> assign(
+       :oembed_json,
+       oembed_meta(socket, track)
+     )
      |> assign(:meta_tags, metatags(socket, track))}
   end
 
@@ -44,6 +48,10 @@ defmodule RauversionWeb.TrackLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:track, track)
+     |> assign(
+       :oembed_json,
+       oembed_meta(socket, track)
+     )
      |> assign(:meta_tags, metatags(socket, track))}
   end
 
@@ -53,10 +61,16 @@ defmodule RauversionWeb.TrackLive.Show do
         _,
         socket = %{assigns: %{live_action: :private}}
       ) do
+    track = Rauversion.Tracks.find_by_signed_id!(signed_id) |> Repo.preload(:user)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:track, Rauversion.Tracks.find_by_signed_id!(signed_id) |> Repo.preload(:user))}
+     |> assign(:track, track)
+     |> assign(
+       :oembed_json,
+       oembed_meta(socket, track)
+     )}
   end
 
   @impl true
@@ -139,5 +153,17 @@ defmodule RauversionWeb.TrackLive.Show do
       # url: "https://phoenix.meta.tags",
       # image: "https://phoenix.meta.tags/logo.png"
     }
+  end
+
+  defp oembed_meta(socket, track = %{private: false}) do
+    Application.get_env(:rauversion, :domain) <>
+      Routes.embed_path(socket, :oembed_show, track, %{format: :json})
+  end
+
+  defp oembed_meta(socket, track = %{private: true}) do
+    Application.get_env(:rauversion, :domain) <>
+      Routes.embed_path(socket, :oembed_private_show, Rauversion.Tracks.signed_id(track), %{
+        format: :json
+      })
   end
 end

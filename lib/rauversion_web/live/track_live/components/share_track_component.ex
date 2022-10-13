@@ -9,16 +9,12 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
       Application.get_env(:rauversion, :domain) <>
         Routes.embed_path(socket, :private, Rauversion.Tracks.signed_id(track))
 
-    iframe_code_string(url, track)
+    Rauversion.Tracks.iframe_code_string(url, track)
   end
 
   def iframe_code(socket, track = %Rauversion.Tracks.Track{private: true}) do
     url = Application.get_env(:rauversion, :domain) <> Routes.embed_path(socket, :show, track)
-    iframe_code_string(url, track)
-  end
-
-  defp iframe_code_string(url, track) do
-    '<iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="#{url}"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="#{track.user.username}" title="#{track.user.username}" target="_blank" style="color: #cccccc; text-decoration: none;">#{track.user.username}</a> · <a href="#{url}" title="#{track.title}" target="_blank" style="color: #cccccc; text-decoration: none;">#{track.title}</a></div>'
+    Rauversion.Tracks.iframe_code_string(url, track)
   end
 
   def render(%{track: track} = assigns) do
