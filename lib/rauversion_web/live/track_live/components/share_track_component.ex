@@ -138,7 +138,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                 scrolling="no"
                 frameborder="no"
                 allow="autoplay"
-                src={Routes.embed_url(@socket, :show, track)}>
+                src={Application.get_env(:rauversion, :domain) <> Routes.embed_path(@socket, :show, track)}>
               </iframe>
               <div
                 style="font-size: 10px;
