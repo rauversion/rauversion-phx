@@ -9,7 +9,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="mx-auto max-w-4xl text-center">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-              Event overview
+              <%= gettext("Event overview") %>
             </h2>
             <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 dark:text-gray-300 dark:text-gray-300 sm:mt-4">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.
@@ -27,7 +27,11 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
                       <%= gettext("Tickets sales") %>
                     </dt>
                     <dd class="order-1 text-5xl font-bold tracking-tight text-brand-600 dark:text-brand-400">
-                      $0.00
+                      <!-- $0.00 -->
+                      <%= Number.Currency.number_to_currency(
+                        Rauversion.Events.sales_count(@event),
+                        precision: Rauversion.Events.presicion_for_currency(@event))
+                      %>
                     </dd>
                   </div>
                   <div class="flex flex-col border-t border-b border-gray-100 dark:border-gray-900 p-6 text-center sm:border-0 sm:border-l sm:border-r">

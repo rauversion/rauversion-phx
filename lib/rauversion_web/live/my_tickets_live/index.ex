@@ -19,6 +19,7 @@ defmodule RauversionWeb.MyTicketsLive.Index do
       "all_tickets" ->
         current_user
         |> Ecto.assoc(:purchased_tickets)
+        |> Rauversion.PurchasedTickets.order_descending()
         |> Rauversion.Repo.all()
         |> Rauversion.Repo.preload([:user, :purchase_order, [event_ticket: :event]])
 
@@ -26,6 +27,7 @@ defmodule RauversionWeb.MyTicketsLive.Index do
         current_user
         |> Ecto.assoc(:purchased_tickets)
         |> Rauversion.PurchasedTickets.get_checked_in()
+        |> Rauversion.PurchasedTickets.order_descending()
         |> Rauversion.Repo.all()
         |> Rauversion.Repo.preload([:user, :purchase_order, [event_ticket: :event]])
     end

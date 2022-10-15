@@ -41,6 +41,11 @@ defmodule Rauversion.PurchasedTickets do
     query |> where(checked_in: true)
   end
 
+  def order_descending(query) do
+    query
+    |> order_by([p], desc: p.inserted_at)
+  end
+
   @doc """
   Creates a purchased_ticket.
 

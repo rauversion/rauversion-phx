@@ -80,6 +80,18 @@ defmodule Rauversion.Events do
     )
   end
 
+  def sales_count(event) do
+    from(a in Rauversion.Events.Event,
+      where: a.id == ^event.id,
+      join: t in Rauversion.EventTickets.EventTicket,
+      on: a.id == t.event_id,
+      join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+      on: t.id == pt.event_ticket_id,
+      select: sum(fragment("(?->>'price')::integer", pt.data))
+    )
+    |> Repo.one()
+  end
+
   def purchased_tickets_count(event) do
     purchased_tickets(event) |> Repo.one()
   end
@@ -224,6 +236,13 @@ defmodule Rauversion.Events do
     case Countries.filter_by(:alpha2, name) do
       [%{name: country_name} | _] -> country_name
       _ -> name
+    end
+  end
+
+  def presicion_for_currency(event) do
+    case event.event_settings.ticket_currency do
+      "usd" -> 2
+      "clp" -> 0
     end
   end
 end

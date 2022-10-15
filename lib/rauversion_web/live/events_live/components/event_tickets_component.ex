@@ -259,7 +259,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                       </td>
                                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                                         <div class="text-gray-900 dark:text-gray-100 text-2xl">
-                                          <%= Number.Currency.number_to_currency(ticket.price) %>
+                                          <%= Number.Currency.number_to_currency(ticket.price, precision: Rauversion.Events.presicion_for_currency(@event)) %>
                                           <%= @event.event_settings.ticket_currency %>
                                         </div>
                                       </td>

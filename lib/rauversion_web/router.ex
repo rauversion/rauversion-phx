@@ -192,7 +192,7 @@ defmodule RauversionWeb.Router do
     live "/events/:slug/overview", EventsLive.New, :overview
 
     live "/events/:slug/payment_success", EventsLive.Show, :payment_success
-    live "/events/:slug/payment_failure", EventsLive.Show, :payment_fail
+    live "/events/:slug/payment_failure", EventsLive.Show, :payment_failure
     live "/events/:slug/payment_cancel", EventsLive.Show, :payment_cancel
 
     live "/events/:slug/edit/schedule", EventsLive.New, :schedule

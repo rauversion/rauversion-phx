@@ -41,6 +41,11 @@ defmodule RauversionWeb.EventsLive.Show do
     socket |> assign(:event, event) |> assign(:payment_success, true)
   end
 
+  defp apply_action(socket, :payment_failure, %{"slug" => id}) do
+    event = Events.get_by_slug!(id) |> Repo.preload([:user])
+    socket |> assign(:event, event) |> assign(:payment_failure, true)
+  end
+
   def attending_people(event) do
     Rauversion.Events.purchased_tickets_count(event)
   end
