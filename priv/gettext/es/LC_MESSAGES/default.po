@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-07 14:22\n"
+"PO-Revision-Date: 2022-10-15 01:34\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1210,7 +1210,7 @@ msgstr "Opcional descripción corta se mostrará junto a este ticket en la pági
 #: lib/rauversion_web/live/events_live/show.html.heex:81
 #, elixir-autogen, elixir-format
 msgid "People Attending"
-msgstr "Gente atendiendo"
+msgstr "Asistentes"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:22
 #, elixir-autogen, elixir-format
@@ -1225,7 +1225,7 @@ msgstr "Mostrar la venta hasta la fecha en la página del evento."
 #: lib/rauversion_web/live/events_live/show.html.heex:72
 #, elixir-autogen, elixir-format
 msgid "Speakers"
-msgstr "Ponentes"
+msgstr "Artistas"
 
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:49
 #, elixir-autogen, elixir-format
