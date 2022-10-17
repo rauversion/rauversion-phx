@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-15 20:55\n"
+"PO-Revision-Date: 2022-10-17 13:07\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1098,7 +1098,7 @@ msgstr "eliminar"
 #: lib/rauversion_web/live/track_live/player.ex:369
 #, elixir-autogen, elixir-format
 msgid "remove from next up"
-msgstr "eliminar del siguiente arriba"
+msgstr "sacar de la lista"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:261
 #, elixir-autogen, elixir-format
