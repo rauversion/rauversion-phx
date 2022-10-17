@@ -33,7 +33,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
               <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
               <%= gettext "Private Share" %>
               </h2>
-              <div class="mb-4 text-zinc-800">
+              <div class="mb-4 text-zinc-800 dark:text-gray-100">
                 <div class="flex items-center space-x-3">
                   <input
                     type="text"
@@ -54,7 +54,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                   <input
                     type="text"
                     value="0:00"
-                    class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
+                    class="w-1/4 shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
                   />
                 </div>
               </div>
