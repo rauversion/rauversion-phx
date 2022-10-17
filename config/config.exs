@@ -41,7 +41,7 @@ config :ueberauth, Ueberauth,
   ]
 
 config :ex_cldr,
-  default_locale: "en",
+  default_locale: "es",
   default_backend: Rauversion.Cldr,
   json_library: Jason
 
