@@ -2,7 +2,7 @@ defmodule RauversionWeb.EmbedController do
   use RauversionWeb, :controller
 
   def show(conn, %{"track_id" => track_id}) do
-    track = Rauversion.Tracks.get_public_track!(track_id)
+    track = Rauversion.Tracks.get_public_track!(track_id) |> Rauversion.Repo.preload(:user)
 
     conn =
       conn

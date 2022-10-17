@@ -21,11 +21,11 @@
     <div class="flex-grow  ml-2 flex items-center justify-between">
 
       <div class="">
-        <h4 class="text-md font-bold">
+        <h4 class="text-md font-bold dark:text-gray-100">
           <%= live_redirect @track.title, to: Routes.track_show_url(@conn, :show, @track) %>
         </h4>
         <%= if @track.user == %Rauversion.Accounts.User{} do %>
-          <h5 class="text-sm font-"><%= @track.user.username %></h5>
+          <h5 class="text-sm dark:text-gray-300"><%= @track.user.username %></h5>
         <% end %>
       </div>
 

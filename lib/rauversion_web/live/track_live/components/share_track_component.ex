@@ -34,36 +34,28 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
               <%= gettext "Private Share" %>
               </h2>
               <div class="mb-4 text-zinc-800">
-                <div class="flex space-x-3">
-                  <label
-                    for="shareLink__field"
-                    class="overflow-hidden absolute p-0 -m-px w-px h-px border-0 cursor-default">
-                    <%= gettext "Link" %>
+                <div class="flex items-center space-x-3">
+                  <input
+                    type="text"
+                    value={Application.get_env(:rauversion, :domain) <> Routes.track_show_path(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
+                    class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
+                    readonly="readonly"/>
+
+                  <label class="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id=""
+                      name="share_from"
+                      class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded"
+                    />
+                    <span class=""><%= gettext "at" %></span>
                   </label>
 
-                  <div class="flex items-center space-x-3">
-                    <input
-                      type="text"
-                      value={Application.get_env(:rauversion, :domain) <> Routes.track_show_path(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
-                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
-                      readonly="readonly"/>
-
-                    <label class="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id=""
-                        name="share_from"
-                        class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded"
-                      />
-                      <span class=""><%= gettext "at" %></span>
-                    </label>
-
-                    <input
-                      type="text"
-                      value="0:00"
-                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value="0:00"
+                    class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
+                  />
                 </div>
               </div>
               <div class="text-sm text-gray-700 dark:text-gray-300 py-2">
