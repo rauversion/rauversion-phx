@@ -15,6 +15,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesHighlightsListComponent do
 
   defp list_posts() do
     Posts.list_posts("published")
+    |> Posts.order()
     |> Rauversion.Repo.paginate(page: 1, page_size: 3)
   end
 

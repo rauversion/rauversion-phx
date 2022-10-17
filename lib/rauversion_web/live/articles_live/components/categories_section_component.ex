@@ -6,8 +6,7 @@ defmodule RauversionWeb.ArticlesLive.CategoriesSectionComponent do
   def update(assigns, socket) do
     {:ok,
      socket
-     |> assign(assigns)
-     |> assign(:posts, list_posts_on_category(assigns.category_slug))}
+     |> assign(assigns)}
   end
 
   defp list_posts_on_category(slug) do
@@ -15,7 +14,8 @@ defmodule RauversionWeb.ArticlesLive.CategoriesSectionComponent do
 
     Posts.list_posts("published")
     |> Posts.with_category(category)
-    |> Rauversion.Repo.paginate(page: 1, page_size: 3)
+    |> Posts.order()
+    |> Rauversion.Repo.paginate(page: 1, page_size: 6)
   end
 
   def render(assigns) do
@@ -28,7 +28,7 @@ defmodule RauversionWeb.ArticlesLive.CategoriesSectionComponent do
       </div>
 
       <div class="flex space-x-2">
-        <%= for post <- @posts do %>
+        <%= for post <- list_posts_on_category(@category_slug) do %>
           <div class="w-full px-2 mt-12 md:w-1/2 lg:w-1/4">
             <.live_component
               id={"post-id-#{post.id}"}

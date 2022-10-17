@@ -9,13 +9,19 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
   def update(assigns, socket) do
     {:ok,
      socket
-     |> assign(assigns)
-     |> assign(:posts, list_posts())}
+     |> assign(assigns)}
   end
 
   defp list_posts() do
     Posts.list_posts("published")
+    |> Posts.order()
     |> Rauversion.Repo.paginate(page: 1, page_size: 3)
+  end
+
+  defp list_latests do
+    Posts.list_posts("published")
+    |> Posts.order()
+    |> Rauversion.Repo.paginate(page: 2, page_size: 7)
   end
 
   def render(assigns) do
@@ -38,7 +44,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
           <div class="col-span-5 flex space-x-4 divide-x-2">
 
             <div class="w-1/4 space-y-4">
-              <%= for post <- @posts do %>
+              <%= for post <- list_latests() do %>
                 <.live_component
                   post={post}
                   id={"side-articles-#{post.id}"}
@@ -50,7 +56,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
             </div>
 
             <div class="px-4 flex-grow space-y-4 pb-4">
-              <%= for post <- @posts do %>
+              <%= for post <- list_latests() do %>
                 <.live_component
                   id={"main-articles-#{post.id}"}
                   post={post}
@@ -67,7 +73,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
               <%= gettext("The Latest") %>
             </h3>
 
-            <%= for post <- @posts do %>
+            <%= for post <- list_latests() do %>
               <.live_component
                 id={"minimal-post-#{post.id}"}
                 post={post}
