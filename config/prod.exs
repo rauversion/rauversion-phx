@@ -17,9 +17,7 @@ config :rauversion, RauversionWeb.Endpoint,
 config :rauversion, :domain, "https://rauversion.com"
 
 # Do not print debug messages in production
-config :logger,
-  level: :info,
-  backends: [:console, Sentry.LoggerBackend]
+config :logger, level: :info
 
 # ## SSL Support
 #

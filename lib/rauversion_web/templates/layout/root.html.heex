@@ -53,7 +53,7 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', '<%= Application.get_env(:rauversion, :google_analytics_id) %>');
+        gtag('config', '<%= Application.get_env(:rauversion, "GA_ID") %>');
       </script>
     <% end %>
 
