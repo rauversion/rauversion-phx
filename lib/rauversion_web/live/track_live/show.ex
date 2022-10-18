@@ -135,19 +135,24 @@ defmodule RauversionWeb.TrackLive.Show do
   defp page_title(:edit), do: "Edit Track"
 
   defp metatags(socket, track) do
+    # "https://chaskiq.ngrok.io"
+    domain = Application.get_env(:rauversion, :domain)
+
     %{
+      url: domain <> Routes.articles_show_path(socket, :show, track.id),
       title: "#{track.title} on Rauversion",
       description: "Stream #{track.title} by #{track.user.username} on Rauversion.",
       image:
-        Application.get_env(:rauversion, :domain) <>
+        domain <>
           Rauversion.Tracks.variant_url(track, "cover", %{resize_to_limit: "360x360"}),
-      "twitter:player":
-        Application.get_env(:rauversion, :domain) <> Routes.embed_path(socket, :show, track),
+      "twitter:player": domain <> Routes.embed_path(socket, :show, track),
       twitter: %{
         card: "player",
         player: %{
-          width: 480,
-          height: 480
+          stream: domain <> Rauversion.Tracks.blob_proxy_url(track, "mp3_audio"),
+          "stream:content_type": "audio/mpeg",
+          width: 290,
+          height: 58
         }
       }
       # url: "https://phoenix.meta.tags",
