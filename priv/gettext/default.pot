@@ -1664,3 +1664,31 @@ msgstr ""
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:41
 msgid "There was something wrong sending this invitation"
 msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/templates/error/404.html.heex:31
+#: lib/rauversion_web/templates/error/500.html.heex:31
+msgid "Contact support"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/templates/error/404.html.heex:28
+#: lib/rauversion_web/templates/error/500.html.heex:28
+msgid "Go back home"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/templates/error/404.html.heex:20
+msgid "Page not found"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/templates/error/404.html.heex:23
+#: lib/rauversion_web/templates/error/500.html.heex:23
+msgid "Please check the URL in the address bar and try again."
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/templates/error/500.html.heex:20
+msgid "Something went wrong"
+msgstr ""

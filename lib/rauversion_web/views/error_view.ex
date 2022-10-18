@@ -1,10 +1,12 @@
 defmodule RauversionWeb.ErrorView do
   use RauversionWeb, :view
 
+  # In order to test error views on development, we need to set debug_errors: false in config/dev.exs.
+
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
   # def render("500.html", _assigns) do
-  #   "Internal Server Error"
+  #  " a suuuper Internal Server Error"
   # end
 
   # By default, Phoenix returns the status message from
