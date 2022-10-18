@@ -1,6 +1,6 @@
 defmodule RauversionWeb.Router do
   use RauversionWeb, :router
-
+  use Plug.ErrorHandler
   import RauversionWeb.UserAuth
 
   import Plug.BasicAuth
