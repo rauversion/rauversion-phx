@@ -77,6 +77,7 @@ defmodule Rauversion.MixProject do
       {:ex_cldr_dates_times, "~> 2.0"},
       {:oauth2, "~> 1.0 or ~> 2.0"},
       {:ueberauth, "~> 0.7", override: true},
+      {:sentry, "~> 8.0"},
       {
         :transbank,
         git: "https://github.com/elixircl/transbank-elixir.git", branch: "main"
@@ -119,6 +120,7 @@ defmodule Rauversion.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      sentry_recompile: ["compile", "deps.compile sentry --force"],
       # "assets.deploy": ["esbuild default --minify", "phx.digest"]
       "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]

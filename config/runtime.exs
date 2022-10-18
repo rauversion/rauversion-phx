@@ -78,6 +78,7 @@ config :rauversion, tbk_mall_id: System.get_env("TBK_MALL_ID")
 config :rauversion, tbk_commerce_id: System.get_env("TBK_COMMERCE_ID")
 config :rauversion, tbk_api_key: System.get_env("TBK_API_KEY")
 config :rauversion, platform_event_fee: System.get_env("PLATFORM_EVENTS_FEE")
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration
@@ -109,6 +110,16 @@ if config_env() == :prod do
       environment variable SECRET_KEY_BASE is missing.
       You can generate one by calling: mix phx.gen.secret
       """
+
+  config :sentry,
+    dsn: System.get_env("SENTRY_DSN"),
+    environment_name: :prod,
+    enable_source_code_context: true,
+    root_source_code_path: File.cwd!(),
+    tags: %{
+      env: "production"
+    },
+    included_environments: [:prod]
 
   config :active_storage, :secret_key_base, secret_key_base
 
