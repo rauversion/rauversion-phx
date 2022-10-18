@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-15 04:34\n"
+"PO-Revision-Date: 2022-10-17 13:07\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1098,7 +1098,7 @@ msgstr "eliminar"
 #: lib/rauversion_web/live/track_live/player.ex:369
 #, elixir-autogen, elixir-format
 msgid "remove from next up"
-msgstr "eliminar del siguiente arriba"
+msgstr "sacar de la lista"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:261
 #, elixir-autogen, elixir-format
@@ -1576,40 +1576,40 @@ msgstr "¿Quieres subir tu música?"
 #: lib/rauversion_web/live/events_live/components/event_overview.ex:12
 #, elixir-autogen, elixir-format
 msgid "Event overview"
-msgstr ""
+msgstr "Resumen del evento"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:70
 #, elixir-autogen, elixir-format
 msgid "Payment failed"
-msgstr ""
+msgstr "Error en el pago"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "Payment succeed"
-msgstr ""
+msgstr "Pago exitoso"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:40
 #, elixir-autogen, elixir-format
 msgid "The payment was successfully processed."
-msgstr ""
+msgstr "El pago fue procesado con éxito."
 
 #: lib/rauversion_web/live/events_live/show.html.heex:74
 #, elixir-autogen, elixir-format
 msgid "There was a problem processing the payment."
-msgstr ""
+msgstr "Hubo un problema al procesar el pago."
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:85
 #, elixir-autogen, elixir-format
 msgid "Transbank accounts are not allowed on your account type"
-msgstr ""
+msgstr "Las cuentas de Transbank no están permitidas en tu tipo de cuenta"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:84
 #, elixir-autogen, elixir-format
 msgid "Transbank not allowed"
-msgstr ""
+msgstr "Transbank no permitido"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:47
 #, elixir-autogen, elixir-format
 msgid "View tickets"
-msgstr ""
+msgstr "Ver tickets"
 
