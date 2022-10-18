@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Acholi\n"
 "Language: ach_UG\n"
-"PO-Revision-Date: 2022-10-15 04:34\n"
+"PO-Revision-Date: 2022-10-18 01:23\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -55,7 +55,7 @@ msgstr "crwdns13:0crwdne13:0"
 msgid "All rights reserved"
 msgstr "crwdns15:0crwdne15:0"
 
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:75
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:67
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to reset this link?<br />\n"
 "            It will not be possible to access this track from any existing shares. "
@@ -120,7 +120,7 @@ msgstr "crwdns37:0crwdne37:0"
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:84
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:270
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:224
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:98
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:90
 #, elixir-autogen, elixir-format
 msgid "Cancel"
 msgstr "crwdns39:0crwdne39:0"
@@ -213,7 +213,7 @@ msgstr "crwdns69:0crwdne69:0"
 msgid "Copy link"
 msgstr "crwdns71:0crwdne71:0"
 
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:124
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:116
 #, elixir-autogen, elixir-format
 msgid "Copy to clipboard"
 msgstr "crwdns73:0crwdne73:0"
@@ -294,7 +294,7 @@ msgstr "crwdns97:0crwdne97:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:98
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:28
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:112
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:104
 #, elixir-autogen, elixir-format
 msgid "Embed"
 msgstr "crwdns99:0crwdne99:0"
@@ -426,7 +426,6 @@ msgstr "crwdns145:0crwdne145:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:28
 #: lib/rauversion_web/live/track_live/components/share_form_track_component.ex:77
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:41
 #, elixir-autogen, elixir-format
 msgid "Link"
 msgstr "crwdns147:0crwdne147:0"
@@ -456,7 +455,7 @@ msgstr "crwdns153:0crwdne153:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:155
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:29
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:176
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:168
 #, elixir-autogen, elixir-format
 msgid "Message"
 msgstr "crwdns155:0crwdne155:0"
@@ -638,11 +637,6 @@ msgstr "crwdns213:0crwdne213:0"
 msgid "Profile"
 msgstr "crwdns215:0crwdne215:0"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:60
-#, elixir-autogen, elixir-format
-msgid "Profile %{title}"
-msgstr "crwdns217:0%{title}crwdne217:0"
-
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:37
 #, elixir-autogen, elixir-format
 msgid "Provide FLAC, WAV, ALAC, or AIFF for highest audio quality."
@@ -675,8 +669,8 @@ msgstr "crwdns227:0crwdne227:0"
 msgid "Push Notifications"
 msgstr "crwdns229:0crwdne229:0"
 
-#: lib/rauversion_web/live/articles_live/components/articles_highlights_list_component.ex:27
-#: lib/rauversion_web/live/articles_live/components/articles_list_component.ex:28
+#: lib/rauversion_web/live/articles_live/components/articles_highlights_list_component.ex:28
+#: lib/rauversion_web/live/articles_live/components/articles_list_component.ex:43
 #, elixir-autogen, elixir-format
 msgid "Recent publications"
 msgstr "crwdns231:0crwdne231:0"
@@ -715,7 +709,7 @@ msgid "Resend confirmation instructions"
 msgstr "crwdns241:0crwdne241:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:79
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:93
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:85
 #, elixir-autogen, elixir-format
 msgid "Reset"
 msgstr "crwdns243:0crwdne243:0"
@@ -726,7 +720,7 @@ msgid "Reset Password"
 msgstr "crwdns245:0crwdne245:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:72
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:86
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:78
 #, elixir-autogen, elixir-format
 msgid "Reset secret link"
 msgstr "crwdns247:0crwdne247:0"
@@ -774,6 +768,7 @@ msgstr "crwdns253:0crwdne253:0"
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:100
 #: lib/rauversion_web/live/usersettings_live/components/email_form.ex:46
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:99
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:60
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:114
 #: lib/rauversion_web/live/usersettings_live/components/security_form.ex:57
@@ -803,8 +798,8 @@ msgstr "crwdns261:0crwdne261:0"
 msgid "Select a tab"
 msgstr "crwdns263:0crwdne263:0"
 
-#: lib/rauversion_web/live/articles_live/components/articles_highlights_list_component.ex:29
-#: lib/rauversion_web/live/articles_live/components/articles_list_component.ex:32
+#: lib/rauversion_web/live/articles_live/components/articles_highlights_list_component.ex:30
+#: lib/rauversion_web/live/articles_live/components/articles_list_component.ex:47
 #, elixir-autogen, elixir-format
 msgid "Selected articles & reviews from Rauversion community and editorial"
 msgstr "crwdns265:0crwdne265:0"
@@ -885,13 +880,13 @@ msgid "Support"
 msgstr "crwdns295:0crwdne295:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:91
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:105
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:97
 #, elixir-autogen, elixir-format
 msgid "The secret link has been successfully reset."
 msgstr "crwdns297:0crwdne297:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:66
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:80
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:72
 #, elixir-autogen, elixir-format
 msgid "There was a problem resetting the link. Please try again later."
 msgstr "crwdns299:0crwdne299:0"
@@ -911,7 +906,7 @@ msgid "This information will be displayed publicly so be careful what you share.
 msgstr "crwdns303:0crwdne303:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:147
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:168
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:160
 #, elixir-autogen, elixir-format
 msgid "This player uses cookies in accordance with our Cookies policy.\n"
 "            We may collect usage data for analytics purposes.\n"
@@ -923,7 +918,7 @@ msgstr "crwdns305:0crwdne305:0"
 msgid "This track is set to private and can only be shared using the secret link above."
 msgstr "crwdns307:0crwdne307:0"
 
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:70
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:62
 #, elixir-autogen, elixir-format
 msgid "This track is set to private and can only be shared using the secret link above.\n"
 "            You can reset the secret link if you want to revoke access."
@@ -1054,7 +1049,7 @@ msgid "Your insights"
 msgstr "crwdns353:0crwdne353:0"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:45
-#: lib/rauversion_web/live/track_live/components/share_track_component.ex:58
+#: lib/rauversion_web/live/track_live/components/share_track_component.ex:51
 #, elixir-autogen, elixir-format
 msgid "at"
 msgstr "crwdns355:0crwdne355:0"
@@ -1228,7 +1223,7 @@ msgstr "crwdns467:0crwdne467:0"
 msgid "Tax options"
 msgstr "crwdns473:0crwdne473:0"
 
-#: lib/rauversion_web/live/articles_live/components/articles_list_component.ex:67
+#: lib/rauversion_web/live/articles_live/components/articles_list_component.ex:82
 #, elixir-autogen, elixir-format
 msgid "The Latest"
 msgstr "crwdns475:0crwdne475:0"
@@ -1543,12 +1538,14 @@ msgid "You need to be login before get tickets"
 msgstr "crwdns599:0crwdne599:0"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:96
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:138
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:86
 #, elixir-autogen, elixir-format
 msgid "Please send us an email showing us your work"
 msgstr "crwdns601:0crwdne601:0"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:97
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:139
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:87
 #, elixir-autogen, elixir-format
 msgid "Request an artist account"
@@ -1608,4 +1605,69 @@ msgstr "crwdns623:0crwdne623:0"
 #, elixir-autogen, elixir-format
 msgid "View tickets"
 msgstr "crwdns625:0crwdne625:0"
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:60
+#, elixir-autogen, elixir-format
+msgid "Edit track"
+msgstr "crwdns627:0crwdne627:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:29
+#, elixir-autogen, elixir-format
+msgid "Invitation sent successfully"
+msgstr "crwdns629:0crwdne629:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:46
+#, elixir-autogen, elixir-format
+msgid "Invitations"
+msgstr "crwdns631:0crwdne631:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:137
+#, elixir-autogen, elixir-format
+msgid "Invitations are disabled on your account type"
+msgstr "crwdns633:0crwdne633:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:136
+#, elixir-autogen, elixir-format
+msgid "Invitations disabled"
+msgstr "crwdns635:0crwdne635:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:105
+#, elixir-autogen, elixir-format
+msgid "Invite artists"
+msgstr "crwdns637:0crwdne637:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:63
+#, elixir-autogen, elixir-format
+msgid "Invite artists to rauversion"
+msgstr "crwdns639:0crwdne639:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:47
+#, elixir-autogen, elixir-format
+msgid "Invite other artists to your account."
+msgstr "crwdns641:0crwdne641:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:85
+#, elixir-autogen, elixir-format
+msgid "Invite people"
+msgstr "crwdns643:0crwdne643:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:67
+#, elixir-autogen, elixir-format
+msgid "you have %{count} invitations left"
+msgstr "crwdns645:0%{count}crwdne645:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:35
+#, elixir-autogen, elixir-format
+msgid "Error, Invitation was not sent"
+msgstr "crwdns647:0crwdne647:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:48
+#, elixir-autogen, elixir-format
+msgid "Invitation not sent, this person already exists"
+msgstr "crwdns649:0crwdne649:0"
+
+#: lib/rauversion_web/live/usersettings_live/components/invitations.ex:41
+#, elixir-autogen, elixir-format
+msgid "There was something wrong sending this invitation"
+msgstr "crwdns651:0crwdne651:0"
 
