@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Acholi\n"
 "Language: ach_UG\n"
-"PO-Revision-Date: 2022-10-18 01:23\n"
+"PO-Revision-Date: 2022-10-18 05:09\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1670,4 +1670,32 @@ msgstr "crwdns649:0crwdne649:0"
 #, elixir-autogen, elixir-format
 msgid "There was something wrong sending this invitation"
 msgstr "crwdns651:0crwdne651:0"
+
+#: lib/rauversion_web/templates/error/404.html.heex:31
+#: lib/rauversion_web/templates/error/500.html.heex:31
+#, elixir-autogen, elixir-format
+msgid "Contact support"
+msgstr "crwdns653:0crwdne653:0"
+
+#: lib/rauversion_web/templates/error/404.html.heex:28
+#: lib/rauversion_web/templates/error/500.html.heex:28
+#, elixir-autogen, elixir-format
+msgid "Go back home"
+msgstr "crwdns655:0crwdne655:0"
+
+#: lib/rauversion_web/templates/error/404.html.heex:20
+#, elixir-autogen, elixir-format
+msgid "Page not found"
+msgstr "crwdns657:0crwdne657:0"
+
+#: lib/rauversion_web/templates/error/404.html.heex:23
+#: lib/rauversion_web/templates/error/500.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Please check the URL in the address bar and try again."
+msgstr "crwdns659:0crwdne659:0"
+
+#: lib/rauversion_web/templates/error/500.html.heex:20
+#, elixir-autogen, elixir-format
+msgid "Something went wrong"
+msgstr "crwdns661:0crwdne661:0"
 
