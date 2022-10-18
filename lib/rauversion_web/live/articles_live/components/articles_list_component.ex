@@ -15,13 +15,22 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
   defp list_posts() do
     Posts.list_posts("published")
     |> Posts.order()
-    |> Rauversion.Repo.paginate(page: 1, page_size: 3)
+    |> Rauversion.Repo.paginate(page: 1, page_size: 7)
   end
 
   defp list_latests do
     Posts.list_posts("published")
     |> Posts.order()
     |> Rauversion.Repo.paginate(page: 2, page_size: 7)
+  end
+
+  defp list_news() do
+    category = Rauversion.Categories.get_category_by_slug!("news")
+
+    Posts.list_posts("published")
+    |> Posts.with_category(category)
+    |> Posts.order()
+    |> Rauversion.Repo.paginate(page: 1, page_size: 7)
   end
 
   def render(assigns) do
@@ -44,7 +53,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
           <div class="col-span-5 flex space-x-4 divide-x-2">
 
             <div class="w-1/4 space-y-4">
-              <%= for post <- list_latests() do %>
+              <%= for post <- list_news() do %>
                 <.live_component
                   post={post}
                   id={"side-articles-#{post.id}"}
@@ -56,7 +65,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
             </div>
 
             <div class="px-4 flex-grow space-y-4 pb-4">
-              <%= for post <- list_latests() do %>
+              <%= for post <- list_posts() do %>
                 <.live_component
                   id={"main-articles-#{post.id}"}
                   post={post}

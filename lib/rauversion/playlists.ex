@@ -194,7 +194,7 @@ defmodule Rauversion.Playlists do
   end
 
   def signed_id(playlist) do
-    Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", playlist.id)
+    Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", playlist.id, max_age: 315_360_000_000)
   end
 
   def find_by_signed_id!(token) do

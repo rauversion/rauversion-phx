@@ -535,4 +535,39 @@ defmodule Rauversion.AccountsTest do
       assert {:ok, %{user: _user}} = Rauversion.Accounts.get_or_create_user(data)
     end
   end
+
+  describe "invite user" do
+    setup do
+      %{user: user_fixture()}
+    end
+
+    test "invite user, invalid email", %{user: user} do
+      user_params = %{email: "ola"}
+      assert {:error, _} = Accounts.invite_user(%Accounts.User{}, user_params)
+    end
+
+    test "invite user, valid", %{user: user} do
+      user_params = %{email: "miguel@m.cl", invited_by: user.id}
+      assert {:ok, _} = Accounts.invite_user(%Accounts.User{}, user_params)
+
+      invited_user = Accounts.get_user_by_email("miguel@m.cl")
+
+      assert %{id: id, invited_by: invited_by} = invited_user
+      assert id == invited_user.id
+      assert invited_by == user.id
+      assert user.type == "user"
+    end
+
+    test "invite artist, valid", %{user: user} do
+      user_params = %{email: "miguel@m.cl", invited_by: user.id, type: "artist"}
+      assert {:ok, _} = Accounts.invite_user(%Accounts.User{}, user_params)
+
+      invited_user = Accounts.get_user_by_email("miguel@m.cl")
+
+      assert %{id: id, invited_by: invited_by} = invited_user
+      assert id == invited_user.id
+      assert invited_by == user.id
+      assert invited_user.type == "artist"
+    end
+  end
 end

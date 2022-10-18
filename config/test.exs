@@ -3,6 +3,13 @@ import Config
 # Only in tests, remove the complexity from the password hashing algorithm
 config :bcrypt_elixir, :log_rounds, 1
 
+config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: "en"
+
+config :ex_cldr,
+  default_locale: "en",
+  default_backend: Rauversion.Cldr,
+  json_library: Jason
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used

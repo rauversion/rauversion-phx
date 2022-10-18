@@ -49,6 +49,7 @@ else
 end
 
 config :rauversion, google_maps_key: System.get_env("GOOGLE_MAPS_KEY")
+config :rauversion, google_analytics_id: System.get_env("GA_ID")
 
 config :rauversion, disabled_registrations: System.get_env("DISABLED_REGISTRATIONS", "false")
 

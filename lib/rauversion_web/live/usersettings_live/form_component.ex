@@ -50,6 +50,10 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     socket
   end
 
+  defp get_change_set(:invitations, socket, _user) do
+    socket
+  end
+
   @impl true
   def handle_event("validate", _params, socket) do
     {:noreply, socket}

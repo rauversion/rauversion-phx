@@ -24,7 +24,7 @@ defmodule Rauversion.Tracks do
   end
 
   def signed_id(track) do
-    Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", track.id)
+    Phoenix.Token.sign(RauversionWeb.Endpoint, "user auth", track.id, max_age: 315_360_000_000)
   end
 
   def get_track_query(id) do
