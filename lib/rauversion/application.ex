@@ -11,6 +11,7 @@ defmodule Rauversion.Application do
     #  Dotenv.load()
     #  Mix.Task.run("loadconfig")
     # end
+    Logger.add_backend(Sentry.LoggerBackend)
 
     children = [
       # Start the Ecto repository
