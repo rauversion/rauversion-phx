@@ -34,6 +34,17 @@ defmodule Rauversion.Events do
     # |> Repo.all()
   end
 
+  def public_events() do
+    from(pi in Event,
+      where: pi.private == false,
+      preload: [user: :avatar_blob]
+    )
+  end
+
+  def public_events(query) do
+    query |> where([e], e.private == false)
+  end
+
   def list_events(query, state) do
     query
     |> where([p], p.state == ^state)
@@ -244,5 +255,17 @@ defmodule Rauversion.Events do
       "usd" -> 2
       "clp" -> 0
     end
+  end
+
+  def publish_event!(event) do
+    event
+    |> Event.changeset(%{state: "published"})
+    |> Repo.update()
+  end
+
+  def unpublish_event!(event) do
+    event
+    |> Event.changeset(%{state: "draft"})
+    |> Repo.update()
   end
 end

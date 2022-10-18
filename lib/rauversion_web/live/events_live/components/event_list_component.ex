@@ -9,12 +9,12 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
   def update(assigns, socket) do
     {:ok,
      socket
-     |> assign(assigns)
-     |> assign(:events, list_posts())}
+     |> assign(assigns)}
   end
 
   defp list_posts() do
-    Events.list_event() |> Repo.preload(user: :avatar_blob)
+    Events.public_events()
+    |> Rauversion.Repo.all()
   end
 
   def render(assigns) do
@@ -32,7 +32,7 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
           <div class="max-w-7xl mx-auto py-16 px-4 overflow-hidden sm:py-24 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
 
-              <%= for event <- @events do %>
+              <%= for event <- list_posts() do %>
 
                 <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, event.slug), class: "group text-sm" do %>
                   <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900 group-hover:opacity-75">

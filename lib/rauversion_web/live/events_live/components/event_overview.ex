@@ -30,7 +30,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
                       <!-- $0.00 -->
                       <%= Number.Currency.number_to_currency(
                         Rauversion.Events.sales_count(@event),
-                        precision: Rauversion.Events.presicion_for_currency(@event))
+                        precision: Rauversion.Events.presicion_for_currency(@event)) || "$0"
                       %>
                     </dd>
                   </div>

@@ -27,9 +27,59 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
     #!(user.settings.tbk_commerce_code |> is_binary())
   end
 
+  def handle_event("publish-event", _, socket) do
+    event =
+      case socket.assigns.event do
+        %{state: "published"} ->
+          Rauversion.Events.unpublish_event!(socket.assigns.event)
+
+        _ ->
+          Rauversion.Events.publish_event!(socket.assigns.event)
+      end
+
+    {:noreply, assign(:event, event)}
+  end
+
+  def button_label(event) do
+    case event do
+      %{state: "published"} -> gettext("Unpublish Event")
+      _ -> gettext("Publish Event")
+    end
+  end
+
+  def event_status_label(event) do
+    case event do
+      %{state: "published"} -> gettext("Your event is published")
+      _ -> gettext("Your event has not been published")
+    end
+  end
+
   def render(assigns) do
     ~H"""
       <div class="p-5">
+
+          <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
+            <%= if @event.id do %>
+              <%= gettext "Edit Event" %>
+            <% else %>
+              <%= gettext "Create Event" %>
+            <% end %>
+          </h2>
+
+          <div class="flex justify-end items-center space-x-3">
+            <span class="text-xs dark:text-gray-400">
+              <%= event_status_label(@event) %>
+            </span>
+            <button
+              phx-click={"publish-event"}
+              phx-target={@myself}
+              class={["inline-flex items-center rounded-md border border-transparent bg-green-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"]}
+              >
+              <%= button_label(@event) %>
+            </button>
+          </div>
+
+
         <.form
           let={f}
           for={@changeset}
@@ -39,10 +89,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
           data-controller="gmaps"
           data-action="google-maps-callback@window->maps#initializeMap"
           >
-
-          <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
-            <%= gettext "Create Event" %>
-          </h2>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 

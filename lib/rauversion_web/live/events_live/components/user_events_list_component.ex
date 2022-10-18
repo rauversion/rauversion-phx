@@ -7,7 +7,7 @@ defmodule RauversionWeb.EventsLive.UserEventsListComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:tab, "draft")
+     |> assign(:tab, "all")
      |> assign(:events, list_events(assigns.current_user, "draft"))}
   end
 
