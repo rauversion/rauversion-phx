@@ -45,7 +45,7 @@
     ></script>
 
 
-    <%= if Application.get_env(:rauversion, "GA_ID") do %>
+    <%= if Application.get_env(:rauversion, :google_analytics_id) do %>
       <!-- Google tag (gtag.js) -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5CQZMGV0S"></script>
       <script>
