@@ -42,7 +42,9 @@ defmodule Rauversion.Events do
   end
 
   def public_events(query) do
-    query |> where([e], e.private == false)
+    query
+    |> where([e], e.private == false)
+    |> where([e], e.state == "published")
   end
 
   def list_events(query, state) do
