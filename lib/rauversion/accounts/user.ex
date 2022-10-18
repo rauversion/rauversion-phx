@@ -7,7 +7,7 @@ defmodule Rauversion.Accounts.User do
   use ActiveStorage.Attached.HasOne, name: :profile_header, model: "User"
 
   schema "users" do
-    field :type, :string
+    field :type, :string, default: "user"
     field :first_name, :string
     field :last_name, :string
     field :username, :string
@@ -18,6 +18,13 @@ defmodule Rauversion.Accounts.User do
     field :country, :string
     field :city, :string
     field :bio, :string
+    field :invitations_count, :integer, default: 10
+
+    belongs_to :invited_by_user, Rauversion.Accounts.User, foreign_key: :invited_by
+
+    has_many :invited_users, Rauversion.Accounts.User,
+      on_delete: :nilify_all,
+      foreign_key: :invited_by
 
     has_many :oauth_credentials, Rauversion.OauthCredentials.OauthCredential,
       on_delete: :delete_all
@@ -110,7 +117,7 @@ defmodule Rauversion.Accounts.User do
 
   def invitation_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :type, :invited_by])
     |> validate_email()
     |> validate_password([])
   end

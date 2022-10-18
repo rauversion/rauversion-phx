@@ -62,4 +62,13 @@
       />
     <% end %>
 
+    <%= if @action == :invitations do %>
+      <.live_component
+        module={RauversionWeb.UsersettingsLive.Invitations}
+        id="invitations-form"
+        target={@myself}
+        current_user={@current_user}
+      />
+    <% end %>
+
   </div>

@@ -543,11 +543,25 @@ defmodule Rauversion.Accounts do
 
   # invitations
 
+  def invite_artist(%User{} = user, attrs \\ %{}) do
+    attrs = Map.merge(attrs, %{password: SecureRandom.urlsafe_base64(10), type: "artist"})
+
+    User.invitation_changeset(user, attrs)
+    |> Repo.insert()
+  end
+
   def invite_user(%User{} = user, attrs \\ %{}) do
     attrs = Map.merge(attrs, %{password: SecureRandom.urlsafe_base64(10)})
 
     User.invitation_changeset(user, attrs)
     |> Repo.insert()
+  end
+
+  def use_invitation(%User{} = user) do
+    from(u in User,
+      where: u.id == ^user.id
+    )
+    |> Rauversion.Repo.update_all(inc: [invitations_count: -1])
   end
 
   def change_user_invitation(%User{} = user, attrs \\ %{}) do
