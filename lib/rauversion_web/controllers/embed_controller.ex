@@ -46,7 +46,8 @@ defmodule RauversionWeb.EmbedController do
   end
 
   def private(conn, %{"track_id" => signed_track_id}) do
-    track = Rauversion.Tracks.find_by_signed_id!(signed_track_id)
+    track =
+      Rauversion.Tracks.find_by_signed_id!(signed_track_id) |> Rauversion.Repo.preload(:user)
 
     conn =
       conn
