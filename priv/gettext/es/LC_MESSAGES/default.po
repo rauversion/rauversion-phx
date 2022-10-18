@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-18 01:23\n"
+"PO-Revision-Date: 2022-10-18 03:02\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1613,65 +1613,65 @@ msgstr "Ver tickets"
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:60
 #, elixir-autogen, elixir-format
 msgid "Edit track"
-msgstr ""
+msgstr "Editar Pista"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:29
 #, elixir-autogen, elixir-format
 msgid "Invitation sent successfully"
-msgstr ""
+msgstr "Invitación enviada correctamente"
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:46
 #, elixir-autogen, elixir-format
 msgid "Invitations"
-msgstr ""
+msgstr "Invitaciones"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:137
 #, elixir-autogen, elixir-format
 msgid "Invitations are disabled on your account type"
-msgstr ""
+msgstr "Las invitaciones están desactivadas en tu tipo de cuenta"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:136
 #, elixir-autogen, elixir-format
 msgid "Invitations disabled"
-msgstr ""
+msgstr "Invitaciones desactivadas"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:105
 #, elixir-autogen, elixir-format
 msgid "Invite artists"
-msgstr ""
+msgstr "Invitar artistas"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:63
 #, elixir-autogen, elixir-format
 msgid "Invite artists to rauversion"
-msgstr ""
+msgstr "Invitar artistas a rauversion"
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:47
 #, elixir-autogen, elixir-format
 msgid "Invite other artists to your account."
-msgstr ""
+msgstr "Invita a otros artistas a tu cuenta."
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:85
 #, elixir-autogen, elixir-format
 msgid "Invite people"
-msgstr ""
+msgstr "Invitar gente"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:67
 #, elixir-autogen, elixir-format
 msgid "you have %{count} invitations left"
-msgstr ""
+msgstr "te quedan %{count} invitaciones"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:35
 #, elixir-autogen, elixir-format
 msgid "Error, Invitation was not sent"
-msgstr ""
+msgstr "Error, la invitación no fue enviada"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:48
 #, elixir-autogen, elixir-format
 msgid "Invitation not sent, this person already exists"
-msgstr ""
+msgstr "Invitación no enviada, esta persona ya existe"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:41
 #, elixir-autogen, elixir-format
 msgid "There was something wrong sending this invitation"
-msgstr ""
+msgstr "Se ha producido un error al enviar esta invitación"
 
