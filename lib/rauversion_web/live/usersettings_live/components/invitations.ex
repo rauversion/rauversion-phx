@@ -13,6 +13,7 @@ defmodule RauversionWeb.UsersettingsLive.Invitations do
       nil ->
         case Accounts.invite_user(%Accounts.User{}, %{
                email: email,
+               type: "artist",
                invited_by: socket.assigns.current_user.id
              }) do
           {:ok, user} ->
