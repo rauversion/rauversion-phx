@@ -34,13 +34,17 @@ defmodule RauversionWeb.ArticlesLive.Show do
     |> assign(:meta_tags, metatags(socket, post))
   end
 
-  defp metatags(_socket, post) do
+  defp metatags(socket, post) do
     %{
       title: "#{post.title} on Rauversion",
       description: "Read #{post.title} by #{post.user.username} on Rauversion.",
+      url: Routes.articles_show_path(socket, :show, post.slug),
       image:
         Application.get_env(:rauversion, :domain) <>
-          Rauversion.Posts.variant_url(post, "cover", %{resize_to_limit: "360x360"})
+          Rauversion.Posts.variant_url(post, "cover", %{resize_to_limit: "360x360"}),
+      twitter: %{
+        card: "summary_large_image"
+      }
     }
   end
 end

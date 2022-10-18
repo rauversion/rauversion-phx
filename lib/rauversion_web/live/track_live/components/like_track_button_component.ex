@@ -70,12 +70,12 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
           like: like
         } = assigns
       ) do
-    like_class = active_button_class(like)
+    assigns = assign(assigns, :like_class, active_button_class(like))
 
     ~H"""
       <div>
         <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: track.id,
-          class: like_class.class do %>
+          class: @like_class.class do %>
           <%= if @like do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
