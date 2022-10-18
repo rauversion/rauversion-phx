@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-10-18 01:23\n"
+"PO-Revision-Date: 2022-10-18 05:09\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1669,5 +1669,33 @@ msgstr ""
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:41
 #, elixir-autogen, elixir-format
 msgid "There was something wrong sending this invitation"
+msgstr ""
+
+#: lib/rauversion_web/templates/error/404.html.heex:31
+#: lib/rauversion_web/templates/error/500.html.heex:31
+#, elixir-autogen, elixir-format
+msgid "Contact support"
+msgstr ""
+
+#: lib/rauversion_web/templates/error/404.html.heex:28
+#: lib/rauversion_web/templates/error/500.html.heex:28
+#, elixir-autogen, elixir-format
+msgid "Go back home"
+msgstr ""
+
+#: lib/rauversion_web/templates/error/404.html.heex:20
+#, elixir-autogen, elixir-format
+msgid "Page not found"
+msgstr ""
+
+#: lib/rauversion_web/templates/error/404.html.heex:23
+#: lib/rauversion_web/templates/error/500.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Please check the URL in the address bar and try again."
+msgstr ""
+
+#: lib/rauversion_web/templates/error/500.html.heex:20
+#, elixir-autogen, elixir-format
+msgid "Something went wrong"
 msgstr ""
 
