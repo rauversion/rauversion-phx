@@ -17,7 +17,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
     Rauversion.Tracks.iframe_code_string(url, track)
   end
 
-  def render(%{track: track} = assigns) do
+  def render(%{track: _track} = assigns) do
     ~H"""
       <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
         <div class="mx-2 py-6">
@@ -37,7 +37,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                 <div class="flex items-center space-x-3">
                   <input
                     type="text"
-                    value={Application.get_env(:rauversion, :domain) <> Routes.track_show_path(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
+                    value={Application.get_env(:rauversion, :domain) <> Routes.track_show_path(@socket, :private, Rauversion.Tracks.signed_id(@track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
                     class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
                     readonly="readonly"/>
 
@@ -108,7 +108,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
 
                 <div data-controller="clipboard" data-clipboard-success-content="Copied!" class="mt-1 flex rounded-md shadow-sm">
                   <input type="text"
-                  value={iframe_code(@socket, track) |> to_string}
+                  value={iframe_code(@socket, @track) |> to_string}
                   data-clipboard-target="source"
                   readonly=""
                   class="py-3 px-2 outline-none flex-1 block rounded-none rounded-l-md sm:text-sm border border-gray-300 dark:bg-gray-900 dark:text-gray-100">
@@ -126,7 +126,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                 scrolling="no"
                 frameborder="no"
                 allow="autoplay"
-                src={Application.get_env(:rauversion, :domain) <> Routes.embed_path(@socket, :show, track)}>
+                src={Application.get_env(:rauversion, :domain) <> Routes.embed_path(@socket, :show, @track)}>
               </iframe>
               <div
                 style="font-size: 10px;
@@ -140,16 +140,16 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                   Garuda, Verdana, Tahoma, sans-serif;
                   font-weight: 100;">
                 <a
-                  href={Routes.profile_index_path(@socket, :index, track.user)}
+                  href={Routes.profile_index_path(@socket, :index, @track.user)}
                   title="waverzap"
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
-                  <%= track.user.username %>
+                  <%= @track.user.username %>
                 </a>
                 ·
                 <a
-                  href={Routes.track_show_path(@socket, :show, track)}
-                  title={track.title}
+                  href={Routes.track_show_path(@socket, :show, @track)}
+                  title={@track.title}
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
                   <%= @track.title %>

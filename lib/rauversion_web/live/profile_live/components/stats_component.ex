@@ -4,25 +4,25 @@ defmodule RauversionWeb.ProfileLive.StatsComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: _track, profile: profile} = assigns) do
+  def render(%{track: _track, profile: _profile} = assigns) do
     ~H"""
     <div class="grid grid-cols-3 divide-x dark:divide-gray-700">
       <div class="p-4">
         <p class="text-base font-medium text-gray-900 dark:text-gray-100"><%= gettext "Following" %></p>
         <span class="text-base font-normal text-gray-500 dark:text-gray-200 text-xl ">
-          <%= live_redirect Rauversion.UserFollows.followings_for(profile), to: Routes.follows_index_path(@socket, :followings, profile.username)  %>
+          <%= live_redirect Rauversion.UserFollows.followings_for(@profile), to: Routes.follows_index_path(@socket, :followings, @profile.username)  %>
         </span>
       </div>
       <div  class="p-4">
         <p class="text-base font-medium text-gray-900 dark:text-gray-100"><%= gettext "Followers" %></p>
         <span class="text-base font-normal text-gray-500 dark:text-gray-200 text-xl ">
-          <%= live_redirect Rauversion.UserFollows.followers_for(profile), to: Routes.follows_index_path(@socket, :followers, profile.username)  %>
+          <%= live_redirect Rauversion.UserFollows.followers_for(@profile), to: Routes.follows_index_path(@socket, :followers, @profile.username)  %>
         </span>
       </div>
       <div  class="p-4">
         <p class="text-base font-medium text-gray-900 dark:text-gray-100"><%= gettext "Tracks" %></p>
         <span class="text-base font-normal text-gray-500 dark:text-gray-200 text-xl ">
-          <%= Rauversion.Accounts.tracks_count(profile) %>
+          <%= Rauversion.Accounts.tracks_count(@profile) %>
         </span>
       </div>
     </div>

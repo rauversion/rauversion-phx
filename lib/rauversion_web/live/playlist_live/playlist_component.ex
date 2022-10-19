@@ -71,7 +71,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
           like: like
         } = assigns
       ) do
-    like_class = active_button_class(like)
+    assigns = assign(assigns, :like_class, active_button_class(like))
 
     ~H"""
       <div class="my-2 p-2 border-- rounded-md shadow-xs mx-3 dark:bg-gray-900" id={"playlist-item-#{@playlist.id}"}>
@@ -130,7 +130,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                 />
 
                 <%= link to: "#", phx_click: "like-playlist", phx_target: @myself, phx_value_id: @playlist.id,
-                  class: like_class.class do %>
+                  class: @like_class.class do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>

@@ -44,8 +44,9 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyControllerTest do
 
   test "range split" do
     range = ["bytes=5-9,13-17"]
-    size = "1124062"
+    _size = "1124062"
 
-    a = RauversionWeb.ActiveStorage.Blobs.ProxyController.parse_range(range)
+    assert [{5, 9}, {13, 17}] ==
+             RauversionWeb.ActiveStorage.Blobs.ProxyController.parse_range(range)
   end
 end

@@ -5,7 +5,7 @@ defmodule RauversionWeb.OEmbedController do
 
   def create(conn, _params = %{"url" => url}) do
     case FetchCardLink.call(url) do
-      record ->
+      record = %PreviewCards{id: _} ->
         conn
         |> Plug.Conn.send_resp(
           200,

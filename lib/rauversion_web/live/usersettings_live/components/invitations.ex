@@ -43,7 +43,7 @@ defmodule RauversionWeb.UsersettingsLive.Invitations do
              |> push_redirect(to: "/users/settings/invitations")}
         end
 
-      user ->
+      _user ->
         {:noreply,
          socket
          |> put_flash(:error, gettext("Invitation not sent, this person already exists"))
@@ -55,6 +55,7 @@ defmodule RauversionWeb.UsersettingsLive.Invitations do
     current_user |> Ecto.assoc(:invited_users) |> Rauversion.Repo.all()
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
@@ -73,7 +74,7 @@ defmodule RauversionWeb.UsersettingsLive.Invitations do
 
 
         <.form
-          let={f}
+          let={_f}
           for={:tbk}
           id="update_profile"
           phx-target={@myself}

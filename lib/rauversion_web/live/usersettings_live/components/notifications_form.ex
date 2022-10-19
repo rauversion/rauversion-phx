@@ -1,8 +1,8 @@
 defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
   use RauversionWeb, :live_component
 
-  def render(%{changeset: _changeset} = assigns) do
-    notification_inputs = [
+  def notification_inputs() do
+    [
       %{name: :new_follower_email, type: :checkbox, wrapper_class: "sm:col-span-6"},
       %{name: :new_follower_app, type: :checkbox, wrapper_class: "sm:col-span-6"},
       %{name: :repost_of_your_post_email, type: :checkbox, wrapper_class: "sm:col-span-6"},
@@ -22,7 +22,9 @@ defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
       %{name: :new_message_email, type: :checkbox, wrapper_class: "sm:col-span-6"},
       %{name: :new_message_app, type: :checkbox, wrapper_class: "sm:col-span-6"}
     ]
+  end
 
+  def render(%{changeset: _changeset} = assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
     <h1 class="text-3xl font-extrabold text-blue-gray-900">Change Notifications</h1>
@@ -50,7 +52,7 @@ defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
       </div>
 
       <%= inputs_for f, :notification_settings, fn item -> %>
-        <%= for field <- notification_inputs do %>
+        <%= for field <- notification_inputs() do %>
           <%= form_input_renderer(item, field ) %>
         <% end %>
       <% end %>
