@@ -8,7 +8,7 @@ defmodule RauversionWeb.LiveHelpers do
   import Phoenix.HTML.Tag
 
   alias Phoenix.LiveView.JS
-  alias Phoenix.LiveView
+  # alias Phoenix.LiveView
 
   @doc """
   Renders a live component inside a modal.
@@ -392,23 +392,23 @@ defmodule RauversionWeb.LiveHelpers do
     """
   end
 
-  def form_input_renderer(f, field = %{type: :upload, name: name}) do
+  def form_input_renderer(f, field = %{type: :upload, name: _name}) do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
 
     <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5">
       <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
-        <%= field[:label] || gettext( "Cover photo") %>
+        <%= @field[:label] || gettext( "Cover photo") %>
       </label>
 
       <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md"
-          phx-drop-target={@field.uploads[name].ref}>
+          phx-drop-target={@field.uploads[@name].ref}>
           <div class="space-y-1 text-center">
 
 
-            <%= if Rauversion.BlobUtils.blob_for(@form.data, "#{name}") == nil do %>
+            <%= if Rauversion.BlobUtils.blob_for(@form.data, "#{@name}") == nil do %>
 
               <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-100" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -416,17 +416,17 @@ defmodule RauversionWeb.LiveHelpers do
 
             <% else %>
 
-              <%= img_tag(Rauversion.BlobUtils.variant_url( @form.data, "#{name}", %{resize_to_fill: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
+              <%= img_tag(Rauversion.BlobUtils.variant_url( @form.data, "#{@name}", %{resize_to_fill: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
 
             <% end %>
 
             <div class="flex text-sm text-gray-600 dark:text-gray-400 py-3">
               <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                 <span>
-                  <%= gettext( "Upload a %{subject}", %{subject: field[:label] || "Track" }) %>
+                  <%= gettext( "Upload a %{subject}", %{subject: @field[:label] || "Track" }) %>
                 </span>
                 <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
-                <.live_file_input upload={@field.uploads[name]} class="hidden" />
+                <.live_file_input upload={@field.uploads[@name]} class="hidden" />
                 <% #= live_file_input @field.uploads[name], class: "hidden" %>
               </label>
               <p class="pl-1">
@@ -435,7 +435,7 @@ defmodule RauversionWeb.LiveHelpers do
             </div>
 
             <div>
-              <%= for entry <- @field.uploads[name].entries do %>
+              <%= for entry <- @field.uploads[@name].entries do %>
                 <div class="flex items-center space-x-2">
                   <.live_img_preview entry={entry} width={300} />
                   <div class="text-xl font-bold">
@@ -444,7 +444,7 @@ defmodule RauversionWeb.LiveHelpers do
                 </div>
               <% end  %>
 
-              <%= for {_ref, msg, } <- @field.uploads[name].errors do %>
+              <%= for {_ref, msg, } <- @field.uploads[@name].errors do %>
                 <%= Phoenix.Naming.humanize(msg) %>
               <% end %>
             </div>
@@ -464,10 +464,10 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, f: f)
 
     ~H"""
-    <%= if Map.get(f.params, "copyright") == "common" || (Map.get(f.data, :copyright) == "common" && Map.get(f.params, "copyright") != "common") do %>
+    <%= if Map.get(@f.params, "copyright") == "common" || (Map.get(@f.data, :copyright) == "common" && Map.get(@f.params, "copyright") != "common") do %>
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-8">
         <%= for field <- Rauversion.Tracks.TrackMetadata.form_definitions("common") do %>
-          <%= form_input_renderer(f, field) %>
+          <%= form_input_renderer(@f, field) %>
         <% end %>
       </div>
     <% else %>

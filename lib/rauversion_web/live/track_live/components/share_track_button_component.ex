@@ -34,7 +34,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackButtonComponent do
   @impl true
   def render(
         %{
-          track: track
+          track: _track
         } = assigns
       ) do
     ~H"""
@@ -53,7 +53,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackButtonComponent do
 
       <%= link to: "#",
         phx_click: "share-track-modal",
-        phx_value_id: track.id,
+        phx_value_id: @track.id,
         phx_target: @myself,
         class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">

@@ -66,15 +66,15 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
   @impl true
   def render(
         %{
-          track: track,
-          like: like
+          track: _track,
+          like: _like
         } = assigns
       ) do
-    assigns = assign(assigns, :like_class, active_button_class(like))
+    assigns = assign(assigns, :like_class, active_button_class(@like))
 
     ~H"""
       <div>
-        <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: track.id,
+        <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: @track.id,
           class: @like_class.class do %>
           <%= if @like do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -86,7 +86,7 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
             </svg>
           <% end %>
           <span class="flex space-x-1">
-            <span><%= track.likes_count %></span>
+            <span><%= @track.likes_count %></span>
             <span class="hidden sm:block"><%= gettext "Like" %></span>
           </span>
         <% end %>
