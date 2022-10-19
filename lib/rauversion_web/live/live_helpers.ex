@@ -392,8 +392,8 @@ defmodule RauversionWeb.LiveHelpers do
     """
   end
 
-  def form_input_renderer(f, field = %{type: :upload, name: _name}) do
-    assigns = assign(%{__changed__: nil}, field: field, form: f)
+  def form_input_renderer(f, field = %{type: :upload, name: name}) do
+    assigns = assign(%{__changed__: nil}, field: field, form: f, name: name)
 
     ~H"""
 
