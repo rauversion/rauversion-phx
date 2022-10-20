@@ -93,6 +93,7 @@ defmodule RauversionWeb do
       import Phoenix.LiveView.Helpers
       import Phoenix.Component
       import RauversionWeb.LiveHelpers
+      import PolymorphicEmbed.HTML.Form
 
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View

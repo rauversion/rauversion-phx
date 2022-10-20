@@ -18,6 +18,8 @@ end
 defmodule Rauversion.Events.Event do
   use Ecto.Schema
   import Ecto.Changeset
+  import PolymorphicEmbed
+
   alias Rauversion.Events.Event.TitleSlug
 
   use ActiveStorage.Attached.Model
@@ -38,6 +40,20 @@ defmodule Rauversion.Events.Event do
     embeds_many :scheduling_settings, Rauversion.Events.Schedule, on_replace: :delete
     # embeds_many :tickets, Rauversion.Events.Ticket
     embeds_one :event_settings, Rauversion.Events.Settings
+
+    polymorphic_embeds_one(:streaming_service,
+      types: [
+        jitsi: Rauversion.Events.Schemas.Jitsi,
+        whereby: Rauversion.Events.Schemas.Whereby,
+        mux: Rauversion.Events.Schemas.Mux,
+        zoom: Rauversion.Events.Schemas.Zoom,
+        twitch: Rauversion.Events.Schemas.Twitch,
+        restream: Rauversion.Events.Schemas.Restream
+        # email: MyApp.Channel.Email
+      ],
+      on_type_not_found: :raise,
+      on_replace: :update
+    )
 
     field :venue, :string
     field :city, :string
@@ -147,6 +163,7 @@ defmodule Rauversion.Events.Event do
       # :attendee_list_settings,
       # :event_settings
     ])
+    |> cast_polymorphic_embed(:streaming_service, required: false)
     |> cast_embed(:scheduling_settings, with: &Rauversion.Events.Schedule.changeset/2)
     # |> cast_embed(:tickets, with: &Rauversion.Events.Ticket.changeset/2)
     |> cast_assoc(:event_hosts, with: &Rauversion.EventHosts.EventHost.changeset/2)

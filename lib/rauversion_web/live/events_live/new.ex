@@ -131,6 +131,10 @@ defmodule RauversionWeb.EventsLive.New do
     edit_response(socket, id)
   end
 
+  defp apply_action(socket, :streaming, %{"slug" => id}) do
+    edit_response(socket, id)
+  end
+
   defp apply_action(socket, :edit, %{"id" => id}) do
     edit_response(socket, id)
   end
