@@ -216,13 +216,15 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
         <%= for service <- streaming_services() do %>
           <div class="relative group bg-white dark:bg-black p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
             <div>
-              <!--
-              <span class="rounded-lg inline-flex p-3 bg-teal-50 text-teal-700 ring-4 ring-white">
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+
+            <%= if :"#{service[:name]}" == PolymorphicEmbed.get_polymorphic_type(Rauversion.Events.Event, :streaming_service, @event.streaming_service) do %>
+              <span class="rounded-lg inline-flex p-3 bg-green-100 text-green-700 ring-4 ring-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </span>
-              -->
+            <% end %>
+
             </div>
             <div class="mt-8">
               <h3 class="text-lg font-medium">
@@ -234,6 +236,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
                   <!-- Extend touch target to entire panel -->
                   <span class="absolute inset-0" aria-hidden="true"></span>
                   <%= service[:name] %>
+
+
+
                 </a>
               </h3>
               <p class="mt-2 text-sm text-gray-500">
