@@ -10,7 +10,7 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:tab, "draft")
+     |> assign(:tab, "all")
      |> assign(:posts, list_posts(assigns.current_user, "draft"))}
   end
 
