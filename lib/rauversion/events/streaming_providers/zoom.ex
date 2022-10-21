@@ -17,8 +17,8 @@ defmodule Rauversion.Events.StreamingProviders.Zoom do
 
   def definitions() do
     [
-      %{type: :text_input, name: :api_key, wrapper_class: "", placeholder: "your api_key"},
-      %{type: :text_input, name: :app_id, wrapper_class: "", placeholder: "your app id"}
+      %{type: :text_input, name: :meeting_url, wrapper_class: "", placeholder: "meeting url"},
+      %{type: :text_input, name: :password, wrapper_class: "", placeholder: "meeting password"}
     ]
   end
 end
@@ -30,14 +30,13 @@ defmodule Rauversion.Events.Schemas.Zoom do
   @primary_key false
 
   embedded_schema do
-    field :api_key, :string
-    field :app_id, :string
+    field :meeting_url, :string
+    field :password, :string
   end
 
   def changeset(email, params) do
     email
-    |> cast(params, ~w(api_key app_id)a)
-    |> validate_required(:api_key)
-    |> validate_length(:app_id, min: 4)
+    |> cast(params, ~w(meeting_url password)a)
+    |> validate_required(:meeting_url)
   end
 end

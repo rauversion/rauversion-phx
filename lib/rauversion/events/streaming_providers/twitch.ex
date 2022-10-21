@@ -17,8 +17,18 @@ defmodule Rauversion.Events.StreamingProviders.Twitch do
 
   def definitions() do
     [
-      %{type: :text_input, name: :api_key, wrapper_class: "", placeholder: "your api_key"},
-      %{type: :text_input, name: :app_id, wrapper_class: "", placeholder: "your app id"}
+      %{
+        name: :streamming_type,
+        wrapper_class: "sm:col-span-2",
+        type: :select,
+        options: ["channel", "video", "collection"]
+      },
+      %{
+        type: :text_input,
+        name: :streaming_identifier,
+        wrapper_class: "",
+        hint: "channel, video or collection"
+      }
     ]
   end
 end
@@ -30,14 +40,18 @@ defmodule Rauversion.Events.Schemas.Twitch do
   @primary_key false
 
   embedded_schema do
-    field :api_key, :string
-    field :app_id, :string
+    field :streamming_type, :string
+    field :streaming_identifier
+    # //channel: "<channel ID>",
+    # video: "738688473",
+    # //collection: "<collection ID>",
   end
 
   def changeset(email, params) do
     email
-    |> cast(params, ~w(api_key app_id)a)
-    |> validate_required(:api_key)
-    |> validate_length(:app_id, min: 4)
+    |> cast(params, ~w(streamming_type streaming_identifier)a)
+    |> validate_required([:streamming_type, :streaming_identifier])
+
+    # |> validate_length(:app_id, min: 4)
   end
 end

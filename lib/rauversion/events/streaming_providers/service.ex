@@ -43,6 +43,7 @@ defmodule Rauversion.Events.StreamingProviders.Service do
       "zoom" -> Rauversion.Events.StreamingProviders.Zoom
       "restream" -> Rauversion.Events.StreamingProviders.Restream
       "twitch" -> Rauversion.Events.StreamingProviders.Twitch
+      "stream_yard" -> Rauversion.Events.StreamingProviders.StreamYard
       _ -> nil
     end
   end

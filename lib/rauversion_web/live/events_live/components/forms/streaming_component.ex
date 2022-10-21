@@ -17,9 +17,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
   end
 
   @impl true
-  def handle_event("validate", %{"event" => event_params}, socket) do
+  def handle_event("validate", %{"event" => service_params}, socket) do
     changeset =
-      Events.change_event(socket.assigns.changeset.data, event_params)
+      Events.change_event(socket.assigns.event, service_params)
       |> Map.put(:action, :validate)
 
     # IO.inspect(changeset)
@@ -78,15 +78,14 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
         active: false,
         description:
           gettext("Live Streaming to 15 services at once, including youtube, twitch, zoom etc...")
+      },
+      %{
+        name: "stream_yard",
+        active: false,
+        description:
+          gettext("Live Streaming to 15 services at once, including youtube, twitch, zoom etc...")
       }
     ]
-  end
-
-  def render_definitions(name) do
-    case Rauversion.Events.StreamingProviders.Service.find_module_by_type(name) do
-      nil -> []
-      mod -> mod.definitions()
-    end
   end
 
   def render_definitions(name) do
@@ -107,7 +106,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
       )
 
     ~H"""
-      <%= polymorphic_embed_inputs_for @f, :streaming_service, ":#{@kind}", fn form -> %>
+      <%= polymorphic_embed_inputs_for @f, :streaming_service, :"#{@kind}", fn form -> %>
         <div class="sms-inputs space-y-2">
           <h3 class="text-2xl"><%= @kind %></h3>
           <%= for definitions <- render_definitions(@kind) do %>
@@ -154,6 +153,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
         <.render_form event={@event} kind={"restream"} f={@f}></.render_form>
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.Twitch{}} -> %>
         <.render_form event={@event} kind={"twitch"} f={@f}></.render_form>
+      <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.StreamYard{}} -> %>
+        <.render_form event={@event} kind={"stream_yard"} f={@f}></.render_form>
       <% a ->  %>
         service not found!
     <% end %>

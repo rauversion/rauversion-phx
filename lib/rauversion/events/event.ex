@@ -48,7 +48,8 @@ defmodule Rauversion.Events.Event do
         mux: Rauversion.Events.Schemas.Mux,
         zoom: Rauversion.Events.Schemas.Zoom,
         twitch: Rauversion.Events.Schemas.Twitch,
-        restream: Rauversion.Events.Schemas.Restream
+        restream: Rauversion.Events.Schemas.Restream,
+        stream_yard: Rauversion.Events.Schemas.StreamYard
         # email: MyApp.Channel.Email
       ],
       on_type_not_found: :raise,

@@ -110,6 +110,21 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
     """
   end
 
+  def stream_yard_renderer(assigns) do
+    ~H"""
+    <div class="flex justify-center flex-col space-y-3">
+      <iframe
+        width="100%"
+        height="520"
+        src="https://www.youtube.com/embed/JSV5QSHBh8I"
+        title=""
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+    </div>
+    """
+  end
+
   def render(assigns) do
     ~H"""
       <div class="relative bg-white dark:bg-black dark:text-white py-16 sm:py-24">
@@ -146,6 +161,8 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
                     <.jitsi_renderer></.jitsi_renderer>
                   <% "zoom" -> %>
                     <.zoom_renderer></.zoom_renderer>
+                  <% "stream_yard" -> %>
+                    <.stream_yard_renderer></.stream_yard_renderer>
                   <% _ -> %>
                     <div class="flex items-start space-x-3 ">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

@@ -1,4 +1,4 @@
-defmodule Rauversion.Events.StreamingProviders.Whereby do
+defmodule Rauversion.Events.StreamingProviders.StreamYard do
   alias RauversionWeb.Router.Helpers, as: Routes
 
   defstruct [:app_id, :api_key]
@@ -19,30 +19,28 @@ defmodule Rauversion.Events.StreamingProviders.Whereby do
     [
       %{
         type: :text_input,
-        name: :room_url,
+        name: :youtube_url,
         wrapper_class: "",
-        placeholder: "the room url",
-        hint: "like: https://user.whereby.com/abc"
+        placeholder: "youtube url",
+        hint: "when you stream via streamyard you can use the youtube url"
       }
     ]
   end
 end
 
-defmodule Rauversion.Events.Schemas.Whereby do
+defmodule Rauversion.Events.Schemas.StreamYard do
   use Ecto.Schema
   import Ecto.Changeset
 
   @primary_key false
 
   embedded_schema do
-    field :room_url, :string
+    field :youtube_url, :string
   end
 
   def changeset(email, params) do
     email
-    |> cast(params, ~w(room_url)a)
-    |> validate_required(:room_url)
-
-    # |> validate_length(:app_id, min: 4)
+    |> cast(params, ~w(youtube_url)a)
+    |> validate_required(:youtube_url)
   end
 end
