@@ -301,6 +301,7 @@ defmodule RauversionWeb.Router do
     live "/events", EventsLive.Index, :index
     live "/events/:id", EventsLive.Show, :show
     live "/events/:id/tickets", TicketsLive.Index, :index
+    live "/events/:id/livestream/:provider", EventsStreamingLive.Show, :show
 
     post "/events/webhooks/:webhook_key", EventWebhooksController, :create
 

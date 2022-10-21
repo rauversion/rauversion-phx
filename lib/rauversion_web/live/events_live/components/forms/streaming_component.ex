@@ -89,7 +89,23 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
     end
   end
 
+  def render_definitions(name) do
+    case Rauversion.Events.StreamingProviders.Service.find_module_by_type(name) do
+      nil -> []
+      mod -> mod.definitions()
+    end
+  end
+
   def render_form(assigns) do
+    u = Rauversion.Events.StreamingProviders.Service
+
+    assigns =
+      assign(
+        assigns,
+        :webhook_url,
+        u.webhook_url(assigns.event.id, %{service: assigns.kind})
+      )
+
     ~H"""
       <%= polymorphic_embed_inputs_for @f, :streaming_service, ":#{@kind}", fn form -> %>
         <div class="sms-inputs space-y-2">
@@ -97,6 +113,14 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
           <%= for definitions <- render_definitions(@kind) do %>
             <%= form_input_renderer(form, definitions) %>
           <% end %>
+
+          <h3 class="text-xl"><%= gettext("webhook url") %></h3>
+          <h3 class="text-md font-bold">
+            <%= gettext("use this url in case you need to process webhooks from the streamin service") %>
+          </h3>
+          <span class="my-2 text-sm p-2 border-gray-700 rounded-sm block bg-gray-800">
+          <%= Application.get_env(:rauversion, :domain) <> @webhook_url %>
+          </span>
         </div>
       <% end %>
     """
@@ -106,30 +130,30 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
     ~H"""
     <%= case Ecto.Changeset.get_field(@changeset, :streaming_service) do %>
       <% %Rauversion.Events.Schemas.Whereby{} -> %>
-        <.render_form kind={"whereby"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"whereby"} f={@f}></.render_form>
       <% %Rauversion.Events.Schemas.Jitsi{} -> %>
-        <.render_form kind={"jitsi"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"jitsi"} f={@f}></.render_form>
       <% %Rauversion.Events.Schemas.Mux{} -> %>
-        <.render_form kind={"mux"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"mux"} f={@f}></.render_form>
       <% %Rauversion.Events.Schemas.Zoom{} -> %>
-        <.render_form kind={"zoom"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"zoom"} f={@f}></.render_form>
       <% %Rauversion.Events.Schemas.Restream{} -> %>
-        <.render_form kind={"restream"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"restream"} f={@f}></.render_form>
       <% %Rauversion.Events.Schemas.Twitch{} -> %>
-        <.render_form kind={"twitch"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"twitch"} f={@f}></.render_form>
 
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.Whereby{} } -> %>
-        <.render_form kind={"whereby"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"whereby"} f={@f}></.render_form>
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.Jitsi{} } -> %>
-        <.render_form kind={"jitsi"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"jitsi"} f={@f}></.render_form>
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.Mux{} } -> %>
-        <.render_form kind={"mux"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"mux"} f={@f}></.render_form>
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.Zoom{} } -> %>
-        <.render_form kind={"zoom"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"zoom"} f={@f}></.render_form>
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.Restream{}} -> %>
-        <.render_form kind={"restream"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"restream"} f={@f}></.render_form>
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.Twitch{}} -> %>
-        <.render_form kind={"twitch"} f={@f}></.render_form>
+        <.render_form event={@event} kind={"twitch"} f={@f}></.render_form>
       <% a ->  %>
         service not found!
     <% end %>
@@ -162,9 +186,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
           <% # IO.inspect @event.streaming_service %>
           <% # IO.inspect Ecto.Changeset.get_field(@changeset, :streaming_service) %>
 
-          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-1">
 
-            <.render_fields changeset={@changeset} f={f}></.render_fields>
+            <.render_fields event={@event} changeset={@changeset} f={f}></.render_fields>
 
             <div class="sm:col-span-6 flex justify-end space-x-2">
               <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
