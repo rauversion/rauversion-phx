@@ -145,7 +145,7 @@ defmodule Rauversion.PurchasedTickets do
 
   def find_by_signed_id!(token) do
     # 86400) do
-    case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token, max_age: 63_072_000) do
+    case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token) do
       {:ok, purchased_ticket_id} -> get_purchased_ticket!(purchased_ticket_id)
       _ -> nil
     end

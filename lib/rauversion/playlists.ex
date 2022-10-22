@@ -198,7 +198,7 @@ defmodule Rauversion.Playlists do
   end
 
   def find_by_signed_id!(token) do
-    case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token, max_age: 86400) do
+    case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token) do
       {:ok, playlist_id} -> get_playlist!(playlist_id)
       _ -> nil
     end
