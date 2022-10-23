@@ -11,7 +11,7 @@ defmodule Rauversion.Events.StreamingProviders.Twitch do
     process(data)
   end
 
-  def process(struct) do
+  def process(_struct) do
     {:ok, nil}
   end
 

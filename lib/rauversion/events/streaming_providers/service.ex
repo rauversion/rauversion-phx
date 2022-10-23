@@ -2,7 +2,7 @@ defmodule Rauversion.Events.StreamingProviders.Service do
   alias RauversionWeb.Router.Helpers, as: Routes
 
   def webhook_url(id, struct) do
-    message = %{event_id: id, type: "jitsy"}
+    message = %{event_id: id, type: struct[:service]}
     key = Plug.Crypto.MessageVerifier.sign(Jason.encode!(message), secret())
     conn = RauversionWeb.Endpoint
     Routes.event_webhooks_path(conn, :create, key)
@@ -26,6 +26,9 @@ defmodule Rauversion.Events.StreamingProviders.Service do
   end
 
   def process_by_key(key) do
+    require IEx
+    IEx.pry()
+
     case find_by_key(key) do
       %{"event_id" => _, "type" => type} = data ->
         find_module_by_type(type) |> process(data)

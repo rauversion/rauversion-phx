@@ -86,7 +86,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
       %{
         name: "jitsi",
         active: false,
-        description: gettext("Live Streaming on jitsy open source platform")
+        description: gettext("Live Streaming on jitsi open source platform")
       },
       %{
         name: "restream",
@@ -164,7 +164,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
         <.render_form event={@event} kind={"twitch"} f={@f}></.render_form>
       <% %Ecto.Changeset{data: %Rauversion.Events.Schemas.StreamYard{}} -> %>
         <.render_form event={@event} kind={"stream_yard"} f={@f}></.render_form>
-      <% a ->  %>
+      <% _ ->  %>
         service not found!
     <% end %>
     """

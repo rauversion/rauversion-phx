@@ -34,19 +34,6 @@ defmodule Rauversion.Events do
     # |> Repo.all()
   end
 
-  def public_events() do
-    from(pi in Event,
-      where: pi.private == false,
-      preload: [user: :avatar_blob]
-    )
-  end
-
-  def public_events(query) do
-    query
-    |> where([e], e.private == false)
-    |> where([e], e.state == "published")
-  end
-
   def list_events(query, state) do
     query
     |> where([p], p.state == ^state)
@@ -61,6 +48,19 @@ defmodule Rauversion.Events do
     |> preload(user: :avatar_blob)
 
     # |> Repo.all()
+  end
+
+  def public_events() do
+    from(pi in Event,
+      where: pi.private == false,
+      preload: [user: :avatar_blob]
+    )
+  end
+
+  def public_events(query) do
+    query
+    |> where([e], e.private == false)
+    |> where([e], e.state == "published")
   end
 
   def list_tickets(event) do
@@ -224,7 +224,7 @@ defmodule Rauversion.Events do
     |> Event.changeset(attrs)
   end
 
-  def event_dates(struct = %{event_start: event_start = nil, event_ends: event_ends = nil}) do
+  def event_dates(%{event_start: _event_start = nil, event_ends: _event_ends = nil}) do
     ""
   end
 

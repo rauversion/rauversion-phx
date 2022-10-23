@@ -23,7 +23,7 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
     end
   end
 
-  defp apply_action(socket, :show, %{"id" => id, "provider" => provider}) do
+  defp apply_action(socket, :show, %{"id" => _id, "provider" => provider}) do
     case Events.verify_streaming_access_for(provider) do
       %Events.Event{} = event ->
         event = Events.get_event!(event.id) |> Repo.preload([:user])
@@ -70,7 +70,9 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
 
   def whereby_renderer(assigns) do
     ~H"""
-    <div>
+    <div
+      id="whereby_renderer"
+      phx-update="ignore">
       <iframe
         width="100%"
         height="520"
@@ -83,7 +85,9 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
 
   def mux_renderer(assigns) do
     ~H"""
-    <div class="w-full h-[520px]">
+    <div class="w-full h-[520px]"
+      id="mux_renderer"
+      phx-update="ignore">
       <script src="https://unpkg.com/@mux/mux-player"></script>
       <mux-player
         stream-type="on-demand"
@@ -98,7 +102,9 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
   def jitsi_renderer(assigns) do
     ~H"""
     <div class="w-full h-[520px]">
-      <div id="jitsi-meet"></div>
+      <div id="jitsi-meet"
+          phx-update="ignore">
+      </div>
       <script src='https://meet.jit.si/external_api.js'></script>
       <script>
         const domain = 'meet.jit.si';
@@ -132,7 +138,9 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
 
   def stream_yard_renderer(assigns) do
     ~H"""
-    <div class="flex justify-center flex-col space-y-3">
+    <div class="flex justify-center flex-col space-y-3"
+      id="stream_yard_renderer"
+      phx-update="ignore">
       <iframe
         width="100%"
         height="520"
@@ -145,6 +153,7 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
     """
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
       <div class="relative bg-white dark:bg-black dark:text-white py-16 sm:py-24">
@@ -164,8 +173,7 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
             <div class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-none lg:px-0 lg:py-20">
               <!-- Testimonial card-->
               <div class="relative overflow-hidden rounded-2xl pt-64- pb-10- shadow-xl"
-                id="streaming-renderer"
-                phx-update="ignore">
+                id="streaming-renderer">
                 <!--<img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1521510895919-46920266ddb3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-100" alt="">
                 <div class="absolute inset-0 bg-brand-500 mix-blend-multiply"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-600 via-brand-600 opacity-90"></div>-->
