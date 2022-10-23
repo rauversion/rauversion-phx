@@ -214,11 +214,15 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
           <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
             <%= gettext("Streaming services") %>
           </h2>
-          <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 dark:text-gray-300 dark:text-gray-300 sm:mt-4">
+
+          <p class="my-3 text-xl text-gray-500 dark:text-gray-300 dark:text-gray-300 dark:text-gray-300 sm:mt-4">
             <%= gettext("Go live with a remote event via one of the following video streaming services") %>
           </p>
 
-          <%= live_redirect gettext("Go streaming page"), to: private_streaming_link(@event) %>
+          <%= live_redirect gettext("Go to streaming event page"),
+            to: private_streaming_link(@event),
+            class: "inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          %>
 
         </div>
       </div>
