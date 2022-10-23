@@ -24,8 +24,25 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
   end
 
   defp apply_action(socket, :show, %{"id" => id, "provider" => provider}) do
-    event = Events.get_by_slug!(id) |> Repo.preload([:user])
-    socket |> assign(:event, event) |> assign(:provider, provider)
+    case Events.verify_streaming_access_for(provider) do
+      %Events.Event{} = event ->
+        event = Events.get_event!(event.id) |> Repo.preload([:user])
+
+        service =
+          PolymorphicEmbed.get_polymorphic_type(
+            Events.Event,
+            :streaming_service,
+            event.streaming_service
+          )
+          |> Atom.to_string()
+
+        socket |> assign(:event, event) |> assign(:provider, service)
+
+      _ ->
+        socket
+        |> put_flash(:error, "Event not found")
+        |> push_redirect(to: "/")
+    end
   end
 
   def twitch_renderer(assigns) do

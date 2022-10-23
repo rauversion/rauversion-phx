@@ -62,6 +62,15 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
     }
   end
 
+  defp private_streaming_link(event) do
+    Routes.events_streaming_show_path(
+      RauversionWeb.Endpoint,
+      :show,
+      event.slug,
+      Events.streaming_access_for(event)
+    )
+  end
+
   def streaming_services() do
     [
       %{name: "twitch", active: true, description: gettext("Twitch is a streaming service")},
@@ -208,6 +217,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
           <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 dark:text-gray-300 dark:text-gray-300 sm:mt-4">
             <%= gettext("Go live with a remote event via one of the following video streaming services") %>
           </p>
+
+          <%= live_redirect gettext("Go streaming page"), to: private_streaming_link(@event) %>
+
         </div>
       </div>
 

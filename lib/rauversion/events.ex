@@ -270,4 +270,15 @@ defmodule Rauversion.Events do
     |> Event.changeset(%{state: "draft"})
     |> Repo.update()
   end
+
+  def streaming_access_for(event) do
+    Phoenix.Token.sign(RauversionWeb.Endpoint, "event", event.id)
+  end
+
+  def verify_streaming_access_for(token) do
+    case Phoenix.Token.verify(RauversionWeb.Endpoint, "event", token) do
+      {:ok, event_id} -> get_event!(event_id)
+      _ -> nil
+    end
+  end
 end
