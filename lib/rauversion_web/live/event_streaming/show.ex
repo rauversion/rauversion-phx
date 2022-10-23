@@ -37,8 +37,9 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
           var options = {
             width: '100%',
             height: '520',
+            <%= @event.streaming_service.streaming_type %>: "<%= @event.streaming_service.streaming_identifier %>"
             //channel: "<channel ID>",
-            video: "738688473",
+            // video: "738688473",
             //collection: "<collection ID>",
             // only needed if your site is also embedded on embed.example.com and othersite.example.com
             //parent: ["embed.example.com", "othersite.example.com"]
@@ -56,7 +57,7 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
       <iframe
         width="100%"
         height="520"
-        src="https://chaskiq.whereby.com/rau-event1d851195-fc49-40bd-8894-8582c072eedb?video=off&audio=off&people=off&precallReview=off"
+        src={"#{assigns.event.streaming_service.room_url}?video=off&audio=off&people=off&precallReview=off"}
         allow="camera; microphone; fullscreen; speaker; display-capture; autoplay">
       </iframe>
     </div>
@@ -69,8 +70,8 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
       <script src="https://unpkg.com/@mux/mux-player"></script>
       <mux-player
         stream-type="on-demand"
-        playback-id={"QAkXTqnlILp6MOfwp6n00zSSn00fjFnrIPeurkNykz34s"}
-        metadata-video-title="Test VOD"
+        playback-id={assigns.event.streaming_service.playback_url}
+        metadata-video-title={assigns.event.streaming_service.title || "streaming video"}
         metadata-viewer-user-id="user-id-007">
       </mux-player>
     </div>
@@ -103,9 +104,11 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
       <p class="text-lg">
         <%= gettext("Player not available please open the metting on Zoom service") %>
       </p>
-      <button class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700">
+      <a href={assigns.streaming_event.meeting_url}
+        target="blank"
+        class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700">
         <%= gettext("Go to the Zoom meeting") %>
-      </button>
+      </a>
     </div>
     """
   end
@@ -116,7 +119,7 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
       <iframe
         width="100%"
         height="520"
-        src="https://www.youtube.com/embed/JSV5QSHBh8I"
+        src={assigns.event.streaming_service.youtube_url}
         title=""
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -152,17 +155,17 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
 
                 <%= case @provider do %>
                   <% "twitch" -> %>
-                    <.twitch_renderer></.twitch_renderer>
+                    <.twitch_renderer event={@event}></.twitch_renderer>
                   <% "whereby" -> %>
-                    <.whereby_renderer></.whereby_renderer>
+                    <.whereby_renderer event={@event}></.whereby_renderer>
                   <% "mux" -> %>
-                    <.mux_renderer></.mux_renderer>
+                    <.mux_renderer event={@event}></.mux_renderer>
                   <% "jitsi" -> %>
-                    <.jitsi_renderer></.jitsi_renderer>
+                    <.jitsi_renderer event={@event}></.jitsi_renderer>
                   <% "zoom" -> %>
-                    <.zoom_renderer></.zoom_renderer>
+                    <.zoom_renderer event={@event}></.zoom_renderer>
                   <% "stream_yard" -> %>
-                    <.stream_yard_renderer></.stream_yard_renderer>
+                    <.stream_yard_renderer event={@event}></.stream_yard_renderer>
                   <% _ -> %>
                     <div class="flex items-start space-x-3 ">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

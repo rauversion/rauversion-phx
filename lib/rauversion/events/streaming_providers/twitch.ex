@@ -18,7 +18,7 @@ defmodule Rauversion.Events.StreamingProviders.Twitch do
   def definitions() do
     [
       %{
-        name: :streamming_type,
+        name: :streaming_type,
         wrapper_class: "sm:col-span-2",
         type: :select,
         options: ["channel", "video", "collection"]
@@ -40,7 +40,7 @@ defmodule Rauversion.Events.Schemas.Twitch do
   @primary_key false
 
   embedded_schema do
-    field :streamming_type, :string
+    field :streaming_type, :string
     field :streaming_identifier
     # //channel: "<channel ID>",
     # video: "738688473",
@@ -49,8 +49,8 @@ defmodule Rauversion.Events.Schemas.Twitch do
 
   def changeset(email, params) do
     email
-    |> cast(params, ~w(streamming_type streaming_identifier)a)
-    |> validate_required([:streamming_type, :streaming_identifier])
+    |> cast(params, ~w(streaming_type streaming_identifier)a)
+    |> validate_required([:streaming_type, :streaming_identifier])
 
     # |> validate_length(:app_id, min: 4)
   end

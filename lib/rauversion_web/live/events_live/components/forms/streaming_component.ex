@@ -64,23 +64,23 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
 
   def streaming_services() do
     [
+      %{name: "twitch", active: true, description: gettext("Twitch is a streaming service")},
+      %{name: "mux", active: true, description: gettext("Mux is a streaming service")},
+      %{name: "whereby", active: true, description: gettext("Whereby is a streaming service")},
+      %{
+        name: "stream_yard",
+        active: true,
+        description:
+          gettext("Live Streaming to 15 services at once, including youtube, twitch, zoom etc...")
+      },
+      %{name: "zoom", active: true, description: gettext("Zoom is a streaming service")},
       %{
         name: "jitsi",
         active: false,
         description: gettext("Live Streaming on jitsy open source platform")
       },
-      %{name: "mux", active: false, description: gettext("Mux is a streaming service")},
-      %{name: "twitch", active: false, description: gettext("Twitch is a streaming service")},
-      %{name: "zoom", active: false, description: gettext("Zoom is a streaming service")},
-      %{name: "whereby", active: false, description: gettext("Whereby is a streaming service")},
       %{
         name: "restream",
-        active: false,
-        description:
-          gettext("Live Streaming to 15 services at once, including youtube, twitch, zoom etc...")
-      },
-      %{
-        name: "stream_yard",
         active: false,
         description:
           gettext("Live Streaming to 15 services at once, including youtube, twitch, zoom etc...")
@@ -214,7 +214,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
       <div class="divide-y divide-gray-200 dark:divide-gray-800 border dark:border:gray-800 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-900 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
 
         <%= for service <- streaming_services() do %>
-          <div class="relative group bg-white dark:bg-black p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+          <div class={"  #{if !service[:active], do: "opacity-50" } relative group bg-white dark:bg-black p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"}>
             <div>
 
             <%= if :"#{service[:name]}" == PolymorphicEmbed.get_polymorphic_type(Rauversion.Events.Event, :streaming_service, @event.streaming_service) do %>
@@ -228,18 +228,27 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
             </div>
             <div class="mt-8">
               <h3 class="text-lg font-medium">
-                <a href="#"
-                  phx-click={"select-service"}
-                  phx-value-id={service[:name]}
-                  phx-target={@myself}
-                  class="focus:outline-none">
-                  <!-- Extend touch target to entire panel -->
-                  <span class="absolute inset-0" aria-hidden="true"></span>
-                  <%= service[:name] %>
-
-
-
-                </a>
+                <%= if service[:active] do %>
+                  <a
+                    href="#"
+                    phx-click={"select-service"}
+                    phx-value-id={service[:name]}
+                    phx-target={@myself}
+                    class="focus:outline-none">
+                    <!-- Extend touch target to entire panel -->
+                    <span class="absolute inset-0" aria-hidden="true"></span>
+                    <%= service[:name] %>
+                  </a>
+                <% else %>
+                  <div class="flex space-x-2">
+                    <span>
+                      <%= service[:name] %>
+                    </span>
+                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                      SOON
+                    </span>
+                  </div>
+                <% end %>
               </h3>
               <p class="mt-2 text-sm text-gray-500">
                 <%= service[:description] %>
