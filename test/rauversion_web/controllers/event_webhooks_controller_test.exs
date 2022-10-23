@@ -9,7 +9,7 @@ defmodule RauversionWeb.EventWebhooksControllerTest do
 
   describe "POST /users/confirm" do
     test "renders the resend confirmation page", %{conn: conn} do
-      a = Rauversion.Events.StreamingProviders.Jitsi.new(api_key: "123", app_id: "1234")
+      a = %{service: "jitsi"}
       event_id = 1
       url = Rauversion.Events.StreamingProviders.Service.webhook_url(event_id, a)
 

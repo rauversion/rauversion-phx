@@ -2,9 +2,6 @@ defmodule RauversionWeb.EventWebhooksController do
   use RauversionWeb, :controller
 
   def create(conn, _params = %{"webhook_key" => webhook_key}) do
-    require IEx
-    IEx.pry()
-
     case process_webhook(webhook_key) do
       {:ok, _data} ->
         conn

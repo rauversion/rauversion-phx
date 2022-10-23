@@ -15,8 +15,6 @@ defmodule Rauversion.Events.StreamingProviders.Service do
     else
       # nil -> {:error, ...} an example that we can match here too
       err ->
-        require IEx
-        IEx.pry()
         err
     end
   end
@@ -26,9 +24,6 @@ defmodule Rauversion.Events.StreamingProviders.Service do
   end
 
   def process_by_key(key) do
-    require IEx
-    IEx.pry()
-
     case find_by_key(key) do
       %{"event_id" => _, "type" => type} = data ->
         find_module_by_type(type) |> process(data)
