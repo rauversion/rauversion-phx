@@ -22,8 +22,8 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
   @impl true
   def render(
         %{
-          track: track,
-          current_user: current_user
+          track: _track,
+          current_user: _current_user
         } = assigns
       ) do
     ~H"""
@@ -135,20 +135,20 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
           <% #= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
 
           <.live_component
-            id={"share-track-button-#{track.id}"}
+            id={"share-track-button-#{@track.id}"}
             module={RauversionWeb.TrackLive.ShareTrackButtonComponent}
             track={@track}
           />
 
           <.live_component
-            id={"like-track-button-#{track.id}"}
+            id={"like-track-button-#{@track.id}"}
             module={RauversionWeb.TrackLive.LikeTrackButtonComponent}
             track={@track}
             current_user={@current_user}
           />
 
           <.live_component
-            id={"repost-track-button-#{track.id}"}
+            id={"repost-track-button-#{@track.id}"}
             module={RauversionWeb.TrackLive.RepostTrackButtonComponent}
             track={@track}
             current_user={@current_user}
@@ -157,7 +157,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
           <%= if @current_user do %>
 
             <.live_component
-              id={"playlist-button-add-track-#{track.id}"}
+              id={"playlist-button-add-track-#{@track.id}"}
               module={RauversionWeb.PlaylistLive.AddToPlaylistComponent}
               track={@track}
               current_user={@current_user}

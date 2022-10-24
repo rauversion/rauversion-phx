@@ -34,7 +34,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   end
 
   @impl true
-  def render(%{collection: collection} = assigns) do
+  def render(%{collection: _collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">
         <div class="bg-white border-t dark:bg-gray-900">
@@ -45,7 +45,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
             <div class="mt-6 flow-root">
               <ul role="list" class="-my-4 divide-y divide-gray-200 dark:divide-gray-800 dark:divide-gray-800">
 
-                <%= for item <- collection do %>
+                <%= for item <- @collection do %>
                   <li class="flex items-center py-4 space-x-3">
                     <div class="flex-shrink-0">
 

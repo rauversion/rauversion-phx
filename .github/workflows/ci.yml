@@ -42,6 +42,14 @@ jobs:
           elixir-version: '1.13'
       - run: mix deps.get
       - run: mix ecto.create ; mix ecto.migrate
+
+      - run: MIX_ENV=cy mix setup
+      #( cd ./assets && yarn install && NODE_ENV=production ./node_modules/webpack/bin/webpack.js  )
+      #MIX_ENV=cy mix phx.server &
+      #sleep 10
+      ## ./assets/node_modules/.bin/cypress install
+      #MIX_ENV=cy mix cypress.ga-ci
+
       # for now we will run only backend tests
       - run: mix test test/rauversion
       - run: mix test test/rauversion_web/controllers

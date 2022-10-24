@@ -1,8 +1,6 @@
 defmodule RauversionWeb.BlockedView do
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Repo}
-
   @impl true
   def render(assigns) do
     ~H"""

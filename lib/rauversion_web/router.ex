@@ -282,6 +282,14 @@ defmodule RauversionWeb.Router do
     )
   end
 
+  if Mix.env() in [:cy] do
+    scope "/__cypress__" do
+      # pipe_through :api
+      pipe_through(:api)
+      post("/command", RauversionWeb.CypressController, :create)
+    end
+  end
+
   scope "/", RauversionWeb do
     pipe_through [:browser]
 

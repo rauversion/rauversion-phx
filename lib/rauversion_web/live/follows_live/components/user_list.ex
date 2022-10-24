@@ -6,14 +6,14 @@ defmodule RauversionWeb.FollowsLive.UserListComponent do
 
   def render(
         %{
-          collection: collection
+          collection: _collection
         } = assigns
       ) do
     ~H"""
       <div class="py-4 mx-4">
         <h2 class="text-3xl font-bold"><%= @kind %> </h2>
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <%= for item <- collection do %>
+          <%= for item <- @collection do %>
             <li class="col-span-1 flex flex-col text-center">
               <%= live_redirect to: Routes.profile_index_path(@socket, :index, Map.get(item, @kind).username) do %>
                 <div class="flex-1 flex flex-col p-8">

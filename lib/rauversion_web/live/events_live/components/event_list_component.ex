@@ -4,7 +4,7 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Events, Repo}
+  alias Rauversion.{Events}
 
   def update(assigns, socket) do
     {:ok,

@@ -1,6 +1,4 @@
 defmodule Rauversion.Events.StreamingProviders.Mux do
-  alias RauversionWeb.Router.Helpers, as: Routes
-
   defstruct [:app_id, :api_key]
 
   def new(attrs) do
@@ -11,7 +9,7 @@ defmodule Rauversion.Events.StreamingProviders.Mux do
     process(data)
   end
 
-  def process(struct) do
+  def process(_struct) do
     {:ok, nil}
   end
 

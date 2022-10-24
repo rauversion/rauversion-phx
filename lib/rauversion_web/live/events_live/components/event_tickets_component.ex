@@ -125,26 +125,6 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
     end
   end
 
-  def order_session(
-        event = %{event_settings: %{payment_gateway: "transbank"}},
-        purchase_order,
-        user_id
-      ) do
-    case Rauversion.PurchaseOrders.create_transbank_order(event, purchase_order, user_id) do
-      {:ok, %{gen_ticket: %{response: resp, order: order}}} ->
-        %{url: resp["url"] <> "?token_ws=#{resp["token"]}", order: order}
-
-      {:error, :gen_ticket, err, _} ->
-        {:error, err}
-
-      e ->
-        IO.inspect(e)
-        {:error, "chuchuc"}
-    end
-
-    # %{url: resp["url"] <> "?token_ws=#{resp["token"]}", order: a}
-  end
-
   @impl true
   def handle_event(
         "validate",

@@ -15,7 +15,14 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
+  "devDependencies": {
+    "cypress": "6.1.0",
+    "cypress-xpath": "^1.4.0"
+  },
   "scripts": {
-    "deploy": "cd .. && mix assets.deploy"
+    "deploy": "cd .. && mix assets.deploy",
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "cypress:run": "./node_modules/.bin/cypress run --headless --browser chrome",
+    "cypress:ga-ci": "./node_modules/.bin/cypress run --headless --browser chrome --parallel --ci-build-id $GITHUB_RUN_ID"
   }
 }
