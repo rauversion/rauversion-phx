@@ -131,7 +131,7 @@ defmodule Rauversion.MixProject do
       "ci.open": ["cmd npx cypress open"],
       "ci.run": ["cmd npx cypress run"],
       "cypress.ga-ci": [
-        "cmd npx cypress run --headless --browser chrome --record --parallel --ci-build-id $GITHUB_RUN_ID"
+        "cmd npx cypress run --headless --browser chrome --parallel --ci-build-id $GITHUB_RUN_ID"
       ]
     ]
   end
