@@ -45,8 +45,8 @@ jobs:
 
       - run: MIX_ENV=cy mix setup
       #( cd ./assets && yarn install && NODE_ENV=production ./node_modules/webpack/bin/webpack.js  )
-      #MIX_ENV=cy mix phx.server &
-      #sleep 10
+      - run: MIX_ENV=cy mix phx.server &
+      - run: sleep 10
       ## ./assets/node_modules/.bin/cypress install
       - run: MIX_ENV=cy mix cypress.ga-ci
 
