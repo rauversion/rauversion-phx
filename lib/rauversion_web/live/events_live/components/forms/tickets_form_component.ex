@@ -69,8 +69,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
   end
 
   def ticket_kind(i) do
-    assigns = %{}
-
     value =
       if Map.get(i.params, "price") do
         case Integer.parse(i.params["price"]) do
@@ -81,7 +79,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
         if i.data.price, do: Decimal.to_integer(i.data.price), else: 0
       end
 
-    assign = assign(:value, value)
+    assigns = assign(%{}, :value, value)
 
     ~H"""
       <div>

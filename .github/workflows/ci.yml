@@ -45,6 +45,7 @@ jobs:
       - run: mix ecto.create ; mix ecto.migrate
 
       - run: MIX_ENV=cy mix setup
+      - run: MIX_ENV=cy mix assets.deploy
       #( cd ./assets && yarn install && NODE_ENV=production ./node_modules/webpack/bin/webpack.js  )
       - run: MIX_ENV=cy mix phx.server &
       - run: sleep 10
