@@ -75,6 +75,8 @@ jobs:
           mix local.hex --force
           mix deps.get
           mix deps.compile
+          mix assets.setup
+
       #- name: Check for unused deps
       #  run: mix deps.unlock --check-unused
       - name: Compile code
