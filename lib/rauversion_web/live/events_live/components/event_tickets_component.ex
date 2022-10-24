@@ -111,20 +111,6 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
      )}
   end
 
-  def order_session(
-        event = %{event_settings: %{payment_gateway: "stripe"}},
-        purchase_order,
-        user_id
-      ) do
-    case Rauversion.PurchaseOrders.create_stripe_order(event, purchase_order, user_id) do
-      {:ok, %{response: resp, order: order}} ->
-        %{url: resp["url"], order: order}
-
-      _ ->
-        nil
-    end
-  end
-
   @impl true
   def handle_event(
         "validate",

@@ -81,9 +81,11 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
         if i.data.price, do: Decimal.to_integer(i.data.price), else: 0
       end
 
+    assign = assign(:value, value)
+
     ~H"""
       <div>
-        <%= if value == 0 do %>
+        <%= if @value == 0 do %>
           <span class="inline-flex items-center rounded-full bg-green-900 px-3 py-1.5 text-xl font-medium text-green-200">
             <%= gettext("Free ticket") %>
           </span>
@@ -246,7 +248,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                 phx-target={@myself}
                 class="mt-2 inline-flex justify-center items-center border-2 border-red-600 rounded-lg py-2 px-2 dark:bg-black text-red-600 block text-sm"
                 phx-value-index={i.index}>
-                Delete Ticket
+               <%= gettext("Delete Ticket") %>
               </button>
 
             </div>
@@ -274,11 +276,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
             <div class="sm:col-span-6 flex justify-end">
               <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
             </div>
-
-
-
           </div>
-
         </.form>
       </div>
     """

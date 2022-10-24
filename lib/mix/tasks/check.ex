@@ -1,23 +1,14 @@
 defmodule Rauversion.Checks.CheckFFMPEG do
-  @min 500
-  @min_string "5.0.0"
-
   def run() do
-    {version, _} = System.cmd("ffmpeg", ["-version"])
-    current =
-      Regex.run(~r/ffmpeg version ([\S]*)/, version)
-      |> Enum.at(1)
+    {_, status} = System.cmd("which", ["ffmpeg"])
 
-    exists? = current
-    |> String.graphemes()
-    |> Enum.filter(fn item -> item != "." end)
-    |> Enum.join()
-    |> String.to_integer()
-    |> Kernel.>=(@min)
+    case status do
+      0 ->
+        true
 
-    case exists? do
-      true -> true
-      false -> raise "ffmpeg version #{@min_string} or greater required. Current #{current}"
+      err ->
+        IO.inspect(err)
+        raise "ffmpeg"
     end
   end
 end
@@ -28,7 +19,7 @@ defmodule Mix.Tasks.Check do
   alias Rauversion.Checks.CheckFFMPEG
 
   defp is_ok(true) do
-    IO.inspect "All checks passed"
+    IO.inspect("All checks passed")
   end
 
   defp is_ok(_) do
