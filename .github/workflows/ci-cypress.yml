@@ -75,22 +75,22 @@ jobs:
           mix local.hex --force
           mix deps.get
           mix deps.compile
-      - name: Check for unused deps
-        run: mix deps.unlock --check-unused
+      #- name: Check for unused deps
+      #  run: mix deps.unlock --check-unused
       - name: Compile code
-        run: mix compile --warnings-as-errors
-      - name: Check code formatting
-        run: mix format --check-formatted
+        run: mix compile #--warnings-as-errors
+      #- name: Check code formatting
+      #  run: mix format --check-formatted
       #- name: Run Credo
       #  run: mix credo suggest --min-priority=normal
-      - name: Run Migrations
-        run: mix ecto.migrate
-      - name: Run Tests
-        run: mix coveralls.json --warnings-as-errors
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #- name: Run Migrations
+      #  run: mix ecto.migrate
+      #- name: Run Tests
+      #  run: mix coveralls.json --warnings-as-errors
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: mix deps.get
+      #- run: mix deps.get
       - run: mix ecto.create ; mix ecto.migrate
       - run: MIX_ENV=cy mix setup
       - run: MIX_ENV=cy mix assets.deploy
