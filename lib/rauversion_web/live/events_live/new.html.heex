@@ -66,6 +66,12 @@
                         event: @event
                         # changeset: @changeset
                       )
+        :streaming -> live_component(
+                        RauversionWeb.Live.EventsLive.Components.StreamingComponent,
+                        id: "streaming",
+                        event: @event,
+                        changeset: @changeset
+                      )              
 
         _ -> "no section for #{@live_action}"
 

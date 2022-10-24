@@ -204,6 +204,7 @@ defmodule RauversionWeb.Router do
     live "/events/:slug/edit/widgets", EventsLive.New, :widgets
     live "/events/:slug/edit/tax", EventsLive.New, :tax
     live "/events/:slug/edit/attendees", EventsLive.New, :attendees
+    live "/events/:slug/edit/streaming", EventsLive.New, :streaming
     live "/events/:slug/edit/sponsors", EventsLive.New, :sponsors
     live "/events/:slug/edit/hosts", EventsLive.New, :hosts
 
@@ -300,6 +301,9 @@ defmodule RauversionWeb.Router do
     live "/events", EventsLive.Index, :index
     live "/events/:id", EventsLive.Show, :show
     live "/events/:id/tickets", TicketsLive.Index, :index
+    live "/events/:id/livestream/:provider", EventsStreamingLive.Show, :show
+
+    post "/events/webhooks/:webhook_key", EventWebhooksController, :create
 
     live "/purchases/tickets", MyTicketsLive.Index, :index
 

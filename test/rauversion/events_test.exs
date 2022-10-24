@@ -195,5 +195,19 @@ defmodule Rauversion.EventsTest do
       event = event_fixture()
       assert %Ecto.Changeset{} = Events.change_event(event)
     end
+
+    test "change_event/1 returns a event changeset streaming event" do
+      event = event_fixture()
+      assert %Ecto.Changeset{} = Events.change_event(event)
+      Events.update_event(event, %{streaming_service: %{__type__: :jitsi, api_key: "1233"}})
+      event = Events.get_event!(event.id)
+      assert %Rauversion.Events.Schemas.Jitsi{} = event.streaming_service
+
+      a =
+        Events.change_event(event, %{streaming_service: %{__type__: :whereby, room_url: "1233"}})
+        |> Map.put(:action, :validate)
+
+      assert a.valid?
+    end
   end
 end

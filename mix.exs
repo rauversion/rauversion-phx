@@ -37,7 +37,7 @@ defmodule Rauversion.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.6.0"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.8"},
+      {:ecto_sql, "~> 3.9"},
       {:ecto_nested_changeset, "~> 0.2.0"},
       {:cloak_ecto, "~> 1.2.0"},
       {:number, "~> 1.0.3"},
@@ -76,6 +76,7 @@ defmodule Rauversion.MixProject do
       {:tesla, "~> 1.4"},
       {:ex_cldr_dates_times, "~> 2.0"},
       {:oauth2, "~> 1.0 or ~> 2.0"},
+      {:polymorphic_embed, "~> 3.0.5"},
       {:ueberauth, "~> 0.7", override: true},
       {:sentry, "~> 8.0"},
       {
