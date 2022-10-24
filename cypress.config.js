@@ -12,7 +12,7 @@ module.exports = {
   numTestsKeptInMemory: 50,
   pageLoadTimeout: 60000,
   port: null,
-  projectId: 'j4kaht',
+  projectId: '6xt2sd',
   reporterOptions: null,
   requestTimeout: 15000,
   responseTimeout: 30000,
