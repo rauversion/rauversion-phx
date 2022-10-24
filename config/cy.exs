@@ -38,12 +38,16 @@ end
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :rauversion, RauversionWeb.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "asD6uWDumjqKv0TC2V9kMI3/1Vb/t+4I/rDC9qygryTac4Zcc7Dx/gmlQCui+s/s",
-  server: true,
+  http: [ip: {0, 0, 0, 0}, port: 4002],
   check_origin: false,
   code_reloader: true,
-  debug_errors: true
+  debug_errors: true,
+  watchers: [
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
+    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+  ]
 
 # In test we don't send emails.
 config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Test
