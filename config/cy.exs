@@ -42,12 +42,13 @@ config :rauversion, RauversionWeb.Endpoint,
   http: [ip: {0, 0, 0, 0}, port: 4002],
   check_origin: false,
   code_reloader: true,
-  debug_errors: true,
-  watchers: [
-    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
-  ]
+  debug_errors: true
+
+# watchers: [
+#  tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
+#  # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+#  esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+# ]
 
 # In test we don't send emails.
 config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Test
