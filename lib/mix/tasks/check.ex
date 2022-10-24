@@ -9,9 +9,7 @@ defmodule Rauversion.Checks.CheckFFMPEG do
       |> Enum.at(1)
 
     exists? = current
-    |> String.graphemes()
-    |> Enum.filter(fn item -> item != "." end)
-    |> Enum.join()
+    |> String.replace(".", "")
     |> String.to_integer()
     |> Kernel.>=(@min)
 
