@@ -282,7 +282,7 @@ defmodule RauversionWeb.Router do
     )
   end
 
-  if Mix.env() in [:cy] do
+  if Mix.env() in [:cy, :test] do
     scope "/__cypress__" do
       # pipe_through :api
       pipe_through(:api)

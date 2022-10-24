@@ -5,6 +5,9 @@ config :bcrypt_elixir, :log_rounds, 1
 
 config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: "en"
 
+config :rauversion, :domain, System.get_env("HOST", "http://localhost:4002")
+config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
+
 config :ex_cldr,
   default_locale: "en",
   default_backend: Rauversion.Cldr,
@@ -23,11 +26,7 @@ config :rauversion, Rauversion.Repo,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10,
   ownership_timeout: 300_000_000,
-  timeout: 300_000_000,
-  stacktrace: true
-
-config :rauversion, :domain, System.get_env("HOST", "http://localhost:4000")
-config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
+  timeout: 300_000_000
 
 if System.get_env("GITHUB_ACTIONS") do
   config :rauversion, Rauversion.Repo,
@@ -38,17 +37,10 @@ end
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :rauversion, RauversionWeb.Endpoint,
+  http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "asD6uWDumjqKv0TC2V9kMI3/1Vb/t+4I/rDC9qygryTac4Zcc7Dx/gmlQCui+s/s",
-  http: [ip: {0, 0, 0, 0}, port: 4002],
-  check_origin: false,
-  code_reloader: true,
+  server: true,
   debug_errors: true
-
-# watchers: [
-#  tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
-#  # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-#  esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
-# ]
 
 # In test we don't send emails.
 config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Test

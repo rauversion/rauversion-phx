@@ -161,13 +161,11 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   defp oembed_meta(socket, track = %{private: false}) do
-    Application.get_env(:rauversion, :domain) <>
-      Routes.embed_path(socket, :oembed_show, track, %{format: :json})
+    Routes.embed_url(socket, :oembed_show, track, %{format: :json})
   end
 
   defp oembed_meta(socket, track = %{private: true}) do
-    Application.get_env(:rauversion, :domain) <>
-      Routes.embed_path(socket, :oembed_private_show, Rauversion.Tracks.signed_id(track), %{
+      Routes.embed_url(socket, :oembed_private_show, Rauversion.Tracks.signed_id(track), %{
         format: :json
       })
   end
