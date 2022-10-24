@@ -2,8 +2,6 @@
 
 install i:
 	mix setup
-	mix fake_accounts
-	cd assets && yarn install
 
 deploy d:
 	mix assets.deploy
