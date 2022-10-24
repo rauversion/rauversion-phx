@@ -48,7 +48,7 @@ jobs:
       #MIX_ENV=cy mix phx.server &
       #sleep 10
       ## ./assets/node_modules/.bin/cypress install
-      #MIX_ENV=cy mix cypress.ga-ci
+      - run: MIX_ENV=cy mix cypress.ga-ci
 
       # for now we will run only backend tests
       - run: mix test test/rauversion
