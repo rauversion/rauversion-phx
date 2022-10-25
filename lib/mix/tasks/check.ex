@@ -7,8 +7,8 @@ defmodule Rauversion.Checks.CheckFFMPEG do
         true
 
       err ->
-        IO.inspect(err)
-        raise "ffmpeg"
+        IO.inspect err, label: "ffmpeg error"
+        raise "ffmpeg command not found"
     end
   end
 end

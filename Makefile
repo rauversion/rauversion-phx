@@ -1,15 +1,13 @@
 .PHONY: deploy install start format test coverage versions
 
 install i:
-	mix deps.get
-	mix ecto.setup
-	mix fake_accounts
-	cd assets && yarn install
+	mix setup
 
 deploy d:
 	mix assets.deploy
 
 start server s:
+	mix check
 	make deploy
 	iex -S mix phx.server
 
