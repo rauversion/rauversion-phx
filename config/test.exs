@@ -39,7 +39,7 @@ end
 config :rauversion, RauversionWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "asD6uWDumjqKv0TC2V9kMI3/1Vb/t+4I/rDC9qygryTac4Zcc7Dx/gmlQCui+s/s",
-  server: true,
+  server: false,
   debug_errors: true
 
 # In test we don't send emails.

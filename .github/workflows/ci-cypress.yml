@@ -97,10 +97,10 @@ jobs:
       - run: MIX_ENV=cy mix setup
       - run: MIX_ENV=cy mix assets.deploy
       #( cd ./assets && yarn install && NODE_ENV=production ./node_modules/webpack/bin/webpack.js  )
-      - run: MIX_ENV=cy mix phx.server &
-      - run: sleep 10
-      - run: MIX_ENV=cy mix cypress.ga-ci
-
       # for now we will run only backend tests
       - run: mix test test/rauversion
       - run: mix test test/rauversion_web/controllers
+
+      - run: MIX_ENV=cy mix phx.server &
+      - run: sleep 10
+      - run: MIX_ENV=cy mix cypress.ga-ci
