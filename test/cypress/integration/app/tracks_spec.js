@@ -23,6 +23,7 @@ describe('Tracks Spec', function () {
     cy.get('input[type=file]').selectFile('test/cypress/fixtures/sample-3s.mp3', {force: true})
     cy.contains("Continue").click()
     cy.contains("Save").click()
+    cy.wait("3000")
     cy.contains("Go to your track").click()
     cy.contains("sample-3s.mp3")
     cy.get('[data-audio-target="play"]').click()
