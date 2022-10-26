@@ -208,6 +208,32 @@ defmodule RauversionWeb.TrackLive.Player do
               data-player-target="play"
               class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400">
               <span class="sr-only"><%= gettext "Play" %></span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                style="margin:auto;display:none;"
+                width="20px"
+                height="20px"
+                viewBox="0 0 100 100"
+                data-player-target="loadingicon"
+                preserveAspectRatio="xMidYMid">
+                <circle cx="84" cy="50" r="10" fill="#e15b64">
+                  <animate attributeName="r" repeatCount="indefinite" dur="0.29411764705882354s" calcMode="spline" keyTimes="0;1" values="11;0" keySplines="0 0.5 0.5 1" begin="0s"></animate>
+                  <animate attributeName="fill" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="discrete" keyTimes="0;0.25;0.5;0.75;1" values="#e15b64;#abbd81;#f8b26a;#f47e60;#e15b64" begin="0s"></animate>
+                </circle><circle cx="16" cy="50" r="10" fill="#e15b64">
+                  <animate attributeName="r" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;11;11;11" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+                  <animate attributeName="cx" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+                </circle><circle cx="50" cy="50" r="10" fill="#f47e60">
+                  <animate attributeName="r" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;11;11;11" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.29411764705882354s"></animate>
+                  <animate attributeName="cx" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.29411764705882354s"></animate>
+                </circle><circle cx="84" cy="50" r="10" fill="#f8b26a">
+                  <animate attributeName="r" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;11;11;11" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.5882352941176471s"></animate>
+                  <animate attributeName="cx" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.5882352941176471s"></animate>
+                </circle><circle cx="16" cy="50" r="10" fill="#abbd81">
+                  <animate attributeName="r" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;11;11;11" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.8823529411764706s"></animate>
+                  <animate attributeName="cx" repeatCount="indefinite" dur="1.1764705882352942s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.8823529411764706s"></animate>
+                </circle>
+              </svg>
               <svg data-player-target="playicon" style="display:none" viewBox="0 0 15 15" class="h-6 w-6"  fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 3v9m4-9v9" stroke="currentColor"></path></svg>
               <svg data-player-target="pauseicon"  viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
             </button>

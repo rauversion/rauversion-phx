@@ -136,10 +136,10 @@ defmodule RauversionWeb.TrackLive.Show do
 
   defp metatags(socket, track) do
     # "https://chaskiq.ngrok.io"
-    domain = Application.get_env(:rauversion, :domain)
+    domain = Application.get_env(:rauversion, :domain )
 
     %{
-      url: domain <> Routes.articles_show_path(socket, :show, track.id),
+      url: Routes.articles_show_url(socket, :show, track.id),
       title: "#{track.title} on Rauversion",
       description: "Stream #{track.title} by #{track.user.username} on Rauversion.",
       image:
