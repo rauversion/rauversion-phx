@@ -1,0 +1,106 @@
+on: push
+
+jobs:
+  test:
+
+    strategy:
+      matrix:
+        elixir: ["1.13"]
+        otp: ["25"]
+        node-version: ["16.8.0"]
+        #mix_env: ["test", "cy"]
+
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+      REDIS_URL: redis://localhost:6379/0
+      MIX_ENV: "cy"
+      VAULT_KEY: l8b+X9II2kn7lHWcBuk0v2ZykpF8OuAhKfTBBDJpdPQ=
+      CYPRESS_RECORD_KEY: 01b55210-d446-44fd-88c2-c1bf11bfcc46
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mfinelli/setup-imagemagick@v1
+      - uses: FedericoCarboni/setup-ffmpeg@v1
+
+      - name: installs certs
+        run: sudo apt-get install ca-certificates -y
+
+      #- name: installs lame
+      #  run: sudo apt-get update -y; sudo apt-get install -y lame
+      
+      - name: Check identify
+        run: identify --version
+
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
+
+      - name: Get deps cache
+        uses: actions/cache@v2
+        with:
+          path: deps/
+          key: >-
+            deps-${{ runner.os }}-${{ matrix.otp }}-
+            ${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+      - name: Get build cache
+        uses: actions/cache@v2
+        with:
+          path: _build/test/
+          key: >-
+            build-${{ runner.os }}-${{ matrix.otp }}-
+            ${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+      - name: Install Dependencies
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
+          mix deps.compile
+          mix assets.setup
+
+      #- name: Check for unused deps
+      #  run: mix deps.unlock --check-unused
+      - name: Compile code
+        run: mix compile #--warnings-as-errors
+      #- name: Check code formatting
+      #  run: mix format --check-formatted
+      #- name: Run Credo
+      #  run: mix credo suggest --min-priority=normal
+      #- name: Run Migrations
+      #  run: mix ecto.migrate
+      #- name: Run Tests
+      #  run: mix coveralls.json --warnings-as-errors
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      #- run: mix deps.get
+      - run: mix ecto.create ; mix ecto.migrate
+      - run: MIX_ENV=cy mix setup
+      - run: MIX_ENV=cy mix assets.deploy
+      #( cd ./assets && yarn install && NODE_ENV=production ./node_modules/webpack/bin/webpack.js  )
+      # for now we will run only backend tests
+      - run: mix test test/rauversion
+      - run: mix test test/rauversion_web/controllers
+
+      - run: MIX_ENV=cy mix phx.server &
+      - run: sleep 10
+      - run: MIX_ENV=cy mix cypress.ga-ci

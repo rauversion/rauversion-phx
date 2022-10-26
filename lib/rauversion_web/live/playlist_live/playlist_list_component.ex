@@ -41,7 +41,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
       assigns.profile,
       assigns[:current_user]
     )
-    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+    |> Repo.paginate(page: page, page_size: 5)
   end
 
   defp list_playlists(page, assigns = %{section: "playlists"}) do
@@ -49,7 +49,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
       assigns.profile,
       assigns[:current_user]
     )
-    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+    |> Repo.paginate(page: page, page_size: 5)
   end
 
   defp track_meta(tracks) do

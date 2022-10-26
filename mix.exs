@@ -27,6 +27,7 @@ defmodule Rauversion.MixProject do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:cy), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -44,7 +45,7 @@ defmodule Rauversion.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:ecto_psql_extras, "~> 0.6"},
       {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_reload, "~> 1.2", only: [:dev, :cy, :test]},
       {:phoenix_live_view, "~> 0.18.2"},
       {:floki, ">= 0.30.0", override: true},
       {:phoenix_live_dashboard, "~> 0.7"},
@@ -57,9 +58,9 @@ defmodule Rauversion.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:faker, "~> 0.17", only: [:test, :dev]},
+      {:faker, "~> 0.17", only: [:test, :dev, :cy]},
       {:ecto_autoslug_field, "~> 3.0"},
-      {:dotenv, "~> 3.0.0", only: [:dev, :test]},
+      {:dotenv, "~> 3.0.0", only: [:dev, :test, :cy]},
       {:scrivener_ecto, "~> 2.0"},
       {:gen_smtp, "~> 1.2.0"},
       {:simplex_format, "0.2.0"},
@@ -117,13 +118,22 @@ defmodule Rauversion.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["check", "deps.get", "ecto.setup"],
+      setup: ["check", "deps.get", "ecto.setup", "assets.setup"],
+      "assets.setup": ["cmd --cd assets npm install"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       sentry_recompile: ["compile", "deps.compile sentry --force"],
       # "assets.deploy": ["esbuild default --minify", "phx.digest"]
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      cy: [
+        "cmd MIX_ENV=cy mix phx.server"
+      ],
+      "ci.open": ["cmd npx cypress open"],
+      "ci.run": ["cmd npx cypress run"],
+      "cypress.ga-ci": [
+        "cmd npx cypress run --headless --browser chrome --record  --parallel --ci-build-id $GITHUB_RUN_ID"
+      ]
     ]
   end
 end

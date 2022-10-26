@@ -136,10 +136,10 @@ defmodule RauversionWeb.TrackLive.Show do
 
   defp metatags(socket, track) do
     # "https://chaskiq.ngrok.io"
-    domain = Application.get_env(:rauversion, :domain)
+    domain = Application.get_env(:rauversion, :domain )
 
     %{
-      url: domain <> Routes.articles_show_path(socket, :show, track.id),
+      url: Routes.articles_show_url(socket, :show, track.id),
       title: "#{track.title} on Rauversion",
       description: "Stream #{track.title} by #{track.user.username} on Rauversion.",
       image:
@@ -161,13 +161,11 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   defp oembed_meta(socket, track = %{private: false}) do
-    Application.get_env(:rauversion, :domain) <>
-      Routes.embed_path(socket, :oembed_show, track, %{format: :json})
+    Routes.embed_url(socket, :oembed_show, track, %{format: :json})
   end
 
   defp oembed_meta(socket, track = %{private: true}) do
-    Application.get_env(:rauversion, :domain) <>
-      Routes.embed_path(socket, :oembed_private_show, Rauversion.Tracks.signed_id(track), %{
+      Routes.embed_url(socket, :oembed_private_show, Rauversion.Tracks.signed_id(track), %{
         format: :json
       })
   end

@@ -19,7 +19,7 @@ defmodule Mix.Tasks.Check do
   alias Rauversion.Checks.CheckFFMPEG
 
   defp is_ok(true) do
-    IO.inspect "All checks passed"
+    IO.inspect("All checks passed")
   end
 
   defp is_ok(_) do

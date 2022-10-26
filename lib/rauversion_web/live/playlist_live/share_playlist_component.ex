@@ -4,7 +4,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: track} = assigns) do
+  def render(%{track: _track} = assigns) do
     ~H"""
       <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
         <div class="mx-2 py-6">
@@ -31,7 +31,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                   <div class="flex items-center space-x-3">
                     <input
                       type="text"
-                      value={Routes.playlist_show_url(@socket, :private, Rauversion.Playlists.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
+                      value={Routes.playlist_show_url(@socket, :private, Rauversion.Playlists.signed_id(@track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
                       class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       readonly="readonly"/>
 
@@ -98,12 +98,12 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
               <%= gettext "Embed" %>
               </h2>
               <input type="text"
-                value={Routes.embed_url(@socket, :show, track)}
+                value={Routes.embed_url(@socket, :show, @track)}
                 class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
               />
 
               <input type="text"
-                value={Routes.embed_url(@socket, :private_playlist, Rauversion.Playlists.signed_id(track) )}
+                value={Routes.embed_url(@socket, :private_playlist, Rauversion.Playlists.signed_id(@track) )}
                 class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
               />
 
@@ -113,7 +113,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                 scrolling="no"
                 frameborder="no"
                 allow="autoplay"
-                src={Routes.embed_url(@socket, :show, track)}>
+                src={Routes.embed_url(@socket, :show, @track)}>
               </iframe>
               <div
                 style="font-size: 10px;
@@ -127,16 +127,16 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                   Garuda, Verdana, Tahoma, sans-serif;
                   font-weight: 100;">
                 <a
-                  href={Routes.profile_index_path(@socket, :index, track.user)}
+                  href={Routes.profile_index_path(@socket, :index, @track.user)}
                   title="waverzap"
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
-                  <%= track.user.username %>
+                  <%= @track.user.username %>
                 </a>
                 ·
                 <a
-                  href={Routes.track_show_path(@socket, :show, track)}
-                  title={track.title}
+                  href={Routes.track_show_path(@socket, :show, @track)}
+                  title={@track.title}
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
                   <%= @track.title %>

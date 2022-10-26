@@ -65,10 +65,10 @@ defmodule RauversionWeb.TrackLive.RepostTrackButtonComponent do
   def render(
         %{
           track: _track,
-          repost: _repost
+          repost: repost
         } = assigns
       ) do
-    assigns = assign(assigns, :repost_class, active_button_class(@repost))
+    assigns = assign(assigns, :repost_class, active_button_class(repost))
 
     ~H"""
       <div>

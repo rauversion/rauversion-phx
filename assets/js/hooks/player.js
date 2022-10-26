@@ -15,6 +15,8 @@ Player = {
     
     this.playiconTarget = this.el.querySelector('[data-player-target="playicon"]')
     this.pauseiconTarget = this.el.querySelector('[data-player-target="pauseicon"]')
+    this.loadingiconTarget = this.el.querySelector('[data-player-target="loadingicon"]')
+
     this.range = this.el.querySelector('#player-range')
 
     this.range.value = window.store.getState().volume
@@ -22,6 +24,9 @@ Player = {
     this.playBtn = this.el.querySelector('[data-player-target="play"]')
 
     this.playBtnListener = (e)=>{
+      //this.pauseiconTarget.style.display = 'block'
+      //this.loadingiconTarget.style.display = 'block'
+      //this.playiconTarget.style.display = 'none'
       this._wave.playPause()
     }
     
@@ -48,6 +53,11 @@ Player = {
     
     this.playSongListener = (e) => {
       console.log("PLAY SONG", e.detail)
+
+      this.pauseiconTarget.style.display = 'none'
+      this.loadingiconTarget.style.display = 'block'
+      this.playiconTarget.style.display = 'none'
+
       // this.el.dataset.playerPeaks = e.detail.peaks
       // this.el.dataset.playerUrl = e.detail.url
       setTimeout(()=>{
@@ -145,8 +155,21 @@ Player = {
     })
 
     this._wave.on('play', ()=> {
+      console.log("play")
       this.dispatchPlay()
     })
+
+    this._wave.on('loading', (percent)=> {
+      console.log("loaddingggnn!!")
+    })
+
+    this._wave.backend.on('canplay', () => {
+      console.log("CAN PLAY!!")
+      this.loadingiconTarget.style.display = 'none'
+      // this.pauseiconTarget.style.display = 'block'
+      //this.loadingiconTarget.style.display = 'none'
+      //this.playiconTarget.style.display = 'block'
+    });
 
     this._wave.on('audioprocess', (e)=> {
       const trackId = this.el.dataset.trackId
@@ -163,6 +186,8 @@ Player = {
     this._wave.on('ready', ()=> {
       console.log("PLAYER READY")
       // sends the progress position to track_component
+      //this.playiconTarget.style.display = 'block'
+      //this.loadingiconTarget.style.display = 'none'
 
       this._wave.drawer.wrapper.addEventListener('click', this.waveClickListener)
     })
@@ -180,6 +205,7 @@ Player = {
   },
   dispatchPlay(){
     this.playiconTarget.style.display = 'block'
+    // this.loadingiconTarget.style.display = 'block'
     this.pauseiconTarget.style.display = 'none'
 
     const trackId = this.el.dataset.trackId
@@ -196,6 +222,7 @@ Player = {
   dispatchPause(){
     this.playiconTarget.style.display = 'none'
     this.pauseiconTarget.style.display = 'block'
+    this.loadingiconTarget.style.display = 'none'
     const trackId = this.el.dataset.trackId
     const ev = new CustomEvent(`audio-process-${trackId}-pause`, {
       detail: {}

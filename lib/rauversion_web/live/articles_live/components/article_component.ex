@@ -4,13 +4,15 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(assigns) do
-    image_height_class = assigns |> Map.get(:image_class) || "h-32"
+  def image_height_class(image_class) do
+    image_class || "h-32"
+  end
 
+  def render(assigns) do
     ~H"""
     <div class="cursor-pointer group">
       <div class="relative overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800 hover:scale-105 aspect-square">
-        <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug), class: "block w-full #{image_height_class}" do %>
+        <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug), class: "block w-full #{image_height_class(@image_class)}" do %>
           <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
           <%= img_tag(Rauversion.Tracks.variant_url(
             @post, "cover", %{resize_to_limit: "500x500"}),

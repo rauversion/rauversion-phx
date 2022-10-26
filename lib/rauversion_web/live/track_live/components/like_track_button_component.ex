@@ -67,10 +67,10 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
   def render(
         %{
           track: _track,
-          like: _like
+          like: like
         } = assigns
       ) do
-    assigns = assign(assigns, :like_class, active_button_class(@like))
+    assigns = assign(assigns, :like_class, active_button_class(like))
 
     ~H"""
       <div>

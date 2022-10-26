@@ -17,7 +17,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
   end
 
   def has_transbank?(user) do
-    with %{settings: settings = %Settings{tbk_commerce_code: tbk_code}} <-
+    with %{settings: _settings = %Settings{tbk_commerce_code: tbk_code}} <-
            user do
       !(tbk_code |> is_binary())
     else

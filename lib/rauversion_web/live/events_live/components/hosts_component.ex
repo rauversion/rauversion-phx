@@ -158,7 +158,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
                 &Routes.user_invitation_url(socket, :accept, &1)
               )
 
-            host =
+            _host =
               Rauversion.EventHosts.create_event_host(%{
                 name: "-",
                 user_id: user.id,

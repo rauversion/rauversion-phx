@@ -1,6 +1,4 @@
 defmodule Rauversion.Events.StreamingProviders.Twitch do
-  alias RauversionWeb.Router.Helpers, as: Routes
-
   defstruct [:app_id, :api_key]
 
   def new(attrs) do

@@ -37,7 +37,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
     IO.inspect(post_params)
 
     case Posts.update_post_attributes(socket.assigns.post, post_params) do
-      {:ok, post} ->
+      {:ok, _post} ->
         # IO.inspect(post)
 
         {

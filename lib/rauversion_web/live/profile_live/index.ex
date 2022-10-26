@@ -65,7 +65,7 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   @impl true
   def handle_info(
-        {Tracks, [:tracks, :destroyed], %Tracks.Track{user_id: user_id} = deleted_track},
+        {Tracks, [:tracks, :destroyed], %Tracks.Track{user_id: user_id} = _deleted_track},
         socket
       ) do
     IO.puts("HANDLE DELETE TRACK EVENT")
