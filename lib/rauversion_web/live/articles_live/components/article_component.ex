@@ -5,7 +5,11 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
   use RauversionWeb, :live_component
 
   def image_height_class(image_class) do
-    image_class || "h-32"
+    image_class
+  end
+
+  def image_height_class(image_class = nil) do
+    "h-32"
   end
 
   def render(assigns) do
