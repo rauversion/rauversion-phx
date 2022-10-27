@@ -43,13 +43,20 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
     case socket.assigns.like do
       %Rauversion.TrackLikes.TrackLike{} = track_like ->
         Rauversion.TrackLikes.delete_track_like(track_like)
-        {:noreply, assign(socket, :like, nil)}
+
+        track = track |> Map.merge(%{likes_count: track.likes_count - 1})
+
+        {:noreply, assign(socket, :like, nil) |> assign(track: track) }
 
       _ ->
         {:ok, %Rauversion.TrackLikes.TrackLike{} = track_like} =
           Rauversion.TrackLikes.create_track_like(attrs)
 
-        {:noreply, assign(socket, :like, track_like)}
+      track = track |> Map.merge(%{likes_count: track.likes_count + 1})
+
+      {
+        :noreply, assign(socket, :like, track_like) |> assign(track: track)
+      }
     end
   end
 

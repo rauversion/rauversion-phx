@@ -19,7 +19,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
       <.form
         let={f}
         for={@changeset}
-        id="track-form-2"
+        id={"info-track-form-#{@track.id}"}
         phx-target={@target}
         phx-change="validate"
         phx-submit="save"

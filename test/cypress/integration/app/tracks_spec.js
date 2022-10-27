@@ -38,5 +38,12 @@ describe('Tracks Spec', function () {
 
     cy.contains("Commented")
     cy.contains("foo")
+
+    cy.contains("0 Like").click()
+
+    cy.contains("1 Like").click()
+
+    cy.contains("0 Like")
+
   })
 });

@@ -149,7 +149,7 @@ defmodule RauversionWeb.TrackLive.Show do
       twitter: %{
         card: "player",
         player: %{
-          stream: domain <> Rauversion.Tracks.blob_proxy_url(track, "mp3_audio"),
+          stream: domain <> (Rauversion.Tracks.blob_proxy_url(track, "mp3_audio") || ""),
           "stream:content_type": "audio/mpeg",
           width: 290,
           height: 58
