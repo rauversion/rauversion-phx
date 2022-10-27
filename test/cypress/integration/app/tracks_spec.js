@@ -6,6 +6,7 @@ describe('Tracks Spec', function () {
     /*cy.appEval(`
       Chaskiq.Integrations.Catalog.import_all
     `);*/
+    // cy.viewport(1024, 768)
   });
 
   it('Access & upload tracks', function () {
@@ -29,5 +30,13 @@ describe('Tracks Spec', function () {
     cy.get('[data-audio-target="play"]').click()
 
     expectPlayingAudio()
+
+
+    cy.get('textarea').type('foo').should('have.value', 'foo');
+
+    cy.get('button[data-cy="comment-submit"]').click()
+
+    cy.contains("Commented")
+    cy.contains("foo")
   })
 });

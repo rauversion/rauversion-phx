@@ -3,15 +3,8 @@ import Config
 # Only in tests, remove the complexity from the password hashing algorithm
 config :bcrypt_elixir, :log_rounds, 1
 
-config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: "en"
-
 config :rauversion, :domain, System.get_env("HOST", "http://localhost:4002")
 config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
-
-config :ex_cldr,
-  default_locale: "en",
-  default_backend: Rauversion.Cldr,
-  json_library: Jason
 
 # Configure your database
 #
@@ -40,7 +33,16 @@ config :rauversion, RauversionWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "asD6uWDumjqKv0TC2V9kMI3/1Vb/t+4I/rDC9qygryTac4Zcc7Dx/gmlQCui+s/s",
   server: false,
-  debug_errors: true
+  debug_errors: true,
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "Ga6651EYCdxFIUDx0VnhDKFE4Kc5uyekmzY5nLG8yYxUgYpjhv0Rzm1Z4CJkeylZ",
+  watchers: [
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
+    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+  ]
 
 # In test we don't send emails.
 config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Test

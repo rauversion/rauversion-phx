@@ -21,13 +21,6 @@ defmodule Rauversion.Playlists do
     Repo.all(Playlist)
   end
 
-  def list_playlists_by_user(user, _preloads = nil) do
-    from pi in Playlist,
-      where: pi.user_id == ^user.id,
-      where: pi.playlist_type == ^"playlist",
-      preload: [:user, track_playlists: [track: [:cover_blob, :mp3_audio_blob]]]
-  end
-
   def list_albums_by_user(user, _preloads = nil) do
     from pi in Playlist,
       where: pi.user_id == ^user.id,
@@ -48,6 +41,13 @@ defmodule Rauversion.Playlists do
         likes: ^likes_query,
         track_playlists: [track: [:cover_blob, :mp3_audio_blob]]
       ]
+  end
+
+  def list_playlists_by_user(user, _preloads = nil) do
+    from pi in Playlist,
+      where: pi.user_id == ^user.id,
+      where: pi.playlist_type == ^"playlist",
+      preload: [:user, track_playlists: [track: [:cover_blob, :mp3_audio_blob]]]
   end
 
   def list_playlists_by_user(user, _current_user = %Rauversion.Accounts.User{id: id}) do

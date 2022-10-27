@@ -47,9 +47,6 @@ defmodule Rauversion.Accounts.UserToken do
     {token, %UserToken{token: token, context: "session", user_id: user.id}}
   end
 
-  # Added the “invitation” case in the days_for_context validation time
-  defp days_for_context("invitation"), do: @invite_validity_in_days
-
   @doc """
   Checks if the token is valid and returns its underlying lookup query.
 
@@ -130,6 +127,8 @@ defmodule Rauversion.Accounts.UserToken do
     end
   end
 
+  # Added the “invitation” case in the days_for_context validation time
+  defp days_for_context("invitation"), do: @invite_validity_in_days
   defp days_for_context("confirm"), do: @confirm_validity_in_days
   defp days_for_context("reset_password"), do: @reset_password_validity_in_days
 

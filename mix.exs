@@ -129,6 +129,9 @@ defmodule Rauversion.MixProject do
       cy: [
         "cmd MIX_ENV=cy mix phx.server"
       ],
+      "cy.test": [
+        "cmd MIX_ENV=test mix phx.server"
+      ],
       "ci.open": ["cmd npx cypress open"],
       "ci.run": ["cmd npx cypress run"],
       "cypress.ga-ci": [
