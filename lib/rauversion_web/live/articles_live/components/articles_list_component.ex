@@ -60,6 +60,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
                   module={RauversionWeb.ArticlesLive.ArticleComponent}
                   hide_excerpt={true}
                   truncate_titlesss={true}
+                  image_class={nil}
                 />
               <% end %>
             </div>
