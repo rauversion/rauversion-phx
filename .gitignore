@@ -41,3 +41,4 @@ npm-debug.log
 forks/
 
 test/cypress/videos
+do-app-spec.yml

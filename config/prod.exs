@@ -10,11 +10,11 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :rauversion, RauversionWeb.Endpoint,
-  url: [host: "rauversion.com", port: 443, scheme: "https"],
+  # url: [host: "rauversion.com", port: 443, scheme: "https"],
   cache_static_manifest: "priv/static/cache_manifest.json",
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
-config :rauversion, :domain, "https://rauversion.com"
+# config :rauversion, :domain, "https://rauversion.com"
 
 # Do not print debug messages in production
 config :logger,
@@ -65,7 +65,7 @@ config :rauversion, Oban,
   notifier: Oban.Notifiers.PG,
   peer: Oban.Peers.Global
 
-config :active_storage, :host, "https://rauversion.com"
+# config :active_storage, :host, "https://rauversion.com"
 config :active_storage, :service, :amazon
 # config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo
