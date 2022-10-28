@@ -92,7 +92,7 @@ config :logger, :console,
   format: "[$level] $message\n",
   truncate: :infinity
 
-config :logger, level: :debug
+config :logger, level: :warn
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
