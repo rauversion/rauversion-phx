@@ -29,7 +29,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build --build-arg APP_ENV=production \
+              docker build --build-arg MIX_ENV=prod \
                --build-arg PG_MAJOR=11 \
                --build-arg NODE_MAJOR=18 \
                --build-arg YARN_VERSION=1.13.0 \
