@@ -13,10 +13,9 @@ apt-get update -qq \
     zlib1g-dev \
     apt-transport-https \
     ca-certificates \
-    ffmpeg \
-    libgnutls30 \ 
-    software-properties-common
+    libgnutls30  
+    #software-properties-common
 
-add-apt-repository ppa:chris-needham/ppa
-apt-get update
-apt-get install audiowaveform
+#add-apt-repository ppa:chris-needham/ppa
+#apt-get update
+#apt-get install audiowaveform

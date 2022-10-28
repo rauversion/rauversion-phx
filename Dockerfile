@@ -94,6 +94,8 @@ FROM ${RUNNER_IMAGE}
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
+RUN apt install -y ffmpeg imagemagick libmad0-dev libid3tag0-dev libsndfile1-dev libgd-dev
+
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
