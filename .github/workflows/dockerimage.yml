@@ -33,14 +33,14 @@ jobs:
                --build-arg PG_MAJOR=11 \
                --build-arg NODE_MAJOR=18 \
                --build-arg YARN_VERSION=1.13.0 \
-               -t $DOCKER_REPO \
+               -t michelson/rauversion \
                .
 
       - name: Tag and Push Docker image
         if: github.event_name == 'push'
         run: |
-          docker tag $DOCKER_REPO $DOCKER_REPO:$SHORT_SHA
-          docker push $DOCKER_REPO:$SHORT_SHA
+          docker tag michelson/rauversion michelson/rauversion:$SHORT_SHA
+          docker push michelson/rauversion:$SHORT_SHA
           echo "SHORT_SHA: ${SHORT_SHA}"
         env:
           SHORT_SHA: ${{ steps.vars.outputs.short_sha }}
@@ -48,13 +48,13 @@ jobs:
       - name: Tag LATEST and Push Docker image
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
-          docker tag $DOCKER_REPO $DOCKER_REPO:latest
-          docker push $DOCKER_REPO:latest
+          docker tag michelson/rauversion michelson/rauversion:latest
+          docker push michelson/rauversion:latest
           echo "LATEST deployed!"
 
       - name: Tag RELEASE and Push Docker image
         if: github.event_name	== 'release'
         run: |
-          docker tag $DOCKER_REPO $DOCKER_REPO:${{ github.ref_name }}
-          docker push $DOCKER_REPO:${{ github.ref_name }}
+          docker tag michelson/rauversion michelson/rauversion:${{ github.ref_name }}
+          docker push michelson/rauversion:${{ github.ref_name }}
           echo "${{ github.ref_name }} deployed!"
