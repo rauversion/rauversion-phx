@@ -117,11 +117,15 @@ defmodule Rauversion.Tracks.Track do
       %{valid?: true} ->
         case attrs do
           %{^kind => [file | _]} ->
+            IO.inspect("kind processing: ")
+            IO.inspect(kind)
             # Get peaks. maybe detach this processings
             struct =
               if kind == "audio" do
                 # copy temp file from live
                 file = generate_local_copy(file)
+
+                IO.inspect("inserting oban job: ")
 
                 %{file: file, track_id: struct.data.id}
                 |> Rauversion.Workers.TrackProcessorWorker.new()
@@ -129,6 +133,8 @@ defmodule Rauversion.Tracks.Track do
 
                 struct
               else
+                IO.inspect("no job inserting for track processor: ")
+
                 struct
               end
 
@@ -143,7 +149,9 @@ defmodule Rauversion.Tracks.Track do
 
             struct
 
-          _ ->
+          ee ->
+            IO.inspect("NO PROCESSING")
+            IO.inspect(ee)
             struct
         end
 
