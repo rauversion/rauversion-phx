@@ -168,10 +168,13 @@ defmodule Rauversion.Tracks.Track do
     struct =
       case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
         [_ | _] = data ->
+          IO.inspect("PROCESSED WITH PEAKS")
+
           put_change(struct, :metadata, %{peaks: data})
           |> put_change(:state, "processed")
 
         _ ->
+          IO.inspect("PROCESSED WITHOUT PEAKS")
           put_change(struct, :state, "processed")
       end
 
@@ -179,9 +182,6 @@ defmodule Rauversion.Tracks.Track do
   end
 
   def convert_to_mp3(struct, file) do
-    IO.inspect("CONVERT MP3 #{file.path}")
-    IO.inspect(File.exists?(file.path))
-
     path = transform_to_mp3(file.path)
     # audio_blob = create_and_analyze_audio(struct, file)
     blob = create_and_analyze_audio(struct, file, "mp3_audio")
