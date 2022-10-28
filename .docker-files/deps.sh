@@ -13,4 +13,5 @@ apt-get update -qq \
     zlib1g-dev \
     apt-transport-https \
     ca-certificates \
+    ffmpeg \
     libgnutls30
