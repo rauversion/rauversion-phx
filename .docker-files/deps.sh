@@ -14,7 +14,8 @@ apt-get update -qq \
     apt-transport-https \
     ca-certificates \
     ffmpeg \
-    libgnutls30
+    libgnutls30 \ 
+    software-properties-common
 
 add-apt-repository ppa:chris-needham/ppa
 apt-get update
