@@ -8,8 +8,8 @@ config :rauversion, Rauversion.Repo,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10,
   ownership_timeout: 300_000_000,
-  timeout: 300_000_000,
-  stacktrace: true
+  # , stacktrace: true
+  timeout: 300_000_000
 
 if System.get_env("GITHUB_ACTIONS") do
   config :rauversion, Rauversion.Repo,
@@ -32,8 +32,7 @@ config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
 
-
-#config :rauversion, RauversionWeb.Endpoint,
+# config :rauversion, RauversionWeb.Endpoint,
 #  http: [ip: {127, 0, 0, 1}, port: 4002],
 #  secret_key_base: "asD6uWDumjqKv0TC2V9kMI3/1Vb/t+4I/rDC9qygryTac4Zcc7Dx/gmlQCui+s/s",
 #  server: true,
