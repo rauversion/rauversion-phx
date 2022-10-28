@@ -92,7 +92,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
           <div class="pt-6">
             <!-- Activity feed-->
             <div class="flow-root">
-              <ul id="track-comments"
+              <ul id="track-comments-list"
                 role="list"
                 class="-mb-8"
                 phx-update="append">

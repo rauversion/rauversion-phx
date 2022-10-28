@@ -4,11 +4,11 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def image_height_class(image_class) do
+  def image_height_class(image_class) when is_binary(image_class) do
     image_class
   end
 
-  def image_height_class(image_class = nil) do
+  def image_height_class(_image_class = nil) do
     "h-32"
   end
 
