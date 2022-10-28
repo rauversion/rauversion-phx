@@ -541,7 +541,7 @@ defmodule Rauversion.AccountsTest do
       %{user: user_fixture()}
     end
 
-    test "invite user, invalid email", %{user: user} do
+    test "invite user, invalid email", %{user: _user} do
       user_params = %{email: "ola"}
       assert {:error, _} = Accounts.invite_user(%Accounts.User{}, user_params)
     end

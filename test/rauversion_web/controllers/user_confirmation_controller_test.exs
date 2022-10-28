@@ -5,6 +5,10 @@ defmodule RauversionWeb.UserConfirmationControllerTest do
   alias Rauversion.Repo
   import Rauversion.AccountsFixtures
 
+  # setup_all do
+  # Surgex.DatabaseCleaner.call(Rauversion.Repo)
+  # end
+
   setup do
     %{user: user_fixture()}
   end

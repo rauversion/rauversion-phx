@@ -16,6 +16,8 @@ defmodule Rauversion.TrackCommentsTest do
     @invalid_attrs %{body: nil, state: nil, track_minute: nil}
 
     setup do
+      Surgex.DatabaseCleaner.call(Rauversion.Repo)
+
       user = user_fixture(%{username: "miki"})
       track = track_fixture(%{user_id: user.id})
       {:ok, %{user: user, track: track}}
@@ -23,6 +25,7 @@ defmodule Rauversion.TrackCommentsTest do
 
     test "list_track_comments/0 returns all track_comments", %{user: user, track: track} do
       track_comment = track_comment_fixture(%{user_id: user.id, track_id: track.id})
+
       assert TrackComments.list_track_comments() == [track_comment]
     end
 
