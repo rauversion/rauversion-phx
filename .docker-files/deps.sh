@@ -15,3 +15,7 @@ apt-get update -qq \
     ca-certificates \
     ffmpeg \
     libgnutls30
+
+add-apt-repository ppa:chris-needham/ppa
+apt-get update
+apt-get install audiowaveform
