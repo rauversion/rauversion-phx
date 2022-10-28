@@ -15,10 +15,7 @@
     "wavesurfer.js": "6.2.0",
     "zustand": "^4.0.0-rc.1"
   },
-  "devDependencies": {
-    "cypress": "6.1.0",
-    "cypress-xpath": "^1.4.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "deploy": "cd .. && mix assets.deploy",
     "cypress:open": "./node_modules/.bin/cypress open",

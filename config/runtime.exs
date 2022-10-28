@@ -4,6 +4,8 @@ unless Mix.env() == :prod do
   Dotenv.load!()
 end
 
+maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
+
 config :active_storage, :services,
   amazon: [
     service: "S3",
@@ -95,6 +97,7 @@ if config_env() == :prod do
 
   config :rauversion, Rauversion.Repo,
     ssl: true,
+    socket_options: maybe_ipv6,
     # socket_options: [:inet6],
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
@@ -133,6 +136,11 @@ if config_env() == :prod do
       port: String.to_integer(System.get_env("PORT") || "4000")
     ],
     secret_key_base: secret_key_base
+
+  if System.get_env("PHX_SERVER") do
+    config :rauversion, RauversionWeb.Endpoint, server: true
+  end
+
 
   # ## Using releases
   #
