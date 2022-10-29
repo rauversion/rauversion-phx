@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-10-18 23:54\n"
+"PO-Revision-Date: 2022-10-29 04:36\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -151,7 +151,7 @@ msgstr "Cambiar Email"
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:75
 #, elixir-autogen, elixir-format
 msgid "Change information"
-msgstr "Cambiar la información del correo electrónico"
+msgstr "Cambiar la información de cuenta"
 
 #: lib/rauversion_web/live/usersettings_live/components/security_form.ex:57
 #, elixir-autogen, elixir-format
@@ -1706,25 +1706,25 @@ msgstr "Algo salió mal"
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:63
 #, elixir-autogen, elixir-format
 msgid "Edit Event"
-msgstr ""
+msgstr "Editar evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:46
 #, elixir-autogen, elixir-format
 msgid "Publish Event"
-msgstr ""
+msgstr "Publicar Evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:45
 #, elixir-autogen, elixir-format
 msgid "Unpublish Event"
-msgstr ""
+msgstr "Despublicar Evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:53
 #, elixir-autogen, elixir-format
 msgid "Your event has not been published"
-msgstr ""
+msgstr "Tu evento no ha sido publicado"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:52
 #, elixir-autogen, elixir-format
 msgid "Your event is published"
-msgstr ""
+msgstr "Tu evento está publicado"
 
