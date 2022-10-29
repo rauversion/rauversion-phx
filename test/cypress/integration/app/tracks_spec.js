@@ -17,6 +17,7 @@ describe('Tracks Spec', function () {
     cy.get('a').contains('My Tracks').click({force: true})
     cy.contains("Albums")
     cy.contains("Playlists")
+    cy.wait(2000)
     cy.contains("New Track").click()
     cy.get('input[type=file]').selectFile('test/cypress/fixtures/example.json', {force: true})
     cy.contains("Not accepted")
