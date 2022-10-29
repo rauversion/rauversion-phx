@@ -93,7 +93,6 @@ jobs:
 
       #- run: mix deps.get
       - run: mix ecto.create ; mix ecto.migrate
-      - run: MIX_ENV=cy mix setup
-
+      - run: mix setup
       - run: mix test test/rauversion
       - run: mix test test/rauversion_web/controllers

@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - stage
-      - docker-image
   release:
     types: [published]
 
