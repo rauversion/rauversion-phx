@@ -187,6 +187,22 @@ defmodule Rauversion.Accounts do
     |> Repo.update()
   end
 
+  def avatar_url(profile, size) do
+    case size do
+      :medium ->
+        Rauversion.BlobUtils.variant_url(profile, :avatar, %{resize_to_fill: "200x200"})
+
+      :large ->
+        Rauversion.BlobUtils.variant_url(profile, :avatar, %{resize_to_fill: "500x500"})
+
+      :small ->
+        Rauversion.BlobUtils.variant_url(profile, :avatar, %{resize_to_fill: "50x50"})
+
+      _ ->
+        Rauversion.BlobUtils.variant_url(profile, :avatar, %{resize_to_fill: "200x200"})
+    end
+  end
+
   def avatar_url(user) do
     # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
     case user do

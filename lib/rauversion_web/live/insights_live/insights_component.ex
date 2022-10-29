@@ -121,7 +121,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                   <li class="py-4">
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">
-                        <%= img_tag(Rauversion.Accounts.avatar_url(item.user), class: "h-8 w-8 rounded-full") %>
+                        <%= img_tag(Rauversion.Accounts.avatar_url(item.user, :small), class: "h-8 w-8 rounded-full") %>
                       </div>
                       <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item.user.username %> </p>

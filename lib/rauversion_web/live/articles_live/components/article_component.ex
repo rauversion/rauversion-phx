@@ -61,7 +61,7 @@ defmodule RauversionWeb.ArticlesLive.ArticleComponent do
 
             <% #= img_tag(Rauversion.Tracks.variant_url(@post.user, "avatar", %{resize_to_limit: "30x30"}), class: "rounded-full" ) %>
 
-            <%= img_tag(Rauversion.Accounts.avatar_url(@post.user), class: "rounded-full") %>
+            <%= img_tag(Rauversion.Accounts.avatar_url(@post.user, :small), class: "rounded-full") %>
 
             </span>
           </div>

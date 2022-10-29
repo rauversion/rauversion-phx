@@ -50,7 +50,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                     <div class="flex-shrink-0">
 
                       <%= img_tag(
-                        Accounts.avatar_url(item),
+                        Accounts.avatar_url(item, :small),
                         class: "h-8 w-8 rounded-full") %>
 
                     </div>

@@ -196,7 +196,7 @@
                 <div class="group relative">
                   <%= live_redirect to: Routes.profile_index_path(@socket, :index, user.username) do %>
                     <div class="relative sm:h-64-- w-full- h-80- bg-white rounded-full overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1">
-                      <%= img_tag(Rauversion.Accounts.avatar_url(user), class: "w-full h-full object-center object-cover") %>
+                      <%= img_tag(Rauversion.Accounts.avatar_url(user, :medium), class: "w-full h-full object-center object-cover") %>
                     </div>
 
                     <h3 class="hidden mt-6 text-sm text-gray-500 text-center">

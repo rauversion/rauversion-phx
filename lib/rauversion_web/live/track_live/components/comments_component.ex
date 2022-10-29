@@ -106,7 +106,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                       <div class="relative flex items-start space-x-3">
                           <div class="relative">
 
-                            <%= img_tag(Rauversion.Accounts.avatar_url(comment.user),
+                            <%= img_tag(Rauversion.Accounts.avatar_url(comment.user, :small),
                               class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
                               alt: comment.user.username
                               )
@@ -149,7 +149,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                   <div class="flex-shrink-0">
                     <div class="relative">
 
-                      <%= img_tag(Rauversion.Accounts.avatar_url(@current_user),
+                      <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small),
                         class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
                         alt: @current_user.username
                         )

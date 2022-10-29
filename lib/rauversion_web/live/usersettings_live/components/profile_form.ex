@@ -80,7 +80,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
           </label>
           <div class="mt-1 flex items-center">
 
-            <%= img_tag(Rauversion.Accounts.avatar_url(@changeset.data),
+            <%= img_tag(Rauversion.Accounts.avatar_url(@changeset.data, :small),
             class: "inline-block h-12 w-12 rounded-full")
             %>
 
