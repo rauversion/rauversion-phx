@@ -19,6 +19,7 @@ defmodule Rauversion.TracksTest do
     }
 
     setup do
+      Surgex.DatabaseCleaner.call(Rauversion.Repo)
       user = user_fixture()
       {:ok, %{user: user}}
     end

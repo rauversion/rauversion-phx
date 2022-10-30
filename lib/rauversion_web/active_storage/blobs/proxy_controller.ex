@@ -220,8 +220,8 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
 
     downloaded_stream =
       ActiveStorage.Blob.download(blob, fn chunk_data ->
-        IO.inspect(chunk_data)
-        IO.inspect("chunk_data: !!")
+        # IO.inspect(chunk_data)
+        # IO.inspect("chunk_data: !!")
         chunk(conn, chunk_data)
       end)
 

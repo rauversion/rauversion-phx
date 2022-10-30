@@ -92,7 +92,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
           <div class="pt-6">
             <!-- Activity feed-->
             <div class="flow-root">
-              <ul id="track-comments"
+              <ul id="track-comments-list"
                 role="list"
                 class="-mb-8"
                 phx-update="append">
@@ -106,7 +106,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                       <div class="relative flex items-start space-x-3">
                           <div class="relative">
 
-                            <%= img_tag(Rauversion.Accounts.avatar_url(comment.user),
+                            <%= img_tag(Rauversion.Accounts.avatar_url(comment.user, :small),
                               class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
                               alt: comment.user.username
                               )
@@ -149,7 +149,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                   <div class="flex-shrink-0">
                     <div class="relative">
 
-                      <%= img_tag(Rauversion.Accounts.avatar_url(@current_user),
+                      <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small),
                         class: "h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white",
                         alt: @current_user.username
                         )
@@ -168,7 +168,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                       <.form
                         let={f}
                         for={@comment_changeset}
-                        id="track-form-2"
+                        id={"track-comments"}
                         phx-change="validate"
                         phx-submit="save"
                         phx-target={@myself}
@@ -180,7 +180,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                         </div>
 
                         <div class="mt-6 flex items-center justify-end space-x-4 py-4">
-                          <%= submit gettext("Comment"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" %>
+                          <%= submit gettext("Comment"), phx_disable_with: gettext("Saving..."), "data-cy": "comment-submit", class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" %>
                         </div>
 
                       </.form>

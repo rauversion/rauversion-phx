@@ -92,7 +92,7 @@
                   class="flex-shrink-0 bg-gray-500 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
                   <span class="sr-only"><%= gettext "Notificaitons" %></span>
 
-                  <%= img_tag(Rauversion.Accounts.avatar_url(@current_user), 
+                  <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small), 
                     class: "h-6 w-6 rounded-full") 
                   %>
                 </button>
@@ -170,7 +170,7 @@
         <div class="flex items-center px-4">
           <%= if @current_user do %>
           <div class="flex-shrink-0">
-            <%= img_tag(Rauversion.Accounts.avatar_url(@current_user), class: "h-10 w-10 rounded-full") %>
+            <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small), class: "h-10 w-10 rounded-full") %>
           </div>
           <div class="ml-3">
             <div class="text-base font-medium text-white"><%= @current_user.username %></div>

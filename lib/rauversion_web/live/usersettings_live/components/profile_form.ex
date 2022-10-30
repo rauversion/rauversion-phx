@@ -80,7 +80,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
           </label>
           <div class="mt-1 flex items-center">
 
-            <%= img_tag(Rauversion.Accounts.avatar_url(@changeset.data),
+            <%= img_tag(Rauversion.Accounts.avatar_url(@changeset.data, :small),
             class: "inline-block h-12 w-12 rounded-full")
             %>
 
@@ -105,13 +105,13 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
 
 
         <div class="sm:col-span-6">
-          <%= form_input_renderer(f, %{type: :upload, uploads: @uploads, name: :profile_header}) %>
+          <%= form_input_renderer(f, %{type: :upload, uploads: @uploads, name: :profile_header, label: gettext("Cover image")}) %>
         </div>
 
       </div>
 
       <div class="pt-8 flex justify-end space-x-2">
-        <%= submit gettext("Change information"), phx_disable_with: gettext("Saving..."), class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+        <%= submit gettext("Change profile information"), phx_disable_with: gettext("Saving..."), class: "bg-white py-2 px-4 border border-gray-300 dark:text-blue-gray-100 dark:bg-gray-900 rounded-md shadow-sm text-sm font-medium text-blue-gray-900 hover:bg-blue-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
       </div>
     </.form>
     </div>

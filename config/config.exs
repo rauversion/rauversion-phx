@@ -17,6 +17,14 @@ config :rauversion, RauversionWeb.Endpoint,
   pubsub_server: Rauversion.PubSub,
   live_view: [signing_salt: "WyVJIKVd"]
 
+# https://lokalise.com/blog/localization-of-phoenix-applications/
+config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: System.get_env("DEFAULT_LOCALE", "en")
+
+config :ex_cldr,
+  default_locale: System.get_env("DEFAULT_LOCALE", "en"),
+  default_backend: Rauversion.Cldr,
+  json_library: Jason
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
@@ -25,14 +33,6 @@ config :rauversion, RauversionWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Local
-
-# https://lokalise.com/blog/localization-of-phoenix-applications/
-config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: "es"
-
-config :ex_cldr,
-  default_locale: "es",
-  default_backend: Rauversion.Cldr,
-  json_library: Jason
 
 config :ueberauth, Ueberauth,
   providers: [

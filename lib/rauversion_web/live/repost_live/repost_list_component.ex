@@ -10,6 +10,7 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
     assigns = List.first(assigns)
     page = 1
     reposts = list_tracks(page, assigns)
+
     tracks_meta = track_meta(reposts)
 
     [

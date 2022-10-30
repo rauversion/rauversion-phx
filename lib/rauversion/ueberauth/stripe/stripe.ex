@@ -99,7 +99,7 @@ defmodule Ueberauth.Strategy.Stripe do
   Fetches the fields to populate the info section of the `Ueberauth.Auth` struct.
   """
   def info(conn) do
-    user = conn.private.stripe_user
+    _user = conn.private.stripe_user
 
     %Info{
       email: nil,

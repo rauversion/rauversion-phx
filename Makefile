@@ -1,4 +1,4 @@
-.PHONY: deploy install start format test coverage versions
+.PHONY: deploy install start format test coverage versions ci.open cy.run
 
 install i:
 	mix setup
@@ -16,6 +16,15 @@ format f:
 
 test t:
 	mix test
+
+start server ci:
+	MIX_ENV=cy iex -S mix phx.server
+
+cy.run: 
+	npx cypress run
+
+cy.open: 
+	npx cypress open
 
 coverage cover co:
 	mix test --cover

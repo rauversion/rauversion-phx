@@ -1,12 +1,12 @@
 defmodule RauversionWeb.WebhooksController do
   use RauversionWeb, :controller
 
-  alias Rauversion.Accounts
+  # alias Rauversion.Accounts
 
   def create(
         conn,
-        params = %{
-          "account" => account_id,
+        _params = %{
+          "account" => _account_id,
           "type" => "checkout.session.completed",
           "data" => %{"object" => object}
         }

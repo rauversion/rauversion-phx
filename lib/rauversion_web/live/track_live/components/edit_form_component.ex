@@ -19,7 +19,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
       <.form
         let={f}
         for={@changeset}
-        id="track-form-2"
+        id={"edit-track-form-#{@track.id}"}
         phx-target={@target}
         phx-change="validate"
         phx-submit="save"
