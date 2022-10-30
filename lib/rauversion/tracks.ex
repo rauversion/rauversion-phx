@@ -69,6 +69,17 @@ defmodule Rauversion.Tracks do
       ]
   end
 
+  def query_public_tracks(query) do
+    query
+    |> where([p], p.private == false)
+    |> preload([
+      :mp3_audio_blob,
+      :cover_blob,
+      :cover_attachment,
+      user: :avatar_attachment
+    ])
+  end
+
   def order_by_likes(query) do
     query |> order_by([p], desc: p.likes_count)
   end
@@ -85,9 +96,28 @@ defmodule Rauversion.Tracks do
     list_public_tracks() |> where([p], p.id in ^ids)
   end
 
-  def list_tracks_by_username(user_id) do
-    Rauversion.Accounts.get_user_by_username(user_id)
+  def list_tracks_by_user_id(user_id) do
+    Rauversion.Accounts.get_user!(user_id)
     |> Ecto.assoc(:tracks)
+    |> query_public_tracks()
+  end
+
+  def list_tracks_by_user_id(user_id, current_user_id) do
+    case Rauversion.Accounts.get_user!(user_id) do
+      %Rauversion.Accounts.User{} = user ->
+        if user.id == current_user_id do
+          user
+          |> Ecto.assoc(:tracks)
+        else
+          user
+          |> Ecto.assoc(:tracks)
+          |> published()
+          |> with_processed()
+        end
+
+      _ ->
+        nil
+    end
   end
 
   def preload_tracks_preloaded_by_user(
