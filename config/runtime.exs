@@ -11,7 +11,6 @@ end
 
 maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
 
-
 config :active_storage, :services,
   amazon: [
     service: "S3",
@@ -42,8 +41,6 @@ config :active_storage, :services,
   ]
 
 key = System.get_env("VAULT_KEY")
-
-
 
 with {:ok, key} <- Base.decode64(key) do
   config :rauversion, Rauversion.Vault,
@@ -88,6 +85,7 @@ config :rauversion, tbk_mall_id: System.get_env("TBK_MALL_ID")
 config :rauversion, tbk_commerce_id: System.get_env("TBK_COMMERCE_ID")
 config :rauversion, tbk_api_key: System.get_env("TBK_API_KEY")
 config :rauversion, platform_event_fee: System.get_env("PLATFORM_EVENTS_FEE")
+config :rauversion, peaks_processor: System.get_env("PEAKS_PROCESSOR", "ffmpeg")
 
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
@@ -149,7 +147,6 @@ if config_env() == :prod do
   if System.get_env("PHX_SERVER") do
     config :rauversion, RauversionWeb.Endpoint, server: true
   end
-
 
   # ## Using releases
   #

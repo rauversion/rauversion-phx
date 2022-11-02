@@ -27,8 +27,6 @@ config :ex_cldr,
   default_backend: Rauversion.Cldr,
   json_library: Jason
 
-config :rauversion, peaks_processor: System.get_env("PEAKS_PROCESSOR", "ffmpeg")
-
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

@@ -1,26 +1,33 @@
 defmodule Rauversion.Services.PeaksGenerator do
   def run_audiowaveform(file, duration) do
-    desired_pixels = 500
+    desired_pixels = 10
 
     pixels_per_second = desired_pixels_per_second(desired_pixels, duration)
 
-    {output, _status} =
-      System.cmd(audiowaveform_path(), [
-        "-i",
-        file,
-        "--input-format",
-        "mp3",
-        "--pixels-per-second",
-        "#{pixels_per_second}",
-        "-b",
-        "8",
-        "--output-format",
-        "json",
-        "-"
-      ])
+    IO.inspect("pixels_per_second: #{pixels_per_second}")
 
-    # |> normalize
-    Jason.decode!(output)["data"]
+    case System.cmd(audiowaveform_path(), [
+           "-i",
+           file,
+           "--input-format",
+           "mp3",
+           "--pixels-per-second",
+           "#{pixels_per_second}",
+           "-b",
+           "8",
+           "--output-format",
+           "json",
+           "-"
+         ]) do
+      {output, _status} ->
+        output
+        |> Jason.decode!()
+        |> get_in(["data"])
+        |> normalize
+
+      _ ->
+        []
+    end
 
     # audiowaveform -i ~/Desktop/patio/STE-098.mp3
 
@@ -53,27 +60,20 @@ defmodule Rauversion.Services.PeaksGenerator do
   end
 
   def desired_pixels_per_second(desired_pixels, duration) do
-    res =
+    pixels_per_second =
       (desired_pixels / duration)
-      |> to_string
-      |> Integer.parse()
+      |> round
 
-    case res do
-      {pixels_per_second, _} ->
-        cond do
-          pixels_per_second < 0 -> 1
-          pixels_per_second == 0 -> 1
-          true -> pixels_per_second
-        end
-
-      _ ->
-        1
+    cond do
+      pixels_per_second < 0 -> 1
+      pixels_per_second == 0 -> 1
+      true -> 200
     end
   end
 
   def normalize(input) do
     {min, max} = Enum.min_max(input)
-    {new_min, new_max} = {-1, 1}
+    {new_min, new_max} = {-1.0, 1.0}
 
     Enum.map(
       input,

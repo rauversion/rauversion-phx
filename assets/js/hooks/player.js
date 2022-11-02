@@ -130,6 +130,7 @@ Player = {
       backend: 'MediaElement',
       waveColor: 'grey',
       progressColor: 'tomato',
+      ignoreSilenceMode: true,
       height: 45,
       barWidth: 2,
       barGap: 3,
@@ -242,7 +243,7 @@ Player = {
     this.pushEvent("request-song", {action: "prev"} )
   },
   playSong(){
-    this._wave.playPause()
+    setTimeout(()=> this._wave.playPause(), 1000)
   },
   trackEvent(trackId) {
     fetch(`/api/tracks/${trackId}/events`)
