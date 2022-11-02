@@ -1,6 +1,6 @@
 <main class="dark:bg-black">
   <!-- Hero -->
-  <%= if !@current_user do %>
+  <%= if !@current_user && System.get_env("DISPLAY_HERO") == "true" do %>
     <div class="flex flex-col border-b border-gray-200 dark:divide-gray-800 lg:border-0">
       <nav aria-label="Offers" class="order-last lg:order-first hidden">
         <div class="max-w-7xl mx-auto lg:px-8">
@@ -81,7 +81,7 @@
                   RauversionWeb.ArticlesLive.ArticlesHighlightsListComponent,
                   id: "all-posts-published",
                   page: 1,
-                  current_user: assigns[:current_user]
+                  current_user: @current_user
                 ) 
   %>
 
@@ -90,7 +90,7 @@
     <div class="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:py-32 lg:px-8">
       <div class="px-4 flex items-center justify-between sm:px-6 lg:px-0">
         <h2 id="trending-heading" class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
-        <%= gettext "Trending Albums" %>
+        <%= gettext "Recent Tracks" %>
         </h2>
         <%= live_redirect to: "/tracks", class: "hidden sm:block text-sm font-semibold text-brand-600 hover:text-brand-500" do %>
           <%= gettext "See everything" %>
@@ -133,7 +133,7 @@
                       <% end %>
                     </h3>
                     <p class="mt-1 text-gray-900 dark:text-gray-100 hidden">
-                      PRICE ?
+                      ---
                     </p>
                   </div>
                 </div>
