@@ -303,6 +303,29 @@ defmodule Rauversion.Tracks do
     end
   end
 
+  def regenerate_mp3(track) do
+    blob = Rauversion.Tracks.blob_for(track, :audio)
+
+    case ActiveStorage.Blob.download(blob) do
+      {:ok, contents} ->
+        file = %{
+          path: generate_local_copy(contents),
+          filename: blob.filename,
+          content_type: blob.content_type
+        }
+
+        Rauversion.Tracks.Track.convert_to_mp3(
+          Rauversion.Tracks.change_track(track),
+          file
+        )
+
+      err ->
+        IO.inspect(err)
+        IO.puts("can't download the file")
+        nil
+    end
+  end
+
   def is_processed?(track) do
     track.state == "processed"
   end
@@ -321,6 +344,7 @@ defmodule Rauversion.Tracks do
 
   def generate_local_copy(contents) do
     {:ok, fd, file_path} = Temp.open("my-file")
+    IO.puts("GENERATED LOCAL COPY: ")
     IO.puts(file_path)
     IO.binwrite(fd, contents)
     File.close(fd)

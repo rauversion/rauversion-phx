@@ -166,7 +166,7 @@ defmodule Rauversion.Tracks.Track do
     Rauversion.Tracks.broadcast_change({:ok, struct.data}, [:tracks, :mp3_converted])
 
     struct =
-      case Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration) do
+      case Rauversion.Services.PeaksGenerator.run(path, duration) do
         [_ | _] = data ->
           IO.inspect("PROCESSED WITH PEAKS")
 
@@ -183,8 +183,9 @@ defmodule Rauversion.Tracks.Track do
 
   def convert_to_mp3(struct, file) do
     path = transform_to_mp3(file.path)
+    new_file = file |> Map.merge(%{filename: "mp3-version", path: path})
     # audio_blob = create_and_analyze_audio(struct, file)
-    blob = create_and_analyze_audio(struct, file, "mp3_audio")
+    blob = create_and_analyze_audio(struct, new_file, "mp3_audio")
     # create_and_analyze_audio(struct, file)
 
     %{path: path, blob: blob}
