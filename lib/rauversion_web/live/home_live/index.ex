@@ -14,7 +14,7 @@ defmodule RauversionWeb.HomeLive.Index do
   defp list_tracks(page) do
     Tracks.list_public_tracks()
     |> Tracks.with_processed()
-    |> Tracks.order_by_likes()
+    |> Tracks.order_desc()
     |> Rauversion.Repo.paginate(page: page, page_size: 4)
   end
 

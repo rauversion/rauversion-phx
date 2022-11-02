@@ -92,6 +92,10 @@ defmodule Rauversion.Tracks do
     query |> where([t], t.private == false)
   end
 
+  def order_desc(query) do
+    query |> order_by([t], desc: t.id)
+  end
+
   def list_tracks_by_ids(ids) do
     list_public_tracks() |> where([p], p.id in ^ids)
   end
@@ -99,6 +103,7 @@ defmodule Rauversion.Tracks do
   def list_tracks_by_user_id(user_id) do
     Rauversion.Accounts.get_user!(user_id)
     |> Ecto.assoc(:tracks)
+    |> order_desc()
     |> query_public_tracks()
   end
 
@@ -108,9 +113,11 @@ defmodule Rauversion.Tracks do
         if user.id == current_user_id do
           user
           |> Ecto.assoc(:tracks)
+          |> order_desc()
         else
           user
           |> Ecto.assoc(:tracks)
+          |> order_desc()
           |> published()
           |> with_processed()
         end
@@ -279,7 +286,7 @@ defmodule Rauversion.Tracks do
       {:ok, contents} ->
         duration = blob_duration_metadata(blob)
         path = generate_local_copy(contents)
-        data = Rauversion.Services.PeaksGenerator.run_ffprobe(path, duration)
+        data = Rauversion.Services.PeaksGenerator.run(path, duration)
         # pass track.metadata.id is needed in order to merge the embedded_schema properly.
         case track.metadata do
           nil ->
@@ -288,6 +295,29 @@ defmodule Rauversion.Tracks do
           metadata ->
             update_track(track, %{metadata: %{id: metadata.id, peaks: data}})
         end
+
+      err ->
+        IO.inspect(err)
+        IO.puts("can't download the file")
+        nil
+    end
+  end
+
+  def regenerate_mp3(track) do
+    blob = Rauversion.Tracks.blob_for(track, :audio)
+
+    case ActiveStorage.Blob.download(blob) do
+      {:ok, contents} ->
+        file = %{
+          path: generate_local_copy(contents),
+          filename: blob.filename,
+          content_type: blob.content_type
+        }
+
+        Rauversion.Tracks.Track.convert_to_mp3(
+          Rauversion.Tracks.change_track(track),
+          file
+        )
 
       err ->
         IO.inspect(err)
@@ -314,6 +344,7 @@ defmodule Rauversion.Tracks do
 
   def generate_local_copy(contents) do
     {:ok, fd, file_path} = Temp.open("my-file")
+    IO.puts("GENERATED LOCAL COPY: ")
     IO.puts(file_path)
     IO.binwrite(fd, contents)
     File.close(fd)

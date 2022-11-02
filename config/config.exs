@@ -18,7 +18,9 @@ config :rauversion, RauversionWeb.Endpoint,
   live_view: [signing_salt: "WyVJIKVd"]
 
 # https://lokalise.com/blog/localization-of-phoenix-applications/
-config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: System.get_env("DEFAULT_LOCALE", "en")
+config :rauversion, RauversionWeb.Gettext,
+  locales: ~w(en es pt),
+  default_locale: System.get_env("DEFAULT_LOCALE", "en")
 
 config :ex_cldr,
   default_locale: System.get_env("DEFAULT_LOCALE", "en"),

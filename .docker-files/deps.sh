@@ -9,7 +9,6 @@ apt-get update -qq \
     less \
     git \
     vim \
-    imagemagick \
     zlib1g-dev \
     apt-transport-https \
     ca-certificates \
