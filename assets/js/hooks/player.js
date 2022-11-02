@@ -243,7 +243,7 @@ Player = {
     this.pushEvent("request-song", {action: "prev"} )
   },
   playSong(){
-    setTimeout(()=> this._wave.playPause(), 1000)
+    this._wave.playPause()
   },
   trackEvent(trackId) {
     fetch(`/api/tracks/${trackId}/events`)
