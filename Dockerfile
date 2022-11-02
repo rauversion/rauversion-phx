@@ -14,14 +14,15 @@
 #
 ARG ELIXIR_VERSION=1.13.4
 ARG OTP_VERSION=25.0.4
-ARG DEBIAN_VERSION=bullseye-20220801-slim
+ARG DISTRO=ubuntu
+ARG DEBIAN_VERSION=bionic-20210930
 
 ARG PG_MAJOR=14
 ARG NODE_MAJOR=18
 ARG YARN_VERSION=1.13.0
 
-ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
-ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
+ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-${DISTRO}-${DEBIAN_VERSION}"
+ARG RUNNER_IMAGE="${DISTRO}:${DEBIAN_VERSION}"
 
 FROM ${BUILDER_IMAGE} as builder
 
@@ -35,7 +36,9 @@ RUN chmod +x /docker-files/*.sh
 RUN /docker-files/deps.sh
 
 # Install PostgreSQL
-RUN /docker-files/pg.sh
+# RUN /docker-files/pg.sh
+
+RUN apt-get install -y postgresql-client
 
 # Install NodeJS, Yarn
 RUN /docker-files/node.sh
@@ -74,7 +77,7 @@ COPY assets assets
 
 RUN echo yarn -v
 
-RUN cd ./assets ; npx yarn install
+RUN cd ./assets ; npm install
 # compile assets
 RUN mix assets.deploy
 
@@ -91,10 +94,21 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
-  ffmpeg imagemagick libmad0-dev libid3tag0-dev libsndfile1-dev libgd-dev \
-  && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
+RUN apt-get update -y && apt-get install -y libstdc++6 openssl \ 
+  libncurses5 locales \
+  imagemagick 
+
+COPY --from=mwader/static-ffmpeg:4.1.4-2 /ffmpeg /ffprobe /usr/local/bin/
+
+# Audiowaveform
+RUN apt install software-properties-common -y && \ 
+  apt-get update && \
+  add-apt-repository ppa:chris-needham/ppa && \ 
+  apt-get update && \
+  apt-get install audiowaveform -y
+
+RUN apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen

@@ -91,4 +91,14 @@ defmodule Rauversion.Services.PeaksGenerator do
   def audiowaveform_path() do
     "audiowaveform"
   end
+
+  def run(file, duration) do
+    case Application.get_env(:rauversion, :peaks_processor) do
+      "audiowaveform" ->
+        run_audiowaveform(file, duration)
+
+      _ ->
+        run_ffprobe(file, duration)
+    end
+  end
 end
