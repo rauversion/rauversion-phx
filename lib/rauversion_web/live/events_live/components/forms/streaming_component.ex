@@ -170,7 +170,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
     """
   end
 
-  defp selected_service?(service, streaming_service = nil) do
+  defp selected_service?(_service, _streaming_service = nil) do
     false
   end
 
