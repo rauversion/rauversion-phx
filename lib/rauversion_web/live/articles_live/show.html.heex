@@ -44,6 +44,12 @@
       <p class="mt-8 text-xl text-gray-500 dark:text-gray-300 leading-8">
         <%= @post.excerpt %>
       </p>
+
+      <.live_component
+        module={RauversionWeb.ArticlesLive.SharerComponent}
+        id="hero"
+        post={@post}
+      />
     </div>
     <div
       id={"article-#{@post.id}"} 
