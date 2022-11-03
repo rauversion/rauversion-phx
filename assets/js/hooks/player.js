@@ -60,11 +60,17 @@ Player = {
 
       // this.el.dataset.playerPeaks = e.detail.peaks
       // this.el.dataset.playerUrl = e.detail.url
-      setTimeout(()=>{
-        this.destroyWave();
-        this.initWave();
-        this.playSong()
-      }, 400)
+
+      // this.destroyWave();
+      //this.initWave();
+
+      this.url = this.el.dataset.playerUrl
+
+      const data = JSON.parse(this.peaks) 
+      this._wave.load(this.url, data)
+
+      this.playSong()
+     
     }
 
     this.waveClickListener = (e)=> {
