@@ -69,31 +69,14 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
   end
 
   def ticket_kind(i) do
-    value =
-      if Map.get(i.params, "price") do
-        case Integer.parse(i.params["price"]) do
-          {n, ""} -> n
-          _ -> 0
-        end
-      else
-        if i.data.price, do: Decimal.to_integer(i.data.price), else: 0
+    if Map.get(i.params, "price") do
+      case Integer.parse(i.params["price"]) do
+        {n, ""} -> n
+        _ -> 0
       end
-
-    assigns = assign(%{}, :value, value)
-
-    ~H"""
-      <div>
-        <%= if @value == 0 do %>
-          <span class="inline-flex items-center rounded-full bg-green-900 px-3 py-1.5 text-xl font-medium text-green-200">
-            <%= gettext("Free ticket") %>
-          </span>
-        <% else %>
-          <span class="inline-flex items-center rounded-full bg-blue-900 px-3 py-1.5 text-xl font-medium text-blue-200">
-            <%= gettext("Paid ticket") %>
-          </span>
-        <% end %>
-      </div>
-    """
+    else
+      if i.data.price, do: Decimal.to_integer(i.data.price), else: 0
+    end
   end
 
   @impl true
@@ -121,7 +104,17 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
             <div class="border-2 rounded-md p-4 my-4">
 
               <div class="rounded-md p-2 my-2 flex justify-end">
-                <%= ticket_kind(i) %>
+              <div>
+                  <%= if ticket_kind(i) == 0 do %>
+                    <span class="inline-flex items-center rounded-full bg-green-900 px-3 py-1.5 text-xl font-medium text-green-200">
+                      <%= gettext("Free ticket") %>
+                    </span>
+                  <% else %>
+                    <span class="inline-flex items-center rounded-full bg-blue-900 px-3 py-1.5 text-xl font-medium text-blue-200">
+                      <%= gettext("Paid ticket") %>
+                    </span>
+                  <% end %>
+                </div>
               </div>
 
               <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">

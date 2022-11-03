@@ -170,6 +170,19 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
     """
   end
 
+  defp selected_service?(service, streaming_service = nil) do
+    false
+  end
+
+  defp selected_service?(service, streaming_service = %{}) do
+    :"#{service[:name]}" ==
+      PolymorphicEmbed.get_polymorphic_type(
+        Rauversion.Events.Event,
+        :streaming_service,
+        streaming_service
+      )
+  end
+
   @impl true
   def render(assigns) do
     ~H"""
@@ -233,7 +246,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
           <div class={"  #{if !service[:active], do: "opacity-50" } relative group bg-white dark:bg-black p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"}>
             <div>
 
-            <%= if :"#{service[:name]}" == PolymorphicEmbed.get_polymorphic_type(Rauversion.Events.Event, :streaming_service, @event.streaming_service) do %>
+            <%= if selected_service?(service, @event.streaming_service) do %>
               <span class="rounded-lg inline-flex p-3 bg-green-100 text-green-700 ring-4 ring-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
