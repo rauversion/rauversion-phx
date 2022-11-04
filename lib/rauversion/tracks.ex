@@ -330,6 +330,15 @@ defmodule Rauversion.Tracks do
     track.state == "processed"
   end
 
+  def prompt_cover(prompt) do
+    client = Rauversion.Services.OpenAi.new()
+    Rauversion.Services.OpenAi.images(client, prompt)
+  end
+
+  def confirm_prompt(track, url) do
+    # TODO:
+  end
+
   def blob_duration_metadata(blob) do
     metadata = ActiveStorage.Blob.metadata(blob)
 
