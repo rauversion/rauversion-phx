@@ -337,6 +337,17 @@ defmodule Rauversion.Tracks do
 
   def confirm_prompt(track, url) do
     # TODO:
+    %HTTPoison.Response{body: body} = HTTPoison.get!(url)
+    tmp_path = "/tmp/image-#{Ecto.UUID.generate()}.png"
+    :ok = File.write!(tmp_path, body)
+
+    file = %{
+      content_type: "image/png",
+      filename: "image",
+      path: tmp_path
+    }
+
+    Rauversion.BlobUtils.attach_file_with_blob(track, "cover", file)
   end
 
   def blob_duration_metadata(blob) do

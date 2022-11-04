@@ -4,6 +4,29 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
+  @impl true
+  def update(assigns, socket) do
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:prompt, nil)
+      |> assign(:prompt_image, nil)
+    }
+  end
+
+  @impl true
+  def handle_event("set-prompt", %{"value" => value}, socket) do
+    {:noreply, assign(socket, :prompt, value)}
+  end
+
+  @impl true
+  def handle_event("generate-prompt", _, socket) do
+    {:ok, url} = Rauversion.Tracks.prompt_cover(socket.assigns.prompt)
+    {:noreply, assign(socket, :prompt_image, url)}
+  end
+
+  @impl true
   def render(
         %{
           uploads: _uploads,
@@ -106,6 +129,28 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                               </label>
                               <p class="pl-1"><%= gettext "or drag and drop" %></p>
                             </div>
+
+                            <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
+                              <span><%= gettext "prompt it" %></span>
+                              <%= text_input f, :prompt, phx_keyup: "set-prompt", phx_target: @myself, class: "flex-1 block w-full focus:ring-brand-500 focus:border-brand-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 dark:bg-gray-900 dark:text-gray-100" %>
+                            </label>
+
+                            <%= @prompt %>
+
+                            <button
+                              type="button"
+                              phx-click="generate-prompt"
+                              phx-target={@myself}>
+                              <%= gettext("generate image") %>
+                            </button>
+
+                            <%= if @prompt_image do %>
+                              <%= img_tag(@prompt_image,
+                                class: "object-center object-cover group-hover:opacity-75")
+                              %>
+                            <% end %>
+
+
 
                             <div>
                               <%= for entry <- @uploads.cover.entries do %>
