@@ -6,17 +6,17 @@
             <%= live_redirect to: "/", class: "flex items-center space-x-3 text-white sm:text-2xl text-sm font-extrabold" do %>
               <img class="h-12 w-auto" src={ Routes.static_path(@conn, "/images/logo.png")} alt="">
 
-              <span>RAUVERSION</span> 
+              <span>RAUVERSION</span>
               <% #= RauversionWeb.Gettext |> Gettext.get_locale %>
               <% #= image_tag url_for(current_user.avatar), class: "h-8 w-auto" if current_user&.avatar&.persisted? %>
             <% end %>
           </div>
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
-            
+
               <%= live_redirect to: "/tracks", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
                 <%= gettext "Tracks" %>
               <% end %>
-            
+
               <% #= live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
                 <% #= gettext "Account" %>
               <% # end %>
@@ -67,10 +67,10 @@
         </div>
 
         <div class="flex items-center lg:hidden">
-          <button type="button" 
+          <button type="button"
             data-action="dropdown#toggle click@window->dropdown#hide"
             data-cy="mobile-dropdown-toggle"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" 
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu">
             <span class="sr-only"><%= gettext "Open menu" %></span>
             <svg class="h-6 w-6 block"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -88,18 +88,18 @@
 
               <div class="flex items-center space-x-1">
                 <button type="button"
-                  data-action="dropdown#toggle click@window->dropdown#hide" 
-                  class="flex-shrink-0 bg-gray-500 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
-                  <span class="sr-only"><%= gettext "Notificaitons" %></span>
+                  data-action="dropdown#toggle click@window->dropdown#hide"
+                  class="flex-shrink-0 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
+                  <span class="sr-only"><%= gettext "Notifications" %></span>
 
-                  <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small), 
-                    class: "h-6 w-6 rounded-full") 
+                  <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small),
+                    class: "h-6 w-6 rounded-full")
                   %>
                 </button>
 
-                <span class="text-sm">
-                  <%= @current_user.username || @current_user.email %>
-                </span>
+                <button type="button" class="text-sm cursor-pointer" data-action="dropdown#toggle click@window->dropdown#hide">
+                    <p class="truncate w-20"><%= @current_user.username || @current_user.email %></p>
+                </button>
               </div>
 
                 <div
@@ -121,15 +121,15 @@
                     <% end %>
 
                     <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                    <%= live_redirect gettext("Settings"), 
-                        to: "/users/settings", 
+                    <%= live_redirect gettext("Settings"),
+                        to: "/users/settings",
                        class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
 
                     <div class="border-1" />
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
                     <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                  
+
                     <div class="flex items-center space-x-2">
                       <%= new_locale @conn, :en, "EN", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                       <%= new_locale @conn, :es, "ES", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
@@ -143,13 +143,13 @@
       </div>
     </div>
 
-    
-    <div 
+
+    <div
       data-dropdown-target="menu"
-      x-description="Mobile menu, show/hide based on menu state." 
-      class="lg:hidden" 
-      id="mobile-menu" 
-      x-show="open" 
+      x-description="Mobile menu, show/hide based on menu state."
+      class="lg:hidden"
+      id="mobile-menu"
+      x-show="open"
       >
       <div class="pt-2 pb-3 px-2 space-y-1">
 
@@ -203,15 +203,15 @@
             <% end %>
 
             <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-            <%= live_redirect gettext("Settings"), 
-                to: "/users/settings", 
+            <%= live_redirect gettext("Settings"),
+                to: "/users/settings",
                 class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
 
             <div class="border-1" />
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
             <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-          
+
             <div class="flex items-center space-x-2">
               <%= new_locale @conn, :en, "EN", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
               <%= new_locale @conn, :es, "ES", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
@@ -227,5 +227,5 @@
         </div>
       </div>
     </div>
-    
+
   </nav>
