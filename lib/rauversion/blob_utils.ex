@@ -15,8 +15,13 @@ defmodule Rauversion.BlobUtils do
     Rauversion.BlobUtils.attach_file(struct, kind, blob)
   end
 
-  def attach_file(struct, kind, blob) do
+  def attach_file(struct = %Ecto.Changeset{}, kind, blob) do
     cover = apply(struct.data.__struct__, :"#{kind}", [struct.data])
+    apply(cover.__struct__, :attach, [cover, blob])
+  end
+
+  def attach_file(struct, kind, blob) do
+    cover = apply(struct.__struct__, :"#{kind}", [struct])
     apply(cover.__struct__, :attach, [cover, blob])
   end
 

@@ -66,7 +66,7 @@
       <%= if @step.name == "info" and @action == :edit do %>
         <.live_component
           module={RauversionWeb.TrackLive.EditFormComponent}
-          id="track-form"
+          id="track-form-edit-info"
           changeset={@changeset}
           track={@track}
           step={@step}
