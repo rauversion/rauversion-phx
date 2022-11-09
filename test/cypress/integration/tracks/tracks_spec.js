@@ -1,4 +1,4 @@
-import { login, expectPlayingAudio } from '../plugins/utils';
+import { login, expectPlayingAudio } from '../../plugins/utils';
 
 describe('Tracks Spec', function () {
 
