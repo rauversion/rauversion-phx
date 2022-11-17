@@ -121,9 +121,7 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                           </svg>
 
                         <% else %>
-
-                          <%= img_tag(Rauversion.Posts.variant_url( @post, "cover", %{resize_to_fill: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
-
+                          <%= img_tag(Rauversion.Posts.proxy_cover_representation_url(@post, %{resize_to_limit: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
                         <% end %>
 
                         <div class="flex text-sm text-gray-600 dark:text-gray-400 py-3">

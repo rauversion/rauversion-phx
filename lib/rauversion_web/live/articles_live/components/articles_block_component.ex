@@ -9,8 +9,8 @@ defmodule RauversionWeb.ArticlesLive.ArticlesBlockComponent do
       <div class="relative flex flex-wrap items-end w-full dark:text-white">
 
         <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) do %>
-          <%= img_tag(Rauversion.Tracks.variant_url(
-            @post, "cover", %{resize_to_limit: "500x500"}),
+          <%= img_tag(
+            Rauversion.Posts.proxy_cover_representation_url(@post, %{resize_to_limit: "500x500"}),
             class: "inset-0 block object-cover object-center w-full h-72 grayscale filter")
           %>
         <% end %>
