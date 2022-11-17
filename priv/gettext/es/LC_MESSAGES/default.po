@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-11-17 14:05\n"
+"PO-Revision-Date: 2022-11-17 22:53\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1705,178 +1705,178 @@ msgstr "Tu evento está publicado"
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:205
 #, elixir-autogen, elixir-format
 msgid "Add Streaming service"
-msgstr ""
+msgstr "Añadir servicio de streaming"
 
 #: lib/rauversion_web/live/articles_live/show.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "By %{name}"
-msgstr ""
+msgstr "Por %{name}"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:75
 #, elixir-autogen, elixir-format
 msgid "Change Transbank information"
-msgstr ""
+msgstr "Cambiar la información del correo electrónico"
 
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:114
 #, elixir-autogen, elixir-format
 msgid "Change profile information"
-msgstr ""
+msgstr "Cambiar la información del correo electrónico"
 
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:108
 #, elixir-autogen, elixir-format
 msgid "Cover image"
-msgstr ""
+msgstr "Imagen de portada"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:242
 #, elixir-autogen, elixir-format
 msgid "Delete Ticket"
-msgstr ""
+msgstr "Eliminar Ticket"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:272
 #, elixir-autogen, elixir-format
 msgid "Go and check the event details"
-msgstr ""
+msgstr "Ir y comprobar los detalles del evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:232
 #, elixir-autogen, elixir-format
 msgid "Go live with a remote event via one of the following video streaming services"
-msgstr ""
+msgstr "Inicia el evento remoto a través de uno de los siguientes servicios de streaming de vídeo"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:235
 #, elixir-autogen, elixir-format
 msgid "Go to streaming event page"
-msgstr ""
+msgstr "Ir a la página de eventos de streaming"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:133
 #, elixir-autogen, elixir-format
 msgid "Go to the Zoom meeting"
-msgstr ""
+msgstr "Ir a la reunión de Zoom"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:89
 #, elixir-autogen, elixir-format
 msgid "Live Streaming on jitsi open source platform"
-msgstr ""
+msgstr "Streaming en vivo en plataforma de código abierto jitsi"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:83
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:95
 #, elixir-autogen, elixir-format
 msgid "Live Streaming to 15 services at once, including youtube, twitch, zoom etc..."
-msgstr ""
+msgstr "Streaming en vivo a 15 servicios a la vez, incluyendo youtube, twitch, zoom, etc..."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:41
 #, elixir-autogen, elixir-format
 msgid "Manage streaming event."
-msgstr ""
+msgstr "Administrar evento de streaming."
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:77
 #, elixir-autogen, elixir-format
 msgid "Mux is a streaming service"
-msgstr ""
+msgstr "Mux es un servicio de streaming"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:128
 #, elixir-autogen, elixir-format
 msgid "Player not available please open the metting on Zoom service"
-msgstr ""
+msgstr "Reproductor no disponible, por favor abre el encuentro en el servicio ZOOM"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:40
 #, elixir-autogen, elixir-format
 msgid "Streaming"
-msgstr ""
+msgstr "Streaming"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:228
 #, elixir-autogen, elixir-format
 msgid "Streaming services"
-msgstr ""
+msgstr "Añadir servicio de streaming"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:76
 #, elixir-autogen, elixir-format
 msgid "Twitch is a streaming service"
-msgstr ""
+msgstr "Mux es un servicio de streaming"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:78
 #, elixir-autogen, elixir-format
 msgid "Whereby is a streaming service"
-msgstr ""
+msgstr "Mux es un servicio de streaming"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:85
 #, elixir-autogen, elixir-format
 msgid "Zoom is a streaming service"
-msgstr ""
+msgstr "Mux es un servicio de streaming"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:200
 #, elixir-autogen, elixir-format
 msgid "no renderer avaiable"
-msgstr ""
+msgstr "no hay renderizador disponible"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:127
 #, elixir-autogen, elixir-format
 msgid "use this url in case you need to process webhooks from the streamin service"
-msgstr ""
+msgstr "use esta url en caso de que necesite procesar webhooks desde el servicio streamin"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:125
 #, elixir-autogen, elixir-format
 msgid "webhook url"
-msgstr ""
+msgstr "url de webhook"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:252
 #, elixir-autogen, elixir-format
 msgid "Confirm image"
-msgstr ""
+msgstr "Confirmar imagen"
 
 #: lib/rauversion_web/live/articles_live/components/sharer_component.ex:49
 #, elixir-autogen, elixir-format
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:17
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:156
 #, elixir-autogen, elixir-format
 msgid "Music"
-msgstr ""
+msgstr "Música"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:115
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:197
 #, elixir-autogen, elixir-format
 msgid "My Music"
-msgstr ""
+msgstr "Mi música"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:199
 #, elixir-autogen, elixir-format
 msgid "Or generate the image with AI"
-msgstr ""
+msgstr "O generar la imagen con IA"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:93
 #, elixir-autogen, elixir-format
 msgid "Recent Tracks"
-msgstr ""
+msgstr "Pistas recientes"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:261
 #, elixir-autogen, elixir-format
 msgid "Redo image"
-msgstr ""
+msgstr "Rehacer imagen"
 
 #: lib/rauversion_web/live/articles_live/components/sharer_component.ex:12
 #, elixir-autogen, elixir-format
 msgid "Share on: "
-msgstr ""
+msgstr "Compartir en: "
 
 #: lib/rauversion_web/live/articles_live/components/sharer_component.ex:30
 #, elixir-autogen, elixir-format
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:233
 #, elixir-autogen, elixir-format
 msgid "We use DALL-E from Open AI to generate images"
-msgstr ""
+msgstr "Utilizamos DALL-E de Open AI para generar imágenes"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:218
 #, elixir-autogen, elixir-format
 msgid "generate image"
-msgstr ""
+msgstr "generar imagen"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:235
 #, elixir-autogen, elixir-format
 msgid "read more"
-msgstr ""
+msgstr "leer más"
 
