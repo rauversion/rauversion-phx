@@ -32,7 +32,7 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
     Tracks.list_public_tracks()
     |> Tracks.with_processed()
     |> Tracks.latests()
-    |> Repo.paginate(page: page, page_size: 5)
+    |> Repo.paginate(page: page, page_size: 12)
   end
 
   @impl true
@@ -101,7 +101,7 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
                 </svg>
               </button>
             </div>
-            <%= img_tag(Tracks.blob_url(track, "cover"), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
+            <%= img_tag(Tracks.proxy_cover_representation_url(track), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
           </div>
           <h3 class="mt-4 text-sm text-gray-700 dark:text-gray-300">
             <%= track.title %>
