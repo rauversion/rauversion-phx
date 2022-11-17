@@ -84,6 +84,14 @@ defmodule Rauversion.Tracks do
     query |> order_by([p], desc: p.likes_count)
   end
 
+  def latests(query) do
+    query |> order_by([p], desc: p.id)
+  end
+
+  def limit_records(query, count) do
+    query |> limit(^count)
+  end
+
   def with_processed(query) do
     query |> where([t], t.state == "processed")
   end

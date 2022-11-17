@@ -73,7 +73,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
 
         conn
         # this is cache forever!
-        |> Plug.Conn.put_resp_header("cache-control", "max-age=#{3_155_760_000}")
+        |> Plug.Conn.put_resp_header("cache-control", "max-age=#{3_155_760_000}, public")
         |> Plug.Conn.put_resp_header("accept-ranges", "bytes")
         |> Plug.Conn.put_resp_header("content-length", conn.assigns.blob.byte_size |> to_string)
         |> Plug.Conn.put_resp_header(
