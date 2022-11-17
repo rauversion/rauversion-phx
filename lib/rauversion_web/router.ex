@@ -293,6 +293,8 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser]
 
+    get "/sitemap.xml", SitemapController, :index
+
     live "/", HomeLive.Index, :index
 
     delete "/users/log_out", UserSessionController, :delete
