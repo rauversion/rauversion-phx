@@ -170,7 +170,7 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
   end
 
   defp has_range_header(req_range_header) do
-    IO.inspect(req_range_header)
+    # IO.inspect(req_range_header)
 
     case req_range_header do
       # TODO think about multi ranges
