@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-10-30 18:49\n"
+"PO-Revision-Date: 2022-11-17 14:05\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -49,7 +49,7 @@ msgstr "Adicionar"
 msgid "Add to playlist"
 msgstr "Adicionar à playlist"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:181
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:324
 #, elixir-autogen, elixir-format
 msgid "All rights reserved"
 msgstr "Todos os direitos reservados"
@@ -71,13 +71,13 @@ msgstr "Tem certeza de que deseja redefinir este link?<br /> Não será possíve
 msgid "Article settings"
 msgstr "Configurações de artigo"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:227
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:225
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:54
 #, elixir-autogen, elixir-format
 msgid "Article will be plublished on blog listing."
 msgstr "O artigo será anexado na listagem do blog."
 
-#: lib/rauversion_web/live/home_live/index.html.heex:190
+#: lib/rauversion_web/live/home_live/index.html.heex:189
 #, elixir-autogen, elixir-format
 msgid "Artists You Should Know"
 msgstr "Artistas que você deveria saber"
@@ -94,8 +94,8 @@ msgstr "Áudio, até 200MB"
 msgid "Basic Account Information."
 msgstr "Informações básicas da conta."
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:35
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:49
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:100
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:114
 #, elixir-autogen, elixir-format
 msgid "Basic Info"
 msgstr "Informação básica"
@@ -110,10 +110,10 @@ msgstr "Seja sua própria indústria de música"
 msgid "By Email"
 msgstr "Por E-mail"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:275
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:273
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:222
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:84
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:270
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:413
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:224
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:90
 #, elixir-autogen, elixir-format
@@ -197,7 +197,7 @@ msgstr "Informação do Contato"
 msgid "Continue"
 msgstr "Continuar"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:251
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:249
 #, elixir-autogen, elixir-format
 msgid "Copy link"
 msgstr "Link de cópia"
@@ -210,7 +210,7 @@ msgstr "Copiar para área de transferência"
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:107
 #: lib/rauversion_web/live/live_helpers.ex:402
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:30
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:90
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:155
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:69
 #, elixir-autogen, elixir-format
 msgid "Cover photo"
@@ -221,7 +221,7 @@ msgstr "Foto de capa"
 msgid "Create playlist"
 msgstr "Criar playlist"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:186
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:329
 #, elixir-autogen, elixir-format
 msgid "Creative commons"
 msgstr "Creative commons"
@@ -293,7 +293,7 @@ msgstr "Incorporar"
 msgid "Empowering independent music communities on the internet"
 msgstr "Fortalecimento comunidades musicais independentes na internet"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:193
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:191
 #, elixir-autogen, elixir-format
 msgid "Everyone with the link will see this article."
 msgstr "Todos com o link verão esse artigo."
@@ -385,7 +385,7 @@ msgstr "Insights"
 msgid "Last 12 months"
 msgstr "Últimos 12 meses"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:261
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:259
 #, elixir-autogen, elixir-format
 msgid "Learn more about sharing "
 msgstr "Saiba mais sobre compartilhamento "
@@ -449,13 +449,13 @@ msgstr "Efetuar logout"
 msgid "Message"
 msgstr "Mensagem"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:37
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:50
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:102
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:115
 #, elixir-autogen, elixir-format
 msgid "Metadata"
 msgstr "Metadados"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:166
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:309
 #, elixir-autogen, elixir-format
 msgid "Metadata information"
 msgstr "Informação de metadados"
@@ -473,7 +473,7 @@ msgid "New Playlist"
 msgstr "Nova playlist"
 
 #: lib/rauversion_web/live/repost_live/repost_list_component.ex:93
-#: lib/rauversion_web/live/track_live/components/track_list_component.ex:111
+#: lib/rauversion_web/live/track_live/components/track_list_component.ex:114
 #, elixir-autogen, elixir-format
 msgid "New Track"
 msgstr "Nova faixa"
@@ -501,11 +501,6 @@ msgstr "Próximo"
 msgid "No push notifications"
 msgstr "Notificações via Push"
 
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:93
-#, elixir-autogen, elixir-format
-msgid "Notificaitons"
-msgstr "Notificações"
-
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:51
 #, elixir-autogen, elixir-format
 msgid "Notification settings."
@@ -514,6 +509,7 @@ msgstr "Configurações de Notificação."
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:119
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:28
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:50
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:93
 #, elixir-autogen, elixir-format
 msgid "Notifications"
 msgstr "Notificações via Push"
@@ -523,7 +519,7 @@ msgstr "Notificações via Push"
 msgid "Offers"
 msgstr "Ofertas"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:207
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:205
 #, elixir-autogen, elixir-format
 msgid "Only members of this article would be able to access."
 msgstr "Apenas membros desse artigo poderiam acessar."
@@ -556,10 +552,10 @@ msgstr "Ou"
 msgid "Or continue with"
 msgstr "Ou continuar com"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:158
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:156
 #: lib/rauversion_web/live/live_helpers.ex:453
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:63
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:126
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:191
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:107
 #, elixir-autogen, elixir-format
 msgid "PNG, JPG, GIF up to 10MB"
@@ -570,8 +566,8 @@ msgstr "PNG, JPG, GIF até 10MB"
 msgid "Password"
 msgstr "Palavra-passe"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:39
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:51
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:104
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:116
 #, elixir-autogen, elixir-format
 msgid "Permissions"
 msgstr "Permissões"
@@ -617,7 +613,7 @@ msgstr "Privado"
 msgid "Private Share"
 msgstr "Compartilhamento Privado"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:204
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:202
 #, elixir-autogen, elixir-format
 msgid "Private to article members "
 msgstr "Privado para membros do artigo "
@@ -633,7 +629,7 @@ msgstr "Forneça FLAC, WAV, ALAC ou AIFF para maior qualidade de áudio."
 msgid "Public"
 msgstr "Público"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:190
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:188
 #, elixir-autogen, elixir-format
 msgid "Public access"
 msgstr "Acesso público"
@@ -644,7 +640,7 @@ msgstr "Acesso público"
 msgid "Published"
 msgstr "Publicado"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:224
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:222
 #, elixir-autogen, elixir-format
 msgid "Published on platform"
 msgstr "Publicado na plataforma"
@@ -720,38 +716,38 @@ msgstr "Retornar quando estiver pronto"
 msgid "Same as email"
 msgstr "Igual ao email"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:278
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:276
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:256
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:204
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:217
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:93
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:116
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:275
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:99
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:268
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:253
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:315
 #: lib/rauversion_web/live/playlist_live/create_form_component.ex:124
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:272
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:415
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
 #, elixir-autogen, elixir-format
 msgid "Save"
 msgstr "Guardar"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:278
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:276
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:256
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:204
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:217
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:93
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:116
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:275
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:99
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:268
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:253
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:315
 #: lib/rauversion_web/live/playlist_live/create_form_component.ex:124
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
 #: lib/rauversion_web/live/track_live/components/comments_component.ex:183
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:272
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:415
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:100
 #: lib/rauversion_web/live/usersettings_live/components/email_form.ex:46
@@ -775,12 +771,12 @@ msgid "Security"
 msgstr "Segurança"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:96
-#: lib/rauversion_web/live/home_live/index.html.heex:148
+#: lib/rauversion_web/live/home_live/index.html.heex:147
 #, elixir-autogen, elixir-format
 msgid "See everything"
 msgstr "Ver tudo"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:32
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:97
 #, elixir-autogen, elixir-format
 msgid "Select a tab"
 msgstr "Select a tab"
@@ -804,8 +800,8 @@ msgstr "Confirgurações"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_button_component.ex:53
 #: lib/rauversion_web/live/playlist_live/show.html.heex:146
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:41
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:52
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:106
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:117
 #: lib/rauversion_web/live/track_live/components/share_track_button_component.ex:62
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:27
 #, elixir-autogen, elixir-format
@@ -883,7 +879,7 @@ msgstr "Ocorreu um problema ao redefinir o link. Tente novamente mais tarde."
 msgid "These are delivered via SMS to your mobile phone."
 msgstr "Estas são entregues via SMS para o seu celular."
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:63
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:128
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:38
 #: lib/rauversion_web/live/usersettings_live/components/email_form.ex:28
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:30
@@ -934,7 +930,7 @@ msgstr "Melhores faixas"
 msgid "Total Listens"
 msgstr "Total escuta"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:169
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:312
 #, elixir-autogen, elixir-format
 msgid "Track information"
 msgstr "Alterar informações do E-mail"
@@ -943,8 +939,6 @@ msgstr "Alterar informações do E-mail"
 #: lib/rauversion_web/live/profile_live/components/stats_component.ex:23
 #: lib/rauversion_web/live/track_live/index.html.heex:27
 #: lib/rauversion_web/live/track_live/show.html.heex:39
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:17
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:156
 #, elixir-autogen, elixir-format
 msgid "Tracks"
 msgstr "Acompanhamentos"
@@ -953,11 +947,6 @@ msgstr "Acompanhamentos"
 #, elixir-autogen, elixir-format
 msgid "Trending"
 msgstr "Tendências"
-
-#: lib/rauversion_web/live/home_live/index.html.heex:93
-#, elixir-autogen, elixir-format
-msgid "Trending Albums"
-msgstr "Álbuns em alta"
 
 #: lib/rauversion_web/live/usersettings_live/components/notifications_form.ex:62
 #, elixir-autogen, elixir-format
@@ -974,8 +963,8 @@ msgstr "Enviar capa"
 msgid "Upload a Audio file"
 msgstr "Carregar um arquivo de áudio"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:132
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:103
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:130
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:168
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:83
 #, elixir-autogen, elixir-format
 msgid "Upload a track Cover"
@@ -1049,9 +1038,9 @@ msgstr "em"
 msgid "clear all"
 msgstr "limpar tudo"
 
-#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:138
+#: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:136
 #: lib/rauversion_web/live/live_helpers.ex:433
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:107
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:172
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:87
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:58
 #, elixir-autogen, elixir-format
@@ -1081,12 +1070,12 @@ msgstr "excluir"
 msgid "remove from next up"
 msgstr "remover do próximo para cima"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:261
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:404
 #, elixir-autogen, elixir-format
 msgid "share controls"
 msgstr "controles de compartilhamento"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:237
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:380
 #, elixir-autogen, elixir-format
 msgid "some rights reserved"
 msgstr "todos os direitos reservados"
@@ -1122,7 +1111,7 @@ msgstr "Fechar"
 msgid "Successfully saved!"
 msgstr "Salvo com sucesso!"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:231
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:224
 #, elixir-autogen, elixir-format
 msgid "Additional message to include on the purchased ticket"
 msgstr "Mensagem adicional para incluir no ticket comprado"
@@ -1132,7 +1121,7 @@ msgstr "Mensagem adicional para incluir no ticket comprado"
 msgid "Attendees"
 msgstr "Participantes"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:208
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:201
 #, elixir-autogen, elixir-format
 msgid "Check to hide this ticket on your Event page and make it available via a direct link only."
 msgstr "Marque para ocultar este ticket na página do seu evento e disponibilizá-lo apenas através de um link direto."
@@ -1142,12 +1131,12 @@ msgstr "Marque para ocultar este ticket na página do seu evento e disponibiliz�
 msgid "Create Event"
 msgstr "Criar evento"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:112
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:95
 #, elixir-autogen, elixir-format
 msgid "Create Tickets"
 msgstr "Criar bilhetes"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:190
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:183
 #, elixir-autogen, elixir-format
 msgid "Display with a \"Sold out\" message after ticket quantity runs out."
 msgstr "Mostrar com uma mensagem \"Vendido de saída\" depois que a quantidade do ticket se esgotar."
@@ -1168,12 +1157,12 @@ msgstr "Por exemplo: Vendas de Ticket"
 msgid "Get your tickets"
 msgstr "Receber seu ingresso Grátis"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:223
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:216
 #, elixir-autogen, elixir-format
 msgid "Leave blank unless there is a Maximum number of tickets customer is limited to."
 msgstr "Deixe em branco, a menos que haja um número máximo de tickets que o cliente está limitado a."
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:215
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:208
 #, elixir-autogen, elixir-format
 msgid "Leave blank unless there is a Minimum amount of tickets customer has to order."
 msgstr "Deixe em branco, a menos que haja um número máximo de tickets que o cliente está limitado a."
@@ -1183,7 +1172,7 @@ msgstr "Deixe em branco, a menos que haja um número máximo de tickets que o cl
 msgid "Location"
 msgstr "Local"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:170
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:163
 #, elixir-autogen, elixir-format
 msgid "Optional short description will be displayed next to this ticket on the Event page."
 msgstr "Descrição opcional será exibida ao lado deste ticket na página do evento."
@@ -1198,7 +1187,7 @@ msgstr "Pessoas Participantes"
 msgid "Schedule"
 msgstr "Agendamento"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:183
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:176
 #, elixir-autogen, elixir-format
 msgid "Show the Sell Until date on the event page."
 msgstr "Mostrar a data de venda até na página de eventos."
@@ -1218,7 +1207,7 @@ msgstr "Opções de imposto"
 msgid "The Latest"
 msgstr "O mais recente"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:133
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:126
 #, elixir-autogen, elixir-format
 msgid "Ticket Type. For Example: General Admission, VIP Admission ..."
 msgstr "Tipo de Ticket. Por exemplo: Admissão Geral, Entrada VIP..."
@@ -1230,7 +1219,7 @@ msgstr "Tipo de Ticket. Por exemplo: Admissão Geral, Entrada VIP..."
 msgid "Tickets"
 msgstr "Tickets"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:150
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:143
 #, elixir-autogen, elixir-format
 msgid "Total number of tickets."
 msgstr "Número total de bilhetes."
@@ -1260,12 +1249,12 @@ msgstr "Adicionar agendamentos"
 msgid "Add hosts, special guests, and event managers."
 msgstr "Adicionar hosts, convidados especiais e gerentes de eventos."
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:269
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:262
 #, elixir-autogen, elixir-format
 msgid "Add new Ticket"
 msgstr "Adicionar novo Ticket"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:142
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:135
 #, elixir-autogen, elixir-format
 msgid "All prices are in $%{ccy}."
 msgstr "Todos os preços estão em $%{ccy}."
@@ -1348,12 +1337,6 @@ msgstr "Meus Eventos"
 #, elixir-autogen, elixir-format
 msgid "My Purchases"
 msgstr "Minhas compras"
-
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:115
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:197
-#, elixir-autogen, elixir-format
-msgid "My Tracks"
-msgstr "Meus Acompanhamentos"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:51
 #, elixir-autogen, elixir-format
@@ -1440,7 +1423,7 @@ msgstr "Código Comercial Transbank"
 msgid "Add a host to highlight them on the event page or to get help managing the event."
 msgstr "Adicione um host para destacá-los na página do evento ou para obter ajuda para gerenciar o evento."
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:88
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:110
 #, elixir-autogen, elixir-format
 msgid "Free ticket"
 msgstr "Ticket grátis"
@@ -1470,7 +1453,7 @@ msgstr "Nome"
 msgid "New host"
 msgstr "Novo host"
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:92
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:114
 #, elixir-autogen, elixir-format
 msgid "Paid ticket"
 msgstr "Ticket pago"
@@ -1601,7 +1584,7 @@ msgstr ""
 msgid "View tickets"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:60
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:125
 #, elixir-autogen, elixir-format
 msgid "Edit track"
 msgstr ""
@@ -1719,7 +1702,7 @@ msgstr ""
 msgid "Your event is published"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:192
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:205
 #, elixir-autogen, elixir-format
 msgid "Add Streaming service"
 msgstr ""
@@ -1744,7 +1727,7 @@ msgstr ""
 msgid "Cover image"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:249
+#: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:242
 #, elixir-autogen, elixir-format
 msgid "Delete Ticket"
 msgstr ""
@@ -1754,12 +1737,12 @@ msgstr ""
 msgid "Go and check the event details"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:219
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:232
 #, elixir-autogen, elixir-format
 msgid "Go live with a remote event via one of the following video streaming services"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:222
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:235
 #, elixir-autogen, elixir-format
 msgid "Go to streaming event page"
 msgstr ""
@@ -1800,7 +1783,7 @@ msgstr ""
 msgid "Streaming"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:215
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:228
 #, elixir-autogen, elixir-format
 msgid "Streaming services"
 msgstr ""
@@ -1833,5 +1816,67 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:125
 #, elixir-autogen, elixir-format
 msgid "webhook url"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:252
+#, elixir-autogen, elixir-format
+msgid "Confirm image"
+msgstr ""
+
+#: lib/rauversion_web/live/articles_live/components/sharer_component.ex:49
+#, elixir-autogen, elixir-format
+msgid "Facebook"
+msgstr ""
+
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:17
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:156
+#, elixir-autogen, elixir-format
+msgid "Music"
+msgstr ""
+
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:115
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:197
+#, elixir-autogen, elixir-format
+msgid "My Music"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:199
+#, elixir-autogen, elixir-format
+msgid "Or generate the image with AI"
+msgstr ""
+
+#: lib/rauversion_web/live/home_live/index.html.heex:93
+#, elixir-autogen, elixir-format
+msgid "Recent Tracks"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:261
+#, elixir-autogen, elixir-format
+msgid "Redo image"
+msgstr ""
+
+#: lib/rauversion_web/live/articles_live/components/sharer_component.ex:12
+#, elixir-autogen, elixir-format
+msgid "Share on: "
+msgstr ""
+
+#: lib/rauversion_web/live/articles_live/components/sharer_component.ex:30
+#, elixir-autogen, elixir-format
+msgid "Twitter"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:233
+#, elixir-autogen, elixir-format
+msgid "We use DALL-E from Open AI to generate images"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:218
+#, elixir-autogen, elixir-format
+msgid "generate image"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:235
+#, elixir-autogen, elixir-format
+msgid "read more"
 msgstr ""
 
