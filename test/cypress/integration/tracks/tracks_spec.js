@@ -44,3 +44,16 @@ describe('Tracks Spec', function () {
     cy.get('[data-cy="profile-menu-Tracks"]').click()
   })
 });
+
+
+describe('User Tracks access', function () {
+  beforeEach(() => {
+    cy.appScenario('basic', {email: "test@test.cl", password: "12345678", username: "test"});
+  })
+
+  it('Draft event My events', function () {
+    login()
+    cy.visit("/tracks/new")
+    cy.contains("Tracks uploads are not allowed on your account type")
+  })
+});

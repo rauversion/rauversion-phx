@@ -2,7 +2,7 @@ import { login } from '../../plugins/utils'
 
 describe('Admin Events Spec', function () {
   beforeEach(() => {
-    cy.appScenario('basic', {email: "test@test.cl", password: "12345678", username: "test", type: "admin"});
+    cy.appScenario('artist', {email: "test@test.cl", password: "12345678", username: "test"});
   })
 
   it('Draft event My events', function () {
@@ -39,7 +39,7 @@ describe('Admin Events Spec', function () {
   })
 
 
-  it.only('Published event My events', function () {
+  it('Published event My events', function () {
     login()
     cy.visit("/events/mine")
     cy.contains("All Events")
