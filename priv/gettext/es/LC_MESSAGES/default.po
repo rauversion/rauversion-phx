@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-11-18 15:17\n"
+"PO-Revision-Date: 2022-11-18 16:50\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1869,65 +1869,65 @@ msgstr "leer más"
 #: lib/rauversion_web/live/events_live/show.html.heex:241
 #, elixir-autogen, elixir-format
 msgid "All rights reserved."
-msgstr ""
+msgstr "Todos los derechos reservados."
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:180
 #, elixir-autogen, elixir-format
 msgid "Choose the currency in which you will charge"
-msgstr ""
+msgstr "Elige la moneda en la que cobrarás"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:239
 #, elixir-autogen, elixir-format
 msgid "Copyright ©"
-msgstr ""
+msgstr "Copyright ©"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:17
 #, elixir-autogen, elixir-format
 msgid "Edit event Information."
-msgstr ""
+msgstr "Editar información del evento."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:23
 #, elixir-autogen, elixir-format
 msgid "Edit event Schedulings."
-msgstr ""
+msgstr "Editar programación de eventos."
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:102
 #, elixir-autogen, elixir-format
 msgid "Event Timezone"
-msgstr ""
+msgstr "Zona horaria del evento"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:41
 #, elixir-autogen, elixir-format
 msgid "Manage live streaming sources event."
-msgstr ""
+msgstr "Administrar evento de fuentes de streaming en vivo."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:35
 #, elixir-autogen, elixir-format
 msgid "Manage the event tickets."
-msgstr ""
+msgstr "Administrar los Tickets del evento."
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:303
 #, elixir-autogen, elixir-format
 msgid "Place order"
-msgstr ""
+msgstr "Realizar pedido"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:112
 #, elixir-autogen, elixir-format
 msgid "Times are displayed in"
-msgstr ""
+msgstr "Las horas se muestran en"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:59
 #, elixir-autogen, elixir-format
 msgid "View the event's attendees list."
-msgstr ""
+msgstr "Ver la lista de asistentes del evento."
 
 #: lib/rauversion_web/live/track_live/components/track_component.ex:189
 #, elixir-autogen, elixir-format
 msgid "Add to next up"
-msgstr ""
+msgstr "Añadir al siguiente"
 
 #: lib/rauversion_web/live/track_live/player.ex:348
 #, elixir-autogen, elixir-format
 msgid "Next up"
-msgstr ""
+msgstr "Siguiente"
 
