@@ -22,7 +22,7 @@
   </url>
   <%= for track <- @tracks do %>
     <url>
-      <loc><%= Routes.track_show_url(@conn, :show, track.slug) %></loc>
+      <loc><%= Routes.track_show_url(@conn, :show, track.id) %></loc>
       <lastmod><%= format_date(track.updated_at) %></lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
