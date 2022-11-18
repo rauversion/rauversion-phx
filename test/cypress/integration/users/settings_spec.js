@@ -35,19 +35,15 @@ describe('User Settings Spec', function () {
     cy.get('textarea[name="user[bio]"]')
       .type('A rockstar from Chile')
 
-    cy.get('input[name="avatar"]')
-      .selectFile('test/cypress/fixtures/avatar.png', {force: true})
+    /*cy.get('input[name="avatar"]')
+      .selectFile('test/cypress/fixtures/avatar.png', {force: true})*/
 
-    cy.get('input[name="profile_header"]')
-      .selectFile('test/cypress/fixtures/cover.png', {force: true})
-
-    cy.wait(16000)
+    /*cy.get('input[name="profile_header"]')
+      .selectFile('test/cypress/fixtures/cover.png', {force: true})*/
 
     cy.get('button[type="submit"]').click();
 
-    cy.wait(16000)
-
-    cy.get('body').should('contain', 'updated successfully');
+    cy.contains('updated successfully');
 
     cy.get('input[name="user[username]"]')
       .should('have.value', 'test-username')

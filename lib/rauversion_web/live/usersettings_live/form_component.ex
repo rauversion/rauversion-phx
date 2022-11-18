@@ -22,8 +22,12 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
   defp get_change_set(:profile, socket, user) do
     socket
     |> assign(:changeset, Accounts.change_user_profile(user))
-    |> allow_upload(:avatar, accept: ~w(.jpg .jpeg .png), max_entries: 1)
-    |> allow_upload(:profile_header, accept: ~w(.jpg .jpeg .png), max_entries: 1)
+    |> allow_upload(:avatar, accept: ~w(.jpg .jpeg .png), max_entries: 1, max_file_size: 10_000)
+    |> allow_upload(:profile_header,
+      accept: ~w(.jpg .jpeg .png),
+      max_entries: 1,
+      max_file_size: 10_000
+    )
   end
 
   defp get_change_set(:email, socket, user) do

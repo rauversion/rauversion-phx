@@ -14,7 +14,7 @@ describe('Tracks Spec', function () {
     login();
 
     cy.get('[data-cy="mobile-dropdown-toggle"]').click()
-    cy.get('a').contains('My Tracks').click({force: true})
+    cy.get('a').contains('My Music').click({force: true})
     cy.contains("Albums")
     cy.contains("Playlists")
     cy.wait(2000)
