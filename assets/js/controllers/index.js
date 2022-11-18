@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus"
-import Dropdown from "stimulus-dropdown"
+import Dropdown from "./dropdown"
 import Clipboard from 'stimulus-clipboard'
 import Audio from "./audio_controller"
 import Tabs from "./tabs_controller"
