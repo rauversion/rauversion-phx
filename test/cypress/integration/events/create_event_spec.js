@@ -27,10 +27,14 @@ describe('Admin Events Spec', function () {
 
     cy.contains("my title")
 
+    cy.contains("Drafts")
+    cy.wait(2000)
     cy.contains("Drafts").click()
 
     cy.contains("my title")
 
+    cy.contains("Published")
+    cy.wait(2000)
     cy.contains("Published").click()
 
     cy.get('body')
@@ -57,9 +61,8 @@ describe('Admin Events Spec', function () {
     cy.visit("/events/my-title/edit")
 
     cy.contains("Publish Event")
-    cy.wait(4000)
+    cy.wait(2000)
     cy.contains("Publish Event").click()
-    cy.wait(4000)
     cy.contains("Your event is published")
 
     cy.visit("/events")
@@ -77,7 +80,6 @@ describe('Admin Events Spec', function () {
     cy.contains("Drafts")
     cy.wait(2000)
     cy.contains("Drafts").click()
-    cy.wait(2000)
 
     cy.get('body')
     .should('not.have.value', 'my title')
