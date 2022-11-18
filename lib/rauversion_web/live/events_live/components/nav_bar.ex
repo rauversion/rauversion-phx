@@ -14,13 +14,13 @@ defmodule RauversionWeb.EventsLive.NavBar do
         to: "/events/#{event.slug}/edit",
         namespace: :edit,
         title: gettext("Edit event"),
-        sub: gettext("Basic Account Information.")
+        sub: gettext("Edit event Information.")
       },
       %{
         to: "/events/#{event.slug}/edit/schedule",
         namespace: :schedule,
         title: gettext("Schedule"),
-        sub: gettext("Basic Account Information.")
+        sub: gettext("Edit event Schedulings.")
       },
       %{
         to: "/events/#{event.slug}/edit/hosts",
@@ -32,13 +32,13 @@ defmodule RauversionWeb.EventsLive.NavBar do
         to: "/events/#{event.slug}/edit/tickets",
         namespace: :tickets,
         title: gettext("Tickets"),
-        sub: gettext("Change Email information.")
+        sub: gettext("Manage the event tickets.")
       },
       %{
         to: "/events/#{event.slug}/edit/streaming",
         namespace: :streaming,
         title: gettext("Streaming"),
-        sub: gettext("Manage streaming event.")
+        sub: gettext("Manage live streaming sources event.")
       },
       # %{
       #  to: "/events/#{event.slug}/edit/widgets",
@@ -56,7 +56,7 @@ defmodule RauversionWeb.EventsLive.NavBar do
         to: "/events/#{event.slug}/edit/attendees",
         namespace: :attendees,
         title: gettext("Attendees"),
-        sub: gettext("Change your notification preferences.")
+        sub: gettext("View the event's attendees list.")
       }
       # %{
       #  to: "/events/#{event.slug}/edit/email_attendees",

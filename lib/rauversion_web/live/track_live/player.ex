@@ -344,7 +344,9 @@ defmodule RauversionWeb.TrackLive.Player do
             <div class="flex h-full flex-col overflow-y-scroll py-6 shadow-xl dark:border-l-2 dark:border-white">
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
-                  <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100" id="slide-over-title">Next up</h2>
+                  <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100" id="slide-over-title">
+                    <%= gettext("Next up") %>
+                  </h2>
                   <button type="button"
                       phx-click="clear-all"
                       class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -391,8 +393,10 @@ defmodule RauversionWeb.TrackLive.Player do
                                 <a href="#"
                                   phx-click="remove-from-next-up"
                                   phx-value-index={counter}
-                                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 dark:border-gray-700 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
-                                  <%= gettext "remove from next up" %>
+                                  class="inline-flex items-center shadow-sm border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 bg-white hover:bg-gray-50 dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4"strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
                                 </a>
                               </div>
                             </div>

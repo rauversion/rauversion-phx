@@ -6,8 +6,10 @@ defmodule RauversionWeb.EventsLive.Components.SchedulingSettingsForm do
     ~H"""
       <div class="border mt-6 p-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 dark:bg-black rounded-md">
           <%= form_input_renderer(@f, %{type: :text_input, name: :name, wrapper_class: "sm:col-span-6"}) %>
-          <%= form_input_renderer(@f, %{type: :datetime_input, name: :start_date, wrapper_class: "sm:col-span-2"}) %>
-          <%= form_input_renderer(@f, %{type: :datetime_input, name: :end_date, wrapper_class: "sm:col-span-2"}) %>
+          <% #= form_input_renderer(@f, %{type: :datetime_input, name: :start_date, wrapper_class: "sm:col-span-2"}) %>
+          <%= form_input_renderer(@f, %{type: :text_input, name: :start_date, wrapper_class: "sm:col-span-2", id: "wrap-id", hook: "DatetimeHook"}) %>
+          <%= form_input_renderer(@f, %{type: :text_input, name: :end_date, wrapper_class: "sm:col-span-2", id: "wrap-end", hook: "DatetimeHook"}) %>
+          <% #= form_input_renderer(@f, %{type: :datetime_input, name: :end_date, wrapper_class: "sm:col-span-2"}) %>
           <%= form_input_renderer(@f, %{type: :select, options: [
             [key: "Daily", value: "daily"],
             [key: "Weekly", value: "weekly"],
@@ -18,8 +20,9 @@ defmodule RauversionWeb.EventsLive.Components.SchedulingSettingsForm do
           <%= for i <- inputs_for(@f, :schedulings) do %>
             <div class="sm:col-span-6 mt-6 p-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 dark:bg-gray-700 rounded-md border-2 border-white">
               <%= form_input_renderer(i, %{type: :text_input, name: :title, wrapper_class: "sm:col-span-6"}) %>
-              <%= form_input_renderer(i, %{type: :datetime_input, name: :start_date, wrapper_class: "sm:col-span-3"}) %>
-              <%= form_input_renderer(i, %{type: :datetime_input, name: :end_date, wrapper_class: "sm:col-span-3"}) %>
+
+              <%= form_input_renderer(i, %{type: :text_input, name: :start_date, wrapper_class: "sm:col-span-3", hook: "DatetimeHook"}) %>
+              <%= form_input_renderer(i, %{type: :text_input, name: :end_date, wrapper_class: "sm:col-span-3", hook: "DatetimeHook"}) %>
               <%= form_input_renderer(i, %{type: :textarea, name: :short_description, wrapper_class: "sm:col-span-6"}) %>
 
               <button type="button"

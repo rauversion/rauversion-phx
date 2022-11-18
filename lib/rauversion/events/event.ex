@@ -65,6 +65,7 @@ defmodule Rauversion.Events.Event do
     field :lat, :decimal
     field :lng, :decimal
 
+    field :timezone, :string
     field :description, :string
     field :eticket, :boolean, default: false
     field :event_capacity, :boolean, default: false
@@ -79,7 +80,6 @@ defmodule Rauversion.Events.Event do
     field :state, :string, default: "draft"
     field :street, :string
     field :street_number, :string
-    field :timezone, :string
     field :title, :string
 
     field :will_call, :boolean, default: false
@@ -99,6 +99,10 @@ defmodule Rauversion.Events.Event do
     has_one(:cover_blob, through: [:cover_attachment, :blob])
   end
 
+  def record_type() do
+    "Event"
+  end
+
   @doc false
   def changeset(event, attrs) do
     event
@@ -108,13 +112,13 @@ defmodule Rauversion.Events.Event do
       :description,
       :slug,
       :state,
-      :timezone,
       :event_start,
       :event_ends,
       :private,
       :online,
       :location,
       :street,
+      :timezone,
       :street_number,
       :country,
       :city,
@@ -172,6 +176,9 @@ defmodule Rauversion.Events.Event do
     |> cast_embed(:event_settings, with: &Rauversion.Events.Settings.changeset/2)
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
+
+    # |> handle_tz_for(:event_start)
+    # |> handle_tz_for(:event_ends)
   end
 
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils

@@ -145,15 +145,17 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                 </div>
 
                 <%= form_input_renderer(i, %{
-                  type: :datetime_input,
+                  type: :text_input,
                   name: :selling_start,
-                  wrapper_class: "sm:col-span-1"
+                  wrapper_class: "sm:col-span-3",
+                  hook: "DatetimeHook"
                 }) %>
 
                 <%= form_input_renderer(i, %{
-                  type: :datetime_input,
+                  type: :text_input,
                   name: :selling_end,
-                  wrapper_class: "sm:col-span-1"
+                  wrapper_class: "sm:col-span-3",
+                  hook: "DatetimeHook"
                 }) %>
 
                 <%= form_input_renderer(i, %{
