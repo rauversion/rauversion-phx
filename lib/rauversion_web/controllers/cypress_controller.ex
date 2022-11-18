@@ -33,6 +33,10 @@ defmodule RauversionWeb.CypressController do
             %{"name" => "scenarios/artist", "options" => options = %{}} ->
               artist(options)
 
+            %{"name" => "eval"} ->
+              {result, _} = Code.eval_string(a["options"], [])
+              result
+
             any ->
               IO.puts("UNHANDLED!")
               IO.inspect(any)
