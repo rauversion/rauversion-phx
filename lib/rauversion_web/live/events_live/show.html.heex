@@ -94,7 +94,13 @@
     <div class="relative pt-10 pb-20 sm:py-24">
       
       <div class="absolute inset-x-0 -top-48 -bottom-14 overflow-hidden bg-black">
-        <img src={ Routes.static_path(@socket, "/images/denys-churchyn-Kwmz_c_NiYk-unsplash.jpg")} width="918" height="1495" decoding="async" data-nimg="1" class="absolute top-0 left-0 translate-y-[-10%] translate-x-[-55%] -scale-x-100 sm:left-1/2 sm:translate-y-[-6%] sm:translate-x-[-98%] lg:translate-x-[-106%] xl:translate-x-[-122%]" style="color:transparent">
+        <img src={ Routes.static_path(@socket, "/images/denys-churchyn-Kwmz_c_NiYk-unsplash.jpg")} 
+          width="918" 
+          height="1495" 
+          decoding="async"
+          data-nimg="1" 
+          class="absolute top-0 left-0 translate-y-[-10%] translate-x-[-55%] -scale-x-100 sm:left-1/2 sm:translate-y-[-6%] sm:translate-x-[-98%] lg:translate-x-[-106%] xl:translate-x-[-122%]" 
+          style="color:transparent">
         <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black"></div>
         <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black">
         </div>
@@ -151,7 +157,7 @@
                 <%= gettext("Location") %>
               </dt>
               <dd class="mt-0.5 text-xl sm:text-2xl font-semibold tracking-tight text-brand-100">
-              <%= @event.city %>
+                <%= @event.city %>
               </dd>
             </div>
           </dl>

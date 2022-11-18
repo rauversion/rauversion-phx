@@ -201,8 +201,13 @@ defmodule RauversionWeb.LiveHelpers do
     ~H"""
       <div class={@field.wrapper_class}>
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1">
-          <%= text_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
+        <div class="mt-1"
+          phx-update={ if Map.get(@field,:hook), do: "ignore"}
+          id={"form-field-container-#{@field.name}"}>
+          <%= text_input @form, @field.name,
+            placeholder: Map.get(@field, :placeholder),
+            phx_hook: Map.get(@field,:hook),
+            class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
         </div>
         <%= if get_in(assigns.field, [:hint]) do %>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
@@ -458,6 +463,22 @@ defmodule RauversionWeb.LiveHelpers do
     </div>
 
     """
+  end
+
+  def locale_list do
+    now = DateTime.utc_now()
+
+    Tzdata.zone_list()
+    |> Enum.map(fn zone ->
+      tzinfo = Timex.Timezone.get(zone, now)
+      # added in v3.78
+      # _offset = Timex.TimezoneInfo.format_offset(tzinfo)
+      # _label = "#{tzinfo.full_name} - #{tzinfo.abbreviation} (#{offset})"
+
+      # {tzinfo.full_name, label}
+      {tzinfo.full_name, tzinfo.full_name}
+    end)
+    |> Enum.uniq()
   end
 
   def render_attribution_fields(f) do

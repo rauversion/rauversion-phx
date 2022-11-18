@@ -9,7 +9,7 @@ defmodule Rauversion.Repo.Migrations.CreateEvent do
       add :state, :string
       add :timezone, :string
       add :event_start, :utc_datetime
-      add :event_ends, :naive_datetime
+      add :event_ends, :utc_datetime
       add :private, :boolean, default: false, null: false
       add :online, :boolean, default: false, null: false
       add :location, :string

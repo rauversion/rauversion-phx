@@ -16,7 +16,7 @@ defmodule RauversionWeb.TrackLive.FormComponent do
      |> allow_upload(:audio,
        accept: ~w(.mp3 .mp4 .wav .ogg),
        max_entries: 1,
-       max_file_size: 200_000_000
+       max_file_size: 400_000_000
      )}
   end
 
