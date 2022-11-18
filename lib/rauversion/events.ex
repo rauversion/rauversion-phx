@@ -53,6 +53,7 @@ defmodule Rauversion.Events do
   def public_events() do
     from(pi in Event,
       where: pi.private == false,
+      where: pi.state == ^"published",
       preload: [user: :avatar_blob]
     )
   end
