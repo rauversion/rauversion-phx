@@ -203,7 +203,7 @@ defmodule RauversionWeb.LiveHelpers do
         <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
         <div class="mt-1"
           phx-update={ if Map.get(@field,:hook), do: "ignore"}
-          id={"form-field-container-#{@field.name}"}>
+          id={if @field[:id], do: "ww-#{@field.id}"}>
           <%= text_input @form, @field.name,
             placeholder: Map.get(@field, :placeholder),
             phx_hook: Map.get(@field,:hook),
