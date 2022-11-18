@@ -1,7 +1,7 @@
 import { login, expectPlayingAudio } from '../../plugins/utils';
 
 describe('Tracks Spec', function () {
-  
+
   beforeEach(() => {
     cy.appScenario('artist', {email: "test@test.cl", password: "12345678", username: "test"});
     /*cy.appEval(`
@@ -14,7 +14,7 @@ describe('Tracks Spec', function () {
     login();
 
     cy.get('[data-cy="mobile-dropdown-toggle"]').click()
-    cy.get('a').contains('My Tracks').click({force: true})
+    cy.get('a').contains('My Music').click({force: true})
     cy.contains("Albums")
     cy.contains("Playlists")
     cy.wait(2000)
@@ -42,5 +42,18 @@ describe('Tracks Spec', function () {
     cy.contains("plays 1")
     cy.contains("Tracks")
     cy.get('[data-cy="profile-menu-Tracks"]').click()
+  })
+});
+
+
+describe('User Tracks access', function () {
+  beforeEach(() => {
+    cy.appScenario('basic', {email: "test@test.cl", password: "12345678", username: "test"});
+  })
+
+  it('Draft event My events', function () {
+    login()
+    cy.visit("/tracks/new")
+    cy.contains("Tracks uploads are not allowed on your account type")
   })
 });

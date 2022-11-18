@@ -18,13 +18,15 @@ test t:
 	mix test
 
 cy.server:
+	MIX_ENV=cy mix setup
+	MIX_ENV=cy mix cy.account
 	MIX_ENV=cy iex -S mix phx.server
 
 cy.run:
-	npx cypress run
+	npx --yes cypress run
 
 cy.open:
-	npx cypress open
+	npx --yes cypress open
 
 coverage cover co:
 	mix test --cover

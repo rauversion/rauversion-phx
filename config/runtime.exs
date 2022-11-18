@@ -2,12 +2,16 @@ import Config
 
 IO.inspect(System.get_env("MIX_ENV"))
 
-config :active_storage, :host, "https://#{System.get_env("DOMAIN")}"
-config :rauversion, :domain, "https://#{System.get_env("DOMAIN")}"
-
 unless System.get_env("MIX_ENV") == "prod" do
   Dotenv.load!()
 end
+
+config :active_storage, :host, "https://#{System.get_env("APP_DOMAIN")}"
+config :rauversion, :domain, "https://#{System.get_env("APP_DOMAIN")}"
+
+config :mux,
+  access_token_id: System.get_env("MUX_TOKEN_ID"),
+  access_token_secret: System.get_env("MUX_TOKEN_SECRET")
 
 maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
 
