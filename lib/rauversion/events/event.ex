@@ -99,6 +99,10 @@ defmodule Rauversion.Events.Event do
     has_one(:cover_blob, through: [:cover_attachment, :blob])
   end
 
+  def record_type() do
+    "Event"
+  end
+
   @doc false
   def changeset(event, attrs) do
     event

@@ -147,8 +147,13 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
       </div>
 
       <div class="relative mt-14 sm:mt-24">
-        <div class="absolute inset-x-0 -top-40 -bottom-32 overflow-hidden bg-gray-900">
-          <!--<img >-->
+        <div class="absolute inset-x-0 -top-40 -bottom-32 overflow-hidden bg-black">
+          <img src={ Routes.static_path(@socket, "/images/denys-churchyn-Kwmz_c_NiYk-unsplash.jpg")}
+            width="918" height="1495"
+            decoding="async"
+            data-nimg="1"
+            class="absolute left-full top-0 -translate-x-1/2 sm:left-1/2 sm:translate-y-[-15%] sm:translate-x-[-20%] md:translate-x-0 lg:translate-x-[5%] lg:translate-y-[4%] xl:translate-y-[-8%] xl:translate-x-[27%]"
+            style="color:transparent">
           <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black"></div>
           <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black"></div>
         </div>
@@ -222,9 +227,10 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                 </p>
 
                 <%= if Enum.any?(day.schedulings) do %>
-                  <ol role="list" class="mt-10 space-y-8 dark:bg-black/60 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
+                  <ol role="list" class="mt-10 space-y-8 dark:bg-gray-900 --dark:bg-black/60 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
                     <%= for scheduling <- day.schedulings do %>
                       <li>
+                        <div class="mx-auto mb-8 h-px w-48 bg-gray-200/10"></div>
                         <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">
                           <%= scheduling.title %>
                         </h4>

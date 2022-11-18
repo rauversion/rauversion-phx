@@ -416,7 +416,7 @@ defmodule RauversionWeb.LiveHelpers do
 
             <% else %>
 
-              <%= img_tag(Rauversion.BlobUtils.variant_url( @form.data, "#{@name}", %{resize_to_fill: "300x70"}), class: "object-center object-cover group-hover:opacity-75") %>
+              <%= img_tag(Rauversion.BlobUtils.variant_url( @form.data, "#{@name}"), class: "object-center object-cover group-hover:opacity-75") %>
 
             <% end %>
 

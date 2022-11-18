@@ -269,13 +269,14 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
                 phx-submit="save">
 
                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                  <div class="sm:col-span-6">
+                  <div class="sm:col-span-6 space-y-4">
 
-                      <div class="sm:col-span-6">
+                      <div class="sm:col-span-4 pb-4">
                         <%= form_input_renderer(i, %{
                           type: :upload,
                           uploads: @uploads,
-                          name: :avatar
+                          name: :avatar,
+                          label: "Avatar"
                           }) %>
                       </div>
 
