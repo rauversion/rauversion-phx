@@ -15,8 +15,13 @@ defmodule Rauversion.BlobUtils do
     Rauversion.BlobUtils.attach_file(struct, kind, blob)
   end
 
-  def attach_file(struct, kind, blob) do
+  def attach_file(struct = %Ecto.Changeset{}, kind, blob) do
     cover = apply(struct.data.__struct__, :"#{kind}", [struct.data])
+    apply(cover.__struct__, :attach, [cover, blob])
+  end
+
+  def attach_file(struct, kind, blob) do
+    cover = apply(struct.__struct__, :"#{kind}", [struct])
     apply(cover.__struct__, :attach, [cover, blob])
   end
 
@@ -90,6 +95,27 @@ defmodule Rauversion.BlobUtils do
   def blob_proxy_url(track, kind) do
     blob = blob_for(track, kind)
     ActiveStorage.blob_proxy_url(blob)
+  end
+
+  def blob_representation_proxy_url(struct, kind, options \\ %{}) do
+    namespace = ActiveStorage.routes_prefix()
+    # sign_option = [expires_in: 3600]
+    sign_option = []
+
+    blob = __MODULE__.blob_for(struct, kind)
+
+    case blob do
+      %ActiveStorage.Blob{} = blob ->
+        variant = ActiveStorage.Blob.Representable.variant(blob, options)
+        filename = ActiveStorage.Blob.filename(blob)
+        variation_key = variant.variation.__struct__.key(variant.variation)
+        signed_blob_id = ActiveStorage.verifier().sign(blob.id)
+
+        "#{namespace}/representations/proxy/#{signed_blob_id}/#{variation_key}/#{filename.filename}"
+
+      _ ->
+        fallback_image()
+    end
   end
 
   def process_one_upload(struct, attrs, kind) do

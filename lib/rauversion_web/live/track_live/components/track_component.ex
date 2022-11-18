@@ -33,7 +33,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         <div class="group relative aspect-w-1 aspect-h-1 sm:rounded-none rounded-md-- bg-gray-100 dark:bg-gray-900 overflow-hidden">
           <% #= image_tag url_for(track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
 
-          <%= img_tag(Rauversion.Tracks.blob_url(@track, "cover"), class: "object-center object-cover group-hover:opacity-75") %>
+          <%= img_tag(Tracks.proxy_cover_representation_url(@track), class: "object-center object-cover group-hover:opacity-75") %>
 
           <div class="flex flex-col justify-end">
             <!--<div class="p-4 bg-white bg-opacity-60 text-sm">
@@ -186,7 +186,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
               <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
             </svg>
-            <span class="hidden sm:block">Add to next up</span>
+            <span class="hidden sm:block"><%= gettext("Add to next up") %></span>
           <% end %>
 
           <% #= link_to "Show this track", track, class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>

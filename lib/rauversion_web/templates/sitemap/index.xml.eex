@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc><%= Routes.home_index_url(@conn, :index) %></loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= Routes.track_index_url(@conn, :index) %></loc>
+    <changefreq>never</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc><%= Routes.articles_index_url(@conn, :index) %></loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc><%= Routes.events_index_url(@conn, :index) %></loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <%= for track <- @tracks do %>
+    <url>
+      <loc><%= Routes.track_show_url(@conn, :show, track.id) %></loc>
+      <lastmod><%= format_date(track.updated_at) %></lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>1</priority>
+    </url>
+  <% end %>
+</urlset>

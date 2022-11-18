@@ -94,11 +94,51 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
 
             <%= form_input_renderer(f, %{type: :text_input, name: :title, wrapper_class: "sm:col-span-6"}) %>
 
-            <%= form_input_renderer(f, %{type: :datetime_input, name: :event_start, wrapper_class: "sm:col-span-3"}) %>
-            <%= form_input_renderer(f, %{type: :datetime_input, name: :event_ends, wrapper_class: "sm:col-span-3"}) %>
+            <%= form_input_renderer(f, %{
+              type: :select,
+              options: RauversionWeb.LiveHelpers.locale_list,
+              wrapper_class: "sm:col-span-2",
+              name: :timezone,
+              label: gettext("Event Timezone")
+              })
+            %>
+
+            <%= form_input_renderer(f, %{type: :text_input, name: :event_start, wrapper_class: "sm:col-span-2", hook: "DatetimeHook" }) %>
+            <%= form_input_renderer(f, %{type: :text_input, name: :event_ends, wrapper_class: "sm:col-span-2", hook: "DatetimeHook"}) %>
+            <div
+              class="flex items-center space-x-2 sm:col-span-6 text-sm"
+              phx-update="ignore"
+              id="current-tz-w">
+              <span><%= gettext("Times are displayed in") %> </span>
+              <span id="tttt" phx-hook="currentTimezone" class="text-bold underline">....</span>
+            </div>
+
+
             <%= form_input_renderer(f, %{type: :textarea, name: :description, wrapper_class: "sm:col-span-6"}) %>
 
-            <div class="sm:col-span-3 space-y-3 flex flex-col justify-between">
+            <div class="flex items-center space-x-2">
+              <div class="flex items-center">
+                <label for="push-everything" class="block text-md font-bold text-gray-700 dark:text-gray-300">
+                <%= gettext "Privacy" %>
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <%= radio_button f, :private, true, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
+                <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <%= gettext "Private" %>
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <%= radio_button f, :private, false, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
+                <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <%= gettext "Public" %>
+                </label>
+              </div>
+            </div>
+
+            <div class="sm:col-span-6 space-y-3 flex flex-col justify-between">
               <%= form_input_renderer(f, %{type: :text_input, name: :venue, wrapper_class: ""}) %>
               <%= form_input_renderer(f, %{type: :select, options: [
                 [key: "All ages", value: "all", disabled: true],
@@ -110,28 +150,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
                 [key: "20+", value: "20"],
                 [key: "21+", value: "21"]
               ], wrapper_class: nil, name: :age_requirement }) %>
+            </div>
 
-              <div class="flex items-center space-x-2">
-                <div class="flex items-center">
-                  <label for="push-everything" class="block text-md font-bold text-gray-700 dark:text-gray-300">
-                  <%= gettext "Privacy" %>
-                  </label>
-                </div>
-
-                <div class="flex items-center">
-                  <%= radio_button f, :private, true, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
-                  <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <%= gettext "Private" %>
-                  </label>
-                </div>
-
-                <div class="flex items-center">
-                  <%= radio_button f, :private, false, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300" %>
-                  <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <%= gettext "Public" %>
-                  </label>
-                </div>
-              </div>
+            <div class="sm:col-span-6 space-y-3 flex flex-col justify-between">
 
               <div class="flex items-center justify-between space-x-2">
                 <%= inputs_for f, :event_settings, fn i -> %>
@@ -155,19 +176,19 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
                           [key: "EUR", value: "eur", disabled: false]
                         ],
                         wrapper_class: nil,
-                        name: :ticket_currency
+                        name: :ticket_currency,
+                        hint: gettext("Choose the currency in which you will charge")
                       })
                   %>
 
                   </div>
                 <% end %>
               </div>
-
             </div>
 
 
-            <div class="sm:col-span-3 space-y-3">
-              <%= form_input_renderer(f, %{type: :upload, uploads: @uploads, name: :cover}) %>
+            <div class="sm:col-span-3 space-y-3 hidden">
+              <% #= form_input_renderer(f, %{type: :upload, uploads: @uploads, name: :cover, label: gettext("Event image")}) %>
             </div>
 
           </div>
@@ -241,10 +262,10 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
                 <%= form_input_renderer(i, %{type: :text_input, name: :participant_label, wrapper_class: "sm:col-span-6"}) %>
                 <%= form_input_renderer(i, %{type: :textarea, name: :participant_description, wrapper_class: "sm:col-span-6"}) %>
               </div>
-              <div class="sm:col-span-3 flex flex-col justify-start space-y-2">
-                <%= form_input_renderer(i, %{type: :text_input, name: :sponsors_label, wrapper_class: ""}) %>
-                <%= form_input_renderer(i, %{type: :textarea, name: :sponsors_description, wrapper_class: ""}) %>
-                <%= form_input_renderer(i, %{type: :checkbox, name: :accept_sponsors, wrapper_class: ""}) %>
+              <div class="hidden sm:col-span-3 flex flex-col justify-start space-y-2">
+                <% #= form_input_renderer(i, %{type: :text_input, name: :sponsors_label, wrapper_class: ""}) %>
+                <% #= form_input_renderer(i, %{type: :textarea, name: :sponsors_description, wrapper_class: ""}) %>
+                <% #= form_input_renderer(i, %{type: :checkbox, name: :accept_sponsors, wrapper_class: ""}) %>
               </div>
               <div class="sm:col-span-3 flex flex-col justify-start space-y-2">
                 <%= form_input_renderer(i, %{type: :text_input, name: :scheduling_label, wrapper_class: "sm:col-span-6"}) %>

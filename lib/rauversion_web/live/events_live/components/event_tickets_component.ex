@@ -293,12 +293,14 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                                       <div class="flex justify-end">
+                                        <div class="hidden">
                                         <%= if @changeset.valid? do %>
                                           is valid!
                                         <% else %>
                                           no valid!
                                         <% end %>
-                                        <%= submit "Place order",
+                                        </div>
+                                        <%= submit gettext("Place order"),
                                           disabled: !@changeset.valid?,
                                           class: "inline-flex items-center rounded-md border border-brand-300 dark:border-brand-700 bg-brand-600 dark:bg-brand-600 px-4 py-4 text-sm font-medium leading-4 text-brand-100 dark:text-brand-100 shadow-sm hover:bg-brand-50 dark:hover:bg-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                                         %>

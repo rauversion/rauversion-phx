@@ -14,7 +14,7 @@
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
 
               <%= live_redirect to: "/tracks", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
-                <%= gettext "Tracks" %>
+                <%= gettext "Music" %>
               <% end %>
 
               <% #= live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
@@ -112,7 +112,7 @@
                   <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-900 bg-white">
 
                     <%= if is_creator?(@current_user) do %>
-                      <%= live_redirect gettext("My Tracks"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                      <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <% end %>
 
                     <%= if is_admin?(@current_user) do %>
@@ -153,7 +153,7 @@
       >
       <div class="pt-2 pb-3 px-2 space-y-1">
 
-          <%= live_redirect gettext("Tracks"), to: "/tracks", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
+          <%= live_redirect gettext("Music"), to: "/tracks", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
           <%= live_redirect gettext("Magazine"), to: "/articles", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
           <%= live_redirect gettext("Events"), to: "/events", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
 
@@ -194,7 +194,7 @@
             <% #= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
 
             <%= if is_creator?(@current_user) do %>
-              <%= live_redirect gettext("My Tracks"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+              <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
             <% end %>
 
             <%= if is_admin?(@current_user) do %>

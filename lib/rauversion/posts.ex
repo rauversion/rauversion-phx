@@ -164,6 +164,10 @@ defmodule Rauversion.Posts do
     end
   end
 
+  def proxy_cover_representation_url(struct, options \\ %{resize_to_fill: "250x250"}) do
+    Rauversion.BlobUtils.blob_representation_proxy_url(struct, "cover", options)
+  end
+
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
 
   defdelegate blob_for(track, kind), to: Rauversion.BlobUtils

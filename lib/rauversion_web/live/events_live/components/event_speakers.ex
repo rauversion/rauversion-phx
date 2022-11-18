@@ -111,14 +111,26 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
 
                 <%= for performer <- performers(@event) do %>
                   <div>
-                    <div class="group relative h-[17.5rem] transform overflow-hidden rounded-4xl">
+                    <div class="group relative h-[17.5rem] transform overflow-hidden rounded-4xl- rounded-full">
                       <div class="absolute top-0 left-0 right-4 bottom-6 rounded-4xl border transition duration-300 group-hover:scale-95 xl:right-6 border-brand-300"></div>
-                      <div class="absolute inset-0 bg-indigo-50" style="clip-path:url(#:R9m:-0)">
-                        <%= img_tag(Rauversion.BlobUtils.variant_url( performer, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75") %>
+                      <div class="absolute inset-0 bg-indigo-50 rounded-full" style="clip-path:url(#:R9m:-0)">
+                        <%= if performer.user && performer.user.username do %>
+                          <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                            <%= img_tag(Rauversion.BlobUtils.variant_url( performer.user, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75") %>
+                          <% end %>
+                        <% else %>
+                          <%= img_tag(Rauversion.BlobUtils.variant_url( performer, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75") %>
+                        <% end %>
                       </div>
                     </div>
                     <h3 class="mt-8 font-display text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                      <%= performer.name %>
+                      <%= if performer.user && performer.user.username do %>
+                        <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                          <%= "#{performer.user.first_name} #{performer.user.last_name}" %>
+                        <% end %>
+                      <% else %>
+                       <%= performer.name %>
+                      <% end %>
                     </h3>
                     <p class="mt-1 text-base tracking-tight text-slate-500 dark:text-slate-300">
                       <%= performer.description %>
@@ -147,8 +159,13 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
       </div>
 
       <div class="relative mt-14 sm:mt-24">
-        <div class="absolute inset-x-0 -top-40 -bottom-32 overflow-hidden bg-gray-900">
-          <!--<img >-->
+        <div class="absolute inset-x-0 -top-40 -bottom-32 overflow-hidden bg-black">
+          <img src={ Routes.static_path(@socket, "/images/denys-churchyn-Kwmz_c_NiYk-unsplash.jpg")}
+            width="918" height="1495"
+            decoding="async"
+            data-nimg="1"
+            class="absolute left-full top-0 -translate-x-1/2 sm:left-1/2 sm:translate-y-[-15%] sm:translate-x-[-20%] md:translate-x-0 lg:translate-x-[5%] lg:translate-y-[4%] xl:translate-y-[-8%] xl:translate-x-[27%]"
+            style="color:transparent">
           <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black"></div>
           <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black"></div>
         </div>
@@ -222,9 +239,10 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                 </p>
 
                 <%= if Enum.any?(day.schedulings) do %>
-                  <ol role="list" class="mt-10 space-y-8 dark:bg-black/60 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
+                  <ol role="list" class="mt-10 space-y-8 dark:bg-gray-900 --dark:bg-black/60 bg-white/60 py-14 px-10 text-center shadow-xl shadow-brand-900/5 backdrop-blur">
                     <%= for scheduling <- day.schedulings do %>
                       <li>
+                        <div class="mx-auto mb-8 h-px w-48 bg-gray-200/10"></div>
                         <h4 class="text-lg font-semibold tracking-tight text-brand-900 dark:text-brand-100">
                           <%= scheduling.title %>
                         </h4>

@@ -86,7 +86,7 @@ config :rauversion, tbk_commerce_id: System.get_env("TBK_COMMERCE_ID")
 config :rauversion, tbk_api_key: System.get_env("TBK_API_KEY")
 config :rauversion, platform_event_fee: System.get_env("PLATFORM_EVENTS_FEE")
 config :rauversion, peaks_processor: System.get_env("PEAKS_PROCESSOR", "ffmpeg")
-
+config :rauversion, :openai_api_key, System.get_env("OPENAI_API_KEY")
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration

@@ -116,8 +116,8 @@
            
             <% #= img_tag(Rauversion.Tracks.blob_url_for(@track, "cover"),  class: "object-center object-cover group-hover:opacity-75")  %>
 
-            <%= img_tag(Rauversion.Tracks.variant_url(
-              @track, "cover", %{resize_to_limit: "360x360"}), 
+            <%= img_tag(
+              Tracks.proxy_cover_representation_url(@track, %{resize_to_fill: "360x360"}), 
               class: "object-center object-cover group-hover:opacity-75") 
             %>
 

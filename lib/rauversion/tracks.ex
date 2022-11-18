@@ -84,6 +84,14 @@ defmodule Rauversion.Tracks do
     query |> order_by([p], desc: p.likes_count)
   end
 
+  def latests(query) do
+    query |> order_by([p], desc: p.id)
+  end
+
+  def limit_records(query, count) do
+    query |> limit(^count)
+  end
+
   def with_processed(query) do
     query |> where([t], t.state == "processed")
   end
@@ -330,6 +338,26 @@ defmodule Rauversion.Tracks do
     track.state == "processed"
   end
 
+  def prompt_cover(prompt) do
+    client = Rauversion.Services.OpenAi.new()
+    Rauversion.Services.OpenAi.images(client, prompt)
+  end
+
+  def confirm_prompt(track, url) do
+    # TODO:
+    %HTTPoison.Response{body: body} = HTTPoison.get!(url)
+    tmp_path = "/tmp/image-#{Ecto.UUID.generate()}.png"
+    :ok = File.write!(tmp_path, body)
+
+    file = %{
+      content_type: "image/png",
+      filename: "image",
+      path: tmp_path
+    }
+
+    Rauversion.BlobUtils.attach_file_with_blob(track, "cover", file)
+  end
+
   def blob_duration_metadata(blob) do
     metadata = ActiveStorage.Blob.metadata(blob)
 
@@ -360,6 +388,10 @@ defmodule Rauversion.Tracks do
   defdelegate variant_url(track, kind, options), to: Rauversion.BlobUtils
 
   defdelegate blob_url_for(track, kind), to: Rauversion.BlobUtils
+
+  def proxy_cover_representation_url(track, options \\ %{resize_to_fill: "250x250"}) do
+    Rauversion.BlobUtils.blob_representation_proxy_url(track, "cover", options)
+  end
 
   def iframe_code_string(url, track) do
     '<iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="#{url}"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="#{track.user.username}" title="#{track.user.username}" target="_blank" style="color: #cccccc; text-decoration: none;">#{track.user.username}</a> · <a href="#{url}" title="#{track.title}" target="_blank" style="color: #cccccc; text-decoration: none;">#{track.title}</a></div>'

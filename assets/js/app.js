@@ -17,7 +17,6 @@
 //
 //     import "some-package"
 //
-
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
 // Establish Phoenix Socket and LiveView configuration.
@@ -33,6 +32,7 @@ import TrackHook from "./hooks/track_hook"
 import Editor from "./hooks/editor"
 import ArticleContent from "./hooks/article_content"
 import PlayButton from "./hooks/play_button"
+import { datetimeHook } from './hooks/datetime_picker'
 
 import create from 'zustand/vanilla'
 import { persist } from 'zustand/middleware'
@@ -93,6 +93,15 @@ Hooks.TrackHook = TrackHook
 Hooks.InfiniteScroll = InfiniteScroll
 Hooks.Editor = Editor
 Hooks.ArticleContent = ArticleContent
+Hooks.DatetimeHook = datetimeHook
+
+Hooks.currentTimezone = {
+  mounted(){
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // console.log(timezone); // Asia/Karachi
+    this.el.innerHTML = timezone
+  }
+}
 
 Hooks.PlayerInitiator = {
   mounted(){
@@ -142,6 +151,8 @@ window.addEventListener(`phx:remove-from-playlist`, (e) => {
 
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {
   _csrf_token: csrfToken,
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  timezone_offset: -(new Date().getTimezoneOffset() / 60)
   //store: JSON.stringify(store.getState().playlist)
 }})
 
