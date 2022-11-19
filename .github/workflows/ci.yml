@@ -78,6 +78,9 @@ jobs:
 
       #- name: Check for unused deps
       #  run: mix deps.unlock --check-unused
+
+      - name: Clean
+        run: mix deps.clean mime --build
       - name: Compile code
         run: mix compile #--warnings-as-errors
       #- name: Check code formatting
