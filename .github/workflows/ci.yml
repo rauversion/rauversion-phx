@@ -72,6 +72,7 @@ jobs:
         run: |
           mix local.rebar --force
           mix local.hex --force
+          mix deps.clean mime --build
           mix deps.get
           mix deps.compile
           mix assets.setup
@@ -79,8 +80,6 @@ jobs:
       #- name: Check for unused deps
       #  run: mix deps.unlock --check-unused
 
-      - name: Clean
-        run: mix deps.clean mime --build
       - name: Compile code
         run: mix compile #--warnings-as-errors
       #- name: Check code formatting
