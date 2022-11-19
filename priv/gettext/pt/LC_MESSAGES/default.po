@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-11-18 15:17\n"
+"PO-Revision-Date: 2022-11-19 01:07\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -364,7 +364,7 @@ msgstr "Ir para o perfil"
 msgid "Go to your track"
 msgstr "Ir para sua faixa"
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:122
+#: lib/rauversion_web/live/track_live/components/track_component.ex:123
 #: lib/rauversion_web/live/track_live/show.html.heex:105
 #, elixir-autogen, elixir-format
 msgid "Hold on, this track is in %{state} state"
@@ -485,7 +485,7 @@ msgid "New password"
 msgstr "Nova senha"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:82
-#: lib/rauversion_web/live/track_live/components/track_component.ex:78
+#: lib/rauversion_web/live/track_live/components/track_component.ex:79
 #: lib/rauversion_web/live/track_live/player.ex:202
 #: lib/rauversion_web/live/track_live/show.html.heex:78
 #, elixir-autogen, elixir-format
@@ -579,7 +579,7 @@ msgid "Photo"
 msgstr "Fotografia"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:72
-#: lib/rauversion_web/live/track_live/components/track_component.ex:69
+#: lib/rauversion_web/live/track_live/components/track_component.ex:70
 #: lib/rauversion_web/live/track_live/player.ex:210
 #: lib/rauversion_web/templates/embed/show.html.heex:15
 #, elixir-autogen, elixir-format
@@ -1050,7 +1050,7 @@ msgstr "ou arraste e solte"
 msgid "plays %{count}"
 msgstr "jogar %{count}"
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:101
+#: lib/rauversion_web/live/track_live/components/track_component.ex:102
 #, elixir-autogen, elixir-format
 msgid "private"
 msgstr "privado"
@@ -1921,7 +1921,7 @@ msgstr ""
 msgid "View the event's attendees list."
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:189
+#: lib/rauversion_web/live/track_live/components/track_component.ex:241
 #, elixir-autogen, elixir-format
 msgid "Add to next up"
 msgstr ""
@@ -1929,5 +1929,20 @@ msgstr ""
 #: lib/rauversion_web/live/track_live/player.ex:348
 #, elixir-autogen, elixir-format
 msgid "Next up"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/track_component.ex:229
+#, elixir-autogen, elixir-format
+msgid "Delete this track"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/track_component.ex:220
+#, elixir-autogen, elixir-format
+msgid "Edit this track"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/track_component.ex:180
+#, elixir-autogen, elixir-format
+msgid "More"
 msgstr ""
 
