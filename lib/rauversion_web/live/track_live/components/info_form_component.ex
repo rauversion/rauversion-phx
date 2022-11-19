@@ -90,7 +90,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                       <div>
                         <%= for entry <- @uploads.cover.entries do %>
                           <div class="flex items-center space-x-2">
-                            <%= live_img_preview entry, width: 300 %>
+                            <.live_img_preview entry={entry} width={300} />
                             <div class="text-xl font-bold">
                               <%= entry.progress %>%
                             </div>

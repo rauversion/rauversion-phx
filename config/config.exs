@@ -98,7 +98,9 @@ config :phoenix_meta_tags,
 #  queues: [default: 10]
 
 config :mime, :types, %{
-  "audio/ogg" => ["ogg"]
+  "audio/ogg" => ["ogg"],
+  "audio/flac" => ["flac"],
+  "audio/aiff" => ["aiff"]
 }
 
 # fb: %{
