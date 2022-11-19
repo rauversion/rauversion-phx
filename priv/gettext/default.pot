@@ -361,7 +361,7 @@ msgid "Go to your track"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/track_live/components/track_component.ex:122
+#: lib/rauversion_web/live/track_live/components/track_component.ex:123
 #: lib/rauversion_web/live/track_live/show.html.heex:105
 msgid "Hold on, this track is in %{state} state"
 msgstr ""
@@ -482,7 +482,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/playlist_live/show.html.heex:82
-#: lib/rauversion_web/live/track_live/components/track_component.ex:78
+#: lib/rauversion_web/live/track_live/components/track_component.ex:79
 #: lib/rauversion_web/live/track_live/player.ex:202
 #: lib/rauversion_web/live/track_live/show.html.heex:78
 msgid "Next"
@@ -576,7 +576,7 @@ msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/playlist_live/show.html.heex:72
-#: lib/rauversion_web/live/track_live/components/track_component.ex:69
+#: lib/rauversion_web/live/track_live/components/track_component.ex:70
 #: lib/rauversion_web/live/track_live/player.ex:210
 #: lib/rauversion_web/templates/embed/show.html.heex:15
 msgid "Play"
@@ -1041,7 +1041,7 @@ msgid "plays %{count}"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/track_live/components/track_component.ex:101
+#: lib/rauversion_web/live/track_live/components/track_component.ex:102
 msgid "private"
 msgstr ""
 
@@ -1912,11 +1912,26 @@ msgid "View the event's attendees list."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/track_live/components/track_component.ex:189
+#: lib/rauversion_web/live/track_live/components/track_component.ex:241
 msgid "Add to next up"
 msgstr ""
 
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/track_live/player.ex:348
 msgid "Next up"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/track_live/components/track_component.ex:229
+msgid "Delete this track"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/track_live/components/track_component.ex:220
+msgid "Edit this track"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/track_live/components/track_component.ex:180
+msgid "More"
 msgstr ""
