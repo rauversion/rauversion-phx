@@ -18,7 +18,11 @@ defmodule RauversionWeb.EventsLive.New do
         Events.new_event(%{})
       )
       |> assign(:event, %Events.Event{})
-      |> allow_upload(:cover, accept: ~w(.jpg .jpeg .png), max_entries: 1, max_file_size: 10000)
+      |> allow_upload(:cover,
+        accept: ~w(.jpg .jpeg .png),
+        max_entries: 1,
+        max_file_size: 15_000_000
+      )
       |> assign(:content, "")
     }
   end

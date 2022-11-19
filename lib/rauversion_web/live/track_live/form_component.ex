@@ -12,9 +12,13 @@ defmodule RauversionWeb.TrackLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign(:changeset, changeset)
-     |> allow_upload(:cover, accept: ~w(.jpg .jpeg .png), max_entries: 1)
+     |> allow_upload(:cover,
+       accept: ~w(.jpg .jpeg .png),
+       max_entries: 1,
+       max_file_size: 15_000_000
+     )
      |> allow_upload(:audio,
-       accept: ~w(.mp3 .mp4 .wav .ogg),
+       accept: ~w(.mp3 .mp4 .wav .ogg .flac .aiff),
        max_entries: 1,
        max_file_size: 400_000_000
      )}
