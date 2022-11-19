@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Acholi\n"
 "Language: ach_UG\n"
-"PO-Revision-Date: 2022-11-18 15:17\n"
+"PO-Revision-Date: 2022-11-19 01:07\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -363,7 +363,7 @@ msgstr "crwdns127:0crwdne127:0"
 msgid "Go to your track"
 msgstr "crwdns129:0crwdne129:0"
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:122
+#: lib/rauversion_web/live/track_live/components/track_component.ex:123
 #: lib/rauversion_web/live/track_live/show.html.heex:105
 #, elixir-autogen, elixir-format
 msgid "Hold on, this track is in %{state} state"
@@ -484,7 +484,7 @@ msgid "New password"
 msgstr "crwdns169:0crwdne169:0"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:82
-#: lib/rauversion_web/live/track_live/components/track_component.ex:78
+#: lib/rauversion_web/live/track_live/components/track_component.ex:79
 #: lib/rauversion_web/live/track_live/player.ex:202
 #: lib/rauversion_web/live/track_live/show.html.heex:78
 #, elixir-autogen, elixir-format
@@ -578,7 +578,7 @@ msgid "Photo"
 msgstr "crwdns201:0crwdne201:0"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:72
-#: lib/rauversion_web/live/track_live/components/track_component.ex:69
+#: lib/rauversion_web/live/track_live/components/track_component.ex:70
 #: lib/rauversion_web/live/track_live/player.ex:210
 #: lib/rauversion_web/templates/embed/show.html.heex:15
 #, elixir-autogen, elixir-format
@@ -1046,7 +1046,7 @@ msgstr "crwdns359:0crwdne359:0"
 msgid "plays %{count}"
 msgstr "crwdns361:0%{count}crwdne361:0"
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:101
+#: lib/rauversion_web/live/track_live/components/track_component.ex:102
 #, elixir-autogen, elixir-format
 msgid "private"
 msgstr "crwdns363:0crwdne363:0"
@@ -1917,7 +1917,7 @@ msgstr "crwdns760:0crwdne760:0"
 msgid "View the event's attendees list."
 msgstr "crwdns762:0crwdne762:0"
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:189
+#: lib/rauversion_web/live/track_live/components/track_component.ex:241
 #, elixir-autogen, elixir-format
 msgid "Add to next up"
 msgstr "crwdns764:0crwdne764:0"
@@ -1926,4 +1926,19 @@ msgstr "crwdns764:0crwdne764:0"
 #, elixir-autogen, elixir-format
 msgid "Next up"
 msgstr "crwdns766:0crwdne766:0"
+
+#: lib/rauversion_web/live/track_live/components/track_component.ex:229
+#, elixir-autogen, elixir-format
+msgid "Delete this track"
+msgstr "crwdns768:0crwdne768:0"
+
+#: lib/rauversion_web/live/track_live/components/track_component.ex:220
+#, elixir-autogen, elixir-format
+msgid "Edit this track"
+msgstr "crwdns770:0crwdne770:0"
+
+#: lib/rauversion_web/live/track_live/components/track_component.ex:180
+#, elixir-autogen, elixir-format
+msgid "More"
+msgstr "crwdns772:0crwdne772:0"
 
