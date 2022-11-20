@@ -48,8 +48,14 @@ defmodule Rauversion.Accounts do
     |> artists()
   end
 
+  def latests(query) do
+    query |> order_by([c], desc: c.id)
+  end
+
   def artists(query) do
-    query |> where(type: ^"artist")
+    query
+    |> where(type: ^"artist")
+    |> where([u], not is_nil(u.username))
   end
 
   def artists() do
@@ -57,6 +63,7 @@ defmodule Rauversion.Accounts do
       where: [type: ^"artist"],
       preload: [:avatar_blob, :avatar_attachment]
     )
+    |> where([u], not is_nil(u.username))
   end
 
   ## Database getters
