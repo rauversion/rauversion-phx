@@ -29,8 +29,12 @@ defmodule RauversionWeb.HomeLive.Index do
   end
 
   defp list_users(page, current_user = %Accounts.User{}) do
-    Accounts.unfollowed_users(current_user)
-    |> Repo.paginate(page: page, page_size: 5)
+    a =
+      Accounts.unfollowed_users(current_user)
+      |> Accounts.artists()
+      |> Repo.paginate(page: page, page_size: 5)
+
+    a
   end
 
   @impl true

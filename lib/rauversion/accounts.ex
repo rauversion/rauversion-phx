@@ -33,12 +33,28 @@ defmodule Rauversion.Accounts do
     |> Repo.aggregate(:count, :id)
   end
 
-  def unfollowed_users(_user) do
+  def unfollowed_users(user) do
     from(u in User,
       left_join: m in assoc(u, :followings),
-      # on: [follower_id: ^user.id],
+      on: [follower_id: ^user.id],
       where: not is_nil(u.username),
       where: is_nil(m.id),
+      preload: [:avatar_blob, :avatar_attachment]
+    )
+  end
+
+  def unfollowed_artists() do
+    unfollowed_users(nil)
+    |> artists()
+  end
+
+  def artists(query) do
+    query |> where(type: ^"artist")
+  end
+
+  def artists() do
+    from(u in User,
+      where: [type: ^"artist"],
       preload: [:avatar_blob, :avatar_attachment]
     )
   end
