@@ -1,6 +1,6 @@
 defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   use RauversionWeb, :live_component
-  alias Rauversion.{PurchaseOrders}
+  alias Rauversion.{PurchaseOrders, Events}
   alias Rauversion.PurchaseOrders.{PurchaseOrder}
 
   @impl true
@@ -30,9 +30,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
   def get_public_tickets(event) do
     event
-    |> Ecto.assoc(:event_tickets)
-    |> Rauversion.Repo.all()
-    |> Enum.filter(fn x -> !x.settings.hidden end)
+    |> Events.public_event_tickets()
   end
 
   @impl true
@@ -62,6 +60,11 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   end
 
   @impl true
+  def handle_event("save", _, socket) do
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("close-modal", %{}, socket) do
     {:noreply, socket |> assign(:open, false)}
   end
@@ -70,7 +73,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   def handle_event(
         "get-free-ticket",
         %{"id" => id},
-        socket = %{current_user: user = %Rauversion.Accounts.User{}}
+        socket = %{assigns: %{current_user: user = %Rauversion.Accounts.User{}}}
       ) do
     with {:ok, result} <-
            Rauversion.PurchaseOrders.create_free_ticket_order(
@@ -95,7 +98,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   end
 
   @impl true
-  def handle_event("get-free-ticket", _params, socket = %{assigns: %{current_user: user = nil}}) do
+  def handle_event("get-free-ticket", _params, socket = %{assigns: %{current_user: _user = nil}}) do
     {:noreply,
      socket
      |> put_flash(:info, gettext("You need to be login before get tickets"))
@@ -341,7 +344,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                             <div class="mt-2 sm:flex sm:items-start sm:justify-between">
                               <div class="max-w-xl text-sm text-gray-500 dark:text-gray-200">
                                 <p>
-                                  <%= gettext("The ticket purchase was successfully completed, it willappear in your purchasessection") %>
+                                  <%= gettext("The ticket purchase was successfully completed, it willappear in your purchases section") %>
                                 </p>
                               </div>
                               <div class="mt-5 sm:mt-0 sm:ml-6 sm:flex sm:flex-shrink-0 sm:items-center">

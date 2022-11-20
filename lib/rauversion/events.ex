@@ -94,6 +94,16 @@ defmodule Rauversion.Events do
     )
   end
 
+  def public_event_tickets(event) do
+    start_date = Timex.now()
+
+    event
+    |> Ecto.assoc(:event_tickets)
+    |> where([t], t.selling_start <= ^start_date and t.selling_end >= ^start_date)
+    |> where([t], fragment("(settings ->> ?)::boolean = ?", "hidden", false))
+    |> Rauversion.Repo.all()
+  end
+
   def sales_count(event) do
     from(a in Rauversion.Events.Event,
       where: a.id == ^event.id,

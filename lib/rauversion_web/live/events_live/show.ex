@@ -28,6 +28,11 @@ defmodule RauversionWeb.EventsLive.Show do
     socket |> assign(:event, event)
   end
 
+  defp apply_action(socket, :show, %{"id" => id, "invitation_id" => invitation_id}) do
+    event = Events.get_by_slug!(id) |> Repo.preload([:user])
+    socket |> assign(:event, event)
+  end
+
   defp apply_action(socket, :payment_success, %{"slug" => id, "token_ws" => token}) do
     event = Events.get_by_slug!(id) |> Repo.preload([:user])
 
