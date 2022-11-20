@@ -649,11 +649,16 @@ defmodule Rauversion.Accounts do
 
   # tickets
 
-  def get_event_ticket(current_user, ticket) do
+  def get_event_ticket(current_user = %Rauversion.Accounts.User{}, ticket) do
     ticket
     |> Ecto.assoc(:purchased_tickets)
+    |> where([p], p.user_id == ^current_user.id)
     |> where([p], p.event_ticket_id == ^ticket.id)
     |> limit(1)
     |> Repo.one()
+  end
+
+  def get_event_ticket(_current_user = nil, _ticket) do
+    nil
   end
 end

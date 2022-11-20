@@ -67,12 +67,16 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   end
 
   @impl true
-  def handle_event("get-free-ticket", %{"id" => id}, socket) do
+  def handle_event(
+        "get-free-ticket",
+        %{"id" => id},
+        socket = %{current_user: user = %Rauversion.Accounts.User{}}
+      ) do
     with {:ok, result} <-
            Rauversion.PurchaseOrders.create_free_ticket_order(
              socket.assigns.event,
              id,
-             socket.assigns.current_user.id
+             user.id
            ) do
       IO.inspect(result)
 
@@ -88,6 +92,14 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
          |> put_flash(:error, "Failed to authenticate.")
          |> assign(:status, :error)}
     end
+  end
+
+  @impl true
+  def handle_event("get-free-ticket", _params, socket = %{assigns: %{current_user: user = nil}}) do
+    {:noreply,
+     socket
+     |> put_flash(:info, gettext("You need to be login before get tickets"))
+     |> redirect(to: "/users/log_in")}
   end
 
   @impl true
