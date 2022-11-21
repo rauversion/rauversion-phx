@@ -94,6 +94,21 @@ defmodule Rauversion.Events do
     )
   end
 
+  def purchased_tickets(event, event_ticket_id) do
+    from(a in Rauversion.Events.Event,
+      where: a.id == ^event.id,
+      join: t in Rauversion.EventTickets.EventTicket,
+      on: a.id == t.event_id and t.id == ^event_ticket_id,
+      join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+      on: t.id == pt.event_ticket_id,
+      select: count(pt)
+    )
+  end
+
+  def get_purchased_ticket_count_for(event, event_ticket_id) do
+    purchased_tickets(event, event_ticket_id)
+  end
+
   def public_event_tickets(event) do
     start_date = Timex.now()
 

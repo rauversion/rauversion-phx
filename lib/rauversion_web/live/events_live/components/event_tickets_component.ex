@@ -18,6 +18,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
         :changeset,
         %PurchaseOrder{}
         |> PurchaseOrders.change_purchase_order(%{
+          user_id: assigns.current_user.id,
           data:
             get_public_tickets(assigns.event)
             |> Enum.map(fn x -> %{ticket_id: x.id, count: 0} end)
@@ -81,19 +82,29 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
              id,
              user.id
            ) do
-      IO.inspect(result)
+      # IO.inspect(result)
 
       {:noreply,
        socket
-       |> put_flash(:error, "Failed to authenticate.")
        |> assign(:purchase, result)
        |> assign(:status, :success)}
     else
+      {:error, :purchase_order, changeset, %{}} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Fail to create chchc.")
+         |> assign(:changeset, changeset)
+         |> assign(:status, :error)}
+
       {:error, _} ->
         {:noreply,
          socket
          |> put_flash(:error, "Failed to authenticate.")
          |> assign(:status, :error)}
+
+      any ->
+        socket
+        |> assign(:status, :error)
     end
   end
 
@@ -205,6 +216,10 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                           phx-change="validate"
                           phx-target={@myself}
                           phx-submit="save">
+                            <div>
+
+                            <%= error_tag f, :not_valid %>
+
                             <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
                                 <thead class="bg-gray-50-- dark:bg-gray-900--">
 
@@ -218,9 +233,11 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-900-- bg-white-- dark:bg-gray-800--">
 
+
                                   <%= inputs_for f, :data, fn i -> %>
 
                                   <% ticket = Rauversion.EventTickets.get_event_ticket!(i.params["ticket_id"])
+
 
                                   # ticket = Rauversion.EventTickets.get_event_ticket!(i.ticket_id) %>
 
@@ -266,6 +283,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                               </div>
                                             <% else %>
                                               <button
+                                                type="button"
                                                 phx-click="get-free-ticket"
                                                 phx-value-id={ticket.id}
                                                 phx-target={@myself}
@@ -324,9 +342,9 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                   </tr>
 
                                 </tbody>
-
-
                               </table>
+
+                            </div>
                         </.form>
 
                       <% else %>
