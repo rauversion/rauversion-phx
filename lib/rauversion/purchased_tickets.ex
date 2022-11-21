@@ -21,6 +21,10 @@ defmodule Rauversion.PurchasedTickets do
     Repo.all(PurchasedTicket)
   end
 
+  def filter_by_purchase_order(query, purchase_order_id) do
+    query |> where([t], t.purchase_order_id == ^purchase_order_id)
+  end
+
   @doc """
   Gets a single purchased_ticket.
 
@@ -130,7 +134,7 @@ defmodule Rauversion.PurchasedTickets do
   end
 
   def url_for_ticket(purchased_ticket) do
-    RauversionWeb.Router.Helpers.qr_index_path(
+    RauversionWeb.Router.Helpers.qr_index_url(
       RauversionWeb.Endpoint,
       :index,
       signed_id(purchased_ticket)
@@ -149,5 +153,11 @@ defmodule Rauversion.PurchasedTickets do
       {:ok, purchased_ticket_id} -> get_purchased_ticket!(purchased_ticket_id)
       _ -> nil
     end
+  end
+
+  def qr_png(ticket) do
+    url_for_ticket(ticket)
+    |> QRCodeEx.encode()
+    |> QRCodeEx.png(width: 120)
   end
 end

@@ -1,0 +1,37 @@
+<h2>Confirmación de ticket para evento</h2>
+<% # IO.inspect(@tickets) %>
+
+<p>Para ingresar al evento deberás mostrar tu e-ticket impreso o desde tu móvil</p>
+<ol>
+ <li>Ingresa a Mi cuenta.</li>
+ <li>Ve a la pestaña Mis Compras.</li>
+ <li>Toca en Ver ticket/s electrónicos/s, para que los puedas ver y descargar. </li>
+</ol>  
+
+<%= for ticket <- @tickets do %>
+
+  <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
+    Evento: <%= ticket.event_ticket.event.title %>
+  </h3>
+
+  <h4 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
+    Ticket: <%= ticket.event_ticket.title %>
+  </h4>
+
+  <p class="text-sm text-gray-500 dark:text-gray-300">
+    <%= Rauversion.Events.event_dates(ticket.event_ticket.event) %>, <%= ticket.event_ticket.event.location %>
+  </p>
+
+  <%= img_tag "data:image/jpeg;base64," <> Base.encode64(Rauversion.PurchasedTickets.qr_png(ticket)) %>
+
+  <% #= live_redirect to: Routes.events_show_path(@socket, :show, ticket.event_ticket.event.slug),
+    #class: "inline-flex w-full justify-center rounded-md border border-transparent bg-brand-600 dark:bg-brand-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-brand-700 dark:hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-600 focus:ring-offset-2 sm:text-sm" do %>
+    <% #= gettext("Go to Event") %>
+    <% # end %>
+
+  <hr>
+
+<% end %>
+
+
+
