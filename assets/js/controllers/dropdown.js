@@ -14,12 +14,12 @@ export default class extends Controller {
   connect () {
     useTransition(this, {
       element: this.menuTarget,
-      hiddenClass: false
+      //hiddenClass: false
     })
   }
 
   toggle () {
-    this.menuTarget.classList.toggle("hidden")
+    //this.menuTarget.classList.toggle("hidden")
     this.toggleTransition()
   }
 
