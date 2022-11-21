@@ -1133,7 +1133,7 @@ msgid "For example: Ticket Sales"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:172
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:200
 #: lib/rauversion_web/live/events_live/show.html.heex:123
 msgid "Get your tickets"
 msgstr ""
@@ -1410,12 +1410,12 @@ msgid "Free ticket"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:248
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:281
 msgid "Free ticket already added"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:258
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:292
 msgid "Get your FREE ticket"
 msgstr ""
 
@@ -1425,7 +1425,7 @@ msgid "In order to upload music and create events you need to access as an artis
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:197
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:229
 msgid "Name"
 msgstr ""
 
@@ -1440,12 +1440,12 @@ msgid "Paid ticket"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:198
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:230
 msgid "Price"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:199
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:231
 msgid "QTY"
 msgstr ""
 
@@ -1455,12 +1455,7 @@ msgid "Ready to dive in?"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:332
-msgid "The ticket purchase was successfully completed, it willappear in your purchasessection"
-msgstr ""
-
-#, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:326
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:360
 msgid "Ticket purchase complete"
 msgstr ""
 
@@ -1470,7 +1465,7 @@ msgid "Type the event address, and confirm the prompt"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:337
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:371
 msgid "go to ticket"
 msgstr ""
 
@@ -1492,7 +1487,8 @@ msgid "Upload a %{subject}"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:122
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:77
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:150
 msgid "You need to be login before get tickets"
 msgstr ""
 
@@ -1897,7 +1893,7 @@ msgid "Manage the event tickets."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:303
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:337
 msgid "Place order"
 msgstr ""
 
@@ -1934,4 +1930,24 @@ msgstr ""
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/track_live/components/track_component.ex:180
 msgid "More"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/track_live/index.html.heex:19
+msgid "Discover Tracks and Albums"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion/events/event_notifier.ex:53
+msgid "Event Tickets confirmation"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/track_live/index.html.heex:20
+msgid "Our thoughtfully curated list of community tracks."
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:366
+msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
 msgstr ""
