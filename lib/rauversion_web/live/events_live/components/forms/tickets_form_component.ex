@@ -186,13 +186,13 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
                     })
                   %>
 
-                  <%= form_input_renderer(ii, %{type: :select, options: [
-                      [key: "Pass all fees to the buyer", value: "pass_all"],
-                      [key: "Absorb service and Credit card fees", value: "absorb_all"],
-                      [key: "Pass Service fee to the buyer and Absorb Credit Card fee", value: "absorb_merchant"],
-                    ],
-                    wrapper_class: "sm:col-span-6",
-                    name: :fees })
+                  <% # = form_input_renderer(ii, %{type: :select, options: [
+                     # [key: "Pass all fees to the buyer", value: "pass_all"],
+                     # [key: "Absorb service and Credit card fees", value: "absorb_all"],
+                     # [key: "Pass Service fee to the buyer and Absorb Credit Card fee", value: "absorb_merchant"],
+                    #],
+                    #wrapper_class: "sm:col-span-6",
+                    # name: :fees })
                   %>
 
                   <%= form_input_renderer(ii, %{

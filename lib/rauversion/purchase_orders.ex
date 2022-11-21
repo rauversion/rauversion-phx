@@ -420,8 +420,8 @@ defmodule Rauversion.PurchaseOrders do
         ticket_id,
         user_id
       ) do
-    IO.inspect(event)
-    IO.inspect(ticket_id)
+    # IO.inspect(event)
+    # IO.inspect(ticket_id)
 
     data = [%{"ticket_id" => ticket_id, "count" => 1}]
 

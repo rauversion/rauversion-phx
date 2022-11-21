@@ -151,11 +151,19 @@ defmodule RauversionWeb.EventsLive.New do
     event =
       socket.assigns.current_user
       |> Ecto.assoc(:events)
-      |> Repo.get_by!(%{slug: id})
+      |> Repo.get_by(%{slug: id})
       |> Repo.preload([:event_tickets, :event_hosts])
 
-    socket
-    |> assign(:changeset, Events.change_event(event, %{}))
-    |> assign(:event, event)
+    case event do
+      %Rauversion.Events.Event{} ->
+        socket
+        |> assign(:changeset, Events.change_event(event, %{}))
+        |> assign(:event, event)
+
+      nil ->
+        socket
+        |> put_flash(:error, "Resource not available")
+        |> push_redirect(to: "/events")
+    end
   end
 end

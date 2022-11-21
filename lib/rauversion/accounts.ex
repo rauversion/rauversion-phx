@@ -33,14 +33,37 @@ defmodule Rauversion.Accounts do
     |> Repo.aggregate(:count, :id)
   end
 
-  def unfollowed_users(_user) do
+  def unfollowed_users(user) do
     from(u in User,
       left_join: m in assoc(u, :followings),
-      # on: [follower_id: ^user.id],
+      on: [follower_id: ^user.id],
       where: not is_nil(u.username),
       where: is_nil(m.id),
       preload: [:avatar_blob, :avatar_attachment]
     )
+  end
+
+  def unfollowed_artists() do
+    unfollowed_users(nil)
+    |> artists()
+  end
+
+  def latests(query) do
+    query |> order_by([c], desc: c.id)
+  end
+
+  def artists(query) do
+    query
+    |> where(type: ^"artist")
+    |> where([u], not is_nil(u.username))
+  end
+
+  def artists() do
+    from(u in User,
+      where: [type: ^"artist"],
+      preload: [:avatar_blob, :avatar_attachment]
+    )
+    |> where([u], not is_nil(u.username))
   end
 
   ## Database getters
@@ -633,11 +656,16 @@ defmodule Rauversion.Accounts do
 
   # tickets
 
-  def get_event_ticket(current_user, ticket) do
+  def get_event_ticket(current_user = %Rauversion.Accounts.User{}, ticket) do
     ticket
     |> Ecto.assoc(:purchased_tickets)
+    |> where([p], p.user_id == ^current_user.id)
     |> where([p], p.event_ticket_id == ^ticket.id)
     |> limit(1)
     |> Repo.one()
+  end
+
+  def get_event_ticket(_current_user = nil, _ticket) do
+    nil
   end
 end

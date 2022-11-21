@@ -127,14 +127,15 @@
             />
           </section>
         <% end %>
-
-        <section aria-labelledby="trending-heading">
-          <.live_component
-            module={RauversionWeb.ProfileLive.TrendingComponent}
-            id={"track-#{@profile.id}-trending"}
-            track={"track"}
-          />
-        </section>
+        <% 
+        #<section aria-labelledby="trending-heading">
+        #  <.live_component
+        #    module={RauversionWeb.ProfileLive.TrendingComponent}
+        #    id={"track-#{@profile.id}-trending"}
+        #    track={"track"}
+        #  />
+        #</section>
+        %>
       </div>
     </aside>
 

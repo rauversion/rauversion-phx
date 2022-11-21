@@ -1,6 +1,6 @@
 defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   use RauversionWeb, :live_component
-  alias Rauversion.{PurchaseOrders}
+  alias Rauversion.{PurchaseOrders, Events}
   alias Rauversion.PurchaseOrders.{PurchaseOrder}
 
   @impl true
@@ -18,6 +18,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
         :changeset,
         %PurchaseOrder{}
         |> PurchaseOrders.change_purchase_order(%{
+          user_id: assigns.current_user.id,
           data:
             get_public_tickets(assigns.event)
             |> Enum.map(fn x -> %{ticket_id: x.id, count: 0} end)
@@ -30,9 +31,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
   def get_public_tickets(event) do
     event
-    |> Ecto.assoc(:event_tickets)
-    |> Rauversion.Repo.all()
-    |> Enum.filter(fn x -> !x.settings.hidden end)
+    |> Events.public_event_tickets()
   end
 
   @impl true
@@ -62,32 +61,59 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   end
 
   @impl true
+  def handle_event("save", _, socket) do
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("close-modal", %{}, socket) do
     {:noreply, socket |> assign(:open, false)}
   end
 
   @impl true
-  def handle_event("get-free-ticket", %{"id" => id}, socket) do
+  def handle_event(
+        "get-free-ticket",
+        %{"id" => id},
+        socket = %{assigns: %{current_user: user = %Rauversion.Accounts.User{}}}
+      ) do
     with {:ok, result} <-
            Rauversion.PurchaseOrders.create_free_ticket_order(
              socket.assigns.event,
              id,
-             socket.assigns.current_user.id
+             user.id
            ) do
-      IO.inspect(result)
+      # IO.inspect(result)
 
       {:noreply,
        socket
-       |> put_flash(:error, "Failed to authenticate.")
        |> assign(:purchase, result)
        |> assign(:status, :success)}
     else
+      {:error, :purchase_order, changeset, %{}} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Fail to create chchc.")
+         |> assign(:changeset, changeset)
+         |> assign(:status, :error)}
+
       {:error, _} ->
         {:noreply,
          socket
          |> put_flash(:error, "Failed to authenticate.")
          |> assign(:status, :error)}
+
+      any ->
+        socket
+        |> assign(:status, :error)
     end
+  end
+
+  @impl true
+  def handle_event("get-free-ticket", _params, socket = %{assigns: %{current_user: _user = nil}}) do
+    {:noreply,
+     socket
+     |> put_flash(:info, gettext("You need to be login before get tickets"))
+     |> redirect(to: "/users/log_in")}
   end
 
   @impl true
@@ -190,6 +216,10 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                           phx-change="validate"
                           phx-target={@myself}
                           phx-submit="save">
+                            <div>
+
+                            <%= error_tag f, :not_valid %>
+
                             <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
                                 <thead class="bg-gray-50-- dark:bg-gray-900--">
 
@@ -203,9 +233,11 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-900-- bg-white-- dark:bg-gray-800--">
 
+
                                   <%= inputs_for f, :data, fn i -> %>
 
                                   <% ticket = Rauversion.EventTickets.get_event_ticket!(i.params["ticket_id"])
+
 
                                   # ticket = Rauversion.EventTickets.get_event_ticket!(i.ticket_id) %>
 
@@ -251,6 +283,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                               </div>
                                             <% else %>
                                               <button
+                                                type="button"
                                                 phx-click="get-free-ticket"
                                                 phx-value-id={ticket.id}
                                                 phx-target={@myself}
@@ -309,9 +342,9 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                   </tr>
 
                                 </tbody>
-
-
                               </table>
+
+                            </div>
                         </.form>
 
                       <% else %>
@@ -329,7 +362,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                             <div class="mt-2 sm:flex sm:items-start sm:justify-between">
                               <div class="max-w-xl text-sm text-gray-500 dark:text-gray-200">
                                 <p>
-                                  <%= gettext("The ticket purchase was successfully completed, it willappear in your purchasessection") %>
+                                  <%= gettext("The ticket purchase was successfully completed, it willappear in your purchases section") %>
                                 </p>
                               </div>
                               <div class="mt-5 sm:mt-0 sm:ml-6 sm:flex sm:flex-shrink-0 sm:items-center">

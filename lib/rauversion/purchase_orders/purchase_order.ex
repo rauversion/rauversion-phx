@@ -21,6 +21,34 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrder do
     |> cast(attrs, [:total, :promo_code, :user_id, :payment_id, :payment_provider])
     |> cast_embed(:data, with: &Rauversion.PurchaseOrders.PurchaseOrderTickets.changeset/2)
     |> validate_required([:user_id])
+    |> validate_event_tickets_qty()
+  end
+
+  def validate_event_tickets_qty(changeset) do
+    changeset
+    |> get_field(:data)
+    |> Enum.filter(fn x -> x.count > 0 end)
+    |> Enum.reduce(changeset, fn item, acc ->
+      ticket =
+        Rauversion.EventTickets.get_event_ticket!(item.ticket_id)
+        |> Rauversion.Repo.preload(:event)
+
+      a = Rauversion.Events.purchased_tickets(ticket.event, ticket.id) |> Rauversion.Repo.one()
+
+      # IO.inspect("AAAAA #{a} #{ticket.qty}")
+
+      case ticket.qty > a do
+        true ->
+          acc
+
+        false ->
+          add_error(
+            acc,
+            :not_valid,
+            "The ticket: \"#{ticket.title}\", is sold out. Please choose a different ticket option"
+          )
+      end
+    end)
   end
 end
 

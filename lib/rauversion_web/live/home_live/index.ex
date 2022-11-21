@@ -24,13 +24,18 @@ defmodule RauversionWeb.HomeLive.Index do
     |> Repo.paginate(page: page, page_size: 6)
   end
 
-  defp list_users(_page, _current_user = nil) do
+  defp list_artists(_page, _current_user = nil) do
     nil
   end
 
-  defp list_users(page, current_user = %Accounts.User{}) do
-    Accounts.unfollowed_users(current_user)
-    |> Repo.paginate(page: page, page_size: 5)
+  defp list_artists(page, _current_user = %Accounts.User{}) do
+    # Accounts.unfollowed_users(current_user) |>
+    a =
+      Accounts.artists()
+      |> Accounts.latests()
+      |> Repo.paginate(page: page, page_size: 12)
+
+    a
   end
 
   @impl true
@@ -52,6 +57,6 @@ defmodule RauversionWeb.HomeLive.Index do
     |> assign(:page_title, "Listing Tracks")
     |> assign(:tracks, list_tracks(1))
     |> assign(:playlists, list_playlists(1))
-    |> assign(:users, list_users(1, socket.assigns.current_user))
+    |> assign(:users, list_artists(1, socket.assigns.current_user))
   end
 end
