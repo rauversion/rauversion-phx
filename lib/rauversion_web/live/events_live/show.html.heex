@@ -140,7 +140,7 @@
             
             <div>
               <dt class="font-mono text-sm text-brand-600">
-                <%= gettext("Speakers") %>
+                <%= @event.event_settings.participant_label || gettext("Speakers") %>
               </dt>
               <dd class="mt-0.5 text-xl sm:text-2xl font-semibold tracking-tight text-brand-100">
                 <%= Rauversion.Events.hosts_count(@event) %>
