@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-11-19 01:07\n"
+"PO-Revision-Date: 2022-11-21 16:34\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -80,7 +80,7 @@ msgstr "El artículo será publicado en la lista de artículos."
 #: lib/rauversion_web/live/home_live/index.html.heex:189
 #, elixir-autogen, elixir-format
 msgid "Artists You Should Know"
-msgstr "Artistas que debes conocer"
+msgstr "Artistas que deberías escuchar"
 
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:77
 #, elixir-autogen, elixir-format
