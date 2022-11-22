@@ -112,7 +112,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
          |> put_flash(:error, "Failed to authenticate.")
          |> assign(:status, :error)}
 
-      any ->
+      _any ->
         socket
         |> assign(:status, :error)
     end

@@ -47,7 +47,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
         "save",
         %{
           "invite_ticket_form" =>
-            params = %{"email" => email, "message" => message, "ticket_id" => ticket_id}
+            _params = %{"email" => email, "message" => message, "ticket_id" => ticket_id}
         },
         socket
       ) do
@@ -111,10 +111,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
     end
   end
 
-  def handle_event(a, b, socket) do
-    # IO.inspect(b)
-  end
-
+  @impl true
   def render(assigns) do
     ~H"""
       <div class="px-4 sm:px-6 lg:px-8 w-full">

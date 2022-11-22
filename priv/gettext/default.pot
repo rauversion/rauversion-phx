@@ -248,6 +248,7 @@ msgstr ""
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:113
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:132
+#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:140
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:110
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:129
 #: lib/rauversion_web/live/playlist_live/index.html.heex:40
@@ -712,6 +713,7 @@ msgstr ""
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:276
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:277
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
+#: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:68
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:217
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:93
@@ -730,6 +732,7 @@ msgstr ""
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:276
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:277
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
+#: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:68
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:217
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:93
@@ -1950,4 +1953,34 @@ msgstr ""
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:366
 msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:121
+msgid "A list of all the users in your account including their name, title, email and role."
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:27
+msgid "Give away courtesy invitations."
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/templates/event_notifier/deliver_event_tickets.html.heex:13
+msgid "Has invited you to the event"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:72
+msgid "Invitation sent"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:25
+msgid "Send invitations"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:120
+msgid "Users"
 msgstr ""
