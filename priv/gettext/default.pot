@@ -715,7 +715,7 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
 #: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:68
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:217
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:208
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:93
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:99
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:270
@@ -734,7 +734,7 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/forms/hosts_uploader_component.ex:79
 #: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:68
 #: lib/rauversion_web/live/events_live/components/forms/scheduling_form_component.ex:156
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:217
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:208
 #: lib/rauversion_web/live/events_live/components/forms/tax_form_component.ex:93
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:99
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:270
@@ -1136,8 +1136,8 @@ msgid "For example: Ticket Sales"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:200
-#: lib/rauversion_web/live/events_live/show.html.heex:123
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:206
+#: lib/rauversion_web/live/events_live/show.html.heex:136
 msgid "Get your tickets"
 msgstr ""
 
@@ -1152,7 +1152,7 @@ msgid "Leave blank unless there is a Minimum amount of tickets customer has to o
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:157
+#: lib/rauversion_web/live/events_live/show.html.heex:170
 msgid "Location"
 msgstr ""
 
@@ -1162,7 +1162,7 @@ msgid "Optional short description will be displayed next to this ticket on the E
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:139
+#: lib/rauversion_web/live/events_live/show.html.heex:152
 msgid "People Attending"
 msgstr ""
 
@@ -1177,7 +1177,7 @@ msgid "Show the Sell Until date on the event page."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:130
+#: lib/rauversion_web/live/events_live/show.html.heex:143
 msgid "Speakers"
 msgstr ""
 
@@ -1219,7 +1219,7 @@ msgid "Upcoming Events from the Rauversion community"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:148
+#: lib/rauversion_web/live/events_live/show.html.heex:161
 msgid "Venue"
 msgstr ""
 
@@ -1413,12 +1413,12 @@ msgid "Free ticket"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:281
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:287
 msgid "Free ticket already added"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:292
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:298
 msgid "Get your FREE ticket"
 msgstr ""
 
@@ -1428,7 +1428,7 @@ msgid "In order to upload music and create events you need to access as an artis
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:229
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:235
 msgid "Name"
 msgstr ""
 
@@ -1443,12 +1443,12 @@ msgid "Paid ticket"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:230
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:236
 msgid "Price"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:231
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:237
 msgid "QTY"
 msgstr ""
 
@@ -1458,7 +1458,7 @@ msgid "Ready to dive in?"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:360
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:366
 msgid "Ticket purchase complete"
 msgstr ""
 
@@ -1468,7 +1468,7 @@ msgid "Type the event address, and confirm the prompt"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:371
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:377
 msgid "go to ticket"
 msgstr ""
 
@@ -1490,8 +1490,8 @@ msgid "Upload a %{subject}"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:77
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:150
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:83
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:156
 msgid "You need to be login before get tickets"
 msgstr ""
 
@@ -1530,22 +1530,22 @@ msgid "Event overview"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:70
+#: lib/rauversion_web/live/events_live/show.html.heex:83
 msgid "Payment failed"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:37
+#: lib/rauversion_web/live/events_live/show.html.heex:50
 msgid "Payment succeed"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:40
+#: lib/rauversion_web/live/events_live/show.html.heex:53
 msgid "The payment was successfully processed."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:74
+#: lib/rauversion_web/live/events_live/show.html.heex:87
 msgid "There was a problem processing the payment."
 msgstr ""
 
@@ -1560,7 +1560,7 @@ msgid "Transbank not allowed"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:47
+#: lib/rauversion_web/live/events_live/show.html.heex:60
 msgid "View tickets"
 msgstr ""
 
@@ -1683,7 +1683,7 @@ msgid "Your event is published"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:205
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:196
 msgid "Add Streaming service"
 msgstr ""
 
@@ -1718,12 +1718,12 @@ msgid "Go and check the event details"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:232
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:223
 msgid "Go live with a remote event via one of the following video streaming services"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:235
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:226
 msgid "Go to streaming event page"
 msgstr ""
 
@@ -1733,18 +1733,18 @@ msgid "Go to the Zoom meeting"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:89
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:80
 msgid "Live Streaming on jitsi open source platform"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:83
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:95
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:74
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:86
 msgid "Live Streaming to 15 services at once, including youtube, twitch, zoom etc..."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:77
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:68
 msgid "Mux is a streaming service"
 msgstr ""
 
@@ -1759,22 +1759,22 @@ msgid "Streaming"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:228
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:219
 msgid "Streaming services"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:76
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:67
 msgid "Twitch is a streaming service"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:78
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:69
 msgid "Whereby is a streaming service"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:85
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:76
 msgid "Zoom is a streaming service"
 msgstr ""
 
@@ -1784,12 +1784,12 @@ msgid "no renderer avaiable"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:127
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:118
 msgid "use this url in case you need to process webhooks from the streamin service"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:125
+#: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:116
 msgid "webhook url"
 msgstr ""
 
@@ -1856,7 +1856,7 @@ msgid "read more"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:241
+#: lib/rauversion_web/live/events_live/show.html.heex:254
 msgid "All rights reserved."
 msgstr ""
 
@@ -1866,7 +1866,7 @@ msgid "Choose the currency in which you will charge"
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/show.html.heex:239
+#: lib/rauversion_web/live/events_live/show.html.heex:252
 msgid "Copyright ©"
 msgstr ""
 
@@ -1896,7 +1896,7 @@ msgid "Manage the event tickets."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:337
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:343
 msgid "Place order"
 msgstr ""
 
@@ -1951,7 +1951,7 @@ msgid "Our thoughtfully curated list of community tracks."
 msgstr ""
 
 #, elixir-autogen, elixir-format
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:366
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:372
 msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
 msgstr ""
 
@@ -1983,4 +1983,9 @@ msgstr ""
 #, elixir-autogen, elixir-format
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:120
 msgid "Users"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/rauversion_web/live/events_live/show.html.heex:35
+msgid "Watch live stream"
 msgstr ""

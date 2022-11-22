@@ -47,9 +47,9 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
 
   def twitch_renderer(assigns) do
     ~H"""
-      <div>
+      <div id="twitch-wrapper" phx-update="ignore">
         <script src="https://player.twitch.tv/js/embed/v1.js"></script>
-        <div id="twitch-div" phx-update="ignore"></div>
+        <div id="twitch-div"></div>
         <script type="text/javascript">
           var options = {
             width: '100%',
