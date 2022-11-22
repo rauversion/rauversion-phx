@@ -31,6 +31,14 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
     {:noreply, assign(:day, List.first(socket.assigns.days))}
   end
 
+  def render_date(event, date) do
+    Rauversion.Dates.format_time(date,
+      locale: "en-US",
+      timezone: event.timezone || "Etc/UTC",
+      format: "hh:mm a"
+    )
+  end
+
   def render(assigns) do
     ~H"""
 
@@ -210,11 +218,14 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                       <%= scheduling.short_description %>
                     </p>
                     <p class="mt-1 font-mono text-sm text-gray-500 dark:text-gray-300">
-                      <time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>
-                      <!-- -->-
+                      <!--<time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>-->
+                      <!-- - -->
                       <!-- -->
-                      <time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>
-                      <!-- -->PST
+                      <!--<time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>-->
+                      <!-- -->
+                      <%= render_date(@event, scheduling.start_date) %>
+                      -
+                      <%= render_date(@event, scheduling.end_date) %>
                     </p>
                   </li>
                 </ol>
@@ -250,11 +261,14 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                           <%= scheduling.short_description %>
                         </p>
                         <p class="mt-1 font-mono text-sm text-gray-500 dark:text-gray-300">
-                          <time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>
-                          <!-- -->-
+                          <!--<time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>-->
+                          <!-- - -->
                           <!-- -->
-                          <time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>
-                          <!-- -->PST
+                          <!--<time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>-->
+                          <!-- -->
+                          <%= render_date(@event, scheduling.start_date) %>
+                          -
+                          <%= render_date(@event, scheduling.end_date) %>
                         </p>
                       </li>
                     <% end %>

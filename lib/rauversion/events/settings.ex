@@ -8,9 +8,8 @@ defmodule Rauversion.Events.Settings do
     field :accept_sponsors, :boolean
     field :sponsors_label, :string
     field :sponsors_description, :string
-
+    field :public_streaming, :boolean
     field :payment_gateway, :string
-
     field :scheduling_label, :string
     field :scheduling_description, :string
     field :ticket_currency, :string

@@ -18,15 +18,21 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
         :changeset,
         %PurchaseOrder{}
         |> PurchaseOrders.change_purchase_order(%{
-          user_id: assigns.current_user.id,
+          user_id: get_user(assigns),
           data:
             get_public_tickets(assigns.event)
             |> Enum.map(fn x -> %{ticket_id: x.id, count: 0} end)
         })
-
-        # PurchasedTickets.change_purchased_ticket(%PurchasedTicket{})
       )
     }
+  end
+
+  def get_user(_assigns = %{current_user: %Rauversion.Accounts.User{id: id}}) do
+    id
+  end
+
+  def get_user(_assigns = %{current_user: nil}) do
+    nil
   end
 
   def get_public_tickets(event) do
