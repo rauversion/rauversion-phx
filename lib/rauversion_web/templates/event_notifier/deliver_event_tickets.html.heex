@@ -1,12 +1,23 @@
 <h2>Confirmación de ticket para evento</h2>
-<% # IO.inspect(@tickets) %>
 
 <p>Para ingresar al evento deberás mostrar tu e-ticket impreso o desde tu móvil</p>
+
 <ol>
  <li>Ingresa a Mi cuenta.</li>
  <li>Ve a la pestaña Mis Compras.</li>
  <li>Toca en Ver ticket/s electrónicos/s, para que los puedas ver y descargar. </li>
-</ol>  
+</ol>
+
+<%= if @inviter do %>
+  <b><%= @inviter.first_name %> <%= @inviter.last_name %></b>
+  <%= gettext("Has invited you to the event") %>
+<% end %>
+<hr>
+<%= if @message do %>
+  <b>Message:</b>
+  <%= @message %>
+<% end %>
+<hr>
 
 <%= for ticket <- @tickets do %>
 

@@ -38,7 +38,7 @@ defmodule Rauversion.Events.EventNotifier do
     end
   end
 
-  def deliver_event_tickets(purchase_order) do
+  def deliver_event_tickets(purchase_order, message \\ nil, inviter \\ nil) do
     purchase_order = purchase_order |> Repo.preload([:user])
 
     user = purchase_order.user
@@ -52,7 +52,13 @@ defmodule Rauversion.Events.EventNotifier do
 
     deliver(user.email, gettext("Event Tickets confirmation"), [
       "deliver_event_tickets.html",
-      %{user: user, tickets: tickets, purchase_order: purchase_order}
+      %{
+        user: user,
+        tickets: tickets,
+        purchase_order: purchase_order,
+        message: message,
+        inviter: inviter
+      }
     ])
   end
 
