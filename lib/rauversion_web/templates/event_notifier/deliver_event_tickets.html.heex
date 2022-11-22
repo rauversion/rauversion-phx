@@ -29,6 +29,8 @@
     Ticket: <%= ticket.event_ticket.title %>
   </h4>
 
+  <b><%= ticket.event_ticket.settings.after_purchase_message %> </b>
+
   <p class="text-sm text-gray-500 dark:text-gray-300">
     <%= Rauversion.Events.event_dates(ticket.event_ticket.event) %>, <%= ticket.event_ticket.event.location %>
   </p>

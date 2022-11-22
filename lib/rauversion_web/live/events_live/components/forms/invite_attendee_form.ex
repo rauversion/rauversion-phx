@@ -12,7 +12,7 @@ defmodule RauversionWeb.EventsLive.Components.Forms.InviteAttendeeForm do
   end
 
   def get_tickets(event) do
-    event |> Rauversion.Events.public_event_tickets()
+    event |> Rauversion.Events.private_in_date_event_tickets()
   end
 
   @impl true

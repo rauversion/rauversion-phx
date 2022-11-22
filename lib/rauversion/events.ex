@@ -129,13 +129,55 @@ defmodule Rauversion.Events do
     purchased_tickets(event, event_ticket_id)
   end
 
+  def in_date(query, start_date) do
+    # (start_date BETWEEN '2013-01-03'AND '2013-01-09') OR
+    # (To_date BETWEEN '2013-01-03' AND '2013-01-09') OR
+    # (start_date <= '2013-01-03' AND To_date >= '2013-01-09')
+
+    conditions =
+      dynamic(
+        [p],
+        ^start_date >= p.selling_start and ^start_date <= p.selling_end
+      )
+
+    # conditions =
+    #  dynamic(
+    #    [t],
+    #    fragment(
+    #      "? BETWEEN ? AND ?",
+    #      ^start_date,
+    #      t.selling_start,
+    #      t.selling_end
+    #    ) or
+    #      ^conditions
+    #  )
+
+    query
+    |> where([t], ^conditions)
+  end
+
   def public_event_tickets(event) do
     start_date = Timex.now()
 
     event
     |> Ecto.assoc(:event_tickets)
-    |> where([t], t.selling_start <= ^start_date and t.selling_end >= ^start_date)
+    |> in_date(start_date)
     |> where([t], fragment("(settings ->> ?)::boolean = ?", "hidden", false))
+    |> Rauversion.Repo.all()
+  end
+
+  def private_in_date_event_tickets(event) do
+    start_date = Timex.now()
+
+    event
+    |> Ecto.assoc(:event_tickets)
+    |> in_date(start_date)
+    |> Rauversion.Repo.all()
+  end
+
+  def all_event_tickets(event) do
+    event
+    |> Ecto.assoc(:event_tickets)
     |> Rauversion.Repo.all()
   end
 
