@@ -52,6 +52,7 @@ defmodule Rauversion.MixProject do
       {:mux, "~> 1.8.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
+      {:phoenix_swoosh, "~> 1.1"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},

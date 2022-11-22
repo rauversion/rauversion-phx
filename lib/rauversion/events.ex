@@ -72,7 +72,7 @@ defmodule Rauversion.Events do
       join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
       on: t.id == pt.event_ticket_id,
       # group_by: [pt.id],
-      limit: 10,
+      limit: 10000,
       select: pt
       # order_by: [desc: count(t.id)],
       # preload: [
