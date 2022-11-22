@@ -57,7 +57,8 @@
         :attendees -> live_component(
                         RauversionWeb.Live.EventsLive.Components.AttendeesComponent,
                         id: "attendees",
-                        event: @event
+                        event: @event,
+                        current_user: @current_user
                       )
 
         :hosts -> live_component(

@@ -72,7 +72,7 @@ defmodule Rauversion.Events do
       join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
       on: t.id == pt.event_ticket_id,
       # group_by: [pt.id],
-      limit: 10,
+      limit: 10000,
       select: pt
       # order_by: [desc: count(t.id)],
       # preload: [
@@ -103,6 +103,26 @@ defmodule Rauversion.Events do
       on: t.id == pt.event_ticket_id,
       select: count(pt)
     )
+  end
+
+  # TODO: use this to identify specific individual or groups of tickets to filter with
+  def purchased_tickets_by_user_id(event, user_id) do
+    from(a in Rauversion.Events.Event,
+      where: a.id == ^event.id,
+      join: t in Rauversion.EventTickets.EventTicket,
+      on: a.id == t.event_id,
+      join: pt in Rauversion.PurchasedTickets.PurchasedTicket,
+      on: t.id == pt.event_ticket_id and pt.user_id == ^user_id,
+      select: pt.id
+    )
+  end
+
+  def has_access_to_streaming?(event, _user = %Rauversion.Accounts.User{id: id}) do
+    purchased_tickets_by_user_id(event, id) |> Repo.all() |> Enum.any?()
+  end
+
+  def has_access_to_streaming?(_event, _user = nil) do
+    false
   end
 
   def get_purchased_ticket_count_for(event, event_ticket_id) do
@@ -306,5 +326,14 @@ defmodule Rauversion.Events do
       {:ok, event_id} -> get_event!(event_id)
       _ -> nil
     end
+  end
+
+  def private_streaming_link(event) do
+    RauversionWeb.Router.Helpers.events_streaming_show_path(
+      RauversionWeb.Endpoint,
+      :show,
+      event.slug,
+      streaming_access_for(event)
+    )
   end
 end

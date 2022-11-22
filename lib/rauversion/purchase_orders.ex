@@ -443,4 +443,8 @@ defmodule Rauversion.PurchaseOrders do
     end)
     |> Repo.transaction()
   end
+
+  def notify_purchased_order(purchase_order, message \\ nil, inviter \\ nil) do
+    Rauversion.Events.EventNotifier.deliver_event_tickets(purchase_order, message, inviter)
+  end
 end
