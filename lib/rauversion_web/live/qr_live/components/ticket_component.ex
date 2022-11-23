@@ -20,8 +20,20 @@ defmodule RauversionWeb.QrLive.Components.TicketComponent do
                 <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
                   <%= @ticket.user.email %>
                 </h3>
-                <div class="p-2 bg-green-600 text-white block rounded-md">
-                  <%= @ticket.state %>
+                <div class="flex">
+                  <div class="p-2 bg-green-600 text-white block rounded-md">
+                    <%= @ticket.state %>
+                  </div>
+                </div>
+
+                <div class="p-2 flex flex-col space-y-2 text-white block">
+                  <span class="text-bold">
+                    TICKET: <%= @ticket.event_ticket.title %>
+                  </span>
+                  <span class="text-sm text-gray-600">
+                    <%= Number.Currency.number_to_currency(@ticket.event_ticket.price, precision: Rauversion.Events.presicion_for_currency(@ticket.event_ticket.event)) %>
+                    <%= @ticket.event_ticket.event.event_settings.ticket_currency %>
+                  </span>
                 </div>
               </div>
             </div>

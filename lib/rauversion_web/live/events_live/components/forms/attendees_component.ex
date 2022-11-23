@@ -88,8 +88,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
          |> assign(:status, :error)}
 
       any ->
-        IO.inspect(any)
-
         {:noreply,
          socket
          |> assign(:status, :error)}
@@ -134,6 +132,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:pl-6">Name</th>
                 <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 lg:table-cell">Price</th>
                 <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:table-cell">Email</th>
+                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 lg:table-cell">Ticket</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Status</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Checked in</th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -158,6 +157,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
                     <% #= ticket.event_ticket.currency %>
                   </td>
                   <td class="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-300 sm:table-cell"><%= ticket.user.email %></td>
+                  <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300"><%= ticket.event_ticket.title %></td>
                   <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300"><%= ticket.state %></td>
                   <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-300"><%= ticket.checked_in_at %></td>
                   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
