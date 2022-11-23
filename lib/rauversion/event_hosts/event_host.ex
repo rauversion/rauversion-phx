@@ -31,7 +31,7 @@ defmodule Rauversion.EventHosts.EventHost do
   def changeset(event_host, attrs) do
     event_host
     |> cast(attrs, [:name, :description, :listed_on_page, :event_manager, :user_id, :event_id])
-    |> validate_required([:name])
+    # |> validate_required([:name])
     |> unsafe_validate_unique([:user_id, :event_id], Rauversion.Repo)
   end
 end
