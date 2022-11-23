@@ -124,10 +124,10 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                       <div class="absolute inset-0 bg-indigo-50 rounded-full" style="clip-path:url(#:R9m:-0)">
                         <%= if performer.user && performer.user.username do %>
                           <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
-                            <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer.user, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75") %>
+                            <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer.user, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75 w-full") %>
                           <% end %>
                         <% else %>
-                          <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75") %>
+                          <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75 w-full") %>
                         <% end %>
                       </div>
                     </div>
