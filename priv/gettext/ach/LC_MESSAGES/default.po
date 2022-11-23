@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Acholi\n"
 "Language: ach_UG\n"
-"PO-Revision-Date: 2022-11-22 06:16\n"
+"PO-Revision-Date: 2022-11-23 01:06\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -238,7 +238,7 @@ msgid "Downloads"
 msgstr "crwdns85:0crwdne85:0"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:77
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:74
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:86
 #, elixir-autogen, elixir-format
 msgid "Drafts"
 msgstr "crwdns87:0crwdne87:0"
@@ -251,8 +251,8 @@ msgstr "crwdns89:0crwdne89:0"
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:113
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:132
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:140
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:110
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:129
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:127
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:146
 #: lib/rauversion_web/live/playlist_live/index.html.heex:40
 #: lib/rauversion_web/live/playlist_live/playlist_component.ex:145
 #: lib/rauversion_web/live/playlist_live/show.html.heex:168
@@ -631,7 +631,7 @@ msgid "Public access"
 msgstr "crwdns223:0crwdne223:0"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:82
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:79
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:91
 #, elixir-autogen, elixir-format
 msgid "Published"
 msgstr "crwdns225:0crwdne225:0"
@@ -1012,7 +1012,7 @@ msgid "You can reset the secret link if you want to revoke access."
 msgstr "crwdns349:0crwdne349:0"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:94
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:91
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:108
 #, elixir-autogen, elixir-format
 msgid "Your articles."
 msgstr "crwdns351:0crwdne351:0"
@@ -1315,7 +1315,7 @@ msgstr "crwdns521:0crwdne521:0"
 msgid "Manage your transbank commerce (Chile only)."
 msgstr "crwdns523:0crwdne523:0"
 
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:69
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:81
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:120
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:202
 #, elixir-autogen, elixir-format
@@ -1946,7 +1946,7 @@ msgstr "crwdns772:0crwdne772:0"
 msgid "Discover Tracks and Albums"
 msgstr "crwdns774:0crwdne774:0"
 
-#: lib/rauversion/events/event_notifier.ex:53
+#: lib/rauversion/events/event_notifier.ex:68
 #, elixir-autogen, elixir-format
 msgid "Event Tickets confirmation"
 msgstr "crwdns776:0crwdne776:0"
@@ -1995,4 +1995,19 @@ msgstr "crwdns792:0crwdne792:0"
 #, elixir-autogen, elixir-format
 msgid "Watch live stream"
 msgstr "crwdns794:0crwdne794:0"
+
+#: lib/rauversion_web/live/events_live/components/hosts_component.ex:372
+#, elixir-autogen, elixir-format
+msgid "Event Manager"
+msgstr "crwdns796:0crwdne796:0"
+
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:96
+#, elixir-autogen, elixir-format
+msgid "Events I manage"
+msgstr "crwdns798:0crwdne798:0"
+
+#: lib/rauversion_web/live/events_live/components/hosts_component.ex:366
+#, elixir-autogen, elixir-format
+msgid "Listed on page"
+msgstr "crwdns800:0crwdne800:0"
 
