@@ -250,7 +250,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
                                     <% #= for ticket <- @tickets do %>
                                       <tr>
-                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                        <td class="whitespace-nowrap-- py-4 pl-4 pr-3 text-sm sm:pl-6">
                                           <div class="flex items-center">
                                             <div class="">
                                               <div class="font-medium text-gray-900 dark:text-gray-100">
