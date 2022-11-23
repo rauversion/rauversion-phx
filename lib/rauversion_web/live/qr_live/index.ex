@@ -17,7 +17,8 @@ defmodule RauversionWeb.QrLive.Index do
   end
 
   @impl true
-  def handle_event("check-in", %{}, socket) do
+  def handle_event("check-in", %{}, socket = %{assigns: %{is_manager: is_manager}})
+      when is_manager == true do
     case Rauversion.PurchasedTickets.check_in_purchased_ticket(socket.assigns.ticket) do
       {:ok, %Rauversion.PurchasedTickets.PurchasedTicket{} = ticket} ->
         {:noreply, assign(socket, :ticket, ticket)}
@@ -28,7 +29,8 @@ defmodule RauversionWeb.QrLive.Index do
   end
 
   @impl true
-  def handle_event("reenable", %{}, socket) do
+  def handle_event("reenable", %{}, socket = %{assigns: %{is_manager: is_manager}})
+      when is_manager == true do
     case Rauversion.PurchasedTickets.uncheck_in_purchased_ticket(socket.assigns.ticket) do
       {:ok, %Rauversion.PurchasedTickets.PurchasedTicket{} = ticket} ->
         {:noreply, assign(socket, :ticket, ticket)}
@@ -46,7 +48,21 @@ defmodule RauversionWeb.QrLive.Index do
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Ticket")
-    |> assign(:repost, nil)
+    |> assign(
+      :is_manager,
+      check_manager(socket.assigns.current_user, socket.assigns.ticket.event_ticket.event.slug)
+    )
+  end
+
+  def check_manager(user = %Rauversion.Accounts.User{}, event_id) do
+    case Rauversion.Events.find_event_by_user(user, event_id) do
+      %Rauversion.Events.Event{} -> true
+      _ -> false
+    end
+  end
+
+  def check_manager(_user = nil, _event) do
+    false
   end
 
   defp get_ticket(id) do

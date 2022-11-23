@@ -160,7 +160,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
 
             _host =
               Rauversion.EventHosts.create_event_host(%{
-                name: "-",
+                name: user.first_name <> user.last_name,
                 user_id: user.id,
                 event_id: socket.assigns.event.id
               })
@@ -176,7 +176,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
 
       user ->
         Rauversion.EventHosts.create_event_host(%{
-          name: "-",
+          name: user.first_name <> user.last_name,
           user_id: user.id,
           event_id: socket.assigns.event.id
         })
@@ -342,12 +342,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
               <div class="flex w-full items-center justify-between space-x-6 p-6">
                 <div class="flex-1 truncate">
                   <div class="flex flex-col items-start space-x-3 justify-center">
-                    <div class="flex justify-between">
+                    <div class="flex flex-col justify-between space-y-2">
                       <h3 class="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
                         <%= host.name %>
-                        <%= if host.user do %>
-                          user: <%= host.user.username %>
-                        <% end %>
                       </h3>
 
                       <%= if host.event_manager do %>
@@ -355,6 +352,27 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
                           Admin
                         </span>
                       <% end %>
+
+                      <%= if host.user do %>
+                        <ul>
+                        <li> <%= if host.user.username, do: live_redirect(host.user.username, to: Routes.profile_index_path(RauversionWeb.Endpoint, :index, host.user.username), class: "underline") %></li>
+                        <li> <%= host.user.email %></li>
+                        </ul>
+                      <% end %>
+
+                      <div class="flex space-x-2">
+                        <%= if host.listed_on_page do %>
+                          <span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
+                            <%= gettext("Listed on page") %>
+                          </span>
+                        <% end %>
+
+                        <%= if host.event_manager do %>
+                          <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                            <%= gettext("Event Manager") %>
+                          </span>
+                        <% end %>
+                      </div>
                     </div>
 
                     <div class="sm:col-span-6">

@@ -4,7 +4,7 @@
   <div class="bg-white dark:bg-black">
     <div class="mx-auto max-w-7xl py-12 px-4 text-center sm:px-6 lg:py-16 lg:px-8">
       
-      <%= if assigns.current_user && @ticket.event_ticket.event.user_id == assigns.current_user.id do %>
+      <%= if @is_manager do %>
 
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
           <span class="block">The status of this ticket is?</span>

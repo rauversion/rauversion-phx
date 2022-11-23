@@ -370,6 +370,19 @@ defmodule Rauversion.Events do
     end
   end
 
+  def find_event_by_user(user, event_id) do
+    event =
+      user
+      |> Ecto.assoc(:events)
+      |> Repo.get_by(%{slug: event_id})
+      |> Repo.preload([:event_tickets, :event_hosts])
+
+    case event do
+      nil -> Rauversion.Accounts.find_managed_event(user, event_id) |> Rauversion.Repo.one()
+      _ -> event
+    end
+  end
+
   def private_streaming_link(event) do
     RauversionWeb.Router.Helpers.events_streaming_show_path(
       RauversionWeb.Endpoint,
