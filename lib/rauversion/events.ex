@@ -378,8 +378,13 @@ defmodule Rauversion.Events do
       |> Repo.preload([:event_tickets, :event_hosts])
 
     case event do
-      nil -> Rauversion.Accounts.find_managed_event(user, event_id) |> Rauversion.Repo.one()
-      _ -> event
+      nil ->
+        Rauversion.Accounts.find_managed_event(user, event_id)
+        |> Rauversion.Repo.one()
+        |> Repo.preload([:event_tickets, :event_hosts])
+
+      _ ->
+        event
     end
   end
 
