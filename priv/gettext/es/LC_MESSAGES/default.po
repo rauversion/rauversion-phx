@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-11-22 06:16\n"
+"PO-Revision-Date: 2022-11-23 01:06\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -239,7 +239,7 @@ msgid "Downloads"
 msgstr "Descargas"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:77
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:74
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:86
 #, elixir-autogen, elixir-format
 msgid "Drafts"
 msgstr "Borradores"
@@ -252,8 +252,8 @@ msgstr "Arrastra y suelta tus canciones y álbumes aquí"
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:113
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:132
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:140
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:110
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:129
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:127
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:146
 #: lib/rauversion_web/live/playlist_live/index.html.heex:40
 #: lib/rauversion_web/live/playlist_live/playlist_component.ex:145
 #: lib/rauversion_web/live/playlist_live/show.html.heex:168
@@ -632,7 +632,7 @@ msgid "Public access"
 msgstr "Acceso público"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:82
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:79
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:91
 #, elixir-autogen, elixir-format
 msgid "Published"
 msgstr "Publicado"
@@ -1016,7 +1016,7 @@ msgid "You can reset the secret link if you want to revoke access."
 msgstr "Puede restablecer el enlace secreto si desea revocar el acceso."
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:94
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:91
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:108
 #, elixir-autogen, elixir-format
 msgid "Your articles."
 msgstr "Sus artículos."
@@ -1319,7 +1319,7 @@ msgstr "Gestione sus integraciones externas."
 msgid "Manage your transbank commerce (Chile only)."
 msgstr "Gestione su comercio transbancario (sólo Chile)."
 
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:69
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:81
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:120
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:202
 #, elixir-autogen, elixir-format
@@ -1933,70 +1933,85 @@ msgstr "Siguiente"
 #: lib/rauversion_web/live/track_live/components/track_component.ex:229
 #, elixir-autogen, elixir-format
 msgid "Delete this track"
-msgstr ""
+msgstr "Borrar esta pista"
 
 #: lib/rauversion_web/live/track_live/components/track_component.ex:220
 #, elixir-autogen, elixir-format
 msgid "Edit this track"
-msgstr ""
+msgstr "Editar esta pista"
 
 #: lib/rauversion_web/live/track_live/components/track_component.ex:180
 #, elixir-autogen, elixir-format
 msgid "More"
-msgstr ""
+msgstr "Más"
 
 #: lib/rauversion_web/live/track_live/index.html.heex:19
 #, elixir-autogen, elixir-format
 msgid "Discover Tracks and Albums"
-msgstr ""
+msgstr "Descubre pistas y álbumes"
 
-#: lib/rauversion/events/event_notifier.ex:53
+#: lib/rauversion/events/event_notifier.ex:68
 #, elixir-autogen, elixir-format
 msgid "Event Tickets confirmation"
-msgstr ""
+msgstr "Confirmación de tickets de evento"
 
 #: lib/rauversion_web/live/track_live/index.html.heex:20
 #, elixir-autogen, elixir-format
 msgid "Our thoughtfully curated list of community tracks."
-msgstr ""
+msgstr "Nuestra lista de seguidores de la comunidad conservada."
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:372
 #, elixir-autogen, elixir-format
 msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
-msgstr ""
+msgstr "La compra del ticket se completó con éxito, aparecerá en su sección de compras"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:121
 #, elixir-autogen, elixir-format
 msgid "A list of all the users in your account including their name, title, email and role."
-msgstr ""
+msgstr "Una lista de todos los usuarios de tu cuenta incluyendo su nombre, título, correo electrónico y rol."
 
 #: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:27
 #, elixir-autogen, elixir-format
 msgid "Give away courtesy invitations."
-msgstr ""
+msgstr "Regalar invitaciones de cortesía."
 
 #: lib/rauversion_web/templates/event_notifier/deliver_event_tickets.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "Has invited you to the event"
-msgstr ""
+msgstr "Te ha invitado al evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:72
 #, elixir-autogen, elixir-format
 msgid "Invitation sent"
-msgstr ""
+msgstr "Invitaciones"
 
 #: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:25
 #, elixir-autogen, elixir-format
 msgid "Send invitations"
-msgstr ""
+msgstr "Enviar invitaciones"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:120
 #, elixir-autogen, elixir-format
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:35
 #, elixir-autogen, elixir-format
 msgid "Watch live stream"
+msgstr "Ver transmisión en vivo"
+
+#: lib/rauversion_web/live/events_live/components/hosts_component.ex:372
+#, elixir-autogen, elixir-format
+msgid "Event Manager"
+msgstr ""
+
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:96
+#, elixir-autogen, elixir-format
+msgid "Events I manage"
+msgstr ""
+
+#: lib/rauversion_web/live/events_live/components/hosts_component.ex:366
+#, elixir-autogen, elixir-format
+msgid "Listed on page"
 msgstr ""
 
