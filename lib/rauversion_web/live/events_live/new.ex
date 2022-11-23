@@ -148,11 +148,7 @@ defmodule RauversionWeb.EventsLive.New do
   end
 
   defp edit_response(socket, id) do
-    event =
-      socket.assigns.current_user
-      |> Ecto.assoc(:events)
-      |> Repo.get_by(%{slug: id})
-      |> Repo.preload([:event_tickets, :event_hosts])
+    event = Rauversion.Events.find_event_by_user(socket.assigns.current_user, id)
 
     case event do
       %Rauversion.Events.Event{} ->

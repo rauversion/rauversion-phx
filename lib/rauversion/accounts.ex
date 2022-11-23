@@ -580,6 +580,18 @@ defmodule Rauversion.Accounts do
     |> Repo.one()
   end
 
+  def user_host_events(user) do
+    from p in Rauversion.Events.Event,
+      join: c in assoc(p, :event_hosts),
+      where: c.user_id == ^user.id,
+      preload: [:user],
+      select: p
+  end
+
+  def find_managed_event(user, event_id) do
+    user_host_events(user) |> where([c], c.slug == ^event_id)
+  end
+
   # invitations
 
   def invite_artist(%User{} = user, attrs \\ %{}) do

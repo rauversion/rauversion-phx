@@ -54,6 +54,8 @@ defmodule Rauversion.Accounts.User do
     has_many :liked_tracks, Rauversion.TrackLikes.TrackLike, on_delete: :delete_all
     has_many :reposted_tracks, Rauversion.Reposts.Repost, on_delete: :delete_all
 
+    has_many :event_hosts, Rauversion.EventHosts.EventHost, on_delete: :delete_all
+    has_many :hosted_events, through: [:event_hosts, :event]
     has_many :events, Rauversion.Events.Event, on_delete: :delete_all
     has_many :purchase_orders, Rauversion.PurchaseOrders.PurchaseOrder, on_delete: :delete_all
 

@@ -1,7 +1,7 @@
 defmodule RauversionWeb.EventsLive.UserEventsListComponent do
   use RauversionWeb, :live_component
 
-  alias Rauversion.{Events}
+  alias Rauversion.{Events, Repo}
 
   def update(assigns, socket) do
     {:ok,
@@ -29,19 +29,29 @@ defmodule RauversionWeb.EventsLive.UserEventsListComponent do
      |> assign(:events, list_events(socket.assigns.current_user, tab))}
   end
 
+  def handle_event("manager" = tab, %{}, socket) do
+    {:noreply,
+     assign(socket, tab: tab)
+     |> assign(:events, list_events(socket.assigns.current_user, tab))}
+  end
+
   defp list_events(user, tab) do
     case tab do
       "draft" ->
         Events.list_events(user |> Ecto.assoc(:events), "draft")
-        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
+        |> Repo.paginate(page: 1, page_size: 30)
 
       "published" ->
         Events.list_events(user |> Ecto.assoc(:events), "published")
-        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
+        |> Repo.paginate(page: 1, page_size: 30)
 
       "all" ->
         Events.list_events(user)
-        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
+        |> Repo.paginate(page: 1, page_size: 30)
+
+      "manager" ->
+        Rauversion.Accounts.user_host_events(user)
+        |> Repo.paginate(page: 1, page_size: 30)
     end
   end
 
@@ -77,6 +87,11 @@ defmodule RauversionWeb.EventsLive.UserEventsListComponent do
               <a href="#" phx-click={"published"} phx-target={@myself}
               class={tab_class(@tab == "published")}>
                 <%= gettext "Published" %>
+              </a>
+
+              <a href="#" phx-click={"manager"} phx-target={@myself}
+              class={tab_class(@tab == "manager")}>
+                <%= gettext "Events I manage" %>
               </a>
 
             </nav>
