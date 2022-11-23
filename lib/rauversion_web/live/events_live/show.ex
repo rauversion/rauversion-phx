@@ -25,7 +25,10 @@ defmodule RauversionWeb.EventsLive.Show do
 
   defp apply_action(socket, :show, %{"id" => id}) do
     event = Events.get_by_slug!(id) |> Repo.preload([:user])
-    socket |> assign(:event, event)
+
+    socket
+    |> assign(:event, event)
+    |> assign(:meta_tags, metatags(socket, event))
   end
 
   defp apply_action(socket, :payment_success, %{"slug" => id, "token_ws" => token}) do
@@ -48,5 +51,19 @@ defmodule RauversionWeb.EventsLive.Show do
 
   def attending_people(event) do
     Rauversion.Events.purchased_tickets_count(event)
+  end
+
+  defp metatags(socket, event) do
+    # "https://chaskiq.ngrok.io"
+    domain = Application.get_env(:rauversion, :domain)
+
+    %{
+      url: Routes.events_show_url(socket, :show, event.slug),
+      title: "#{event.title} on Rauversion",
+      description: "#{event.description}",
+      image:
+        domain <>
+          Rauversion.Tracks.variant_url(event, "cover", %{resize_to_limit: "360x360"})
+    }
   end
 end
