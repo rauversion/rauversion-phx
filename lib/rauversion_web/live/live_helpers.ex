@@ -32,7 +32,7 @@ defmodule RauversionWeb.LiveHelpers do
   def modal(assigns) do
     assigns = assign_new(assigns, :return_to, fn -> nil end)
     assigns = assign_new(assigns, :close_handler, fn -> nil end)
-    assigns = assign_new(assigns, :w_class, fn -> "w-3/4" end)
+    assigns = assign_new(assigns, :w_class, fn -> "lg:w-3/4 w-full mx-4" end)
 
     ~H"""
     <div id="modal" class="phx-modal fade-in" phx-remove={hide_modal()}>

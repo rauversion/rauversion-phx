@@ -201,8 +201,9 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
   @impl true
   def render(assigns) do
     ~H"""
-      <div class="hidden sm:mt-10 sm:flex lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
-        <a phx-click="show-tickets" phx-target={@myself} class="inline-flex justify-center rounded-2xl bg-brand-600 p-4 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70" href="#">
+      <div>
+        <a phx-click="show-tickets" phx-target={@myself}
+          class={@button_class} href="#">
           <%= gettext("Get your tickets") %>
         </a>
 

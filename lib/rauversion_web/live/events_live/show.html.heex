@@ -92,13 +92,16 @@
           </.modal>
         <% end %>
 
-        <.live_component
-          module={RauversionWeb.EventsLive.EventTicketsComponent}
-          id={:tickets_modal}
-          action={:new}
-          event={@event}
-          current_user={@current_user}
-        />
+       <div class="hidden sm:mt-10 sm:flex lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
+          <.live_component
+            module={RauversionWeb.EventsLive.EventTicketsComponent}
+            id={:tickets_modal}
+            action={:new}
+            event={@event}
+            button_class={"inline-flex justify-center rounded-2xl bg-brand-600 p-4 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70"}
+            current_user={@current_user}
+          />
+        </div>
     </div>
   </header>
 
@@ -132,9 +135,16 @@
             <%= @event.description %>
           </div>
 
-          <a class="inline-flex justify-center rounded-2xl bg-brand-600 p-4 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70 mt-10 w-full sm:hidden" href="/#">
-            <%= gettext("Get your tickets") %>
-          </a>
+         
+          <.live_component
+            module={RauversionWeb.EventsLive.EventTicketsComponent}
+            id={:tickets_modal_mobile}
+            action={:new}
+            event={@event}
+            button_class={"inline-flex justify-center rounded-2xl bg-brand-600 p-4 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70 mt-10 w-full sm:hidden"}
+            current_user={@current_user}
+          />
+    
 
           <dl class="mt-10 grid grid-cols-2 gap-y-6 gap-x-10 sm:mt-16 sm:gap-y-10 sm:gap-x-16 sm:text-center lg:auto-cols-auto lg:grid-flow-col lg:grid-cols-none lg:justify-start lg:text-left">
             
