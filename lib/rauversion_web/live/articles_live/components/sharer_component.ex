@@ -16,7 +16,7 @@ defmodule RauversionWeb.ArticlesLive.SharerComponent do
             type="button"
             class="text-brand-500 hover:text-brand-300 flex space-x-2 flex items-center"
             tabindex="0"
-            href={"https://twitter.com/intent/tweet?#{Routes.articles_show_url(@socket, :show, @post,
+            href={"https://twitter.com/intent/tweet?#{Routes.articles_show_url(@socket, :show, @post.slug,
             utm_source: "twitter",
             utm_medium: "post",
             utm_campaign: "social_sharing",
@@ -36,7 +36,7 @@ defmodule RauversionWeb.ArticlesLive.SharerComponent do
             type="button"
             class="text-brand-500 hover:text-brand-300 flex space-x-2 flex items-center"
             tabindex="0"
-            href={"https://www.facebook.com/sharer/sharer.php?u=#{Routes.articles_show_url(@socket, :show, @post,
+            href={"https://www.facebook.com/sharer/sharer.php?u=#{Routes.articles_show_url(@socket, :show, @post.slug,
             utm_source: "facebook",
             utm_medium: "post",
             utm_campaign: "social_sharing"
