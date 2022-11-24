@@ -75,6 +75,7 @@ defmodule Rauversion.MixProject do
       {:fsmx, "~> 0.2.0"},
       {:qrcode_ex, "~> 0.1.0"},
       {:oembed, "~> 0.4.1"},
+      {:poison, ">= 1.5.0"},
       {:tesla, "~> 1.4"},
       {:ex_cldr_dates_times, "~> 2.0"},
       {:oauth2, "~> 1.0 or ~> 2.0"},
