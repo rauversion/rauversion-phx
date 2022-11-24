@@ -1,5 +1,5 @@
 defmodule Rauversion.Events.StreamingProviders.Restream do
-  defstruct [:app_id, :api_key]
+  defstruct [:app_id, :player_url]
 
   def new(attrs) do
     %__MODULE__{} |> Map.merge(Enum.into(attrs, %{}))
@@ -15,8 +15,13 @@ defmodule Rauversion.Events.StreamingProviders.Restream do
 
   def definitions() do
     [
-      %{type: :text_input, name: :api_key, wrapper_class: "", placeholder: "your api_key"},
-      %{type: :text_input, name: :app_id, wrapper_class: "", placeholder: "your app id"}
+      %{
+        type: :text_input,
+        name: :player_url,
+        wrapper_class: "",
+        placeholder: "The player url",
+        hint: "Example: https://player.restream.io/?token=1234"
+      }
     ]
   end
 end
@@ -28,14 +33,14 @@ defmodule Rauversion.Events.Schemas.Restream do
   @primary_key false
 
   embedded_schema do
-    field :api_key, :string
+    field :player_url, :string
     field :app_id, :string
   end
 
   def changeset(email, params) do
     email
-    |> cast(params, ~w(api_key app_id)a)
-    |> validate_required(:api_key)
+    |> cast(params, ~w(player_url app_id)a)
+    |> validate_required(:player_url)
     |> validate_length(:app_id, min: 4)
   end
 end

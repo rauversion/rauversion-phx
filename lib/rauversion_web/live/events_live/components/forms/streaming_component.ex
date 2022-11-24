@@ -81,7 +81,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
       },
       %{
         name: "restream",
-        active: false,
+        active: true,
         description:
           gettext("Live Streaming to 15 services at once, including youtube, twitch, zoom etc...")
       }

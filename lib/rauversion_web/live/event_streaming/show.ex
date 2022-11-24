@@ -45,6 +45,18 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
     end
   end
 
+  def restream_renderer(assigns) do
+    ~H"""
+      <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe src={@event.streaming_service.player_url}
+        allow="autoplay"
+        allowfullscreen
+        frameborder="0"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;"/>
+      </div>
+    """
+  end
+
   def twitch_renderer(assigns) do
     ~H"""
       <div id="twitch-wrapper" phx-update="ignore">
@@ -191,6 +203,8 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
                     <.zoom_renderer event={@event}></.zoom_renderer>
                   <% "stream_yard" -> %>
                     <.stream_yard_renderer event={@event}></.stream_yard_renderer>
+                  <% "restream" -> %>
+                    <.restream_renderer event={@event}></.restream_renderer>
                   <% _ -> %>
                     <div class="flex items-start space-x-3 ">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
