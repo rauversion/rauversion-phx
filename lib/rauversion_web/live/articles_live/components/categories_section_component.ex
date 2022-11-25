@@ -27,7 +27,7 @@ defmodule RauversionWeb.ArticlesLive.CategoriesSectionComponent do
         </h2>
       </div>
 
-      <div class="flex space-x-2">
+      <div class="flex lg:flex-row flex-col space-x-2">
         <%= for post <- list_posts_on_category(@category_slug) do %>
           <div class="w-full px-2 mt-12 md:w-1/2 lg:w-1/4">
             <.live_component

@@ -49,10 +49,10 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
 
         </div>
 
-        <div class="mt-12 grid gap-16 pt-12 lg:grid-cols-6 lg:gap-x-5 lg:gap-y-12">
-          <div class="col-span-5 flex space-x-4 divide-x-2">
+        <div class="mt-12 grid lg:gap-16 pt-12 lg:grid-cols-6 lg:gap-x-5 lg:gap-y-12">
+          <div class="col-span-5 flex lg:flex-row flex-col lg:space-x-4 lg:divide-x-2 lg:divide-y-0 divide-y-2">
 
-            <div class="w-1/4 space-y-4">
+            <div class="w-1/4- space-y-4">
               <%= for post <- list_news() do %>
                 <.live_component
                   post={post}
@@ -65,7 +65,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
               <% end %>
             </div>
 
-            <div class="px-4 flex-grow space-y-4 pb-4">
+            <div class="lg:px-4 flex-grow space-y-4 pb-4">
               <%= for post <- list_posts() do %>
                 <.live_component
                   id={"main-articles-#{post.id}"}
@@ -78,7 +78,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
 
           </div>
 
-          <div class="col-span-1 space-y-4">
+          <div class="col-span-6 lg:col-span-1 space-y-4">
             <h3 class="border-b uppercase">
               <%= gettext("The Latest") %>
             </h3>
