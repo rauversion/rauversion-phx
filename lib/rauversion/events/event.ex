@@ -23,7 +23,7 @@ defmodule Rauversion.Events.Event do
   alias Rauversion.Events.Event.TitleSlug
 
   use ActiveStorage.Attached.Model
-  use ActiveStorage.Attached.HasOne, name: :cover, model: "Track"
+  use ActiveStorage.Attached.HasOne, name: :cover, model: "Event"
 
   schema "events" do
     field :age_requirement, :string
@@ -92,7 +92,7 @@ defmodule Rauversion.Events.Event do
 
     # cover image
     has_one(:cover_attachment, ActiveStorage.Attachment,
-      where: [record_type: "Track", name: "cover"],
+      where: [record_type: "Event", name: "cover"],
       foreign_key: :record_id
     )
 
