@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { useTransition } from 'stimulus-use'
+import { useClickOutside } from 'stimulus-use'
 
 export default class extends Controller {
   /*menuTarget: HTMLElement
@@ -12,13 +13,22 @@ export default class extends Controller {
   static targets = ['menu']
 
   connect () {
+    useClickOutside(this)
     useTransition(this, {
       element: this.menuTarget,
       //hiddenClass: false
     })
   }
 
-  toggle () {
+  clickOutside(event) {
+    // example to close a modal
+    event.preventDefault()
+    this.menuTarget.classList.add("hidden")
+    //this.toggleTransition()
+  }
+
+  toggle (e) {
+    console.log(e)
     this.menuTarget.classList.toggle("hidden")
     //this.toggleTransition()
   }
