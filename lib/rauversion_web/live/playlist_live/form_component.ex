@@ -5,7 +5,7 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
 
   @impl true
   def update(%{playlist: playlist, track: track, action: :new} = assigns, socket) do
-    playlist = playlist |> Rauversion.Repo.preload(:track_playlists)
+    playlist = playlist |> Rauversion.Repo.preload(track_playlists: [:track])
 
     # track = Rauversion.Tracks.get_track!(81) |> Rauversion.Repo.preload(:user)
     track_playlist = %{"track_id" => track.id}
@@ -137,8 +137,6 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
          socket
          |> put_flash(:info, "Playlist created successfully")
          |> assign(:playlist, playlist)}
-
-      # |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

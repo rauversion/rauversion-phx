@@ -71,7 +71,8 @@ defmodule Rauversion.Playlists do
       ) do
     track_query =
       from pi in Rauversion.TrackPlaylists.TrackPlaylist,
-        where: pi.track_id == ^track_id
+        where: pi.track_id == ^track_id,
+        preload: :track
 
     from pi in Playlist,
       where: pi.user_id == ^user_id,

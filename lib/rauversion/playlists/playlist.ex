@@ -17,7 +17,7 @@ defmodule Rauversion.Playlists.Playlist do
     field :private, :boolean, default: false
     field :genre, :string
     field :custom_genre, :string
-    field :playlist_type, :string
+    field :playlist_type, :string, default: "playlist"
     # TODO: if user selects album on playlist_type, then the release_date should be required
     field :release_date, :utc_datetime
 

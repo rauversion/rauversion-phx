@@ -85,7 +85,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     to: Routes.playlist_show_path(@socket, :show, @playlist)
                   %>
                   <%= if Rauversion.Playlists.is_album?(@playlist) do %>
-                      <span class="text-xs dark:text-gray-600 font-thin">
+                      <span class="text-xs dark:text-gray-400 font-thin">
                         Album <%= simple_date_for(@playlist.release_date, :short) %>
                       </span>
                     <% end %>

@@ -12,7 +12,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
       let={f}
       for={@changeset}
       id="edit-playlist-form"
-      phx-target={@ref}
+      phx_target={@ref}
       phx-change="validate"
       phx-submit="save">
 

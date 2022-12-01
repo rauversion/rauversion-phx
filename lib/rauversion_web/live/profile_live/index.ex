@@ -68,8 +68,6 @@ defmodule RauversionWeb.ProfileLive.Index do
         {Tracks, [:tracks, :destroyed], %Tracks.Track{user_id: user_id} = _deleted_track},
         socket
       ) do
-    IO.puts("HANDLE DELETE TRACK EVENT")
-
     cond do
       user_id == socket.assigns.profile.id ->
         {:noreply, socket}

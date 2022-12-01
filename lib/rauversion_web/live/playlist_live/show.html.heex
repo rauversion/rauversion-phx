@@ -87,9 +87,9 @@
                 </span>
                 <div class="ml-2 pl-6 pt-6">
                   <h4 class="text-lg font-bold flex items-center space-x-2">
-                    <%= live_redirect @playlist.title, to: Routes.track_show_path(@socket, :show, @playlist) %>
+                    <%= live_redirect @playlist.title, to: Routes.playlist_show_path(@socket, :show, @playlist) %>
                     <%= if Rauversion.Playlists.is_album?(@playlist) do %>
-                      <span class="text-xs dark:text-gray-600 font-thin">
+                      <span class="text-xs dark:text-gray-400 font-thin">
                         Album <%= simple_date_for(@playlist.release_date, :short) %>
                       </span>
                     <% end %>
