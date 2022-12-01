@@ -76,7 +76,9 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
     ~H"""
       <div class="my-2 p-2 border-- rounded-md shadow-xs mx-3 dark:bg-gray-900" id={"playlist-item-#{@playlist.id}"}>
         <div class="flex space-x-3">
-          <div class="w-32 h-32 bg-red-600"></div>
+          <div class="w-48">
+            <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( @playlist, "cover", %{resize_to_limit: "300x200"}), class: "object-center object-cover group-hover:opacity-75") %>
+          </div>
           <div class="flex-grow">
             <div class="flex flex-col">
               <div class="space-y-2">

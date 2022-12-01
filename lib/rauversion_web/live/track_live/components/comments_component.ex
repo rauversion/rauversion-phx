@@ -145,7 +145,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
 
             <%= if assigns.comment_changeset do %>
               <div class="mt-6">
-                <div class="flex space-x-3">
+                <div class="flex space-x-5">
                   <div class="flex-shrink-0">
                     <div class="relative">
 

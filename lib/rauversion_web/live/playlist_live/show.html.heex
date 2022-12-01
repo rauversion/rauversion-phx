@@ -191,13 +191,15 @@
       </div>
 
       <div class="sm:text-xl text-sm container mx-auto px-4 my-4">
-        <%= @playlist.description %>
+        <%= SimplexFormat.text_to_html(@playlist.description, auto_link: true) %>
       </div>
 
       <div class="sm:text-xl text-sm container mx-auto px-4 my-4 flex flex-col space-y-4">
-        <a href={@playlist.metadata.buy_link} class="underline" target="blank">
-          <%= gettext("Buy Link") %>
-        </a>
+        <%= if @playlist.metadata.buy_link do %>
+          <a href={@playlist.metadata.buy_link} class="underline" target="blank">
+            <%= gettext("Buy Link") %>
+          </a>
+        <% end %>
       
         <.live_component
             module={RauversionWeb.AttributionComponent}

@@ -201,7 +201,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
 
                               <%= unless @prompt_image do %>
-                              <div class="flex items-center justify-center space-x-3">
+                              <div class="flex items-center justify-center space-x-3 my-4">
                                 <div>
                                   <%= text_input f, :prompt, phx_keyup: "set-prompt", phx_target: @myself,
                                     class: "bg-black w-full rounded-md border-white px-2 py-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-700",
