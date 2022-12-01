@@ -143,12 +143,12 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
           <div class="my-4 py-4 border-t flex space-x-4 items-center">
             <div class="space-x-2 flex items-center">
               <%= radio_button i, :copyright, "all-rights" %>
-              <%= label i, "All rights reserved" %>
+              <%= label i, gettext("All rights reserved") %>
             </div>
 
             <div class="space-x-2 flex items-center">
               <%= radio_button i, :copyright, "common" %>
-              <%= label i, "Creative commons" %>
+              <%= label i, gettext("Creative commons") %>
 
               <div class="text-sm text-gray-700 dark:text-gray-300 flex space-x-2 items-center">
                 <%= if i.params["copyright"] == "common" || (!i.params["copyright"] && i.data.copyright == "common")  do %>
@@ -199,7 +199,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                     <% end %>
                   </div>
 
-                  some rights reserved
+                  <%= gettext("some rights reserved") %>
                 <% end %>
               </div>
             </div>

@@ -106,7 +106,7 @@
 
         <div class="w-1/4 hidden sm:block">
           <div class="group relative aspect-w-1 aspect-h-1 rounded-md- bg-gray-100 overflow-hidden">
-            <%= img_tag(Rauversion.Playlists.variant_url( @playlist, "cover", %{resize_to_limit: "300x200"}), class: "object-center object-cover group-hover:opacity-75") %>
+            <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( @playlist, "cover", %{resize_to_limit: "300x200"}), class: "object-center object-cover group-hover:opacity-75") %>
 
             <div class="hidden flex- flex-col justify-end">
               <div class="p-4 bg-white dark:bg-black bg-opacity-60 text-sm">
@@ -175,7 +175,6 @@
     </div>
 
     <div class="mt-6 sm:mt-2 2xl:mt-5">
-
       <div class="mx-2 flex space-x-2 items-start">
         <div class="h-32 w-32">
           <%= img_tag(Rauversion.Playlists.variant_url( @playlist.user, "avatar", %{resize_to_limit: "300x200"}), class: "rounded-full object-center object-cover group-hover:opacity-75") %>
@@ -190,6 +189,23 @@
           />
         </div>
       </div>
+
+      <div class="sm:text-xl text-sm container mx-auto px-4 my-4">
+        <%= @playlist.description %>
+      </div>
+
+      <div class="sm:text-xl text-sm container mx-auto px-4 my-4 flex flex-col space-y-4">
+        <a href={@playlist.metadata.buy_link} class="underline" target="blank">
+          <%= gettext("Buy Link") %>
+        </a>
+      
+        <.live_component
+            module={RauversionWeb.AttributionComponent}
+            id="attribution-c"
+            metadata={@playlist.metadata}
+        />
+      </div>
+
     </div>
   </article>
 </main>
