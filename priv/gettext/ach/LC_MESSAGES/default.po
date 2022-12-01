@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Acholi\n"
 "Language: ach_UG\n"
-"PO-Revision-Date: 2022-11-23 01:06\n"
+"PO-Revision-Date: 2022-12-01 03:41\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -38,7 +38,7 @@ msgstr "crwdns7:0crwdne7:0"
 msgid "Activity"
 msgstr "crwdns9:0crwdne9:0"
 
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:55
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:59
 #, elixir-autogen, elixir-format
 msgid "Add"
 msgstr "crwdns11:0crwdne11:0"
@@ -49,6 +49,8 @@ msgstr "crwdns11:0crwdne11:0"
 msgid "Add to playlist"
 msgstr "crwdns13:0crwdne13:0"
 
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:146
+#: lib/rauversion_web/live/shared_components/attribution_component.ex:56
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:324
 #, elixir-autogen, elixir-format
 msgid "All rights reserved"
@@ -211,18 +213,19 @@ msgstr "crwdns73:0crwdne73:0"
 msgid "Cover photo"
 msgstr "crwdns75:0crwdne75:0"
 
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:83
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:89
 #, elixir-autogen, elixir-format
 msgid "Create playlist"
 msgstr "crwdns77:0crwdne77:0"
 
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:151
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:329
 #, elixir-autogen, elixir-format
 msgid "Creative commons"
 msgstr "crwdns79:0crwdne79:0"
 
 #: lib/rauversion_web/live/playlist_live/index.html.heex:41
-#: lib/rauversion_web/live/playlist_live/playlist_component.ex:155
+#: lib/rauversion_web/live/playlist_live/playlist_component.ex:157
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr "crwdns81:0crwdne81:0"
@@ -238,7 +241,7 @@ msgid "Downloads"
 msgstr "crwdns85:0crwdne85:0"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:77
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:86
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:84
 #, elixir-autogen, elixir-format
 msgid "Drafts"
 msgstr "crwdns87:0crwdne87:0"
@@ -250,11 +253,11 @@ msgstr "crwdns89:0crwdne89:0"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:113
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:132
-#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:140
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:127
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:146
+#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:139
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:125
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:144
 #: lib/rauversion_web/live/playlist_live/index.html.heex:40
-#: lib/rauversion_web/live/playlist_live/playlist_component.ex:145
+#: lib/rauversion_web/live/playlist_live/playlist_component.ex:147
 #: lib/rauversion_web/live/playlist_live/show.html.heex:168
 #: lib/rauversion_web/live/track_live/show.html.heex:181
 #, elixir-autogen, elixir-format
@@ -586,19 +589,19 @@ msgstr "crwdns201:0crwdne201:0"
 msgid "Play"
 msgstr "crwdns203:0crwdne203:0"
 
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:91
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:97
 #, elixir-autogen, elixir-format
 msgid "Playlist title"
 msgstr "crwdns205:0crwdne205:0"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:122
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:104
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:110
 #, elixir-autogen, elixir-format
 msgid "Privacy"
 msgstr "crwdns207:0crwdne207:0"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:129
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:111
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:117
 #: lib/rauversion_web/live/track_live/components/share_form_track_component.ex:42
 #, elixir-autogen, elixir-format
 msgid "Private"
@@ -620,7 +623,7 @@ msgid "Provide FLAC, WAV, ALAC, or AIFF for highest audio quality."
 msgstr "crwdns219:0crwdne219:0"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:136
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:118
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:124
 #, elixir-autogen, elixir-format
 msgid "Public"
 msgstr "crwdns221:0crwdne221:0"
@@ -631,7 +634,7 @@ msgid "Public access"
 msgstr "crwdns223:0crwdne223:0"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:82
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:91
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:89
 #, elixir-autogen, elixir-format
 msgid "Published"
 msgstr "crwdns225:0crwdne225:0"
@@ -664,7 +667,7 @@ msgstr "crwdns231:0crwdne231:0"
 msgid "Register"
 msgstr "crwdns233:0crwdne233:0"
 
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:47
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:51
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:100
 #, elixir-autogen, elixir-format
 msgid "Remove"
@@ -723,7 +726,7 @@ msgstr "crwdns251:0crwdne251:0"
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:270
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:253
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:316
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:124
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:130
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:415
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
@@ -742,7 +745,7 @@ msgstr "crwdns253:0crwdne253:0"
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:270
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:253
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:316
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:124
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:130
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
 #: lib/rauversion_web/live/track_live/components/comments_component.ex:183
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:415
@@ -979,7 +982,7 @@ msgstr "crwdns337:0crwdne337:0"
 #: lib/rauversion_web/live/insights_live/insights_component.ex:101
 #: lib/rauversion_web/live/insights_live/insights_component.ex:144
 #: lib/rauversion_web/live/insights_live/insights_component.ex:191
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:65
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:70
 #: lib/rauversion_web/live/profile_live/components/trending_component.ex:64
 #: lib/rauversion_web/live/profile_live/components/user_suggestions_component.ex:82
 #, elixir-autogen, elixir-format
@@ -1012,7 +1015,7 @@ msgid "You can reset the secret link if you want to revoke access."
 msgstr "crwdns349:0crwdne349:0"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:94
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:108
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:106
 #, elixir-autogen, elixir-format
 msgid "Your articles."
 msgstr "crwdns351:0crwdne351:0"
@@ -1054,7 +1057,7 @@ msgstr "crwdns361:0%{count}crwdne361:0"
 msgid "private"
 msgstr "crwdns363:0crwdne363:0"
 
-#: lib/rauversion_web/live/playlist_live/create_form_component.ex:147
+#: lib/rauversion_web/live/playlist_live/create_form_component.ex:153
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:117
 #, elixir-autogen, elixir-format
 msgid "remove"
@@ -1065,6 +1068,7 @@ msgstr "crwdns365:0crwdne365:0"
 msgid "share controls"
 msgstr "crwdns369:0crwdne369:0"
 
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:202
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:380
 #, elixir-autogen, elixir-format
 msgid "some rights reserved"
@@ -1141,8 +1145,7 @@ msgstr "crwdns441:0crwdne441:0"
 msgid "For example: Ticket Sales"
 msgstr "crwdns445:0crwdne445:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:206
-#: lib/rauversion_web/live/events_live/show.html.heex:136
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:207
 #, elixir-autogen, elixir-format
 msgid "Get your tickets"
 msgstr "crwdns447:0crwdne447:0"
@@ -1157,7 +1160,7 @@ msgstr "crwdns449:0crwdne449:0"
 msgid "Leave blank unless there is a Minimum amount of tickets customer has to order."
 msgstr "crwdns451:0crwdne451:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:170
+#: lib/rauversion_web/live/events_live/show.html.heex:180
 #, elixir-autogen, elixir-format
 msgid "Location"
 msgstr "crwdns453:0crwdne453:0"
@@ -1167,7 +1170,7 @@ msgstr "crwdns453:0crwdne453:0"
 msgid "Optional short description will be displayed next to this ticket on the Event page."
 msgstr "crwdns457:0crwdne457:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:152
+#: lib/rauversion_web/live/events_live/show.html.heex:162
 #, elixir-autogen, elixir-format
 msgid "People Attending"
 msgstr "crwdns459:0crwdne459:0"
@@ -1182,7 +1185,7 @@ msgstr "crwdns463:0crwdne463:0"
 msgid "Show the Sell Until date on the event page."
 msgstr "crwdns465:0crwdne465:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:143
+#: lib/rauversion_web/live/events_live/show.html.heex:153
 #, elixir-autogen, elixir-format
 msgid "Speakers"
 msgstr "crwdns467:0crwdne467:0"
@@ -1224,7 +1227,7 @@ msgstr "crwdns483:0crwdne483:0"
 msgid "Upcoming Events from the Rauversion community"
 msgstr "crwdns485:0crwdne485:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:161
+#: lib/rauversion_web/live/events_live/show.html.heex:171
 #, elixir-autogen, elixir-format
 msgid "Venue"
 msgstr "crwdns487:0crwdne487:0"
@@ -1274,7 +1277,7 @@ msgstr "crwdns505:0crwdne505:0"
 msgid "Event Overview."
 msgstr "crwdns507:0crwdne507:0"
 
-#: lib/rauversion_web/live/qr_live/components/ticket_component.ex:54
+#: lib/rauversion_web/live/qr_live/components/ticket_component.ex:66
 #, elixir-autogen, elixir-format
 msgid "Go to Event"
 msgstr "crwdns509:0crwdne509:0"
@@ -1315,7 +1318,7 @@ msgstr "crwdns521:0crwdne521:0"
 msgid "Manage your transbank commerce (Chile only)."
 msgstr "crwdns523:0crwdne523:0"
 
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:81
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:79
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:120
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:202
 #, elixir-autogen, elixir-format
@@ -1418,12 +1421,12 @@ msgstr "crwdns563:0crwdne563:0"
 msgid "Free ticket"
 msgstr "crwdns565:0crwdne565:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:287
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:288
 #, elixir-autogen, elixir-format
 msgid "Free ticket already added"
 msgstr "crwdns567:0crwdne567:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:298
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:299
 #, elixir-autogen, elixir-format
 msgid "Get your FREE ticket"
 msgstr "crwdns569:0crwdne569:0"
@@ -1433,7 +1436,7 @@ msgstr "crwdns569:0crwdne569:0"
 msgid "In order to upload music and create events you need to access as an artist account"
 msgstr "crwdns571:0crwdne571:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:235
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:236
 #, elixir-autogen, elixir-format
 msgid "Name"
 msgstr "crwdns573:0crwdne573:0"
@@ -1448,12 +1451,12 @@ msgstr "crwdns575:0crwdne575:0"
 msgid "Paid ticket"
 msgstr "crwdns577:0crwdne577:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:236
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:237
 #, elixir-autogen, elixir-format
 msgid "Price"
 msgstr "crwdns579:0crwdne579:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:237
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:238
 #, elixir-autogen, elixir-format
 msgid "QTY"
 msgstr "crwdns581:0crwdne581:0"
@@ -1463,7 +1466,7 @@ msgstr "crwdns581:0crwdne581:0"
 msgid "Ready to dive in?"
 msgstr "crwdns583:0crwdne583:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:366
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:367
 #, elixir-autogen, elixir-format
 msgid "Ticket purchase complete"
 msgstr "crwdns587:0crwdne587:0"
@@ -1473,7 +1476,7 @@ msgstr "crwdns587:0crwdne587:0"
 msgid "Type the event address, and confirm the prompt"
 msgstr "crwdns589:0crwdne589:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:377
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:378
 #, elixir-autogen, elixir-format
 msgid "go to ticket"
 msgstr "crwdns591:0crwdne591:0"
@@ -1718,7 +1721,7 @@ msgstr "crwdns680:0crwdne680:0"
 msgid "Delete Ticket"
 msgstr "crwdns682:0crwdne682:0"
 
-#: lib/rauversion_web/live/event_streaming/show.ex:272
+#: lib/rauversion_web/live/event_streaming/show.ex:286
 #, elixir-autogen, elixir-format
 msgid "Go and check the event details"
 msgstr "crwdns684:0crwdne684:0"
@@ -1733,7 +1736,7 @@ msgstr "crwdns686:0crwdne686:0"
 msgid "Go to streaming event page"
 msgstr "crwdns688:0crwdne688:0"
 
-#: lib/rauversion_web/live/event_streaming/show.ex:133
+#: lib/rauversion_web/live/event_streaming/show.ex:145
 #, elixir-autogen, elixir-format
 msgid "Go to the Zoom meeting"
 msgstr "crwdns690:0crwdne690:0"
@@ -1754,7 +1757,7 @@ msgstr "crwdns694:0crwdne694:0"
 msgid "Mux is a streaming service"
 msgstr "crwdns698:0crwdne698:0"
 
-#: lib/rauversion_web/live/event_streaming/show.ex:128
+#: lib/rauversion_web/live/event_streaming/show.ex:140
 #, elixir-autogen, elixir-format
 msgid "Player not available please open the metting on Zoom service"
 msgstr "crwdns700:0crwdne700:0"
@@ -1784,7 +1787,7 @@ msgstr "crwdns708:0crwdne708:0"
 msgid "Zoom is a streaming service"
 msgstr "crwdns710:0crwdne710:0"
 
-#: lib/rauversion_web/live/event_streaming/show.ex:200
+#: lib/rauversion_web/live/event_streaming/show.ex:214
 #, elixir-autogen, elixir-format
 msgid "no renderer avaiable"
 msgstr "crwdns712:0crwdne712:0"
@@ -1861,7 +1864,7 @@ msgstr "crwdns738:0crwdne738:0"
 msgid "read more"
 msgstr "crwdns740:0crwdne740:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:254
+#: lib/rauversion_web/live/events_live/show.html.heex:264
 #, elixir-autogen, elixir-format
 msgid "All rights reserved."
 msgstr "crwdns742:0crwdne742:0"
@@ -1871,7 +1874,7 @@ msgstr "crwdns742:0crwdne742:0"
 msgid "Choose the currency in which you will charge"
 msgstr "crwdns744:0crwdne744:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:252
+#: lib/rauversion_web/live/events_live/show.html.heex:262
 #, elixir-autogen, elixir-format
 msgid "Copyright ©"
 msgstr "crwdns746:0crwdne746:0"
@@ -1901,7 +1904,7 @@ msgstr "crwdns754:0crwdne754:0"
 msgid "Manage the event tickets."
 msgstr "crwdns756:0crwdne756:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:343
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:344
 #, elixir-autogen, elixir-format
 msgid "Place order"
 msgstr "crwdns758:0crwdne758:0"
@@ -1956,12 +1959,12 @@ msgstr "crwdns776:0crwdne776:0"
 msgid "Our thoughtfully curated list of community tracks."
 msgstr "crwdns778:0crwdne778:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:372
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:373
 #, elixir-autogen, elixir-format
 msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
 msgstr "crwdns780:0crwdne780:0"
 
-#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:121
+#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:119
 #, elixir-autogen, elixir-format
 msgid "A list of all the users in your account including their name, title, email and role."
 msgstr "crwdns782:0crwdne782:0"
@@ -1986,7 +1989,7 @@ msgstr "crwdns788:0crwdne788:0"
 msgid "Send invitations"
 msgstr "crwdns790:0crwdne790:0"
 
-#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:120
+#: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:118
 #, elixir-autogen, elixir-format
 msgid "Users"
 msgstr "crwdns792:0crwdne792:0"
@@ -2001,7 +2004,7 @@ msgstr "crwdns794:0crwdne794:0"
 msgid "Event Manager"
 msgstr "crwdns796:0crwdne796:0"
 
-#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:96
+#: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:94
 #, elixir-autogen, elixir-format
 msgid "Events I manage"
 msgstr "crwdns798:0crwdne798:0"
@@ -2010,4 +2013,20 @@ msgstr "crwdns798:0crwdne798:0"
 #, elixir-autogen, elixir-format
 msgid "Listed on page"
 msgstr "crwdns800:0crwdne800:0"
+
+#: lib/rauversion_web/live/playlist_live/show.html.heex:200
+#: lib/rauversion_web/live/track_live/show.html.heex:230
+#, elixir-autogen, elixir-format
+msgid "Buy Link"
+msgstr "crwdns802:0crwdne802:0"
+
+#: lib/rauversion_web/live/events_live/components/forms/form_component.ex:191
+#, elixir-autogen, elixir-format
+msgid "Event image"
+msgstr "crwdns804:0crwdne804:0"
+
+#: lib/rauversion_web/live/shared_components/attribution_component.ex:54
+#, elixir-autogen, elixir-format
+msgid "Some rights reserved"
+msgstr "crwdns806:0crwdne806:0"
 
