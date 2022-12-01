@@ -19,8 +19,8 @@ export default class extends Controller {
   }
 
   toggle () {
-    //this.menuTarget.classList.toggle("hidden")
-    this.toggleTransition()
+    this.menuTarget.classList.toggle("hidden")
+    //this.toggleTransition()
   }
 
   hide (event) {
