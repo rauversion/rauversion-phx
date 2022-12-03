@@ -15,7 +15,7 @@ defmodule RauversionWeb.EmbedController do
     end
   end
 
-  def show(conn, %{"playlist_id" => playlist_id}) do
+  def show_playlist(conn, %{"playlist_id" => playlist_id}) do
     playlist = Rauversion.Playlists.get_public_playlist!(playlist_id)
 
     conn =
@@ -25,7 +25,21 @@ defmodule RauversionWeb.EmbedController do
 
     case playlist do
       nil -> conn |> send_resp(404, "This playlist is private or not found")
-      _ -> render(conn, "show.html")
+      _ -> render(conn, "show_playlist.html")
+    end
+  end
+
+  def private_playlist(conn, %{"playlist_id" => playlist_id}) do
+    playlist = Rauversion.Playlists.find_by_signed_id!(playlist_id)
+
+    conn =
+      conn
+      |> assign(:playlist, playlist)
+      |> delete_resp_header("x-frame-options")
+
+    case playlist do
+      nil -> conn |> send_resp(404, "This playlist is private or not found")
+      _ -> render(conn, "show_playlist.html")
     end
   end
 

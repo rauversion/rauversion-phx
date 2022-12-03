@@ -4,62 +4,68 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
   # use Phoenix.LiveComponent
   use RauversionWeb, :live_component
 
-  def render(%{track: _track} = assigns) do
+  def iframe_code(socket, track = %Rauversion.Playlists.Playlist{private: true}) do
+    url =
+      Application.get_env(:rauversion, :domain) <>
+      Routes.embed_path(socket, :private_playlist, Rauversion.Playlists.signed_id(track))
+
+    Rauversion.Playlists.iframe_code_string(url, track)
+  end
+
+  def iframe_code(socket, track = %Rauversion.Playlists.Playlist{private: false}) do
+    url = Application.get_env(:rauversion, :domain) <> Routes.embed_path(socket, :show_playlist, track)
+    Rauversion.Playlists.iframe_code_string(url, track)
+  end
+
+  def render(%{playlist: _track} = assigns) do
     ~H"""
       <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
         <div class="mx-2 py-6">
           <div class="relative">
 
-            <nav class="flex space-x-4" aria-label="Tabs" data-controller="tabs">
-              <a href="#" data-tab="#share-tab" data-action="click->tabs#changeTab" class="tab-link bg-brand-100 text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Share </a>
-              <a href="#" data-tab="#embed-tab" data-action="click->tabs#changeTab" class="tab-link text-brand-500 hover:text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Embed </a>
-              <a href="#" data-tab="#message-tab" data-action="click->tabs#changeTab" class="tab-link text-brand-500 hover:text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> Message </a>
+            <nav class="flex space-x-4 mt-2" aria-label="Tabs" data-controller="tabs">
+              <a href="#" data-tab="#share-tab" data-action="click->tabs#changeTab" class="tab-link bg-brand-100 text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> <%= gettext "Share" %> </a>
+              <a href="#" data-tab="#embed-tab" data-action="click->tabs#changeTab" class="tab-link text-brand-500 hover:text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> <%= gettext "Embed" %> </a>
+              <a href="#" data-tab="#message-tab" data-action="click->tabs#changeTab" class="hidden tab-link text-brand-500 hover:text-brand-700 px-3 py-2 font-medium text-sm rounded-md"> <%= gettext "Message" %> </a>
             </nav>
 
             <section id="share-tab" class="tab-pane block py-4">
               <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
-                Private Share
+              <%= gettext "Private Share" %>
               </h2>
-              <div class="mb-4 text-zinc-800">
-                <div class="flex space-x-3">
-                  <label
-                    for="shareLink__field"
-                    class="overflow-hidden absolute p-0 -m-px w-px h-px border-0 cursor-default">
-                    <%= gettext "Link" %>
+              <div class="mb-4 text-zinc-800 dark:text-gray-100">
+                <div class="flex items-center space-x-3">
+                  <input
+                    type="text"
+                    value={Application.get_env(:rauversion, :domain) <> Routes.playlist_show_path(@socket, :private, Rauversion.Playlists.signed_id(@playlist), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
+                    class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
+                    readonly="readonly"/>
+
+                  <label class="flex items-center space-x-2 hidden">
+                    <input
+                      type="checkbox"
+                      id=""
+                      name="share_from"
+                      class="focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300 rounded"
+                    />
+                    <span class="hidden"><%= gettext "at" %></span>
                   </label>
 
-                  <div class="flex items-center space-x-3">
-                    <input
-                      type="text"
-                      value={Routes.playlist_show_url(@socket, :private, Rauversion.Playlists.signed_id(@track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
-                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                      readonly="readonly"/>
-
-                    <label class="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id=""
-                        name="share_from"
-                        class="focus:ring-brand-500 h-4 w-4 text-brand-600 dark:text-brand-400 border-gray-300 rounded"
-                      />
-                      <span class=""><%= gettext "at" %></span>
-                    </label>
-
-                    <input
-                      type="text"
-                      value="0:00"
-                      class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value="0:00"
+                    class="hidden w-1/4 shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
+                  />
                 </div>
               </div>
               <div class="text-sm text-gray-700 dark:text-gray-300 py-2">
-                <%= gettext "This track is set to private and can only be shared using the secret link above." %>
-                <br class="" />
-                <%= gettext "You can reset the secret link if you want to revoke access." %>
+              <%= gettext "This track is set to private and can only be shared using the secret link above.
+                You can reset the secret link if you want to revoke access."
+                %>
               </div>
               <div class="hidden mb-4 text-brand-600 dark:text-brand-400">
-              <%= gettext "Are you sure you want to reset this link?<br /> It will not be possible to access this track from any existing shares." %>
+              <%= gettext "Are you sure you want to reset this link?<br />
+                It will not be possible to access this track from any existing shares. "%>
               </div>
               <div
                 class="hidden visible py-1 px-0 mb-4 font-sans text-xs text-red-700 opacity-100">
@@ -97,23 +103,32 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
               <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
               <%= gettext "Embed" %>
               </h2>
-              <input type="text"
-                value={Routes.embed_url(@socket, :show, @track)}
-                class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
-              />
 
-              <input type="text"
-                value={Routes.embed_url(@socket, :private_playlist, Rauversion.Playlists.signed_id(@track) )}
-                class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md"
-              />
+              <div>
+
+                <div data-controller="clipboard"
+                  data-clipboard-success-content="Copied!"
+                  class="my-2 flex rounded-md shadow-sm">
+                  <input type="text"
+                  value={iframe_code(@socket, @playlist) |> to_string}
+                  data-clipboard-target="source"
+                  readonly=""
+                  class="py-3 px-2 outline-none flex-1 block rounded-none rounded-l-md sm:text-sm border border-gray-300 dark:bg-gray-900 dark:text-gray-100">
+                  <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="inline-flex items-center px-3 focus:outline-none rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500    dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 text-sm">
+                  <%= gettext "Copy to clipboard" %>
+                  </button>
+                </div>
+
+              </div>
+
 
               <iframe
                 width="100%"
-                height="200"
+                height="100%"
                 scrolling="no"
                 frameborder="no"
                 allow="autoplay"
-                src={Routes.embed_url(@socket, :show, @track)}>
+                src={Application.get_env(:rauversion, :domain) <> Routes.embed_path(@socket, :show_playlist, @playlist)}>
               </iframe>
               <div
                 style="font-size: 10px;
@@ -127,30 +142,30 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                   Garuda, Verdana, Tahoma, sans-serif;
                   font-weight: 100;">
                 <a
-                  href={Routes.profile_index_path(@socket, :index, @track.user)}
+                  href={Routes.profile_index_path(@socket, :index, @playlist.user)}
                   title="waverzap"
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
-                  <%= @track.user.username %>
+                  <%= @playlist.user.username %>
                 </a>
                 ·
                 <a
-                  href={Routes.track_show_path(@socket, :show, @track)}
-                  title={@track.title}
+                  href={Routes.playlist_show_path(@socket, :show, @playlist)}
+                  title={@playlist.title}
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
-                  <%= @track.title %>
+                  <%= @playlist.title %>
                 </a>
               </div>
 
-              <p class="text-sm text-gray-700 dark:text-gray-300 py-2">
+              <p class="text-sm text-gray-700 dark:text-gray-300 dark:text-gray-300 py-2">
               <%= gettext "This player uses cookies in accordance with our Cookies policy.
                 We may collect usage data for analytics purposes.
                 It is your responsibility to disclose this to visitors of any site where you embed the player." %>
               </p>
             </section>
 
-            <section id="message-tab" class="tab-pane hidden py-4">
+            <section id="message-tab" class="tab-pane hidden py-4 hidden">
               <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
               <%= gettext "Message" %>
               </h2>

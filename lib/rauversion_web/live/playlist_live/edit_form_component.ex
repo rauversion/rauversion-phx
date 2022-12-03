@@ -98,7 +98,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
 
       <div id="tracks-info" class={"tab-pane #{ active_tab_for?(@current_tab, "tracks-tab")}"}>
 
-        <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800 my-4">
+        <ul role="list" class="my-5 divide-y divide-gray-200 dark:divide-gray-800 my-4">
           <%= inputs_for f, :track_playlists, fn track -> %>
 
             <%= hidden_input track, :track_id %>
@@ -106,7 +106,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
             <li class="py-4">
               <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
-                  <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                  <% #= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( track, "cover", %{resize_to_limit: "100x100"}), class: "h-8 w-8 rounded-full") %>
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= track.data.track.title %></p>

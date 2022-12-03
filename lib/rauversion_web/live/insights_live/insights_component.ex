@@ -56,7 +56,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
 
         <div class="grid grid-cols-2 gap-4">
 
-          <div class="p-4 shadow-lg rounded-lg overflow-hidden dark:bg-gray-900">
+          <div class="p-4 shadow-lg rounded-lg col-span-2 md:col-span-1 overflow-hidden dark:bg-gray-900">
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
@@ -104,7 +104,7 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
           </div>
 
 
-          <div class="p-4 shadow-lg rounded-lg overflow-hidden dark:bg-gray-900">
+          <div class="p-4 shadow-lg rounded-lg col-span-2 md:col-span-1 overflow-hidden dark:bg-gray-900">
 
             <div class="-px-4 py-5 -sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">

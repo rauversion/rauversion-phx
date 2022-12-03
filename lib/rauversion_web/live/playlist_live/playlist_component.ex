@@ -46,13 +46,19 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
     case socket.assigns.like do
       %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like ->
         Rauversion.PlaylistLikes.delete_playlist_like(playlist_like)
-        {:noreply, assign(socket, :like, nil)}
+        {:noreply,
+        assign(socket, :like, nil)
+        |> assign(:playlist, %{ socket.assigns.playlist | likes_count: playlist.likes_count - 1 } )
+      }
 
       _ ->
         {:ok, %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like} =
           Rauversion.PlaylistLikes.create_playlist_like(attrs)
 
-        {:noreply, assign(socket, :like, playlist_like)}
+        {:noreply,
+          assign(socket, :like, playlist_like)
+          |> assign(:playlist, %{ socket.assigns.playlist | likes_count: playlist.likes_count + 1 } )
+        }
     end
   end
 
@@ -87,21 +93,20 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     to: Routes.playlist_show_path(@socket, :show, @playlist)
                   %>
                   <%= if Rauversion.Playlists.is_album?(@playlist) do %>
-                      <span class="text-xs dark:text-gray-400 font-thin">
-                        Album <%= simple_date_for(@playlist.release_date, :short) %>
-                      </span>
-                    <% end %>
+                    <span class="text-xs dark:text-gray-400 font-thin">
+                      <%= gettext("Album") %> <%= simple_date_for(@playlist.release_date, :short) %>
+                    </span>
+                  <% end %>
                 </h3>
                 <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for track_playlists <- @playlist.track_playlists do %>
                     <li class="py-4">
                       <div class="flex items-center space-x-4">
                         <div class="flex-shrink-0">
-                        <%= img_tag(Rauversion.Tracks.variant_url(
-                          track_playlists.track, "cover", %{resize_to_limit: "360x360"}),
-                          class: "h-8 w-8 rounded-full")
-                        %>
-
+                          <%= img_tag(Rauversion.Tracks.variant_url(
+                            track_playlists.track, "cover", %{resize_to_limit: "360x360"}),
+                            class: "h-8 w-8 rounded-full")
+                          %>
                         </div>
                         <div class="flex-1 min-w-0">
                           <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= track_playlists.track.title %></p>

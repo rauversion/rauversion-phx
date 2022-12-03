@@ -213,6 +213,10 @@ defmodule Rauversion.Playlists do
     end
   end
 
+  def iframe_code_string(url, playlist) do
+    '<iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="#{url}"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="#{playlist.user.username}" title="#{playlist.user.username}" target="_blank" style="color: #cccccc; text-decoration: none;">#{playlist.user.username}</a> · <a href="#{url}" title="#{playlist.title}" target="_blank" style="color: #cccccc; text-decoration: none;">#{playlist.title}</a></div>'
+  end
+
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
 
   defdelegate blob_for(struct, kind), to: Rauversion.BlobUtils

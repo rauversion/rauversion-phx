@@ -318,13 +318,13 @@ defmodule RauversionWeb.Router do
     live "/purchases/tickets", MyTicketsLive.Index, :index
 
     live "/tracks", TrackLive.Index, :index
-    live "/tracks/:id", TrackLive.Show, :show
     live "/tracks/:id/private", TrackLive.Show, :private
+    live "/tracks/:id", TrackLive.Show, :show
     live "/reposts", RepostLive.Index, :index
     live "/reposts/:id", RepostLive.Show, :show
     live "/playlists", PlaylistLive.Index, :index
-    live "/playlists/:id", PlaylistLive.Show, :show
     live "/playlists/:id/private", PlaylistLive.Show, :private
+    live "/playlists/:id", PlaylistLive.Show, :show
 
     # post "/direct_uploads" => "active_storage/direct_uploads#create", as: :rails_direct_uploads
 
