@@ -103,7 +103,7 @@ defmodule RauversionWeb.PlaylistLive.FormComponent do
       socket.assigns.playlist
       |> Playlists.change_playlist(playlist_params)
       |> Map.put(:action, :validate)
-
+    IO.inspect("validoooooo!")
     {:noreply, assign(socket, :changeset, changeset)}
   end
 

@@ -29,7 +29,7 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
                     <li class="py-4">
                       <div class="flex items-center space-x-4">
                         <div class="flex-shrink-0">
-                        <% IO.inspect(item) %>
+                        <% # IO.inspect(item) %>
                           <%
                             #= img_tag(Rauversion.Tracks.proxy_cover_representation_url(item.track),
                             #class: "h-8 w-8 rounded-full")
@@ -167,8 +167,10 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
               </.form>
 
             <% else %>
-              <%= @playlist.title %>
-              <%= live_redirect "Go to playlist", to: Routes.playlist_show_path(@socket, :show, @playlist) %>
+              <h3 class="text-2xl p-4"><%= @playlist.title %></h3>
+              <div class="p-4 border border-gray-800">
+                <%= live_redirect "Go to playlist", to: Routes.playlist_show_path(@socket, :show, @playlist) %>
+              </div>
             <% end %>
 
           </section>

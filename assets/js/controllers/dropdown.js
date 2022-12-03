@@ -22,7 +22,7 @@ export default class extends Controller {
 
   clickOutside(event) {
     // example to close a modal
-    event.preventDefault()
+    //event.preventDefault()
     this.menuTarget.classList.add("hidden")
     //this.toggleTransition()
   }
