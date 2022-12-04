@@ -102,7 +102,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                 </h3>
                 <ul role="list"
                   phx-hook={"PlaylistComponent"}
-                  id="playlist-component-list"
+                  id={"playlist-component-list-#{@playlist.id}"}
                   class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for track_playlists <- @playlist.track_playlists do %>
                     <li class="py-4 px-2 dark:hover:bg-gray-800">

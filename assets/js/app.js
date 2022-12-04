@@ -121,6 +121,8 @@ Hooks.PlaylistComponent = {
   mounted(){
     this.addFromPlaylistListener = (e) => {
       this.pushEventTo("#main-player", "play-song", {id: e.detail.track_id } )
+      this.pushEventTo("#main-player", "add-song", {id: e.detail.value.id } )
+      store.setState({playlist: [e.detail.value.id, ...store.getState().playlist ]})
     }
     window.addEventListener(`phx:add-from-playlist`, this.addFromPlaylistListener )
   },

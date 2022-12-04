@@ -17,7 +17,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   end
 
   defp who_to_follow(current_user) do
-    Accounts.unfollowed_users(current_user)
+    Accounts.unfollowed_artists(current_user)
     |> Repo.paginate(page: 1, page_size: 5)
 
     # |> Rauversion.Repo.preload(:avatar_blob)
@@ -77,7 +77,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
 
               </ul>
             </div>
-            <div class="mt-6">
+            <div class="mt-6 hidden">
               <a href="#" class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50  dark:text-gray-300 dark:bg-black dark:hover:bg-gray-900">
               <%= gettext "View all" %>
               </a>

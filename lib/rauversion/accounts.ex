@@ -38,6 +38,18 @@ defmodule Rauversion.Accounts do
       left_join: m in assoc(u, :followings),
       on: [follower_id: ^user.id],
       where: not is_nil(u.username),
+      where: u.type == "user",
+      where: is_nil(m.id),
+      preload: [:avatar_blob, :avatar_attachment]
+    )
+  end
+
+  def unfollowed_artists(user) do
+    from(u in User,
+      left_join: m in assoc(u, :followings),
+      on: [follower_id: ^user.id],
+      where: not is_nil(u.username),
+      where: u.type == "artist",
       where: is_nil(m.id),
       preload: [:avatar_blob, :avatar_attachment]
     )
