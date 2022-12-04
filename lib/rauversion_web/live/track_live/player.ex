@@ -246,11 +246,11 @@ defmodule RauversionWeb.TrackLive.Player do
           </div>
 
           <div id="player-main-player" phx-update="ignore"
-          data-player-target="player"
-          class="mx-3 flex-grow items-center">
+            data-player-target="player"
+            class="mx-3 flex-grow items-center">
           </div>
 
-          <div class="mx-3 w-1/4">
+          <div class="mx-3">
 
             <div class="py-0 px-2 h-12 leading-4 box-border text-zinc-200 flex">
 
@@ -289,7 +289,7 @@ defmodule RauversionWeb.TrackLive.Player do
                   <% end %>
 
                   <div class="flex-grow w-0-- leading-6">
-                    <%= live_redirect to: Routes.track_show_path(@socket, :show, @track), class: "flex items-center w-full h-4 text-xs cursor-pointer truncate text-neutral-200 focus:text-black hover:text-neutral-300", title: @track.title do %>
+                    <%= live_redirect to: Routes.profile_index_path(@socket, :index, @track.user.username), class: "flex items-center w-full h-4 text-xs cursor-pointer truncate text-neutral-200 focus:text-black hover:text-neutral-300", title: @track.title do %>
                       <%= @track.user.username %>
                     <% end %>
 
@@ -341,7 +341,7 @@ defmodule RauversionWeb.TrackLive.Player do
       <%= if @slideover do %>
         <div style="height: calc(100% - 64px);" class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full bg-white dark:bg-black">
           <div class="pointer-events-auto w-screen max-w-md">
-            <div class="flex h-full flex-col overflow-y-scroll py-6 shadow-xl dark:border-l-2 dark:border-white">
+            <div class="flex h-full flex-col overflow-y-scroll py-6 shadow-xl dark:border-l-2 dark:border-gray-800">
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
                   <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100" id="slide-over-title">

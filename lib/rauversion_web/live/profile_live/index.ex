@@ -64,6 +64,13 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   @impl true
+  def handle_event("change-track", %{"id" => id}, socket) do
+    {:noreply,
+     socket
+     |> push_event("add-from-playlist", %{track_id: id})}
+  end
+
+  @impl true
   def handle_info(
         {Tracks, [:tracks, :destroyed], %Tracks.Track{user_id: user_id} = _deleted_track},
         socket

@@ -80,7 +80,9 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
     assigns = assign(assigns, :like_class, active_button_class(like))
 
     ~H"""
-      <div class="my-2 p-2 border-- rounded-md shadow-xs mx-3 dark:bg-gray-900" id={"playlist-item-#{@playlist.id}"}>
+      <div
+        class="my-2 p-2 border-- rounded-md shadow-xs mx-3 dark:bg-gray-900"
+        id={"playlist-item-#{@playlist.id}"}>
         <div class="flex space-x-3">
           <div class="w-48">
             <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( @playlist, "cover", %{resize_to_limit: "300x200"}), class: "object-center object-cover group-hover:opacity-75") %>
@@ -98,10 +100,18 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     </span>
                   <% end %>
                 </h3>
-                <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
+                <ul role="list"
+                  phx-hook={"PlaylistComponent"}
+                  id="playlist-component-list"
+                  class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
                   <%= for track_playlists <- @playlist.track_playlists do %>
-                    <li class="py-4">
-                      <div class="flex items-center space-x-4">
+                    <li class="py-4 px-2 dark:hover:bg-gray-800">
+
+                      <a href="#"
+                        phx-click="change-track"
+                        phx-value-id={track_playlists.track.id}
+                        class="flex items-center space-x-4">
+
                         <div class="flex-shrink-0">
                           <%= img_tag(Rauversion.Tracks.variant_url(
                             track_playlists.track, "cover", %{resize_to_limit: "360x360"}),
@@ -121,7 +131,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                           </a>
                         </div>
                         -->
-                      </div>
+                      </a>
                     </li>
                   <% end %>
                 </ul>

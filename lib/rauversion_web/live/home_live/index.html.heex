@@ -156,7 +156,7 @@
         <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
           <h2 id="collections-playlists" class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">Playlists</h2>
 
-          <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-5 lg:gap-x-6">
+          <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-5 lg:gap-x-6 lg:gap-y-6">
             
             <%= for playlist <- @playlists do %>
               <div class="w-64 inline-flex flex-col text-center lg:w-auto">
@@ -189,7 +189,7 @@
             <%= gettext "Artists You Should Know" %>
           </h2>
 
-          <div class="mt-6 space-y-12 lg:space-y-0 grid-cols-4 grid lg:grid-cols-6 lg:gap-x-6">
+          <div class="mt-6 space-y-12 lg:space-y-0 grid-cols-4 grid lg:grid-cols-6 lg:gap-x-6 lg:gap-y-6">
             
             <%= for user <- @users do %>
                 <div class="group relative">

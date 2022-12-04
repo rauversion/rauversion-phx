@@ -117,6 +117,18 @@ Hooks.PlayerInitiator = {
   },
 }
 
+Hooks.PlaylistComponent = {
+  mounted(){
+    this.addFromPlaylistListener = (e) => {
+      this.pushEventTo("#main-player", "play-song", {id: e.detail.track_id } )
+    }
+    window.addEventListener(`phx:add-from-playlist`, this.addFromPlaylistListener )
+  },
+  destroyed(){
+    window.removeEventListener(`phx:add-from-playlist`, this.addFromPlaylistListener)
+  },
+}
+
 
 // handler for remove playlist, this is basically because we are using pxh-update=append on the playlist list
 window.addEventListener(`phx:remove-item`, (e) => {
