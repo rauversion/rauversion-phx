@@ -232,12 +232,12 @@
           <% end %>
         </div>
 
-        <%= if @playlist.metadata do %>
-        <.live_component
-          module={RauversionWeb.AttributionComponent}
-          id="attribution-t"
-          metadata={@track.metadata}
-        />
+        <%= if @track.metadata do %>
+          <.live_component
+            module={RauversionWeb.AttributionComponent}
+            id="attribution-t"
+            metadata={@track.metadata}
+          />
         <% end %>
 
 
