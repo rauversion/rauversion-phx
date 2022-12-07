@@ -225,18 +225,21 @@
             <%= SimplexFormat.text_to_html(@track.description, auto_link: true) %>
           </dd>
 
-          <%= if @track.metadata.buy_link do %>
+          <%= if @track.metadata && @track.metadata.buy_link do %>
             <a href={@track.metadata.buy_link} class="underline" target="blank">
               <%= gettext("Buy Link") %>
             </a>
           <% end %>
         </div>
 
+        <%= if @playlist.metadata do %>
         <.live_component
           module={RauversionWeb.AttributionComponent}
           id="attribution-t"
           metadata={@track.metadata}
         />
+        <% end %>
+
 
         <div class="sm:col-span-2">
           <!-- comments here -->
