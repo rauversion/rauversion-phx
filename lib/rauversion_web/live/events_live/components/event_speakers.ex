@@ -118,27 +118,44 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                 role="tabpanel">
 
                 <%= for performer <- performers(@event) do %>
+                  <% IO.inspect(performer.avatar_blob) %>
+
                   <div>
                     <div class="group relative h-[17.5rem] transform overflow-hidden rounded-4xl- rounded-full">
                       <div class="absolute top-0 left-0 right-4 bottom-6 rounded-4xl border transition duration-300 group-hover:scale-95 xl:right-6 border-brand-300"></div>
                       <div class="absolute inset-0 bg-indigo-50 rounded-full" style="clip-path:url(#:R9m:-0)">
-                        <%= if performer.user && performer.user.username do %>
-                          <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                        <%= if performer.avatar_blob do %>
+                          <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75 w-full") %>
+                        <% else %>
+                          <%= if performer.user && performer.user.username do %>
+                            <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                              <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer.user, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75 w-full") %>
+                            <% end %>
+                          <% end %>
+
+                          <%= if performer.user && !performer.user.username do %>
                             <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer.user, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75 w-full") %>
                           <% end %>
-                        <% else %>
-                          <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url( performer, "avatar", %{resize_to_fill: "300x300"}), class: "object-center object-cover group-hover:opacity-75 w-full") %>
+
+
                         <% end %>
                       </div>
                     </div>
                     <h3 class="mt-8 font-display text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                      <%= if performer.user && performer.user.username do %>
+                      <%= if performer.name do %>
+                        <%= performer.name %>
+                      <% end %>
+
+                      <%= if !performer.name && performer.user && performer.user.first_name && performer.user.username do %>
                         <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
                           <%= "#{performer.user.first_name} #{performer.user.last_name}" %>
                         <% end %>
-                      <% else %>
-                       <%= performer.name %>
                       <% end %>
+
+                      <%= if !performer.name && performer.user && performer.user.first_name && !performer.user.username do %>
+                          <%= "#{performer.user.first_name} #{performer.user.last_name}" %>
+                      <% end %>
+
                     </h3>
                     <p class="mt-1 text-base tracking-tight text-slate-500 dark:text-slate-300">
                       <%= performer.description %>

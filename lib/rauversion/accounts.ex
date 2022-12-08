@@ -548,8 +548,8 @@ defmodule Rauversion.Accounts do
         _ ->
           attrs = %{
             email: user_data.email,
-            username: username,
-            first_name: user_data.name,
+            username: username || user_data.username,
+            first_name: user_data.name || username,
             password: SecureRandom.urlsafe_base64(10)
           }
 

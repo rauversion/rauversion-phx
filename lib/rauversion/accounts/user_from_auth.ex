@@ -7,7 +7,7 @@ defmodule Rauversion.UserFromAuth do
 
   alias Ueberauth.Auth
 
-  def find_or_create(%Auth{} = auth) do
+  def get_basic_info(%Auth{} = auth) do
     {:ok, basic_info(auth)}
   end
 

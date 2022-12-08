@@ -14,7 +14,7 @@ defmodule RauversionWeb.OAuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    with {:ok, user} <- UserFromAuth.find_or_create(auth),
+    with {:ok, user} <- UserFromAuth.get_basic_info(auth),
          {:ok, %{user: user}} <- Accounts.get_or_create_user(user) do
       conn
       |> put_flash(:info, "Successfully authenticated.")
