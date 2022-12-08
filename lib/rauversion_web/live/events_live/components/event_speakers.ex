@@ -143,7 +143,14 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                     </div>
                     <h3 class="mt-8 font-display text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
                       <%= if performer.name do %>
-                        <%= performer.name %>
+
+                        <%= if performer.user && performer.user.first_name && performer.user.username do %>
+                          <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                            <%= performer.name %>
+                          <% end %>
+                        <% else %>
+                          <%= performer.name %>
+                        <% end %>
                       <% end %>
 
                       <%= if !performer.name && performer.user && performer.user.first_name && performer.user.username do %>
