@@ -164,9 +164,9 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                       <% end %>
 
                     </h3>
-                    <p class="mt-1 text-base tracking-tight text-slate-500 dark:text-slate-300">
+                    <div class="mt-1 text-base tracking-tight text-slate-500 dark:text-slate-300">
                       <%= SimplexFormat.text_to_html(performer.description, auto_link: true) %>
-                    </p>
+                    </div>
                   </div>
                 <% end %>
 
@@ -184,9 +184,9 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
           <h2 class="font-display text-4xl font-medium tracking-tighter text-brand-600 sm:text-5xl">
             <%= @event.event_settings.scheduling_label %>
           </h2>
-          <p class="mt-4 font-display text-2xl tracking-tight text-brand-100">
-            <%= @event.event_settings.scheduling_description %>
-          </p>
+          <div class="mt-4 font-display text-2xl tracking-tight text-brand-100">
+            <%= SimplexFormat.text_to_html(@event.event_settings.scheduling_description, auto_link: true) %>
+          </div>
         </div>
       </div>
 
