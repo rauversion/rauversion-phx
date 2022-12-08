@@ -165,7 +165,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
 
                     </h3>
                     <p class="mt-1 text-base tracking-tight text-slate-500 dark:text-slate-300">
-                      <%= performer.description %>
+                      <%= SimplexFormat.text_to_html(performer.description, auto_link: true) %>
                     </p>
                   </div>
                 <% end %>

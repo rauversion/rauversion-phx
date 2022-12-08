@@ -9,8 +9,9 @@ export const datetimeHook = {
       enableTime: true,
       parseDate(dateString, format) {
         var wrongDate = new Date(dateString);
-        var localizedDate = new Date(wrongDate.getTime() - wrongDate.getTimezoneOffset() * 60000);
-        return localizedDate;
+        return wrongDate
+        //var localizedDate = new Date(wrongDate.getTime() - wrongDate.getTimezoneOffset() * 60000);
+        //return dateString;
       },
     });
   }
