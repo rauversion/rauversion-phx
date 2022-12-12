@@ -21,7 +21,7 @@ defmodule Rauversion.MixProject do
   def application do
     [
       mod: {Rauversion.Application, []},
-      extra_applications: [:ex_cldr, :logger, :runtime_tools, :os_mon]
+      extra_applications: [:ex_cldr, :logger, :runtime_tools, :os_mon, :ssl]
     ]
   end
 
