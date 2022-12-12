@@ -141,7 +141,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.FormComponent do
             <div class="sm:col-span-6 space-y-3 flex flex-col justify-between">
               <%= form_input_renderer(f, %{type: :text_input, name: :venue, wrapper_class: ""}) %>
               <%= form_input_renderer(f, %{type: :select, options: [
-                [key: "All ages", value: "all", disabled: true],
+                [key: "All ages", value: "all", disabled: false],
                 [key: "13+", value: "13"],
                 [key: "16+", value: "16"],
                 [key: "17+", value: "17"],

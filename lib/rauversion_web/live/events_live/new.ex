@@ -2,7 +2,7 @@ defmodule RauversionWeb.EventsLive.New do
   use RauversionWeb, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
-  alias Rauversion.{Events, Repo}
+  alias Rauversion.{Events}
 
   @impl true
   def mount(_params, session, socket) do
@@ -136,6 +136,10 @@ defmodule RauversionWeb.EventsLive.New do
   end
 
   defp apply_action(socket, :streaming, %{"slug" => id}) do
+    edit_response(socket, id)
+  end
+
+  defp apply_action(socket, :recordings, %{"slug" => id}) do
     edit_response(socket, id)
   end
 

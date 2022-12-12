@@ -396,4 +396,8 @@ defmodule Rauversion.Events do
       streaming_access_for(event)
     )
   end
+
+  def get_recording(event, id) do
+    event |> Ecto.assoc(:event_recordings) |> where(id: ^id) |> Repo.one()
+  end
 end

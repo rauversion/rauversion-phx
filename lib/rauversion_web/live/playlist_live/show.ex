@@ -9,7 +9,6 @@ defmodule RauversionWeb.PlaylistLive.Show do
     {:ok, socket |> assign(:like, nil)}
   end
 
-  @impl true
   def update(assigns, socket) do
     case assigns do
       %{current_user: _current_user = %Rauversion.Accounts.User{}} ->
@@ -32,7 +31,7 @@ defmodule RauversionWeb.PlaylistLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id} = params, _, socket) do
+  def handle_params(%{"id" => id} = _params, _, socket) do
     playlist = get_playlist(id, socket.assigns.live_action)
 
     track =
@@ -107,49 +106,43 @@ defmodule RauversionWeb.PlaylistLive.Show do
   end
 
   def handle_event(
-    "like-playlist",
-    %{"id" => _id},
-    socket = %{
-      assigns: %{playlist: playlist, current_user: current_user = %Rauversion.Accounts.User{}}
-    }
-  ) do
+        "like-playlist",
+        %{"id" => _id},
+        socket = %{
+          assigns: %{playlist: playlist, current_user: current_user = %Rauversion.Accounts.User{}}
+        }
+      ) do
     attrs = %{user_id: current_user.id, playlist_id: playlist.id}
 
     case socket.assigns.like do
       %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like ->
         Rauversion.PlaylistLikes.delete_playlist_like(playlist_like)
+
         {:noreply,
-        assign(socket, :like, nil)
-        |> assign(:playlist, %{ socket.assigns.playlist | likes_count: playlist.likes_count - 1 } )
-      }
+         assign(socket, :like, nil)
+         |> assign(:playlist, %{socket.assigns.playlist | likes_count: playlist.likes_count - 1})}
 
       _ ->
         {:ok, %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like} =
           Rauversion.PlaylistLikes.create_playlist_like(attrs)
 
         {:noreply,
-          assign(socket, :like, playlist_like)
-          |> assign(:playlist, %{ socket.assigns.playlist | likes_count: playlist.likes_count + 1 } )
-        }
+         assign(socket, :like, playlist_like)
+         |> assign(:playlist, %{socket.assigns.playlist | likes_count: playlist.likes_count + 1})}
     end
   end
 
-  defp get_playlist( id, :private ) do
+  defp get_playlist(id, :private) do
     Rauversion.Playlists.find_by_signed_id!(id)
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 
-  defp get_playlist( id, :edit ) do
+  defp get_playlist(id, :edit) do
     Playlists.get_playlist!(id)
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 
-  defp get_playlist( id, :show ) do
-    Playlists.get_playlist!(id)
-    |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
-  end
-
-  defp get_playlist_by_signed_id(id) do
+  defp get_playlist(id, :show) do
     Playlists.get_playlist!(id)
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end

@@ -29,7 +29,7 @@
       </div>
 
       <div>
-      <%= if Rauversion.Events.has_access_to_streaming?(@event, @current_user) do %>
+        <%= if Rauversion.Events.has_access_to_streaming?(@event, @current_user) do %>
           <a href={Rauversion.Events.private_streaming_link(@event)}
             class="space-x-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <span><%= gettext("Watch live stream") %></span>
@@ -37,71 +37,71 @@
               <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
             </svg>
           </a>
-      <% else %>
-      <% end %>
+        <% else %>
+        <% end %>
       </div>
 
-        <%= if assigns[:payment_success] do %>
-          <.modal w_class={"w-1/2"}>
-            <div class="bg-gray-50 dark:bg-gray-800">
-              <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-                  <span class="block">
-                    <%= gettext("Payment succeed") %>
-                  </span>
-                  <span class="block text-green-600">
-                    <%= gettext("The payment was successfully processed.") %>
-                  </span>
-                </h2>
-                <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-                  <div class="inline-flex rounded-md shadow">
+      <%= if assigns[:payment_success] do %>
+        <.modal w_class={"w-1/2"}>
+          <div class="bg-gray-50 dark:bg-gray-800">
+            <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+                <span class="block">
+                  <%= gettext("Payment succeed") %>
+                </span>
+                <span class="block text-green-600">
+                  <%= gettext("The payment was successfully processed.") %>
+                </span>
+              </h2>
+              <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                <div class="inline-flex rounded-md shadow">
 
-                    <%= live_redirect to: "/purchases/tickets", class: "inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700" do %>
-                      <%= gettext("View tickets") %>
-                    <% end %>
-                  </div>
-               
+                  <%= live_redirect to: "/purchases/tickets", class: "inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700" do %>
+                    <%= gettext("View tickets") %>
+                  <% end %>
                 </div>
+              
               </div>
             </div>
-          </.modal>
-        <% end %>
+          </div>
+        </.modal>
+      <% end %>
 
-        <%= if assigns[:payment_failure] do %>
-          <.modal w_class={"w-1/2"}>
-            <div class="bg-gray-50 dark:bg-gray-800">
-              <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-                  <span class="flex space-x-2 items-center">
+      <%= if assigns[:payment_failure] do %>
+        <.modal w_class={"w-1/2"}>
+          <div class="bg-gray-50 dark:bg-gray-800">
+            <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
+              <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+                <span class="flex space-x-2 items-center">
 
-                    <span class="text-5xl">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                      </svg>
-                    </span>
-                    <span>
-                    <%= gettext("Payment failed") %>
-                    </span>
+                  <span class="text-5xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
                   </span>
-                  <span class="block text-red-600">
-                    <%= gettext("There was a problem processing the payment.") %>
+                  <span>
+                  <%= gettext("Payment failed") %>
                   </span>
-                </h2>
-              </div>
+                </span>
+                <span class="block text-red-600">
+                  <%= gettext("There was a problem processing the payment.") %>
+                </span>
+              </h2>
             </div>
-          </.modal>
-        <% end %>
+          </div>
+        </.modal>
+      <% end %>
 
-       <div class="hidden sm:mt-10 sm:flex lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
-          <.live_component
-            module={RauversionWeb.EventsLive.EventTicketsComponent}
-            id={:tickets_modal}
-            action={:new}
-            event={@event}
-            button_class={"inline-flex justify-center rounded-2xl bg-brand-600 p-4 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70"}
-            current_user={@current_user}
-          />
-        </div>
+      <div class="hidden sm:mt-10 sm:flex lg:mt-0 lg:grow lg:basis-0 lg:justify-end">
+        <.live_component
+          module={RauversionWeb.EventsLive.EventTicketsComponent}
+          id={:tickets_modal}
+          action={:new}
+          event={@event}
+          button_class={"inline-flex justify-center rounded-2xl bg-brand-600 p-4 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70"}
+          current_user={@current_user}
+        />
+      </div>
     </div>
   </header>
 
@@ -186,6 +186,15 @@
           </dl>
         </div>
       </div>
+    </div>
+
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <%= live_component(
+        RauversionWeb.EventsLive.Components.RecordingsList,
+        id: "recording-list",
+        event_recordings: event_recordings(@event) )
+      %>
     </div>
 
 
