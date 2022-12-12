@@ -66,4 +66,8 @@ defmodule RauversionWeb.EventsLive.Show do
           Rauversion.Tracks.variant_url(event, "cover", %{resize_to_limit: "360x360"})
     }
   end
+
+  def event_recordings(event) do
+    event |> Ecto.assoc(:event_recordings) |> Rauversion.Repo.paginate(page: 1, page_size: 6)
+  end
 end

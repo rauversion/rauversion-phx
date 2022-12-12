@@ -37,6 +37,8 @@ defmodule Rauversion.Events.Event do
 
     has_many :event_tickets, Rauversion.EventTickets.EventTicket, on_replace: :delete
 
+    has_many :event_recordings, Rauversion.EventRecordings.EventRecording, on_replace: :delete
+
     embeds_many :scheduling_settings, Rauversion.Events.Schedule, on_replace: :delete
     # embeds_many :tickets, Rauversion.Events.Ticket
     embeds_one :event_settings, Rauversion.Events.Settings

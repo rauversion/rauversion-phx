@@ -205,6 +205,7 @@ defmodule RauversionWeb.Router do
     live "/events/:slug/edit/tax", EventsLive.New, :tax
     live "/events/:slug/edit/attendees", EventsLive.New, :attendees
     live "/events/:slug/edit/streaming", EventsLive.New, :streaming
+    live "/events/:slug/edit/recordings", EventsLive.New, :recordings
     live "/events/:slug/edit/sponsors", EventsLive.New, :sponsors
     live "/events/:slug/edit/hosts", EventsLive.New, :hosts
 

@@ -87,7 +87,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
          |> put_flash(:error, "Failed to authenticate.")
          |> assign(:status, :error)}
 
-      any ->
+      _any ->
         {:noreply,
          socket
          |> assign(:status, :error)}
