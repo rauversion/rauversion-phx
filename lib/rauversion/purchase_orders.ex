@@ -444,7 +444,15 @@ defmodule Rauversion.PurchaseOrders do
     |> Repo.transaction()
   end
 
-  def notify_purchased_order(purchase_order, message \\ nil, inviter \\ nil) do
-    Rauversion.Events.EventNotifier.deliver_event_tickets(purchase_order, message, inviter)
+  def notify_purchased_order(purchase_order, message \\ nil, inviter \\ nil, options \\ []) do
+    defaults = [subject: nil, event: nil]
+    options = Keyword.merge(defaults, options)
+
+    Rauversion.Events.EventNotifier.deliver_event_tickets(
+      purchase_order,
+      message,
+      inviter,
+      options
+    )
   end
 end
