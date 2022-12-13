@@ -62,7 +62,10 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
            Rauversion.PurchaseOrders.notify_purchased_order(
              result.purchase_order,
              message,
-             socket.assigns.current_user
+             socket.assigns.current_user,
+             subject:
+               gettext("Invitation for event: %{title}", %{title: socket.assigns.event.title}),
+             event: socket.assigns.event
            ) do
       # IO.inspect(result)
       {:noreply,
