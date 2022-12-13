@@ -75,6 +75,7 @@ jobs:
           mix deps.clean mime --build
           mix deps.get
           mix deps.compile
+          mix deps.compile ex_cldr --force
           mix assets.setup
 
       #- name: Check for unused deps

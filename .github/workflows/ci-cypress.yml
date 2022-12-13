@@ -75,6 +75,7 @@ jobs:
           mix local.hex --force
           mix setup
           mix deps.compile
+          mix deps.compile ex_cldr --force
           mix assets.setup
           
 
