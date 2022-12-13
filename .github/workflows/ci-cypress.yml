@@ -55,25 +55,26 @@ jobs:
           elixir-version: ${{ matrix.elixir }}
           otp-version: ${{ matrix.otp }}
 
-      - name: Get deps cache
-        uses: actions/cache@v2
-        with:
-          path: deps/
-          key: >-
-            deps-${{ runner.os }}-${{ matrix.otp }}-
-            ${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
-      - name: Get build cache
-        uses: actions/cache@v2
-        with:
-          path: _build/test/
-          key: >-
-            build-${{ runner.os }}-${{ matrix.otp }}-
-            ${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+      # - name: Get deps cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: deps/
+      #     key: >-
+      #       deps-${{ runner.os }}-${{ matrix.otp }}-
+      #       ${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+      # - name: Get build cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: _build/test/
+      #     key: >-
+      #       build-${{ runner.os }}-${{ matrix.otp }}-
+      #       ${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
       - name: Install Dependencies
         run: |
           mix local.rebar --force
           mix local.hex --force
-          mix setup
+          mix deps.clean mime --build
+          mix deps.get
           mix deps.compile
           mix assets.setup
           
