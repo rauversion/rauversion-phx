@@ -31,10 +31,10 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
     {:noreply, assign(:day, List.first(socket.assigns.days))}
   end
 
-  def render_date(event, date) do
+  def render_date(date, tz \\ "Etc/UTC") do
     Rauversion.Dates.format_time(date,
       locale: "en-US",
-      timezone: event.timezone || "Etc/UTC",
+      timezone: tz,
       format: "hh:mm a"
     )
   end
@@ -118,8 +118,6 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                 role="tabpanel">
 
                 <%= for performer <- performers(@event) do %>
-                  <% IO.inspect(performer.avatar_blob) %>
-
                   <div>
                     <div class="group relative h-[17.5rem] transform overflow-hidden rounded-4xl- rounded-full">
                       <div class="absolute top-0 left-0 right-4 bottom-6 rounded-4xl border transition duration-300 group-hover:scale-95 xl:right-6 border-brand-300"></div>
@@ -247,9 +245,9 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                       <!-- -->
                       <!--<time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>-->
                       <!-- -->
-                      <%= render_date(@event, scheduling.start_date) %>
+                      <%= render_date(scheduling.start_date, @timezone) %>
                       -
-                      <%= render_date(@event, scheduling.end_date) %>
+                      <%= render_date(scheduling.end_date, @timezone) %>
                     </p>
                   </li>
                 </ol>
@@ -265,7 +263,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
 
                 <h3 class="text-2xl font-semibold tracking-tight text-brand-900 dark:text-brand-100">
                   <time datetime={day.start_date}>
-                    <%= Events.simple_date_for(day.start_date) %>
+                    <%= Events.simple_date_for(Rauversion.Dates.convert_date(day.start_date, @timezone)) %>
                   </time>
                 </h3>
 
@@ -290,9 +288,9 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                           <!-- -->
                           <!--<time datetime="2022-04-04T10:00AM-08:00">10:00AM</time>-->
                           <!-- -->
-                          <%= render_date(@event, scheduling.start_date) %>
+                          <%= render_date(scheduling.start_date, @timezone) %>
                           -
-                          <%= render_date(@event, scheduling.end_date) %>
+                          <%= render_date(scheduling.end_date, @timezone) %>
                         </p>
                       </li>
                     <% end %>
