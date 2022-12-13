@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2022-12-12 05:58\n"
+"PO-Revision-Date: 2022-12-13 17:29\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1999,62 +1999,62 @@ msgstr "Ver transmisión en vivo"
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:372
 #, elixir-autogen, elixir-format
 msgid "Event Manager"
-msgstr ""
+msgstr "Gestor de eventos"
 
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:94
 #, elixir-autogen, elixir-format
 msgid "Events I manage"
-msgstr ""
+msgstr "Eventos que administro"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:366
 #, elixir-autogen, elixir-format
 msgid "Listed on page"
-msgstr ""
+msgstr "Listado en la página"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:199
 #: lib/rauversion_web/live/track_live/show.html.heex:230
 #, elixir-autogen, elixir-format
 msgid "Buy Link"
-msgstr ""
+msgstr "Link de compra"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:191
 #, elixir-autogen, elixir-format
 msgid "Event image"
-msgstr ""
+msgstr "Imagen del evento"
 
 #: lib/rauversion_web/live/shared_components/attribution_component.ex:54
 #, elixir-autogen, elixir-format
 msgid "Some rights reserved"
-msgstr ""
+msgstr "Algunos derechos reservados"
 
 #: lib/rauversion_web/live/events_live/components/forms/recordings_component.ex:116
 #, elixir-autogen, elixir-format
 msgid "Add Event recordings from Twitch, Youtube etc..."
-msgstr ""
+msgstr "Añadir grabaciones de eventos desde Twitch, Youtube etc..."
 
 #: lib/rauversion_web/live/events_live/components/forms/recordings_component.ex:119
 #, elixir-autogen, elixir-format
 msgid "Add new event recording"
-msgstr ""
+msgstr "Añadir nueva grabación de evento"
 
 #: lib/rauversion_web/live/playlist_live/playlist_component.ex:99
 #: lib/rauversion_web/live/playlist_live/show.html.heex:93
 #, elixir-autogen, elixir-format
 msgid "Album"
-msgstr ""
+msgstr "Álbum"
 
 #: lib/rauversion_web/live/events_live/components/forms/recordings_component.ex:112
 #, elixir-autogen, elixir-format
 msgid "Event Recordings"
-msgstr ""
+msgstr "Grabaciones de eventos"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:65
 #, elixir-autogen, elixir-format
 msgid "Manage event recordings."
-msgstr ""
+msgstr "Administrar grabaciones de eventos."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:64
 #, elixir-autogen, elixir-format
 msgid "Recordings"
-msgstr ""
+msgstr "Grabaciones"
 
