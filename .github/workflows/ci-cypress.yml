@@ -73,7 +73,8 @@ jobs:
         run: |
           mix local.rebar --force
           mix local.hex --force
-          mix setup
+          mix deps.clean mime --build
+          mix deps.get
           mix deps.compile
           mix assets.setup
           
