@@ -232,7 +232,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                             <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
                                 <thead class="bg-gray-50-- dark:bg-gray-900--">
 
-                                  <tr>
+                                  <tr class="hidden sm:table-row">
                                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 sm:pl-6"><%= gettext("Name") %></th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-100"><%= gettext("Price") %></th>
                                     <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 dark:text-gray-100"><%= gettext("QTY") %></th>
@@ -251,7 +251,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
                                     <% #= for ticket <- @tickets do %>
                                       <tr>
-                                        <td class="whitespace-nowrap-- py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                        <td class="hidden sm:table-cell whitespace-nowrap-- py-4 pl-4 pr-3 text-sm sm:pl-6">
                                           <div class="flex items-center">
                                             <div class="">
                                               <div class="font-medium text-gray-900 dark:text-gray-100">
@@ -263,54 +263,68 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                             </div>
                                           </div>
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                        <td class="hidden sm:table-cell whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                                           <div class="text-gray-900 dark:text-gray-100 text-2xl">
                                             <%= Number.Currency.number_to_currency(ticket.price, precision: Rauversion.Events.presicion_for_currency(@event)) %>
                                             <%= @event.event_settings.ticket_currency %>
                                           </div>
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                        <td class="whitespace-nowrap-- px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
 
-                                          <div class="flex justify-center items-center space-x-3">
-
-                                            <%= if Decimal.to_integer(ticket.price) != 0 do %>
-                                              <%= label i, :x %>
-                                              <%= text_input i, :count, class: "bg-gray-700 border rounded-sm", type: :number %>
-                                              <%= error_tag i, :count %>
-                                              <%= hidden_input i, :ticket_id, value: ticket.id %>
-                                            <% else %>
-                                              <%= if reedemed_free_ticket?(@current_user, ticket) do %>
-                                                <div class="flex items-center space-x-2">
-                                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                  </svg>
-                                                  <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                    <%= gettext("Free ticket already added") %>
-                                                  </div>
-
+                                          <div class="flex flex-col space-y-2 sm:space-y-0">
+                                            <div class="flex items-center sm:hidden">
+                                              <div class="">
+                                                <div class="font-medium text-gray-900 dark:text-gray-100">
+                                                  <%= ticket.title %>
                                                 </div>
+                                                <div class="text-gray-500 dark:text-gray-400 break-all">
+                                                  <span class="overflow-wrap">
+                                                    <%= ticket.short_description %>
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="flex sm:justify-center items-center space-x-3">
+
+                                              <%= if Decimal.to_integer(ticket.price) != 0 do %>
+                                                <%= label i, :x %>
+                                                <%= text_input i, :count, class: "bg-gray-700 border rounded-sm", type: :number %>
+                                                <%= error_tag i, :count %>
+                                                <%= hidden_input i, :ticket_id, value: ticket.id %>
                                               <% else %>
-                                                <button
-                                                  type="button"
-                                                  phx-click="get-free-ticket"
-                                                  phx-value-id={ticket.id}
-                                                  phx-target={@myself}
-                                                  class="inline-flex justify-center rounded-2xl bg-brand-600 px-4 p-2 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70">
-                                                  <%= gettext("Get your FREE ticket") %>
-                                                </button>
+                                                <%= if reedemed_free_ticket?(@current_user, ticket) do %>
+                                                  <div class="flex items-center space-x-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
+                                                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
+                                                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                      <%= gettext("Free ticket already added") %>
+                                                    </div>
+
+                                                  </div>
+                                                <% else %>
+                                                  <button
+                                                    type="button"
+                                                    phx-click="get-free-ticket"
+                                                    phx-value-id={ticket.id}
+                                                    phx-target={@myself}
+                                                    class="inline-flex justify-center rounded-2xl bg-brand-600 px-4 p-2 text-base font-semibold text-white hover:bg-brand-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:text-white/70">
+                                                    <%= gettext("Get your FREE ticket") %>
+                                                  </button>
+                                                <% end %>
                                               <% end %>
-                                            <% end %>
+                                            </div>
                                           </div>
                                         </td>
                                       </tr>
                                   <% end %>
 
                                   <tr>
-                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                    <td class="hidden sm:table-cell whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
 
                                     </td>
 
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                    <td class="hidden sm:table-cell whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
 
                                     </td>
 
@@ -325,14 +339,14 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
 
 
                                   <tr>
-                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                    <td class="hidden sm:table-cell whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
 
                                     </td>
 
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                    <td class="hidden sm:table-cell whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                                     </td>
 
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                    <td colspan="3" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                                       <div class="flex justify-end">
                                         <div class="hidden">
                                         <%= if @changeset.valid? do %>
