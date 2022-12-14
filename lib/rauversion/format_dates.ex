@@ -42,4 +42,13 @@ defmodule Rauversion.Dates do
         Timex.format!(datetime, "{ISO:Extended}")
     end
   end
+
+  def convert_date(datetime, tz) do
+    case DateTime.shift_zone(datetime, tz) do
+      {:ok, d} -> d
+      {:error, _} -> datetime
+    end
+
+    # Timex.Timezone.convert(datetime, tz)
+  end
 end

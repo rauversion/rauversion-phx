@@ -16,7 +16,7 @@
         
         <div class="mx-auto flex items-center gap-4 px-4">
           <p>
-            <%= Rauversion.Events.event_dates(@event) %>
+            <%= Rauversion.Events.event_dates(@event, @timezone) %>  <% #= @timezone %>
           </p>
 
           <svg aria-hidden="true" viewBox="0 0 6 6" class="h-1.5 w-1.5 overflow-visible fill-current stroke-current">
@@ -201,6 +201,7 @@
     <.live_component
       id="speakers"
       event={@event}
+      timezone={@timezone}
       module={RauversionWeb.EventsLive.EventSpeakers}
     />
 

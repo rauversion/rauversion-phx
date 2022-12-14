@@ -312,17 +312,23 @@ defmodule Rauversion.Events do
     |> Event.changeset(attrs)
   end
 
-  def event_dates(%{event_start: _event_start = nil, event_ends: _event_ends = nil}) do
+  def event_dates(
+        %{event_start: _event_start = nil, event_ends: _event_ends = nil},
+        _timezone
+      ) do
     ""
   end
 
-  def event_dates(struct) do
-    case Cldr.Date.Interval.to_string(struct.event_start, struct.event_ends, Rauversion.Cldr) do
+  def event_dates(struct, timezone \\ "UTC") do
+    start = Rauversion.Dates.convert_date(struct.event_start, timezone)
+    ends = Rauversion.Dates.convert_date(struct.event_ends, timezone)
+
+    case Cldr.Date.Interval.to_string(start, ends, Rauversion.Cldr) do
       {:ok, d} ->
         d
 
       _ ->
-        struct.event_start
+        start
     end
   end
 
