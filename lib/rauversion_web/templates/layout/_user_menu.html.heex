@@ -111,7 +111,7 @@
                   data-transition-leave-to="opacity-0 scale-95">
                   <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-900 bg-white">
 
-                    <%= if is_creator?(@current_user) do %>
+                    <%= if is_creator?(@current_user) && @current_user.username do %>
                       <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <% end %>
 
@@ -193,7 +193,7 @@
             <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "License" %></a> -->
             <% #= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
 
-            <%= if is_creator?(@current_user) do %>
+            <%= if is_creator?(@current_user) && @current_user.username do %>
               <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
             <% end %>
 
