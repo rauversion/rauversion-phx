@@ -48,7 +48,7 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
                   </p>
 
                   <p class="mt-2 font-medium text-gray-900 dark:text-gray-100">
-                    <%= Rauversion.Events.event_dates(event) %>
+                    <%= Rauversion.Events.event_dates(event, @timezone) %>
                   </p>
                 <% end %>
 

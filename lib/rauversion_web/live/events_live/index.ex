@@ -4,7 +4,13 @@ defmodule RauversionWeb.EventsLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, socket |> assign_timezone()}
+  end
+
+  defp assign_timezone(socket) do
+    # || @default_timezone
+    timezone = get_connect_params(socket)["timezone"]
+    assign(socket, timezone: timezone)
   end
 
   @impl true
