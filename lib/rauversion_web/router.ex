@@ -20,6 +20,7 @@ defmodule RauversionWeb.Router do
     plug :put_secure_browser_headers
     plug :fetch_current_user
     plug RauversionWeb.Plugs.SetLocale
+    plug RauversionWeb.ArtistCheckPlug
   end
 
   # without protect_from_forgery

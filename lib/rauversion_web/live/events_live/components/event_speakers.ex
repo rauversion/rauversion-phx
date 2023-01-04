@@ -103,7 +103,11 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                     <time
                       datetime={day.start_date}
                       class="mt-1.5 block text-2xl font-semibold tracking-tight text-brand-900 dark:text-brand-100">
-                      <%= Rauversion.Events.simple_date_for(day.day) %>
+                      <% #= Rauversion.Events.simple_date_for(day.day, @timezone) %>
+                      <% #= Rauversion.Dates.convert_date(day.start_date, @timezone) %>
+                      <%= Events.simple_date_for(Rauversion.Dates.convert_date(day.start_date, @timezone)) %>
+
+
                     </time>
                   </div>
                 </div>
@@ -217,7 +221,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                           tabindex="0">
                         <span class="absolute inset-0"></span>
                         <time datetime={day.start_date}>
-                          <%= Events.simple_date_for(day.start_date) %>
+                          <%= Events.simple_date_for(Rauversion.Dates.convert_date(day.start_date, @timezone)) %>
                         </time>
                         </button>
                     </time>
