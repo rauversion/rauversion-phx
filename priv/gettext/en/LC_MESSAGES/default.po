@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2022-12-13 19:50\n"
+"PO-Revision-Date: 2023-01-05 03:30\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1414,12 +1414,12 @@ msgstr ""
 msgid "Free ticket"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:288
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:301
 #, elixir-autogen, elixir-format
 msgid "Free ticket already added"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:299
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:312
 #, elixir-autogen, elixir-format
 msgid "Get your FREE ticket"
 msgstr ""
@@ -1459,7 +1459,7 @@ msgstr ""
 msgid "Ready to dive in?"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:367
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:381
 #, elixir-autogen, elixir-format
 msgid "Ticket purchase complete"
 msgstr ""
@@ -1469,7 +1469,7 @@ msgstr ""
 msgid "Type the event address, and confirm the prompt"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:378
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:392
 #, elixir-autogen, elixir-format
 msgid "go to ticket"
 msgstr ""
@@ -1857,7 +1857,7 @@ msgstr ""
 msgid "read more"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/show.html.heex:273
+#: lib/rauversion_web/live/events_live/show.html.heex:274
 #, elixir-autogen, elixir-format
 msgid "All rights reserved."
 msgstr ""
@@ -1867,7 +1867,7 @@ msgstr ""
 msgid "Choose the currency in which you will charge"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/show.html.heex:271
+#: lib/rauversion_web/live/events_live/show.html.heex:272
 #, elixir-autogen, elixir-format
 msgid "Copyright ©"
 msgstr ""
@@ -1897,7 +1897,7 @@ msgstr ""
 msgid "Manage the event tickets."
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:344
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:358
 #, elixir-autogen, elixir-format
 msgid "Place order"
 msgstr ""
@@ -1952,7 +1952,7 @@ msgstr ""
 msgid "Our thoughtfully curated list of community tracks."
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:373
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:387
 #, elixir-autogen, elixir-format
 msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
 msgstr ""
