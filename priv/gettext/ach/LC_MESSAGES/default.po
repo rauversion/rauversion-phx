@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Acholi\n"
 "Language: ach_UG\n"
-"PO-Revision-Date: 2022-12-13 19:50\n"
+"PO-Revision-Date: 2023-01-05 03:30\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1414,12 +1414,12 @@ msgstr "crwdns563:0crwdne563:0"
 msgid "Free ticket"
 msgstr "crwdns565:0crwdne565:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:288
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:301
 #, elixir-autogen, elixir-format
 msgid "Free ticket already added"
 msgstr "crwdns567:0crwdne567:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:299
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:312
 #, elixir-autogen, elixir-format
 msgid "Get your FREE ticket"
 msgstr "crwdns569:0crwdne569:0"
@@ -1459,7 +1459,7 @@ msgstr "crwdns581:0crwdne581:0"
 msgid "Ready to dive in?"
 msgstr "crwdns583:0crwdne583:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:367
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:381
 #, elixir-autogen, elixir-format
 msgid "Ticket purchase complete"
 msgstr "crwdns587:0crwdne587:0"
@@ -1469,7 +1469,7 @@ msgstr "crwdns587:0crwdne587:0"
 msgid "Type the event address, and confirm the prompt"
 msgstr "crwdns589:0crwdne589:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:378
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:392
 #, elixir-autogen, elixir-format
 msgid "go to ticket"
 msgstr "crwdns591:0crwdne591:0"
@@ -1857,7 +1857,7 @@ msgstr "crwdns738:0crwdne738:0"
 msgid "read more"
 msgstr "crwdns740:0crwdne740:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:273
+#: lib/rauversion_web/live/events_live/show.html.heex:274
 #, elixir-autogen, elixir-format
 msgid "All rights reserved."
 msgstr "crwdns742:0crwdne742:0"
@@ -1867,7 +1867,7 @@ msgstr "crwdns742:0crwdne742:0"
 msgid "Choose the currency in which you will charge"
 msgstr "crwdns744:0crwdne744:0"
 
-#: lib/rauversion_web/live/events_live/show.html.heex:271
+#: lib/rauversion_web/live/events_live/show.html.heex:272
 #, elixir-autogen, elixir-format
 msgid "Copyright ©"
 msgstr "crwdns746:0crwdne746:0"
@@ -1897,7 +1897,7 @@ msgstr "crwdns754:0crwdne754:0"
 msgid "Manage the event tickets."
 msgstr "crwdns756:0crwdne756:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:344
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:358
 #, elixir-autogen, elixir-format
 msgid "Place order"
 msgstr "crwdns758:0crwdne758:0"
@@ -1952,7 +1952,7 @@ msgstr "crwdns776:0crwdne776:0"
 msgid "Our thoughtfully curated list of community tracks."
 msgstr "crwdns778:0crwdne778:0"
 
-#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:373
+#: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:387
 #, elixir-autogen, elixir-format
 msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
 msgstr "crwdns780:0crwdne780:0"
