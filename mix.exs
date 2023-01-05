@@ -12,7 +12,11 @@ defmodule Rauversion.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      validate_compile_env: false
+      releases: [
+        rauversion: [
+          validate_compile_env: false
+        ]
+      ]
     ]
   end
 
