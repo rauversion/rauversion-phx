@@ -7,8 +7,8 @@ defmodule Rauversion.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      # ++ [:cldr],
-      compilers: [:gettext] ++ Mix.compilers(),
+      # ++ [:cldr], ++ [:gettext]
+      compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
