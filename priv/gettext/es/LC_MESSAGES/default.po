@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish, Chile\n"
 "Language: es_CL\n"
-"PO-Revision-Date: 2023-01-05 03:30\n"
+"PO-Revision-Date: 2023-01-05 15:47\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -2061,10 +2061,10 @@ msgstr "Grabaciones"
 #: lib/rauversion_web/live/track_live/components/track_component.ex:253
 #, elixir-autogen, elixir-format
 msgid "Download"
-msgstr ""
+msgstr "Descargas"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:67
 #, elixir-autogen, elixir-format
 msgid "Invitation for event: %{title}"
-msgstr ""
+msgstr "Invitación al evento: %{title}"
 
