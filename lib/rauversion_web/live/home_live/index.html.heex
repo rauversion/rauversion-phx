@@ -181,7 +181,6 @@
     </section>
   <% end  %>
 
-  <%= if @users do %>
     <section aria-labelledby="collections-heading" class="bg-gray-100 dark:bg-black">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24 lg:pb-32 lg:pt-6 pt-4">
         <div class="max-w-2xl mx-auto lg:max-w-none">
@@ -191,7 +190,7 @@
 
           <div class="mt-6 space-y-12 lg:space-y-0 grid-cols-4 grid lg:grid-cols-6 lg:gap-x-6 lg:gap-y-6">
             
-            <%= for user <- @users do %>
+            <%= for user <- list_artists(1) do %>
                 <div class="group relative">
                   <%= live_redirect to: Routes.profile_index_path(@socket, :index, user.username) do %>
                     <div class="relative sm:h-64-- w-full- h-80- bg-white rounded-full overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1">
@@ -211,6 +210,5 @@
         </div>
       </div>
     </section>
-  <% end %>
 
 </main>
