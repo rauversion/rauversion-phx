@@ -351,6 +351,13 @@ defmodule Rauversion.Events do
     end
   end
 
+  def simple_datetime_for(date, format \\ :long) do
+    case Cldr.DateTime.to_string(date, format: format) do
+      {:ok, d} -> d
+      _ -> date
+    end
+  end
+
   def country_name(name) do
     case Countries.filter_by(:alpha2, name) do
       [%{name: country_name} | _] -> country_name

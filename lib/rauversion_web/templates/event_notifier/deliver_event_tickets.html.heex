@@ -32,7 +32,9 @@
   <b><%= ticket.event_ticket.settings.after_purchase_message %> </b>
 
   <p class="text-sm text-gray-500 dark:text-gray-300">
-    <%= Rauversion.Events.event_dates(ticket.event_ticket.event) %>, <%= ticket.event_ticket.event.location %>
+    <% # Rauversion.Events.event_dates(ticket.event_ticket.event, ticket.event_ticket.event.timezone) %>
+    <%= Rauversion.Events.simple_datetime_for(Rauversion.Dates.convert_date(ticket.event_ticket.event.event_start, ticket.event_ticket.event.timezone)) %>
+    , <%= ticket.event_ticket.event.location %>
   </p>
 
   <%= img_tag "cid:qrcode-#{ticket.id}.png" %>
