@@ -73,7 +73,7 @@ defmodule Rauversion.Events do
   def past_events(query) do
     query
     |> where([e], e.event_start <= ^Timex.now())
-    |> order_by(asc: :event_start)
+    |> order_by(desc: :event_start)
   end
 
   def list_tickets(event) do
