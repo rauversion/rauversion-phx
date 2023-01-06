@@ -44,19 +44,19 @@ defmodule Rauversion.Dates do
   end
 
   def convert_date(datetime, tz) do
-    IO.puts("DATETIME SHIFT")
-    IO.inspect(tz)
-    IO.inspect(datetime)
+    # IO.puts("DATETIME SHIFT")
+    # IO.inspect(tz)
+    # IO.inspect(datetime)
 
     case DateTime.shift_zone(datetime, tz) do
       {:ok, d} ->
-        IO.inspect("SHIFTED")
-        IO.inspect(d)
+        # IO.inspect("SHIFTED")
+        # IO.inspect(d)
         d
 
       {:error, _} ->
-        IO.inspect("NO SHIFTED")
-        IO.inspect(datetime)
+        # IO.inspect("NO SHIFTED")
+        # IO.inspect(datetime)
         datetime
     end
 

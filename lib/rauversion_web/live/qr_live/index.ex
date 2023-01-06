@@ -12,8 +12,15 @@ defmodule RauversionWeb.QrLive.Index do
       ticket ->
         {:ok,
          assign(socket, :qr, gen_qr(ticket))
-         |> assign(:ticket, ticket)}
+         |> assign(:ticket, ticket)
+         |> assign_timezone()}
     end
+  end
+
+  defp assign_timezone(socket) do
+    # || @default_timezone
+    timezone = get_connect_params(socket)["timezone"]
+    assign(socket, timezone: timezone)
   end
 
   @impl true

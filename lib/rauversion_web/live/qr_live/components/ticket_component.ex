@@ -44,7 +44,7 @@ defmodule RauversionWeb.QrLive.Components.TicketComponent do
               </h3>
               <div class="mt-2 flex flex-col">
                 <p class="text-sm text-gray-500 dark:text-gray-300">
-                  <%= Rauversion.Events.event_dates(@ticket.event_ticket.event) %>
+                  <%= Rauversion.Events.event_dates(@ticket.event_ticket.event, @timezone) %>
                 </p>
 
                 <p class="text-sm text-gray-500 dark:text-gray-300 font-bold">
