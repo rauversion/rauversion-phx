@@ -64,6 +64,18 @@ defmodule Rauversion.Events do
     |> where([e], e.state == "published")
   end
 
+  def upcoming_events(query) do
+    query
+    |> where([e], e.event_start >= ^Timex.now())
+    |> order_by(asc: :event_start)
+  end
+
+  def past_events(query) do
+    query
+    |> where([e], e.event_start <= ^Timex.now())
+    |> order_by(asc: :event_start)
+  end
+
   def list_tickets(event) do
     from(a in Rauversion.Events.Event,
       where: a.id == ^event.id,

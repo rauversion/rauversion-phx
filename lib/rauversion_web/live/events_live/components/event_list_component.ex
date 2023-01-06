@@ -12,8 +12,15 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
      |> assign(assigns)}
   end
 
-  defp list_posts() do
+  defp upcoming_events() do
     Events.public_events()
+    |> Events.upcoming_events()
+    |> Rauversion.Repo.all()
+  end
+
+  defp past_events() do
+    Events.public_events()
+    |> Events.past_events()
     |> Rauversion.Repo.all()
   end
 
@@ -32,7 +39,45 @@ defmodule RauversionWeb.EventsLive.EventsListComponent do
           <div class="max-w-7xl mx-auto py-16 px-4 overflow-hidden sm:py-24 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
 
-              <%= for event <- list_posts() do %>
+              <%= for event <- upcoming_events() do %>
+
+                <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, event.slug), class: "group text-sm" do %>
+                  <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900 group-hover:opacity-75">
+                    <%= img_tag(Rauversion.Events.Event.variant_url( event, "cover", %{resize_to_limit: "500x500"}), class: "w-full h-full object-center object-cover") %>
+                  </div>
+
+                  <h3 class="mt-4 font-medium text-gray-900 dark:text-gray-100">
+                    <%= event.title %>
+                  </h3>
+
+                  <p class="text-gray-500 italic">
+                    <%= event.province %> <%= event.city %> <%= event.country %>
+                  </p>
+
+                  <p class="mt-2 font-medium text-gray-900 dark:text-gray-100">
+                    <%= Rauversion.Events.event_dates(event, @timezone) %>
+                  </p>
+                <% end %>
+
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="relative max-w-lg mx-auto divide-y-2 divide-gray-200 dark:divide-gray-100 lg:max-w-7xl">
+        <div>
+          <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+            <%= gettext("Past Events") %>
+          </h2>
+        </div>
+
+        <div class="bg-white dark:bg-black">
+          <div class="max-w-7xl mx-auto py-16 px-4 overflow-hidden sm:py-24 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-8">
+
+              <%= for event <- past_events() do %>
 
                 <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, event.slug), class: "group text-sm" do %>
                   <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900 group-hover:opacity-75">
