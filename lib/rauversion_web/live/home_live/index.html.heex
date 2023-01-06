@@ -102,7 +102,7 @@
         <div class="relative w-full overflow-x-auto">
           <ul role="list" class="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
             
-            <%= for track <- @tracks do %>
+            <%= for track <- list_tracks(1) do %>
               <li class="w-64 inline-flex flex-col text-center lg:w-auto">
                 <div class="group relative">
                   <div class="w-full bg-gray-200 dark:bg-gray-800 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
@@ -150,7 +150,7 @@
     </div>
   </section>
 
-  <%= if Enum.any?(@playlists) do %>
+  <% #= if Enum.any?(@playlists) do %>
     <section aria-labelledby="collections-heading" class="bg-gray-100 dark:bg-gray-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
@@ -158,7 +158,7 @@
 
           <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-5 lg:gap-x-6 lg:gap-y-6">
             
-            <%= for playlist <- @playlists do %>
+            <%= for playlist <- list_playlists(1) do %>
               <div class="w-64 inline-flex flex-col text-center lg:w-auto">
                 <div class="group relative">
                   <div class="relative w-full h-80 bg-white dark:bg-black rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
@@ -179,7 +179,7 @@
         </div>
       </div>
     </section>
-  <% end  %>
+  <% # end %>
 
     <section aria-labelledby="collections-heading" class="bg-gray-100 dark:bg-black">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24 lg:pb-32 lg:pt-6 pt-4">

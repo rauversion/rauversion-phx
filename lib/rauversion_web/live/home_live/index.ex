@@ -56,7 +56,5 @@ defmodule RauversionWeb.HomeLive.Index do
   defp apply_action(socket, :index, _) do
     socket
     |> assign(:page_title, "Listing Tracks")
-    |> assign(:tracks, list_tracks(1))
-    |> assign(:playlists, list_playlists(1))
   end
 end
