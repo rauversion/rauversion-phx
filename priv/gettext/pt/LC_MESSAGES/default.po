@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2023-01-05 03:30\n"
+"PO-Revision-Date: 2023-01-05 16:53\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -1506,24 +1506,24 @@ msgstr "Você precisa fazer o login antes de obter os tickets"
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:86
 #, elixir-autogen, elixir-format
 msgid "Please send us an email showing us your work"
-msgstr ""
+msgstr "Por favor, envie-nos um e-mail mostrando seu trabalho"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:97
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:141
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:87
 #, elixir-autogen, elixir-format
 msgid "Request an artist account"
-msgstr ""
+msgstr "Solicitar uma conta de artista"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:95
 #, elixir-autogen, elixir-format
 msgid "Tracks uploads are not allowed on your account type"
-msgstr ""
+msgstr "Faixas de envio não são permitidas no seu tipo de conta"
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:137
 #, elixir-autogen, elixir-format
 msgid "View Article"
-msgstr ""
+msgstr "Novo artigo"
 
 #: lib/rauversion_web/live/track_live/form_component.html.heex:94
 #, elixir-autogen, elixir-format
@@ -1533,27 +1533,27 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/event_overview.ex:12
 #, elixir-autogen, elixir-format
 msgid "Event overview"
-msgstr ""
+msgstr "Visão Geral de Eventos"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:83
 #, elixir-autogen, elixir-format
 msgid "Payment failed"
-msgstr ""
+msgstr "Pagamento falhou"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:50
 #, elixir-autogen, elixir-format
 msgid "Payment succeed"
-msgstr ""
+msgstr "Pagamento efetuado"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:53
 #, elixir-autogen, elixir-format
 msgid "The payment was successfully processed."
-msgstr ""
+msgstr "O pagamento foi processado com sucesso."
 
 #: lib/rauversion_web/live/events_live/show.html.heex:87
 #, elixir-autogen, elixir-format
 msgid "There was a problem processing the payment."
-msgstr ""
+msgstr "Houve um problema ao processar o pagamento."
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:85
 #, elixir-autogen, elixir-format
@@ -1563,12 +1563,12 @@ msgstr ""
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:84
 #, elixir-autogen, elixir-format
 msgid "Transbank not allowed"
-msgstr ""
+msgstr "Transbank não permitido"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:60
 #, elixir-autogen, elixir-format
 msgid "View tickets"
-msgstr ""
+msgstr "Ver tickets"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:125
 #, elixir-autogen, elixir-format
@@ -1578,253 +1578,253 @@ msgstr ""
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:30
 #, elixir-autogen, elixir-format
 msgid "Invitation sent successfully"
-msgstr ""
+msgstr "Convite enviado com sucesso"
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:46
 #, elixir-autogen, elixir-format
 msgid "Invitations"
-msgstr ""
+msgstr "Convites"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:139
 #, elixir-autogen, elixir-format
 msgid "Invitations are disabled on your account type"
-msgstr ""
+msgstr "Convites estão desativados no seu tipo de conta"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:138
 #, elixir-autogen, elixir-format
 msgid "Invitations disabled"
-msgstr ""
+msgstr "Convites desativados"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:107
 #, elixir-autogen, elixir-format
 msgid "Invite artists"
-msgstr ""
+msgstr "Convidar artistas"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:65
 #, elixir-autogen, elixir-format
 msgid "Invite artists to rauversion"
-msgstr ""
+msgstr "Convidar artistas para rauversion"
 
 #: lib/rauversion_web/live/usersettings_live/components/nav_bar.ex:47
 #, elixir-autogen, elixir-format
 msgid "Invite other artists to your account."
-msgstr ""
+msgstr "Convide outros artistas para a sua conta."
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:87
 #, elixir-autogen, elixir-format
 msgid "Invite people"
-msgstr ""
+msgstr "Convidar pessoas"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:69
 #, elixir-autogen, elixir-format
 msgid "you have %{count} invitations left"
-msgstr ""
+msgstr "você tem %{count} convites restantes"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:36
 #, elixir-autogen, elixir-format
 msgid "Error, Invitation was not sent"
-msgstr ""
+msgstr "Erro, convite não foi enviado"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:49
 #, elixir-autogen, elixir-format
 msgid "Invitation not sent, this person already exists"
-msgstr ""
+msgstr "Convite não enviado, esta pessoa já existe"
 
 #: lib/rauversion_web/live/usersettings_live/components/invitations.ex:42
 #, elixir-autogen, elixir-format
 msgid "There was something wrong sending this invitation"
-msgstr ""
+msgstr "Houve algo de errado ao enviar este convite"
 
 #: lib/rauversion_web/templates/error/404.html.heex:31
 #: lib/rauversion_web/templates/error/500.html.heex:31
 #, elixir-autogen, elixir-format
 msgid "Contact support"
-msgstr ""
+msgstr "Contatar o suporte"
 
 #: lib/rauversion_web/templates/error/404.html.heex:28
 #: lib/rauversion_web/templates/error/500.html.heex:28
 #, elixir-autogen, elixir-format
 msgid "Go back home"
-msgstr ""
+msgstr "Voltar ao início"
 
 #: lib/rauversion_web/templates/error/404.html.heex:20
 #, elixir-autogen, elixir-format
 msgid "Page not found"
-msgstr ""
+msgstr "Página não encontrada"
 
 #: lib/rauversion_web/templates/error/404.html.heex:23
 #: lib/rauversion_web/templates/error/500.html.heex:23
 #, elixir-autogen, elixir-format
 msgid "Please check the URL in the address bar and try again."
-msgstr ""
+msgstr "Por favor, verifique a URL na barra de endereços e tente novamente."
 
 #: lib/rauversion_web/templates/error/500.html.heex:20
 #, elixir-autogen, elixir-format
 msgid "Something went wrong"
-msgstr ""
+msgstr "Ocorreu um problema"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:63
 #, elixir-autogen, elixir-format
 msgid "Edit Event"
-msgstr ""
+msgstr "Editar evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:46
 #, elixir-autogen, elixir-format
 msgid "Publish Event"
-msgstr ""
+msgstr "Publicar evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:45
 #, elixir-autogen, elixir-format
 msgid "Unpublish Event"
-msgstr ""
+msgstr "Despublicar evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:53
 #, elixir-autogen, elixir-format
 msgid "Your event has not been published"
-msgstr ""
+msgstr "Seu evento não foi publicado"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:52
 #, elixir-autogen, elixir-format
 msgid "Your event is published"
-msgstr ""
+msgstr "Seu evento foi publicado"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:196
 #, elixir-autogen, elixir-format
 msgid "Add Streaming service"
-msgstr ""
+msgstr "Adicionar serviço de streaming"
 
 #: lib/rauversion_web/live/articles_live/show.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "By %{name}"
-msgstr ""
+msgstr "Por %{name}"
 
 #: lib/rauversion_web/live/usersettings_live/components/transbank_form.ex:75
 #, elixir-autogen, elixir-format
 msgid "Change Transbank information"
-msgstr ""
+msgstr "Alterar informações do E-mail"
 
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:114
 #, elixir-autogen, elixir-format
 msgid "Change profile information"
-msgstr ""
+msgstr "Alterar informações do E-mail"
 
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:108
 #, elixir-autogen, elixir-format
 msgid "Cover image"
-msgstr ""
+msgstr "Imagem da capa"
 
 #: lib/rauversion_web/live/events_live/components/forms/tickets_form_component.ex:244
 #, elixir-autogen, elixir-format
 msgid "Delete Ticket"
-msgstr ""
+msgstr "Apagar Ticket"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:286
 #, elixir-autogen, elixir-format
 msgid "Go and check the event details"
-msgstr ""
+msgstr "Vá e verifique os detalhes do evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:223
 #, elixir-autogen, elixir-format
 msgid "Go live with a remote event via one of the following video streaming services"
-msgstr ""
+msgstr "Ir ao vivo com um evento remoto através de um dos seguintes serviços de streaming de vídeo"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:226
 #, elixir-autogen, elixir-format
 msgid "Go to streaming event page"
-msgstr ""
+msgstr "Ir para a página de streaming do evento"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:145
 #, elixir-autogen, elixir-format
 msgid "Go to the Zoom meeting"
-msgstr ""
+msgstr "Ir para a reunião Zoom"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:80
 #, elixir-autogen, elixir-format
 msgid "Live Streaming on jitsi open source platform"
-msgstr ""
+msgstr "Streaming ao vivo na plataforma de código aberto jitsi"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:74
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:86
 #, elixir-autogen, elixir-format
 msgid "Live Streaming to 15 services at once, including youtube, twitch, zoom etc..."
-msgstr ""
+msgstr "Streaming ao vivo para 15 serviços ao mesmo tempo, incluindo youtube, twitch, zoom etc..."
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:68
 #, elixir-autogen, elixir-format
 msgid "Mux is a streaming service"
-msgstr ""
+msgstr "Mux é um serviço de streaming"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:140
 #, elixir-autogen, elixir-format
 msgid "Player not available please open the metting on Zoom service"
-msgstr ""
+msgstr "Video Player não disponível, abra a reunião no serviço Zoom"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:40
 #, elixir-autogen, elixir-format
 msgid "Streaming"
-msgstr ""
+msgstr "Transmissão"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:219
 #, elixir-autogen, elixir-format
 msgid "Streaming services"
-msgstr ""
+msgstr "Adicionar serviço de streaming"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:67
 #, elixir-autogen, elixir-format
 msgid "Twitch is a streaming service"
-msgstr ""
+msgstr "Mux é um serviço de streaming"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:69
 #, elixir-autogen, elixir-format
 msgid "Whereby is a streaming service"
-msgstr ""
+msgstr "Mux é um serviço de streaming"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:76
 #, elixir-autogen, elixir-format
 msgid "Zoom is a streaming service"
-msgstr ""
+msgstr "Mux é um serviço de streaming"
 
 #: lib/rauversion_web/live/event_streaming/show.ex:214
 #, elixir-autogen, elixir-format
 msgid "no renderer avaiable"
-msgstr ""
+msgstr "sem renderização disponível"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:118
 #, elixir-autogen, elixir-format
 msgid "use this url in case you need to process webhooks from the streamin service"
-msgstr ""
+msgstr "use esta url caso você precise processar webhooks do serviço de transmissão"
 
 #: lib/rauversion_web/live/events_live/components/forms/streaming_component.ex:116
 #, elixir-autogen, elixir-format
 msgid "webhook url"
-msgstr ""
+msgstr "URL do webhook"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:252
 #, elixir-autogen, elixir-format
 msgid "Confirm image"
-msgstr ""
+msgstr "Confirmar imagem"
 
 #: lib/rauversion_web/live/articles_live/components/sharer_component.ex:49
 #, elixir-autogen, elixir-format
 msgid "Facebook"
-msgstr ""
+msgstr "Siga-nos"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:17
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:156
 #, elixir-autogen, elixir-format
 msgid "Music"
-msgstr ""
+msgstr "Música"
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:115
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:197
 #, elixir-autogen, elixir-format
 msgid "My Music"
-msgstr ""
+msgstr "Minhas músicas"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:199
 #, elixir-autogen, elixir-format
 msgid "Or generate the image with AI"
-msgstr ""
+msgstr "Ou gerar a imagem com IA"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:93
 #, elixir-autogen, elixir-format
@@ -1834,97 +1834,97 @@ msgstr ""
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:261
 #, elixir-autogen, elixir-format
 msgid "Redo image"
-msgstr ""
+msgstr "Refazer imagem"
 
 #: lib/rauversion_web/live/articles_live/components/sharer_component.ex:12
 #, elixir-autogen, elixir-format
 msgid "Share on: "
-msgstr ""
+msgstr "Compartilhar em: "
 
 #: lib/rauversion_web/live/articles_live/components/sharer_component.ex:30
 #, elixir-autogen, elixir-format
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:233
 #, elixir-autogen, elixir-format
 msgid "We use DALL-E from Open AI to generate images"
-msgstr ""
+msgstr "Nós usamos o DALL-E do Open AI para gerar imagens"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:218
 #, elixir-autogen, elixir-format
 msgid "generate image"
-msgstr ""
+msgstr "gerar imagem"
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:235
 #, elixir-autogen, elixir-format
 msgid "read more"
-msgstr ""
+msgstr "leia mais"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:274
 #, elixir-autogen, elixir-format
 msgid "All rights reserved."
-msgstr ""
+msgstr "Todos os direitos reservados."
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:180
 #, elixir-autogen, elixir-format
 msgid "Choose the currency in which you will charge"
-msgstr ""
+msgstr "Escolha a moeda em que você irá carregar"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:272
 #, elixir-autogen, elixir-format
 msgid "Copyright ©"
-msgstr ""
+msgstr "Direitos Autorais ©"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:17
 #, elixir-autogen, elixir-format
 msgid "Edit event Information."
-msgstr ""
+msgstr "Editar informações do evento."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:23
 #, elixir-autogen, elixir-format
 msgid "Edit event Schedulings."
-msgstr ""
+msgstr "Editar agendamento de eventos."
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:102
 #, elixir-autogen, elixir-format
 msgid "Event Timezone"
-msgstr ""
+msgstr "Fuso horário do evento"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:41
 #, elixir-autogen, elixir-format
 msgid "Manage live streaming sources event."
-msgstr ""
+msgstr "Gerenciar o evento de streaming ao vivo."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:35
 #, elixir-autogen, elixir-format
 msgid "Manage the event tickets."
-msgstr ""
+msgstr "Gerenciar os bilhetes de evento."
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:358
 #, elixir-autogen, elixir-format
 msgid "Place order"
-msgstr ""
+msgstr "Faça a compra"
 
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:112
 #, elixir-autogen, elixir-format
 msgid "Times are displayed in"
-msgstr ""
+msgstr "Os tempos são exibidos em"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:59
 #, elixir-autogen, elixir-format
 msgid "View the event's attendees list."
-msgstr ""
+msgstr "Visualizar a lista de participantes do evento."
 
 #: lib/rauversion_web/live/track_live/components/track_component.ex:242
 #, elixir-autogen, elixir-format
 msgid "Add to next up"
-msgstr ""
+msgstr "Adicionar à próxima"
 
 #: lib/rauversion_web/live/track_live/player.ex:348
 #, elixir-autogen, elixir-format
 msgid "Next up"
-msgstr ""
+msgstr "Avançar acima"
 
 #: lib/rauversion_web/live/track_live/components/track_component.ex:230
 #, elixir-autogen, elixir-format
@@ -1939,77 +1939,77 @@ msgstr ""
 #: lib/rauversion_web/live/track_live/components/track_component.ex:181
 #, elixir-autogen, elixir-format
 msgid "More"
-msgstr ""
+msgstr "Mais"
 
 #: lib/rauversion_web/live/track_live/index.html.heex:19
 #, elixir-autogen, elixir-format
 msgid "Discover Tracks and Albums"
-msgstr ""
+msgstr "Descubra trilhas e álbuns"
 
 #: lib/rauversion/events/event_notifier.ex:71
 #, elixir-autogen, elixir-format
 msgid "Event Tickets confirmation"
-msgstr ""
+msgstr "Confirmação dos Tickets"
 
 #: lib/rauversion_web/live/track_live/index.html.heex:20
 #, elixir-autogen, elixir-format
 msgid "Our thoughtfully curated list of community tracks."
-msgstr ""
+msgstr "Nossa lista de caminhos da comunidade cuidadosamente selecionada."
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:387
 #, elixir-autogen, elixir-format
 msgid "The ticket purchase was successfully completed, it willappear in your purchases section"
-msgstr ""
+msgstr "A compra do bilhete foi concluída com sucesso, ela aparecerá na sua seção de compras"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:122
 #, elixir-autogen, elixir-format
 msgid "A list of all the users in your account including their name, title, email and role."
-msgstr ""
+msgstr "Uma lista de todos os usuários em sua conta, incluindo seus nomes, títulos, e-mail e papel."
 
 #: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:27
 #, elixir-autogen, elixir-format
 msgid "Give away courtesy invitations."
-msgstr ""
+msgstr "Dê convites de cortesia."
 
 #: lib/rauversion_web/templates/event_notifier/deliver_event_tickets.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "Has invited you to the event"
-msgstr ""
+msgstr "Convidou você para o evento"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:75
 #, elixir-autogen, elixir-format
 msgid "Invitation sent"
-msgstr ""
+msgstr "Convites"
 
 #: lib/rauversion_web/live/events_live/components/forms/invite_attendee_form.ex:25
 #, elixir-autogen, elixir-format
 msgid "Send invitations"
-msgstr ""
+msgstr "Enviar convites"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:121
 #, elixir-autogen, elixir-format
 msgid "Users"
-msgstr ""
+msgstr "Usuários"
 
 #: lib/rauversion_web/live/events_live/show.html.heex:35
 #, elixir-autogen, elixir-format
 msgid "Watch live stream"
-msgstr ""
+msgstr "Assistir à transmissão ao vivo"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:372
 #, elixir-autogen, elixir-format
 msgid "Event Manager"
-msgstr ""
+msgstr "Gerenciador de Eventos"
 
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:94
 #, elixir-autogen, elixir-format
 msgid "Events I manage"
-msgstr ""
+msgstr "Eventos que eu gerencio"
 
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:366
 #, elixir-autogen, elixir-format
 msgid "Listed on page"
-msgstr ""
+msgstr "Listado na página"
 
 #: lib/rauversion_web/live/playlist_live/show.html.heex:199
 #: lib/rauversion_web/live/track_live/show.html.heex:230
@@ -2020,51 +2020,51 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/forms/form_component.ex:191
 #, elixir-autogen, elixir-format
 msgid "Event image"
-msgstr ""
+msgstr "Imagem do evento"
 
 #: lib/rauversion_web/live/shared_components/attribution_component.ex:54
 #, elixir-autogen, elixir-format
 msgid "Some rights reserved"
-msgstr ""
+msgstr "Todos os direitos reservados"
 
 #: lib/rauversion_web/live/events_live/components/forms/recordings_component.ex:117
 #, elixir-autogen, elixir-format
 msgid "Add Event recordings from Twitch, Youtube etc..."
-msgstr ""
+msgstr "Adicionar gravações de eventos do Twitch, Youtube etc..."
 
 #: lib/rauversion_web/live/events_live/components/forms/recordings_component.ex:120
 #, elixir-autogen, elixir-format
 msgid "Add new event recording"
-msgstr ""
+msgstr "Adicionar nova gravação de evento"
 
 #: lib/rauversion_web/live/playlist_live/playlist_component.ex:99
 #: lib/rauversion_web/live/playlist_live/show.html.heex:93
 #, elixir-autogen, elixir-format
 msgid "Album"
-msgstr ""
+msgstr "Álbum"
 
 #: lib/rauversion_web/live/events_live/components/forms/recordings_component.ex:113
 #, elixir-autogen, elixir-format
 msgid "Event Recordings"
-msgstr ""
+msgstr "Gravações de Eventos"
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:65
 #, elixir-autogen, elixir-format
 msgid "Manage event recordings."
-msgstr ""
+msgstr "Gerenciar gravações de eventos."
 
 #: lib/rauversion_web/live/events_live/components/nav_bar.ex:64
 #, elixir-autogen, elixir-format
 msgid "Recordings"
-msgstr ""
+msgstr "Gravações"
 
 #: lib/rauversion_web/live/track_live/components/track_component.ex:253
 #, elixir-autogen, elixir-format
 msgid "Download"
-msgstr ""
+msgstr "Downloads"
 
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:67
 #, elixir-autogen, elixir-format
 msgid "Invitation for event: %{title}"
-msgstr ""
+msgstr "Convite para o evento: %{title}"
 
