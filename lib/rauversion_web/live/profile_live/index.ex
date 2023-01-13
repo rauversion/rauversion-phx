@@ -98,34 +98,50 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   defp apply_action(socket, :index, %{"username" => id}) do
     socket
-    |> assign(:page_title, "All tracks")
+    |> assign(
+      :page_title,
+      gettext("Stream %{id} | Listen to music online for free on Rauversion", id: id)
+    )
     |> assign(:title, "all")
     |> assign(:data, menu(socket, id, "all"))
   end
 
   defp apply_action(socket, :tracks_all, %{"username" => id}) do
     socket
-    |> assign(:page_title, "All tracks")
+    |> assign(
+      :page_title,
+      gettext("Stream %{id} | Listen to music online for free on Rauversion", id: id)
+    )
     |> assign(:title, "all")
     |> assign(:data, menu(socket, id, "all"))
   end
 
   defp apply_action(socket, :reposts, %{"username" => id}) do
     socket
-    |> assign(:page_title, "Reposts")
+    |> assign(
+      :page_title,
+      gettext("Listen to %{id}'s favorite music online for free on Rauversion", id: id)
+    )
     |> assign(:title, "reposts")
     |> assign(:data, menu(socket, id, "reposts"))
   end
 
   defp apply_action(socket, :albums, %{"username" => id}) do
     socket
+    |> assign(
+      :page_title,
+      gettext("Stream %{id} | Listen to music albums online for free on Rauversion", id: id)
+    )
     |> assign(:title, "albums")
     |> assign(:data, menu(socket, id, "albums"))
   end
 
   defp apply_action(socket, :playlists, %{"username" => id}) do
     socket
-    |> assign(:page_title, "Tracks all")
+    |> assign(
+      :page_title,
+      gettext("Stream %{id} | Listen to music playlists online for free on Rauversion", id: id)
+    )
     |> assign(:title, "playlists")
     |> assign(:data, menu(socket, id, "playlists"))
   end
@@ -133,12 +149,20 @@ defmodule RauversionWeb.ProfileLive.Index do
   defp apply_action(socket, :popular, %{"username" => id}) do
     socket
     |> assign(:title, "popular")
+    |> assign(
+      :page_title,
+      gettext(
+        "Stream %{id} | Listen to top hits and popular tracks online for free on Rauversion",
+        id: id
+      )
+    )
     |> assign(:data, menu(socket, id, "popular"))
   end
 
   defp apply_action(socket, :insights, %{"username" => id}) do
     socket
     |> assign(:title, "insights")
+    |> assign(:page_title, gettext("%{id}'s Insights on Rauversion", id: id))
     |> assign(:data, menu(socket, id, "insights"))
   end
 
