@@ -358,7 +358,7 @@ defmodule RauversionWeb.LiveHelpers do
             <%= checkbox(@form, @field.name, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300") %>
           </div>
           <div class="flex flex-col">
-            <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= label @form, Map.get(@field, :label) || @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
             <p class="text-xs text-gray-500 dark:text-gray-300">
               <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
                 "true" ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)

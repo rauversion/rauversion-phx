@@ -132,6 +132,26 @@ defmodule Rauversion.Playlists.Playlist do
     |> Enum.filter(fn x -> !is_nil(x) end)
   end
 
+  def pricing_definitions(_changeset) do
+    [
+      %{
+        name: :price,
+        wrapper_class: "sm:col-span-4",
+        hint: "zero or more",
+        label: "Price",
+        type: :text_input
+      },
+      %{
+        name: :name_your_price,
+        wrapper_class: "sm:col-span-4",
+        # hint: "Let users name the price",
+        label: "let fans pay more if they want",
+        type: :checkbox
+      }
+    ]
+    |> Enum.filter(fn x -> !is_nil(x) end)
+  end
+
   def custom_genre_field(changeset) do
     case is_custom_genre?(changeset) do
       true ->

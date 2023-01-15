@@ -184,6 +184,8 @@ defmodule RauversionWeb.Router do
 
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
+    live "/merch/mine", MerchLive.Index, :index
+
     live "/articles/mine", ArticlesLive.Index, :mine
     live "/articles/new", ArticlesLive.New, :new
     live "/articles/edit/:id", ArticlesLive.New, :edit

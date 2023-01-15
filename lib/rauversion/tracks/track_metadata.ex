@@ -36,6 +36,8 @@ defmodule Rauversion.Tracks.TrackMetadata do
     field :non_derivative_works, :boolean
     field :share_alike, :boolean
     field :copies, :string
+    field :price, :decimal
+    field :name_your_price, :boolean
   end
 
   @required_fields []
@@ -69,7 +71,9 @@ defmodule Rauversion.Tracks.TrackMetadata do
     :attribution,
     :noncommercial,
     :copies,
-    :peaks
+    :peaks,
+    :price,
+    :name_your_price
   ]
 
   def changeset(struct, attrs) do

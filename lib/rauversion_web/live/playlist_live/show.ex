@@ -89,6 +89,13 @@ defmodule RauversionWeb.PlaylistLive.Show do
   end
 
   @impl true
+  def handle_event("pricing-tab", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:current_tab, "pricing-tab")}
+  end
+
+  @impl true
   def handle_event("tracks-tab", %{}, socket) do
     {:noreply,
      socket

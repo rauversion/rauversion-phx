@@ -15,6 +15,8 @@ defmodule Rauversion.Playlists.PlaylistMetadata do
     field :share_alike, :boolean
     field :copies, :string
     field :copyright, :string
+    field :price, :decimal
+    field :name_your_price, :boolean
   end
 
   @required_fields []
@@ -26,7 +28,9 @@ defmodule Rauversion.Playlists.PlaylistMetadata do
     :copyright,
     :attribution,
     :noncommercial,
-    :copies
+    :copies,
+    :price,
+    :name_your_price
   ]
 
   def changeset(struct, attrs) do

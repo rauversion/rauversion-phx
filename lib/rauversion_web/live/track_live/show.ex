@@ -116,6 +116,11 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
+  def handle_event("pricing-tab" = tab, _, socket) do
+    {:noreply, socket |> assign(:current_tab, tab)}
+  end
+
+  @impl true
   def handle_event("share-tab" = tab, _, socket) do
     {:noreply, socket |> assign(:current_tab, tab)}
   end
