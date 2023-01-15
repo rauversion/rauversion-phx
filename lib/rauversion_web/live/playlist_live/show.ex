@@ -6,7 +6,7 @@ defmodule RauversionWeb.PlaylistLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(:like, nil)}
+    {:ok, socket |> assign(:like, nil) |> assign(:buy_modal, false)}
   end
 
   def update(assigns, socket) do

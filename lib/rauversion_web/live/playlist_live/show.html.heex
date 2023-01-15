@@ -194,18 +194,26 @@
       </div>
 
       <div class="sm:text-xl text-sm container mx-auto px-4 my-4 flex flex-col space-y-4">
+
         <%= if @playlist.metadata && @playlist.metadata.buy_link do %>
           <a href={@playlist.metadata.buy_link} class="underline" target="blank">
             <%= gettext("Buy Link") %>
           </a>
         <% end %>
-      
-      <%= if @playlist.metadata do %>
+
         <.live_component
-            module={RauversionWeb.AttributionComponent}
-            id="attribution-c"
-            metadata={@playlist.metadata}
+            module={RauversionWeb.PlaylistLive.BuyModalComponent}
+            id="buy-modal"
+            playlist={@playlist}
         />
+
+
+        <%= if @playlist.metadata do %>
+          <.live_component
+              module={RauversionWeb.AttributionComponent}
+              id="attribution-c"
+              metadata={@playlist.metadata}
+          />
          <% end %>
       </div>
 
