@@ -45,16 +45,24 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
               <label for="company-website" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 <%= gettext("Price") %>
               </label>
-              <div class="mt-1 flex rounded-md shadow-sm">
-                <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-900 dark:border-gray-800 bg-gray-50 px-3 text-sm text-gray-500 dark:text-white">
-                  $
-                </span>
-                <input type="text"
-                  name="company-website"
-                  id="company-website"
-                  class="block w-64 flex-1- rounded-none rounded-r-md border-gray-300 dark:border-gray-800 dark:bg-gray-800 focus:border-brand-500 focus:ring-brand-500 sm:text-sm"
-                  placeholder={gettext("Name your price %{num} or more", num: Number.Currency.number_to_currency(@playlist.metadata.price, precision: 2) )}>
-              </div>
+
+              <%= if @playlist.metadata.name_your_price do %>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-900 dark:border-gray-800 bg-gray-50 px-3 text-sm text-gray-500 dark:text-white">
+                    $
+                  </span>
+                  <input type="text"
+                    name="company-website"
+                    id="company-website"
+                    class="block w-64 flex-1- rounded-none rounded-r-md border-gray-300 dark:border-gray-800 dark:bg-gray-800 focus:border-brand-500 focus:ring-brand-500 sm:text-sm"
+                    placeholder={gettext("Name your price %{num} or more", num: Number.Currency.number_to_currency(@playlist.metadata.price, precision: 2) )}>
+                </div>
+              <% else %>
+
+                <div class="text-xl">
+                  <%= Number.Currency.number_to_currency(@playlist.metadata.price, precision: 2) %>
+                </div>
+              <% end %>
             </div>
 
             <span class="py-4 text-sm">
@@ -62,12 +70,14 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
             </span>
 
             <div>
+
               <%= if @include_message do %>
-              <div class="mt-1">
-                <textarea id="about" name="about" rows="3"
-                  class="mt-1 block w-full rounded-md border-gray-300 dark:text.gray-600 dark:bg-gray-800 text-gray-100 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm" placeholder="you@example.com"></textarea>
-              </div>
+                <div class="mt-1">
+                  <textarea id="about" name="about" rows="3"
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:text.gray-600 dark:bg-gray-800 text-gray-100 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm" placeholder="you@example.com"></textarea>
+                </div>
               <% end %>
+
               <p class="mt-2 text-sm text-gray-500">
                 <button phx-click="include_message" phx-target={@myself} class="hover:underline">
                   <%= gettext("include a message to %{name}", name: "foo") %>

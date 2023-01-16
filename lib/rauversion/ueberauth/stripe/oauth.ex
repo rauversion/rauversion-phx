@@ -16,7 +16,7 @@ defmodule Ueberauth.Strategy.Stripe.OAuth do
     strategy: __MODULE__,
     site: "https://connect.stripe.com",
     authorize_url: "/express/oauth/authorize",
-    token_url: "/express/oauth/token"
+    token_url: "/oauth/token"
   ]
 
   # Public API
