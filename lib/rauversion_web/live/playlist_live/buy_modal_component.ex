@@ -11,7 +11,7 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
   end
 
   @impl true
-  def handle_event("buy-modal", %{}, socket) do
+  def handle_event("open-modal", %{}, socket) do
     {:noreply,
      socket
      |> assign(:buy_modal, true)}
@@ -58,7 +58,7 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
             </div>
 
             <span class="py-4 text-sm">
-              <%= gettext("Includes unlimited streaming via the free Bandcamp app, plus high-quality download in MP3, FLAC") %>
+              <%= gettext("Includes unlimited streaming via the %{app_name} app, plus high-quality download in MP3, FLAC", app_name: Application.get_env(:rauversion, :app_name, "rauversion.com") ) %>
             </span>
 
             <div>
@@ -87,7 +87,7 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
 
       <%= if @playlist.metadata && @playlist.metadata.price do %>
           <div class="text-2xl font-bold">
-            <button class="underline" target="blank" phx-click="buy-modal" phx-target={@myself}>
+            <button class="underline" target="blank" phx-click="open-modal" phx-target={@myself}>
               <%= gettext("Buy Digital Album") %>
             </button>
 

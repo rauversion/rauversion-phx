@@ -118,8 +118,8 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
 
   def render(assigns) do
     ~H"""
-    <nav aria-label="Sections" class="hidden flex-shrink-0 w-96 border-r border-gray-200 dark:border-gray-800 xl:flex xl:flex-col">
-      <div class="flex-shrink-0 h-16 px-6 border-b- border-gray-200 dark:border-gray-800 flex items-center">
+    <nav aria-label="Sections" class="hidden- w-20 flex-shrink-0 xl:w-96 border-r-gray-500 border-blue-gray-600 xl:flex xl:flex-col">
+      <div class="hidden xl:flex flex-shrink-0 h-16 px-6 border-b- border-gray-200 dark:border-gray-800 flex items-center">
         <p class="text-lg font-medium text-gray-900 dark:text-gray-100">Settings</p>
       </div>
 
@@ -127,7 +127,7 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
         <%= for item <- menu_items() do %>
           <%= live_redirect to: item.to, class: item_class(@live_action, item.namespace) do %>
             <%= icon_for(item.namespace) %>
-            <div class="ml-3 text-sm">
+            <div class="ml-3 text-sm hidden xl:block">
               <p class="font-medium text-gray-900 dark:text-gray-100"><%= item.title %> </p>
               <p class="mt-1 text-gray-500 dark:text-gray-300"><%= item.sub %></p>
             </div>
