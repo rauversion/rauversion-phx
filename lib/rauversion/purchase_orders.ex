@@ -132,7 +132,7 @@ defmodule Rauversion.PurchaseOrders do
     end
   end
 
-  def create_stripe_session(order, event) do
+  def create_stripe_session(order, event = Rauversion.Events.Event) do
     client = Rauversion.Stripe.Client.new()
     user = event |> Ecto.assoc(:user) |> Repo.one()
 

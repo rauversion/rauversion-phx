@@ -60,4 +60,91 @@ defmodule Rauversion.Payments.Payment do
       end
     end)
   end
+
+  def create_stripe_session(payment, album, changeset) do
+    client = Rauversion.Stripe.Client.new()
+    user = album |> Ecto.assoc(:user) |> Rauversion.Repo.one()
+
+    payment_price = changeset.price || changeset.initial_price
+
+    c = Rauversion.Accounts.get_oauth_credential(user, "stripe")
+
+    line_items =
+      [%{}]
+      |> Enum.with_index()
+      |> Enum.reduce(%{}, fn {x, i}, acc ->
+        acc
+        |> Map.merge(%{
+          "#{i}" => %{
+            "quantity" => 1,
+            "price_data" => %{
+              "unit_amount" => Decimal.to_integer(payment_price) * 100,
+              "currency" => "USD",
+              "product_data" => %{
+                "name" => album.title,
+                "description" => "Buy digital album #{album.title} from #{album.user.username}"
+              }
+            }
+          }
+        })
+      end)
+
+    IO.inspect(line_items)
+
+    # total =
+    #  Rauversion.PurchaseOrders.calculate_total(order, event.events_settings.ticket_currency)
+
+    # fee_amount =
+    #  Rauversion.PurchaseOrders.calculate_fee(total, event.events_settings.ticket_currency)
+
+    Rauversion.Stripe.Client.create_session(
+      client,
+      c.uid,
+      %{
+        "line_items" => line_items,
+        "payment_intent_data" => %{
+          "application_fee_amount" => 100
+          # "transfer_data"=> %{
+          #  "destination"=> c.uid
+          # }
+        },
+        "mode" => "payment",
+        "success_url" =>
+          RauversionWeb.Router.Helpers.events_show_url(
+            RauversionWeb.Endpoint,
+            :payment_success,
+            album.slug
+          ),
+        "cancel_url" =>
+          RauversionWeb.Router.Helpers.events_show_url(
+            RauversionWeb.Endpoint,
+            :payment_cancel,
+            album.slug
+          )
+      }
+    )
+  end
+
+  def create_with_purchase_order(album, payment) do
+    {:ok, a} =
+      Rauversion.PurchaseOrders.create_purchase_order(%{
+        "user_id" => album.user_id
+      })
+
+    {:ok, data} =
+      __MODULE__.create_stripe_session(
+        a,
+        album,
+        payment
+      )
+
+    {:ok, order_with_payment_id} =
+      Rauversion.PurchaseOrders.update_purchase_order(a, %{
+        "payment_id" => data["id"],
+        "payment_provider" => "stripe",
+        "total" => payment.price
+      })
+
+    {:ok, %{resp: data, order: order_with_payment_id}}
+  end
 end

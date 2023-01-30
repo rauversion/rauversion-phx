@@ -44,12 +44,25 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
   end
 
   @impl true
-  def handle_event("save", %{}, socket) do
-    IO.inspect("CHECKOUT")
-    a = create_stripe_session(%{}, socket.assigns.playlist)
+  def handle_event("save", %{"payment" => payment_params}, socket) do
+    IO.inspect("CHECKOUT SAVE")
+
+    payment =
+      socket.assigns.changeset.data
+      |> Rauversion.Payments.Payment.change(payment_params)
+      |> Ecto.Changeset.apply_changes()
+
+    IO.inspect(payment)
+
+    a =
+      Rauversion.Payments.Payment.create_with_purchase_order(
+        socket.assigns.playlist,
+        payment
+      )
+
     IO.inspect(a)
 
-    with {:ok, %{"url" => url} = _data} <- a do
+    with {:ok, %{resp: %{"url" => url}} = _data} <- a do
       {:noreply,
        socket
        |> redirect(external: url)}
@@ -57,68 +70,6 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
       _ ->
         {:noreply, socket}
     end
-  end
-
-  def create_stripe_session(_order, album) do
-    client = Rauversion.Stripe.Client.new()
-    user = album |> Ecto.assoc(:user) |> Rauversion.Repo.one()
-
-    c = Rauversion.Accounts.get_oauth_credential(user, "stripe")
-
-    line_items =
-      [%{}]
-      |> Enum.with_index()
-      |> Enum.reduce(%{}, fn {x, i}, acc ->
-        acc
-        |> Map.merge(%{
-          "#{i}" => %{
-            "quantity" => 1,
-            "price_data" => %{
-              "unit_amount" => Decimal.to_integer(album.metadata.price) * 100,
-              "currency" => "USD",
-              "product_data" => %{
-                "name" => album.title,
-                "description" => "short_description"
-              }
-            }
-          }
-        })
-      end)
-
-    IO.inspect(line_items)
-
-    # total =
-    #  Rauversion.PurchaseOrders.calculate_total(order, event.events_settings.ticket_currency)
-
-    # fee_amount =
-    #  Rauversion.PurchaseOrders.calculate_fee(total, event.events_settings.ticket_currency)
-
-    Rauversion.Stripe.Client.create_session(
-      client,
-      c.uid,
-      %{
-        "line_items" => line_items,
-        "payment_intent_data" => %{
-          "application_fee_amount" => 100
-          # "transfer_data"=> %{
-          #  "destination"=> c.uid
-          # }
-        },
-        "mode" => "payment",
-        "success_url" =>
-          RauversionWeb.Router.Helpers.events_show_url(
-            RauversionWeb.Endpoint,
-            :payment_success,
-            album.slug
-          ),
-        "cancel_url" =>
-          RauversionWeb.Router.Helpers.events_show_url(
-            RauversionWeb.Endpoint,
-            :payment_cancel,
-            album.slug
-          )
-      }
-    )
   end
 
   @impl true
@@ -173,7 +124,7 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
                 <%= if Ecto.Changeset.get_field(@changeset, :include_message) do %>
                   <div class="mt-1">
                     <%= textarea f, :optional_message,
-                      class: "mt-1 block w-full rounded-md border-gray-300 dark:text.gray-600 dark:bg-gray-800 text-gray-100 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm",
+                      class: "mt-1 block w-full rounded-md border-gray-300 dark:text-gray-100 dark:bg-gray-800 text-gray-900 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm",
                       placeholder: "optional message",
                       rows: 3
                     %>
