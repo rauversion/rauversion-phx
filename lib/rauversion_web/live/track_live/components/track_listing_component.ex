@@ -76,7 +76,7 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
   def render(assigns) do
     ~H"""
     <div
-      class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+      class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-5 xl:grid-cols-6 xl:gap-x-8"
       id="infinite-scroll"
       phx-hook="InfiniteScroll"
       phx-update="append"

@@ -112,6 +112,7 @@ defmodule RauversionWeb.PlaylistLive.Show do
      )}
   end
 
+  @impl true
   def handle_event(
         "like-playlist",
         %{"id" => _id},

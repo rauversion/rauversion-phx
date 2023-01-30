@@ -114,8 +114,7 @@ defmodule Rauversion.Tracks.TrackMetadata do
         name: :isrc,
         wrapper_class: "sm:col-span-2",
         type: :text_input,
-        placeholder: "oli",
-        hint: "hey hey!"
+        placeholder: "ISRC code"
       },
       %{
         name: :composer,
