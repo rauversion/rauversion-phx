@@ -3,6 +3,7 @@ defmodule RauversionWeb.PlaylistLive.Show do
   on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.Playlists
+  alias Rauversion.Repo
 
   @impl true
   def mount(_params, _session, socket) do
@@ -138,6 +139,55 @@ defmodule RauversionWeb.PlaylistLive.Show do
          assign(socket, :like, playlist_like)
          |> assign(:playlist, %{socket.assigns.playlist | likes_count: playlist.likes_count + 1})}
     end
+  end
+
+  @impl true
+  def handle_params(params, _url, socket) do
+    case apply_action(socket, socket.assigns.live_action, params) do
+      {:ok, reply} ->
+        {:noreply, reply}
+
+      {:err, err} ->
+        {:noreply, err}
+
+      any ->
+        {:noreply, any}
+    end
+  end
+
+  defp apply_action(socket, :payment_success, %{"slug" => id, "token_ws" => token}) do
+    event =
+      Playlists.get_playlist!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+
+    Rauversion.PurchaseOrders.commit_order(event, token)
+
+    socket |> assign(:event, event) |> assign(:payment_success, true)
+  end
+
+  defp apply_action(socket, :payment_success, %{"slug" => id}) do
+    playlist =
+      Playlists.get_by_slug!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+
+    track =
+      case playlist.track_playlists do
+        [tp | _] -> tp.track
+        _ -> nil
+      end
+
+    socket
+    |> assign(:playlist, playlist)
+    |> assign(track: track)
+    |> assign(:payment_success, true)
+  end
+
+  defp apply_action(socket, :payment_failure, %{"slug" => id}) do
+    event =
+      Playlists.get_by_slug!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+
+    socket |> assign(:playlist, event) |> assign(:payment_failure, true)
   end
 
   defp get_playlist(id, :private) do

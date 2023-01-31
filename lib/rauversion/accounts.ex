@@ -692,4 +692,18 @@ defmodule Rauversion.Accounts do
   def get_event_ticket(_current_user = nil, _ticket) do
     nil
   end
+
+  ### album orders
+
+  def get_album_orders(current_user) do
+    id = current_user.id
+
+    from(p in Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder,
+      join: c in Rauversion.PurchaseOrders.PurchaseOrder,
+      on: c.id == p.purchase_order_id and c.user_id == ^id
+    )
+    |> preload([:playlist, :purchase_order])
+    |> order_by([c], desc: c.id)
+    |> Repo.all()
+  end
 end

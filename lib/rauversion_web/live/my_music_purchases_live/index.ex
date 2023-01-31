@@ -1,4 +1,4 @@
-defmodule RauversionWeb.MyTicketsLive.Index do
+defmodule RauversionWeb.MyMusicPurchasesLive.Index do
   use RauversionWeb, :live_view
 
   on_mount RauversionWeb.UserLiveAuth
@@ -17,11 +17,9 @@ defmodule RauversionWeb.MyTicketsLive.Index do
   def get_tickets(current_user, section) do
     case section do
       "all_tickets" ->
-        current_user
-        |> Ecto.assoc(:purchased_tickets)
-        |> Rauversion.PurchasedTickets.order_descending()
-        |> Rauversion.Repo.all()
-        |> Rauversion.Repo.preload([:user, :purchase_order, [event_ticket: :event]])
+        a = Rauversion.Accounts.get_album_orders(current_user)
+        IO.inspect(a)
+        a
 
       "checked_in" ->
         current_user
@@ -63,7 +61,7 @@ defmodule RauversionWeb.MyTicketsLive.Index do
                           <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
                         </svg>
                         <a href="#" class="ml-4 text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300">
-                          <%= gettext("Tickets") %>
+                          <%= gettext("Music") %>
                         </a>
                       </div>
                     </li>
@@ -71,7 +69,7 @@ defmodule RauversionWeb.MyTicketsLive.Index do
                 </nav>
 
                 <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 dark:text-gray-100 sm:truncate sm:text-3xl sm:tracking-tight">
-                  My Tickets
+                  My Purchased music
                 </h1>
               </div>
             </div>
@@ -81,7 +79,7 @@ defmodule RauversionWeb.MyTicketsLive.Index do
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
               <div class="px-4 sm:px-0">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                  <%= gettext("Tickets", %{section: @section}) %>
+                  <%= gettext("purchased Music", %{section: @section}) %>
                 </h2>
 
                 <div class="sm:block">
@@ -120,32 +118,38 @@ defmodule RauversionWeb.MyTicketsLive.Index do
                           <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                             <div>
                               <p class="truncate text-sm font-medium text-brand-600">
-                                <%= ticket.event_ticket.event.title %>
+                                <%= ticket.playlist.title %>
                               </p>
                               <p class="space-x-2 mt-2 flex items-center text-sm text-gray-500 dark:text-gray-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
                                 </svg>
 
-                                <span class="truncate"><%= ticket.user.email %></span>
+                                <span class="truncate"><% #= ticket.user.email %></span>
                               </p>
                             </div>
                             <div class="hidden md:block">
                               <div>
 
-                                <p class="text-sm text-gray-900 dark:text-gray-100">
-                                  purchased on: <%= Cldr.DateTime.to_string!(ticket.inserted_at) %>
+                                <p class="hidden text-sm text-gray-900 dark:text-gray-100">
+                                  purchased on: <% #= Cldr.DateTime.to_string!(ticket.inserted_at) %>
                                   <!---<time datetime={ticket.inserted_at}>
                                     <%= ticket.inserted_at %>
                                   </time>-->
                                 </p>
 
-                                <%= if ticket.checked_in_at do %>
+                                <p class="text-sm text-gray-900 dark:text-gray-100">
+                                  <%= ticket.purchase_order.state %>
+                                </p>
+
+
+
+                                <%= if ticket.purchase_order.state == "paid" do %>
                                   <p class="mt-2 flex items-center text-sm text-gray-500">
                                     <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
                                     </svg>
-                                    Completed checkin
+                                    <%= ticket.purchase_order.state %>
                                   </p>
                                 <% end %>
                               </div>

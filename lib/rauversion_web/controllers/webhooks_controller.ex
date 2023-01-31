@@ -13,6 +13,19 @@ defmodule RauversionWeb.WebhooksController do
       ) do
     order = Rauversion.PurchaseOrders.get_purchase_order_by_stripe_payment!(object["id"])
 
+    require IEx
+    IEx.pry()
+
+    order |> Rauversion.Repo.preload([:albums, :tracks])
+
+    order =
+      case Rauversion.PurchaseOrders.update_purchase_order(order, %{
+             state: object["payment_status"]
+           }) do
+        {:ok, purchase_order} -> order
+      end
+
+    # this will not run if it have data, but we should validate if the trx is from events
     case Rauversion.PurchaseOrders.generate_purchased_tickets(order) do
       {:error, :purchased_tickets, _, _} ->
         conn
@@ -21,7 +34,7 @@ defmodule RauversionWeb.WebhooksController do
 
       _ ->
         conn
-        |> Plug.Conn.resp(200, "Not found")
+        |> Plug.Conn.resp(200, "ok found")
         |> Plug.Conn.send_resp()
     end
   end

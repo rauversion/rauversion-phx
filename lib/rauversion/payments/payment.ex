@@ -110,13 +110,13 @@ defmodule Rauversion.Payments.Payment do
         },
         "mode" => "payment",
         "success_url" =>
-          RauversionWeb.Router.Helpers.events_show_url(
+          RauversionWeb.Router.Helpers.playlist_show_url(
             RauversionWeb.Endpoint,
             :payment_success,
             album.slug
           ),
         "cancel_url" =>
-          RauversionWeb.Router.Helpers.events_show_url(
+          RauversionWeb.Router.Helpers.playlist_show_url(
             RauversionWeb.Endpoint,
             :payment_cancel,
             album.slug
@@ -128,7 +128,8 @@ defmodule Rauversion.Payments.Payment do
   def create_with_purchase_order(album, payment) do
     {:ok, a} =
       Rauversion.PurchaseOrders.create_purchase_order(%{
-        "user_id" => album.user_id
+        "user_id" => album.user_id,
+        "albums" => [album]
       })
 
     {:ok, data} =

@@ -14,9 +14,59 @@
   </.modal>
 <% end %>
 
+<%= if assigns[:payment_success] do %>
+  <.modal w_class={"w-1/2"}>
+    <div class="bg-gray-50 dark:bg-gray-800">
+      <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+          <span class="block">
+            <%= gettext("Payment succeed") %>
+          </span>
+          <span class="block text-green-600">
+            <%= gettext("The payment was successfully processed.") %>
+          </span>
+        </h2>
+        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+          <div class="inline-flex rounded-md shadow">
+
+            <%= live_redirect to: "/purchases/tickets", class: "inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700" do %>
+              <%= gettext("View your Orders") %>
+            <% end %>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </.modal>
+<% end %>
+
+<%= if assigns[:payment_failure] do %>
+  <.modal w_class={"w-1/2"}>
+    <div class="bg-gray-50 dark:bg-gray-800">
+      <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+          <span class="flex space-x-2 items-center">
+
+            <span class="text-5xl">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+            </span>
+            <span>
+            <%= gettext("Payment failed") %>
+            </span>
+          </span>
+          <span class="block text-red-600">
+            <%= gettext("There was a problem processing the payment.") %>
+          </span>
+        </h2>
+      </div>
+    </div>
+  </.modal>
+<% end %>
+
 <% #= live_patch "Edit", to: Routes.playlist_show_path(@socket, :edit, @playlist), class: "button" %>
 <% #= live_redirect "Back", to: Routes.playlist_index_path(@socket, :index) %>
-
 
 <% #= @current_user.username %> 
 
