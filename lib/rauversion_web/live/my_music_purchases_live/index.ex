@@ -117,6 +117,8 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
                                 <h3 class="text-2xl"><%= ticket.playlist.title %></h3>
                               <% end %>
 
+                              <span> <%= gettext("Created at:") %> <%= ticket.inserted_at %> </span>
+
                               <%= if ticket.purchase_order.state == "paid" do %>
                                 <p class="truncate text-sm font-medium text-brand-600">
                                   <a href={Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.url_for_download(ticket, @current_user.id)}

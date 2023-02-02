@@ -38,15 +38,13 @@ defmodule Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder do
 
     entries =
       Enum.map(playlist.track_playlists, fn item ->
-        [ext | _] = MIME.extensions(item.track.audio_blob.content_type)
-
         [
           source: {
             :url,
             Application.get_env(:rauversion, :domain) <>
               Rauversion.BlobUtils.blob_proxy_url(item.track, :audio)
           },
-          path: "/#{playlist.slug}/#{item.track.title}.#{ext}"
+          path: "/#{playlist.slug}/#{String.replace(item.track.audio_blob.filename, " ", "-")}"
         ]
       end)
 

@@ -523,7 +523,8 @@ defmodule RauversionWeb.LiveHelpers do
              %{
                path: path,
                content_type: entry.client_type,
-               filename: entry.client_name,
+               filename:
+                 ActiveStorage.Filename.sanitized(String.replace(entry.client_name, " ", "-")),
                size: entry.client_size
              }}
 

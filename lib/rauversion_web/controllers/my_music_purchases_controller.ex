@@ -13,8 +13,7 @@ defmodule RauversionWeb.MyMusicPurchasesController do
         user_id
       )
 
-    stream = Packmatic.build_stream(entries)
-    stream |> Packmatic.Conn.send_chunked(conn, "download.zip")
+    Packmatic.build_stream(entries) |> Packmatic.Conn.send_chunked(conn, "download.zip")
   end
 
   def show(conn, _) do

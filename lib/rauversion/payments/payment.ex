@@ -94,23 +94,25 @@ defmodule Rauversion.Payments.Payment do
     # total =
     #  Rauversion.PurchaseOrders.calculate_total(order, event.events_settings.ticket_currency)
 
-    fee_amount =
-      Rauversion.PurchaseOrders.calculate_fee(
-        payment_price,
-        "USD"
-      )
+    # fee_amount =
+    #  Rauversion.PurchaseOrders.calculate_fee(
+    #    payment_price,
+    #    "USD"
+    #  )
 
     Rauversion.Stripe.Client.create_session(
       client,
-      c.uid,
+      # c.uid
+      nil,
       %{
         "line_items" => line_items,
-        "payment_intent_data" => %{
-          "application_fee_amount" => fee_amount
-          # "transfer_data"=> %{
-          #  "destination"=> c.uid
-          # }
-        },
+        "payment_intent_data" =>
+          %{
+            # "application_fee_amount" => 1
+            # "transfer_data"=> %{
+            #  "destination"=> c.uid
+            # }
+          },
         "mode" => "payment",
         "success_url" =>
           RauversionWeb.Router.Helpers.playlist_show_url(
