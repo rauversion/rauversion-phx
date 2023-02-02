@@ -155,7 +155,7 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
 
       <%= if @playlist.metadata && @playlist.metadata.price do %>
           <div class="text-2xl font-bold">
-            <button class="underline" target="blank" phx-click="open-modal" phx-target={@myself}>
+            <button class="underline dark:border-white border-black rounded-sm border-4 px-3" target="blank" phx-click="open-modal" phx-target={@myself}>
               <%= gettext("Buy Digital Album") %>
             </button>
 

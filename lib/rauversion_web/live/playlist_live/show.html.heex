@@ -251,11 +251,30 @@
           </a>
         <% end %>
 
-        <.live_component
-            module={RauversionWeb.PlaylistLive.BuyModalComponent}
-            id="buy-modal"
-            playlist={@playlist}
-        />
+        <%= if @playlist.metadata && @playlist.metadata.price do %>
+          <.live_component
+              module={RauversionWeb.PlaylistLive.BuyModalComponent}
+              id="buy-modal"
+              playlist={@playlist}
+          />
+        <% end %>
+
+
+        <div class="flex flex-col space-y-2">
+          <%= if @playlist.metadata && @playlist.metadata.record_label do %>
+            <span>
+              <span class="font-bold"><%= gettext("Released by:") %></span> 
+              <%= @playlist.metadata.record_label %>
+            </span>
+          <% end %>
+
+          <%= if @playlist.playlist_type == "album" do %>
+            <span>
+              <span class="font-bold"><%= gettext("Album release date:") %></span> 
+              <%= simple_date_for(@playlist.release_date, :long) %>
+            </span>
+          <% end %>
+        </div>
 
 
         <%= if @playlist.metadata do %>
