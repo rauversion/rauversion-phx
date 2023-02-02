@@ -104,23 +104,28 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
                       <div class="flex min-w-0 flex-1 items-center">
                         <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
 
-
                           <div class="flex space-x-2">
 
                             <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url(
                               ticket.playlist, "cover", %{resize_to_limit: "300x200"}),
-                              class: "w-20 h-20 object-center object-cover group-hover:opacity-75") %>
-
+                              class: "w-20 h-20 object-center object-cover group-hover:opacity-75")
+                            %>
 
                             <div>
-                              <h3 class="text-2xl"><%= ticket.playlist.title %></h3>
-                              <p class="truncate text-sm font-medium text-brand-600">
-                                <a href={Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.url_for_download(ticket, @current_user.id)}
-                                  class="group block"
-                                  target="_blank">
-                                  <%= gettext("Download link") %>
-                                </a>
-                              </p>
+
+                              <%= live_redirect to: "/playlists/#{ticket.playlist.id}" do %>
+                                <h3 class="text-2xl"><%= ticket.playlist.title %></h3>
+                              <% end %>
+
+                              <%= if ticket.purchase_order.state == "paid" do %>
+                                <p class="truncate text-sm font-medium text-brand-600">
+                                  <a href={Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.url_for_download(ticket, @current_user.id)}
+                                    class="group block"
+                                    target="_blank">
+                                    <%= gettext("Download link") %>
+                                  </a>
+                                </p>
+                              <% end %>
                             </div>
                           </div>
 

@@ -2,7 +2,7 @@ defmodule RauversionWeb.MyMusicPurchasesController do
   use RauversionWeb, :controller
 
   def show(
-        %{assigns: %{current_user: current_user = %Rauversion.Accounts.User{id: user_id}}} = conn,
+        %{assigns: %{current_user: %Rauversion.Accounts.User{id: user_id}}} = conn,
         %{
           "signed_id" => token
         }
