@@ -9,7 +9,6 @@ defmodule Rauversion.Playlists.Playlist do
 
   use ActiveStorage.Attached.Model
   use ActiveStorage.Attached.HasOne, name: :cover, model: "Playlist"
-  use ActiveStorage.Attached.HasOne, name: :zip, model: "Playlist"
 
   schema "playlists" do
     field :description, :string
@@ -36,14 +35,6 @@ defmodule Rauversion.Playlists.Playlist do
     )
 
     has_one(:cover_blob, through: [:cover_attachment, :blob])
-
-    # zip
-    has_one(:zip_attachment, ActiveStorage.Attachment,
-      where: [record_type: "Playlist", name: "zip"],
-      foreign_key: :record_id
-    )
-
-    has_one(:zip_blob, through: [:zip_attachment, :blob])
 
     timestamps()
   end

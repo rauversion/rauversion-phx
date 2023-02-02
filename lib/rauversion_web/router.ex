@@ -215,7 +215,7 @@ defmodule RauversionWeb.Router do
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
 
-    get "/tracks/:id/oembed.xml", TracksController, :oembed
+    # get "/tracks/:id/oembed.xml", TracksController, :oembed
 
     live "/tracks/:id/show/edit", TrackLive.Show, :edit
 

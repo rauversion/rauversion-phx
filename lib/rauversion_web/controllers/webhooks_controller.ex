@@ -13,9 +13,6 @@ defmodule RauversionWeb.WebhooksController do
       ) do
     order = Rauversion.PurchaseOrders.get_purchase_order_by_stripe_payment!(object["id"])
 
-    require IEx
-    IEx.pry()
-
     order |> Rauversion.Repo.preload([:albums, :tracks])
 
     order =
