@@ -85,6 +85,7 @@ defmodule Rauversion.MixProject do
       {:ex_cldr_dates_times, "~> 2.0"},
       {:oauth2, "~> 1.0 or ~> 2.0"},
       {:polymorphic_embed, "~> 3.0.5"},
+      {:packmatic, "~> 1.1.2"},
       {:ueberauth, "~> 0.7", override: true},
       {:sentry, "~> 8.0"},
       {

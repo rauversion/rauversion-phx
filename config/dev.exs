@@ -88,6 +88,8 @@ config :rauversion, Oban,
 
 # activestorage
 
+config :rauversion, :domain, "http://localhost:4000"
+
 # :amazon
 config :active_storage, :host, "http://localhost:4000"
 config :active_storage, :service, :local

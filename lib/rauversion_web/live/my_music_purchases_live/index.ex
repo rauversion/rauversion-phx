@@ -8,7 +8,7 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
     socket =
       socket
       |> assign(:page, 1)
-      |> assign(:section, "all_tickets")
+      |> assign(:section, "all_music")
       |> assign(:tickets, [])
 
     {:ok, socket}
@@ -16,18 +16,11 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
 
   def get_tickets(current_user, section) do
     case section do
-      "all_tickets" ->
-        a = Rauversion.Accounts.get_album_orders(current_user)
-        IO.inspect(a)
-        a
+      "all_music" ->
+        Rauversion.Accounts.get_album_orders(current_user)
 
-      "checked_in" ->
-        current_user
-        |> Ecto.assoc(:purchased_tickets)
-        |> Rauversion.PurchasedTickets.get_checked_in()
-        |> Rauversion.PurchasedTickets.order_descending()
-        |> Rauversion.Repo.all()
-        |> Rauversion.Repo.preload([:user, :purchase_order, [event_ticket: :event]])
+      "pending_orders" ->
+        Rauversion.Accounts.get_pending_album_orders(current_user)
     end
   end
 
@@ -69,7 +62,7 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
                 </nav>
 
                 <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 dark:text-gray-100 sm:truncate sm:text-3xl sm:tracking-tight">
-                  My Purchased music
+                  <%= gettext("My Purchased music") %>
                 </h1>
               </div>
             </div>
@@ -86,14 +79,14 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
                   <div class="border-b border-gray-200">
                     <nav class="mt-2 -mb-px flex space-x-8" aria-label="Tabs">
 
-                      <a href="#" phx-click={"section-change"} phx-value-section={"all_tickets"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <%= gettext("All your Tickets") %>
-                        <span class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-gray-900 dark:text-gray-100 hidden ml-2 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">2</span>
+                      <a href="#" phx-click={"section-change"} phx-value-section={"all_music"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <%= gettext("All your purchased Music") %>
+                        <!--<span class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-gray-900 dark:text-gray-100 hidden ml-2 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">2</span>-->
                       </a>
 
-                      <a href="#" phx-click={"section-change"} phx-value-section={"checked_in"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <%= gettext("Checked in tickets") %>
-                        <span class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-gray-900 dark:text-gray-100 hidden ml-2 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">4</span>
+                      <a href="#" phx-click={"section-change"} phx-value-section={"pending_orders"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <%= gettext("Pending orders") %>
+                        <!--<span class="hidden bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-gray-900 dark:text-gray-100 hidden ml-2 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">4</span>-->
                       </a>
 
                     </nav>
@@ -107,63 +100,64 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
                 <%= for ticket <- get_tickets(@current_user, @section) do %>
 
                   <li>
-                    <%= live_redirect to: Rauversion.PurchasedTickets.url_for_ticket(ticket), class: "group block" do %>
-                      <div class="flex items-center py-5 px-4 sm:py-6 sm:px-0">
-                        <div class="flex min-w-0 flex-1 items-center">
-                          <!--<div class="flex-shrink-0">
-                            <img class="h-12 w-12 rounded-full group-hover:opacity-75"
-                            src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt="">
-                          </div>-->
-                          <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-                            <div>
-                              <p class="truncate text-sm font-medium text-brand-600">
-                                <%= ticket.playlist.title %>
-                              </p>
-                              <p class="space-x-2 mt-2 flex items-center text-sm text-gray-500 dark:text-gray-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
-                                </svg>
+                    <div class="flex items-center py-5 px-4 sm:py-6 sm:px-0">
+                      <div class="flex min-w-0 flex-1 items-center">
+                        <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
 
-                                <span class="truncate"><% #= ticket.user.email %></span>
+
+                          <div class="flex space-x-2">
+
+                            <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url(
+                              ticket.playlist, "cover", %{resize_to_limit: "300x200"}),
+                              class: "w-20 h-20 object-center object-cover group-hover:opacity-75") %>
+
+
+                            <div>
+                              <h3 class="text-2xl"><%= ticket.playlist.title %></h3>
+                              <p class="truncate text-sm font-medium text-brand-600">
+                                <a href={Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.url_for_download(ticket, @current_user.id)}
+                                  class="group block"
+                                  target="_blank">
+                                  <%= gettext("Download link") %>
+                                </a>
                               </p>
                             </div>
-                            <div class="hidden md:block">
-                              <div>
+                          </div>
 
-                                <p class="hidden text-sm text-gray-900 dark:text-gray-100">
-                                  purchased on: <% #= Cldr.DateTime.to_string!(ticket.inserted_at) %>
-                                  <!---<time datetime={ticket.inserted_at}>
-                                    <%= ticket.inserted_at %>
-                                  </time>-->
+
+                          <div class="hidden md:block">
+                            <div>
+
+                              <p class="hidden text-sm text-gray-900 dark:text-gray-100">
+                                purchased on: <% #= Cldr.DateTime.to_string!(ticket.inserted_at) %>
+                                <!---<time datetime={ticket.inserted_at}>
+                                  <%= ticket.inserted_at %>
+                                </time>-->
+                              </p>
+
+                              <%= if ticket.purchase_order.state == "paid" do %>
+                                <p class="mt-2 flex items-center text-sm text-gray-500">
+                                  <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                                  </svg>
+                                  <%= ticket.purchase_order.state %>
                                 </p>
-
+                              <% else %>
                                 <p class="text-sm text-gray-900 dark:text-gray-100">
                                   <%= ticket.purchase_order.state %>
                                 </p>
-
-
-
-                                <%= if ticket.purchase_order.state == "paid" do %>
-                                  <p class="mt-2 flex items-center text-sm text-gray-500">
-                                    <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-                                    </svg>
-                                    <%= ticket.purchase_order.state %>
-                                  </p>
-                                <% end %>
-                              </div>
+                              <% end %>
                             </div>
                           </div>
                         </div>
-                        <div>
-                          <!-- Heroicon name: mini/chevron-right -->
-                          <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-700 hover:text-gray-300 dark:text-gray-300 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                          </svg>
-                        </div>
                       </div>
-                    <% end %>
+                      <div>
+                        <!-- Heroicon name: mini/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-700 hover:text-gray-300 dark:text-gray-300 dark:text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
                   </li>
 
                 <% end %>

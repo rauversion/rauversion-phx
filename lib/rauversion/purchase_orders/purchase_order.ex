@@ -8,7 +8,7 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrder do
     # field :data, :map
     field :payment_id, :string
     field :payment_provider, :string
-    field :state, :string
+    field :state, :string, default: "pending"
 
     embeds_many :data, Rauversion.PurchaseOrders.PurchaseOrderTickets, on_replace: :delete
     belongs_to :user, Rauversion.Accounts.User

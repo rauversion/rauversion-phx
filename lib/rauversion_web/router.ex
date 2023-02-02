@@ -326,6 +326,7 @@ defmodule RauversionWeb.Router do
     live "/purchases", MyPurchasesLive.Index, :index
     live "/purchases/tickets", MyTicketsLive.Index, :index
     live "/purchases/music", MyMusicPurchasesLive.Index, :index
+    get "/purchases/music/download/:signed_id", MyMusicPurchasesController, :show
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id/private", TrackLive.Show, :private
