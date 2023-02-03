@@ -695,32 +695,34 @@ defmodule Rauversion.Accounts do
 
   ### album orders
 
-  def get_album_orders(current_user) do
+  def albun_orders_query(current_user) do
     id = current_user.id
 
     from(p in Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder,
       join: c in Rauversion.PurchaseOrders.PurchaseOrder,
-      on: c.id == p.purchase_order_id and c.user_id == ^id and c.state == "paid"
+      on: c.id == p.purchase_order_id and c.user_id == ^id
     )
     |> preload([:playlist, :purchase_order])
     |> order_by([c], desc: c.id)
+  end
+
+  def get_album_orders(current_user) do
+    q = albun_orders_query(current_user)
+
+    query =
+      from [p, c] in q,
+        where: c.state == "paid" or c.state == "free_access"
+
+    query
     |> Repo.all()
   end
 
   def get_pending_album_orders(current_user) do
-    id = current_user.id
-
-    q =
-      from(p in Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder,
-        join: c in Rauversion.PurchaseOrders.PurchaseOrder,
-        on: c.id == p.purchase_order_id and c.user_id == ^id
-      )
-      |> preload([:playlist, :purchase_order])
-      |> order_by([c], desc: c.id)
+    q = albun_orders_query(current_user)
 
     query =
       from [p, c] in q,
-        where: c.state != "paid" or is_nil(c.state)
+        where: c.state == "pending"
 
     query
     |> Repo.all()

@@ -46,19 +46,18 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
     case socket.assigns.like do
       %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like ->
         Rauversion.PlaylistLikes.delete_playlist_like(playlist_like)
+
         {:noreply,
-        assign(socket, :like, nil)
-        |> assign(:playlist, %{ socket.assigns.playlist | likes_count: playlist.likes_count - 1 } )
-      }
+         assign(socket, :like, nil)
+         |> assign(:playlist, %{socket.assigns.playlist | likes_count: playlist.likes_count - 1})}
 
       _ ->
         {:ok, %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like} =
           Rauversion.PlaylistLikes.create_playlist_like(attrs)
 
         {:noreply,
-          assign(socket, :like, playlist_like)
-          |> assign(:playlist, %{ socket.assigns.playlist | likes_count: playlist.likes_count + 1 } )
-        }
+         assign(socket, :like, playlist_like)
+         |> assign(:playlist, %{socket.assigns.playlist | likes_count: playlist.likes_count + 1})}
     end
   end
 
@@ -137,7 +136,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                 </ul>
               </div>
 
-              <div class="p-2 sm:p-0 sm:pt-2 flex items-center space-x-1" data-turbo="false">
+              <div class="p-2 sm:p-0 sm:pt-2 flex items-center space-x-1">
                 <% #= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
 
                 <.live_component
@@ -173,6 +172,34 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                   <% end %>
                 <% end %>
               </div>
+
+              <%= if @playlist.metadata && @playlist.metadata.price do %>
+                <.live_component
+                    module={RauversionWeb.PlaylistLive.BuyModalComponent}
+                    id={"buy-modal-#{@playlist.id}"}
+                    playlist={@playlist}>
+
+                  <button class="underline text-sm dark:bg-black dark:border-gray-800 dark:hover:bg-gray-700 border-black rounded-sm border px-3 mt-2"
+                    phx-click="open-modal"
+                    phx-target={"#xx-#{@playlist.id}"}>
+                    <%= gettext("Buy Digital Album") %>
+                  </button>
+
+                  <span>
+                    <%= Number.Currency.number_to_currency(@playlist.metadata.price, precision: 2) %>
+                    <span class="text-sm text-gray-300">
+                      USD
+                    </span>
+                  </span>
+
+                  <%= if @playlist.metadata.name_your_price do %>
+                    <span class="text-sm text-gray-300">
+                      <%= gettext("or more") %>
+                    </span>
+                  <% end %>
+
+                </.live_component>
+              <% end %>
 
             </div>
           </div>

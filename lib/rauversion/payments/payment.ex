@@ -52,7 +52,7 @@ defmodule Rauversion.Payments.Payment do
       formatted = Number.Currency.number_to_currency(max, precision: 2)
 
       cond do
-        count.coef < max.coef && count.coef != 0 ->
+        count.coef < max.coef ->
           [{:price, "Min Price should be #{formatted}"}]
 
         true ->
@@ -128,6 +128,25 @@ defmodule Rauversion.Payments.Payment do
           )
       }
     )
+  end
+
+  # free access
+  def create_with_purchase_order(album, payment = %{initial_price: initial_price, price: price})
+      when initial_price.coef == 0 and (is_nil(price) or price.coef == 0) do
+    {:ok, a} =
+      Rauversion.PurchaseOrders.create_purchase_order(%{
+        "user_id" => album.user_id,
+        "albums" => [album]
+      })
+
+    {:ok, order} =
+      Rauversion.PurchaseOrders.update_purchase_order(a, %{
+        "payment_provider" => "free",
+        "total" => 0,
+        "state" => "free_access"
+      })
+
+    {:ok, %{resp: %{free: true}, order: order}}
   end
 
   def create_with_purchase_order(album, payment) do

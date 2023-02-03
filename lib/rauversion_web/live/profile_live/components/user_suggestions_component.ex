@@ -37,7 +37,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   def render(%{collection: _collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">
-        <div class="bg-white border-t dark:bg-gray-900">
+        <div class="bg-white border-t dark:bg-gray-900 dark:border-gray-800">
           <div class="p-6">
             <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900 dark:text-gray-100">
             <%= gettext("Who to follow") %>

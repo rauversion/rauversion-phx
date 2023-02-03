@@ -53,4 +53,8 @@ defmodule Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder do
     IO.inspect(entries)
     entries
   end
+
+  def is_downloadable?(%{purchase_order: order}) do
+    order.state == "paid" or order.state == "free_access"
+  end
 end
