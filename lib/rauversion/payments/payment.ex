@@ -61,13 +61,36 @@ defmodule Rauversion.Payments.Payment do
     end)
   end
 
+  def get_price(payment_price, fee) do
+    ((Decimal.to_integer(payment_price) + fee) * 100)
+    |> round
+  end
+
   def create_stripe_session(payment, album, changeset) do
     client = Rauversion.Stripe.Client.new()
     user = album |> Ecto.assoc(:user) |> Rauversion.Repo.one()
 
     payment_price = changeset.price || changeset.initial_price
 
-    c = Rauversion.Accounts.get_oauth_credential(user, "stripe")
+    c =
+      case Rauversion.Accounts.get_oauth_credential(user, "stripe") do
+        nil ->
+          fee = Rauversion.PurchaseOrders.calculate_fee(payment_price, "usd")
+
+          %{cid: nil, data: %{}, price: get_price(payment_price, fee)}
+
+        data ->
+          %{
+            cid: data.uid,
+            price: Decimal.to_integer(payment_price) * 100,
+            data: %{
+              "application_fee_amount" => round(Rauversion.PurchaseOrders.app_fee())
+              # "transfer_data" => %{
+              #  "destination" => data.uid
+              # }
+            }
+          }
+      end
 
     line_items =
       [%{}]
@@ -78,7 +101,7 @@ defmodule Rauversion.Payments.Payment do
           "#{i}" => %{
             "quantity" => 1,
             "price_data" => %{
-              "unit_amount" => Decimal.to_integer(payment_price) * 100,
+              "unit_amount" => c.price,
               "currency" => "USD",
               "product_data" => %{
                 "name" => album.title,
@@ -91,28 +114,12 @@ defmodule Rauversion.Payments.Payment do
 
     IO.inspect(line_items)
 
-    # total =
-    #  Rauversion.PurchaseOrders.calculate_total(order, event.events_settings.ticket_currency)
-
-    # fee_amount =
-    #  Rauversion.PurchaseOrders.calculate_fee(
-    #    payment_price,
-    #    "USD"
-    #  )
-
     Rauversion.Stripe.Client.create_session(
       client,
-      # c.uid
-      nil,
+      c.cid,
       %{
         "line_items" => line_items,
-        "payment_intent_data" =>
-          %{
-            # "application_fee_amount" => 1
-            # "transfer_data"=> %{
-            #  "destination"=> c.uid
-            # }
-          },
+        "payment_intent_data" => c.data,
         "mode" => "payment",
         "success_url" =>
           RauversionWeb.Router.Helpers.playlist_show_url(

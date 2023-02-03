@@ -121,15 +121,31 @@ defmodule Rauversion.PurchaseOrders do
     |> Enum.sum()
   end
 
-  def calculate_fee(total, ccy \\ "usd") do
+  def calculate_fee(total, cyy \\ "usd")
+
+  def calculate_fee(total = %Decimal{}, ccy) do
     {platform_fee, _} = Float.parse(Application.get_env(:rauversion, :platform_event_fee))
 
-    t = total / (platform_fee * 100.0)
+    t = total.coef / (app_fee() * 100.0)
 
     case ccy do
       "usd" -> t
       "clp" -> t |> Kernel.round()
     end
+  end
+
+  def calculate_fee(total, ccy) do
+    t = total / (app_fee() * 100.0)
+
+    case ccy do
+      "usd" -> t
+      "clp" -> t |> Kernel.round()
+    end
+  end
+
+  def app_fee do
+    {platform_fee, _} = Float.parse(Application.get_env(:rauversion, :platform_event_fee))
+    platform_fee
   end
 
   def create_stripe_session(order, event = Rauversion.Events.Event) do
