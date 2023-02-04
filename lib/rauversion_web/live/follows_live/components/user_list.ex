@@ -18,7 +18,7 @@ defmodule RauversionWeb.FollowsLive.UserListComponent do
               <%= live_redirect to: Routes.profile_index_path(@socket, :index, Map.get(item, @kind).username) do %>
                 <div class="flex-1 flex flex-col p-8">
                   <%= img_tag(Rauversion.Accounts.avatar_url(Map.get(item, @kind), :medium), class: "w-32 h-32 flex-shrink-0 mx-auto rounded-full") %>
-                  <h3 class="mt-6 text-gray-900 text-sm font-medium">
+                  <h3 class="mt-6 text-gray-900 dark:text-gray-100 text-sm font-medium">
                     <%= Map.get(item, @kind).username %>
                   </h3>
                 </div>
