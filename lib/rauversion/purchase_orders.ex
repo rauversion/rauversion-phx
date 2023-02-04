@@ -124,8 +124,6 @@ defmodule Rauversion.PurchaseOrders do
   def calculate_fee(total, cyy \\ "usd")
 
   def calculate_fee(total = %Decimal{}, ccy) do
-    {platform_fee, _} = Float.parse(Application.get_env(:rauversion, :platform_event_fee))
-
     t = total.coef / (app_fee() * 100.0)
 
     case ccy do
@@ -148,7 +146,7 @@ defmodule Rauversion.PurchaseOrders do
     platform_fee
   end
 
-  def create_stripe_session(order, event = Rauversion.Events.Event) do
+  def create_stripe_session(order, event = %Rauversion.Events.Event{}) do
     client = Rauversion.Stripe.Client.new()
     user = event |> Ecto.assoc(:user) |> Repo.one()
 
@@ -177,11 +175,10 @@ defmodule Rauversion.PurchaseOrders do
         })
       end)
 
-    total =
-      Rauversion.PurchaseOrders.calculate_total(order, event.events_settings.ticket_currency)
+    total = Rauversion.PurchaseOrders.calculate_total(order, event.event_settings.ticket_currency)
 
     fee_amount =
-      Rauversion.PurchaseOrders.calculate_fee(total, event.events_settings.ticket_currency)
+      Rauversion.PurchaseOrders.calculate_fee(total, event.event_settings.ticket_currency)
 
     Rauversion.Stripe.Client.create_session(
       client,

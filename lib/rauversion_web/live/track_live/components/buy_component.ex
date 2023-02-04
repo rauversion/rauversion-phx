@@ -46,7 +46,7 @@ defmodule RauversionWeb.TrackLive.Components.BuyComponent do
   @impl true
   def handle_event(
         "save",
-        %{"payment" => payment_params},
+        %{"payment" => _payment_params},
         socket = %{assigns: %{current_user: _current_user = nil}}
       ) do
     {
