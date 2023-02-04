@@ -133,7 +133,7 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
               <div class="px-4 sm:px-0">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                  <%= gettext("purchased Music", %{section: @section}) %>
+                  <%= gettext("Purchased Music", %{section: @section}) %>
                 </h2>
 
                 <div class="sm:block">
@@ -161,7 +161,7 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
               </div>
 
               <!-- Stacked list -->
-              <ul role="list" class="mt-5 divide-y divide-gray-200 dark:divide-gray-600 border-t border-gray-200 dark:border-gray-800 sm:mt-0 sm:border-t-0">
+              <ul role="list" class="mt-5 divide-y divide-gray-200 dark:divide-gray-800 border-t border-gray-200 dark:border-gray-800 sm:mt-0 sm:border-t-0">
 
                 <%= for ticket <- get_tickets(@current_user, @section) do %>
 
