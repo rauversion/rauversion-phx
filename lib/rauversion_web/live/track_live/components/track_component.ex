@@ -61,7 +61,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                                 "data-audio-height-value": 70,
                                 "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(@track, :peaks)),
                                 "data-audio-url": Rauversion.Tracks.blob_proxy_url(@track, "mp3_audio"),
-                                class: "h-32"  do %>
+                                class: "sm:h-32 h-38"  do %>
             <div class='controls flex items-center'>
               <span class="sm:ml-4 relative z-0 inline-flex py-2 px-2 sm:px-0">
                 <button type="button"
