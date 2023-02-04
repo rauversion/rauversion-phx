@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2023-01-05 03:30\n"
+"PO-Revision-Date: 2023-02-04 05:49\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -22,7 +22,7 @@ msgstr ""
 msgid "60 days of free returns"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/show.html.heex:222
+#: lib/rauversion_web/live/track_live/show.html.heex:274
 #, elixir-autogen, elixir-format
 msgid "About"
 msgstr ""
@@ -51,7 +51,7 @@ msgstr ""
 
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:146
 #: lib/rauversion_web/live/shared_components/attribution_component.ex:56
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:324
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:325
 #, elixir-autogen, elixir-format
 msgid "All rights reserved"
 msgstr ""
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Article will be plublished on blog listing."
 msgstr ""
 
-#: lib/rauversion_web/live/home_live/index.html.heex:189
+#: lib/rauversion_web/live/home_live/index.html.heex:188
 #, elixir-autogen, elixir-format
 msgid "Artists You Should Know"
 msgstr ""
@@ -106,9 +106,9 @@ msgid "By Email"
 msgstr ""
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:273
-#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:222
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:242
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:90
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:413
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:434
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:224
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:90
 #, elixir-autogen, elixir-format
@@ -165,7 +165,7 @@ msgstr ""
 #: lib/rauversion_web/live/follows_live/index.html.heex:42
 #: lib/rauversion_web/live/insights_live/insights_component.ex:40
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:142
-#: lib/rauversion_web/live/track_live/show.html.heex:206
+#: lib/rauversion_web/live/track_live/show.html.heex:257
 #, elixir-autogen, elixir-format
 msgid "Comments"
 msgstr ""
@@ -203,8 +203,8 @@ msgstr ""
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:107
 #: lib/rauversion_web/live/live_helpers.ex:407
-#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:30
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:155
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:31
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:156
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:69
 #, elixir-autogen, elixir-format
 msgid "Cover photo"
@@ -216,13 +216,13 @@ msgid "Create playlist"
 msgstr ""
 
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:151
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:329
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:330
 #, elixir-autogen, elixir-format
 msgid "Creative commons"
 msgstr ""
 
 #: lib/rauversion_web/live/playlist_live/index.html.heex:41
-#: lib/rauversion_web/live/playlist_live/playlist_component.ex:172
+#: lib/rauversion_web/live/playlist_live/playlist_component.ex:171
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr ""
@@ -254,9 +254,9 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:125
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:144
 #: lib/rauversion_web/live/playlist_live/index.html.heex:40
-#: lib/rauversion_web/live/playlist_live/playlist_component.ex:162
-#: lib/rauversion_web/live/playlist_live/show.html.heex:167
-#: lib/rauversion_web/live/track_live/show.html.heex:181
+#: lib/rauversion_web/live/playlist_live/playlist_component.ex:161
+#: lib/rauversion_web/live/playlist_live/show.html.heex:217
+#: lib/rauversion_web/live/track_live/show.html.heex:232
 #, elixir-autogen, elixir-format
 msgid "Edit"
 msgstr ""
@@ -365,13 +365,13 @@ msgstr ""
 msgid "Go to your track"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:124
-#: lib/rauversion_web/live/track_live/show.html.heex:105
+#: lib/rauversion_web/live/track_live/components/track_component.ex:123
+#: lib/rauversion_web/live/track_live/show.html.heex:156
 #, elixir-autogen, elixir-format
 msgid "Hold on, this track is in %{state} state"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/show.html.heex:210
+#: lib/rauversion_web/live/track_live/show.html.heex:261
 #, elixir-autogen, elixir-format
 msgid "Insights"
 msgstr ""
@@ -387,12 +387,12 @@ msgstr ""
 msgid "Learn more about sharing "
 msgstr ""
 
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:193
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:194
 #, elixir-autogen, elixir-format
 msgid "License"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/show.html.heex:160
+#: lib/rauversion_web/live/playlist_live/show.html.heex:210
 #: lib/rauversion_web/live/track_live/components/like_track_button_component.ex:97
 #, elixir-autogen, elixir-format
 msgid "Like"
@@ -414,14 +414,14 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/show.html.heex:117
-#: lib/rauversion_web/live/track_live/show.html.heex:131
+#: lib/rauversion_web/live/playlist_live/show.html.heex:167
+#: lib/rauversion_web/live/track_live/show.html.heex:182
 #, elixir-autogen, elixir-format
 msgid "Listen now"
 msgstr ""
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:65
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:166
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:167
 #: lib/rauversion_web/templates/user_confirmation/edit.html.heex:11
 #: lib/rauversion_web/templates/user_confirmation/new.html.heex:14
 #: lib/rauversion_web/templates/user_registration/new.html.heex:113
@@ -431,8 +431,8 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:131
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:213
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:132
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:215
 #, elixir-autogen, elixir-format
 msgid "Log out"
 msgstr ""
@@ -451,14 +451,14 @@ msgstr ""
 msgid "Metadata"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:309
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:310
 #, elixir-autogen, elixir-format
 msgid "Metadata information"
 msgstr ""
 
 #: lib/rauversion_web/live/articles_live/components/user_articles_list_component.ex:72
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:119
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:201
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:120
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:202
 #, elixir-autogen, elixir-format
 msgid "My Articles"
 msgstr ""
@@ -484,10 +484,10 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/show.html.heex:82
+#: lib/rauversion_web/live/playlist_live/show.html.heex:132
 #: lib/rauversion_web/live/track_live/components/track_component.ex:80
 #: lib/rauversion_web/live/track_live/player.ex:202
-#: lib/rauversion_web/live/track_live/show.html.heex:78
+#: lib/rauversion_web/live/track_live/show.html.heex:129
 #, elixir-autogen, elixir-format
 msgid "Next"
 msgstr ""
@@ -550,8 +550,8 @@ msgstr ""
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:156
 #: lib/rauversion_web/live/live_helpers.ex:458
-#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:63
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:191
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:64
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:192
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:107
 #, elixir-autogen, elixir-format
 msgid "PNG, JPG, GIF up to 10MB"
@@ -563,7 +563,7 @@ msgid "Password"
 msgstr ""
 
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:104
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:116
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:117
 #, elixir-autogen, elixir-format
 msgid "Permissions"
 msgstr ""
@@ -578,7 +578,7 @@ msgstr ""
 msgid "Photo"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/show.html.heex:72
+#: lib/rauversion_web/live/playlist_live/show.html.heex:122
 #: lib/rauversion_web/live/track_live/components/track_component.ex:71
 #: lib/rauversion_web/live/track_live/player.ex:210
 #: lib/rauversion_web/templates/embed/show.html.heex:15
@@ -654,7 +654,7 @@ msgid "Recent publications"
 msgstr ""
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:64
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:165
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:166
 #: lib/rauversion_web/templates/user_confirmation/edit.html.heex:10
 #: lib/rauversion_web/templates/user_confirmation/new.html.heex:13
 #: lib/rauversion_web/templates/user_reset_password/edit.html.heex:51
@@ -727,7 +727,7 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:316
 #: lib/rauversion_web/live/playlist_live/create_form_component.ex:130
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:415
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:436
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
 #, elixir-autogen, elixir-format
 msgid "Save"
@@ -748,7 +748,7 @@ msgstr ""
 #: lib/rauversion_web/live/playlist_live/create_form_component.ex:130
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
 #: lib/rauversion_web/live/track_live/components/comments_component.ex:183
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:415
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:436
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:100
 #: lib/rauversion_web/live/usersettings_live/components/email_form.ex:46
@@ -793,17 +793,17 @@ msgstr ""
 msgid "Send instructions to reset password"
 msgstr ""
 
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:124
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:206
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:125
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:208
 #, elixir-autogen, elixir-format
 msgid "Settings"
 msgstr ""
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_button_component.ex:53
 #: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:27
-#: lib/rauversion_web/live/playlist_live/show.html.heex:149
+#: lib/rauversion_web/live/playlist_live/show.html.heex:199
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:106
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:117
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:118
 #: lib/rauversion_web/live/track_live/components/share_track_button_component.ex:62
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:27
 #, elixir-autogen, elixir-format
@@ -859,7 +859,7 @@ msgstr ""
 msgid "Start now"
 msgstr ""
 
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:192
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:193
 #, elixir-autogen, elixir-format
 msgid "Support"
 msgstr ""
@@ -881,7 +881,7 @@ msgstr ""
 msgid "These are delivered via SMS to your mobile phone."
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:128
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:129
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:38
 #: lib/rauversion_web/live/usersettings_live/components/email_form.ex:28
 #: lib/rauversion_web/live/usersettings_live/components/profile_form.ex:30
@@ -925,15 +925,16 @@ msgstr ""
 msgid "Total Listens"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:312
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:313
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:414
 #, elixir-autogen, elixir-format
 msgid "Track information"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/show.html.heex:42
+#: lib/rauversion_web/live/playlist_live/show.html.heex:92
 #: lib/rauversion_web/live/profile_live/components/stats_component.ex:23
 #: lib/rauversion_web/live/track_live/index.html.heex:27
-#: lib/rauversion_web/live/track_live/show.html.heex:39
+#: lib/rauversion_web/live/track_live/show.html.heex:90
 #, elixir-autogen, elixir-format
 msgid "Tracks"
 msgstr ""
@@ -948,7 +949,7 @@ msgstr ""
 msgid "Update Notifications"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:41
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:42
 #, elixir-autogen, elixir-format
 msgid "Upload Cover"
 msgstr ""
@@ -959,14 +960,14 @@ msgid "Upload a Audio file"
 msgstr ""
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:130
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:168
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:169
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:83
 #, elixir-autogen, elixir-format
 msgid "Upload a track Cover"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/show.html.heex:115
-#: lib/rauversion_web/live/track_live/show.html.heex:128
+#: lib/rauversion_web/live/playlist_live/show.html.heex:165
+#: lib/rauversion_web/live/track_live/show.html.heex:179
 #, elixir-autogen, elixir-format
 msgid "Upload image"
 msgstr ""
@@ -986,7 +987,7 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:180
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:181
 #, elixir-autogen, elixir-format
 msgid "View notifications"
 msgstr ""
@@ -1030,7 +1031,7 @@ msgstr ""
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:136
 #: lib/rauversion_web/live/live_helpers.ex:438
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:172
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:173
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:87
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:58
 #, elixir-autogen, elixir-format
@@ -1050,18 +1051,18 @@ msgid "private"
 msgstr ""
 
 #: lib/rauversion_web/live/playlist_live/create_form_component.ex:153
-#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:117
+#: lib/rauversion_web/live/playlist_live/edit_form_component.ex:118
 #, elixir-autogen, elixir-format
 msgid "remove"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:404
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:405
 #, elixir-autogen, elixir-format
 msgid "share controls"
 msgstr ""
 
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:202
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:380
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:381
 #, elixir-autogen, elixir-format
 msgid "some rights reserved"
 msgstr ""
@@ -1209,12 +1210,12 @@ msgstr ""
 msgid "Total number of tickets."
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_list_component.ex:25
+#: lib/rauversion_web/live/events_live/components/event_list_component.ex:32
 #, elixir-autogen, elixir-format
 msgid "Upcoming Events"
 msgstr ""
 
-#: lib/rauversion_web/live/events_live/components/event_list_component.ex:27
+#: lib/rauversion_web/live/events_live/components/event_list_component.ex:34
 #, elixir-autogen, elixir-format
 msgid "Upcoming Events from the Rauversion community"
 msgstr ""
@@ -1311,14 +1312,15 @@ msgid "Manage your transbank commerce (Chile only)."
 msgstr ""
 
 #: lib/rauversion_web/live/events_live/components/user_events_list_component.ex:79
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:120
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:202
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:121
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:203
 #, elixir-autogen, elixir-format
 msgid "My Events"
 msgstr ""
 
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:123
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:205
+#: lib/rauversion_web/live/my_purchases_live/index.ex:38
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:124
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:207
 #, elixir-autogen, elixir-format
 msgid "My Purchases"
 msgstr ""
@@ -1333,6 +1335,7 @@ msgstr ""
 msgid "Page visitors"
 msgstr ""
 
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:108
 #: lib/rauversion_web/live/my_tickets_live/index.ex:56
 #, elixir-autogen, elixir-format
 msgid "Purchases"
@@ -1445,6 +1448,8 @@ msgid "Paid ticket"
 msgstr ""
 
 #: lib/rauversion_web/live/events_live/components/event_tickets_component.ex:237
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:126
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:126
 #, elixir-autogen, elixir-format
 msgid "Price"
 msgstr ""
@@ -1475,13 +1480,13 @@ msgid "go to ticket"
 msgstr ""
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:25
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:158
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:159
 #, elixir-autogen, elixir-format
 msgid "Events"
 msgstr ""
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:29
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:157
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:158
 #, elixir-autogen, elixir-format
 msgid "Magazine"
 msgstr ""
@@ -1532,6 +1537,8 @@ msgid "Event overview"
 msgstr ""
 
 #: lib/rauversion_web/live/events_live/show.html.heex:83
+#: lib/rauversion_web/live/playlist_live/show.html.heex:56
+#: lib/rauversion_web/live/track_live/show.html.heex:69
 #, elixir-autogen, elixir-format
 msgid "Payment failed"
 msgstr ""
@@ -1547,6 +1554,8 @@ msgid "The payment was successfully processed."
 msgstr ""
 
 #: lib/rauversion_web/live/events_live/show.html.heex:87
+#: lib/rauversion_web/live/playlist_live/show.html.heex:60
+#: lib/rauversion_web/live/track_live/show.html.heex:73
 #, elixir-autogen, elixir-format
 msgid "There was a problem processing the payment."
 msgstr ""
@@ -1566,7 +1575,7 @@ msgstr ""
 msgid "View tickets"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:125
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:126
 #, elixir-autogen, elixir-format
 msgid "Edit track"
 msgstr ""
@@ -1795,7 +1804,7 @@ msgstr ""
 msgid "webhook url"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:252
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:253
 #, elixir-autogen, elixir-format
 msgid "Confirm image"
 msgstr ""
@@ -1805,19 +1814,20 @@ msgstr ""
 msgid "Facebook"
 msgstr ""
 
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:118
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:17
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:156
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:157
 #, elixir-autogen, elixir-format
 msgid "Music"
 msgstr ""
 
 #: lib/rauversion_web/templates/layout/_user_menu.html.heex:115
-#: lib/rauversion_web/templates/layout/_user_menu.html.heex:197
+#: lib/rauversion_web/templates/layout/_user_menu.html.heex:198
 #, elixir-autogen, elixir-format
 msgid "My Music"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:199
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:200
 #, elixir-autogen, elixir-format
 msgid "Or generate the image with AI"
 msgstr ""
@@ -1827,7 +1837,7 @@ msgstr ""
 msgid "Recent Tracks"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:261
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:262
 #, elixir-autogen, elixir-format
 msgid "Redo image"
 msgstr ""
@@ -1842,17 +1852,17 @@ msgstr ""
 msgid "Twitter"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:233
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:234
 #, elixir-autogen, elixir-format
 msgid "We use DALL-E from Open AI to generate images"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:218
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:219
 #, elixir-autogen, elixir-format
 msgid "generate image"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:235
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:236
 #, elixir-autogen, elixir-format
 msgid "read more"
 msgstr ""
@@ -1912,7 +1922,7 @@ msgstr ""
 msgid "View the event's attendees list."
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:242
+#: lib/rauversion_web/live/track_live/components/track_component.ex:241
 #, elixir-autogen, elixir-format
 msgid "Add to next up"
 msgstr ""
@@ -1922,17 +1932,17 @@ msgstr ""
 msgid "Next up"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:230
+#: lib/rauversion_web/live/track_live/components/track_component.ex:229
 #, elixir-autogen, elixir-format
 msgid "Delete this track"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:221
+#: lib/rauversion_web/live/track_live/components/track_component.ex:220
 #, elixir-autogen, elixir-format
 msgid "Edit this track"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:181
+#: lib/rauversion_web/live/track_live/components/track_component.ex:180
 #, elixir-autogen, elixir-format
 msgid "More"
 msgstr ""
@@ -2007,8 +2017,8 @@ msgstr ""
 msgid "Listed on page"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/show.html.heex:199
-#: lib/rauversion_web/live/track_live/show.html.heex:230
+#: lib/rauversion_web/live/playlist_live/show.html.heex:250
+#: lib/rauversion_web/live/track_live/show.html.heex:283
 #, elixir-autogen, elixir-format
 msgid "Buy Link"
 msgstr ""
@@ -2033,8 +2043,8 @@ msgstr ""
 msgid "Add new event recording"
 msgstr ""
 
-#: lib/rauversion_web/live/playlist_live/playlist_component.ex:99
-#: lib/rauversion_web/live/playlist_live/show.html.heex:93
+#: lib/rauversion_web/live/playlist_live/playlist_component.ex:98
+#: lib/rauversion_web/live/playlist_live/show.html.heex:143
 #, elixir-autogen, elixir-format
 msgid "Album"
 msgstr ""
@@ -2054,7 +2064,7 @@ msgstr ""
 msgid "Recordings"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/track_component.ex:253
+#: lib/rauversion_web/live/track_live/components/track_component.ex:252
 #, elixir-autogen, elixir-format
 msgid "Download"
 msgstr ""
@@ -2062,5 +2072,197 @@ msgstr ""
 #: lib/rauversion_web/live/events_live/components/forms/attendees_component.ex:67
 #, elixir-autogen, elixir-format
 msgid "Invitation for event: %{title}"
+msgstr ""
+
+#: lib/rauversion/playlists/playlist.ex:142
+#, elixir-autogen, elixir-format
+msgid "$0 or more. We apply a fee of %%{fee} when price is higher than $0. The fee will be capped at the total payment amount"
+msgstr ""
+
+#: lib/rauversion_web/live/profile_live/index.ex:165
+#, elixir-autogen, elixir-format
+msgid "%{id}'s Insights on Rauversion"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/show.html.heex:274
+#, elixir-autogen, elixir-format
+msgid "Album release date:"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:192
+#: lib/rauversion_web/live/playlist_live/playlist_component.ex:186
+#, elixir-autogen, elixir-format
+msgid "Buy Digital Album"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:121
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:192
+#: lib/rauversion_web/live/track_live/components/track_component.ex:276
+#, elixir-autogen, elixir-format
+msgid "Buy Digital Track"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:121
+#, elixir-autogen, elixir-format
+msgid "Buy Digital album"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:175
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:175
+#, elixir-autogen, elixir-format
+msgid "Checkout"
+msgstr ""
+
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:48
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:77
+#, elixir-autogen, elixir-format
+msgid "Created at:"
+msgstr ""
+
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:55
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:84
+#, elixir-autogen, elixir-format
+msgid "Download link"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:149
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:149
+#, elixir-autogen, elixir-format
+msgid "Includes unlimited streaming via the %{app_name} app, plus high-quality download in MP3, FLAC"
+msgstr ""
+
+#: lib/rauversion_web/live/profile_live/index.ex:123
+#, elixir-autogen, elixir-format
+msgid "Listen to %{id}'s favorite music online for free on Rauversion"
+msgstr ""
+
+#: lib/rauversion_web/live/merch_live/index.ex:10
+#, elixir-autogen, elixir-format
+msgid "Merch"
+msgstr ""
+
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:126
+#, elixir-autogen, elixir-format
+msgid "My Purchased music"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:136
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:136
+#, elixir-autogen, elixir-format
+msgid "Name your price %{num} or more"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/show.html.heex:23
+#: lib/rauversion_web/live/track_live/show.html.heex:36
+#, elixir-autogen, elixir-format
+msgid "Order placed"
+msgstr ""
+
+#: lib/rauversion_web/live/events_live/components/event_list_component.ex:72
+#, elixir-autogen, elixir-format
+msgid "Past Events"
+msgstr ""
+
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:149
+#, elixir-autogen, elixir-format
+msgid "Pending orders"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:116
+#, elixir-autogen, elixir-format
+msgid "Pricing"
+msgstr ""
+
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:411
+#, elixir-autogen, elixir-format
+msgid "Pricing information"
+msgstr ""
+
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:136
+#, elixir-autogen, elixir-format
+msgid "Purchased Music"
+msgstr ""
+
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:144
+#, elixir-autogen, elixir-format
+msgid "Purchased albums"
+msgstr ""
+
+#: lib/rauversion_web/live/my_music_purchases_live/index.ex:154
+#, elixir-autogen, elixir-format
+msgid "Purchased individual Tracks"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/show.html.heex:267
+#, elixir-autogen, elixir-format
+msgid "Released by:"
+msgstr ""
+
+#: lib/rauversion_web/live/profile_live/index.ex:133
+#, elixir-autogen, elixir-format
+msgid "Stream %{id} | Listen to music albums online for free on Rauversion"
+msgstr ""
+
+#: lib/rauversion_web/live/profile_live/index.ex:103
+#: lib/rauversion_web/live/profile_live/index.ex:113
+#, elixir-autogen, elixir-format
+msgid "Stream %{id} | Listen to music online for free on Rauversion"
+msgstr ""
+
+#: lib/rauversion_web/live/profile_live/index.ex:143
+#, elixir-autogen, elixir-format
+msgid "Stream %{id} | Listen to music playlists online for free on Rauversion"
+msgstr ""
+
+#: lib/rauversion_web/live/profile_live/index.ex:154
+#, elixir-autogen, elixir-format
+msgid "Stream %{id} | Listen to top hits and popular tracks online for free on Rauversion"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/show.html.heex:26
+#: lib/rauversion_web/live/track_live/show.html.heex:39
+#, elixir-autogen, elixir-format
+msgid "The order was successfully processed."
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/show.html.heex:33
+#: lib/rauversion_web/live/track_live/show.html.heex:46
+#, elixir-autogen, elixir-format
+msgid "View your Orders"
+msgstr ""
+
+#: lib/rauversion_web/live/my_purchases_live/index.ex:55
+#, elixir-autogen, elixir-format
+msgid "You purchased %{name}"
+msgstr ""
+
+#: lib/rauversion_web/live/merch_live/index.ex:11
+#, elixir-autogen, elixir-format
+msgid "Your merch"
+msgstr ""
+
+#: lib/rauversion/purchase_orders/music_purchase_notifier.ex:72
+#, elixir-autogen, elixir-format
+msgid "Your music order"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:55
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:55
+#, elixir-autogen, elixir-format
+msgid "in order to make purchases you need to sign in"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:168
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:168
+#, elixir-autogen, elixir-format
+msgid "include a message to %{name}"
+msgstr ""
+
+#: lib/rauversion_web/live/playlist_live/buy_modal_component.ex:204
+#: lib/rauversion_web/live/playlist_live/playlist_component.ex:198
+#: lib/rauversion_web/live/track_live/components/buy_component.ex:204
+#: lib/rauversion_web/live/track_live/components/track_component.ex:288
+#, elixir-autogen, elixir-format
+msgid "or more"
 msgstr ""
 
