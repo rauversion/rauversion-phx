@@ -75,7 +75,7 @@ defmodule Rauversion.Payments.Payment do
     c =
       case Rauversion.Accounts.get_oauth_credential(user, "stripe") do
         nil ->
-          fee = Rauversion.PurchaseOrders.calculate_fee(payment_price, "usd")
+          _fee = Rauversion.PurchaseOrders.calculate_fee(payment_price, "usd")
 
           %{cid: nil, data: %{}, price: Decimal.to_integer(payment_price) * 100}
 
