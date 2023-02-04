@@ -21,6 +21,8 @@ defmodule Rauversion.Playlists.Playlist do
     field :playlist_type, :string, default: "playlist"
     # TODO: if user selects album on playlist_type, then the release_date should be required
     field :release_date, :utc_datetime
+    # , required: false
+    field :tags, {:array, :string}, default: []
 
     field :likes_count, :integer, default: 0
 
@@ -55,7 +57,8 @@ defmodule Rauversion.Playlists.Playlist do
       :genre,
       :custom_genre,
       :playlist_type,
-      :release_date
+      :release_date,
+      :tags
     ])
     |> cast_embed(:metadata, with: &Rauversion.Playlists.PlaylistMetadata.changeset/2)
     |> cast_assoc(:track_playlists)
@@ -116,6 +119,13 @@ defmodule Rauversion.Playlists.Playlist do
         wrapper_class: "sm:col-span-2",
         type: :select,
         options: Rauversion.CategoryTypes.playlist_types()
+      },
+      %{
+        name: :tags,
+        label: "Genres",
+        wrapper_class: "sm:col-span-4",
+        type: :react_select,
+        options: Rauversion.Genres.plain()
       },
       %{
         name: :release_date,

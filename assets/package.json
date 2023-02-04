@@ -11,13 +11,16 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-select": "^5.7.0",
     "stimulus-clipboard": "^3.2.0",
     "stimulus-dropdown": "^2.0.0",
     "stimulus-use": "^0.51.1",
     "wavesurfer.js": "6.2.0",
     "zustand": "^4.0.0-rc.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "postcss-import": "^15.1.0"
+  },
   "scripts": {
     "deploy": "cd .. && mix assets.deploy",
     "cypress:open": "./node_modules/.bin/cypress open",

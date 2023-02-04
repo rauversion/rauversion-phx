@@ -7,7 +7,7 @@ defmodule RauversionWeb.PlaylistLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :playlists, list_playlists())}
+    {:ok, assign(socket, :playlists, list_playlists()) |> assign(:tag, nil)}
   end
 
   @impl true
@@ -19,6 +19,13 @@ defmodule RauversionWeb.PlaylistLive.Index do
     socket
     |> assign(:page_title, "Edit Playlist")
     |> assign(:playlist, Playlists.get_playlist!(id))
+  end
+
+  defp apply_action(socket, :genre, %{"tag" => id}) do
+    socket
+    |> assign(:page_title, "Edit Playlist")
+    |> assign(:tag, id)
+    |> assign(:playlists, Playlists.get_playlists_by_tag(id) |> Rauversion.Repo.all())
   end
 
   defp apply_action(socket, :new, _params) do

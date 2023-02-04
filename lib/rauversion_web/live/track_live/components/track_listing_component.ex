@@ -6,18 +6,31 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
   alias Rauversion.{Tracks, Repo}
 
   @impl true
-  def mount(socket) do
-    tracks = list_tracks(1)
+  def update(assigns, socket) do
+    socket =
+      socket
+      |> assign(assigns)
+
+    tracks = list_tracks(1, socket.assigns.tag)
     tracks_meta = track_meta(tracks)
 
     socket =
       socket
+      |> assign(tag: socket.assigns.tag)
       |> assign(page: 1)
       |> assign(:track_meta, tracks_meta)
       |> assign(:tracks, tracks.entries)
 
-    {:ok, socket, temporary_assigns: [tracks: []]}
+    {:ok,
+     socket
+     |> assign(temporary_assigns: [tracks: []])}
   end
+
+  # @impl true
+  # def mount(socket) do
+  #
+  #  {:ok, socket, temporary_assigns: [tracks: []]}
+  # end
 
   defp track_meta(tracks) do
     %{
@@ -28,7 +41,14 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
     }
   end
 
-  defp list_tracks(page) do
+  defp list_tracks(page, tag) when tag |> is_binary do
+    Tracks.get_tracks_by_tag(tag)
+    |> Tracks.with_processed()
+    |> Tracks.latests()
+    |> Repo.paginate(page: page, page_size: 12)
+  end
+
+  defp list_tracks(page, tag) when tag |> is_nil do
     Tracks.list_public_tracks()
     |> Tracks.with_processed()
     |> Tracks.latests()
@@ -41,7 +61,7 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
       {:noreply, socket}
     else
       page = socket.assigns.page + 1
-      tracks = list_tracks(page)
+      tracks = list_tracks(page, socket.assigns.tag)
 
       tracks_meta = %{
         page_number: tracks.page_number,

@@ -116,6 +116,11 @@ defmodule Rauversion.Playlists do
   def get_playlist!(id), do: Repo.get!(Playlist, id)
   def get_by_slug!(id), do: Repo.get_by!(Playlist, slug: id)
 
+  # https://fly.io/phoenix-files/tag-all-the-things/
+  def get_playlists_by_tag(tag) do
+    from(b in Playlist, where: ^tag in b.tags, preload: [:user])
+  end
+
   @doc """
   Creates a playlist.
 
