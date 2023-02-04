@@ -240,6 +240,8 @@
       </div>
 
       <div class="sm:text-xl text-sm container mx-auto px-4 my-4">
+        <.tag_list_for playlist={@playlist} />
+
         <%= SimplexFormat.text_to_html(@playlist.description, auto_link: true) %>
       </div>
 

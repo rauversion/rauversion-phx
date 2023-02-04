@@ -58,6 +58,7 @@ module.exports = {
     }
   },
   plugins: [
+    require('postcss-import'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),

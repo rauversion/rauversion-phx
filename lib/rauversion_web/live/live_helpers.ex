@@ -39,7 +39,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div
         id="modal-content"
         class={"phx-modal-content #{@w_class} fade-in-scale bg-white text-gray-900 dark:bg-black dark:text-gray-100 border-2 border-black dark:border-white"}
-        phx-click-away={JS.dispatch("click", to: "#close")}
+        phx-click-away-disabled={JS.dispatch("click", to: "#close")}
         phx-window-keydown={JS.dispatch("click", to: "#close")}
         phx-key="escape"
       >
@@ -131,6 +131,40 @@ defmodule RauversionWeb.LiveHelpers do
         </button>
       </div>
     </div>
+    """
+  end
+
+  def tag_list_for(assigns = %{track: _track}) do
+    ~H"""
+    <%= if @track.tags && Enum.any?(@track.tags) do %>
+      <div class="py-4">
+        <%= for tag <- @track.tags do %>
+
+          <%= live_redirect to: "/tracks/genre/#{tag}",
+            class: "inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200" do %>
+            <%= tag %>
+          <% end %>
+
+        <% end %>
+      </div>
+    <% end %>
+    """
+  end
+
+  def tag_list_for(assigns = %{playlist: _}) do
+    ~H"""
+    <%= if @playlist.tags && Enum.any?(@playlist.tags) do %>
+      <div class="py-4">
+        <%= for tag <- @playlist.tags do %>
+
+          <%= live_redirect to: "/playlists/genre/#{tag}",
+            class: "inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200" do %>
+            <%= tag %>
+          <% end %>
+
+        <% end %>
+      </div>
+    <% end %>
     """
   end
 
@@ -295,6 +329,24 @@ defmodule RauversionWeb.LiveHelpers do
         <%= error_tag @form, @field.name %>
 
       </div>
+    """
+  end
+
+  def form_input_renderer(f, field = %{type: :react_select, options: options}) do
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
+
+    ~H"""
+    <div class={@field.wrapper_class}>
+      <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pb-2--" %>
+      <div class="mt-1 sm:mt-0- sm:col-span-2">
+        <div class="max-w-lg flex- rounded-md shadow-sm">
+          <div phx-hook="Select" id={"oe-#{@field.name}"}>
+            <%= multiple_select(@form, @field.name, options, class: "hidden text-gray-800") %>
+            <div class="select-wrapper"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     """
   end
 

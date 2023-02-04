@@ -26,6 +26,8 @@ defmodule Rauversion.Tracks.Track do
     field :title, :string
     field :likes_count, :integer, default: 0
     field :reposts_count, :integer, default: 0
+    # , required: false
+    field :tags, {:array, :string}, default: []
 
     has_many :listening_events, Rauversion.TrackingEvents.Event, on_delete: :delete_all
     has_many :track_comments, Rauversion.TrackComments.TrackComment, on_delete: :delete_all
@@ -83,7 +85,8 @@ defmodule Rauversion.Tracks.Track do
       :description,
       :private,
       :user_id,
-      :caption
+      :caption,
+      :tags
       # :slug,
       # :caption,
       # :notification_settings,

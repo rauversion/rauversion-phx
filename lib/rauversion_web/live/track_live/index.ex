@@ -13,6 +13,7 @@ defmodule RauversionWeb.TrackLive.Index do
     socket =
       socket
       |> assign(:page, 1)
+      |> assign(:tag, nil)
       |> assign(:tracks, [])
 
     {:ok, socket}
@@ -49,6 +50,17 @@ defmodule RauversionWeb.TrackLive.Index do
       err ->
         err
     end
+  end
+
+  defp apply_action(socket, :genre, %{"tag" => id}) do
+    socket
+    |> assign(:page_title, "Tag #{id}")
+    |> assign(:track, nil)
+    |> assign(:tag, id)
+    |> assign(
+      :tag,
+      id
+    )
   end
 
   defp apply_action(socket, :new, _params) do

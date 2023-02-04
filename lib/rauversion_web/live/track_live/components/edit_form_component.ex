@@ -141,6 +141,20 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                       </div>
                     </div>
 
+
+                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                      <%= label f, :tags, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
+                      <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <div class="max-w-lg flex- rounded-md shadow-sm">
+                          <div phx-hook="Select" id="oe">
+                            <%= multiple_select(f, :tags, Rauversion.Genres.plain(), class: "hidden text-gray-800") %>
+                            <div class="select-wrapper"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                       <%= label f, :description, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
                       <div class="mt-1 sm:mt-0 sm:col-span-2">

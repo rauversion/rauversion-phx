@@ -32,6 +32,8 @@ import TrackHook from "./hooks/track_hook"
 import Editor from "./hooks/editor"
 import ArticleContent from "./hooks/article_content"
 import PlayButton from "./hooks/play_button"
+import Select from "./hooks/select"
+
 import { datetimeHook } from './hooks/datetime_picker'
 
 import create from 'zustand/vanilla'
@@ -94,6 +96,7 @@ Hooks.InfiniteScroll = InfiniteScroll
 Hooks.Editor = Editor
 Hooks.ArticleContent = ArticleContent
 Hooks.DatetimeHook = datetimeHook
+Hooks.Select = Select
 
 Hooks.currentTimezone = {
   mounted(){

@@ -88,6 +88,9 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                   <h4 class="text-md font-bold">
                     <%= live_redirect @track.title, to: Routes.track_show_path(@socket, :show, @track) %>
                   </h4>
+
+
+
                   <h5 class="text-sm font-">
                     <%= case @track.user do
                       %Rauversion.Accounts.User{} ->  @track.user.username
@@ -104,6 +107,10 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                     </div>
                   </div>
                 <% end %>
+              </div>
+
+              <div class="mr-2">
+                <.tag_list_for track={@track} />
               </div>
             </div>
           <% end %>

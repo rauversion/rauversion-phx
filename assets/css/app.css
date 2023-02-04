@@ -158,6 +158,106 @@ input[type="range"].vertical {
 
 
 
+/* REACT SELECT */
+
+.my-react-select-container .my-react-select__control {
+  /*@apply bg-white dark:bg-neutral-700 border-2 border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500;*/
+  background: black;
+  color: white;
+}
+
+.my-react-select__multi-value__label {
+  color: white !important;
+}
+
+.my-react-select-container .my-react-select__control--is-focused {
+  /*@apply border-neutral-500 hover:border-neutral-500 dark:border-neutral-400 dark:hover:border-neutral-400 shadow-none;*/
+  background: #222;
+}
+
+.my-react-select-container .my-react-select__menu {
+  /*@apply bg-neutral-100 dark:bg-neutral-700 border-2 border-neutral-300 dark:border-neutral-600;*/
+  background: #555;
+}
+
+.my-react-select-container .my-react-select__option {
+  /*@apply text-neutral-600 dark:text-neutral-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-800;*/
+  background: #111;
+  color: white
+}
+
+.my-react-select-container .my-react-select__option:hover {
+  /*@apply text-neutral-600 dark:text-neutral-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-800;*/
+  background: #333;
+  color: white
+}
+
+/* .my-react-select-container .my-react-select__option--is-focused {
+    @apply bg-neutral-200 dark:bg-neutral-800;
+  } */
+
+.my-react-select-container .my-react-select__indicator-separator {
+  /*@apply bg-neutral-400;*/
+  background: white;
+}
+
+.my-react-select-container .my-react-select__input-container,
+.my-react-select-container .my-react-select__placeholder,
+.my-react-select-container .my-react-select__single-value {
+  /*@apply text-neutral-600 dark:text-neutral-200;*/
+  color: black;
+}
+
+.my-react-select__multi-value {
+  background: black !important;
+  border: 1px solid white;
+}
+
+
+
+
+
+
+@layer components {
+
+  .aaa {
+    @apply bg-white;
+  }
+
+  /* .my-react-select-container {
+      oijoijoij
+  } */
+  .my-react-select-container .my-react-select__control {
+    @apply bg-white dark: bg-neutral-700 border-2 border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500;
+  }
+
+  .my-react-select-container .my-react-select__control--is-focused {
+    @apply border-neutral-500 hover: border-neutral-500 dark:border-neutral-400 dark:hover:border-neutral-400 shadow-none;
+  }
+
+  .my-react-select-container .my-react-select__menu {
+    @apply bg-neutral-100 dark: bg-neutral-700 border-2 border-neutral-300 dark:border-neutral-600;
+  }
+
+  .my-react-select-container .my-react-select__option {
+    @apply text-neutral-600 dark: text-neutral-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-800;
+  }
+
+  /* .my-react-select-container .my-react-select__option--is-focused {
+    @apply bg-neutral-200 dark:bg-neutral-800;
+  } */
+
+  .my-react-select-container .my-react-select__indicator-separator {
+    @apply bg-neutral-400;
+  }
+
+  .my-react-select-container .my-react-select__input-container,
+  .my-react-select-container .my-react-select__placeholder,
+  .my-react-select-container .my-react-select__single-value {
+    @apply text-neutral-600 dark: text-neutral-200;
+  }
+}
+
 
 
 

@@ -213,6 +213,9 @@ defmodule RauversionWeb.Router do
     live "/events/:slug/edit/hosts", EventsLive.New, :hosts
 
     live "/tracks/new", TrackLive.New, :new
+
+    live "/tracks/genre/:tag", TrackLive.Index, :genre
+
     live "/tracks/:id/edit", TrackLive.Index, :edit
 
     # get "/tracks/:id/oembed.xml", TracksController, :oembed
@@ -228,6 +231,7 @@ defmodule RauversionWeb.Router do
     live "/reposts/:id/show/edit", RepostLive.Show, :edit
 
     live "/playlists/new", PlaylistLive.Index, :new
+    live "/playlists/genre/:tag", PlaylistLive.Index, :genre
     live "/playlists/:id/edit", PlaylistLive.Index, :edit
     live "/playlists/:id/show/edit", PlaylistLive.Show, :edit
 

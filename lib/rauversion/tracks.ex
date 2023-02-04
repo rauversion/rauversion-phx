@@ -196,6 +196,11 @@ defmodule Rauversion.Tracks do
     |> Repo.one()
   end
 
+  # https://fly.io/phoenix-files/tag-all-the-things/
+  def get_tracks_by_tag(tag) do
+    from(b in Track, where: ^tag in b.tags, preload: [:user])
+  end
+
   @doc """
   Creates a track.
 

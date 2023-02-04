@@ -1,48 +1,43 @@
-<h1>Listing Playlists</h1>
+<main class="bg-white dark:bg-black">
+  <div >
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+        <%= gettext("Discover Playlists and Albums") %>
+      </h1>
+      <%= if @tag do %>
+        <h2 class="my-4 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+          <%= gettext("Tracks tagged in %{t}", %{t: @tag}) %>
+        </h2>
+      <% end %>
+    </div>
+  </div>
 
-<%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.playlist_index_path(@socket, :index)}>
-    <.live_component
-      module={RauversionWeb.PlaylistLive.FormComponent}
-      id={@playlist.id || :new}
-      title={@page_title}
-      action={@live_action}
-      playlist={@playlist}
-      current_user={@current_user}
-      return_to={Routes.playlist_index_path(@socket, :index)}
-    />
-  </.modal>
-<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Slug</th>
-      <th>Description</th>
-      <th>Title</th>
-       <th>Private</th>
-      <th>Metadata</th>
+  <!-- Product grid -->
+  <section aria-labelledby="products-heading" class="max-w-2xl mx-auto pt-12-- pb-16 px-4 sm:pt-16-- sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <h2 id="products-heading" class="sr-only"><%= gettext "Tracks" %></h2>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="playlists">
+
     <%= for playlist <- @playlists do %>
-      <tr id={"playlist-#{playlist.id}"}>
-        <td><%= playlist.slug %></td>
-        <td><%= playlist.description %></td>
-        <td><%= playlist.title %></td>
-        <td><%= playlist.private %></td>
-        <td><%= playlist.metadata %></td>
+   
+      <div class="w-64 inline-flex flex-col text-center lg:w-auto">
+        <div class="group relative">
+          <div class="relative w-full h-80 bg-white dark:bg-black rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+            <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"), class: "w-full h-full object-center object-cover") %>
+          </div>
 
-        <td>
-          <span><%= live_redirect gettext("Show"), to: Routes.playlist_show_path(@socket, :show, playlist) %></span>
-          <span><%= live_patch gettext("Edit"), to: Routes.playlist_index_path(@socket, :edit, playlist) %></span>
-          <span><%= link gettext("Delete"), to: "#", phx_click: "delete", phx_value_id: playlist.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
+          <h3 class="mt-3 text-sm text-gray-500 dark:text-gray-300 text-left">
+            <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist) do %>
+              <span class="absolute inset-0"></span>
+              <%= playlist.title %>
+            <% end %>
+          </h3>
+          <p class="text-base font-semibold text-gray-900 dark:text-gray-100 text-left"><%= playlist.user.username %></p>
+        </div>
+      </div>
+
     <% end %>
-  </tbody>
-</table>
+  </section>
 
-<span><%= live_patch gettext("New Playlist"), to: Routes.playlist_index_path(@socket, :new) %></span>
+  
+</main>
