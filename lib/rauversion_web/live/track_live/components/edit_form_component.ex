@@ -113,6 +113,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
               <!-- Current: "bg-brand-100 text-brand-700", Default: "text-gray-500 hover:text-gray-700 dark:text-gray-300" -->
               <a href="#" phx-click="basic-info-tab" class={"#{active_tab_link?(@current_tab, "basic-info-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> <%= gettext "Basic Info" %> </a>
               <a href="#" phx-click="metadata-tab" class={"#{active_tab_link?(@current_tab, "metadata-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> <%= gettext "Metadata" %> </a>
+              <a href="#" phx-click="pricing-tab" class={"#{active_tab_link?(@current_tab, "pricing-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"} aria-current="page"> <%= gettext "Pricing" %> </a>
               <a href="#" phx-click="permissions-tab" class={"#{active_tab_link?(@current_tab, "permissions-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"} aria-current="page"> <%= gettext "Permissions" %> </a>
               <a href="#" phx-click="share-tab" class={"#{active_tab_link?(@current_tab, "share-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> <%= gettext "Share" %> </a>
             </nav>
@@ -401,7 +402,27 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
             <% end %>
 
             <div id="share" class={"tab-pane #{ active_tab_for?(@current_tab, "share-tab")}"}>
-            <%= gettext "share controls" %>
+              <%= gettext "share controls" %>
+            </div>
+
+            <div id="pricing" class={"tab-pane #{ active_tab_for?(@current_tab, "pricing-tab")}"}>
+              <div class="pt-8">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+                  <%= gettext("Pricing information") %>
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                  <%= gettext("Track information") %>
+                </p>
+              </div>
+
+              <%= inputs_for f, :metadata, fn i -> %>
+                <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                  <%= for field <- Rauversion.Playlists.Playlist.pricing_definitions(@changeset) do %>
+                    <%= form_input_renderer(i, field) %>
+                  <% end %>
+                </div>
+              <% end %>
+
             </div>
 
           </div>

@@ -158,6 +158,11 @@ defmodule Rauversion.Stripe.Client do
 
   defp prepare_request(client, method, path, account, params \\ [])
 
+  defp prepare_request(client, :post, path, account = nil, params) do
+    opts = []
+    handle_response(post(client, path, params, opts))
+  end
+
   defp prepare_request(client, :post, path, account, params) do
     opts = [
       headers: [
@@ -177,9 +182,25 @@ defmodule Rauversion.Stripe.Client do
     handle_response(get(client, path, opts))
   end
 
+  defp prepare_request(client, :get, path, account = nil, params) do
+    opts = [
+      query: params
+    ]
+
+    handle_response(get(client, path, opts))
+  end
+
   defp prepare_request(client, :delete, path, account, params) do
     opts = [
       headers: [{"Stripe-Account", account}],
+      query: params
+    ]
+
+    handle_response(delete(client, path, opts))
+  end
+
+  defp prepare_request(client, :delete, path, account = nil, params) do
+    opts = [
       query: params
     ]
 

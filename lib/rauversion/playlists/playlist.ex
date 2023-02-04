@@ -6,6 +6,7 @@ defmodule Rauversion.Playlists.Playlist do
   use Ecto.Schema
   import Ecto.Changeset
   alias Rauversion.Playlists.Playlist.TitleSlug
+  require RauversionWeb.Gettext
 
   use ActiveStorage.Attached.Model
   use ActiveStorage.Attached.HasOne, name: :cover, model: "Playlist"
@@ -128,6 +129,30 @@ defmodule Rauversion.Playlists.Playlist do
         options: ["", "Custom"] ++ Rauversion.CategoryTypes.genres()
       },
       custom_genre_field(changeset)
+    ]
+    |> Enum.filter(fn x -> !is_nil(x) end)
+  end
+
+  def pricing_definitions(_changeset) do
+    [
+      %{
+        name: :price,
+        wrapper_class: "sm:col-span-4",
+        hint:
+          RauversionWeb.Gettext.gettext(
+            "$0 or more. We apply a fee of %%{fee} when price is higher than $0. The fee will be capped at the total payment amount",
+            %{fee: round(Rauversion.PurchaseOrders.app_fee())}
+          ),
+        label: "Price",
+        type: :text_input
+      },
+      %{
+        name: :name_your_price,
+        wrapper_class: "sm:col-span-4",
+        # hint: "Let users name the price",
+        label: "let fans pay more if they want",
+        type: :checkbox
+      }
     ]
     |> Enum.filter(fn x -> !is_nil(x) end)
   end

@@ -184,6 +184,8 @@ defmodule RauversionWeb.Router do
 
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
+    live "/merch/mine", MerchLive.Index, :index
+
     live "/articles/mine", ArticlesLive.Index, :mine
     live "/articles/new", ArticlesLive.New, :new
     live "/articles/edit/:id", ArticlesLive.New, :edit
@@ -213,9 +215,12 @@ defmodule RauversionWeb.Router do
     live "/tracks/new", TrackLive.New, :new
     live "/tracks/:id/edit", TrackLive.Index, :edit
 
-    get "/tracks/:id/oembed.xml", TracksController, :oembed
+    # get "/tracks/:id/oembed.xml", TracksController, :oembed
 
     live "/tracks/:id/show/edit", TrackLive.Show, :edit
+    live "/tracks/:slug/payment_success", TrackLive.Show, :payment_success
+    live "/tracks/:slug/payment_failure", TrackLive.Show, :payment_failure
+    live "/tracks/:slug/payment_cancel", TrackLive.Show, :payment_cancel
 
     live "/reposts/new", RepostLive.Index, :new
     live "/reposts/:id/edit", RepostLive.Index, :edit
@@ -225,6 +230,10 @@ defmodule RauversionWeb.Router do
     live "/playlists/new", PlaylistLive.Index, :new
     live "/playlists/:id/edit", PlaylistLive.Index, :edit
     live "/playlists/:id/show/edit", PlaylistLive.Show, :edit
+
+    live "/playlists/:slug/payment_success", PlaylistLive.Show, :payment_success
+    live "/playlists/:slug/payment_failure", PlaylistLive.Show, :payment_failure
+    live "/playlists/:slug/payment_cancel", PlaylistLive.Show, :payment_cancel
   end
 
   scope "/active_storage", RauversionWeb do
@@ -317,7 +326,10 @@ defmodule RauversionWeb.Router do
 
     post "/events/webhooks/:webhook_key", EventWebhooksController, :create
 
+    live "/purchases", MyPurchasesLive.Index, :index
     live "/purchases/tickets", MyTicketsLive.Index, :index
+    live "/purchases/music", MyMusicPurchasesLive.Index, :index
+    get "/purchases/music/download/:signed_id", MyMusicPurchasesController, :show
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id/private", TrackLive.Show, :private

@@ -24,7 +24,9 @@ defmodule RauversionWeb.CypressController do
           case a do
             %{"name" => "clean"} ->
               # Ecto.Adapters.SQL.Sandbox.checkout(Chaskiq.Repo)
+
               Surgex.DatabaseCleaner.call(Rauversion.Repo)
+
               %{ok: "ok"}
 
             %{"name" => "scenarios/basic", "options" => options = %{}} ->

@@ -6,7 +6,7 @@ defmodule RauversionWeb.PlaylistLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(:like, nil)}
+    {:ok, socket |> assign(:like, nil) |> assign(:buy_modal, false)}
   end
 
   def update(assigns, socket) do
@@ -28,25 +28,6 @@ defmodule RauversionWeb.PlaylistLive.Show do
       _ ->
         {:ok, socket |> assign(:like, nil)}
     end
-  end
-
-  @impl true
-  def handle_params(%{"id" => id} = _params, _, socket) do
-    playlist = get_playlist(id, socket.assigns.live_action)
-
-    track =
-      case playlist.track_playlists do
-        [tp | _] -> tp.track
-        _ -> nil
-      end
-
-    {:noreply,
-     socket
-     |> assign(:current_tab, "basic-info-tab")
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:playlist, playlist)
-     |> assign(:track, track)
-     |> assign(:meta_tags, metatags(playlist))}
   end
 
   @impl true
@@ -89,6 +70,13 @@ defmodule RauversionWeb.PlaylistLive.Show do
   end
 
   @impl true
+  def handle_event("pricing-tab", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:current_tab, "pricing-tab")}
+  end
+
+  @impl true
   def handle_event("tracks-tab", %{}, socket) do
     {:noreply,
      socket
@@ -105,6 +93,7 @@ defmodule RauversionWeb.PlaylistLive.Show do
      )}
   end
 
+  @impl true
   def handle_event(
         "like-playlist",
         %{"id" => _id},
@@ -130,6 +119,74 @@ defmodule RauversionWeb.PlaylistLive.Show do
          assign(socket, :like, playlist_like)
          |> assign(:playlist, %{socket.assigns.playlist | likes_count: playlist.likes_count + 1})}
     end
+  end
+
+  @impl true
+  def handle_params(%{"id" => id} = _params, _, socket) do
+    playlist = get_playlist(id, socket.assigns.live_action)
+
+    track =
+      case playlist.track_playlists do
+        [tp | _] -> tp.track
+        _ -> nil
+      end
+
+    {:noreply,
+     socket
+     |> assign(:current_tab, "basic-info-tab")
+     |> assign(:page_title, page_title(socket.assigns.live_action))
+     |> assign(:playlist, playlist)
+     |> assign(:track, track)
+     |> assign(:meta_tags, metatags(playlist))}
+  end
+
+  @impl true
+  def handle_params(params, _url, socket) do
+    case apply_action(socket, socket.assigns.live_action, params) do
+      {:ok, reply} ->
+        {:noreply, reply}
+
+      {:err, err} ->
+        {:noreply, err}
+
+      any ->
+        {:noreply, any}
+    end
+  end
+
+  defp apply_action(socket, :payment_success, %{"slug" => id, "token_ws" => token}) do
+    event =
+      Playlists.get_playlist!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+
+    Rauversion.PurchaseOrders.commit_order(event, token)
+
+    socket |> assign(:event, event) |> assign(:payment_success, true)
+  end
+
+  defp apply_action(socket, :payment_success, %{"slug" => id}) do
+    playlist =
+      Playlists.get_by_slug!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+
+    track =
+      case playlist.track_playlists do
+        [tp | _] -> tp.track
+        _ -> nil
+      end
+
+    socket
+    |> assign(:playlist, playlist)
+    |> assign(track: track)
+    |> assign(:payment_success, true)
+  end
+
+  defp apply_action(socket, :payment_failure, %{"slug" => id}) do
+    event =
+      Playlists.get_by_slug!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+
+    socket |> assign(:playlist, event) |> assign(:payment_failure, true)
   end
 
   defp get_playlist(id, :private) do

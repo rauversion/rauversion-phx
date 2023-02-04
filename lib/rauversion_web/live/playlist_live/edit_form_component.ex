@@ -12,13 +12,14 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
       let={f}
       for={@changeset}
       id="edit-playlist-form"
-      phx_target={@ref}
+      phx-target={@ref}
       phx-change="validate"
       phx-submit="save">
 
       <nav class="flex space-x-4" aria-label="Tabs">
         <a href="#" phx-click="basic-info-tab" class={"#{active_tab_link?(@current_tab, "basic-info-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Basic Info </a>
         <a href="#" phx-click="tracks-tab" class={"#{active_tab_link?(@current_tab, "tracks-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"} aria-current="page"> Tracks </a>
+        <a href="#" phx-click="pricing-tab" class={"#{active_tab_link?(@current_tab, "pricing-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Pricing </a>
         <a href="#" phx-click="metadata-tab" class={"#{active_tab_link?(@current_tab, "metadata-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}> Metadata </a>
       </nav>
 
@@ -123,7 +124,6 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
         </ul>
       </div>
 
-
       <div id="metadata-tab" class={"tab-pane #{ active_tab_for?(@current_tab, "metadata-tab")}"}>
 
         <%= inputs_for f, :metadata, fn i -> %>
@@ -210,6 +210,26 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
           <% end %>
 
         <% end %>
+
+      </div>
+
+      <div id="pricing-tab" class={"tab-pane #{ active_tab_for?(@current_tab, "pricing-tab")}"}>
+        PRICING
+
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+          <div class="sm:col-span-4">
+
+            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <%= inputs_for f, :metadata, fn i -> %>
+                <%= for field <- Rauversion.Playlists.Playlist.pricing_definitions(@changeset) do %>
+                  <%= form_input_renderer(i, field) %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
 
       </div>
 

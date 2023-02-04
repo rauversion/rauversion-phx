@@ -52,9 +52,9 @@ defmodule RauversionWeb.MyTicketsLive.Index do
                   <ol role="list" class="flex items-center space-x-4">
                     <li>
                       <div>
-                        <a href="#" class="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300">
-                        <%= gettext("Purchases") %>
-                        </a>
+                        <%= live_redirect to: "/purchases", class: "text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300" do %>
+                          <%= gettext("Purchases") %>
+                        <% end %>
                       </div>
                     </li>
                     <li>

@@ -4,7 +4,7 @@
 
   <%= Jason.encode!(@data) %>
 
-  <.form let={f} 
+  <.form let={_f} 
     for={:tbk}
     action={@data["url"]}
     method={"post"}

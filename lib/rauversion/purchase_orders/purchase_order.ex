@@ -8,9 +8,28 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrder do
     # field :data, :map
     field :payment_id, :string
     field :payment_provider, :string
+    field :state, :string, default: "pending"
 
     embeds_many :data, Rauversion.PurchaseOrders.PurchaseOrderTickets, on_replace: :delete
     belongs_to :user, Rauversion.Accounts.User
+
+    many_to_many :albums, Rauversion.Playlists.Playlist,
+      join_through: Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder
+
+    many_to_many :tracks, Rauversion.Tracks.Track,
+      join_through: Rauversion.TrackPurchaseOrders.TrackPurchaseOrder
+
+    # TODO: associate purchase order tickets instead of embeds
+
+    # polymorphic assocs
+    # has_many :album_purchase_orders, Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder
+
+    # has_many :purchased_albums,
+    #  through: [:album_purchase_orders, :playlist]
+
+    # has_many :track_purchase_orders, Rauversion.TrackPurchaseOrders.TrackPurchaseOrder
+    # has_many :purchased_tracks,
+    #  through: [:track_purchase_orders, :track]
 
     timestamps()
   end
@@ -18,8 +37,12 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrder do
   @doc false
   def changeset(purchase_order, attrs) do
     purchase_order
-    |> cast(attrs, [:total, :promo_code, :user_id, :payment_id, :payment_provider])
+    |> cast(attrs, [:total, :promo_code, :user_id, :payment_id, :payment_provider, :state])
     |> cast_embed(:data, with: &Rauversion.PurchaseOrders.PurchaseOrderTickets.changeset/2)
+    # |> put_assoc(:albums, required: false)
+    # |> put_assoc(:tracks, required: false)
+    |> load_albums_assoc(attrs)
+    |> load_tracks_assoc(attrs)
     |> validate_required([:user_id])
     |> validate_event_tickets_qty()
   end
@@ -49,6 +72,41 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrder do
           )
       end
     end)
+  end
+
+  defp load_albums_assoc(order, %{"albums" => albums} = _attrs) do
+    # if Repo.exists?(from a in Author, where: a.name == ^attrs["authors"]) do
+    #   authors = Repo.all(from a in Author, where: a.name == ^authors)
+    #   order
+    #   |> Ecto.Changeset.change()
+    #   |> Ecto.Changeset.put_assoc(:authors, authors)
+    # else
+    #   {:ok, %Author{} = authors} = Repo.insert(%Author{name: authors}, returning: true)
+    #   authors = Repo.all(from a in Author, where: a.id == ^authors.id)
+    #   order
+    #   |> Ecto.Changeset.change()
+    #   |> Ecto.Changeset.put_assoc(:authors, authors)
+    # end
+    # Repo.insert_all("authors", [[name: authors, inserted_at: DateTime.utc_now(), updated_at: DateTime.utc_now()]], on_conflict: :nothing)
+    # authors = Repo.all(from a in Author, where: a.name == ^authors)
+
+    order
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:albums, albums)
+  end
+
+  defp load_albums_assoc(order, _attrs) do
+    order
+  end
+
+  defp load_tracks_assoc(order, %{"tracks" => tracks} = _attrs) do
+    order
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:tracks, tracks)
+  end
+
+  defp load_tracks_assoc(order, _attrs) do
+    order
   end
 end
 

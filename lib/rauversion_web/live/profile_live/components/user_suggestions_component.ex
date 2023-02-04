@@ -37,7 +37,7 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
   def render(%{collection: _collection} = assigns) do
     ~H"""
       <section aria-labelledby="who-to-follow-heading">
-        <div class="bg-white border-t dark:bg-gray-900">
+        <div class="bg-white border-t dark:bg-gray-900 dark:border-gray-800">
           <div class="p-6">
             <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900 dark:text-gray-100">
             <%= gettext("Who to follow") %>
@@ -63,8 +63,8 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                       </p>
                     </div>
                     <div class="flex-shrink-0">
-                      <%= link to: "#",  phx_click: "follow-account", phx_value_id: item.id, phx_target: @myself, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 dark:bg-rose-900 text-sm font-medium text-rose-700 dark:text-rose-300 hover:bg-rose-100 dark:hover:bg-rose-900" do %>
-                        <svg class="-ml-1 mr-0.5 h-5 w-5 text-rose-400" x-description="Heroicon name: solid/plus-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <%= link to: "#",  phx_click: "follow-account", phx_value_id: item.id, phx_target: @myself, class: "inline-flex items-center px-3 py-0.5 rounded-full bg-brand-50 dark:bg-brand-900 text-sm font-medium text-brand-700 dark:text-brand-300 hover:bg-brand-100 dark:hover:bg-brand-900" do %>
+                        <svg class="-ml-1 mr-0.5 h-5 w-5 text-brand-400" x-description="Heroicon name: solid/plus-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>
                         <span>

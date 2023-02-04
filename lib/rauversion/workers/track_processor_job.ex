@@ -1,8 +1,6 @@
 defmodule Rauversion.Workers.TrackProcessorWorker do
   use Oban.Worker, queue: :default, max_attempts: 1
 
-  # alias MyApp.{Endpoint, Zipper}
-
   def perform(%_{args: %{"track_id" => track_id, "file" => file}}) do
     IO.inspect("PERFORM TrackProcessorWorker")
     struct = Rauversion.Tracks.get_track!(track_id) |> Rauversion.Tracks.change_track()

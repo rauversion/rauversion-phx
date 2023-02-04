@@ -121,10 +121,10 @@ defmodule Rauversion.PurchaseOrders do
     |> Enum.sum()
   end
 
-  def calculate_fee(total, ccy \\ "usd") do
-    {platform_fee, _} = Float.parse(Application.get_env(:rauversion, :platform_event_fee))
+  def calculate_fee(total, cyy \\ "usd")
 
-    t = total / (platform_fee * 100.0)
+  def calculate_fee(total = %Decimal{}, ccy) do
+    t = total.coef / (app_fee() * 100.0)
 
     case ccy do
       "usd" -> t
@@ -132,7 +132,21 @@ defmodule Rauversion.PurchaseOrders do
     end
   end
 
-  def create_stripe_session(order, event) do
+  def calculate_fee(total, ccy) do
+    t = total / (app_fee() * 100.0)
+
+    case ccy do
+      "usd" -> t
+      "clp" -> t |> Kernel.round()
+    end
+  end
+
+  def app_fee do
+    {platform_fee, _} = Float.parse(Application.get_env(:rauversion, :platform_event_fee))
+    platform_fee
+  end
+
+  def create_stripe_session(order, event = %Rauversion.Events.Event{}) do
     client = Rauversion.Stripe.Client.new()
     user = event |> Ecto.assoc(:user) |> Repo.one()
 
@@ -161,11 +175,10 @@ defmodule Rauversion.PurchaseOrders do
         })
       end)
 
-    total =
-      Rauversion.PurchaseOrders.calculate_total(order, event.events_settings.ticket_currency)
+    total = Rauversion.PurchaseOrders.calculate_total(order, event.event_settings.ticket_currency)
 
     fee_amount =
-      Rauversion.PurchaseOrders.calculate_fee(total, event.events_settings.ticket_currency)
+      Rauversion.PurchaseOrders.calculate_fee(total, event.event_settings.ticket_currency)
 
     Rauversion.Stripe.Client.create_session(
       client,
@@ -454,5 +467,45 @@ defmodule Rauversion.PurchaseOrders do
       inviter,
       options
     )
+  end
+
+  def notify_music_order_to_buyer(id) do
+    order =
+      Rauversion.PurchaseOrders.get_purchase_order!(id)
+      |> Rauversion.Repo.preload([:albums, :tracks])
+
+    case order do
+      %PurchaseOrder{albums: [%Rauversion.Playlists.Playlist{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_album_purchase(order)
+
+      %PurchaseOrder{tracks: [%Rauversion.Tracks.Track{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_tracks_purchase(order)
+
+      _ ->
+        nil
+    end
+  end
+
+  def notify_music_order_to_author(id) do
+    order =
+      Rauversion.PurchaseOrders.get_purchase_order!(id)
+      |> Rauversion.Repo.preload(albums: [:user], tracks: [:user])
+
+    case order do
+      %PurchaseOrder{albums: [%Rauversion.Playlists.Playlist{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_album_purchase_to_author(order)
+
+      %PurchaseOrder{tracks: [%Rauversion.Tracks.Track{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_track_purchase_to_author(order)
+
+      _ ->
+        nil
+    end
+  end
+
+  def notify_music_purchase(id) do
+    %{order_id: id}
+    |> Rauversion.Workers.OrderNotificationJob.new()
+    |> Oban.insert()
   end
 end

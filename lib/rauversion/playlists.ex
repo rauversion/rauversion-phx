@@ -114,6 +114,7 @@ defmodule Rauversion.Playlists do
 
   """
   def get_playlist!(id), do: Repo.get!(Playlist, id)
+  def get_by_slug!(id), do: Repo.get_by!(Playlist, slug: id)
 
   @doc """
   Creates a playlist.

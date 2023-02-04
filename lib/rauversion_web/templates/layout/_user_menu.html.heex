@@ -113,6 +113,7 @@
 
                     <%= if is_creator?(@current_user) && @current_user.username do %>
                       <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                      <% #= live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <% end %>
 
                     <%= if is_admin?(@current_user) do %>
@@ -120,7 +121,7 @@
                       <%= live_redirect gettext("My Events"), to: "/events/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <% end %>
 
-                    <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    <%= live_redirect gettext("My Purchases"), to: "/purchases", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <%= live_redirect gettext("Settings"),
                         to: "/users/settings",
                        class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
@@ -200,6 +201,7 @@
             <%= if is_admin?(@current_user) do %>
               <%= live_redirect gettext("My Articles"), to: "/articles/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
               <%= live_redirect gettext("My Events"), to: "/events/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+              <% #= live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
             <% end %>
 
             <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>

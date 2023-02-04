@@ -8,7 +8,7 @@ defmodule Rauversion.MixProject do
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       # ++ [:cldr], ++ [:gettext]
-      compilers: Mix.compilers(),
+      compilers: Mix.compilers() ++ [:gettext],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -85,6 +85,7 @@ defmodule Rauversion.MixProject do
       {:ex_cldr_dates_times, "~> 2.0"},
       {:oauth2, "~> 1.0 or ~> 2.0"},
       {:polymorphic_embed, "~> 3.0.5"},
+      {:packmatic, "~> 1.1.2"},
       {:ueberauth, "~> 0.7", override: true},
       {:sentry, "~> 8.0"},
       {

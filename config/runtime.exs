@@ -16,9 +16,6 @@ config :ex_cldr,
   default_backend: Rauversion.Cldr,
   json_library: Jason
 
-config :active_storage, :host, "https://#{System.get_env("APP_DOMAIN")}"
-config :rauversion, :domain, "https://#{System.get_env("APP_DOMAIN")}"
-
 config :mux,
   access_token_id: System.get_env("MUX_TOKEN_ID"),
   access_token_secret: System.get_env("MUX_TOKEN_SECRET")
@@ -108,6 +105,9 @@ config :rauversion, :openai_api_key, System.get_env("OPENAI_API_KEY")
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
 if config_env() == :prod do
+  config :active_storage, :host, "https://#{System.get_env("APP_DOMAIN")}"
+  config :rauversion, :domain, "https://#{System.get_env("APP_DOMAIN")}"
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """

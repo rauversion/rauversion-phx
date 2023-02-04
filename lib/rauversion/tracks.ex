@@ -186,6 +186,7 @@ defmodule Rauversion.Tracks do
 
   """
   def get_track!(id), do: Repo.get!(Track, id)
+  def get_by_slug!(id), do: Repo.get_by!(Track, slug: id)
 
   def get_public_track!(id) do
     Track
