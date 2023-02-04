@@ -77,7 +77,7 @@ defmodule Rauversion.Payments.Payment do
         nil ->
           fee = Rauversion.PurchaseOrders.calculate_fee(payment_price, "usd")
 
-          %{cid: nil, data: %{}, price: get_price(payment_price, fee * 100)}
+          %{cid: nil, data: %{}, price: Decimal.to_integer(payment_price) * 100}
 
         data ->
           %{
