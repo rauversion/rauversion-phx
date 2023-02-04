@@ -7,12 +7,7 @@ defmodule RauversionWeb.MyMusicPurchasesController do
           "signed_id" => token
         }
       ) do
-    entries =
-      Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.album_entries_by_token(
-        token,
-        user_id
-      )
-
+    entries = resource_entries_by_token(user_id, token)
     Packmatic.build_stream(entries) |> Packmatic.Conn.send_chunked(conn, "download.zip")
   end
 
@@ -21,5 +16,21 @@ defmodule RauversionWeb.MyMusicPurchasesController do
     |> put_status(:not_found)
     |> send_resp(404, "not found")
     |> halt
+  end
+
+  defp resource_entries_by_token(user_id, token) do
+    case Phoenix.Token.verify(RauversionWeb.Endpoint, "#{user_id}", token) do
+      {:ok, %{resource: "album", id: _id}} ->
+        Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.album_entries_by_token(
+          token,
+          user_id
+        )
+
+      {:ok, %{resource: "track", id: _id}} ->
+        Rauversion.TrackPurchaseOrders.TrackPurchaseOrder.entries_by_token(
+          token,
+          user_id
+        )
+    end
   end
 end

@@ -92,6 +92,27 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   @impl true
+  def handle_params(%{"slug" => id}, _, socket = %{assigns: %{live_action: :payment_success}}) do
+    track =
+      Tracks.get_by_slug!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob])
+
+    {:noreply,
+     socket
+     |> assign(track: track)
+     |> assign(:payment_success, true)}
+  end
+
+  @impl true
+  def handle_params(%{"slug" => id}, _, socket = %{assigns: %{live_action: :payment_failure}}) do
+    event =
+      Tracks.get_by_slug!(id)
+      |> Rauversion.Repo.preload([:user, :cover_blob])
+
+    {:noreply, socket |> assign(:track, event) |> assign(:payment_failure, true)}
+  end
+
+  @impl true
   def handle_event("close-modal", %{}, socket) do
     {
       :noreply,

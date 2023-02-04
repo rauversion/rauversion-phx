@@ -218,6 +218,9 @@ defmodule RauversionWeb.Router do
     # get "/tracks/:id/oembed.xml", TracksController, :oembed
 
     live "/tracks/:id/show/edit", TrackLive.Show, :edit
+    live "/tracks/:slug/payment_success", TrackLive.Show, :payment_success
+    live "/tracks/:slug/payment_failure", TrackLive.Show, :payment_failure
+    live "/tracks/:slug/payment_cancel", TrackLive.Show, :payment_cancel
 
     live "/reposts/new", RepostLive.Index, :new
     live "/reposts/:id/edit", RepostLive.Index, :edit

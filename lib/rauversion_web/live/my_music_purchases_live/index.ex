@@ -19,6 +19,9 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
       "all_music" ->
         Rauversion.Accounts.get_album_orders(current_user)
 
+      "all_tracks" ->
+        Rauversion.Accounts.get_track_orders(current_user)
+
       "pending_orders" ->
         Rauversion.Accounts.get_pending_album_orders(current_user)
     end
@@ -27,6 +30,64 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
   @impl true
   def handle_event("section-change", %{"section" => section}, socket) do
     {:noreply, assign(socket, :section, section)}
+  end
+
+  def render_item(assigns = %{resource: %Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder{}}) do
+    ~H"""
+    <div class="flex space-x-2">
+      <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url(
+        @resource.playlist, "cover", %{resize_to_limit: "300x200"}),
+        class: "w-20 h-20 object-center object-cover group-hover:opacity-75")
+      %>
+
+      <div>
+        <%= live_redirect to: "/playlists/#{@resource.playlist.id}" do %>
+          <h3 class="text-2xl"><%= @resource.playlist.title %></h3>
+        <% end %>
+
+        <span> <%= gettext("Created at:") %> <%= @resource.inserted_at %> </span>
+
+        <%= if Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.is_downloadable?(@resource) do %>
+          <p class="truncate text-sm font-medium text-brand-600">
+            <a href={Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.url_for_download(@resource, @current_user.id)}
+              class="group block"
+              target="_blank">
+              <%= gettext("Download link") %>
+            </a>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    """
+  end
+
+  def render_item(assigns = %{resource: %Rauversion.TrackPurchaseOrders.TrackPurchaseOrder{}}) do
+    ~H"""
+    <div class="flex space-x-2">
+      <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url(
+        @resource.track, "cover", %{resize_to_limit: "300x200"}),
+        class: "w-20 h-20 object-center object-cover group-hover:opacity-75")
+      %>
+
+      <div>
+        <%= live_redirect to: "/tracks/#{@resource.track.id}" do %>
+          <h3 class="text-2xl"><%= @resource.track.title %></h3>
+        <% end %>
+
+        <span> <%= gettext("Created at:") %> <%= @resource.inserted_at %> </span>
+
+        <%= if Rauversion.TrackPurchaseOrders.TrackPurchaseOrder.is_downloadable?(@resource) do %>
+          <p class="truncate text-sm font-medium text-brand-600">
+            <a href={Rauversion.TrackPurchaseOrders.TrackPurchaseOrder.url_for_download(@resource, @current_user.id)}
+              class="group block"
+              target="_blank">
+              <%= gettext("Download link") %>
+            </a>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    """
   end
 
   @impl true
@@ -80,12 +141,17 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
                     <nav class="mt-2 -mb-px flex space-x-8" aria-label="Tabs">
 
                       <a href="#" phx-click={"section-change"} phx-value-section={"all_music"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <%= gettext("All your purchased Music") %>
+                        <%= gettext("Purchased albums") %>
                         <!--<span class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-gray-900 dark:text-gray-100 hidden ml-2 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">2</span>-->
                       </a>
 
-                      <a href="#" phx-click={"section-change"} phx-value-section={"pending_orders"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                      <!--<a href="#" phx-click={"section-change"} phx-value-section={"pending_orders"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
                         <%= gettext("Pending orders") %>
+                        <span class="hidden bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-gray-900 dark:text-gray-100 hidden ml-2 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">4</span>
+                      </a>-->
+
+                      <a href="#" phx-click={"section-change"} phx-value-section={"all_tracks"} class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <%= gettext("Purchased individual Tracks") %>
                         <!--<span class="hidden bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-gray-900 dark:text-gray-100 hidden ml-2 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">4</span>-->
                       </a>
 
@@ -104,32 +170,7 @@ defmodule RauversionWeb.MyMusicPurchasesLive.Index do
                       <div class="flex min-w-0 flex-1 items-center">
                         <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
 
-                          <div class="flex space-x-2">
-
-                            <%= img_tag(Rauversion.BlobUtils.blob_representation_proxy_url(
-                              ticket.playlist, "cover", %{resize_to_limit: "300x200"}),
-                              class: "w-20 h-20 object-center object-cover group-hover:opacity-75")
-                            %>
-
-                            <div>
-
-                              <%= live_redirect to: "/playlists/#{ticket.playlist.id}" do %>
-                                <h3 class="text-2xl"><%= ticket.playlist.title %></h3>
-                              <% end %>
-
-                              <span> <%= gettext("Created at:") %> <%= ticket.inserted_at %> </span>
-
-                              <%= if Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.is_downloadable?(ticket) do %>
-                                <p class="truncate text-sm font-medium text-brand-600">
-                                  <a href={Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder.url_for_download(ticket, @current_user.id)}
-                                    class="group block"
-                                    target="_blank">
-                                    <%= gettext("Download link") %>
-                                  </a>
-                                </p>
-                              <% end %>
-                            </div>
-                          </div>
+                          <.render_item resource={ticket} current_user={@current_user} />
 
 
                           <div class="hidden md:block">

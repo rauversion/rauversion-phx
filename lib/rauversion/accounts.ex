@@ -695,6 +695,28 @@ defmodule Rauversion.Accounts do
 
   ### album orders
 
+  def track_orders_query(current_user) do
+    id = current_user.id
+
+    from(p in Rauversion.TrackPurchaseOrders.TrackPurchaseOrder,
+      join: c in Rauversion.PurchaseOrders.PurchaseOrder,
+      on: c.id == p.purchase_order_id and c.user_id == ^id
+    )
+    |> preload([:track, :purchase_order])
+    |> order_by([c], desc: c.id)
+  end
+
+  def get_track_orders(current_user) do
+    q = track_orders_query(current_user)
+
+    query =
+      from [p, c] in q,
+        where: c.state == "paid" or c.state == "free_access"
+
+    query
+    |> Repo.all()
+  end
+
   def albun_orders_query(current_user) do
     id = current_user.id
 

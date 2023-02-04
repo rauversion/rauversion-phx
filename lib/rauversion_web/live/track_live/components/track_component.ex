@@ -104,7 +104,6 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                     </div>
                   </div>
                 <% end %>
-
               </div>
             </div>
           <% end %>
@@ -258,10 +257,40 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             </div>
           </div>
 
-
           <% #= link_to "Show this track", track, class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
           <% #= link_to 'Edit this track', edit_track_path(track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
         </div>
+
+
+        <%= if @track.metadata && @track.metadata.price do %>
+          <div class="ml-3 mb-2">
+            <.live_component
+                module={RauversionWeb.TrackLive.Components.BuyComponent}
+                id={"buy-modal-#{@track.id}"}
+                track={@track}>
+
+              <button class="underline text-sm dark:bg-black dark:border-gray-200 dark:hover:bg-gray-700 border-black rounded-sm border px-3 mt-2"
+                phx-click="open-modal"
+                phx-target={"#xx-#{@track.id}"}>
+                <%= gettext("Buy Digital Track") %>
+              </button>
+
+              <span>
+                <%= Number.Currency.number_to_currency(@track.metadata.price, precision: 2) %>
+                <span class="text-sm text-gray-300">
+                  USD
+                </span>
+              </span>
+
+              <%= if @track.metadata.name_your_price do %>
+                <span class="text-sm text-gray-300">
+                  <%= gettext("or more") %>
+                </span>
+              <% end %>
+
+            </.live_component>
+          </div>
+        <% end %>
       </div>
     </div>
 

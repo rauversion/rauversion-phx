@@ -16,12 +16,14 @@ defmodule Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder do
   end
 
   def signed_id(order, user_id) do
-    Phoenix.Token.sign(RauversionWeb.Endpoint, "#{user_id}", order.id, max_age: 315_360_000_000)
+    Phoenix.Token.sign(RauversionWeb.Endpoint, "#{user_id}", %{id: order.id, resource: "album"},
+      max_age: 315_360_000_000
+    )
   end
 
   def find_by_signed_id!(token, user_id) do
     case Phoenix.Token.verify(RauversionWeb.Endpoint, "#{user_id}", token) do
-      {:ok, playlist_id} ->
+      {:ok, %{id: playlist_id}} ->
         Rauversion.Repo.get(Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder, playlist_id)
 
       _ ->
