@@ -179,7 +179,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     id={"buy-modal-#{@playlist.id}"}
                     playlist={@playlist}>
 
-                  <button class="underline text-sm dark:bg-black dark:border-gray-800 dark:hover:bg-gray-700 border-black rounded-sm border px-3 mt-2"
+                  <button class="underline text-sm dark:bg-black dark:border-gray-200 dark:hover:bg-gray-700 border-black rounded-sm border px-3 mt-2"
                     phx-click="open-modal"
                     phx-target={"#xx-#{@playlist.id}"}>
                     <%= gettext("Buy Digital Album") %>

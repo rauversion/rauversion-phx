@@ -6,6 +6,7 @@ defmodule Rauversion.Playlists.Playlist do
   use Ecto.Schema
   import Ecto.Changeset
   alias Rauversion.Playlists.Playlist.TitleSlug
+  require RauversionWeb.Gettext
 
   use ActiveStorage.Attached.Model
   use ActiveStorage.Attached.HasOne, name: :cover, model: "Playlist"
@@ -137,7 +138,11 @@ defmodule Rauversion.Playlists.Playlist do
       %{
         name: :price,
         wrapper_class: "sm:col-span-4",
-        hint: "zero or more",
+        hint:
+          RauversionWeb.Gettext.gettext(
+            "$0 or more. We apply a fee of %%{fee} when price is higher than $0. The fee will be capped at the total payment amount",
+            %{fee: round(Rauversion.PurchaseOrders.app_fee())}
+          ),
         label: "Price",
         type: :text_input
       },

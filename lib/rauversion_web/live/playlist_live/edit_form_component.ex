@@ -227,7 +227,6 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                 <% end %>
               <% end %>
             </div>
-
           </div>
 
         </div>

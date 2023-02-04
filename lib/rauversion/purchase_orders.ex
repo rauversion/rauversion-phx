@@ -471,4 +471,43 @@ defmodule Rauversion.PurchaseOrders do
       options
     )
   end
+
+  def notify_music_order_to_buyer(id) do
+    order =
+      Rauversion.PurchaseOrders.get_purchase_order!(id) |> Rauversion.Repo.preload([:albums])
+
+    case order do
+      %PurchaseOrder{albums: [%Rauversion.Playlists.Playlist{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_album_purchase(order)
+
+      %PurchaseOrder{tracks: [%Rauversion.Tracks.Track{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_tracks_purchase(order)
+
+      _ ->
+        nil
+    end
+  end
+
+  def notify_music_order_to_author(id) do
+    order =
+      Rauversion.PurchaseOrders.get_purchase_order!(id)
+      |> Rauversion.Repo.preload(albums: [:user])
+
+    case order do
+      %PurchaseOrder{albums: [%Rauversion.Playlists.Playlist{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_album_purchase_to_author(order)
+
+      %PurchaseOrder{tracks: [%Rauversion.Tracks.Track{} | _]} ->
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_album_purchase_to_author(order)
+
+      _ ->
+        nil
+    end
+  end
+
+  def notify_music_purchase(id) do
+    %{order_id: id}
+    |> Rauversion.Workers.OrderNotificationJob.new()
+    |> Oban.insert()
+  end
 end

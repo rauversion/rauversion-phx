@@ -3,7 +3,6 @@ defmodule RauversionWeb.PlaylistLive.Show do
   on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.Playlists
-  alias Rauversion.Repo
 
   @impl true
   def mount(_params, _session, socket) do
@@ -29,25 +28,6 @@ defmodule RauversionWeb.PlaylistLive.Show do
       _ ->
         {:ok, socket |> assign(:like, nil)}
     end
-  end
-
-  @impl true
-  def handle_params(%{"id" => id} = _params, _, socket) do
-    playlist = get_playlist(id, socket.assigns.live_action)
-
-    track =
-      case playlist.track_playlists do
-        [tp | _] -> tp.track
-        _ -> nil
-      end
-
-    {:noreply,
-     socket
-     |> assign(:current_tab, "basic-info-tab")
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:playlist, playlist)
-     |> assign(:track, track)
-     |> assign(:meta_tags, metatags(playlist))}
   end
 
   @impl true
@@ -139,6 +119,25 @@ defmodule RauversionWeb.PlaylistLive.Show do
          assign(socket, :like, playlist_like)
          |> assign(:playlist, %{socket.assigns.playlist | likes_count: playlist.likes_count + 1})}
     end
+  end
+
+  @impl true
+  def handle_params(%{"id" => id} = _params, _, socket) do
+    playlist = get_playlist(id, socket.assigns.live_action)
+
+    track =
+      case playlist.track_playlists do
+        [tp | _] -> tp.track
+        _ -> nil
+      end
+
+    {:noreply,
+     socket
+     |> assign(:current_tab, "basic-info-tab")
+     |> assign(:page_title, page_title(socket.assigns.live_action))
+     |> assign(:playlist, playlist)
+     |> assign(:track, track)
+     |> assign(:meta_tags, metatags(playlist))}
   end
 
   @impl true
