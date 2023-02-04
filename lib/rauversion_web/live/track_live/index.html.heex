@@ -19,10 +19,11 @@
       <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100"><%= gettext("Discover Tracks and Albums") %></h1>
       <p class="mt-4 max-w-xl text-sm text-gray-700 dark:text-gray-300"><%= gettext("Our thoughtfully curated list of community tracks.") %></p>
 
-
-      <h2 class="my-4 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
-        <%= gettext("Tracks tagged in %{t}", %{t: @tag}) %>
-      </h2>
+      <%= if @tag do %>
+        <h2 class="my-4 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+          <%= gettext("Tracks tagged in %{t}", %{t: @tag}) %>
+        </h2>
+      <% end %>
     </div>
 
 

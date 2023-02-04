@@ -333,7 +333,7 @@ defmodule RauversionWeb.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :react_select, options: options}) do
-    assigns = assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f, options: options)
 
     ~H"""
     <div class={@field.wrapper_class}>
@@ -341,7 +341,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class="mt-1 sm:mt-0- sm:col-span-2">
         <div class="max-w-lg flex- rounded-md shadow-sm">
           <div phx-hook="Select" id={"oe-#{@field.name}"}>
-            <%= multiple_select(@form, @field.name, options, class: "hidden text-gray-800") %>
+            <%= multiple_select(@form, @field.name, @options, class: "hidden text-gray-800") %>
             <div class="select-wrapper"></div>
           </div>
         </div>

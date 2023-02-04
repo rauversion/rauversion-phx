@@ -12,7 +12,7 @@ defmodule Rauversion.PurchaseOrders.MusicPurchaseNotifier do
 
   def notify_album_purchase(purchase_order, message \\ nil, options \\ []) do
     defaults = [subject: nil, event: nil]
-    options = Keyword.merge(defaults, options)
+    _options = Keyword.merge(defaults, options)
 
     purchase_order = purchase_order |> Repo.preload([:user])
 
