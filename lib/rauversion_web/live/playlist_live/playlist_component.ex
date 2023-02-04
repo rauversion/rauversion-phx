@@ -177,7 +177,8 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                 <.live_component
                     module={RauversionWeb.PlaylistLive.BuyModalComponent}
                     id={"buy-modal-#{@playlist.id}"}
-                    playlist={@playlist}>
+                    playlist={@playlist}
+                    current_user={@current_user}>
 
                   <button class="underline text-sm dark:bg-black dark:border-gray-200 dark:hover:bg-gray-700 border-black rounded-sm border px-3 mt-2"
                     phx-click="open-modal"

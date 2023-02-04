@@ -32,7 +32,7 @@ defmodule RauversionWeb.WebhooksController do
     case Rauversion.PurchaseOrders.update_purchase_order(order, %{
            state: object["payment_status"]
          }) do
-      {:ok, purchase_order} ->
+      {:ok, _purchase_order} ->
         Rauversion.PurchaseOrders.notify_music_purchase(order.id)
         # this will not run if it have data, but we should validate if the trx is from events
         case Rauversion.PurchaseOrders.generate_purchased_tickets(order) do

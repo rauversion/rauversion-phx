@@ -180,9 +180,13 @@ defmodule Rauversion.Payments.Payment do
   end
 
   # free access
-  def create_with_purchase_order(album, _payment = %{initial_price: initial_price, price: price})
+  def create_with_purchase_order(
+        album,
+        _payment = %{initial_price: initial_price, price: price},
+        current_user
+      )
       when initial_price.coef == 0 and (is_nil(price) or price.coef == 0) do
-    {:ok, a} = create_purchase_order_by_resource(album)
+    {:ok, a} = create_purchase_order_by_resource(album, current_user.id)
 
     {:ok, order} =
       Rauversion.PurchaseOrders.update_purchase_order(a, %{
@@ -194,8 +198,8 @@ defmodule Rauversion.Payments.Payment do
     {:ok, %{resp: %{free: true}, order: order}}
   end
 
-  def create_with_purchase_order(album, payment) do
-    {:ok, a} = create_purchase_order_by_resource(album)
+  def create_with_purchase_order(album, payment, current_user) do
+    {:ok, a} = create_purchase_order_by_resource(album, current_user.id)
 
     {:ok, data} =
       __MODULE__.create_stripe_session(
@@ -214,16 +218,16 @@ defmodule Rauversion.Payments.Payment do
     {:ok, %{resp: data, order: order_with_payment_id}}
   end
 
-  def create_purchase_order_by_resource(resource = %Rauversion.Playlists.Playlist{}) do
+  def create_purchase_order_by_resource(resource = %Rauversion.Playlists.Playlist{}, user_id) do
     Rauversion.PurchaseOrders.create_purchase_order(%{
-      "user_id" => resource.user_id,
+      "user_id" => user_id,
       "albums" => [resource]
     })
   end
 
-  def create_purchase_order_by_resource(resource = %Rauversion.Tracks.Track{}) do
+  def create_purchase_order_by_resource(resource = %Rauversion.Tracks.Track{}, user_id) do
     Rauversion.PurchaseOrders.create_purchase_order(%{
-      "user_id" => resource.user_id,
+      "user_id" => user_id,
       "tracks" => [resource]
     })
   end

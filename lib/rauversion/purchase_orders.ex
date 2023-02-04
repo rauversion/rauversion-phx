@@ -474,7 +474,8 @@ defmodule Rauversion.PurchaseOrders do
 
   def notify_music_order_to_buyer(id) do
     order =
-      Rauversion.PurchaseOrders.get_purchase_order!(id) |> Rauversion.Repo.preload([:albums])
+      Rauversion.PurchaseOrders.get_purchase_order!(id)
+      |> Rauversion.Repo.preload([:albums, :tracks])
 
     case order do
       %PurchaseOrder{albums: [%Rauversion.Playlists.Playlist{} | _]} ->
@@ -491,14 +492,14 @@ defmodule Rauversion.PurchaseOrders do
   def notify_music_order_to_author(id) do
     order =
       Rauversion.PurchaseOrders.get_purchase_order!(id)
-      |> Rauversion.Repo.preload(albums: [:user])
+      |> Rauversion.Repo.preload(albums: [:user], tracks: [:user])
 
     case order do
       %PurchaseOrder{albums: [%Rauversion.Playlists.Playlist{} | _]} ->
         Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_album_purchase_to_author(order)
 
       %PurchaseOrder{tracks: [%Rauversion.Tracks.Track{} | _]} ->
-        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_album_purchase_to_author(order)
+        Rauversion.PurchaseOrders.MusicPurchaseNotifier.notify_track_purchase_to_author(order)
 
       _ ->
         nil

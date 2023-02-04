@@ -267,7 +267,8 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
             <.live_component
                 module={RauversionWeb.TrackLive.Components.BuyComponent}
                 id={"buy-modal-#{@track.id}"}
-                track={@track}>
+                track={@track}
+                current_user={@current_user}>
 
               <button class="underline text-sm dark:bg-black dark:border-gray-200 dark:hover:bg-gray-700 border-black rounded-sm border px-3 mt-2"
                 phx-click="open-modal"

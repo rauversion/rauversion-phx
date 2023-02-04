@@ -113,7 +113,7 @@
 
                     <%= if is_creator?(@current_user) && @current_user.username do %>
                       <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                      <%= live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                      <% #= live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                     <% end %>
 
                     <%= if is_admin?(@current_user) do %>

@@ -44,6 +44,20 @@ defmodule RauversionWeb.TrackLive.Components.BuyComponent do
   end
 
   @impl true
+  def handle_event(
+        "save",
+        %{"payment" => payment_params},
+        socket = %{assigns: %{current_user: _current_user = nil}}
+      ) do
+    {
+      :noreply,
+      socket
+      |> put_flash(:error, gettext("in order to make purchases you need to sign in"))
+      |> redirect(to: "/users/log_in")
+    }
+  end
+
+  @impl true
   def handle_event("save", %{"payment" => payment_params}, socket) do
     IO.inspect("CHECKOUT SAVE")
 
@@ -57,7 +71,8 @@ defmodule RauversionWeb.TrackLive.Components.BuyComponent do
     a =
       Rauversion.Payments.Payment.create_with_purchase_order(
         socket.assigns.track,
-        payment
+        payment,
+        socket.assigns.current_user
       )
 
     IO.inspect(a)

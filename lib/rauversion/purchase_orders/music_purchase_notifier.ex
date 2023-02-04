@@ -65,15 +65,41 @@ defmodule Rauversion.PurchaseOrders.MusicPurchaseNotifier do
     purchase_order = purchase_order |> Repo.preload([:user])
 
     user = purchase_order.user
+    track = purchase_order.tracks |> List.first()
 
     deliver(
       user.email,
       options[:subject] || gettext("Your music order"),
       [
-        "deliver_album_notification.html",
+        "deliver_track_notification.html",
         %{
           user: user,
           purchase_order: purchase_order,
+          message: message,
+          track: track
+        }
+      ]
+    )
+  end
+
+  def notify_track_purchase_to_author(purchase_order, message \\ nil, options \\ []) do
+    defaults = [subject: nil, event: nil]
+    _options = Keyword.merge(defaults, options)
+
+    purchase_order = purchase_order |> Repo.preload([:user])
+
+    user = purchase_order.user
+    track = purchase_order.tracks |> List.first()
+
+    deliver(
+      track.user.email,
+      "Notification of Purchase for #{track.title} track",
+      [
+        "deliver_track_purchase_to_artist.html",
+        %{
+          user: user,
+          purchase_order: purchase_order,
+          track: track,
           message: message
         }
       ]
