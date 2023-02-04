@@ -340,9 +340,11 @@ defmodule RauversionWeb.LiveHelpers do
       <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pb-2--" %>
       <div class="mt-1 sm:mt-0- sm:col-span-2">
         <div class="max-w-lg flex- rounded-md shadow-sm">
-          <div phx-hook="Select" id={"oe-#{@field.name}"}>
-            <%= multiple_select(@form, @field.name, @options, class: "hidden text-gray-800") %>
-            <div class="select-wrapper"></div>
+          <div phx-update={"ignore"} id={"ignore-#{@field.name}"} >
+            <div phx-hook="Select" id={"oe-#{@field.name}"}>
+              <%= multiple_select(@form, @field.name, @options, class: "hidden text-gray-800") %>
+              <div class="select-wrapper"></div>
+            </div>
           </div>
         </div>
       </div>

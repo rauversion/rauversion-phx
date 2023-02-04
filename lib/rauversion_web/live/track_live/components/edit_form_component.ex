@@ -146,9 +146,11 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
                       <%= label f, :tags, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2" %>
                       <div class="mt-1 sm:mt-0 sm:col-span-2">
                         <div class="max-w-lg flex- rounded-md shadow-sm">
+                        <div phx-update={"ignore"} id={"ignore-tags-"} >
                           <div phx-hook="Select" id="oe">
                             <%= multiple_select(f, :tags, Rauversion.Genres.plain(), class: "hidden text-gray-800") %>
                             <div class="select-wrapper"></div>
+                          </div>
                           </div>
                         </div>
                       </div>
