@@ -165,8 +165,8 @@ defmodule RauversionWeb.InsightsLive.InsightComponent do
                       <div class="flex-shrink-0">
                         <%= if item.country do %>
                           <img
-                            class="h-8 w-12 rounded-sm"
-                            src={"https://countryflagsapi.com/png/#{item.country}"}
+                            class="rounded-sm"
+                            src={"https://flagcdn.com/w40/#{String.downcase(item.country)}.png"}
                             alt="">
                         <% end %>
                       </div>
