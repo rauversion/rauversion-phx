@@ -19,7 +19,7 @@ defmodule RauversionWeb.TrackLive.Show do
         _,
         socket = %{assigns: %{live_action: :show, current_user: _user = nil}}
       ) do
-    track = Tracks.Tracks.get_by_slug!(id) |> Repo.preload(:user)
+    track = Tracks.get_by_slug!(id) |> Repo.preload(:user)
 
     {:noreply,
      socket

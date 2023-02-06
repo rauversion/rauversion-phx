@@ -8,7 +8,7 @@ defmodule Rauversion.MixProject do
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       # ++ [:cldr], ++ [:gettext]
-      compilers: Mix.compilers() ++ [:gettext],
+      # compilers: Mix.compilers() ++ [:gettext],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -26,7 +26,7 @@ defmodule Rauversion.MixProject do
   def application do
     [
       mod: {Rauversion.Application, []},
-      extra_applications: [:ex_cldr, :logger, :runtime_tools, :os_mon, :ssl]
+      extra_applications: [:phoenix, :ex_cldr, :logger, :runtime_tools, :os_mon, :ssl]
     ]
   end
 
@@ -41,7 +41,7 @@ defmodule Rauversion.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 3.0"},
-      {:phoenix, "~> 1.6.0"},
+      {:phoenix, "~> 1.7.0-rc.0", override: true},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.9"},
       {:ecto_nested_changeset, "~> 0.2.0"},
@@ -52,8 +52,8 @@ defmodule Rauversion.MixProject do
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: [:dev, :cy, :test]},
       {:phoenix_live_view, "~> 0.18.2"},
-      {:floki, ">= 0.30.0", override: true},
       {:phoenix_live_dashboard, "~> 0.7"},
+      {:floki, ">= 0.30.0", override: true},
       {:mux, "~> 1.8.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
