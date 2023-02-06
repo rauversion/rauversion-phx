@@ -7,13 +7,16 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
   def iframe_code(socket, track = %Rauversion.Playlists.Playlist{private: true}) do
     url =
       Application.get_env(:rauversion, :domain) <>
-      Routes.embed_path(socket, :private_playlist, Rauversion.Playlists.signed_id(track))
+        Routes.embed_path(socket, :private_playlist, Rauversion.Playlists.signed_id(track))
 
     Rauversion.Playlists.iframe_code_string(url, track)
   end
 
   def iframe_code(socket, track = %Rauversion.Playlists.Playlist{private: false}) do
-    url = Application.get_env(:rauversion, :domain) <> Routes.embed_path(socket, :show_playlist, track)
+    url =
+      Application.get_env(:rauversion, :domain) <>
+        Routes.embed_path(socket, :show_playlist, track)
+
     Rauversion.Playlists.iframe_code_string(url, track)
   end
 
@@ -150,7 +153,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
                 </a>
                 ·
                 <a
-                  href={Routes.playlist_show_path(@socket, :show, @playlist)}
+                  href={Routes.playlist_show_path(@socket, :show, @playlist.slug)}
                   title={@playlist.title}
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">

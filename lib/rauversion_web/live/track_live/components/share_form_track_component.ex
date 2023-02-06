@@ -47,7 +47,7 @@ defmodule RauversionWeb.TrackLive.ShareFormTrackComponent do
             <div class="flex justify-between items-center">
               <div class="text-sm font-thin leading-5">
                 <div class="">Upload complete.</div>
-                <%= live_redirect to: Routes.track_show_path(@socket, :show, @track), class: "font-normal text-blue-500 cursor-pointer hover:text-zinc-800" do %>
+                <%= live_redirect to: Routes.track_show_path(@socket, :show, @track.slug), class: "font-normal text-blue-500 cursor-pointer hover:text-zinc-800" do %>
                 <%= gettext "Go to your track" %>
                 <% end %>
               </div>

@@ -106,7 +106,7 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
       data-paginate-end={assigns.track_meta.total_pages == @page}>
 
       <%= for track <- @tracks do %>
-        <%= live_redirect to: Routes.track_show_path(@socket, :show, track), id: "track-item-#{track.id}" , class: "group" do %>
+        <%= live_redirect to: Routes.track_show_path(@socket, :show, track.slug), id: "track-item-#{track.id}" , class: "group" do %>
           <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
 
             <div
@@ -123,12 +123,15 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
             </div>
             <%= img_tag(Tracks.proxy_cover_representation_url(track), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
           </div>
-          <h3 class="mt-4 text-sm text-gray-700 dark:text-gray-300">
+
+          <p class="mt-1 text-lg- font-medium text-gray-900 dark:text-gray-100 ">
             <%= track.title %>
-          </h3>
-          <p class="mt-1 text-lg font-medium text-gray-900 dark:text-gray-100 ">
-            <%= track.user.username %>
           </p>
+
+          <h3 class="mt-4-- text-sm text-gray-700 dark:text-gray-300">
+            <%= track.user.username %>
+          </h3>
+
         <% end %>
       <% end %>
     </div>

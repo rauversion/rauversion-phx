@@ -31,6 +31,10 @@ defmodule Rauversion.Tracks do
     from t in Track, where: t.id == ^id
   end
 
+  def get_by_slug_query(id) do
+    from t in Track, where: t.slug == ^id
+  end
+
   def find_by_signed_id!(token) do
     case Phoenix.Token.verify(RauversionWeb.Endpoint, "user auth", token) do
       {:ok, track_id} -> get_track!(track_id)

@@ -4,8 +4,18 @@ defmodule RauversionWeb.PlaylistLiveTest do
   import Phoenix.LiveViewTest
   import Rauversion.PlaylistsFixtures
 
-  @create_attrs %{description: "some description", metadata: %{}, slug: "some slug", title: "some title"}
-  @update_attrs %{description: "some updated description", metadata: %{}, slug: "some updated slug", title: "some updated title"}
+  @create_attrs %{
+    description: "some description",
+    metadata: %{},
+    slug: "some slug",
+    title: "some title"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    metadata: %{},
+    slug: "some updated slug",
+    title: "some updated title"
+  }
   @invalid_attrs %{description: nil, metadata: nil, slug: nil, title: nil}
 
   defp create_playlist(_) do
@@ -79,19 +89,19 @@ defmodule RauversionWeb.PlaylistLiveTest do
     setup [:create_playlist]
 
     test "displays playlist", %{conn: conn, playlist: playlist} do
-      {:ok, _show_live, html} = live(conn, Routes.playlist_show_path(conn, :show, playlist))
+      {:ok, _show_live, html} = live(conn, Routes.playlist_show_path(conn, :show, playlist.slug))
 
       assert html =~ "Show Playlist"
       assert html =~ playlist.description
     end
 
     test "updates playlist within modal", %{conn: conn, playlist: playlist} do
-      {:ok, show_live, _html} = live(conn, Routes.playlist_show_path(conn, :show, playlist))
+      {:ok, show_live, _html} = live(conn, Routes.playlist_show_path(conn, :show, playlist.slug))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Playlist"
 
-      assert_patch(show_live, Routes.playlist_show_path(conn, :edit, playlist))
+      assert_patch(show_live, Routes.playlist_show_path(conn, :edit, playlist.slug))
 
       assert show_live
              |> form("#playlist-form", playlist: @invalid_attrs)

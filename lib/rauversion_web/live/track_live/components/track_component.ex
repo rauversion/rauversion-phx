@@ -86,7 +86,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
                 <div class="">
                   <h4 class="text-md font-bold">
-                    <%= live_redirect @track.title, to: Routes.track_show_path(@socket, :show, @track) %>
+                    <%= live_redirect @track.title, to: Routes.track_show_path(@socket, :show, @track.slug) %>
                   </h4>
 
 
@@ -220,7 +220,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                 <%= if @current_user && @current_user.id == @track.user_id do %>
 
-                  <%= live_patch to:  Routes.track_show_path(@socket, :edit, @track), class: "flex items-center space-x-2 text-gray-700 dark:text-gray-300 block px-4 py-2 text-sm" do %>
+                  <%= live_patch to:  Routes.track_show_path(@socket, :edit, @track.slug), class: "flex items-center space-x-2 text-gray-700 dark:text-gray-300 block px-4 py-2 text-sm" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                     </svg>
@@ -285,13 +285,13 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
               <span>
                 <%= Number.Currency.number_to_currency(@track.metadata.price, precision: 2) %>
-                <span class="text-sm text-gray-300">
+                <span class="text-sm text-gray-700 dark:text-gray-300">
                   USD
                 </span>
               </span>
 
               <%= if @track.metadata.name_your_price do %>
-                <span class="text-sm text-gray-300">
+                <span class="text-gray-700 dark:text-gray-300">
                   <%= gettext("or more") %>
                 </span>
               <% end %>

@@ -194,13 +194,13 @@ defmodule RauversionWeb.PlaylistLive.BuyModalComponent do
 
               <span>
                 <%= Number.Currency.number_to_currency(@playlist.metadata.price, precision: 2) %>
-                <span class="text-sm text-gray-300">
+                <span class="text-gray-700 dark:text-gray-300">
                   USD
                 </span>
               </span>
 
               <%= if @playlist.metadata.name_your_price do %>
-                <span class="text-sm text-gray-300">
+                <span class="text-gray-700 dark:text-gray-300">
                   <%= gettext("or more") %>
                 </span>
               <% end %>
