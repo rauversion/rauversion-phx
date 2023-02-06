@@ -26,6 +26,8 @@ defmodule RauversionWeb.ConnCase do
 
       alias RauversionWeb.Router.Helpers, as: Routes
 
+      use RauversionWeb, :verified_routes
+
       # The default endpoint for testing
       @endpoint RauversionWeb.Endpoint
     end

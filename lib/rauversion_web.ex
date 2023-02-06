@@ -17,6 +17,8 @@ defmodule RauversionWeb do
   and import those modules here.
   """
 
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt sitemaps)
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: RauversionWeb
@@ -24,6 +26,7 @@ defmodule RauversionWeb do
       import Plug.Conn
       import RauversionWeb.Gettext
       alias RauversionWeb.Router.Helpers, as: Routes
+      unquote(verified_routes())
     end
   end
 
@@ -101,6 +104,16 @@ defmodule RauversionWeb do
       import RauversionWeb.ErrorHelpers
       import RauversionWeb.Gettext
       alias RauversionWeb.Router.Helpers, as: Routes
+      unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: RauversionWeb.Endpoint,
+        router: RauversionWeb.Router,
+        statics: RauversionWeb.static_paths()
     end
   end
 
