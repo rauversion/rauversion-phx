@@ -148,7 +148,7 @@ defmodule RauversionWeb.TrackLive.ShareTrackComponent do
                 </a>
                 ·
                 <a
-                  href={Routes.track_show_path(@socket, :show, @track)}
+                  href={Routes.track_show_path(@socket, :show, @track.slug)}
                   title={@track.title}
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">

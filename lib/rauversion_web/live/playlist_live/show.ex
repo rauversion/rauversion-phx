@@ -195,12 +195,12 @@ defmodule RauversionWeb.PlaylistLive.Show do
   end
 
   defp get_playlist(id, :edit) do
-    Playlists.get_playlist!(id)
+    Playlists.get_by_slug!(id)
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 
   defp get_playlist(id, :show) do
-    Playlists.get_playlist!(id)
+    Playlists.get_by_slug!(id)
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 

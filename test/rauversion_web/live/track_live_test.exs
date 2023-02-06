@@ -121,7 +121,7 @@ defmodule RauversionWeb.TrackLiveTest do
     # setup [:create_track]
 
     test "displays track", %{conn: conn, track: track} do
-      {:ok, _show_live, html} = live(conn, Routes.track_show_path(conn, :show, track))
+      {:ok, _show_live, html} = live(conn, Routes.track_show_path(conn, :show, track.slug))
 
       assert html =~ "Show Track"
       assert html =~ track.caption
@@ -130,12 +130,12 @@ defmodule RauversionWeb.TrackLiveTest do
     test "updates track within modal", %{conn: conn, track: track, user: user} do
       conn = conn |> assign(:current_user, user)
 
-      {:ok, show_live, _html} = live(conn, Routes.track_show_path(conn, :show, track))
+      {:ok, show_live, _html} = live(conn, Routes.track_show_path(conn, :show, track.slug))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Track"
 
-      assert_patch(show_live, Routes.track_show_path(conn, :edit, track))
+      assert_patch(show_live, Routes.track_show_path(conn, :edit, track.slug))
 
       assert show_live
              |> form("#track-form", track: @invalid_attrs)
@@ -145,7 +145,7 @@ defmodule RauversionWeb.TrackLiveTest do
         show_live
         |> form("#track-form", track: @update_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.track_show_path(conn, :show, track))
+        |> follow_redirect(conn, Routes.track_show_path(conn, :show, track.slug))
 
       assert html =~ "Track updated successfully"
       assert html =~ "some updated caption"

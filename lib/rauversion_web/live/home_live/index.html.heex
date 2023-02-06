@@ -122,15 +122,15 @@
                     <%= img_tag(Tracks.proxy_cover_representation_url(track, %{resize_to_fill: "250x250"}), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
                   </div>
                   <div class="mt-3 text-left">
-                    <p class="text-sm text-gray-500 dark:text-gray-300">
-                      <%= track.user.username %>
-                    </p>
                     <h3 class="mt-1 font-semibold text-gray-900 dark:text-gray-100">
-                      <%= live_redirect to: Routes.track_show_path(@socket, :show, track) do %>
+                      <%= live_redirect to: Routes.track_show_path(@socket, :show, track.slug) do %>
                         <span class="absolute inset-0"></span>
                         <%= track.title %>
                       <% end %>
                     </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-300">
+                      <%= gettext("by %{name}", %{name: track.user.username}) %>
+                    </p>
                     <p class="mt-1 text-gray-900 dark:text-gray-100 hidden">
                       ---
                     </p>
@@ -165,13 +165,17 @@
                     <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"), class: "w-full h-full object-center object-cover") %>
                   </div>
 
-                  <h3 class="mt-3 text-sm text-gray-500 dark:text-gray-300 text-left">
-                    <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist) do %>
+                   <p class="text-base font-semibold text-gray-900 dark:text-gray-100 text-left">
+                    <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist.slug) do %>
                       <span class="absolute inset-0"></span>
                       <%= playlist.title %>
                     <% end %>
+                  </p>
+
+                  <h3 class="mt-3- text-sm text-gray-500 dark:text-gray-300 text-left">
+                    <%= gettext("by %{name}", %{name: playlist.user.username}) %>
                   </h3>
-                  <p class="text-base font-semibold text-gray-900 dark:text-gray-100 text-left"><%= playlist.user.username %></p>
+                 
                 </div>
               </div>
             <% end %>

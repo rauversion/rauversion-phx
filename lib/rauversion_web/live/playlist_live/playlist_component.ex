@@ -154,7 +154,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                 <% end %>
 
                 <%= if @current_user && @current_user.id == @playlist.user_id do %>
-                  <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                  <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                     </svg>
@@ -188,13 +188,13 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
 
                   <span>
                     <%= Number.Currency.number_to_currency(@playlist.metadata.price, precision: 2) %>
-                    <span class="text-sm text-gray-300">
+                    <span class="text-gray-700 dark:text-gray-300">
                       USD
                     </span>
                   </span>
 
                   <%= if @playlist.metadata.name_your_price do %>
-                    <span class="text-sm text-gray-300">
+                    <span class="text-gray-700 dark:text-gray-300">
                       <%= gettext("or more") %>
                     </span>
                   <% end %>

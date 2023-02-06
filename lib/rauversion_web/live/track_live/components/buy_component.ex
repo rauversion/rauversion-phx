@@ -194,13 +194,13 @@ defmodule RauversionWeb.TrackLive.Components.BuyComponent do
 
               <span>
                 <%= Number.Currency.number_to_currency(@track.metadata.price, precision: 2) %>
-                <span class="text-sm text-gray-300">
+                <span class="text-gray-700 dark:text-gray-300">
                   USD
                 </span>
               </span>
 
               <%= if @track.metadata.name_your_price do %>
-                <span class="text-sm text-gray-300">
+                <span class="text-gray-700 dark:text-gray-300">
                   <%= gettext("or more") %>
                 </span>
               <% end %>
