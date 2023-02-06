@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2023-02-04 22:13\n"
+"PO-Revision-Date: 2023-02-06 04:13\n"
 
 #: lib/rauversion_web/live/home_live/index.html.heex:37
 #, elixir-autogen, elixir-format
@@ -51,12 +51,12 @@ msgstr "Adicionar à playlist"
 
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:146
 #: lib/rauversion_web/live/shared_components/attribution_component.ex:56
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:339
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:341
 #, elixir-autogen, elixir-format
 msgid "All rights reserved"
 msgstr "Todos os direitos reservados"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:67
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:70
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:67
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to reset this link?<br />\n"
@@ -75,7 +75,7 @@ msgstr "Configurações de artigo"
 msgid "Article will be plublished on blog listing."
 msgstr "O artigo será anexado na listagem do blog."
 
-#: lib/rauversion_web/live/home_live/index.html.heex:188
+#: lib/rauversion_web/live/home_live/index.html.heex:192
 #, elixir-autogen, elixir-format
 msgid "Artists You Should Know"
 msgstr "Artistas que você deveria saber"
@@ -108,8 +108,8 @@ msgstr "Por E-mail"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:273
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:242
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:90
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:448
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:93
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:450
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:224
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:90
 #, elixir-autogen, elixir-format
@@ -196,16 +196,16 @@ msgstr "Continuar"
 msgid "Copy link"
 msgstr "Link de cópia"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:118
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:121
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:116
 #, elixir-autogen, elixir-format
 msgid "Copy to clipboard"
 msgstr "Copiar para área de transferência"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:107
-#: lib/rauversion_web/live/live_helpers.ex:459
+#: lib/rauversion_web/live/live_helpers.ex:461
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:31
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:170
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:172
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:69
 #, elixir-autogen, elixir-format
 msgid "Cover photo"
@@ -217,7 +217,7 @@ msgid "Create playlist"
 msgstr "Criar playlist"
 
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:151
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:344
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:346
 #, elixir-autogen, elixir-format
 msgid "Creative commons"
 msgstr "Creative commons"
@@ -276,8 +276,8 @@ msgstr "Endereço de e-mail"
 msgid "Email address"
 msgstr "Endereço de e-mail"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:28
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:104
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:31
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:107
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:28
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:104
 #, elixir-autogen, elixir-format
@@ -436,8 +436,8 @@ msgstr "Efetuar Login"
 msgid "Log out"
 msgstr "Efetuar logout"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:29
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:170
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:32
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:173
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:29
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:168
 #, elixir-autogen, elixir-format
@@ -450,7 +450,7 @@ msgstr "Mensagem"
 msgid "Metadata"
 msgstr "Metadados"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:324
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:326
 #, elixir-autogen, elixir-format
 msgid "Metadata information"
 msgstr "Informação de metadados"
@@ -543,9 +543,9 @@ msgid "Or continue with"
 msgstr "Ou continuar com"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:156
-#: lib/rauversion_web/live/live_helpers.ex:510
+#: lib/rauversion_web/live/live_helpers.ex:512
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:64
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:206
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:208
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:107
 #, elixir-autogen, elixir-format
 msgid "PNG, JPG, GIF up to 10MB"
@@ -598,7 +598,7 @@ msgstr "Privacidade"
 msgid "Private"
 msgstr "Privado"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:34
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:37
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:34
 #, elixir-autogen, elixir-format
 msgid "Private Share"
@@ -680,7 +680,7 @@ msgstr "Repostar"
 msgid "Resend confirmation instructions"
 msgstr "Reenviar instruções de confirmação"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:85
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:88
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:85
 #, elixir-autogen, elixir-format
 msgid "Reset"
@@ -691,7 +691,7 @@ msgstr "Reset"
 msgid "Reset Password"
 msgstr "Redefinir a senha"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:78
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:81
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:78
 #, elixir-autogen, elixir-format
 msgid "Reset secret link"
@@ -721,7 +721,7 @@ msgstr "Igual ao email"
 #: lib/rauversion_web/live/events_live/components/hosts_component.ex:316
 #: lib/rauversion_web/live/playlist_live/create_form_component.ex:130
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:450
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:452
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
 #, elixir-autogen, elixir-format
 msgid "Save"
@@ -742,7 +742,7 @@ msgstr "Guardar"
 #: lib/rauversion_web/live/playlist_live/create_form_component.ex:130
 #: lib/rauversion_web/live/repost_live/form_component.html.heex:13
 #: lib/rauversion_web/live/track_live/components/comments_component.ex:183
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:450
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:452
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:226
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:100
 #: lib/rauversion_web/live/usersettings_live/components/email_form.ex:46
@@ -794,7 +794,7 @@ msgid "Settings"
 msgstr "Confirgurações"
 
 #: lib/rauversion_web/live/playlist_live/share_playlist_button_component.ex:53
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:27
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:30
 #: lib/rauversion_web/live/playlist_live/show.html.heex:199
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:106
 #: lib/rauversion_web/live/track_live/components/edit_form_component.ex:118
@@ -853,13 +853,13 @@ msgstr "Comece agora"
 msgid "Support"
 msgstr "Suporte"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:97
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:100
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:97
 #, elixir-autogen, elixir-format
 msgid "The secret link has been successfully reset."
 msgstr "O link secreto foi redefinido com sucesso."
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:72
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:75
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:72
 #, elixir-autogen, elixir-format
 msgid "There was a problem resetting the link. Please try again later."
@@ -879,7 +879,7 @@ msgstr "Estas são entregues via SMS para o seu celular."
 msgid "This information will be displayed publicly so be careful what you share."
 msgstr "Essa informação será exibida publicamente, por isso tenha cuidado com o que você compartilhar."
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:162
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:165
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:160
 #, elixir-autogen, elixir-format
 msgid "This player uses cookies in accordance with our Cookies policy.\n"
@@ -889,7 +889,7 @@ msgstr "Este player usa cookies de acordo com a nossa política de cookies.\n"
 "            Podemos coletar dados de uso para fins de análise.\n"
 "            É sua responsabilidade divulgar isso aos visitantes de qualquer site onde você incorporou o jogador."
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:62
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:65
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:62
 #, elixir-autogen, elixir-format
 msgid "This track is set to private and can only be shared using the secret link above.\n"
@@ -917,8 +917,8 @@ msgstr "Melhores faixas"
 msgid "Total Listens"
 msgstr "Total escuta"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:327
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:428
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:329
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:430
 #, elixir-autogen, elixir-format
 msgid "Track information"
 msgstr "Alterar informações do E-mail"
@@ -953,7 +953,7 @@ msgid "Upload a Audio file"
 msgstr "Carregar um arquivo de áudio"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:130
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:183
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:185
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:83
 #, elixir-autogen, elixir-format
 msgid "Upload a track Cover"
@@ -1011,7 +1011,7 @@ msgstr "Seus artigos."
 msgid "Your insights"
 msgstr "Suas dicas"
 
-#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:51
+#: lib/rauversion_web/live/playlist_live/share_playlist_component.ex:54
 #: lib/rauversion_web/live/track_live/components/share_track_component.ex:51
 #, elixir-autogen, elixir-format
 msgid "at"
@@ -1023,8 +1023,8 @@ msgid "clear all"
 msgstr "limpar tudo"
 
 #: lib/rauversion_web/live/articles_live/components/sidebar_form_component.ex:136
-#: lib/rauversion_web/live/live_helpers.ex:490
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:187
+#: lib/rauversion_web/live/live_helpers.ex:492
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:189
 #: lib/rauversion_web/live/track_live/components/info_form_component.ex:87
 #: lib/rauversion_web/live/track_live/components/upload_form_component.ex:58
 #, elixir-autogen, elixir-format
@@ -1049,13 +1049,13 @@ msgstr "privado"
 msgid "remove"
 msgstr "excluir"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:419
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:421
 #, elixir-autogen, elixir-format
 msgid "share controls"
 msgstr "controles de compartilhamento"
 
 #: lib/rauversion_web/live/playlist_live/edit_form_component.ex:202
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:395
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:397
 #, elixir-autogen, elixir-format
 msgid "some rights reserved"
 msgstr "todos os direitos reservados"
@@ -1484,7 +1484,7 @@ msgstr "Eventos"
 msgid "Magazine"
 msgstr "Revista"
 
-#: lib/rauversion_web/live/live_helpers.ex:483
+#: lib/rauversion_web/live/live_helpers.ex:485
 #, elixir-autogen, elixir-format
 msgid "Upload a %{subject}"
 msgstr "Carregar um %{subject}"
@@ -1797,7 +1797,7 @@ msgstr "use esta url caso você precise processar webhooks do serviço de transm
 msgid "webhook url"
 msgstr "URL do webhook"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:267
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:269
 #, elixir-autogen, elixir-format
 msgid "Confirm image"
 msgstr "Confirmar imagem"
@@ -1820,7 +1820,7 @@ msgstr "Música"
 msgid "My Music"
 msgstr "Minhas músicas"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:214
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:216
 #, elixir-autogen, elixir-format
 msgid "Or generate the image with AI"
 msgstr "Ou gerar a imagem com IA"
@@ -1830,7 +1830,7 @@ msgstr "Ou gerar a imagem com IA"
 msgid "Recent Tracks"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:276
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:278
 #, elixir-autogen, elixir-format
 msgid "Redo image"
 msgstr "Refazer imagem"
@@ -1845,17 +1845,17 @@ msgstr "Compartilhar em: "
 msgid "Twitter"
 msgstr "Twitter"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:248
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:250
 #, elixir-autogen, elixir-format
 msgid "We use DALL-E from Open AI to generate images"
 msgstr "Nós usamos o DALL-E do Open AI para gerar imagens"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:233
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:235
 #, elixir-autogen, elixir-format
 msgid "generate image"
 msgstr "gerar imagem"
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:250
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:252
 #, elixir-autogen, elixir-format
 msgid "read more"
 msgstr "leia mais"
@@ -2166,7 +2166,7 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:425
+#: lib/rauversion_web/live/track_live/components/edit_form_component.ex:427
 #, elixir-autogen, elixir-format
 msgid "Pricing information"
 msgstr ""
@@ -2272,5 +2272,11 @@ msgstr ""
 #: lib/rauversion_web/live/track_live/index.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "Tracks tagged in %{t}"
+msgstr ""
+
+#: lib/rauversion_web/live/home_live/index.html.heex:132
+#: lib/rauversion_web/live/home_live/index.html.heex:176
+#, elixir-autogen, elixir-format
+msgid "by %{name}"
 msgstr ""
 
