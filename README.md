@@ -34,11 +34,15 @@ Rauversion is built on Elixir with Phoenix framework.
   + Sell event tickets via stripe or transbank (Chile).
   + Use Stripe connect to ease the payouts.
   + Streaming services via Twitch, Zoom, Whereby, Mux and Stream Yard.
-
-### Publishing magazine:
-  + Articles, Draft, Public, and partially public.
   + Attendees event details.
   + Public page with ticket checkout for paid or free tickets.
+
+### Publishing magazine:
+  + Articles managment publishing: Draft, Public, Listed and partially public.
+  + Showcase articles in homepage.
+  + Text editor based on [Dante3](https://dante-editor.dev)
+  + Cover image.
+  + Article Categories.
   
 
 
