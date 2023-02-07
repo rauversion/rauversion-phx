@@ -10,13 +10,47 @@ Rauversion is an open source music sharing platform.
 
 Rauversion is built on Elixir with Phoenix framework.
 
+
+## Features:
+ + Account system with different providers, Twitter, Discord, Twitch.
+ + Roles to open or closed communities.
+### Music publishing:
+  + Audio processing to format mp3 and audio analisis to draw audio peaks.
+  + Audio player, embeddable, with chunk range loading processing to save bandwidth.
+  + Music publishing preferences, downloadable, private, attribution settings, like cretive commons , all right reserved.
+  + Uploads for tracks, albums and playlists with their meta information.
+  + Multi upload provider local or aws, other providers could be inmplemented.
+  + Sellable tracks & albums with Stripe, for connected accounts or main account.
+  + Tagging tracks, playlist & albums.
+### Music Listening:
+  + Follow artists
+  + Make playlists & reposts
+  + Comments on tracks and albums.
+
+### Events: 
+  + Event scheduling
+  + Host & managers
+  + Ticketing service with QR validation
+  + Sell event tickets via stripe or transbank (Chile).
+  + Use Stripe connect to ease the payouts.
+  + Streaming services via Twitch, Zoom, Whereby, Mux and Stream Yard.
+
+### Publishing magazine:
+  + Articles, Draft, Public, and partially public.
+  + Attendees event details.
+  + Public page with ticket checkout for paid or free tickets.
+  
+
+
 ## setup
+
+Rauversion is written in Elixir on top of the Phoenix Framework:
 
 > OTP 25 and elixir 1.13.4 and up is required
 
 You can develop directly in a container with [vscode devcontainer](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) or [neovim devcontainer](https://github.com/jamestthompson3/nvim-remote-containers)
 
-To start your Phoenix server:
+To start your Rauversion server:
 
   * Install dependencies with `mix deps.get`
   * rename `.env.example` to `.env` and add your variable configurations
