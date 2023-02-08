@@ -96,14 +96,15 @@ defmodule RauversionWeb.PlaylistLive.PlaylistListComponent do
   @impl true
   def render(assigns) do
     ~H"""
-    <div id="infinite-scroll"
+    <div
+      id="infinite-scroll"
       phx-hook="InfiniteScroll"
       phx-update="append"
       data-page={@page}
       phx-target={@myself}
       data-total-pages={assigns.track_meta.total_pages}
       data-paginate-end={assigns.track_meta.total_pages == @page}
-      >
+    >
       <%= for playlist <- assigns.playlists  do %>
         <.live_component
           module={RauversionWeb.PlaylistLive.PlaylistComponent}

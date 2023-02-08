@@ -2,36 +2,34 @@
 
 <%= if is_nil(@purchase_order.total ) or @purchase_order.total == 0 do %>
   <p>
-    We hope this email finds you well. We are writing to inform you that <%= @user.first_name %> 
-    has obtained a download link of your "<%= @album.title %>" album record.
+    We hope this email finds you well. We are writing to inform you that <%= @user.first_name %> has obtained a download link of your "<%= @album.title %>" album record.
   </p>
 <% else %>
   <p>
-    We hope this email finds you well. We are writing to inform you that <%= @user.first_name %> 
-    has made a purchase of your "<%= @album.title %>" album record.
+    We hope this email finds you well. We are writing to inform you that <%= @user.first_name %> has made a purchase of your "<%= @album.title %>" album record.
   </p>
   <p>
-  We would like to inform you that you will receive the payout for this sale on the following days. 
-  Please note that a fee of <%= round(Rauversion.PurchaseOrders.app_fee()) %>% will be deducted from the total amount as our transaction fee.
+    We would like to inform you that you will receive the payout for this sale on the following days.
+    Please note that a fee of <%= round(Rauversion.PurchaseOrders.app_fee()) %>% will be deducted from the total amount as our transaction fee.
   </p>
 <% end %>
 
 <p>
-We would like to take this opportunity to extend our gratitude for creating such wonderful music 
-and making it available for purchase. Your art has truly made a difference in the lives of your fans,
- including <%= @user.first_name %>.
+  We would like to take this opportunity to extend our gratitude for creating such wonderful music
+  and making it available for purchase. Your art has truly made a difference in the lives of your fans,
+  including <%= @user.first_name %>.
 </p>
 
 <p>
-If you have any questions or concerns regarding this purchase or the payout, 
-please do not hesitate to reach out to us.
+  If you have any questions or concerns regarding this purchase or the payout,
+  please do not hesitate to reach out to us.
 </p>
 
 <p>
-Once again, thank you for your contribution to the music industry.
+  Once again, thank you for your contribution to the music industry.
 </p>
 
 <p>
-Best regards,
+  Best regards,
   the <%= Application.get_env(:rauversion, :domain) %> Team
 </p>

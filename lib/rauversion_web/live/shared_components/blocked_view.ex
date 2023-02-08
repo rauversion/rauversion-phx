@@ -17,8 +17,10 @@ defmodule RauversionWeb.BlockedView do
         <p class="mt-4 text-lg leading-6 text-brand-200">
           <%= @description %>
         </p>
-        <a href="mailto:info@rauversion.com"
-          class="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-brand-600 hover:bg-brand-50 sm:w-auto">
+        <a
+          href="mailto:info@rauversion.com"
+          class="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-brand-600 hover:bg-brand-50 sm:w-auto"
+        >
           <%= @cta %>
         </a>
       </div>

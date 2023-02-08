@@ -32,13 +32,12 @@ defmodule RauversionWeb.PlaylistLive.AddToPlaylistComponent do
   def render(assigns) do
     ~H"""
     <div class="space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
-
       <%= if @action == "add" do %>
         <.modal close_handler={@myself}>
           <.live_component
             module={RauversionWeb.PlaylistLive.FormComponent}
             id={:new}
-            title={"@page_title"}
+            title="@page_title"
             action={:new}
             track={@track}
             playlist={%Rauversion.Playlists.Playlist{}}
@@ -47,16 +46,14 @@ defmodule RauversionWeb.PlaylistLive.AddToPlaylistComponent do
         </.modal>
       <% end %>
 
-
       <%= link to: "#",
         "phx-click": "add-to-playlist",
         "phx-target": @myself,
         "phx-value-track": @track.id,
         class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-        <span><%= gettext "Add to playlist" %></span>
+        <span><%= gettext("Add to playlist") %></span>
       <% end %>
     </div>
-
     """
   end
 end

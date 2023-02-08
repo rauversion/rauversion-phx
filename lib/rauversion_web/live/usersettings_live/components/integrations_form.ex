@@ -32,7 +32,7 @@ defmodule RauversionWeb.UsersettingsLive.IntegrationsForm do
   def render(assigns) do
     ~H"""
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-    <h1 class="text-3xl font-extrabold text-blue-gray-900">Integrations</h1>
+      <h1 class="text-3xl font-extrabold text-blue-gray-900">Integrations</h1>
 
       <div class="py-6">
         <h2 class="text-gray-500 dark:text-gray-300 text-sm font-medium">
@@ -46,7 +46,10 @@ defmodule RauversionWeb.UsersettingsLive.IntegrationsForm do
               </div>
               <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 dark:border-gray-900 bg-white dark:bg-gray-800 rounded-r-md truncate">
                 <div class="flex-1 px-4 py-2 text-sm truncate">
-                  <a href={"/auth/#{integration.provider}/revoke"} class="text-red-900 dark:text-red-100 font-medium hover:text-red-600 dark:hover:text-red-400">
+                  <a
+                    href={"/auth/#{integration.provider}/revoke"}
+                    class="text-red-900 dark:text-red-100 font-medium hover:text-red-600 dark:hover:text-red-400"
+                  >
                     Revoke
                   </a>
                 </div>
@@ -68,7 +71,10 @@ defmodule RauversionWeb.UsersettingsLive.IntegrationsForm do
               </div>
               <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 dark:border-gray-900 bg-white dark:bg-gray-800 rounded-r-md truncate">
                 <div class="flex-1 px-4 py-2 text-sm truncate">
-                  <a href={"/auth/#{provider}"} class="text-brand-900 dark:text-brand-600 font-medium hover:text-brand-600 dark:hover:text-brand-400">
+                  <a
+                    href={"/auth/#{provider}"}
+                    class="text-brand-900 dark:text-brand-600 font-medium hover:text-brand-600 dark:hover:text-brand-400"
+                  >
                     Add
                   </a>
                 </div>

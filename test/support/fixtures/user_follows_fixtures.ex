@@ -10,9 +10,7 @@ defmodule Rauversion.UserFollowsFixtures do
   def user_follow_fixture(attrs \\ %{}) do
     {:ok, user_follow} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Rauversion.UserFollows.create_user_follow()
 
     user_follow

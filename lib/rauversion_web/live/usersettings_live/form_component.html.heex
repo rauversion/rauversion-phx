@@ -1,74 +1,71 @@
 <div class="flex-1 xl:overflow-y-auto">
-    
-    <%= if @action == :profile do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.ProfileForm}
-        id="contact-form"
-        target={@myself}
-        changeset={@changeset}
-        return_to={@return_to}
-        uploads={@uploads}
-      />
-    <% end %>
+  <%= if @action == :profile do %>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.ProfileForm}
+      id="contact-form"
+      target={@myself}
+      changeset={@changeset}
+      return_to={@return_to}
+      uploads={@uploads}
+    />
+  <% end %>
 
-    <%= if @action  == :email do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.EmailForm}
-        id="email-form"
-        target={@myself}
-        changeset={@changeset}
-        return_to={@return_to}
-      />
-    <% end %>
+  <%= if @action  == :email do %>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.EmailForm}
+      id="email-form"
+      target={@myself}
+      changeset={@changeset}
+      return_to={@return_to}
+    />
+  <% end %>
 
-    <%= if @action == :security do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.SecurityForm}
-        id="security-form"
-        target={@myself}
-        changeset={@changeset}
-        return_to={@return_to}
-      />
-    <% end %>
+  <%= if @action == :security do %>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.SecurityForm}
+      id="security-form"
+      target={@myself}
+      changeset={@changeset}
+      return_to={@return_to}
+    />
+  <% end %>
 
+  <%= if @action == :notifications do %>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.NotificationsForm}
+      id="security-form"
+      target={@myself}
+      changeset={@changeset}
+      return_to={@return_to}
+    />
+  <% end %>
 
-    <%= if @action == :notifications do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.NotificationsForm}
-        id="security-form"
-        target={@myself}
-        changeset={@changeset}
-        return_to={@return_to}
-      />
-    <% end %>
+  <%= if @action == :integrations do %>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.IntegrationsForm}
+      id="integrations"
+      target={@myself}
+      current_user={@current_user}
+      return_to={@return_to}
+    />
+  <% end %>
 
-    <%= if @action == :integrations do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.IntegrationsForm}
-        id="integrations"
-        target={@myself}
-        current_user={@current_user}
-        return_to={@return_to}
-      />
-    <% end %>
-    
-    <%= if @action == :transbank do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.TransbankForm}
-        id="security-form"
-        target={@myself}
-        changeset={@changeset}
-        return_to={@return_to}
-      />
-    <% end %>
+  <%= if @action == :transbank do %>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.TransbankForm}
+      id="security-form"
+      target={@myself}
+      changeset={@changeset}
+      return_to={@return_to}
+    />
+  <% end %>
 
-    <%= if @action == :invitations do %>
-      <.live_component
-        module={RauversionWeb.UsersettingsLive.Invitations}
-        id="invitations-form"
-        target={@myself}
-        current_user={@current_user}
-      />
-    <% end %>
-
-  </div>
+  <%= if @action == :invitations do %>
+    <.live_component
+      module={RauversionWeb.UsersettingsLive.Invitations}
+      id="invitations-form"
+      target={@myself}
+      current_user={@current_user}
+    />
+  <% end %>
+</div>

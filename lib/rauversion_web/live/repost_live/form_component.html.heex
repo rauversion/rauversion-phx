@@ -2,15 +2,15 @@
   <h2><%= @title %></h2>
 
   <.form
-    let={_f}
+    :let={_f}
     for={@changeset}
     id="repost-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
-  
+    phx-submit="save"
+  >
     <div>
-      <%= submit gettext("Save"), phx_disable_with: gettext("Saving...") %>
+      <%= submit(gettext("Save"), phx_disable_with: gettext("Saving...")) %>
     </div>
   </.form>
 </div>

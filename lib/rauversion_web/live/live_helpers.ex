@@ -44,22 +44,34 @@ defmodule RauversionWeb.LiveHelpers do
         phx-key="escape"
       >
         <%= if @return_to && !@close_handler do %>
-          <%= live_patch "✖",
+          <%= live_patch("✖",
             to: @return_to,
             id: "close",
             class: "phx-modal-close dark:text-gray-100 dark:bg-gray-900",
             phx_click: hide_modal()
-          %>
+          ) %>
         <% end %>
 
         <%= if @close_handler && !@return_to do %>
-          <a id="close" href="#" phx-click={"close-modal"} phx-target={@close_handler} class="phx-modal-close dark:text-gray-100">
+          <a
+            id="close"
+            href="#"
+            phx-click="close-modal"
+            phx-target={@close_handler}
+            class="phx-modal-close dark:text-gray-100"
+          >
             ✖
           </a>
         <% end %>
 
         <%= if !@close_handler && !@return_to do %>
-          <a id="close" href="#" class="phx-modal-close dark:text-gray-100" phx-click={hide_modal()} class="phx-modal-close">
+          <a
+            id="close"
+            href="#"
+            class="phx-modal-close dark:text-gray-100"
+            phx-click={hide_modal()}
+            class="phx-modal-close"
+          >
             ✖
           </a>
         <% end %>
@@ -72,9 +84,12 @@ defmodule RauversionWeb.LiveHelpers do
 
   def notification(assigns) do
     ~H"""
-      <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
-        <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
-          <!--
+    <div
+      aria-live="assertive"
+      class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
+    >
+      <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
+        <!--
             Notification panel, dynamically insert this into the live region when it needs to be displayed
 
             Entering: "transform ease-out duration-300 transition"
@@ -84,48 +99,100 @@ defmodule RauversionWeb.LiveHelpers do
               From: "opacity-100"
               To: "opacity-0"
           -->
-          <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
-            <div class="p-4">
-              <div class="flex items-start">
-                <div class="flex-shrink-0">
-                  <!-- Heroicon name: outline/check-circle -->
-                  <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <!-- Heroicon name: outline/check-circle -->
+                <svg
+                  class="h-6 w-6 text-green-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm font-medium text-gray-900"><%= gettext("Successfully saved!") %></p>
+                <p class="mt-1 text-sm text-gray-500">
+                  <%= gettext("Anyone with a link can now view this file.") %>
+                </p>
+              </div>
+              <div class="ml-4 flex-shrink-0 flex">
+                <button
+                  type="button"
+                  class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <span class="sr-only"><%= gettext("Close") %></span>
+                  <!-- Heroicon name: solid/x -->
+                  <svg
+                    class="h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
                   </svg>
-                </div>
-                <div class="ml-3 w-0 flex-1 pt-0.5">
-                  <p class="text-sm font-medium text-gray-900"><%= gettext "Successfully saved!" %></p>
-                  <p class="mt-1 text-sm text-gray-500"><%= gettext "Anyone with a link can now view this file." %></p>
-                </div>
-                <div class="ml-4 flex-shrink-0 flex">
-                  <button type="button" class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    <span class="sr-only"><%= gettext "Close" %></span>
-                    <!-- Heroicon name: solid/x -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                </div>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     """
   end
 
   def empty_view(assigns) do
     ~H"""
     <div class="text-center">
-      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+      <svg
+        class="mx-auto h-12 w-12 text-gray-400"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          vector-effect="non-scaling-stroke"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+        />
       </svg>
       <h3 class="mt-2 text-sm font-medium text-gray-900">No projects</h3>
       <p class="mt-1 text-sm text-gray-500">Get started by creating a new project.</p>
       <div class="mt-6">
-        <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
-          <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+        <button
+          type="button"
+          class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+        >
+          <svg
+            class="-ml-1 mr-2 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clip-rule="evenodd"
+            />
           </svg>
           New Project
         </button>
@@ -139,12 +206,10 @@ defmodule RauversionWeb.LiveHelpers do
     <%= if @track.tags && Enum.any?(@track.tags) do %>
       <div class="py-4">
         <%= for tag <- @track.tags do %>
-
           <%= live_redirect to: "/tracks/genre/#{tag}",
             class: "inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200" do %>
             <%= tag %>
           <% end %>
-
         <% end %>
       </div>
     <% end %>
@@ -156,12 +221,10 @@ defmodule RauversionWeb.LiveHelpers do
     <%= if @playlist.tags && Enum.any?(@playlist.tags) do %>
       <div class="py-4">
         <%= for tag <- @playlist.tags do %>
-
           <%= live_redirect to: "/playlists/genre/#{tag}",
             class: "inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200" do %>
             <%= tag %>
           <% end %>
-
         <% end %>
       </div>
     <% end %>
@@ -222,10 +285,9 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, attrs: attrs)
 
     ~H"""
-      <audio controls>
-        <source {@attrs}>
-        Your browser does not support the audio tag.
-      </audio>
+    <audio controls>
+      <source {@attrs} /> Your browser does not support the audio tag.
+    </audio>
     """
   end
 
@@ -233,23 +295,29 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={@field.wrapper_class}>
-        <%= label @form, @field[:label] || @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1"
-          phx-update={ if Map.get(@field,:hook), do: "ignore"}
-          id={if @field[:id], do: "ww-#{@field.id}"}>
-          <%= text_input @form, @field.name,
-            placeholder: Map.get(@field, :placeholder),
-            phx_hook: Map.get(@field,:hook),
-            class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
-        </div>
-        <%= if get_in(assigns.field, [:hint]) do %>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-            <%= assigns.field.hint %>
-          </p>
-        <% end %>
-        <%= error_tag @form, @field.name %>
+    <div class={@field.wrapper_class}>
+      <%= label(@form, @field[:label] || @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+      ) %>
+      <div
+        class="mt-1"
+        phx-update={if Map.get(@field, :hook), do: "ignore"}
+        id={if @field[:id], do: "ww-#{@field.id}"}
+      >
+        <%= text_input(@form, @field.name,
+          placeholder: Map.get(@field, :placeholder),
+          phx_hook: Map.get(@field, :hook),
+          class:
+            "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
+        ) %>
       </div>
+      <%= if get_in(assigns.field, [:hint]) do %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
+          <%= assigns.field.hint %>
+        </p>
+      <% end %>
+      <%= error_tag(@form, @field.name) %>
+    </div>
     """
   end
 
@@ -257,18 +325,24 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={@field.wrapper_class}>
-        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1">
-          <%= number_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
-        </div>
-        <%= if get_in(assigns.field, [:hint]) do %>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-            <%= assigns.field.hint %>
-          </p>
-        <% end %>
-        <%= error_tag @form, @field.name %>
+    <div class={@field.wrapper_class}>
+      <%= label(@form, @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+      ) %>
+      <div class="mt-1">
+        <%= number_input(@form, @field.name,
+          placeholder: Map.get(@field, :placeholder),
+          class:
+            "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
+        ) %>
       </div>
+      <%= if get_in(assigns.field, [:hint]) do %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
+          <%= assigns.field.hint %>
+        </p>
+      <% end %>
+      <%= error_tag(@form, @field.name) %>
+    </div>
     """
   end
 
@@ -276,19 +350,24 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={@field.wrapper_class}>
-        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1">
-          <%= date_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
-        </div>
-        <%= if get_in(assigns.field, [:hint]) do %>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-            <%= assigns.field.hint %>
-          </p>
-        <% end %>
-        <%= error_tag @form, @field.name %>
-
+    <div class={@field.wrapper_class}>
+      <%= label(@form, @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+      ) %>
+      <div class="mt-1">
+        <%= date_input(@form, @field.name,
+          placeholder: Map.get(@field, :placeholder),
+          class:
+            "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100"
+        ) %>
       </div>
+      <%= if get_in(assigns.field, [:hint]) do %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
+          <%= assigns.field.hint %>
+        </p>
+      <% end %>
+      <%= error_tag(@form, @field.name) %>
+    </div>
     """
   end
 
@@ -296,18 +375,24 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={@field.wrapper_class}>
-        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1">
-          <%= datetime_local_input @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
-        </div>
-        <%= if get_in(assigns.field, [:hint]) do %>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-            <%= assigns.field.hint %>
-          </p>
-        <% end %>
-        <%= error_tag @form, @field.name %>
+    <div class={@field.wrapper_class}>
+      <%= label(@form, @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+      ) %>
+      <div class="mt-1">
+        <%= datetime_local_input(@form, @field.name,
+          placeholder: Map.get(@field, :placeholder),
+          class:
+            "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100"
+        ) %>
       </div>
+      <%= if get_in(assigns.field, [:hint]) do %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
+          <%= assigns.field.hint %>
+        </p>
+      <% end %>
+      <%= error_tag(@form, @field.name) %>
+    </div>
     """
   end
 
@@ -315,20 +400,24 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={@field.wrapper_class}>
-        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1">
-          <%= select @form, @field.name, @field.options, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
-        </div>
-        <%= if get_in(assigns.field, [:hint]) do %>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-            <%= assigns.field.hint %>
-          </p>
-
-        <% end %>
-        <%= error_tag @form, @field.name %>
-
+    <div class={@field.wrapper_class}>
+      <%= label(@form, @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+      ) %>
+      <div class="mt-1">
+        <%= select(@form, @field.name, @field.options,
+          placeholder: Map.get(@field, :placeholder),
+          class:
+            "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100"
+        ) %>
       </div>
+      <%= if get_in(assigns.field, [:hint]) do %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
+          <%= assigns.field.hint %>
+        </p>
+      <% end %>
+      <%= error_tag(@form, @field.name) %>
+    </div>
     """
   end
 
@@ -337,10 +426,12 @@ defmodule RauversionWeb.LiveHelpers do
 
     ~H"""
     <div class={@field.wrapper_class}>
-      <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pb-2--" %>
+      <%= label(@form, @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pb-2--"
+      ) %>
       <div class="mt-1 sm:mt-0- sm:col-span-2">
         <div class="max-w-lg flex- rounded-md shadow-sm">
-          <div phx-update={"ignore"} id={"ignore-#{@field.name}"} >
+          <div phx-update="ignore" id={"ignore-#{@field.name}"}>
             <div phx-hook="Select" id={"oe-#{@field.name}"}>
               <%= multiple_select(@form, @field.name, @options, class: "hidden text-gray-800") %>
               <div class="select-wrapper"></div>
@@ -356,18 +447,24 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={@field.wrapper_class}>
-        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1 flex space-x-1 items-center">
-          <%= date_select @form, @field.name, placeholder: Map.get(@field, :placeholder), class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100" %>
-        </div>
-        <%= if get_in(assigns.field, [:hint]) do %>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-            <%= assigns.field.hint %>
-          </p>
-        <% end %>
-        <%= error_tag @form, @field.name %>
+    <div class={@field.wrapper_class}>
+      <%= label(@form, @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+      ) %>
+      <div class="mt-1 flex space-x-1 items-center">
+        <%= date_select(@form, @field.name,
+          placeholder: Map.get(@field, :placeholder),
+          class:
+            "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:text-gray-100"
+        ) %>
       </div>
+      <%= if get_in(assigns.field, [:hint]) do %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
+          <%= assigns.field.hint %>
+        </p>
+      <% end %>
+      <%= error_tag(@form, @field.name) %>
+    </div>
     """
   end
 
@@ -375,30 +472,37 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={"#{@field.wrapper_class}"}>
-        <div class="flex items-center space-x-2 py-2">
-          <div class="flex space-x-1 items-start">
-            <%= radio_button(@form, @field.name, @field.value, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300") %>
-          </div>
-          <div class="flex flex-col">
-            <%= label @form, @field[:label] || @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-            <p class="text-xs text-gray-500 dark:text-gray-300">
-              <% #= Map.get(@form.data, @field.name) %>
-              <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
-                "true" ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
-                "false" -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
-                _ -> case Map.get(@form.data, @field.name) do
-                  true ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+    <div class={"#{@field.wrapper_class}"}>
+      <div class="flex items-center space-x-2 py-2">
+        <div class="flex space-x-1 items-start">
+          <%= radio_button(@form, @field.name, @field.value,
+            class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300"
+          ) %>
+        </div>
+        <div class="flex flex-col">
+          <%= label(@form, @field[:label] || @field.name,
+            class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+          ) %>
+          <p class="text-xs text-gray-500 dark:text-gray-300">
+            <% # = Map.get(@form.data, @field.name) %>
+            <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
+              "true" ->
+                Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+
+              "false" ->
+                Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
+
+              _ ->
+                case Map.get(@form.data, @field.name) do
+                  true -> Map.get(@field, :checked_hint) || Map.get(@field, :hint)
                   false -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
                   _ -> Map.get(@field, :hint)
                 end
-              end
-              %>
-            </p>
-          </div>
+            end %>
+          </p>
         </div>
-
       </div>
+    </div>
     """
   end
 
@@ -406,28 +510,36 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={"#{@field.wrapper_class}"}>
-        <div class="flex items-center space-x-2 py-2">
-          <div class="flex space-x-1 items-start">
-            <%= checkbox(@form, @field.name, class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300") %>
-          </div>
-          <div class="flex flex-col">
-            <%= label @form, Map.get(@field, :label) || @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-            <p class="text-xs text-gray-500 dark:text-gray-300">
-              <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
-                "true" ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
-                "false" -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
-                _ -> case Map.get(@form.data, @field.name) do
-                  true ->  Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+    <div class={"#{@field.wrapper_class}"}>
+      <div class="flex items-center space-x-2 py-2">
+        <div class="flex space-x-1 items-start">
+          <%= checkbox(@form, @field.name,
+            class: "focus:ring-brand-500 h-4 w-4 text-brand-600 border-gray-300"
+          ) %>
+        </div>
+        <div class="flex flex-col">
+          <%= label(@form, Map.get(@field, :label) || @field.name,
+            class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+          ) %>
+          <p class="text-xs text-gray-500 dark:text-gray-300">
+            <%= case Map.get(@form.params, Atom.to_string(@field.name)) do
+              "true" ->
+                Map.get(@field, :checked_hint) || Map.get(@field, :hint)
+
+              "false" ->
+                Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
+
+              _ ->
+                case Map.get(@form.data, @field.name) do
+                  true -> Map.get(@field, :checked_hint) || Map.get(@field, :hint)
                   false -> Map.get(@field, :unchecked_hint) || Map.get(@field, :hint)
                   _ -> Map.get(@field, :checked_hint) || Map.get(@field, :hint)
                 end
-               end
-               %>
-            </p>
-          </div>
+            end %>
+          </p>
         </div>
       </div>
+    </div>
     """
   end
 
@@ -435,19 +547,24 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
-      <div class={@field.wrapper_class}>
-        <%= label @form, @field.name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-        <div class="mt-1">
-          <%= textarea @form, @field.name, placeholder: Map.get(@field, :placeholder),
-          class: "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100" %>
-        </div>
-        <%= if get_in(assigns.field, [:hint]) do %>
-          <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
-            <%= assigns.field.hint %>
-          </p>
-        <% end %>
-        <%= error_tag @form, @field.name %>
+    <div class={@field.wrapper_class}>
+      <%= label(@form, @field.name,
+        class: "block text-sm font-medium text-gray-700 dark:text-gray-300"
+      ) %>
+      <div class="mt-1">
+        <%= textarea(@form, @field.name,
+          placeholder: Map.get(@field, :placeholder),
+          class:
+            "shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-900 dark:bg-gray-900 dark:text-gray-100"
+        ) %>
       </div>
+      <%= if get_in(assigns.field, [:hint]) do %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-300">
+          <%= assigns.field.hint %>
+        </p>
+      <% end %>
+      <%= error_tag(@form, @field.name) %>
+    </div>
     """
   end
 
@@ -455,41 +572,53 @@ defmodule RauversionWeb.LiveHelpers do
     assigns = assign(%{__changed__: nil}, field: field, form: f, name: name)
 
     ~H"""
-
     <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-start sm:border-gray-200 sm:pt-5">
-      <label for="cover-photo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2">
-        <%= @field[:label] || gettext( "Cover photo") %>
+      <label
+        for="cover-photo"
+        class="block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mt-px sm:pt-2"
+      >
+        <%= @field[:label] || gettext("Cover photo") %>
       </label>
 
       <div class="mt-1 sm:mt-0 sm:col-span-2">
-        <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md"
-          phx-drop-target={@field.uploads[@name].ref}>
+        <div
+          class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md"
+          phx-drop-target={@field.uploads[@name].ref}
+        >
           <div class="space-y-1 text-center">
-
-
             <%= if Rauversion.BlobUtils.blob_for(@form.data, "#{@name}") == nil do %>
-
-              <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-100" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <svg
+                class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-100"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                </path>
               </svg>
-
             <% else %>
-
-              <%= img_tag(Rauversion.BlobUtils.variant_url( @form.data, "#{@name}"), class: "object-center object-cover group-hover:opacity-75") %>
-
+              <%= img_tag(Rauversion.BlobUtils.variant_url(@form.data, "#{@name}"),
+                class: "object-center object-cover group-hover:opacity-75"
+              ) %>
             <% end %>
 
             <div class="flex text-sm text-gray-600 dark:text-gray-400 py-3">
               <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                 <span>
-                  <%= gettext( "Upload a %{subject}", %{subject: @field[:label] || "Track" }) %>
+                  <%= gettext("Upload a %{subject}", %{subject: @field[:label] || "Track"}) %>
                 </span>
-                <% #= form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
+                <% # = form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
                 <.live_file_input upload={@field.uploads[@name]} class="hidden" />
-                <% #= live_file_input @field.uploads[name], class: "hidden" %>
+                <% # = live_file_input @field.uploads[name], class: "hidden" %>
               </label>
               <p class="pl-1">
-                <%= gettext "or drag and drop" %>
+                <%= gettext("or drag and drop") %>
               </p>
             </div>
 
@@ -501,7 +630,7 @@ defmodule RauversionWeb.LiveHelpers do
                     <%= entry.progress %>%
                   </div>
                 </div>
-              <% end  %>
+              <% end %>
 
               <%= for {_ref, msg, } <- @field.uploads[@name].errors do %>
                 <%= Phoenix.Naming.humanize(msg) %>
@@ -515,7 +644,6 @@ defmodule RauversionWeb.LiveHelpers do
         </div>
       </div>
     </div>
-
     """
   end
 
@@ -546,7 +674,6 @@ defmodule RauversionWeb.LiveHelpers do
         <% end %>
       </div>
     <% else %>
-
     <% end %>
     """
   end

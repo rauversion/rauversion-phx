@@ -1,48 +1,83 @@
-
-
 <div class="mx-auto w-3/4 bg-black">
-<h1>Ejemplo Webpay Plus Transaccion normal</h1>
+  <h1>Ejemplo Webpay Plus Transaccion normal</h1>
 
+  <.form :let={_f} for={:tbk} action="create" class="flex flex-col space-y-3">
+    <label for="merchant_1_amount">Monto comercio 1</label>
+    <input
+      class="bg-gray-600"
+      id="merchant_1_amount"
+      name="detail[details][0][amount]"
+      value="1000"
+    />
 
-  <.form let={_f} 
-    for={:tbk}
-    action={"create"}
-    class="flex flex-col space-y-3">
+    <label for="merchant_1_commerce_code">Codigo comercio del comercio 1</label>
+    <input
+      class="bg-gray-600"
+      id="merchant_1_commerce_code"
+      name="detail[details][0][commerce_code]"
+      value="597055555537"
+    />
 
-  <label for="merchant_1_amount">Monto comercio 1</label>
-  <input class="bg-gray-600" id="merchant_1_amount" name="detail[details][0][amount]" value="1000">
+    <label for="merchant_1_buy_order">Orden de compra comercio 1</label>
+    <input
+      class="bg-gray-600"
+      id="merchant_1_buy_order"
+      name="detail[details][0][buy_order]"
+      value={ "123buyorder1" <> "123456"  }
+    />
 
-  <label for="merchant_1_commerce_code">Codigo comercio del comercio 1</label>
-  <input class="bg-gray-600" id="merchant_1_commerce_code" name="detail[details][0][commerce_code]" value="597055555537">
+    <label for="merchant_2_amount">Monto comercio 2</label>
+    <input
+      class="bg-gray-600"
+      id="merchant_2_amount"
+      name="detail[details][1][amount]"
+      value="2000"
+    />
 
-  <label for="merchant_1_buy_order">Orden de compra comercio 1</label>
-  <input class="bg-gray-600" id="merchant_1_buy_order" name="detail[details][0][buy_order]" value={ "123buyorder1" <> "123456"  }>
+    <label for="merchant_2_commerce_code">Codigo comercio del comercio 2</label>
+    <input
+      class="bg-gray-600"
+      id="merchant_2_commerce_code"
+      name="detail[details][1][commerce_code]"
+      value="597055555536"
+    />
 
+    <label for="merchant_2_buy_order">Orden de compra comercio 2</label>
+    <input
+      class="bg-gray-600"
+      id="merchant_2_buy_order"
+      name="detail[details][1][buy_order]"
+      value={ "123buyorder2" <> "123456" }
+    />
 
-  <label for="merchant_2_amount">Monto comercio 2</label>
-  <input class="bg-gray-600" id="merchant_2_amount" name="detail[details][1][amount]" value="2000">
+    <label for="parent_merchant_buy_order">Orden de compra comercio Padre</label>
+    <input
+      class="bg-gray-600"
+      id="parent_merchant_buy_order"
+      name="buy_order"
+      value={ "222333" <> "123456-123456-123456" }
+    />
 
-  <label for="merchant_2_commerce_code">Codigo comercio del comercio 2</label>
-  <input class="bg-gray-600" id="merchant_2_commerce_code" name="detail[details][1][commerce_code]" value="597055555536">
+    <label for="session_id_parent">
+      Session id comercio padre
+    </label>
+    <input
+      class="bg-gray-600"
+      id="session_id_parent"
+      name="session_id"
+      value={"123session_parent" <> "123456"}
+    />
 
-  <label for="merchant_2_buy_order">Orden de compra comercio 2</label>
-  <input class="bg-gray-600" id="merchant_2_buy_order" name="detail[details][1][buy_order]" value={ "123buyorder2" <> "123456" }>
+    <label for="return_url">
+      URL de retorno
+    </label>
+    <input
+      class="bg-gray-600"
+      id="return_url"
+      name="return_url"
+      value="http://localhost:4000/webpayplus/mall/return_url"
+    />
 
-  <label for="parent_merchant_buy_order">Orden de compra comercio Padre</label>
-  <input class="bg-gray-600" id="parent_merchant_buy_order" name="buy_order" value={ "222333" <> "123456-123456-123456" }>
-
-  <label for="session_id_parent">
-    Session id comercio padre
-  </label>
-  <input class="bg-gray-600" id="session_id_parent" name="session_id" value={"123session_parent" <> "123456"}>
-
-
-  <label for="return_url">
-    URL de retorno
-  </label>
-  <input class="bg-gray-600" id="return_url" name="return_url" value={ "http://localhost:4000/webpayplus/mall/return_url" }/>
-
-  <button type="submit">Aceptar</button>
-
+    <button type="submit">Aceptar</button>
   </.form>
 </div>

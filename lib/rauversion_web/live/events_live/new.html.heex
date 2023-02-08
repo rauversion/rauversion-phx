@@ -1,90 +1,101 @@
-
 <div class="flex-1 flex xl:overflow-hidden">
-
-  <.live_component module={RauversionWeb.EventsLive.NavBar} 
+  <.live_component
+    module={RauversionWeb.EventsLive.NavBar}
     id="nav_bar"
-    event={@event} 
-    live_action={@live_action} 
+    event={@event}
+    live_action={@live_action}
   />
 
-  <% #= @live_action %>
+  <% # = @live_action %>
   <div class="mt-6- text-gray-500 flex-- dark:bg-black dark:text-white w-full ">
-
     <div class="flex flex-col">
-      
-      <%= case @live_action do 
+      <%= case @live_action do
+        :overview ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.EventOverview,
+            id: "event-edit-#{@event.id}",
+            event: @event
+          )
 
-        :overview -> live_component(
-                    RauversionWeb.Live.EventsLive.Components.EventOverview,
-                    id: "event-edit-#{@event.id}",
-                    event: @event
-                  )
+        :new ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.FormComponent,
+            id: "event-edit-#{@event.id}",
+            event: @event,
+            changeset: @changeset,
+            uploads: @uploads,
+            current_user: @current_user
+          )
 
-        :new -> live_component(
-                    RauversionWeb.Live.EventsLive.Components.FormComponent,
-                    id: "event-edit-#{@event.id}",
-                    event: @event,
-                    changeset: @changeset,
-                    uploads: @uploads,
-                    current_user: @current_user
-                  )
-        :edit -> live_component(
-                    RauversionWeb.Live.EventsLive.Components.FormComponent,
-                    id: "event-edit-#{@event.id}",
-                    event: @event,
-                    changeset: @changeset,
-                    uploads: @uploads,
-                    current_user: @current_user
-                  )
-        :schedule -> live_component(
-                  RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent,
-                  id: "scheduling-form",
-                  event: @event,
-                  changeset: @changeset
-                )
-        :tickets -> live_component(
-                  RauversionWeb.Live.EventsLive.Components.TicketsFormComponent,
-                  id: "tickets-form",
-                  event: @event,
-                  changeset: @changeset
-                )
-        :tax -> live_component(
-                  RauversionWeb.Live.EventsLive.Components.TaxFormComponent,
-                  id: "tax-form",
-                  event: @event,
-                  changeset: @changeset
-                )
-        :attendees -> live_component(
-                        RauversionWeb.Live.EventsLive.Components.AttendeesComponent,
-                        id: "attendees",
-                        event: @event,
-                        current_user: @current_user
-                      )
+        :edit ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.FormComponent,
+            id: "event-edit-#{@event.id}",
+            event: @event,
+            changeset: @changeset,
+            uploads: @uploads,
+            current_user: @current_user
+          )
 
-        :hosts -> live_component(
-                        RauversionWeb.Live.EventsLive.Components.HostsComponent,
-                        id: "hosts",
-                        event: @event
-                        # changeset: @changeset
-                      )
-        :streaming -> live_component(
-                        RauversionWeb.Live.EventsLive.Components.StreamingComponent,
-                        id: "streaming",
-                        event: @event,
-                        changeset: @changeset
-                      )              
+        :schedule ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent,
+            id: "scheduling-form",
+            event: @event,
+            changeset: @changeset
+          )
 
-        :recordings -> live_component(
-                        RauversionWeb.Live.EventsLive.Components.RecordingsComponent,
-                        id: "recordings",
-                        event: @event,
-                        changeset: @changeset
-                      )  
+        :tickets ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.TicketsFormComponent,
+            id: "tickets-form",
+            event: @event,
+            changeset: @changeset
+          )
 
-        _ -> "no section for #{@live_action}"
+        :tax ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.TaxFormComponent,
+            id: "tax-form",
+            event: @event,
+            changeset: @changeset
+          )
 
+        :attendees ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.AttendeesComponent,
+            id: "attendees",
+            event: @event,
+            current_user: @current_user
+          )
+
+        :hosts ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.HostsComponent,
+            id: "hosts",
+            event: @event
+            # changeset: @changeset
+          )
+
+        :streaming ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.StreamingComponent,
+            id: "streaming",
+            event: @event,
+            changeset: @changeset
+          )
+
+        :recordings ->
+          live_component(
+            RauversionWeb.Live.EventsLive.Components.RecordingsComponent,
+            id: "recordings",
+            event: @event,
+            changeset: @changeset
+          )
+
+        _ ->
+          "no section for #{@live_action}"
       end %>
-     </div>
-
+    </div>
   </div>
 </div>

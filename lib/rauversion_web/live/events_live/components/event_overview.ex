@@ -4,7 +4,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
   def render(assigns) do
     ~H"""
     <div>
-
       <div class="bg-gray-50- dark:bg-gray-900- pt-12 sm:pt-16">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="mx-auto max-w-4xl text-center">
@@ -30,8 +29,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
                       <!-- $0.00 -->
                       <%= Number.Currency.number_to_currency(
                         Rauversion.Events.sales_count(@event),
-                        precision: Rauversion.Events.presicion_for_currency(@event)) || "$0"
-                      %>
+                        precision: Rauversion.Events.presicion_for_currency(@event)
+                      ) || "$0" %>
                     </dd>
                   </div>
                   <div class="flex flex-col border-t border-b border-gray-100 dark:border-gray-900 p-6 text-center sm:border-0 sm:border-l sm:border-r">
@@ -56,8 +55,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.EventOverview do
           </div>
         </div>
       </div>
-
-
     </div>
     """
   end

@@ -1,11 +1,7 @@
-
 <div>
-
   <div class="bg-white dark:bg-black">
     <div class="mx-auto max-w-7xl py-12 px-4 text-center sm:px-6 lg:py-16 lg:px-8">
-      
       <%= if @is_manager do %>
-
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
           <span class="block">The status of this ticket is?</span>
           <%= if @ticket.checked_in_at  do %>
@@ -22,28 +18,33 @@
         <div class="mt-8 flex justify-center">
           <div class="inline-flex rounded-md shadow space-x-3">
             <%= if !@ticket.checked_in do %>
-              <a href="#" phx-click="check-in" class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700">
+              <a
+                href="#"
+                phx-click="check-in"
+                class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700"
+              >
                 Confirm Check in
               </a>
             <% else %>
-              <a href="#" phx-click="reenable" class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700">
+              <a
+                href="#"
+                phx-click="reenable"
+                class="inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-5 py-3 text-base font-medium text-white hover:bg-brand-700"
+              >
                 Un check!
               </a>
             <% end %>
           </div>
         </div>
-
       <% end %>
-      
     </div>
   </div>
 
-  <.live_component 
-    module={ RauversionWeb.QrLive.Components.TicketComponent} 
+  <.live_component
+    module={RauversionWeb.QrLive.Components.TicketComponent}
     qr={@qr}
     id={@ticket.id}
     ticket={@ticket}
     timezone={@timezone}
   />
-
 </div>

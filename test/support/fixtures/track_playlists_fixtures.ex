@@ -10,9 +10,7 @@ defmodule Rauversion.TrackPlaylistsFixtures do
   def track_playlist_fixture(attrs \\ %{}) do
     {:ok, track_playlist} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Rauversion.TrackPlaylists.create_track_playlist()
 
     track_playlist

@@ -23,12 +23,14 @@ defmodule RauversionWeb.StreamsLive.Show do
   def render(assigns) do
     ~H"""
     <div class="mx-auto w-3/4 py-2">
-      <script src="https://unpkg.com/@mux/mux-player"></script>
+      <script src="https://unpkg.com/@mux/mux-player">
+      </script>
       <mux-player
         stream-type="on-demand"
         playback-id={@id}
         metadata-video-title="Test VOD"
-        metadata-viewer-user-id="user-id-007">
+        metadata-viewer-user-id="user-id-007"
+      >
       </mux-player>
     </div>
     """

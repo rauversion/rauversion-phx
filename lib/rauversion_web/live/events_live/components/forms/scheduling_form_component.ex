@@ -112,54 +112,60 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
   @impl true
   def render(assigns) do
     ~H"""
-      <div class="p-5 w-full">
-        <.form
-          let={f}
-          for={@changeset}
-          phx-target={@myself}
-          id="scheduling-form"
-          phx-change="validate"
-          phx-submit="save">
+    <div class="p-5 w-full">
+      <.form
+        :let={f}
+        for={@changeset}
+        phx-target={@myself}
+        id="scheduling-form"
+        phx-change="validate"
+        phx-submit="save"
+      >
+        <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
+          <%= gettext("Add Schedulings") %>
+        </h2>
 
-          <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
-            <%= gettext "Add Schedulings" %>
-          </h2>
-
-          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
-            <div class="sm:col-span-6">
-
-              <%= for i <- inputs_for(f, :scheduling_settings) do %>
-                <%= live_component RauversionWeb.EventsLive.Components.SchedulingSettingsForm,
-                  id: "aoaoa-#{i.index}",
-                  f: i,
-                  target: @myself
-                %>
-              <% end %>
-
-            </div>
-
-            <div class="sm:col-span-6 flex justify-end space-x-2">
-              <button
-                type="button"
-                class="inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium"
-                phx-target={@myself}
-                phx-click="add-feature">
-
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3" />
-                </svg>
-
-                <span>Add</span>
-              </button>
-
-              <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
-            </div>
-
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div class="sm:col-span-6">
+            <%= for i <- inputs_for(f, :scheduling_settings) do %>
+              <%= live_component(RauversionWeb.EventsLive.Components.SchedulingSettingsForm,
+                id: "aoaoa-#{i.index}",
+                f: i,
+                target: @myself
+              ) %>
+            <% end %>
           </div>
 
-        </.form>
-      </div>
+          <div class="sm:col-span-6 flex justify-end space-x-2">
+            <button
+              type="button"
+              class="inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium"
+              phx-target={@myself}
+              phx-click="add-feature"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3" />
+              </svg>
+
+              <span>Add</span>
+            </button>
+
+            <%= submit(gettext("Save"),
+              phx_disable_with: gettext("Saving..."),
+              class:
+                "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+            ) %>
+          </div>
+        </div>
+      </.form>
+    </div>
     """
   end
 end

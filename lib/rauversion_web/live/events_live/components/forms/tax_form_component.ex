@@ -36,67 +36,67 @@ defmodule RauversionWeb.Live.EventsLive.Components.TaxFormComponent do
   @impl true
   def render(assigns) do
     ~H"""
-      <div class="p-5">
-        <.form
-          let={f}
-          for={@changeset}
-          phx-target={@myself}
-          id="tax-form"
-          phx-change="validate"
-          phx-submit="save">
+    <div class="p-5">
+      <.form
+        :let={f}
+        for={@changeset}
+        phx-target={@myself}
+        id="tax-form"
+        phx-change="validate"
+        phx-submit="save"
+      >
+        <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
+          <%= gettext("Tax options") %>
+        </h2>
 
-          <h2 class="mx-0 mt-0 mb-4 font-sans text-base font-bold leading-none">
-            <%= gettext "Tax options" %>
-          </h2>
+        <p>
+          You can use this section to set up taxes for your event.
+          Rauversion does not collect or remit sales tax on your behalf.
+          It is your responsibility to assess tax obligations in areas where you are selling tickets.
+        </p>
 
-          <p>
-            You can use this section to set up taxes for your event.
-            Rauversion does not collect or remit sales tax on your behalf.
-            It is your responsibility to assess tax obligations in areas where you are selling tickets.
-          </p>
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <%= form_input_renderer(f, %{
+            type: :checkbox,
+            name: :tax_charge,
+            wrapper_class: "sm:col-span-6"
+          }) %>
 
-          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <%= form_input_renderer(f, %{
+            type: :text_input,
+            name: :tax_id,
+            wrapper_class: "sm:col-span-3"
+          }) %>
 
+          <%= form_input_renderer(f, %{
+            type: :text_input,
+            name: :tax_rate,
+            wrapper_class: "sm:col-span-3"
+          }) %>
 
-            <%= form_input_renderer(f, %{
-              type: :checkbox,
-              name: :tax_charge,
-              wrapper_class: "sm:col-span-6",
-            }) %>
+          <%= form_input_renderer(f, %{
+            type: :text_input,
+            name: :tax_country,
+            wrapper_class: "sm:col-span-3"
+          }) %>
 
-            <%= form_input_renderer(f, %{
-              type: :text_input,
-              name: :tax_id,
-              wrapper_class: "sm:col-span-3",
-            }) %>
+          <%= form_input_renderer(f, %{
+            type: :text_input,
+            name: :tax_label,
+            wrapper_class: "sm:col-span-3",
+            hint: gettext("For example: Ticket Sales")
+          }) %>
 
-            <%= form_input_renderer(f, %{
-              type: :text_input,
-              name: :tax_rate,
-              wrapper_class: "sm:col-span-3",
-            }) %>
-
-            <%= form_input_renderer(f, %{
-              type: :text_input,
-              name: :tax_country,
-              wrapper_class: "sm:col-span-3",
-            }) %>
-
-            <%= form_input_renderer(f, %{
-              type: :text_input,
-              name: :tax_label,
-              wrapper_class: "sm:col-span-3",
-              hint: gettext("For example: Ticket Sales")
-            }) %>
-
-            <div class="sm:col-span-6 flex justify-end">
-              <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
-            </div>
-
+          <div class="sm:col-span-6 flex justify-end">
+            <%= submit(gettext("Save"),
+              phx_disable_with: gettext("Saving..."),
+              class:
+                "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+            ) %>
           </div>
-
-        </.form>
-      </div>
+        </div>
+      </.form>
+    </div>
     """
   end
 end

@@ -4,15 +4,13 @@ defmodule RauversionWeb.QrLive.Components.TicketComponent do
   def render(assigns) do
     ~H"""
     <div>
-
       <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
         <div class="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-900 dark:border-2 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-md sm:p-6">
           <div class="flex flex-col">
             <div class="flex items-center space-x-2">
-
               <div class="flex self-auto items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
                 <div class="text-green-600 dark:text-green-400 flex items-center justify-center">
-                  <%= raw @qr %>
+                  <%= raw(@qr) %>
                 </div>
               </div>
 
@@ -31,7 +29,9 @@ defmodule RauversionWeb.QrLive.Components.TicketComponent do
                     TICKET: <%= @ticket.event_ticket.title %>
                   </span>
                   <span class="text-sm text-gray-600">
-                    <%= Number.Currency.number_to_currency(@ticket.event_ticket.price, precision: Rauversion.Events.presicion_for_currency(@ticket.event_ticket.event)) %>
+                    <%= Number.Currency.number_to_currency(@ticket.event_ticket.price,
+                      precision: Rauversion.Events.presicion_for_currency(@ticket.event_ticket.event)
+                    ) %>
                     <%= @ticket.event_ticket.event.event_settings.ticket_currency %>
                   </span>
                 </div>
@@ -52,13 +52,12 @@ defmodule RauversionWeb.QrLive.Components.TicketComponent do
                 </p>
 
                 <%= if @ticket.checked_in do %>
-                <p class="mt-4 text-sm text-brand-500 dark:text-brand-300 font-bold">
-                  Checked in at: <%= @ticket.checked_in_at %>
-                </p>
+                  <p class="mt-4 text-sm text-brand-500 dark:text-brand-300 font-bold">
+                    Checked in at: <%= @ticket.checked_in_at %>
+                  </p>
                 <% end %>
               </div>
             </div>
-
           </div>
           <div class="mt-5 sm:mt-6">
             <%= live_redirect to: Routes.events_show_path(@socket, :show, @ticket.event_ticket.event.slug),
@@ -69,10 +68,8 @@ defmodule RauversionWeb.QrLive.Components.TicketComponent do
         </div>
       </div>
 
-      <% #= img_tag(Rauversion.Events.Event.variant_url(@ticket.event_ticket.event,  "cover", %{resize_to_limit: "500x500"}), class: "h-full w-full object-cover")  %>
-
+      <% # = img_tag(Rauversion.Events.Event.variant_url(@ticket.event_ticket.event,  "cover", %{resize_to_limit: "500x500"}), class: "h-full w-full object-cover") %>
     </div>
-
     """
   end
 end
