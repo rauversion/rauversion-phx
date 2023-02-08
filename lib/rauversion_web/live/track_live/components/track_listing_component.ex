@@ -103,35 +103,50 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
       data-page={@page}
       phx-target={@myself}
       data-total-pages={assigns.track_meta.total_pages}
-      data-paginate-end={assigns.track_meta.total_pages == @page}>
-
+      data-paginate-end={assigns.track_meta.total_pages == @page}
+    >
       <%= for track <- @tracks do %>
         <%= live_redirect to: Routes.track_show_path(@socket, :show, track.slug), id: "track-item-#{track.id}" , class: "group" do %>
           <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-
             <div
               phx-update="ignore"
               id={"play-button-#{track.id}-trending"}
               phx-hook="PlayButton"
               data-audio-id={track.id}
-              class="group-hover:absolute group-hover:z-10 w-full h-full flex justify-center items-center">
-              <button data-play-button="button" class="flex justify-center items-center w-24 h-24 rounded-full bg-brand-500 border-4 border-brand-100 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+              class="group-hover:absolute group-hover:z-10 w-full h-full flex justify-center items-center"
+            >
+              <button
+                data-play-button="button"
+                class="flex justify-center items-center w-24 h-24 rounded-full bg-brand-500 border-4 border-brand-100 focus:outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                  />
                 </svg>
               </button>
             </div>
-            <%= img_tag(Tracks.proxy_cover_representation_url(track), class: "w-full h-full object-center object-cover group-hover:opacity-75") %>
+            <%= img_tag(Tracks.proxy_cover_representation_url(track),
+              class: "w-full h-full object-center object-cover group-hover:opacity-75"
+            ) %>
           </div>
 
-          <p class="mt-1 text-lg- font-medium text-gray-900 dark:text-gray-100 ">
+          <p class="mt-1 text-lg- font-medium leading-none text-gray-900 dark:text-gray-100 ">
             <%= track.title %>
           </p>
 
-          <h3 class="mt-4-- text-sm text-gray-700 dark:text-gray-300">
+          <h3 class="mt-4-- text-xs text-gray-700 dark:text-gray-300">
             <%= track.user.username %>
           </h3>
-
         <% end %>
       <% end %>
     </div>

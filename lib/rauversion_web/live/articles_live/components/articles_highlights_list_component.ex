@@ -24,12 +24,13 @@ defmodule RauversionWeb.ArticlesLive.ArticlesHighlightsListComponent do
     <div class="py-8 sm:py-24- lg:max-w-7xl lg:mx-auto lg:py-32- lg:px-8">
       <%= if Enum.any?(@posts) do %>
         <div class="relative max-w-lg mx-auto divide-y-2 divide-gray-200 dark:divide-gray-100 lg:max-w-7xl">
-          <div>
-            <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl"><%= gettext("Recent publications") %></h2>
-            <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
-              <%= gettext "Selected articles & reviews from Rauversion community and editorial" %>
+          <div class="mx-2 sm:mx-0">
+            <h2 class="text-xl sm:text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+              <%= gettext("Recent publications") %>
+            </h2>
+            <p class="mt-3 text-sm sm:text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
+              <%= gettext("Selected articles & reviews from Rauversion community and editorial") %>
             </p>
-
           </div>
 
           <div class="container pb-4 mx-auto px-5- md:px-12- lg:px-16-">
