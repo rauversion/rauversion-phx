@@ -1,4 +1,4 @@
-<% #= @current_user.username %> 
+<% # = @current_user.username %>
 
 <%= if @live_action in [:edit] do %>
   <.modal return_to={Routes.track_show_path(@socket, :show, @track.slug)}>
@@ -17,8 +17,7 @@
 <% end %>
 
 <%= if @share_track do %>
-  <.modal 
-    close_handler={@myself}>
+  <.modal close_handler={@myself}>
     <.live_component
       id={"share-track-modal-#{@share_track.id}"}
       module={RauversionWeb.TrackLive.ShareTrackComponent}
@@ -28,7 +27,7 @@
 <% end %>
 
 <%= if assigns[:payment_success] do %>
-  <.modal w_class={"w-1/2"}>
+  <.modal w_class="w-1/2">
     <div class="bg-gray-50 dark:bg-gray-800">
       <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
@@ -41,12 +40,10 @@
         </h2>
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div class="inline-flex rounded-md shadow">
-
             <%= live_redirect to: "/purchases/music", class: "inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700" do %>
               <%= gettext("View your Orders") %>
             <% end %>
           </div>
-        
         </div>
       </div>
     </div>
@@ -54,19 +51,29 @@
 <% end %>
 
 <%= if assigns[:payment_failure] do %>
-  <.modal w_class={"w-1/2"}>
+  <.modal w_class="w-1/2">
     <div class="bg-gray-50 dark:bg-gray-800">
       <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
           <span class="flex space-x-2 items-center">
-
             <span class="text-5xl">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                />
               </svg>
             </span>
             <span>
-            <%= gettext("Payment failed") %>
+              <%= gettext("Payment failed") %>
             </span>
           </span>
           <span class="block text-red-600">
@@ -84,22 +91,36 @@
     <%= live_redirect  to: Routes.profile_index_path(@socket, :index, @track.user.username), 
     "data-cy": "tracks-back",
     class: "inline-flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-gray-100" do %>
-      <svg class="-ml-2 h-5 w-5 text-gray-400 dark:text-gray-600" x-description="Heroicon name: solid/chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+      <svg
+        class="-ml-2 h-5 w-5 text-gray-400 dark:text-gray-600"
+        x-description="Heroicon name: solid/chevron-left"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+          clip-rule="evenodd"
+        >
+        </path>
       </svg>
-      <span><%= gettext "Tracks" %></span>
+      <span><%= gettext("Tracks") %></span>
     <% end %>
   </nav>
 
   <article>
     <!-- Profile header -->
     <div>
-
       <div class="flex flex-col sm:flex-row mb-6">
         <div class="flex-grow bg-black items-center text-white">
-        <%= if Rauversion.Tracks.is_processed?(@track) do %>
-          <img class="hidden h-32 w-full object-cover lg:h-48" 
-            src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" alt="">
+          <%= if Rauversion.Tracks.is_processed?(@track) do %>
+            <img
+              class="hidden h-32 w-full object-cover lg:h-48"
+              src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80"
+              alt=""
+            />
 
             <%= content_tag :div,
                                 id: "audio-player-detail-#{@track.id}",
@@ -110,100 +131,152 @@
                                 "data-audio-height-value": 250,
                                 "data-audio-peaks": Jason.encode!(Rauversion.Tracks.metadata(@track, :peaks)),
                                 "data-audio-url": Rauversion.Tracks.blob_proxy_url(@track, "mp3_audio") do %>
-              <div class='controls flex items-center mb-4'>
+              <div class="controls flex items-center mb-4">
                 <span class="relative z-0 inline-flex ml-2 pl-6 pt-6">
-                  <button type="button" 
-                  data-action='audio#play' 
-                  data-audio-target="play" 
-                  class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400">
+                  <button
+                    type="button"
+                    data-action="audio#play"
+                    data-audio-target="play"
+                    class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400"
+                  >
                     <span class="sr-only">Play</span>
-                    <svg data-audio-target="playicon" style="display:none" viewBox="0 0 15 15" class="h-6 w-6"  fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M5.5 3v9m4-9v9" stroke="currentColor"></path></svg>
-                    <svg data-audio-target="pauseicon"  viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round"></path></svg>
+                    <svg
+                      data-audio-target="playicon"
+                      style="display:none"
+                      viewBox="0 0 15 15"
+                      class="h-6 w-6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                    >
+                      <path d="M5.5 3v9m4-9v9" stroke="currentColor"></path>
+                    </svg>
+                    <svg
+                      data-audio-target="pauseicon"
+                      viewBox="0 0 15 15"
+                      class="h-6 w-6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                    >
+                      <path
+                        d="M4.5 12.5v-10l7 5-7 5z"
+                        stroke="currentColor"
+                        stroke-linejoin="round"
+                      >
+                      </path>
+                    </svg>
                   </button>
 
-                  <button 
-                    type="button" 
-                    data-action='audio#pause' 
+                  <button
+                    type="button"
+                    data-action="audio#pause"
                     data-audio-target="pause"
-                    class="hidden -ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                    <span class="sr-only"><%= gettext "Next" %></span>
-                  
-                    <svg viewBox="0 0 15 15" class="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path></svg>
-                  </button>
+                    class="hidden -ml-px relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    <span class="sr-only"><%= gettext("Next") %></span>
 
+                    <svg
+                      viewBox="0 0 15 15"
+                      class="h-6 w-6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                    >
+                      <path d="M11.5 3.5h-8v8h8v-8z" stroke="currentColor"></path>
+                    </svg>
+                  </button>
                 </span>
                 <div class="ml-2 pl-6 pt-6">
                   <h4 class="text-lg font-bold">
-                    <%= live_redirect @track.title, to: Routes.track_show_path(@socket, :show, @track.slug) %>
+                    <%= live_redirect(@track.title,
+                      to: Routes.track_show_path(@socket, :show, @track.slug)
+                    ) %>
                   </h4>
                   <%= if @track.user do %>
                     <h5 class="text-sm font-">
-                    <%= live_redirect @track.user.username, to: Routes.profile_index_path(@socket, :index, @track.user.username) %>
+                      <%= live_redirect(@track.user.username,
+                        to: Routes.profile_index_path(@socket, :index, @track.user.username)
+                      ) %>
                     </h5>
-                  <% end  %>
+                  <% end %>
                 </div>
               </div>
             <% end %>
-
           <% else %>
-
-            <div class='flex items-center'>
+            <div class="flex items-center">
               <span class="text-2xl text-center p-5 space-x-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
                 </svg>
                 <p>
-                  <%= gettext "Hold on, this track is in %{state} state", state: @track.state || "pending" %>
-                </p> 
+                  <%= gettext("Hold on, this track is in %{state} state",
+                    state: @track.state || "pending"
+                  ) %>
+                </p>
               </span>
             </div>
-
           <% end %>
         </div>
 
         <div class="w-1/4 hidden sm:block">
           <div class="group relative aspect-w-1 aspect-h-1 rounded-md-- bg-gray-100 dark:bg-gray-900 overflow-hidden">
-            <% #= image_tag url_for(@track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
-           
-            <% #= img_tag(Rauversion.Tracks.blob_url_for(@track, "cover"),  class: "object-center object-cover group-hover:opacity-75")  %>
+            <% # = image_tag url_for(@track.cover.variant(resize_to_fit: [300, 300])), class: "object-center object-cover group-hover:opacity-75" %>
+
+            <% # = img_tag(Rauversion.Tracks.blob_url_for(@track, "cover"),  class: "object-center object-cover group-hover:opacity-75") %>
 
             <%= img_tag(
-              Tracks.proxy_cover_representation_url(@track, %{resize_to_fill: "360x360"}), 
-              class: "object-center object-cover group-hover:opacity-75") 
-            %>
+              Tracks.proxy_cover_representation_url(@track, %{resize_to_fill: "360x360"}),
+              class: "object-center object-cover group-hover:opacity-75"
+            ) %>
 
             <div class="flex flex-col justify-end hidden">
               <div class="p-4 bg-white bg-opacity-60 text-sm">
                 <a href="#" class="font-medium text-gray-900">
                   <span class="absolute inset-0" aria-hidden="true"></span>
-                  <%= gettext "Upload image" %>
+                  <%= gettext("Upload image") %>
                 </a>
                 <p aria-hidden="true" class="mt-0.5 text-gray-700 sm:mt-1">
-                <%= gettext "Listen now" %></p>
+                  <%= gettext("Listen now") %>
+                </p>
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
           <div class="flex">
-            <% #if @track.user.avatar.persisted? %>
-              <% #= image_tag @track.user.avatar, class: "h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" %>
-            <% #end %>
+            <% # if @track.user.avatar.persisted? %>
+            <% # = image_tag @track.user.avatar, class: "h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" %>
+            <% # end %>
           </div>
           <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
             <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
               <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
                 <%= if @track.user do %>
-                <%= live_redirect @track.user.username, to: Routes.profile_index_path(@socket, :index, @track.user.username) %>
-                <% end  %>
+                  <%= live_redirect(@track.user.username,
+                    to: Routes.profile_index_path(@socket, :index, @track.user.username)
+                  ) %>
+                <% end %>
               </h1>
             </div>
             <div class="mt-6 flex items-center justify-stretch space-x-2 sm:flex-row sm:space-y-0 sm:space-x-4">
-              
               <.live_component
                 id={"share-track-button-#{@track.id}"}
                 module={RauversionWeb.TrackLive.ShareTrackButtonComponent}
@@ -226,41 +299,61 @@
 
               <div>
                 <%= live_patch to: Routes.track_show_path(@socket, :edit, @track.slug), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                    />
                   </svg>
-                  <span><%= gettext "Edit" %></span>
+                  <span><%= gettext("Edit") %></span>
                 <% end %>
               </div>
-
             </div>
           </div>
         </div>
         <div class="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
           <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
-            <% #= @track&.user&.username %>
+            <% # = @track&.user&.username %>
             <%= if @track.user do %>
-              <%= live_redirect @track.user.username, to: Routes.profile_index_path(@socket, :index, @track.user.username) %>
-            <% end  %>
+              <%= live_redirect(@track.user.username,
+                to: Routes.profile_index_path(@socket, :index, @track.user.username)
+              ) %>
+            <% end %>
           </h1>
         </div>
       </div>
     </div>
-
     <!-- Tabs -->
     <div class="mt-6 sm:mt-2 2xl:mt-5">
       <div class="border-b border-gray-200 dark:border-gray-800">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-            
-              <a href="#" class="border-pink-500 text-gray-900 dark:text-gray-100 dark:hover:text-gray-300 dark:hover:border-gray-700 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" x-state:on="Current" x-state:off="Default" aria-current="page" x-state-description="Current: &quot;border-pink-500 text-gray-900&quot;, Default: &quot;border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300&quot;">
-                <%= gettext "Comments" %>
-              </a>
-            
-              <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300 dark:hover:border-gray-700 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" x-state-description="undefined: &quot;border-pink-500 text-gray-900&quot;, undefined: &quot;border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300&quot;">
-                <%= gettext "Insights" %>
-              </a>
-            
+            <a
+              href="#"
+              class="border-pink-500 text-gray-900 dark:text-gray-100 dark:hover:text-gray-300 dark:hover:border-gray-700 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+              x-state:on="Current"
+              x-state:off="Default"
+              aria-current="page"
+              x-state-description="Current: &quot;border-pink-500 text-gray-900&quot;, Default: &quot;border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300&quot;"
+            >
+              <%= gettext("Comments") %>
+            </a>
+
+            <a
+              href="#"
+              class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300 dark:hover:border-gray-700 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+              x-state-description="undefined: &quot;border-pink-500 text-gray-900&quot;, undefined: &quot;border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300&quot;"
+            >
+              <%= gettext("Insights") %>
+            </a>
           </nav>
         </div>
       </div>
@@ -269,18 +362,16 @@
     <div class="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
         <div class="sm:col-span-2">
-
           <.tag_list_for track={@track} />
 
           <%= if @track.description do %>
             <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
-              <%= gettext "About" %>
+              <%= gettext("About") %>
             </dt>
             <dd class="mt-1 mb-4 max-w-prose text-lg text-gray-900 dark:text-gray-100 space-y-5 prose lg:prose-xl dark:prose-invert">
               <%= SimplexFormat.text_to_html(@track.description, auto_link: true) %>
             </dd>
           <% end %>
-
 
           <%= if @track.metadata && @track.metadata.buy_link do %>
             <a href={@track.metadata.buy_link} class="underline" target="blank">
@@ -290,10 +381,10 @@
 
           <%= if @track.metadata && @track.metadata.price do %>
             <.live_component
-                module={RauversionWeb.TrackLive.Components.BuyComponent}
-                id="buy-modal"
-                track={@track}
-                current_user={@current_user}
+              module={RauversionWeb.TrackLive.Components.BuyComponent}
+              id="buy-modal"
+              track={@track}
+              current_user={@current_user}
             />
           <% end %>
         </div>
@@ -306,7 +397,6 @@
           />
         <% end %>
 
-
         <div class="sm:col-span-2">
           <!-- comments here -->
           <.live_component
@@ -315,7 +405,6 @@
             track={@track}
             current_user={@current_user}
           />
-          
         </div>
       </dl>
     </div>

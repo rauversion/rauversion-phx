@@ -10,9 +10,7 @@ defmodule Rauversion.RepostsFixtures do
   def repost_fixture(attrs \\ %{}) do
     {:ok, repost} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Rauversion.Reposts.create_repost()
 
     repost

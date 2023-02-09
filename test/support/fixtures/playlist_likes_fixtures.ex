@@ -10,9 +10,7 @@ defmodule Rauversion.PlaylistLikesFixtures do
   def playlist_like_fixture(attrs \\ %{}) do
     {:ok, playlist_like} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Rauversion.PlaylistLikes.create_playlist_like()
 
     playlist_like

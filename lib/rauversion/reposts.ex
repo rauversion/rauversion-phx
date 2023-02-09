@@ -42,7 +42,6 @@ defmodule Rauversion.Reposts do
   end
 
   def get_reposts_by_user_id(user_id, _current_user = %Rauversion.Accounts.User{id: id}) do
-
     likes_query =
       from pi in Rauversion.TrackLikes.TrackLike,
         where: pi.user_id == ^id
@@ -54,12 +53,14 @@ defmodule Rauversion.Reposts do
     from p in Repost,
       where: p.user_id == ^user_id,
       left_join: track in assoc(p, :track),
-      #left_join: likes in assoc(track, :likes),
-      #where: likes.user_id == ^id #,
-      #left_join: reposts in assoc(track, :reposts),
-      #where: reposts.user_id == ^id,
+      # left_join: likes in assoc(track, :likes),
+      # where: likes.user_id == ^id #,
+      # left_join: reposts in assoc(track, :reposts),
+      # where: reposts.user_id == ^id,
       preload: [
-        track: {track, [:user, :cover_blob, :mp3_audio_blob, likes: ^likes_query, reposts: ^reposts_query]}
+        track:
+          {track,
+           [:user, :cover_blob, :mp3_audio_blob, likes: ^likes_query, reposts: ^reposts_query]}
       ]
   end
 

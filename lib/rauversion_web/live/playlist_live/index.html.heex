@@ -1,5 +1,5 @@
 <main class="bg-white dark:bg-black">
-  <div >
+  <div>
     <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
         <%= gettext("Discover Playlists and Albums") %>
@@ -11,19 +11,20 @@
       <% end %>
     </div>
   </div>
-
-
   <!-- Product grid -->
-  <section aria-labelledby="products-heading" class="max-w-2xl mx-auto pt-12-- pb-16 px-4 sm:pt-16-- sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
-    <h2 id="products-heading" class="sr-only"><%= gettext "Tracks" %></h2>
-
+  <section
+    aria-labelledby="products-heading"
+    class="max-w-2xl mx-auto pt-12-- pb-16 px-4 sm:pt-16-- sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8"
+  >
+    <h2 id="products-heading" class="sr-only"><%= gettext("Tracks") %></h2>
 
     <%= for playlist <- @playlists do %>
-   
       <div class="w-64 inline-flex flex-col text-center lg:w-auto">
         <div class="group relative">
           <div class="relative w-full h-80 bg-white dark:bg-black rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-            <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"), class: "w-full h-full object-center object-cover") %>
+            <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"),
+              class: "w-full h-full object-center object-cover"
+            ) %>
           </div>
 
           <h3 class="mt-3 text-sm text-gray-500 dark:text-gray-300 text-left">
@@ -32,12 +33,11 @@
               <%= playlist.title %>
             <% end %>
           </h3>
-          <p class="text-base font-semibold text-gray-900 dark:text-gray-100 text-left"><%= playlist.user.username %></p>
+          <p class="text-base font-semibold text-gray-900 dark:text-gray-100 text-left">
+            <%= playlist.user.username %>
+          </p>
         </div>
       </div>
-
     <% end %>
   </section>
-
-  
 </main>

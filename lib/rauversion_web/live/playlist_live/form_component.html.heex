@@ -1,28 +1,30 @@
 <div>
+  <%= case @action do
+    :new ->
+      live_component(
+        RauversionWeb.PlaylistLive.CreateFormComponent,
+        id: "playlist-new",
+        changeset: @changeset,
+        ref: @myself,
+        tab: @tab,
+        new_track: @new_track,
+        playlist: @playlist,
+        playlists: @playlists
+      )
 
-    <%= case @action do 
-      :new -> live_component(
-                  RauversionWeb.PlaylistLive.CreateFormComponent,
-                  id: "playlist-new",
-                  changeset: @changeset,
-                  ref: @myself,
-                  tab: @tab,
-                  new_track: @new_track,
-                  playlist: @playlist,
-                  playlists: @playlists
-                )
+    :edit ->
+      live_component(
+        RauversionWeb.PlaylistLive.EditFormComponent,
+        id: "edit-new",
+        changeset: @changeset,
+        tab: @tab,
+        ref: @myself,
+        current_tab: @current_tab,
+        uploads: @uploads
+        # phx-target={@myself}
+      )
 
-      :edit -> live_component(
-                  RauversionWeb.PlaylistLive.EditFormComponent,
-                  id: "edit-new",
-                  changeset: @changeset,
-                  tab: @tab,
-                  ref: @myself,
-                  current_tab: @current_tab,
-                  uploads: @uploads
-                  # phx-target={@myself}
-                )
-      _ -> "no match on #{@title}"
-    end  %>
-
+    _ ->
+      "no match on #{@title}"
+  end %>
 </div>

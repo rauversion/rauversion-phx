@@ -29,14 +29,14 @@ defmodule Chaskiq.Repo.Migrations.CreateActiveStorageTables do
     end
 
     create index("active_storage_attachments", [:record_type, :record_id, :name, :blob_id],
-            name: :index_active_storage_attachments_uniqueness,
-            unique: true
-          )
+             name: :index_active_storage_attachments_uniqueness,
+             unique: true
+           )
 
     create index("active_storage_attachments", [:blob_id],
-            name: :index_active_storage_attachments_on_blob_id,
-            unique: false
-          )
+             name: :index_active_storage_attachments_on_blob_id,
+             unique: false
+           )
 
     create table(:active_storage_variant_records) do
       # for binary types use:

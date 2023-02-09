@@ -1,23 +1,26 @@
-
-
-
 <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <!--<img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-brand-600.svg" alt="Workflow">-->
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">Sign in to your account</h2>
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+      Sign in to your account
+    </h2>
     <p class="hidden mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
       Or
-      <a href="#" class="font-medium text-brand-600 hover:text-brand-500"> start your 14-day free trial </a>
+      <a href="#" class="font-medium text-brand-600 hover:text-brand-500">
+         start your 14-day free trial 
+      </a>
     </p>
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-white dark:bg-gray-900 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-
-      <.form let={f} for={@conn} 
-          action={Routes.user_session_path(@conn, :create)} 
-          as={:user}
-          class="space-y-6">
+      <.form
+        :let={f}
+        for={@conn}
+        action={Routes.user_session_path(@conn, :create)}
+        as={:user}
+        class="space-y-6"
+      >
         <%= if @error_message do %>
           <div class="alert alert-danger">
             <p><%= @error_message %></p>
@@ -25,45 +28,61 @@
         <% end %>
 
         <div>
-          <%= label f, :email, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" do %> 
-          <%= gettext "Email address" %>
+          <%= label f, :email, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" do %>
+            <%= gettext("Email address") %>
           <% end %>
           <div class="mt-1">
-            <%= email_input f, :email, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm dark:bg-black" %>
+            <%= email_input(f, :email,
+              required: true,
+              class:
+                "appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm dark:bg-black"
+            ) %>
             <!-- <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm"> -->
           </div>
         </div>
 
         <div>
-
-          <%= label f, :password, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" do %> 
-            <%= gettext "Password" %>
+          <%= label f, :password, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" do %>
+            <%= gettext("Password") %>
           <% end %>
 
           <div class="mt-1">
-            <%= password_input f, :password, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm dark:bg-black" %>
+            <%= password_input(f, :password,
+              required: true,
+              class:
+                "appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm dark:bg-black"
+            ) %>
             <!-- <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm">-->
           </div>
         </div>
 
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <%= checkbox f, :remember_me, class: "h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded" %>
+            <%= checkbox(f, :remember_me,
+              class: "h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded"
+            ) %>
 
-            <%= label f, :remember_me, "Remember me", class: "ml-2 block text-sm text-gray-900 dark:text-gray-100" %>
-
-           <!-- <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded">
+            <%= label(f, :remember_me, "Remember me",
+              class: "ml-2 block text-sm text-gray-900 dark:text-gray-100"
+            ) %>
+            <!-- <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded">
             <label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>-->
           </div>
 
           <div class="text-sm">
-            <%= link gettext("Forgot your password?"), to: Routes.user_reset_password_path(@conn, :new), class: "font-medium text-brand-600 hover:text-brand-500" %>
+            <%= link(gettext("Forgot your password?"),
+              to: Routes.user_reset_password_path(@conn, :new),
+              class: "font-medium text-brand-600 hover:text-brand-500"
+            ) %>
           </div>
         </div>
 
         <div>
-          <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
-          <%= gettext "Sign in" %>
+          <button
+            type="submit"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+          >
+            <%= gettext("Sign in") %>
           </button>
         </div>
       </.form>
@@ -75,24 +94,34 @@
           </div>
           <div class="relative flex justify-center text-sm">
             <span class="px-2 bg-white dark:bg-black text-gray-500">
-            <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new) %>
-            <%= gettext "Or continue with" %> </span>
+              <%= link(gettext("Register"), to: Routes.user_registration_path(@conn, :new)) %>
+              <%= gettext("Or continue with") %>
+            </span>
           </div>
         </div>
 
         <div class="mt-6 grid grid-cols-4 gap-3">
           <div>
-            <a href="/auth/zoom?state=rauv" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
-              <span class="sr-only"><%= gettext "Sign in with Zoom" %></span>
+            <a
+              href="/auth/zoom?state=rauv"
+              class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900"
+            >
+              <span class="sr-only"><%= gettext("Sign in with Zoom") %></span>
               <svg class="w-6 h-5" fill="currentColor" viewBox="0 0 32 32">
-                  <path id="zoom" d="M20.10554,4H11.89446A7.89446,7.89446,0,0,0,4,11.89446v8.21108A7.89446,7.89446,0,0,0,11.89446,28h8.21108A7.89446,7.89446,0,0,0,28,20.10554V11.89446A7.89446,7.89446,0,0,0,20.10554,4Zm-.73777,15.08546A1.11957,1.11957,0,0,1,18.2482,20.205h-6.981a2.68441,2.68441,0,0,1-2.68441-2.68442V13.027a1.232,1.232,0,0,1,1.232-1.232h6.70857a2.84437,2.84437,0,0,1,2.84438,2.84438Zm4.14163.40563a.71395.71395,0,0,1-1.21817.50544l-1.88257-1.87807a1.65461,1.65461,0,0,1-.486-1.1714V15.213a1.65463,1.65463,0,0,1,.486-1.1714l1.88257-1.87806a.71394.71394,0,0,1,1.21817.50543Z"/>
+                <path
+                  id="zoom"
+                  d="M20.10554,4H11.89446A7.89446,7.89446,0,0,0,4,11.89446v8.21108A7.89446,7.89446,0,0,0,11.89446,28h8.21108A7.89446,7.89446,0,0,0,28,20.10554V11.89446A7.89446,7.89446,0,0,0,20.10554,4Zm-.73777,15.08546A1.11957,1.11957,0,0,1,18.2482,20.205h-6.981a2.68441,2.68441,0,0,1-2.68441-2.68442V13.027a1.232,1.232,0,0,1,1.232-1.232h6.70857a2.84437,2.84437,0,0,1,2.84438,2.84438Zm4.14163.40563a.71395.71395,0,0,1-1.21817.50544l-1.88257-1.87807a1.65461,1.65461,0,0,1-.486-1.1714V15.213a1.65463,1.65463,0,0,1,.486-1.1714l1.88257-1.87806a.71394.71394,0,0,1,1.21817.50543Z"
+                />
               </svg>
             </a>
           </div>
 
           <div>
-            <a href="/auth/twitter?state=rauv" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
-              <span class="sr-only"><%= gettext "Sign in with Twitter" %></span>
+            <a
+              href="/auth/twitter?state=rauv"
+              class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900"
+            >
+              <span class="sr-only"><%= gettext("Sign in with Twitter") %></span>
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
               </svg>
@@ -100,27 +129,35 @@
           </div>
 
           <div>
-            <a href="/auth/discord/" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
-              <span class="sr-only"><%= gettext "Sign in with Discord" %></span>
-              <svg class="w-5 h-5" viewBox="0 -28.5 256 256"  fill="currentColor">
+            <a
+              href="/auth/discord/"
+              class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900"
+            >
+              <span class="sr-only"><%= gettext("Sign in with Discord") %></span>
+              <svg class="w-5 h-5" viewBox="0 -28.5 256 256" fill="currentColor">
                 <g>
-                  <path d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z" fill-rule="nonzero"></path>
+                  <path
+                    d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z"
+                    fill-rule="nonzero"
+                  >
+                  </path>
                 </g>
               </svg>
             </a>
           </div>
 
-
           <div>
-            <a href="/auth/twitch/" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900">
-              <span class="sr-only"><%= gettext "Sign in with Twitch" %></span>
+            <a
+              href="/auth/twitch/"
+              class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-800 rounded-md shadow-sm bg-white dark:bg-black text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900"
+            >
+              <span class="sr-only"><%= gettext("Sign in with Twitch") %></span>
               <svg class="w-5 h-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0H3.857zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142v6.286z"/>
-                <path d="M11.857 3.143h-1.143V6.57h1.143V3.143zm-3.143 0H7.571V6.57h1.143V3.143z"/>
+                <path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0H3.857zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142v6.286z" />
+                <path d="M11.857 3.143h-1.143V6.57h1.143V3.143zm-3.143 0H7.571V6.57h1.143V3.143z" />
               </svg>
             </a>
           </div>
-
         </div>
       </div>
     </div>

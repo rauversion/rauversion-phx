@@ -24,20 +24,21 @@ defmodule RauversionWeb.EventsLive.Components.Forms.InviteAttendeeForm do
           <h1 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
             <%= gettext("Send invitations") %>
           </h1>
-          <p class="mt-2 text-sm text-gray-700 dark:text-gray-300"><%= gettext("Give away courtesy invitations.") %></p>
+          <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+            <%= gettext("Give away courtesy invitations.") %>
+          </p>
         </div>
       </div>
       <.form
-        let={f}
+        :let={f}
         for={@changeset}
         id="events-form"
         phx-change="validate"
         phx-target={@target}
         phx-submit="save"
         class="space-y-2"
-        >
-
-        <%= error_tag f, :not_valid %>
+      >
+        <%= error_tag(f, :not_valid) %>
 
         <%= form_input_renderer(f, %{
           type: :text_input,
@@ -52,8 +53,8 @@ defmodule RauversionWeb.EventsLive.Components.Forms.InviteAttendeeForm do
           type: :select,
           options: Enum.map(@tickets, fn t -> {t.title, t.id} end),
           wrapper_class: nil,
-          name: :ticket_id })
-        %>
+          name: :ticket_id
+        }) %>
 
         <%= form_input_renderer(f, %{
           type: :textarea,
@@ -63,10 +64,11 @@ defmodule RauversionWeb.EventsLive.Components.Forms.InviteAttendeeForm do
           hint: "Add an optional message"
         }) %>
 
-
-
-        <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
-
+        <%= submit(gettext("Save"),
+          phx_disable_with: gettext("Saving..."),
+          class:
+            "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+        ) %>
       </.form>
     </div>
     """

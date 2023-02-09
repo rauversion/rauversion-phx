@@ -54,36 +54,35 @@ defmodule RauversionWeb.EventsLive.Components.HostsUploaderComponent do
     ~H"""
     <div>
       <.form
-        let={f}
+        :let={f}
         for={@changeset}
         phx-target={@myself}
         id="hosts-managers-form"
         phx-change="validate"
-        phx-submit="save">
-
+        phx-submit="save"
+      >
         <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
-          <%= gettext "Host & Managers" %>
+          <%= gettext("Host & Managers") %>
         </h2>
 
         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
           <div class="sm:col-span-6">
             <%= form_input_renderer(f, %{
               type: :upload,
               uploads: @uploads,
               name: :avatar
-              }) %>
+            }) %>
           </div>
 
           <div class="sm:col-span-6 flex justify-end space-x-2">
-            <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>
+            <%= submit(gettext("Save"),
+              phx_disable_with: gettext("Saving..."),
+              class:
+                "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+            ) %>
           </div>
-
         </div>
-
       </.form>
-
-
     </div>
     """
   end

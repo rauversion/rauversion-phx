@@ -37,21 +37,18 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
     ~H"""
     <div class="pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
       <div class="relative max-w-lg mx-auto divide-y-2 divide-gray-200 dark:divide-gray-100 lg:max-w-7xl">
-
         <div>
           <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
             <%= gettext("Recent publications") %>
           </h2>
 
           <p class="mt-3 text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
-            <%= gettext "Selected articles & reviews from Rauversion community and editorial" %>
+            <%= gettext("Selected articles & reviews from Rauversion community and editorial") %>
           </p>
-
         </div>
 
         <div class="mt-12 grid lg:gap-16 pt-12 lg:grid-cols-6 lg:gap-x-5 lg:gap-y-12">
           <div class="col-span-5 flex lg:flex-row flex-col lg:space-x-4 lg:divide-x-2 lg:divide-y-0 divide-y-2">
-
             <div class="w-1/4- space-y-4">
               <%= for post <- list_news() do %>
                 <.live_component
@@ -71,11 +68,10 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
                   id={"main-articles-#{post.id}"}
                   post={post}
                   module={RauversionWeb.ArticlesLive.ArticleComponent}
-                  image_class={"h-64"}
+                  image_class="h-64"
                 />
               <% end %>
             </div>
-
           </div>
 
           <div class="col-span-6 lg:col-span-1 space-y-4">
@@ -91,13 +87,11 @@ defmodule RauversionWeb.ArticlesLive.ArticlesListComponent do
               />
             <% end %>
           </div>
-
         </div>
 
-
         <.live_component
-          id={"sections-reviews"}
-          title={"Reviews"}
+          id="sections-reviews"
+          title="Reviews"
           category_slug="reviews"
           module={RauversionWeb.ArticlesLive.CategoriesSectionComponent}
         />

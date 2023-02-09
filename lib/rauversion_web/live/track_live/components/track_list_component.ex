@@ -108,27 +108,35 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
 
                 <%= live_patch to: Routes.track_new_path(@socket, :new),
                  class: "inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                   </svg>
-                  <span><%= gettext "New Track" %></span>
-                 <% end %>
-                <% #= link_to 'New track', new_track_path,
-                #"data-turbo": false,
-                #class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+                  <span><%= gettext("New Track") %></span>
+                <% end %>
+                <% # = link_to 'New track', new_track_path,
+                # "data-turbo": false,
+                # class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
               </div>
             </div>
 
             <div class="">
-
-              <div id="infinite-scroll"
+              <div
+                id="infinite-scroll"
                 class="min-w-full"
                 phx-hook="InfiniteScroll"
                 phx-update="append"
                 data-page={@page}
                 phx-target={@myself}
                 data-total-pages={assigns.track_meta.total_pages}
-                data-paginate-end={assigns.track_meta.total_pages == @page}>
+                data-paginate-end={assigns.track_meta.total_pages == @page}
+              >
                 <%= for track <- @tracks do %>
                   <.live_component
                     module={RauversionWeb.TrackLive.TrackComponent}

@@ -14,10 +14,14 @@
 <% end %>
 
 <main class="bg-white dark:bg-black">
-  <div >
+  <div>
     <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100"><%= gettext("Discover Tracks and Albums") %></h1>
-      <p class="mt-4 max-w-xl text-sm text-gray-700 dark:text-gray-300"><%= gettext("Our thoughtfully curated list of community tracks.") %></p>
+      <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+        <%= gettext("Discover Tracks and Albums") %>
+      </h1>
+      <p class="mt-4 max-w-xl text-sm text-gray-700 dark:text-gray-300">
+        <%= gettext("Our thoughtfully curated list of community tracks.") %>
+      </p>
 
       <%= if @tag do %>
         <h2 class="my-4 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
@@ -25,21 +29,18 @@
         </h2>
       <% end %>
     </div>
-
-
-
   </div>
-
-
   <!-- Product grid -->
-  <section aria-labelledby="products-heading" class="max-w-2xl mx-auto pt-12-- pb-16 px-4 sm:pt-16-- sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
-    <h2 id="products-heading" class="sr-only"><%= gettext "Tracks" %></h2>
+  <section
+    aria-labelledby="products-heading"
+    class="max-w-2xl mx-auto pt-12-- pb-16 px-4 sm:pt-16-- sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8"
+  >
+    <h2 id="products-heading" class="sr-only"><%= gettext("Tracks") %></h2>
 
     <.live_component
       module={RauversionWeb.TrackLive.TrackListingComponent}
       id="all-track-listing"
-      tag={@tag}/>
+      tag={@tag}
+    />
   </section>
-
-  
 </main>

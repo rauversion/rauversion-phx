@@ -1,26 +1,25 @@
 <p>Dear <%= @user.first_name %>,</p>
 
 <p>
-  We hope this email finds you well. 
-  This is to inform you that your purchase order for the "<%= @album.title %>" 
+  We hope this email finds you well.
+  This is to inform you that your purchase order for the "<%= @album.title %>"
   album record has been successfully processed.
 </p>
 
 <p>
-  As a digital album, you can now access your "<%= @album.title %>" record by downloading it 
+  As a digital album, you can now access your "<%= @album.title %>" record by downloading it
   from the following your orders page in <%= Application.get_env(:rauversion, :domain) %>/purchases/music.
 </p>
 
 <p>
-  If you have any questions or concerns regarding your download, 
+  If you have any questions or concerns regarding your download,
   please do not hesitate to reach out to us. We are always here to assist you.
 </p>
 
 <p>
-Thank you again for your purchase.
+  Thank you again for your purchase.
 </p>
 
 <p>
-  Best regards,
-  <%= Application.get_env(:rauversion, :domain) %>
+  Best regards, <%= Application.get_env(:rauversion, :domain) %>
 </p>

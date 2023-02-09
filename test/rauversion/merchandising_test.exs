@@ -8,7 +8,15 @@ defmodule Rauversion.MerchandisingTest do
 
     import Rauversion.MerchandisingFixtures
 
-    @invalid_attrs %{description: nil, options: nil, pricing: nil, private: nil, qty: nil, shipping_data: nil, title: nil}
+    @invalid_attrs %{
+      description: nil,
+      options: nil,
+      pricing: nil,
+      private: nil,
+      qty: nil,
+      shipping_data: nil,
+      title: nil
+    }
 
     test "list_merchs/0 returns all merchs" do
       merch = merch_fixture()
@@ -21,7 +29,15 @@ defmodule Rauversion.MerchandisingTest do
     end
 
     test "create_merch/1 with valid data creates a merch" do
-      valid_attrs = %{description: "some description", options: %{}, pricing: "120.5", private: true, qty: 42, shipping_data: %{}, title: "some title"}
+      valid_attrs = %{
+        description: "some description",
+        options: %{},
+        pricing: "120.5",
+        private: true,
+        qty: 42,
+        shipping_data: %{},
+        title: "some title"
+      }
 
       assert {:ok, %Merch{} = merch} = Merchandising.create_merch(valid_attrs)
       assert merch.description == "some description"
@@ -39,7 +55,16 @@ defmodule Rauversion.MerchandisingTest do
 
     test "update_merch/2 with valid data updates the merch" do
       merch = merch_fixture()
-      update_attrs = %{description: "some updated description", options: %{}, pricing: "456.7", private: false, qty: 43, shipping_data: %{}, title: "some updated title"}
+
+      update_attrs = %{
+        description: "some updated description",
+        options: %{},
+        pricing: "456.7",
+        private: false,
+        qty: 43,
+        shipping_data: %{},
+        title: "some updated title"
+      }
 
       assert {:ok, %Merch{} = merch} = Merchandising.update_merch(merch, update_attrs)
       assert merch.description == "some updated description"

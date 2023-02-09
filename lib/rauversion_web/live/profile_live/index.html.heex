@@ -16,98 +16,100 @@
 />
 
 <div class="flex">
-
   <div class="flex-grow dark:bg-black dark:text-white">
-
-    <%= case @title do 
+    <%= case @title do
       # TODO: this is the same as all, but eventually will list all only the pinned ones
-      "all" -> live_component(
-                  RauversionWeb.TrackLive.TrackListComponent,
-                  id: "all-track-#{@profile.id}",
-                  profile: @profile,
-                  title: @title,
-                  tracks: [],
-                  track_meta: %{},
-                  page: 1,
-                  current_user: assigns[:current_user]
-                )
-      "tracks_all" -> live_component(
-                  RauversionWeb.TrackLive.TrackListComponent,
-                  id: "all-track-#{@profile.id}",
-                  profile: @profile,
-                  title: @title,
-                  tracks: [],
-                  track_meta: %{},
-                  page: 1,
-                  current_user: @current_user
-                )
+      "all" ->
+        live_component(
+          RauversionWeb.TrackLive.TrackListComponent,
+          id: "all-track-#{@profile.id}",
+          profile: @profile,
+          title: @title,
+          tracks: [],
+          track_meta: %{},
+          page: 1,
+          current_user: assigns[:current_user]
+        )
+
+      "tracks_all" ->
+        live_component(
+          RauversionWeb.TrackLive.TrackListComponent,
+          id: "all-track-#{@profile.id}",
+          profile: @profile,
+          title: @title,
+          tracks: [],
+          track_meta: %{},
+          page: 1,
+          current_user: @current_user
+        )
+
       "reposts" ->
-                live_component(
-                  RauversionWeb.RepostLive.RepostListComponent,
-                  id: "all-reposts-#{@profile.id}",
-                  profile: @profile,
-                  title: @title,
-                  tracks: [],
-                  track_meta: %{},
-                  page: 1,
-                  current_user: @current_user
-                )
+        live_component(
+          RauversionWeb.RepostLive.RepostListComponent,
+          id: "all-reposts-#{@profile.id}",
+          profile: @profile,
+          title: @title,
+          tracks: [],
+          track_meta: %{},
+          page: 1,
+          current_user: @current_user
+        )
+
       "playlists" ->
-                live_component(
-                  RauversionWeb.PlaylistLive.PlaylistListComponent,
-                  id: "all-reposts-#{@profile.id}",
-                  section: "playlists",
-                  profile: @profile,
-                  title: @title,
-                  page: 1,
-                  playlists: [],
-                  track_meta: %{},
-                  page: 1,
-                  current_user: @current_user
-                )
+        live_component(
+          RauversionWeb.PlaylistLive.PlaylistListComponent,
+          id: "all-reposts-#{@profile.id}",
+          section: "playlists",
+          profile: @profile,
+          title: @title,
+          page: 1,
+          playlists: [],
+          track_meta: %{},
+          page: 1,
+          current_user: @current_user
+        )
 
       "albums" ->
-                live_component(
-                  RauversionWeb.PlaylistLive.PlaylistListComponent,
-                  id: "all-reposts-#{@profile.id}",
-                  profile: @profile,
-                  section: "albums",
-                  title: @title,
-                  page: 1,
-                  playlists: [],
-                  track_meta: %{},
-                  page: 1,
-                  current_user: @current_user
-                )
+        live_component(
+          RauversionWeb.PlaylistLive.PlaylistListComponent,
+          id: "all-reposts-#{@profile.id}",
+          profile: @profile,
+          section: "albums",
+          title: @title,
+          page: 1,
+          playlists: [],
+          track_meta: %{},
+          page: 1,
+          current_user: @current_user
+        )
+
       "insights" ->
-              live_component(
-                  RauversionWeb.InsightsLive.InsightComponent,
-                  id: "profile-insights-#{@profile.id}",
-                  profile: @profile,
-                  title: @title,
-                  page: 1,
-                  playlists: [],
-                  track_meta: %{},
-                  page: 1,
-                  current_user: @current_user
-                )
-      
-      _ -> "no match on #{@title}"
-    end  %>
-    
+        live_component(
+          RauversionWeb.InsightsLive.InsightComponent,
+          id: "profile-insights-#{@profile.id}",
+          profile: @profile,
+          title: @title,
+          page: 1,
+          playlists: [],
+          track_meta: %{},
+          page: 1,
+          current_user: @current_user
+        )
+
+      _ ->
+        "no match on #{@title}"
+    end %>
   </div>
 
   <%= if @title != "insights" do %>
-
     <aside class="hidden w-2/5 xl:block xl:col-span-4 bg-gray-50 dark:bg-black">
       <div class="sticky top-4 space-y-4 p-4 ">
-
         <div class="p-4 border-l-1 border-l-gray-50 dark:border-l-gray-800">
           <.live_component
             module={RauversionWeb.ProfileLive.StatsComponent}
             id={"track-#{@profile.id}-stats"}
             profile={@profile}
-            track={"track"}
+            track="track"
           />
         </div>
 
@@ -115,7 +117,7 @@
           <p class="font-normal text-sm">
             <%= @profile.bio %>
           </p>
-        <% end  %>
+        <% end %>
 
         <%= if assigns[:current_user] && @profile.id == @current_user.id do %>
           <section aria-labelledby="who-to-follow-heading">
@@ -127,18 +129,14 @@
             />
           </section>
         <% end %>
-        <% 
-        #<section aria-labelledby="trending-heading">
+        <% # <section aria-labelledby="trending-heading">
         #  <.live_component
         #    module={RauversionWeb.ProfileLive.TrendingComponent}
         #    id={"track-#{@profile.id}-trending"}
         #    track={"track"}
         #  />
-        #</section>
-        %>
+        # </section> %>
       </div>
     </aside>
-
-  <% end  %>
-
+  <% end %>
 </div>

@@ -10,12 +10,15 @@ defmodule RauversionWeb.EventsLive.EventSponsors do
         </h2>
         <div class="mx-auto mt-20 grid max-w-max grid-cols-1 place-content-center gap-y-12 gap-x-32 sm:grid-cols-3 md:gap-x-16 lg:gap-x-32">
           <div class="flex items-center justify-center">
-            <img alt="MMM"
+            <img
+              alt="MMM"
               src="###"
-              width="105" height="48"
+              width="105"
+              height="48"
               decoding="async"
               data-nimg="future"
-              loading="lazy">
+              loading="lazy"
+            />
           </div>
         </div>
       </div>

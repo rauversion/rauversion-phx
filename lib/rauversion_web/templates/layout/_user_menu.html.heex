@@ -1,233 +1,399 @@
 <nav class="bg-black" aria-label="Global" data-controller="dropdown">
-    <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex items-center px-2 lg:px-0">
-          <div class="flex-shrink-0 flex items-center">
-            <%= live_redirect to: "/", class: "flex items-center space-x-3 text-white sm:text-2xl text-sm font-extrabold" do %>
-              <img class="h-12 w-auto" src={ Routes.static_path(@conn, "/images/logo.png")} alt="">
+  <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex items-center px-2 lg:px-0">
+        <div class="flex-shrink-0 flex items-center">
+          <%= live_redirect to: "/", class: "flex items-center space-x-3 text-white sm:text-2xl text-sm font-extrabold" do %>
+            <img class="h-12 w-auto" src={Routes.static_path(@conn, "/images/logo.png")} alt="" />
 
-              <span>RAUVERSION</span>
-              <% #= RauversionWeb.Gettext |> Gettext.get_locale %>
-              <% #= image_tag url_for(current_user.avatar), class: "h-8 w-auto" if current_user&.avatar&.persisted? %>
-            <% end %>
-          </div>
-          <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
-
-              <%= live_redirect to: "/tracks", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
-                <%= gettext "Music" %>
-              <% end %>
-
-              <% #= live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
-                <% #= gettext "Account" %>
-              <% # end %>
-
-              <%= live_redirect to: "/events", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
-                <%= gettext "Events" %>
-              <% end %>
-
-              <%= live_redirect to: "/articles", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
-                <%= gettext "Magazine" %>
-              <% end %>
-
-              <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <% #= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-              <% # end %>
-          </div>
-        </div>
-
-        <div class="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
-          <div class="max-w-lg- w-full lg:max-w-xs-- hidden">
-            <label for="search" class="sr-only"><%= gettext "Search" %></label>
-            <div class="relative text-white focus-within:text-gray-400">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg class="flex-shrink-0 h-5 w-5" x-description="Heroicon name: solid/search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-                </svg>
-              </div>
-              <input id="search" name="search" class="block w-full bg-gray-800 border-transparent py-2 pl-10 pr-3 text-base leading-5 placeholder-white focus:outline-none focus:bg-white focus:ring-0 focus:border-white focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm rounded-md" placeholder="Search" type="search">
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-center px-2 lg:px-0">
-          <%= live_redirect to: "/tracks/new",
-            class: "inline-flex items-center justify-center space-x-1 rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-brand-600" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-            </svg>
-            <span>
-              <%= gettext "upload" %>
-            </span>
-          <% end %>
-
-          <%= if !@current_user do %>
-            <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-            <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-          <% end  %>
-        </div>
-
-        <div class="flex items-center lg:hidden">
-          <button type="button"
-            data-action="dropdown#toggle click@window->dropdown#hide"
-            data-cy="mobile-dropdown-toggle"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-            aria-controls="mobile-menu">
-            <span class="sr-only"><%= gettext "Open menu" %></span>
-            <svg class="h-6 w-6 block"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-              <svg class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-
-        <div class="hidden lg:ml-4 lg:flex lg:items-center z-50">
-          <%= if @current_user do %>
-            <div data-controller="dropdown" class="relative">
-
-              <div class="flex items-center space-x-1">
-                <button type="button"
-                  data-action="dropdown#toggle click@window->dropdown#hide"
-                  class="flex-shrink-0 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
-                  <span class="sr-only"><%= gettext "Notifications" %></span>
-
-                  <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small),
-                    class: "h-6 w-6 rounded-full")
-                  %>
-                </button>
-
-                <button type="button" class="text-sm cursor-pointer" data-action="dropdown#toggle click@window->dropdown#hide">
-                    <p class="truncate w-20"><%= @current_user.username || @current_user.email %></p>
-                </button>
-              </div>
-
-                <div
-                  data-dropdown-target="menu"
-                  class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                  data-transition-enter-from="opacity-0 scale-95"
-                  data-transition-enter-to="opacity-100 scale-100"
-                  data-transition-leave-from="opacity-100 scale-100"
-                  data-transition-leave-to="opacity-0 scale-95">
-                  <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-900 bg-white">
-
-                    <%= if is_creator?(@current_user) && @current_user.username do %>
-                      <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                      <% #= live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                    <% end %>
-
-                    <%= if is_admin?(@current_user) do %>
-                      <%= live_redirect gettext("My Articles"), to: "/articles/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                      <%= live_redirect gettext("My Events"), to: "/events/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                    <% end %>
-
-                    <%= live_redirect gettext("My Purchases"), to: "/purchases", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                    <%= live_redirect gettext("Settings"),
-                        to: "/users/settings",
-                       class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
-
-                    <div class="border-1" />
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
-                    <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-
-                    <div class="flex items-center space-x-2">
-                      <%= new_locale @conn, :en, "EN", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                      <%= new_locale @conn, :es, "ES", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                      <%= new_locale @conn, :"pt-br", "PT", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-                    </div>
-                  </div>
-                </div>
-            </div>
+            <span>RAUVERSION</span>
+            <% # = RauversionWeb.Gettext |> Gettext.get_locale %>
+            <% # = image_tag url_for(current_user.avatar), class: "h-8 w-auto" if current_user&.avatar&.persisted? %>
           <% end %>
         </div>
-      </div>
-    </div>
+        <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
+          <%= live_redirect to: "/tracks", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+            <%= gettext("Music") %>
+          <% end %>
 
-
-    <div
-      data-dropdown-target="menu"
-      x-description="Mobile menu, show/hide based on menu state."
-      class="lg:hidden hidden"
-      id="mobile-menu"
-      x-show="open"
-      >
-      <div class="pt-2 pb-3 px-2 space-y-1">
-
-          <%= live_redirect gettext("Music"), to: "/tracks", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
-          <%= live_redirect gettext("Magazine"), to: "/articles", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
-          <%= live_redirect gettext("Events"), to: "/events", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
-
-          <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-            <% #= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+          <% # = live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+          <% # = gettext "Account" %>
           <% # end %>
 
-          <%= if !@current_user do %>
-            <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
-            <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+          <%= live_redirect to: "/events", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+            <%= gettext("Events") %>
           <% end %>
+
+          <%= live_redirect to: "/articles", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+            <%= gettext("Magazine") %>
+          <% end %>
+
+          <% # = if function_exported?(Routes, :live_dashboard_path, 2) do %>
+          <% # = link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+          <% # end %>
+        </div>
       </div>
-      <div class="pt-4 pb-3 border-t border-gray-500">
-        <div class="flex items-center px-4">
-          <%= if @current_user do %>
+
+      <div class="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
+        <div class="max-w-lg- w-full lg:max-w-xs-- hidden">
+          <label for="search" class="sr-only"><%= gettext("Search") %></label>
+          <div class="relative text-white focus-within:text-gray-400">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg
+                class="flex-shrink-0 h-5 w-5"
+                x-description="Heroicon name: solid/search"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd"
+                >
+                </path>
+              </svg>
+            </div>
+            <input
+              id="search"
+              name="search"
+              class="block w-full bg-gray-800 border-transparent py-2 pl-10 pr-3 text-base leading-5 placeholder-white focus:outline-none focus:bg-white focus:ring-0 focus:border-white focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm rounded-md"
+              placeholder="Search"
+              type="search"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center px-2 lg:px-0">
+        <%= live_redirect to: "/tracks/new",
+            class: "inline-flex items-center justify-center space-x-1 rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-brand-600" do %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+            />
+          </svg>
+          <span>
+            <%= gettext("upload") %>
+          </span>
+        <% end %>
+
+        <%= if !@current_user do %>
+          <%= link(gettext("Register"),
+            to: Routes.user_registration_path(@conn, :new),
+            class:
+              "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800"
+          ) %>
+          <%= link(gettext("Log in"),
+            to: Routes.user_session_path(@conn, :new),
+            class:
+              "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800"
+          ) %>
+        <% end %>
+      </div>
+
+      <div class="flex items-center lg:hidden">
+        <button
+          type="button"
+          data-action="dropdown#toggle click@window->dropdown#hide"
+          data-cy="mobile-dropdown-toggle"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          aria-controls="mobile-menu"
+        >
+          <span class="sr-only"><%= gettext("Open menu") %></span>
+          <svg
+            class="h-6 w-6 block"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            >
+            </path>
+          </svg>
+          <svg
+            class="h-6 w-6 hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            >
+            </path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="hidden lg:ml-4 lg:flex lg:items-center z-50">
+        <%= if @current_user do %>
+          <div data-controller="dropdown" class="relative">
+            <div class="flex items-center space-x-1">
+              <button
+                type="button"
+                data-action="dropdown#toggle click@window->dropdown#hide"
+                class="flex-shrink-0 p-1 text-gray-200 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white"
+              >
+                <span class="sr-only"><%= gettext("Notifications") %></span>
+
+                <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small),
+                  class: "h-6 w-6 rounded-full"
+                ) %>
+              </button>
+
+              <button
+                type="button"
+                class="text-sm cursor-pointer"
+                data-action="dropdown#toggle click@window->dropdown#hide"
+              >
+                <p class="truncate w-20"><%= @current_user.username || @current_user.email %></p>
+              </button>
+            </div>
+
+            <div
+              data-dropdown-target="menu"
+              class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              data-transition-enter-from="opacity-0 scale-95"
+              data-transition-enter-to="opacity-100 scale-100"
+              data-transition-leave-from="opacity-100 scale-100"
+              data-transition-leave-to="opacity-0 scale-95"
+            >
+              <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-900 bg-white">
+                <%= if is_creator?(@current_user) && @current_user.username do %>
+                  <%= live_redirect(gettext("My Music"),
+                    to: Routes.profile_index_path(@conn, :index, @current_user.username),
+                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  ) %>
+                  <% # = live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                <% end %>
+
+                <%= if is_admin?(@current_user) do %>
+                  <%= live_redirect(gettext("My Articles"),
+                    to: "/articles/mine",
+                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  ) %>
+                  <%= live_redirect(gettext("My Events"),
+                    to: "/events/mine",
+                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  ) %>
+                <% end %>
+
+                <%= live_redirect(gettext("My Purchases"),
+                  to: "/purchases",
+                  class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                ) %>
+                <%= live_redirect(gettext("Settings"),
+                  to: "/users/settings",
+                  class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                ) %>
+
+                <div class="border-1" />
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                  Support
+                </a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                  License
+                </a>
+                <%= link(gettext("Log out"),
+                  to: Routes.user_session_path(@conn, :delete),
+                  method: :delete,
+                  class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                ) %>
+
+                <div class="flex items-center space-x-2">
+                  <%= new_locale(
+                    @conn,
+                    :en,
+                    "EN",
+                    "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  ) %>
+                  <%= new_locale(
+                    @conn,
+                    :es,
+                    "ES",
+                    "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  ) %>
+                  <%= new_locale(
+                    @conn,
+                    :"pt-br",
+                    "PT",
+                    "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  ) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div
+    data-dropdown-target="menu"
+    x-description="Mobile menu, show/hide based on menu state."
+    class="lg:hidden hidden"
+    id="mobile-menu"
+    x-show="open"
+  >
+    <div class="pt-2 pb-3 px-2 space-y-1">
+      <%= live_redirect(gettext("Music"),
+        to: "/tracks",
+        class:
+          "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
+      ) %>
+      <%= live_redirect(gettext("Magazine"),
+        to: "/articles",
+        class:
+          "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
+      ) %>
+      <%= live_redirect(gettext("Events"),
+        to: "/events",
+        class:
+          "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
+      ) %>
+
+      <% # = if function_exported?(Routes, :live_dashboard_path, 2) do %>
+      <% # = link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+      <% # end %>
+
+      <%= if !@current_user do %>
+        <%= link(gettext("Register"),
+          to: Routes.user_registration_path(@conn, :new),
+          class:
+            "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
+        ) %>
+        <%= link(gettext("Log in"),
+          to: Routes.user_session_path(@conn, :new),
+          class:
+            "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
+        ) %>
+      <% end %>
+    </div>
+    <div class="pt-4 pb-3 border-t border-gray-500">
+      <div class="flex items-center px-4">
+        <%= if @current_user do %>
           <div class="flex-shrink-0">
-            <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small), class: "h-10 w-10 rounded-full") %>
+            <%= img_tag(Rauversion.Accounts.avatar_url(@current_user, :small),
+              class: "h-10 w-10 rounded-full"
+            ) %>
           </div>
           <div class="ml-3">
             <div class="text-base font-medium text-white"><%= @current_user.username %></div>
             <div class="text-sm font-medium text-gray-200"><%= @current_user.email %></div>
           </div>
-          <button type="button" class="ml-auto flex-shrink-0 bg-gray-500 rounded-full p-1 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
-            <span class="sr-only"><%= gettext "View notifications" %></span>
-            <svg class="h-6 w-6" x-description="Heroicon name: outline/bell" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+          <button
+            type="button"
+            class="ml-auto flex-shrink-0 bg-gray-500 rounded-full p-1 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white"
+          >
+            <span class="sr-only"><%= gettext("View notifications") %></span>
+            <svg
+              class="h-6 w-6"
+              x-description="Heroicon name: outline/bell"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+              >
+              </path>
             </svg>
           </button>
-          <% end %>
-        </div>
-        <div class="mt-3 px-2">
-
-          <%= if @current_user do %>
-            <% #= live_redirect gettext("Settings"), to: "/users/settings", class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
-            <% #= live_redirect gettext("Profile"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
-            <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "Support" %></a> -->
+        <% end %>
+      </div>
+      <div class="mt-3 px-2">
+        <%= if @current_user do %>
+          <% # = live_redirect gettext("Settings"), to: "/users/settings", class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+          <% # = live_redirect gettext("Profile"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+          <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "Support" %></a> -->
             <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "License" %></a> -->
-            <% #= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+          <% # = link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
 
-            <%= if is_creator?(@current_user) && @current_user.username do %>
-              <%= live_redirect gettext("My Music"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-            <% end %>
-
-            <%= if is_admin?(@current_user) do %>
-              <%= live_redirect gettext("My Articles"), to: "/articles/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-              <%= live_redirect gettext("My Events"), to: "/events/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-              <% #= live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-            <% end %>
-
-            <%= live_redirect gettext("My Purchases"), to: "/purchases/tickets", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-            <%= live_redirect gettext("Settings"),
-                to: "/users/settings",
-                class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
-
-            <div class="border-1" />
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
-            <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-
-            <div class="flex items-center space-x-2">
-              <%= new_locale @conn, :en, "EN", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-              <%= new_locale @conn, :es, "ES", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-              <%= new_locale @conn, :"pt-br", "PT", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
-            </div>
-
-
-
-
-
+          <%= if is_creator?(@current_user) && @current_user.username do %>
+            <%= live_redirect(gettext("My Music"),
+              to: Routes.profile_index_path(@conn, :index, @current_user.username),
+              class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            ) %>
           <% end %>
 
-        </div>
+          <%= if is_admin?(@current_user) do %>
+            <%= live_redirect(gettext("My Articles"),
+              to: "/articles/mine",
+              class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            ) %>
+            <%= live_redirect(gettext("My Events"),
+              to: "/events/mine",
+              class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            ) %>
+            <% # = live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+          <% end %>
+
+          <%= live_redirect(gettext("My Purchases"),
+            to: "/purchases/tickets",
+            class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+          ) %>
+          <%= live_redirect(gettext("Settings"),
+            to: "/users/settings",
+            class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+          ) %>
+
+          <div class="border-1" />
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
+          <%= link(gettext("Log out"),
+            to: Routes.user_session_path(@conn, :delete),
+            method: :delete,
+            class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+          ) %>
+
+          <div class="flex items-center space-x-2">
+            <%= new_locale(
+              @conn,
+              :en,
+              "EN",
+              "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            ) %>
+            <%= new_locale(
+              @conn,
+              :es,
+              "ES",
+              "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            ) %>
+            <%= new_locale(
+              @conn,
+              :"pt-br",
+              "PT",
+              "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            ) %>
+          </div>
+        <% end %>
       </div>
     </div>
-
-  </nav>
+  </div>
+</nav>

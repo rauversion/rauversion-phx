@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!--<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">-->
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <%= csrf_meta_tag() %>
     <.live_title suffix=" · Rauversion">
       <%= assigns[:page_title] || "Rauversion" %>
     </.live_title>
-    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
-    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
-    <%= render_tags_all(assigns[:meta_tags] || %{})%>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
+    <script
+      defer
+      phx-track-static
+      type="text/javascript"
+      src={Routes.static_path(@conn, "/assets/app.js")}
+    >
+    </script>
+    <%= render_tags_all(assigns[:meta_tags] || %{}) %>
 
     <%= if assigns[:oembed_json] do %>
       <!--<link rel="alternate" type="text/xml+oembed" href="">-->
-      <link rel="alternate" type="text/json+oembed" href={assigns[:oembed_json]}>
+      <link rel="alternate" type="text/json+oembed" href={assigns[:oembed_json]} />
     <% end %>
-    
   </head>
   <body class="dark:bg-black dark:text-white font-sans antialiased">
-
-    <%= render "_user_menu.html", assigns %>
+    <%= render("_user_menu.html", assigns) %>
 
     <p class="notice"></p>
     <p class="alert"></p>
     <%= @inner_content %>
 
-
-    <%= live_render(@conn, RauversionWeb.TrackLive.Player, id: "global-main-player", session: %{}, sticky: true) %>
+    <%= live_render(@conn, RauversionWeb.TrackLive.Player,
+      id: "global-main-player",
+      session: %{},
+      sticky: true
+    ) %>
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
      document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -45,12 +53,13 @@
     <script
       src={"https://maps.googleapis.com/maps/api/js?key=#{Application.get_env(:rauversion, :google_maps_key)}&callback=dispatchMapsEvent&libraries=places&v=weekly"}
       defer
-    ></script>
-
+    >
+    </script>
 
     <%= if Application.get_env(:rauversion, :google_analytics_id) do %>
       <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5CQZMGV0S"></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5CQZMGV0S">
+      </script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -59,8 +68,5 @@
         gtag('config', '<%= Application.get_env(:rauversion, "GA_ID") %>');
       </script>
     <% end %>
-
   </body>
 </html>
-
-

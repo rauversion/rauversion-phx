@@ -10,9 +10,7 @@ defmodule Rauversion.TrackLikesFixtures do
   def track_like_fixture(attrs \\ %{}) do
     {:ok, track_like} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Rauversion.TrackLikes.create_track_like()
 
     track_like

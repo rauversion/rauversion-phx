@@ -46,17 +46,18 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
 
         track = track |> Map.merge(%{likes_count: track.likes_count - 1})
 
-        {:noreply, assign(socket, :like, nil) |> assign(track: track) }
+        {:noreply, assign(socket, :like, nil) |> assign(track: track)}
 
       _ ->
         {:ok, %Rauversion.TrackLikes.TrackLike{} = track_like} =
           Rauversion.TrackLikes.create_track_like(attrs)
 
-      track = track |> Map.merge(%{likes_count: track.likes_count + 1})
+        track = track |> Map.merge(%{likes_count: track.likes_count + 1})
 
-      {
-        :noreply, assign(socket, :like, track_like) |> assign(track: track)
-      }
+        {
+          :noreply,
+          assign(socket, :like, track_like) |> assign(track: track)
+        }
     end
   end
 
@@ -80,24 +81,44 @@ defmodule RauversionWeb.TrackLive.LikeTrackButtonComponent do
     assigns = assign(assigns, :like_class, active_button_class(like))
 
     ~H"""
-      <div>
-        <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: @track.id,
+    <div>
+      <%= link to: "#", phx_click: "like-track", phx_target: @myself, phx_value_id: @track.id,
           class: @like_class.class do %>
-          <%= if @like do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-            </svg>
-          <% else %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-          <% end %>
-          <span class="flex space-x-1">
-            <span><%= @track.likes_count %></span>
-            <span class="hidden sm:block"><%= gettext "Like" %></span>
-          </span>
+        <%= if @like do %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        <% else %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
         <% end %>
-      </div>
+        <span class="flex space-x-1">
+          <span><%= @track.likes_count %></span>
+          <span class="hidden sm:block"><%= gettext("Like") %></span>
+        </span>
+      <% end %>
+    </div>
     """
   end
 end
