@@ -24,7 +24,7 @@ defmodule Rauversion.Playlists do
   def list_albums_by_user(user, _preloads = nil) do
     from pi in Playlist,
       where: pi.user_id == ^user.id,
-      where: pi.playlist_type not in ^"playlist",
+      where: pi.playlist_type != ^"playlist",
       preload: [:user, track_playlists: [track: [:cover_blob, :mp3_audio_blob]]]
   end
 
