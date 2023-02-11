@@ -204,6 +204,11 @@ defmodule RauversionWeb.PlaylistLive.Show do
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 
+  def get_supporters(album_id) do
+    Rauversion.Playlists.purchases_for_album(album_id)
+    |> Rauversion.Repo.all()
+  end
+
   defp page_title(:show), do: "Show Playlist"
   defp page_title(:edit), do: "Edit Playlist"
   defp page_title(:private), do: "Playlist private view"

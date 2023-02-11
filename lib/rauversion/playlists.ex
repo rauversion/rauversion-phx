@@ -223,6 +223,19 @@ defmodule Rauversion.Playlists do
     '<iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="#{url}"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="#{playlist.user.username}" title="#{playlist.user.username}" target="_blank" style="color: #cccccc; text-decoration: none;">#{playlist.user.username}</a> · <a href="#{url}" title="#{playlist.title}" target="_blank" style="color: #cccccc; text-decoration: none;">#{playlist.title}</a></div>'
   end
 
+  #### purchase orders
+
+  def purchases_for_album(album_id) do
+    from p in Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder,
+      join: c in assoc(p, :purchase_order),
+      where: p.playlist_id == ^album_id and c.state == "paid",
+      preload: [purchase_order: [user: :avatar_blob]],
+      select: %{album_order: p, order: c},
+      group_by: [p.id, c.id, c.user_id],
+      distinct: c.user_id,
+      limit: 20
+  end
+
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
 
   defdelegate blob_for(struct, kind), to: Rauversion.BlobUtils

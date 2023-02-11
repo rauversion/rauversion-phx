@@ -21,7 +21,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
             phx-click="basic-info-tab"
             class={"#{active_tab_link?(@current_tab, "basic-info-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}
           >
-             Basic Info 
+            Basic Info
           </a>
           <a
             href="#"
@@ -29,21 +29,21 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
             class={"#{active_tab_link?(@current_tab, "tracks-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}
             aria-current="page"
           >
-             Tracks 
+            Tracks
           </a>
           <a
             href="#"
             phx-click="pricing-tab"
             class={"#{active_tab_link?(@current_tab, "pricing-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}
           >
-             Pricing 
+            Pricing
           </a>
           <a
             href="#"
             phx-click="metadata-tab"
             class={"#{active_tab_link?(@current_tab, "metadata-tab")} tab-link px-3 py-2 font-medium text-sm rounded-md"}
           >
-             Metadata 
+            Metadata
           </a>
         </nav>
 

@@ -387,6 +387,13 @@
               current_user={@current_user}
             />
           <% end %>
+
+          <.live_component
+            module={RauversionWeb.TrackLive.Components.Supporters}
+            supporters={get_supporters(@track.id)}
+            kind="tracks"
+            id="supporters-albums"
+          />
         </div>
 
         <%= if @track.metadata do %>
