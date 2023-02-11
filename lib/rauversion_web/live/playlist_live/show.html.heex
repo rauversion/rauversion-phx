@@ -164,7 +164,11 @@
                       width="15"
                       height="15"
                     >
-                      <path d="M4.5 12.5v-10l7 5-7 5z" stroke="currentColor" stroke-linejoin="round">
+                      <path
+                        d="M4.5 12.5v-10l7 5-7 5z"
+                        stroke="currentColor"
+                        stroke-linejoin="round"
+                      >
                       </path>
                     </svg>
                   </button>
@@ -196,7 +200,10 @@
                     ) %>
                     <%= if Rauversion.Playlists.is_album?(@playlist) do %>
                       <span class="text-xs dark:text-gray-400 font-thin">
-                        <%= gettext("Album") %> <%= simple_date_for(@playlist.release_date, :short) %>
+                        <%= gettext("Album") %> <%= simple_date_for(
+                          @playlist.release_date,
+                          :short
+                        ) %>
                       </span>
                     <% end %>
                   </h4>
@@ -349,7 +356,6 @@
         <%= SimplexFormat.text_to_html(@playlist.description, auto_link: true) %>
       </div>
 
-
       <div class="sm:text-xl text-sm container mx-auto px-4 my-4 flex flex-col space-y-4">
         <%= if @playlist.metadata && @playlist.metadata.buy_link do %>
           <a href={@playlist.metadata.buy_link} class="underline" target="blank">
@@ -366,11 +372,11 @@
           />
         <% end %>
 
-        <.live_component 
+        <.live_component
           module={RauversionWeb.TrackLive.Components.Supporters}
-          supporters={get_supporters(@playlist.id)} 
-          kind={"albums"}
-          id={"supporters-albums"}
+          supporters={get_supporters(@playlist.id)}
+          kind="albums"
+          id="supporters-albums"
         />
 
         <div class="flex flex-col space-y-2">

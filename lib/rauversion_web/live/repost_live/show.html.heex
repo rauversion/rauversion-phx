@@ -18,4 +18,4 @@
 <span>
   <%= live_patch("Edit", to: Routes.repost_show_path(@socket, :edit, @repost), class: "button") %>
 </span>
-| <span><%= live_redirect "Back", to: Routes.repost_index_path(@socket, :index) %></span>
+| <span><%= live_redirect("Back", to: Routes.repost_index_path(@socket, :index)) %></span>

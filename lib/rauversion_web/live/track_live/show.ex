@@ -160,12 +160,8 @@ defmodule RauversionWeb.TrackLive.Show do
   end
 
   def get_supporters(track_id) do
-    a =
-      Rauversion.Tracks.purchases_for_track(track_id)
-      |> Rauversion.Repo.all()
-
-    IO.inspect(a)
-    a
+    Rauversion.Tracks.purchases_for_track(track_id)
+    |> Rauversion.Repo.all()
   end
 
   defp page_title(:private), do: "Show Track · private preview"
