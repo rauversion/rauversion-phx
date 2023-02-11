@@ -389,6 +389,18 @@ defmodule Rauversion.Tracks do
     file_path
   end
 
+  ### orders
+  def purchases_for_track(track_id) do
+    from p in Rauversion.TrackPurchaseOrders.TrackPurchaseOrder,
+      join: c in assoc(p, :purchase_order),
+      where: p.track_id == ^track_id and c.state == "paid",
+      preload: [purchase_order: [user: :avatar_blob]],
+      select: %{track_order: p, order: c},
+      group_by: [p.id, c.id, c.user_id],
+      distinct: c.user_id,
+      limit: 20
+  end
+
   defdelegate blob_url(user, kind), to: Rauversion.BlobUtils
 
   defdelegate blob_for(track, kind), to: Rauversion.BlobUtils

@@ -159,6 +159,15 @@ defmodule RauversionWeb.TrackLive.Show do
      )}
   end
 
+  def get_supporters(track_id) do
+    a =
+      Rauversion.Tracks.purchases_for_track(track_id)
+      |> Rauversion.Repo.all()
+
+    IO.inspect(a)
+    a
+  end
+
   defp page_title(:private), do: "Show Track · private preview"
   defp page_title(:show), do: "Show Track"
   defp page_title(:edit), do: "Edit Track"
