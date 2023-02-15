@@ -331,9 +331,12 @@ defmodule RauversionWeb.Router do
     post "/events/webhooks/:webhook_key", EventWebhooksController, :create
 
     live "/purchases", MyPurchasesLive.Index, :index
-    live "/purchases/tickets", MyTicketsLive.Index, :index
-    live "/purchases/music", MyMusicPurchasesLive.Index, :index
+    live "/purchases/tickets", MyPurchasesLive.Tickets, :index
+    live "/purchases/music", MyPurchasesLive.Music, :index
     get "/purchases/music/download/:signed_id", MyMusicPurchasesController, :show
+
+    live "/sells", MySellsLive.Index, :index
+    live "/sells/music", MySellsLive.Music, :index
 
     live "/tracks", TrackLive.Index, :index
     live "/tracks/:id/private", TrackLive.Show, :private

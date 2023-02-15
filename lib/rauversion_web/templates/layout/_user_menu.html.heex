@@ -199,10 +199,19 @@
                   ) %>
                 <% end %>
 
-                <%= live_redirect(gettext("My Purchases"),
-                  to: "/purchases",
+
+                <%= if is_creator?(@current_user) do %>
+                  <%= live_redirect(gettext("My Purchases"),
+                    to: "/purchases",
+                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  ) %>
+                <% end %>
+
+                <%= live_redirect(gettext("My Sells"),
+                  to: "/sells",
                   class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
                 ) %>
+
                 <%= live_redirect(gettext("Settings"),
                   to: "/users/settings",
                   class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
