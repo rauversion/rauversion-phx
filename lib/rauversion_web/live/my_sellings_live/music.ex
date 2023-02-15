@@ -1,4 +1,4 @@
-defmodule RauversionWeb.MySellsLive.Music do
+defmodule RauversionWeb.MySalesLive.Music do
   use RauversionWeb, :live_view
 
   on_mount RauversionWeb.UserLiveAuth
@@ -15,7 +15,7 @@ defmodule RauversionWeb.MySellsLive.Music do
   end
 
   def get_tickets(current_user, section) do
-    Rauversion.Accounts.get_sells(current_user, section)
+    Rauversion.Accounts.get_sales(current_user, section)
   end
 
   @impl true
@@ -81,8 +81,8 @@ defmodule RauversionWeb.MySellsLive.Music do
                 <ol role="list" class="flex items-center space-x-4">
                   <li>
                     <div>
-                      <%= live_redirect to: "/sells", class: "text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300" do %>
-                        <%= gettext("Sells") %>
+                      <%= live_redirect to: "/sales", class: "text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300" do %>
+                        <%= gettext("Sales") %>
                       <% end %>
                     </div>
                   </li>
@@ -113,7 +113,7 @@ defmodule RauversionWeb.MySellsLive.Music do
               </nav>
 
               <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 dark:text-gray-100 sm:truncate sm:text-3xl sm:tracking-tight">
-                <%= gettext("My music Sells") %>
+                <%= gettext("My music Sales") %>
               </h1>
             </div>
           </div>
@@ -123,7 +123,7 @@ defmodule RauversionWeb.MySellsLive.Music do
           <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="px-4 sm:px-0">
               <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                <%= gettext("Music Sells", %{section: @section}) %>
+                <%= gettext("Music Sales", %{section: @section}) %>
               </h2>
 
               <div class="sm:block">
@@ -135,7 +135,7 @@ defmodule RauversionWeb.MySellsLive.Music do
                       phx-value-section="all_music"
                       class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
                     >
-                      <%= gettext("Albums Sells") %>
+                      <%= gettext("Albums Sales") %>
                     </a>
                     <a
                       href="#"
@@ -143,7 +143,7 @@ defmodule RauversionWeb.MySellsLive.Music do
                       phx-value-section="all_tracks"
                       class="border-transparent text-gray-500 dark:text-gray-200 hover:text-gray-700 hover:text-gray-300 hover:border-gray-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
                     >
-                      <%= gettext("Individual Tracks Sells") %>
+                      <%= gettext("Individual Tracks Sales") %>
                     </a>
                   </nav>
                 </div>

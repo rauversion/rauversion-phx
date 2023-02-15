@@ -750,16 +750,16 @@ defmodule Rauversion.Accounts do
     |> Repo.all()
   end
 
-  # sells
+  # sales
 
-  def get_sells(current_user, section) do
+  def get_sales(current_user, section) do
     case section do
-      "all_music" -> albums_sells_for(current_user) |> Repo.all()
-      "all_tracks" -> tracks_sells_for(current_user) |> Repo.all()
+      "all_music" -> albums_sales_for(current_user) |> Repo.all()
+      "all_tracks" -> tracks_sales_for(current_user) |> Repo.all()
     end
   end
 
-  def tracks_sells_for(current_user) do
+  def tracks_sales_for(current_user) do
     q =
       from(
         p in Rauversion.TrackPurchaseOrders.TrackPurchaseOrder,
@@ -778,7 +778,7 @@ defmodule Rauversion.Accounts do
     query
   end
 
-  def albums_sells_for(current_user) do
+  def albums_sales_for(current_user) do
     q =
       from(
         p in Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder,

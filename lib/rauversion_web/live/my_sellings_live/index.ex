@@ -1,10 +1,10 @@
-defmodule RauversionWeb.MySellsLive.Index do
+defmodule RauversionWeb.MySalesLive.Index do
   use RauversionWeb, :live_view
 
   defp get_items() do
     [
-      # %{href: "/sells/tickets", name: "Tickets"},
-      %{href: "/sells/music", name: "Music"}
+      # %{href: "/sales/tickets", name: "Tickets"},
+      %{href: "/sales/music", name: "Music"}
     ]
   end
 
@@ -58,7 +58,7 @@ defmodule RauversionWeb.MySellsLive.Index do
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
           <div class="min-w-0 flex-1">
             <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 dark:text-gray-100 sm:truncate sm:text-3xl sm:tracking-tight">
-              <%= gettext("My Sells") %>
+              <%= gettext("My Sales") %>
             </h1>
           </div>
         </div>
@@ -80,7 +80,7 @@ defmodule RauversionWeb.MySellsLive.Index do
                       </span>
                     </div>
                     <p class="mt-1 truncate text-sm text-gray-500 dark:text-gray-300">
-                      <%= gettext("Your %{name} Sells", name: item[:name]) %>
+                      <%= gettext("Your %{name} Sales", name: item[:name]) %>
                     </p>
                   </div>
 
