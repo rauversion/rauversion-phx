@@ -717,7 +717,7 @@ defmodule Rauversion.Accounts do
     |> Repo.all()
   end
 
-  def albun_orders_query(current_user) do
+  def album_orders_query(current_user) do
     id = current_user.id
 
     from(p in Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder,
@@ -729,7 +729,7 @@ defmodule Rauversion.Accounts do
   end
 
   def get_album_orders(current_user) do
-    q = albun_orders_query(current_user)
+    q = album_orders_query(current_user)
 
     query =
       from [p, c] in q,
@@ -740,7 +740,7 @@ defmodule Rauversion.Accounts do
   end
 
   def get_pending_album_orders(current_user) do
-    q = albun_orders_query(current_user)
+    q = album_orders_query(current_user)
 
     query =
       from [p, c] in q,
@@ -748,5 +748,52 @@ defmodule Rauversion.Accounts do
 
     query
     |> Repo.all()
+  end
+
+  # sells
+
+  def get_sells(current_user, section) do
+    case section do
+      "all_music" -> albums_sells_for(current_user) |> Repo.all()
+      "all_tracks" -> tracks_sells_for(current_user) |> Repo.all()
+    end
+  end
+
+  def tracks_sells_for(current_user) do
+    q =
+      from(
+        p in Rauversion.TrackPurchaseOrders.TrackPurchaseOrder,
+        join: c in Rauversion.PurchaseOrders.PurchaseOrder,
+        on: c.id == p.purchase_order_id,
+        join: t in Rauversion.Tracks.Track,
+        on: t.id == p.track_id and t.user_id == ^current_user.id
+      )
+      |> preload([:track, purchase_order: :user])
+      |> order_by([c], desc: c.id)
+
+    query =
+      from [p, c] in q,
+        where: c.state == "paid"
+
+    query
+  end
+
+  def albums_sells_for(current_user) do
+    q =
+      from(
+        p in Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder,
+        join: c in Rauversion.PurchaseOrders.PurchaseOrder,
+        on: c.id == p.purchase_order_id,
+        join: t in Rauversion.Playlists.Playlist,
+        on: t.id == p.playlist_id and t.user_id == ^current_user.id
+      )
+      |> preload([:playlist, purchase_order: :user])
+      |> order_by([c], desc: c.id)
+
+    query =
+      from [p, c] in q,
+        where: c.state == "paid"
+
+    query
   end
 end
