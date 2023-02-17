@@ -356,6 +356,7 @@ defmodule RauversionWeb.Router do
     live "/:username/following", FollowsLive.Index, :followings
     live "/:username/comments", FollowsLive.Index, :comments
     live "/:username/likes", FollowsLive.Index, :likes
+    live "/:username/artists", ProfileLive.Index, :artists
     live "/:username/tracks/all", ProfileLive.Index, :tracks_all
     live "/:username/tracks/reposts", ProfileLive.Index, :reposts
     live "/:username/tracks/albums", ProfileLive.Index, :albums

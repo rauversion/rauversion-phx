@@ -96,6 +96,18 @@
           current_user: @current_user
         )
 
+      "artists" ->
+        live_component(
+          RauversionWeb.ProfileLive.Components.ArtistsList,
+          id: "profile-insights-#{@profile.id}",
+          profile: @profile,
+          title: @title,
+          page: 1,
+          playlists: [],
+          track_meta: %{},
+          page: 1,
+          current_user: @current_user
+        )
       _ ->
         "no match on #{@title}"
     end %>

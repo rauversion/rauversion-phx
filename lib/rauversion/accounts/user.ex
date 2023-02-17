@@ -63,6 +63,13 @@ defmodule Rauversion.Accounts.User do
     has_many :purchased_tickets, Rauversion.PurchasedTickets.PurchasedTicket,
       on_delete: :delete_all
 
+    has_many :connected_accounts,
+             Rauversion.ConnectedAccounts.ConnectedAccount,
+             on_delete: :delete_all,
+             foreign_key: :parent_id
+
+    has_many :child_accounts, through: [:connected_accounts, :user]
+
     has_one(:avatar_attachment, ActiveStorage.Attachment,
       where: [record_type: "User", name: "avatar"],
       foreign_key: :record_id
