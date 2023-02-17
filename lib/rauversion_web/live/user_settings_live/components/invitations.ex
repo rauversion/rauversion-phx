@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.Invitations do
+defmodule RauversionWeb.UserSettingsLive.Invitations do
   use RauversionWeb, :live_component
 
   alias Rauversion.Accounts

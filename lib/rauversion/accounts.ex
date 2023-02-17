@@ -207,6 +207,11 @@ defmodule Rauversion.Accounts do
     |> Repo.update()
   end
 
+  def update_label(user, attrs \\ %{}) do
+    User.label_changeset(user, attrs)
+    |> Repo.update()
+  end
+
   def update_notifications(user, attrs \\ %{}) do
     User.notifications_changeset(user, attrs)
     |> Repo.update()

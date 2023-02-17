@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.TransbankForm do
+defmodule RauversionWeb.UserSettingsLive.TransbankForm do
   use RauversionWeb, :live_component
 
   def render(%{changeset: _changeset} = assigns) do

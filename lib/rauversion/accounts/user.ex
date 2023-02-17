@@ -19,6 +19,7 @@ defmodule Rauversion.Accounts.User do
     field :city, :string
     field :bio, :string
     field :invitations_count, :integer, default: 10
+    field :label, :boolean
 
     belongs_to :invited_by_user, Rauversion.Accounts.User, foreign_key: :invited_by
 
@@ -176,6 +177,10 @@ defmodule Rauversion.Accounts.User do
     |> validate_email()
     |> validate_password(opts)
     |> unique_constraint(:username)
+  end
+
+  def label_changeset(user, attrs, _opts \\ []) do
+    user |> cast(attrs, [:label])
   end
 
   defp validate_contact_fields(changeset, attrs) do

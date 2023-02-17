@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.FormComponent do
+defmodule RauversionWeb.UserSettingsLive.FormComponent do
   use RauversionWeb, :live_component
 
   alias Rauversion.Accounts
@@ -22,6 +22,21 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
   defp get_change_set(:profile, socket, user) do
     socket
     |> assign(:changeset, Accounts.change_user_profile(user))
+    |> allow_upload(:avatar,
+      accept: ~w(.jpg .jpeg .png),
+      max_entries: 1,
+      max_file_size: 15_000_000
+    )
+    |> allow_upload(:profile_header,
+      accept: ~w(.jpg .jpeg .png),
+      max_entries: 1,
+      max_file_size: 15_000_000
+    )
+  end
+
+  defp get_change_set(:labels, socket, user) do
+    socket
+    |> assign(:changeset, Accounts.change_user_email(user))
     |> allow_upload(:avatar,
       accept: ~w(.jpg .jpeg .png),
       max_entries: 1,
@@ -120,6 +135,19 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     save_profile(socket, socket.assigns.action, params)
   end
 
+  @impl true
+  def handle_event(
+        "save",
+        %{"action" => "update_label"} = params,
+        socket = %{
+          assigns: %{
+            action: :labels
+          }
+        }
+      ) do
+    save_label(socket, socket.assigns.action, params)
+  end
+
   defp save_email(socket, :email, %{"current_password" => password, "user" => user_params}) do
     user = socket.assigns.current_user
 
@@ -138,6 +166,26 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
             "A link to confirm your email change has been sent to the new address."
           )
           |> push_redirect(to: socket.assigns.return_to)
+
+        {:error, changeset} ->
+          socket |> assign(:changeset, changeset)
+      end
+
+    {:noreply, socket}
+  end
+
+  defp save_label(socket, :labels, params) do
+    %{"user" => user_params} = params
+
+    user = socket.assigns.current_user
+
+    socket =
+      case Accounts.update_label(user, user_params) do
+        {:ok, _user} ->
+          socket
+          |> put_flash(:info, "Password updated successfully.")
+
+        # |> PhoenixLiveSession.put_session(:user_return_to, "/user/settings/security")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)
@@ -174,8 +222,6 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
       user_params
       |> Map.put("avatar", files_for(socket, :avatar))
       |> Map.put("profile_header", files_for(socket, :profile_header))
-
-    IO.inspect(user_params)
 
     socket =
       case Accounts.update_user_profile(user, user_params) do
