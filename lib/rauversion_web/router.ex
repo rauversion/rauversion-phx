@@ -168,6 +168,8 @@ defmodule RauversionWeb.Router do
     get "/webpayplus/mall/status/:token", TbkController, :mall_status
     post "/webpayplus/mall/refund", TbkController, :mall_refund
 
+    live "/accounts/connect", AccountConnectLive.New, :new
+
     live "/streams/:id", StreamsLive.Show, :show
 
     live "/tickets/qr/:signed_id", QrLive.Index, :index

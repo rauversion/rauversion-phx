@@ -13,7 +13,7 @@ defmodule Rauversion.ConnectedAccountsFixtures do
       |> Enum.into(%{
         state: "some state"
       })
-      |> Rauversion.ConnectedAccounts.create_connected_account()
+      |> Rauversion.ConnectedAccounts.create()
 
     connected_account
   end
