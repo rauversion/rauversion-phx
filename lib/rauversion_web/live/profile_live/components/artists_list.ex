@@ -2,7 +2,7 @@ defmodule RauversionWeb.ProfileLive.Components.ArtistsList do
   use RauversionWeb, :live_component
 
   def get_artists(user) do
-    user |> Ecto.assoc(:child_accounts) |> Rauversion.Repo.all()
+    Rauversion.Accounts.active_connected_accounts(user)
   end
 
   def render(assigns) do
@@ -40,20 +40,20 @@ defmodule RauversionWeb.ProfileLive.Components.ArtistsList do
         </div>
 
         <div class="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-          <%= for artist <- get_artists(@current_user) do %>
+          <%= for account <- get_artists(@current_user) do %>
             <div class="group relative">
               <div class="h-56 lg:h-72-- xl:h-80-- w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
                 <%= img_tag(
-                  Rauversion.Accounts.avatar_url(artist, :small),
+                  Rauversion.Accounts.avatar_url(account.user, :small),
                   class: "h-full w-full object-cover object-center"
                 ) %>
               </div>
 
               <h3 class="mt-4 text-sm text-gray-700 dark:text-gray-300">
                 <%= live_redirect(
-                        to: Routes.profile_index_path(@socket, :index, artist.username)
+                        to: Routes.profile_index_path(@socket, :index, account.user.username)
                       ) do %>
-                  <span class="absolute inset-0"></span> <%= artist.username %>
+                  <span class="absolute inset-0"></span> <%= account.user.username %>
                 <% end %>
               </h3>
             </div>

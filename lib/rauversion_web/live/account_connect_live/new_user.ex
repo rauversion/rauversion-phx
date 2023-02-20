@@ -23,11 +23,13 @@ defmodule RauversionWeb.AccountConnectLive.NewUser do
         "password" => "123456"
       })
 
+    # will auto atictivate the assoc (state: "active")
     case Rauversion.Accounts.register_user(user_params) do
       {:ok, user} ->
         case Rauversion.ConnectedAccounts.create(%{
                user_id: user.id,
-               parent_id: socket.assigns.current_user.id
+               parent_id: socket.assigns.current_user.id,
+               state: "active"
              }) do
           {:ok, _connected} ->
             {:noreply,

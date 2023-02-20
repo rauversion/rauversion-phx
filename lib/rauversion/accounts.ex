@@ -801,4 +801,14 @@ defmodule Rauversion.Accounts do
 
     query
   end
+
+  ### connected accounts
+
+  def active_connected_accounts(user) do
+    from(p in Rauversion.ConnectedAccounts.ConnectedAccount)
+    |> where(parent_id: ^user.id)
+    |> where(state: "active")
+    |> Rauversion.Repo.all()
+    |> Repo.preload(:user)
+  end
 end
