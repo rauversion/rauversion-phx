@@ -21,7 +21,7 @@ defmodule RauversionWeb.ProfileLive.Components.ArtistsList do
           </a>-->
           <%= if @current_user.id == @profile.id do %>
             <.link
-              patch="/accounts/connnect"
+              patch="/accounts/connect"
               class="inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium"
             >
               <svg

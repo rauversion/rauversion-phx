@@ -3,7 +3,7 @@ defmodule Rauversion.ConnectedAccounts.ConnectedAccount do
   import Ecto.Changeset
 
   schema "connected_accounts" do
-    field :state, :string
+    field :state, :string, default: "pending"
     # field :parent_id, :id
     # field :user_id, :id
 
