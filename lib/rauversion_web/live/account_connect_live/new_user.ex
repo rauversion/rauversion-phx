@@ -72,14 +72,21 @@ defmodule RauversionWeb.AccountConnectLive.NewUser do
           </h2>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <%= form_input_renderer(
-              f,
-              %{
-                type: :text_input,
-                name: :username,
-                wrapper_class: "sm:col-span-6"
-              }
-            ) %>
+            <div class="mt-1 flex rounded-md shadow-sm md:col-span-6">
+              <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-gray-700 bg-blue-gray-50 text-blue-gray-500 sm:text-sm">
+                <%= Application.get_env(:rauversion, :domain) %>/
+              </span>
+              <%= text_input(f, :username,
+                required: true,
+                autocomplete: "off",
+                class:
+                  "autofill:!bg-yellow-200 dark:bg-gray-900 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 flex-1 block w-full min-w-0 border-blue-gray-300 rounded-none rounded-r-md shadow-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm"
+              ) %>
+              <div class="mt-4">
+                <%= error_tag(f, :username) %>
+              </div>
+              <!-- <input class="flex-1 block w-full min-w-0 border-blue-gray-300 rounded-none rounded-r-md text-blue-gray-900 dark:text-blue-gray-100 dark:bg-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" id="update_profile_username" name="user[username]" required="" type="text" value="michelson">-->
+            </div>
 
             <%= form_input_renderer(
               f,

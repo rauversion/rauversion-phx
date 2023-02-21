@@ -22,11 +22,6 @@ defmodule RauversionWeb.AccountConnectLive.New do
     {:noreply, socket |> assign(:op, "new") |> assign(:changeset, changeset)}
   end
 
-  @impl true
-  def handle_event("cancel", _, socket) do
-    {:noreply, socket |> assign(:op, nil)}
-  end
-
   def default_class do
     "pointer-events-auto w-[21rem] rounded-lg bg-white dark:bg-gray-900 p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10"
   end
@@ -61,36 +56,36 @@ defmodule RauversionWeb.AccountConnectLive.New do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="relative mx-auto mt-16 grid w-full max-w-container grid-cols-1 px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-32">
-      <%= @op %>
-      <div class="relative z-10 p-4">
-        <div class="space-x-4 flex justify-center">
-          <.option label={gettext("New artist")} action="add-new" selected={@op == "new"} />
-          <.option
-            label={gettext("Existing Artist")}
-            action="add-existing"
-            selected={@op == "existing"}
-          />
+    <div class="mx-auto md:w-2/4">
+      <div class="relative mx-auto mt-16 grid w-full max-w-container grid-cols-1 px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-32">
+        <div class="relative z-10 p-4 space-y-8">
+          <div class="space-x-4 flex justify-center">
+            <.option label={gettext("New artist")} action="add-new" selected={@op == "new"} />
+            <.option
+              label={gettext("Existing Artist")}
+              action="add-existing"
+              selected={@op == "existing"}
+            />
+          </div>
+
+          <div :if={@op == "new"}>
+            <%= live_component(RauversionWeb.AccountConnectLive.NewUser,
+              id: "new-user-connect",
+              changeset: @changeset,
+              current_user: @current_user
+            ) %>
+          </div>
+
+          <div :if={@op == "existing"}>
+            <%= live_component(RauversionWeb.AccountConnectLive.ExistingUser,
+              id: "existing-user-connect",
+              current_user: @current_user,
+              collection: [],
+              selected_artist: nil,
+              errors: ""
+            ) %>
+          </div>
         </div>
-      </div>
-
-      <button phx-click="cancel">cancel</button>
-
-      <div :if={@op == "new"}>
-        <%= live_component(RauversionWeb.AccountConnectLive.NewUser,
-          id: "new-user-connect",
-          changeset: @changeset,
-          current_user: @current_user
-        ) %>
-      </div>
-
-      <div :if={@op == "existing"}>
-        <%= live_component(RauversionWeb.AccountConnectLive.ExistingUser,
-          id: "existing-user-connect",
-          current_user: @current_user,
-          collection: [],
-          selected_artist: nil
-        ) %>
       </div>
     </div>
     """

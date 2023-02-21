@@ -18,5 +18,6 @@ defmodule Rauversion.ConnectedAccounts.ConnectedAccount do
     connected_account
     |> cast(attrs, [:state, :parent_id, :user_id])
     |> validate_required([:state])
+    |> unsafe_validate_unique([:parent_id, :user_id], Rauversion.Repo)
   end
 end
