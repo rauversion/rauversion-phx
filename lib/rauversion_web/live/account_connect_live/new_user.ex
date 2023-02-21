@@ -49,15 +49,6 @@ defmodule RauversionWeb.AccountConnectLive.NewUser do
   def render(assigns) do
     ~H"""
     <div>
-      <p>Please specify an account to add.</p>
-      Artist URL http://<%= Application.get_env(:rauversion, :domain) %>/jjj
-
-      ,
-      Add via
-      Password
-      Request access from the artist
-      Hide artist
-      You can hide and unhide artists later, too.
       <div>
         <.form
           :let={f}
@@ -68,8 +59,10 @@ defmodule RauversionWeb.AccountConnectLive.NewUser do
           phx-submit="save"
         >
           <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
-            <%= gettext("New user") %>
+            <%= gettext("New artist") %>
           </h2>
+
+          <p class="text-md">Please specify an account to add.</p>
 
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div class="mt-1 flex rounded-md shadow-sm md:col-span-6">

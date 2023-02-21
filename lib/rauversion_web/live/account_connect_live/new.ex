@@ -34,7 +34,7 @@ defmodule RauversionWeb.AccountConnectLive.New do
     ~H"""
     <div phx-click={@action} class={if @selected, do: selected_class(), else: default_class()}>
       <div class="flex justify-between">
-        <div class="font-medium text-slate-900 dark:text-slate-100">
+        <div class="text-lg font-medium text-slate-900 dark:text-slate-100">
           <%= @label %>
         </div>
         <svg class="h-5 w-5 flex-none" fill="none">
@@ -47,7 +47,7 @@ defmodule RauversionWeb.AccountConnectLive.New do
           </path>
         </svg>
       </div>
-      <div class="mt-1 text-slate-700 dark:text-slate-300">Last message sent an hour ago</div>
+      <div class="hidden mt-1 text-slate-700 dark:text-slate-300">Last message sent an hour ago</div>
       <div class="hidden mt-6 font-medium text-slate-900 dark:text-slate-100">1200 users</div>
     </div>
     """

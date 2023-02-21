@@ -60,6 +60,12 @@ defmodule RauversionWeb.AccountConnectLive.ExistingUser do
     ~H"""
     <div class="space-y-4">
       <%= if !@selected_artist do %>
+        <h2 class="mx-0 mt-0 mb-4 font-sans text-2xl font-bold leading-none">
+          <%= gettext("Existing artist") %>
+        </h2>
+
+        <p class="text-md">Please search for an existing artist.</p>
+
         <form>
           <div class="mt-1 flex rounded-md shadow-sm md:col-span-6">
             <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-gray-700 bg-blue-gray-50 text-blue-gray-500 sm:text-sm">
@@ -99,7 +105,13 @@ defmodule RauversionWeb.AccountConnectLive.ExistingUser do
       <% end %>
 
       <div :if={@selected_artist} class="space-y-4">
-        <p>Selected! <%= @selected_artist.username %> Send the connect invitation to the artist</p>
+        <p class="text-xl font-bold">
+          <%= gettext("%{name} is selected", name: @selected_artist.username) %>
+        </p>
+
+        <p class="text-md">
+          <%= gettext("Please confirm in order to send the connect invitation request to the artist.") %>
+        </p>
 
         <div class="flex items-center space-x-4">
           <button
