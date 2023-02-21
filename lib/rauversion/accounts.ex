@@ -820,4 +820,12 @@ defmodule Rauversion.Accounts do
     |> Rauversion.Repo.all()
     |> Repo.preload(:user)
   end
+
+  def is_child_of?(user, child_user_id) do
+    from(p in Rauversion.ConnectedAccounts.ConnectedAccount)
+    |> where(parent_id: ^user.id)
+    |> where(state: "active")
+    |> where([c], ^child_user_id == c.user_id)
+    |> Rauversion.Repo.one()
+  end
 end
