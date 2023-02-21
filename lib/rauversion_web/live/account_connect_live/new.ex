@@ -77,7 +77,7 @@ defmodule RauversionWeb.AccountConnectLive.New do
       <button phx-click="cancel">cancel</button>
 
       <div :if={@op == "new"}>
-        new user form here <%= live_component(RauversionWeb.AccountConnectLive.NewUser,
+        <%= live_component(RauversionWeb.AccountConnectLive.NewUser,
           id: "new-user-connect",
           changeset: @changeset,
           current_user: @current_user
@@ -85,7 +85,12 @@ defmodule RauversionWeb.AccountConnectLive.New do
       </div>
 
       <div :if={@op == "existing"}>
-        existing form here
+        <%= live_component(RauversionWeb.AccountConnectLive.ExistingUser,
+          id: "existing-user-connect",
+          current_user: @current_user,
+          collection: [],
+          selected_artist: nil
+        ) %>
       </div>
     </div>
     """

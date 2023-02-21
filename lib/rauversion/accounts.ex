@@ -70,6 +70,10 @@ defmodule Rauversion.Accounts do
     |> where([u], not is_nil(u.username))
   end
 
+  def search_by_username(query, term) do
+    query |> where([u], like(u.username, ^"#{term}%"))
+  end
+
   def artists() do
     from(u in User,
       where: [type: ^"artist"],
@@ -145,6 +149,11 @@ defmodule Rauversion.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  def not_in(query, id) do
+    query
+    |> where([u], u.id != ^id)
+  end
 
   ## User registration
 
