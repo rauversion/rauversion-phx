@@ -741,4 +741,12 @@ defmodule RauversionWeb.LiveHelpers do
       _ -> date
     end
   end
+
+  def my_music_label(current_user) do
+    if Rauversion.Accounts.is_label?(current_user) do
+      gettext("My label")
+    else
+      gettext("My Music")
+    end
+  end
 end

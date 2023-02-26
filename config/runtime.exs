@@ -71,6 +71,9 @@ config :rauversion, google_analytics_id: System.get_env("GA_ID")
 
 config :rauversion, disabled_registrations: System.get_env("DISABLED_REGISTRATIONS", "false")
 
+config :rauversion,
+  disabled_label_registrations: System.get_env("LABEL_REGISTRATION_CLOSED", "false")
+
 config :ueberauth, Ueberauth.Strategy.Zoom.OAuth,
   client_id: System.get_env("ZOOM_CLIENT_ID"),
   client_secret: System.get_env("ZOOM_CLIENT_SECRET")

@@ -20,7 +20,8 @@ defmodule RauversionWeb.AccountConnectLive.NewUser do
     user_params =
       Map.merge(user_params, %{
         "email" => "internal+#{rand}@xxx.com",
-        "password" => "123456"
+        "password" => SecureRandom.urlsafe_base64(10),
+        "type" => "artist"
       })
 
     # will auto atictivate the assoc (state: "active")
@@ -32,6 +33,8 @@ defmodule RauversionWeb.AccountConnectLive.NewUser do
                state: "active"
              }) do
           {:ok, _connected} ->
+            Rauversion.Accounts.update_user_type(user, "artist")
+
             {:noreply,
              socket
              |> put_flash(:info, "Artist created successfully")

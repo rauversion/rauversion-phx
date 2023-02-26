@@ -216,6 +216,10 @@ defmodule Rauversion.Accounts do
     |> Repo.update()
   end
 
+  def is_label?(user) do
+    user.label
+  end
+
   def update_label(user, attrs \\ %{}) do
     User.label_changeset(user, attrs)
     |> Repo.update()
@@ -607,11 +611,12 @@ defmodule Rauversion.Accounts do
   end
 
   def user_host_events(user) do
-    from p in Rauversion.Events.Event,
+    from(p in Rauversion.Events.Event,
       join: c in assoc(p, :event_hosts),
       where: c.user_id == ^user.id,
       preload: [:user],
       select: p
+    )
   end
 
   def find_managed_event(user, event_id) do
@@ -724,8 +729,9 @@ defmodule Rauversion.Accounts do
     q = track_orders_query(current_user)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid" or c.state == "free_access"
+      )
 
     query
     |> Repo.all()
@@ -746,8 +752,9 @@ defmodule Rauversion.Accounts do
     q = album_orders_query(current_user)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid" or c.state == "free_access"
+      )
 
     query
     |> Repo.all()
@@ -757,8 +764,9 @@ defmodule Rauversion.Accounts do
     q = album_orders_query(current_user)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "pending"
+      )
 
     query
     |> Repo.all()
@@ -786,8 +794,9 @@ defmodule Rauversion.Accounts do
       |> order_by([c], desc: c.id)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid"
+      )
 
     query
   end
@@ -805,8 +814,9 @@ defmodule Rauversion.Accounts do
       |> order_by([c], desc: c.id)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid"
+      )
 
     query
   end

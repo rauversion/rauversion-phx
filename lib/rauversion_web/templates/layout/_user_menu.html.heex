@@ -1,11 +1,18 @@
-<nav class="bg-black" aria-label="Global" data-controller="dropdown">
+<nav class="bg-black relative" aria-label="Global" data-controller="dropdown">
   <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
     <div class="flex justify-between h-16">
-      <div class="flex items-center px-2 lg:px-0">
+      <div class="flex items-center px-2 lg:px-0 ">
     
         
-        <%= if user = Plug.Conn.get_session(@conn, "parent_user") do %>
-          back to .... <%= user %>
+        <%= if user_id = Plug.Conn.get_session(@conn, "parent_user") do %>
+
+          <%= if user = Rauversion.Accounts.get_user!(user_id) do %>
+            <a href={"/onbehalf/parent/#{user.username}"} 
+              class="fixed p-2 text-xs bg-black hover:bg-white hover:text-black left-[-1px] border top-[45px] z-[200]">
+              <span> ← </span>
+              back to <br/><%= user.username %>
+            </a>
+          <% end %>
         <% end %>
         <div class="flex-shrink-0 flex items-center">
           <%= live_redirect to: "/", class: "flex items-center space-x-3 text-white sm:text-2xl text-sm font-extrabold" do %>
@@ -186,7 +193,8 @@
             >
               <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-900 bg-white">
                 <%= if is_creator?(@current_user) && @current_user.username do %>
-                  <%= live_redirect(gettext("My Music"),
+                  <%= live_redirect(
+                    my_music_label(@current_user),
                     to: Routes.profile_index_path(@conn, :index, @current_user.username),
                     class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
                   ) %>
@@ -223,12 +231,13 @@
                 ) %>
 
                 <div class="border-1" />
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
-                  Support
+
+                <a href="https://docs.rauversion.com" 
+                  target="blank"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                  <%= gettext("Support") %>
                 </a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
-                  License
-                </a>
+
                 <%= link(gettext("Log out"),
                   to: Routes.user_session_path(@conn, :delete),
                   method: :delete,
@@ -350,7 +359,7 @@
           <% # = link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
 
           <%= if is_creator?(@current_user) && @current_user.username do %>
-            <%= live_redirect(gettext("My Music"),
+            <%= live_redirect(my_music_label(@current_user),
               to: Routes.profile_index_path(@conn, :index, @current_user.username),
               class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
             ) %>
@@ -378,8 +387,13 @@
           ) %>
 
           <div class="border-1" />
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
+
+          <a href="https://docs.rauversion.com" 
+            target="blank"
+            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+            <%= gettext("Support") %>
+          </a>
+
           <%= link(gettext("Log out"),
             to: Routes.user_session_path(@conn, :delete),
             method: :delete,

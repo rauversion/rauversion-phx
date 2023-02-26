@@ -49,7 +49,7 @@ defmodule RauversionWeb.ProfileLive.Components.ArtistsList do
                 ) %>
               </div>
 
-              <h3 class="mt-4 text-sm text-gray-700 dark:text-gray-300">
+              <h3 class="my-4 text-sm text-gray-700 dark:text-gray-300">
                 <%= live_redirect(
                         to: Routes.profile_index_path(@socket, :index, account.user.username)
                       ) do %>

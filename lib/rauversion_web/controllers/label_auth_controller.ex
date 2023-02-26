@@ -40,12 +40,12 @@ defmodule RauversionWeb.LabelAuthController do
             conn
             |> RauversionWeb.UserAuth.log_in_user_conn(user)
             |> put_session(:parent_user, nil)
-            |> redirect(to: "/#{current_user.username}")
+            |> redirect(to: "/#{user.username}")
 
           _ ->
             conn
             |> put_flash(:error, gettext("not allowed"))
-            |> redirect(to: "/#{user.username}")
+            |> redirect(to: "/#{current_user.username}")
         end
 
       _ ->

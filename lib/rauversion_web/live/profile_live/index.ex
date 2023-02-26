@@ -1,6 +1,6 @@
 defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount(RauversionWeb.UserLiveAuth)
 
   alias Rauversion.{Accounts, Tracks, UserFollows}
 
@@ -213,7 +213,11 @@ defmodule RauversionWeb.ProfileLive.Index do
   end
 
   # menu for labels
-  defp menu(socket = %{assigns: %{profile: %Rauversion.Accounts.User{label: label}}}, id, kind)
+  defp menu(
+         socket = %{assigns: %{profile: %Rauversion.Accounts.User{label: label = true}}},
+         id,
+         kind
+       )
        when not is_nil(label) do
     [
       %{
@@ -224,8 +228,8 @@ defmodule RauversionWeb.ProfileLive.Index do
       },
       %{
         name: "Music",
-        url: Routes.profile_index_path(socket, :tracks_all, id),
-        selected: kind == "tracks_all",
+        url: Routes.profile_index_path(socket, :albums, id),
+        selected: kind == "albums",
         kind: kind
       }
     ]
