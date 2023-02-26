@@ -156,6 +156,7 @@ defmodule RauversionWeb.Router do
     get "/users/invite", UserInvitationController, :new
     post "/users/invite", UserInvitationController, :create
 
+    get "/onbehalf/parent/:username", LabelAuthController, :back
     get "/onbehalf/:username", LabelAuthController, :add
 
     get "/webpayplus/mall/create", TbkController, :mall_create
