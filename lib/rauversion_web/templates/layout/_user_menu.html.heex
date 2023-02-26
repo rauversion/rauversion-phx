@@ -2,15 +2,13 @@
   <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex items-center px-2 lg:px-0 ">
-    
-        
         <%= if user_id = Plug.Conn.get_session(@conn, "parent_user") do %>
-
           <%= if user = Rauversion.Accounts.get_user!(user_id) do %>
-            <a href={"/onbehalf/parent/#{user.username}"} 
-              class="fixed p-2 text-xs bg-black hover:bg-white hover:text-black left-[-1px] border top-[45px] z-[200]">
-              <span> ← </span>
-              back to <br/><%= user.username %>
+            <a
+              href={"/onbehalf/parent/#{user.username}"}
+              class="fixed p-2 text-xs bg-black hover:bg-white hover:text-black left-[-1px] border top-[45px] z-[200]"
+            >
+              <span> ← </span> back to <br /><%= user.username %>
             </a>
           <% end %>
         <% end %>
@@ -212,7 +210,6 @@
                   ) %>
                 <% end %>
 
-
                 <%= if is_creator?(@current_user) do %>
                   <%= live_redirect(gettext("My Purchases"),
                     to: "/purchases",
@@ -232,9 +229,11 @@
 
                 <div class="border-1" />
 
-                <a href="https://docs.rauversion.com" 
+                <a
+                  href="https://docs.rauversion.com"
                   target="blank"
-                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                >
                   <%= gettext("Support") %>
                 </a>
 
@@ -388,9 +387,11 @@
 
           <div class="border-1" />
 
-          <a href="https://docs.rauversion.com" 
+          <a
+            href="https://docs.rauversion.com"
             target="blank"
-            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+          >
             <%= gettext("Support") %>
           </a>
 

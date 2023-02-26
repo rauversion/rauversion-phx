@@ -16,7 +16,6 @@
 />
 
 <div class="flex">
-
   <div class="flex-grow dark:bg-black dark:text-white">
     <%= case @title do
       # TODO: this is the same as all, but eventually will list all only the pinned ones
@@ -123,6 +122,7 @@
           page: 1,
           current_user: @current_user
         )
+
       _ ->
         "no match on #{@title}"
     end %>
