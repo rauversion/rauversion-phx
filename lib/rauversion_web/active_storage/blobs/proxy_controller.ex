@@ -225,8 +225,13 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
         chunk(conn, chunk_data)
       end)
 
-    {:ok, conn} = downloaded_stream
-    conn
+    case downloaded_stream do
+      {:ok, conn} ->
+        conn
+
+      _ ->
+        conn
+    end
 
     # send_stream(
     #    filename: blob.filename.sanitized,

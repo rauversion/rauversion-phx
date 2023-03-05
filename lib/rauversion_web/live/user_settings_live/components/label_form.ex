@@ -61,7 +61,7 @@ defmodule RauversionWeb.UserSettingsLive.LabelForm do
             href="mailto:info@rauversion.com"
             class="border p-6 rounded-sm hover:bg-white hover:text-black"
           >
-             Sends us an email 
+            Sends us an email
           </a>
         </div>
 
