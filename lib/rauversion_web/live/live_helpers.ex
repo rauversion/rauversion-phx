@@ -633,7 +633,9 @@ defmodule RauversionWeb.LiveHelpers do
               <% end %>
 
               <%= for {_ref, msg, } <- @field.uploads[@name].errors do %>
-                <%= Phoenix.Naming.humanize(msg) %>
+                <div class="text-md font-bold text-red-600 py-4">
+                  <%= Phoenix.Naming.humanize(msg) %>
+                </div>
               <% end %>
             </div>
 

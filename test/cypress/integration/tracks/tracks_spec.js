@@ -10,7 +10,7 @@ describe('Tracks Spec', function () {
     // cy.viewport(1024, 768)
   });
 
-  it('Access & upload tracks', function () {
+  it.only('Access & upload tracks', function () {
     login();
 
     cy.get('[data-cy="mobile-dropdown-toggle"]').click()
@@ -19,9 +19,17 @@ describe('Tracks Spec', function () {
     cy.contains("Playlists")
     cy.wait(2000)
     cy.contains("New Track").click()
-    cy.get('input[type=file]').selectFile('test/cypress/fixtures/example.json', {force: true})
+    cy.get('input[type=file]')
+    .selectFile('test/cypress/fixtures/example.json', {
+      force: true,
+      action: 'drag-drop'
+    })
+    cy.get('input[type=file]').trigger("change", {force: true})
+
     cy.contains("Not accepted")
-    cy.get('input[type=file]').selectFile('test/cypress/fixtures/sample-3s.mp3', {force: true})
+    cy.get('input[type=file]').selectFile('test/cypress/fixtures/sample-3s.mp3', {force: true, action: 'drag-drop'})
+    cy.get('input[type=file]').trigger("change", {force: true})
+
     cy.contains("Continue").click()
     cy.contains("Save").click()
     cy.wait(16000)
@@ -51,7 +59,7 @@ describe('User Tracks access', function () {
     cy.appScenario('basic', {email: "test@test.cl", password: "12345678", username: "test"});
   })
 
-  it('Draft event My events', function () {
+  it('Upload not allowed, non artists', function () {
     login()
     cy.visit("/tracks/new")
     cy.contains("Tracks uploads are not allowed on your account type")

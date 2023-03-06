@@ -1,6 +1,6 @@
 defmodule RauversionWeb.EventsLive.New do
   use RauversionWeb, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount(RauversionWeb.UserLiveAuth)
 
   alias Rauversion.{Events}
 
@@ -83,7 +83,7 @@ defmodule RauversionWeb.EventsLive.New do
         {:noreply,
          socket
          |> put_flash(:info, "Event created successfully")
-         |> push_redirect(to: "/events/#{event.slug}/edit")}
+         |> push_patch(to: ~p"/events/#{event.slug}/edit")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         # IO.inspect(changeset)

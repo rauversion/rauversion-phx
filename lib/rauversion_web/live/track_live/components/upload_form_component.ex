@@ -76,8 +76,10 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                         <% end %>
 
                         <%= for {_ref, msg, } <- @uploads.audio.errors do %>
-                          <%= Phoenix.Naming.humanize(msg) %>
-                        <% end %>
+                          <div class="text-md font-bold text-red-600 py-4">
+                            <%= Phoenix.Naming.humanize(msg) %>
+                          </div>
+                         <% end %>
                       </div>
 
                       <p class="text-xs text-gray-500">
