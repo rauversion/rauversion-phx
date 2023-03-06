@@ -163,7 +163,7 @@ defmodule RauversionWeb.EventsLive.New do
       nil ->
         socket
         |> put_flash(:error, "Resource not available")
-        |> push_redirect(to: "/events")
+        |> push_navigate(to: "/events")
     end
   end
 end

@@ -37,7 +37,7 @@ defmodule RauversionWeb.AccountConnectLive.ExistingUser do
         {:noreply,
          socket
          |> put_flash(:info, "Artist linked successfully")
-         |> push_redirect(to: "/#{socket.assigns.current_user.username}/artists")}
+         |> push_patch(to: "/#{socket.assigns.current_user.username}/artists")}
 
       {:error, changeset} ->
         errors = convert_changeset_errors(changeset)

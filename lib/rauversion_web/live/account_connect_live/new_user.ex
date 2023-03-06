@@ -38,7 +38,7 @@ defmodule RauversionWeb.AccountConnectLive.NewUser do
             {:noreply,
              socket
              |> put_flash(:info, "Artist created successfully")
-             |> push_redirect(to: "/#{socket.assigns.current_user.username}/artists")}
+             |> push_navigate(to: "/#{socket.assigns.current_user.username}/artists")}
 
           _ ->
             {:noreply, socket}

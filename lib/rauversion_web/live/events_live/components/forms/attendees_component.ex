@@ -73,7 +73,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
        |> assign(:open_modal, false)
        |> assign(:status, :success)
        |> put_flash(:info, gettext("Invitation sent"))
-       |> push_redirect(to: "/events/#{socket.assigns.event.slug}/edit/attendees")}
+       |> push_navigate(to: "/events/#{socket.assigns.event.slug}/edit/attendees")}
 
       # |> assign(:attendees, list_posts(socket.assigns.event))}
     else

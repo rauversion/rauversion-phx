@@ -28,26 +28,26 @@ defmodule RauversionWeb.UserSettingsLive.Invitations do
             {:noreply,
              socket
              |> put_flash(:info, gettext("Invitation sent successfully"))
-             |> push_redirect(to: "/users/settings/invitations")}
+             |> push_navigate(to: "/users/settings/invitations")}
 
           {:error, %Ecto.Changeset{} = changeset} ->
             {:noreply,
              assign(socket, :changeset, changeset)
              |> put_flash(:error, gettext("Error, Invitation was not sent"))
-             |> push_redirect(to: "/users/settings/invitations")}
+             |> push_navigate(to: "/users/settings/invitations")}
 
           _ ->
             {:noreply,
              socket
              |> put_flash(:error, gettext("There was something wrong sending this invitation"))
-             |> push_redirect(to: "/users/settings/invitations")}
+             |> push_navigate(to: "/users/settings/invitations")}
         end
 
       _user ->
         {:noreply,
          socket
          |> put_flash(:error, gettext("Invitation not sent, this person already exists"))
-         |> push_redirect(to: "/users/settings/invitations")}
+         |> push_navigate(to: "/users/settings/invitations")}
     end
   end
 

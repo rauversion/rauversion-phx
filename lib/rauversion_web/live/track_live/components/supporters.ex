@@ -4,9 +4,10 @@ defmodule RauversionWeb.TrackLive.Components.Supporters do
   def render(assigns = %{kind: "albums", supporters: _supporters}) do
     ~H"""
     <div class="sm:text-xl text-sm container mx-auto my-4 flex flex-col space-y-4">
-      <%= if Enum.any?(@supporters) do %>
-        <h3 class="font-bold font-medium">Supporters</h3>
-      <% end %>
+
+      <h3 class="font-bold font-medium" :if={Enum.any?(@supporters)}>
+        <%= gettext("Supporters") %>
+      </h3>
 
       <div class="-space-x-4">
         <%= for supporter <- @supporters do %>
@@ -28,7 +29,9 @@ defmodule RauversionWeb.TrackLive.Components.Supporters do
   def render(assigns = %{kind: "tracks", supporters: _supporters}) do
     ~H"""
     <div class="sm:text-xl text-sm container mx-auto my-4 flex flex-col space-y-4">
-      <h3 class="font-bold text-medium"><%= gettext("Supporters") %></h3>
+      <h3 class="font-bold font-medium" :if={Enum.any?(@supporters)}>
+        <%= gettext("Supporters") %>
+      </h3>
       <div class="-space-x-4">
         <%= for supporter <- @supporters do %>
           <%= live_redirect to: Routes.profile_index_path(@socket, :index, supporter.track_order.purchase_order.user.username) do %>

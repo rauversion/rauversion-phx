@@ -1,5 +1,5 @@
 <%= if @live_action in [:edit] do %>
-  <.modal return_to={Routes.playlist_show_path(@socket, :show, @playlist)}>
+  <.modal return_to={Routes.playlist_show_path(@socket, :show, @playlist.slug)}>
     <.live_component
       module={RauversionWeb.PlaylistLive.FormComponent}
       id={@playlist.id}
