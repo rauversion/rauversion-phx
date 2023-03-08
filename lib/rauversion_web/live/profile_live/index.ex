@@ -171,7 +171,7 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   # menu for artists
   defp menu(socket = %{assigns: %{profile: %Rauversion.Accounts.User{label: label}}}, id, kind)
-       when is_nil(label) do
+       when is_nil(label) or label == false do
     [
       %{
         name: "All",
@@ -214,7 +214,7 @@ defmodule RauversionWeb.ProfileLive.Index do
 
   # menu for labels
   defp menu(
-         socket = %{assigns: %{profile: %Rauversion.Accounts.User{label: label = true}}},
+         socket = %{assigns: %{profile: %Rauversion.Accounts.User{label: label}}},
          id,
          kind
        )

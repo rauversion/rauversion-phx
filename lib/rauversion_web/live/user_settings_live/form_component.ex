@@ -183,7 +183,7 @@ defmodule RauversionWeb.UserSettingsLive.FormComponent do
       case Accounts.update_label(user, user_params) do
         {:ok, _user} ->
           socket
-          |> put_flash(:info, "Password updated successfully.")
+          |> put_flash(:info, "Label config updated successfully.")
           |> push_navigate(to: "/users/settings/labels")
 
         # |> PhoenixLiveSession.put_session(:user_return_to, "/user/settings/security")
@@ -229,7 +229,9 @@ defmodule RauversionWeb.UserSettingsLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "User profile updated successfully.")
-         |> push_navigate(to: "/users/settings")}
+         # |> put_session(:flash, %{info: "Event created successfully"})
+
+         |> push_patch(to: "/users/settings")}
 
       {:error, changeset} ->
         {:noreply, socket |> assign(:changeset, changeset)}

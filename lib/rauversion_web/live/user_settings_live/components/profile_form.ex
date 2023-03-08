@@ -6,8 +6,6 @@ defmodule RauversionWeb.UserSettingsLive.ProfileForm do
     <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
       <h1 class="text-3xl font-extrabold text-blue-gray-900"><%= gettext("Account") %></h1>
 
-      <%= @target %>
-      <%= @myself %>
       <.form
         :let={f}
         for={@changeset}
@@ -23,8 +21,6 @@ defmodule RauversionWeb.UserSettingsLive.ProfileForm do
             <p><%= gettext("Oops, something went wrong! Please check the errors below.") %></p>
           </div>
         <% end %>
-
-        fsdaopijadsoiajsdoidjas
 
         <%= hidden_input(f, :action, name: "action", value: "update_profile") %>
 
