@@ -69,7 +69,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
               <%= @event.event_settings.participant_label %>
             </h2>
             <p class="mt-4 font-display text-2xl tracking-tight text-brand-100">
-              <%= @event.event_settings.participant_description %>
+              <%= SimplexFormat.text_to_html(@event.event_settings.participant_description, auto_link: true) %>
             </p>
           </div>
 
@@ -264,7 +264,9 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                       </time>
                     </h3>
                     <p class="mt-1.5 text-base tracking-tight text-brand-900 dark:text-brand-100 break-words">
-                      <%= @day.description %>
+                      <%= SimplexFormat.text_to_html(@day.description,
+                        auto_link: true
+                      ) %>
                     </p>
                   </div>
                 <% end %>
@@ -285,7 +287,9 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                           <%= scheduling.title %>
                         </h4>
                         <p class="mt-1 tracking-tight text-brand-900 dark:text-brand-100">
-                          <%= scheduling.short_description %>
+                          <%= SimplexFormat.text_to_html(scheduling.short_description ,
+                            auto_link: true
+                          ) %>
                         </p>
                         <p class="mt-1 font-mono text-sm text-gray-500 dark:text-gray-300">
                           <!--<time datetime="2022-04-04T9:00AM-08:00">9:00AM</time>-->
