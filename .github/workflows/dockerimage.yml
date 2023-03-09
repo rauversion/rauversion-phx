@@ -31,6 +31,7 @@ jobs:
               docker build --build-arg MIX_ENV=prod \
                --build-arg PG_MAJOR=11 \
                --build-arg NODE_MAJOR=18 \
+               --build-arg DEFAULT_LOCALE=es \
                --build-arg YARN_VERSION=1.13.0 \
                -t michelson/rauversion \
                .
