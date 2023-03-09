@@ -21,13 +21,12 @@ describe('Tracks Spec', function () {
     cy.contains("New Track").click()
     cy.get('input[type=file]')
     .selectFile('test/cypress/fixtures/example.json', {
-      force: true,
-      action: 'drag-drop'
+      force: true
     })
     cy.get('input[type=file]').trigger("change", {force: true})
 
     cy.contains("Not accepted")
-    cy.get('input[type=file]').selectFile('test/cypress/fixtures/sample-3s.mp3', {force: true, action: 'drag-drop'})
+    cy.get('input[type=file]').selectFile('test/cypress/fixtures/sample-3s.mp3', {force: true})
     cy.get('input[type=file]').trigger("change", {force: true})
 
     cy.contains("Continue").click()

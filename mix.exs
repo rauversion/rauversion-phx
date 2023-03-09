@@ -49,7 +49,7 @@ defmodule Rauversion.MixProject do
       {:number, "~> 1.0.3"},
       {:postgrex, ">= 0.0.0"},
       {:ecto_psql_extras, "~> 0.6"},
-      {:phoenix_html, "~> 3.0"},
+      {:phoenix_html, "3.3.1"},
       {:phoenix_live_reload, "~> 1.2", only: [:dev, :cy, :test]},
       {:phoenix_live_view, "~> 0.18.2"},
       {:phoenix_live_dashboard, "~> 0.7"},
