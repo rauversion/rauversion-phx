@@ -10,7 +10,7 @@ describe('Tracks Spec', function () {
     // cy.viewport(1024, 768)
   });
 
-  it.only('Access & upload tracks', function () {
+  it('Access & upload tracks', function () {
     login();
 
     cy.get('[data-cy="mobile-dropdown-toggle"]').click()
