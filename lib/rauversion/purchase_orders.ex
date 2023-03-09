@@ -124,7 +124,7 @@ defmodule Rauversion.PurchaseOrders do
   def calculate_fee(total, cyy \\ "usd")
 
   def calculate_fee(total = %Decimal{}, ccy) do
-    t = total.coef / (app_fee() * 100.0)
+    t = total.coef * app_fee() / 100.0
 
     case ccy do
       "usd" -> t
@@ -133,7 +133,7 @@ defmodule Rauversion.PurchaseOrders do
   end
 
   def calculate_fee(total, ccy) do
-    t = total / (app_fee() * 100.0)
+    t = total * app_fee() / 100.0
 
     case ccy do
       "usd" -> t
@@ -209,7 +209,7 @@ defmodule Rauversion.PurchaseOrders do
   end
 
   def create_stripe_order(event, user_id, purchase_order) do
-    {:ok, a} =
+    {:ok, po} =
       Rauversion.PurchaseOrders.create_purchase_order(
         %{
           "user_id" => user_id
@@ -219,16 +219,18 @@ defmodule Rauversion.PurchaseOrders do
 
     {:ok, data} =
       Rauversion.PurchaseOrders.create_stripe_session(
-        a,
+        po,
         event
       )
 
     {:ok, order_with_payment_id} =
-      Rauversion.PurchaseOrders.update_purchase_order(a, %{
+      Rauversion.PurchaseOrders.update_purchase_order(po, %{
         "payment_id" => data["id"],
         "payment_provider" => "stripe",
-        "total" => calculate_total(a)
+        "total" => calculate_total(po)
       })
+
+    Rauversion.PurchaseOrders.notify_purchased_order(po)
 
     {:ok, %{resp: data, order: order_with_payment_id}}
   end
@@ -305,8 +307,10 @@ defmodule Rauversion.PurchaseOrders do
     # TODO: save data on some transacion table?
     case data do
       %{"vci" => "TSY"} ->
-        Rauversion.PurchaseOrders.get_purchase_order!(data["buy_order"])
-        |> generate_purchased_tickets()
+        po = Rauversion.PurchaseOrders.get_purchase_order!(data["buy_order"])
+        po |> generate_purchased_tickets()
+
+        Rauversion.PurchaseOrders.notify_purchased_order(po)
 
       _ ->
         {:error, nil}

@@ -299,7 +299,7 @@ defmodule RauversionWeb.EventsLive.EventTicketsComponent do
                                         <%= if Decimal.to_integer(ticket.price) != 0 do %>
                                           <%= label(i, :x) %>
                                           <%= text_input(i, :count,
-                                            class: "bg-gray-700 border rounded-sm",
+                                            class: "dark:bg-gray-800 border rounded-sm dark:text-white",
                                             type: :number
                                           ) %>
                                           <%= error_tag(i, :count) %>
