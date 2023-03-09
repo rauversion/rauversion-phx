@@ -6,6 +6,7 @@ unless System.get_env("MIX_ENV") == "prod" do
   Dotenv.load!()
 end
 
+config :gettext, default_locale: System.get_env("DEFAULT_LOCALE", "en")
 # https://lokalise.com/blog/localization-of-phoenix-applications/
 config :rauversion, RauversionWeb.Gettext,
   locales: ~w(en es pt),

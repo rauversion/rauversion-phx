@@ -29,6 +29,7 @@ jobs:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
       REDIS_URL: redis://localhost:6379/0
       MIX_ENV: "test"
+      DEFAULT_LOCALE: "en"
       VAULT_KEY: l8b+X9II2kn7lHWcBuk0v2ZykpF8OuAhKfTBBDJpdPQ=
       CYPRESS_RECORD_KEY: 01b55210-d446-44fd-88c2-c1bf11bfcc46
     steps:

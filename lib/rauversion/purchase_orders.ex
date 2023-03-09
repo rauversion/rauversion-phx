@@ -377,6 +377,8 @@ defmodule Rauversion.PurchaseOrders do
           transbank_environment(event)
         )
 
+      IO.inspect(trx)
+
       ccy = event.event_settings.ticket_currency
       total = Rauversion.PurchaseOrders.calculate_total(order, ccy)
       fee_amount = Rauversion.PurchaseOrders.calculate_fee(total, ccy)
@@ -393,6 +395,8 @@ defmodule Rauversion.PurchaseOrders do
           buy_order: order.id
         }
       ]
+
+      IO.inspect(details)
 
       {:ok, %{details: details, trx: trx}}
     end)
