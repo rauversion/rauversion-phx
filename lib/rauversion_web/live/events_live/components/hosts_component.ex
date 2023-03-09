@@ -216,6 +216,8 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
           |> assign(:modal, nil)
           |> assign(:hosts, get_hosts(socket.assigns.event))
           |> put_flash(:info, "Host updated successfully")
+          |> push_navigate(to: ~p"/events/#{socket.assigns.event.slug}/edit/hosts")
+
           # |> push_redirect(to: socket.assigns.return_to)
         }
 
