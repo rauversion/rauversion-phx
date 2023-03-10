@@ -147,7 +147,7 @@
           </h1>
 
           <div class="mt-6 space-y-6 font-display text-2xl tracking-tight text-brand-100">
-            <%= @event.description %>
+            <%= SimplexFormat.text_to_html(@event.description, auto_link: true) %>
           </div>
 
           <.live_component

@@ -60,7 +60,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
           :noreply,
           socket
           |> put_flash(:info, "Tickets updated successfully")
-          # |> push_redirect(to: socket.assigns.return_to)
+          |> push_patch(to: ~p"/events/#{socket.assigns.event.slug}/edit/tickets")
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->

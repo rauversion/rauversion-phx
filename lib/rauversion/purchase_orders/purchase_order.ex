@@ -3,21 +3,23 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrder do
   import Ecto.Changeset
 
   schema "purchase_orders" do
-    field :promo_code, :string
-    field :total, :decimal
+    field(:promo_code, :string)
+    field(:total, :decimal)
     # field :data, :map
-    field :payment_id, :string
-    field :payment_provider, :string
-    field :state, :string, default: "pending"
+    field(:payment_id, :string)
+    field(:payment_provider, :string)
+    field(:state, :string, default: "pending")
 
-    embeds_many :data, Rauversion.PurchaseOrders.PurchaseOrderTickets, on_replace: :delete
-    belongs_to :user, Rauversion.Accounts.User
+    embeds_many(:data, Rauversion.PurchaseOrders.PurchaseOrderTickets, on_replace: :delete)
+    belongs_to(:user, Rauversion.Accounts.User)
 
-    many_to_many :albums, Rauversion.Playlists.Playlist,
+    many_to_many(:albums, Rauversion.Playlists.Playlist,
       join_through: Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder
+    )
 
-    many_to_many :tracks, Rauversion.Tracks.Track,
+    many_to_many(:tracks, Rauversion.Tracks.Track,
       join_through: Rauversion.TrackPurchaseOrders.TrackPurchaseOrder
+    )
 
     # TODO: associate purchase order tickets instead of embeds
 
@@ -115,8 +117,8 @@ defmodule Rauversion.PurchaseOrders.PurchaseOrderTickets do
   import Ecto.Changeset
 
   embedded_schema do
-    field :ticket_id, :integer
-    field :count, :integer
+    field(:ticket_id, :integer)
+    field(:count, :integer)
   end
 
   @required_fields []
