@@ -50,12 +50,13 @@ defmodule RauversionWeb.AccountConnectLive.ExistingUser do
     {:noreply, socket |> assign(:errors, nil) |> assign(:selected_artist, nil)}
   end
 
-  def convert_changeset_errors(changeset) do
+  def convert_changeset_errors(_changeset) do
     out = "errors connecting the account"
 
     out
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div class="space-y-4">
