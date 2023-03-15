@@ -90,6 +90,8 @@ config :logger, level: :debug
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
+config :rauversion, :domain, "https://localhost:4002"
+
 # Initialize plugs at runtime for faster development compilation
 # config :phoenix, :plug_init_mode, :runtime
 
