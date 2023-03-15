@@ -41,7 +41,7 @@ defmodule RauversionWeb.EventsLive.Components.HostsUploaderComponent do
           :noreply,
           socket
           |> put_flash(:info, "Host updated successfully")
-          |> push_navigate(to: ~p"/events/#{socket.assigns.event.slug}/edit/hosts")
+          |> push_patch(to: ~p"/events/#{socket.assigns.event.slug}/edit/hosts")
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->

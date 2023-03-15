@@ -1231,20 +1231,20 @@
   "resolved" "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz"
   "version" "4.0.0"
 
-"phoenix_html@^3.2.0":
-  "integrity" "sha512-zv7PIZk0MPkF0ax8n465Q6w86+sGAy5cTem6KcbkUbdgxGc0y3WZmzkM2bSlYdSGbLEZfjXxos1G72xXsha6xA=="
-  "resolved" "https://registry.yarnpkg.com/phoenix_html/-/phoenix_html-3.2.0.tgz"
-  "version" "3.2.0"
+"phoenix_html@^3.3.1":
+  "integrity" "sha512-t/9Saqpe8vznZYHMDim7HS32Dd2/rKf3+uxuKKNRADLpGXVIDjselOY6pK8aNaLiY2gnlqsoz6yIpUBuoLT63w=="
+  "resolved" "https://registry.npmjs.org/phoenix_html/-/phoenix_html-3.3.1.tgz"
+  "version" "3.3.1"
 
-"phoenix_live_view@^0.17.10":
-  "integrity" "sha512-oHSoH0IdJ1I5uAYjH2A1KlBmwra6LgcUrHlAP3EEorrZyMpbhBJjNNhXxhBu6dmcxqnaAbwsIXMQRLi6KjJZIg=="
-  "resolved" "https://registry.yarnpkg.com/phoenix_live_view/-/phoenix_live_view-0.17.10.tgz"
-  "version" "0.17.10"
+"phoenix_live_view@^0.18.17":
+  "integrity" "sha512-ORVy7K1Fihn8sxhwpJRfPZTINsq0DQhtWbiCz6t8h5D/uwURDUUWV1KBFeB+2HhyjqdnWF9DqqAYlt7luNSp1g=="
+  "resolved" "https://registry.npmjs.org/phoenix_live_view/-/phoenix_live_view-0.18.17.tgz"
+  "version" "0.18.17"
 
-"phoenix@^1.6.10":
-  "integrity" "sha512-KfYAJrrw95JGaOlvmZ+lFJZhSfQmo4SVOj6s175/V8YxqhYGO5EGacdrJxQmJ6uhaK4H3S6b0wkC1T33qU/d8Q=="
-  "resolved" "https://registry.yarnpkg.com/phoenix/-/phoenix-1.6.10.tgz"
-  "version" "1.6.10"
+"phoenix@^1.7.1":
+  "integrity" "sha512-DORpAOHp8XdQDs6WT2yD65fhUQXhzrD+CTZCKqWQ9g0G/fyM8EKsSDhtOwl54Nr2DDBu8JARMR97OfLYCiKAoQ=="
+  "resolved" "https://registry.npmjs.org/phoenix/-/phoenix-1.7.1.tgz"
+  "version" "1.7.1"
 
 "picocolors@^1.0.0":
   "integrity" "sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ=="
