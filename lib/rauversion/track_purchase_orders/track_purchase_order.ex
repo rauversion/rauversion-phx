@@ -2,8 +2,8 @@ defmodule Rauversion.TrackPurchaseOrders.TrackPurchaseOrder do
   use Ecto.Schema
 
   schema "track_purchase_orders" do
-    belongs_to :purchase_order, Rauversion.PurchaseOrders.PurchaseOrder
-    belongs_to :track, Rauversion.Tracks.Track
+    belongs_to(:purchase_order, Rauversion.PurchaseOrders.PurchaseOrder)
+    belongs_to(:track, Rauversion.Tracks.Track)
     timestamps()
   end
 
@@ -38,19 +38,52 @@ defmodule Rauversion.TrackPurchaseOrders.TrackPurchaseOrder do
       Rauversion.Tracks.get_track!(order.track_id)
       |> Rauversion.Repo.preload([:user, :cover_blob, :audio_blob])
 
-    entries = [
-      [
-        source: {
-          :url,
-          Application.get_env(:rauversion, :domain) <>
-            Rauversion.BlobUtils.blob_proxy_url(track, :audio)
-        },
-        path: "/#{track.slug}/#{String.replace(track.audio_blob.filename, " ", "-")}"
-      ]
+    entries_group = [
+      source: {
+        :url,
+        Application.get_env(:rauversion, :domain) <>
+          Rauversion.BlobUtils.blob_proxy_url(track, :audio)
+      },
+      path: "/#{track.slug}/#{String.replace(track.audio_blob.filename, " ", "-")}"
     ]
 
-    IO.inspect(entries)
-    entries
+    cover = Rauversion.BlobUtils.blob_proxy_url(track, :cover)
+
+    entries_group =
+      case cover do
+        nil ->
+          [entries_group]
+
+        image ->
+          [
+            entries_group,
+            [
+              source: {
+                :url,
+                Application.get_env(:rauversion, :domain) <>
+                  cover
+              },
+              path: "/#{track.slug}/#{String.replace(track.cover_blob.filename, " ", "-")}.png"
+            ]
+          ]
+      end
+
+    {:ok, fd, file_path} = Temp.open("my-file")
+
+    text = """
+      <h1>#{track.title}</h1>
+      <p>#{track.description}</p>
+      <p>Visit: <a href="#{Application.get_env(:rauversion, :domain) <> "/tracks/#{track.slug}"}">#{track.title}</a> on #{Application.get_env(:rauversion, :domain)}</p>
+    """
+
+    IO.write(fd, text)
+    # File.close(fd) ## close file?
+
+    file_entry = [source: {:file, file_path}, path: "/#{track.slug}/track.slug.html"]
+
+    entries_group = entries_group ++ [file_entry]
+    IO.inspect(entries_group)
+    entries_group
   end
 
   def is_downloadable?(%{purchase_order: order}) do
