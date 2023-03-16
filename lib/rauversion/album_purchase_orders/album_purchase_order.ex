@@ -47,6 +47,8 @@ defmodule Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder do
     """
 
     IO.write(fd, text)
+    charlist = String.to_charlist(text)
+    IO.write(fd, charlist)
     # File.close(fd) ## close file?
 
     file_entry = [source: {:file, file_path}, path: "/#{playlist.slug}/#{playlist.slug}.html"]

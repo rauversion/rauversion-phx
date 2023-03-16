@@ -76,7 +76,8 @@ defmodule Rauversion.TrackPurchaseOrders.TrackPurchaseOrder do
       <p>Visit: <a href="#{Application.get_env(:rauversion, :domain) <> "/tracks/#{track.slug}"}">#{track.title}</a> on #{Application.get_env(:rauversion, :domain)}</p>
     """
 
-    IO.write(fd, text)
+    charlist = String.to_charlist(text)
+    IO.write(fd, charlist)
     # File.close(fd) ## close file?
 
     file_entry = [source: {:file, file_path}, path: "/#{track.slug}/track.slug.html"]
