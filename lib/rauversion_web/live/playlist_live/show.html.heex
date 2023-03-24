@@ -306,7 +306,7 @@
                 <span><%= @playlist.likes_count %> <%= gettext("Like") %></span>
               </button>
 
-              <%= if @current_user && @playlist.user.username == @current_user.id do %>
+              <%= if @current_user && @playlist.user_id == @current_user.id do %>
                 <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "inline-flex justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" do %>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

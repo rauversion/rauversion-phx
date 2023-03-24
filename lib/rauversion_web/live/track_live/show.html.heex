@@ -298,7 +298,7 @@
               />
 
               <div>
-                <%= if @current_user && @track.user.username == @current_user.id do %>
+                <%= if @current_user && @track.user_id == @current_user.id do %>
                   <%= live_patch to: Routes.track_show_path(@socket, :edit, @track.slug), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
