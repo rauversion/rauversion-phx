@@ -695,6 +695,14 @@ defmodule Rauversion.Accounts do
 
   ### album orders
 
+  def get_playlist!(user, id) do
+    user |> Ecto.assoc(:playlists) |> Repo.get!(id)
+  end
+
+  def get_playlist_by_slug!(user, id) do
+    user |> Ecto.assoc(:playlists) |> Repo.get_by(slug: id)
+  end
+
   def track_orders_query(current_user) do
     id = current_user.id
 

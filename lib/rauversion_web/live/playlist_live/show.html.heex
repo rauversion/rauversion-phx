@@ -306,22 +306,24 @@
                 <span><%= @playlist.likes_count %> <%= gettext("Like") %></span>
               </button>
 
-              <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "inline-flex justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" do %>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="-ml-1 mr-2 h-5 w-5 text-gray-400 dark:text-gray-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                  />
-                </svg>
-                <span><%= gettext("Edit") %></span>
+              <%= if @current_user && @playlist.user.username == @current_user.id do %>
+                <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "inline-flex justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" do %>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="-ml-1 mr-2 h-5 w-5 text-gray-400 dark:text-gray-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                    />
+                  </svg>
+                  <span><%= gettext("Edit") %></span>
+                <% end %>
               <% end %>
             </div>
           </div>
