@@ -33,7 +33,7 @@ defmodule RauversionWeb.RepostLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Repost updated successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_patch(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
@@ -46,7 +46,7 @@ defmodule RauversionWeb.RepostLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Repost created successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

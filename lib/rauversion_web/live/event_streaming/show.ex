@@ -41,7 +41,7 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
       _ ->
         socket
         |> put_flash(:error, "Event not found")
-        |> push_redirect(to: "/")
+        |> push_navigate(to: "/")
     end
   end
 

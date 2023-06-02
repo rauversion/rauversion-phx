@@ -208,6 +208,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
       event_params
       |> Map.put("avatar", files_for(socket, :avatar))
 
+    require IEx
+    IEx.pry()
+
     case EventHosts.update_event_host(socket.assigns.changeset.data, event_params) do
       {:ok, _event} ->
         {

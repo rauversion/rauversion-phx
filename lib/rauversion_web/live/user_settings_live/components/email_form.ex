@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.EmailForm do
+defmodule RauversionWeb.UserSettingsLive.EmailForm do
   use RauversionWeb, :live_component
 
   def render(%{changeset: _changeset} = assigns) do

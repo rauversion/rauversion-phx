@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.ProfileForm do
+defmodule RauversionWeb.UserSettingsLive.ProfileForm do
   use RauversionWeb, :live_component
 
   def render(%{changeset: _changeset} = assigns) do

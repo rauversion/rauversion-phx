@@ -99,7 +99,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           :noreply,
           socket
           |> put_flash(:info, "Event updated successfully")
-          # |> push_redirect(to: socket.assigns.return_to)
+          |> push_patch(to: "/events/#{socket.assigns.event.slug}/edit/schedule")
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->

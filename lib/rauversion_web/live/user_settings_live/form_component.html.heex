@@ -1,7 +1,18 @@
 <div class="flex-1 xl:overflow-y-auto">
   <%= if @action == :profile do %>
     <.live_component
-      module={RauversionWeb.UsersettingsLive.ProfileForm}
+      module={RauversionWeb.UserSettingsLive.ProfileForm}
+      id="contact-form"
+      target={@myself}
+      changeset={@changeset}
+      return_to={@return_to}
+      uploads={@uploads}
+    />
+  <% end %>
+
+  <%= if @action == :labels do %>
+    <.live_component
+      module={RauversionWeb.UserSettingsLive.LabelForm}
       id="contact-form"
       target={@myself}
       changeset={@changeset}
@@ -12,7 +23,7 @@
 
   <%= if @action  == :email do %>
     <.live_component
-      module={RauversionWeb.UsersettingsLive.EmailForm}
+      module={RauversionWeb.UserSettingsLive.EmailForm}
       id="email-form"
       target={@myself}
       changeset={@changeset}
@@ -22,7 +33,7 @@
 
   <%= if @action == :security do %>
     <.live_component
-      module={RauversionWeb.UsersettingsLive.SecurityForm}
+      module={RauversionWeb.UserSettingsLive.SecurityForm}
       id="security-form"
       target={@myself}
       changeset={@changeset}
@@ -32,7 +43,7 @@
 
   <%= if @action == :notifications do %>
     <.live_component
-      module={RauversionWeb.UsersettingsLive.NotificationsForm}
+      module={RauversionWeb.UserSettingsLive.NotificationsForm}
       id="security-form"
       target={@myself}
       changeset={@changeset}
@@ -42,7 +53,7 @@
 
   <%= if @action == :integrations do %>
     <.live_component
-      module={RauversionWeb.UsersettingsLive.IntegrationsForm}
+      module={RauversionWeb.UserSettingsLive.IntegrationsForm}
       id="integrations"
       target={@myself}
       current_user={@current_user}
@@ -52,7 +63,7 @@
 
   <%= if @action == :transbank do %>
     <.live_component
-      module={RauversionWeb.UsersettingsLive.TransbankForm}
+      module={RauversionWeb.UserSettingsLive.TransbankForm}
       id="security-form"
       target={@myself}
       changeset={@changeset}
@@ -62,7 +73,7 @@
 
   <%= if @action == :invitations do %>
     <.live_component
-      module={RauversionWeb.UsersettingsLive.Invitations}
+      module={RauversionWeb.UserSettingsLive.Invitations}
       id="invitations-form"
       target={@myself}
       current_user={@current_user}

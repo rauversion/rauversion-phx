@@ -34,7 +34,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
           :noreply,
           socket
           |> put_flash(:info, "Event updated successfully")
-          |> push_redirect(to: "/events/#{event.slug}/edit/streaming")
+          |> push_navigate(to: "/events/#{event.slug}/edit/streaming")
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->

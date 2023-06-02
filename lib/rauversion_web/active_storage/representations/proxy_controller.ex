@@ -15,7 +15,7 @@
 defmodule RauversionWeb.ActiveStorage.Representations.ProxyController do
   use RauversionWeb, :controller
 
-  action_fallback RauversionWeb.FallbackController
+  action_fallback(RauversionWeb.FallbackController)
 
   # def show
   #   http_cache_forever public: true do
@@ -64,7 +64,13 @@ defmodule RauversionWeb.ActiveStorage.Representations.ProxyController do
         chunk(conn, chunk_data)
       end)
 
-    {:ok, conn} = downloaded_stream
-    conn
+    case downloaded_stream do
+      {:ok, conn} ->
+        conn
+
+      e ->
+        IO.inspect(e)
+        conn
+    end
   end
 end

@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
+defmodule RauversionWeb.UserSettingsLive.NotificationsForm do
   use RauversionWeb, :live_component
 
   def notification_inputs() do

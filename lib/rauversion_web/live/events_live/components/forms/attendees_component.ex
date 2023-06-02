@@ -13,16 +13,6 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
      |> assign(:open_modal, false)}
   end
 
-  defp list_posts(event) do
-    Rauversion.Events.list_tickets(event)
-    # Events.list_event() |> Repo.preload(user: :avatar_blob)
-  end
-
-  def new_invitation_changeset(%InviteTicketForm{} = invitation, attrs \\ %{}) do
-    invitation
-    |> InviteTicketForm.changeset(attrs)
-  end
-
   @impl true
   def handle_event("validate", %{"invite_ticket_form" => event_params}, socket) do
     changeset =
@@ -33,16 +23,19 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
+  @impl true
   def handle_event("open_modal", %{"value" => ""}, socket) do
     {:noreply,
      assign(socket, :open_modal, true)
      |> assign(:invitation_changeset, new_invitation_changeset(%InviteTicketForm{}))}
   end
 
+  @impl true
   def handle_event("close-modal", _, socket) do
     {:noreply, assign(socket, :open_modal, false)}
   end
 
+  @impl true
   def handle_event(
         "save",
         %{
@@ -67,13 +60,15 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
                gettext("Invitation for event: %{title}", %{title: socket.assigns.event.title}),
              event: socket.assigns.event
            ) do
-      # IO.inspect(result)
+      IO.inspect("REDIRECT TOOOOO: /events/#{socket.assigns.event.slug}/edit/attendees ")
+      IO.inspect(gettext("Invitation sent"))
+
       {:noreply,
        socket
        |> assign(:open_modal, false)
        |> assign(:status, :success)
        |> put_flash(:info, gettext("Invitation sent"))
-       |> push_redirect(to: "/events/#{socket.assigns.event.slug}/edit/attendees")}
+       |> push_patch(to: ~p"/events/#{socket.assigns.event.slug}/edit/attendees")}
 
       # |> assign(:attendees, list_posts(socket.assigns.event))}
     else
@@ -82,18 +77,22 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
          socket
          |> put_flash(:error, "Fail to create chchc.")
          |> assign(:changeset, changeset)
-         |> assign(:status, :error)}
+         |> assign(:status, :error)
+         |> push_patch(to: ~p"/events/#{socket.assigns.event.slug}/edit/attendees")}
 
       {:error, _} ->
         {:noreply,
          socket
          |> put_flash(:error, "Failed to authenticate.")
-         |> assign(:status, :error)}
+         |> assign(:status, :error)
+         |> push_patch(to: ~p"/events/#{socket.assigns.event.slug}/edit/attendees")}
 
       _any ->
         {:noreply,
          socket
-         |> assign(:status, :error)}
+         |> put_flash(:error, "Error sending invitation.")
+         |> assign(:status, :error)
+         |> push_patch(to: ~p"/events/#{socket.assigns.event.slug}/edit/attendees")}
     end
 
     # save_repost(socket, socket.assigns.action, repost_params)
@@ -110,6 +109,16 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
           _ -> {:error, "error on user invitation"}
         end
     end
+  end
+
+  defp list_posts(event) do
+    Rauversion.Events.list_tickets(event)
+    # Events.list_event() |> Repo.preload(user: :avatar_blob)
+  end
+
+  def new_invitation_changeset(%InviteTicketForm{} = invitation, attrs \\ %{}) do
+    invitation
+    |> InviteTicketForm.changeset(attrs)
   end
 
   @impl true

@@ -70,6 +70,10 @@ defmodule Rauversion.Accounts do
     |> where([u], not is_nil(u.username))
   end
 
+  def search_by_username(query, term) do
+    query |> where([u], like(u.username, ^"#{term}%"))
+  end
+
   def artists() do
     from(u in User,
       where: [type: ^"artist"],
@@ -146,6 +150,11 @@ defmodule Rauversion.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def not_in(query, id) do
+    query
+    |> where([u], u.id != ^id)
+  end
+
   ## User registration
 
   @doc """
@@ -204,6 +213,15 @@ defmodule Rauversion.Accounts do
 
   def update_user_profile(user, attrs \\ %{}) do
     User.profile_changeset(user, attrs)
+    |> Repo.update()
+  end
+
+  def is_label?(user) do
+    user.label
+  end
+
+  def update_label(user, attrs \\ %{}) do
+    User.label_changeset(user, attrs)
     |> Repo.update()
   end
 
@@ -593,11 +611,12 @@ defmodule Rauversion.Accounts do
   end
 
   def user_host_events(user) do
-    from p in Rauversion.Events.Event,
+    from(p in Rauversion.Events.Event,
       join: c in assoc(p, :event_hosts),
       where: c.user_id == ^user.id,
       preload: [:user],
       select: p
+    )
   end
 
   def find_managed_event(user, event_id) do
@@ -718,8 +737,9 @@ defmodule Rauversion.Accounts do
     q = track_orders_query(current_user)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid" or c.state == "free_access"
+      )
 
     query
     |> Repo.all()
@@ -740,8 +760,9 @@ defmodule Rauversion.Accounts do
     q = album_orders_query(current_user)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid" or c.state == "free_access"
+      )
 
     query
     |> Repo.all()
@@ -751,8 +772,9 @@ defmodule Rauversion.Accounts do
     q = album_orders_query(current_user)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "pending"
+      )
 
     query
     |> Repo.all()
@@ -780,8 +802,9 @@ defmodule Rauversion.Accounts do
       |> order_by([c], desc: c.id)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid"
+      )
 
     query
   end
@@ -799,9 +822,28 @@ defmodule Rauversion.Accounts do
       |> order_by([c], desc: c.id)
 
     query =
-      from [p, c] in q,
+      from([p, c] in q,
         where: c.state == "paid"
+      )
 
     query
+  end
+
+  ### connected accounts
+
+  def active_connected_accounts(user) do
+    from(p in Rauversion.ConnectedAccounts.ConnectedAccount)
+    |> where(parent_id: ^user.id)
+    |> where(state: "active")
+    |> Rauversion.Repo.all()
+    |> Repo.preload(:user)
+  end
+
+  def is_child_of?(user, child_user_id) do
+    from(p in Rauversion.ConnectedAccounts.ConnectedAccount)
+    |> where(parent_id: ^user.id)
+    |> where(state: "active")
+    |> where([c], ^child_user_id == c.user_id)
+    |> Rauversion.Repo.one()
   end
 end

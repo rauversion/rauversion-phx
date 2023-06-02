@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.SecurityForm do
+defmodule RauversionWeb.UserSettingsLive.SecurityForm do
   use RauversionWeb, :live_component
 
   @impl true

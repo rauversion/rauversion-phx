@@ -90,7 +90,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.RecordingsComponent do
         {
           :noreply,
           socket
-          |> put_flash(:info, "Event created successfully")
+          |> put_flash(:info, "Event recording created successfully")
           |> assign(:event_recordings, list_recordings(socket.assigns.event))
           |> assign(:display_form, false)
           # |> push_redirect(to: "/events/#{event.slug}/edit")

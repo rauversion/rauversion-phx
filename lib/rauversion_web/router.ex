@@ -156,6 +156,9 @@ defmodule RauversionWeb.Router do
     get "/users/invite", UserInvitationController, :new
     post "/users/invite", UserInvitationController, :create
 
+    get "/onbehalf/parent/:username", LabelAuthController, :back
+    get "/onbehalf/:username", LabelAuthController, :add
+
     get "/webpayplus/mall/create", TbkController, :mall_create
     post "/webpayplus/mall/create", TbkController, :send_mall_create
     post "/webpayplus/mall/return_url", TbkController, :mall_commit
@@ -168,6 +171,8 @@ defmodule RauversionWeb.Router do
     get "/webpayplus/mall/status/:token", TbkController, :mall_status
     post "/webpayplus/mall/refund", TbkController, :mall_refund
 
+    live "/accounts/connect", AccountConnectLive.New, :new
+
     live "/streams/:id", StreamsLive.Show, :show
 
     live "/tickets/qr/:signed_id", QrLive.Index, :index
@@ -179,6 +184,7 @@ defmodule RauversionWeb.Router do
     live "/users/settings/integrations", UserSettingsLive.Index, :integrations
     live "/users/settings/transbank", UserSettingsLive.Index, :transbank
     live "/users/settings/invitations", UserSettingsLive.Index, :invitations
+    live "/users/settings/labels", UserSettingsLive.Index, :labels
 
     get "/oembed", OEmbedController, :create
 
@@ -355,6 +361,7 @@ defmodule RauversionWeb.Router do
     live "/:username/following", FollowsLive.Index, :followings
     live "/:username/comments", FollowsLive.Index, :comments
     live "/:username/likes", FollowsLive.Index, :likes
+    live "/:username/artists", ProfileLive.Index, :artists
     live "/:username/tracks/all", ProfileLive.Index, :tracks_all
     live "/:username/tracks/reposts", ProfileLive.Index, :reposts
     live "/:username/tracks/albums", ProfileLive.Index, :albums

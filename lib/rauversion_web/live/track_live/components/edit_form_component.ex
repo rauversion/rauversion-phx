@@ -63,7 +63,7 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
     {:noreply,
      socket
      |> put_flash(:info, "Cover updated successfully")
-     |> push_redirect(to: "/tracks/#{socket.assigns.track.id}")}
+     |> push_patch(to: "/tracks/#{socket.assigns.track.id}")}
 
     # {:noreply, assign(socket, :prompt, value)}
   end

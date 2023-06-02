@@ -68,21 +68,22 @@ defmodule Rauversion.TrackPurchaseOrders.TrackPurchaseOrder do
           ]
       end
 
-    # {:ok, fd, file_path} = Temp.open("my-file")
-    #
-    # text = """
-    #  <h1>#{track.title}</h1>
-    #  <p>#{track.description}</p>
-    #  <p>Visit: <a href="#{Application.get_env(:rauversion, :domain) <> "/tracks/#{track.slug}"}">#{track.title}</a> on #{Application.get_env(:rauversion, :domain)}</p>
-    # """
-    #
-    # charlist = String.to_charlist(text)
-    # IO.write(fd, charlist)
-    ## File.close(fd) ## close file?
-    #
-    # file_entry = [source: {:file, file_path}, path: "/#{track.slug}/track.slug.html"]
-    #
-    # entries_group = entries_group ++ [file_entry]
+    {:ok, fd, file_path} = Temp.open("my-file")
+
+    text = """
+      <h1>#{track.title}</h1>
+
+      <p>#{track.description}</p>
+
+      <p>Visit: <a href="#{Application.get_env(:rauversion, :domain) <> "/tracks/#{track.slug}"}">#{track.title}</a> on #{Application.get_env(:rauversion, :domain)}</p>
+    """
+
+    IO.write(fd, text)
+    # File.close(fd) ## close file?
+
+    file_entry = [source: {:file, file_path}, path: "/#{track.slug}/track.slug.html"]
+
+    entries_group = entries_group ++ [file_entry]
     IO.inspect(entries_group)
     entries_group
   end

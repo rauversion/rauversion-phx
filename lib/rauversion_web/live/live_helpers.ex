@@ -633,7 +633,9 @@ defmodule RauversionWeb.LiveHelpers do
               <% end %>
 
               <%= for {_ref, msg, } <- @field.uploads[@name].errors do %>
-                <%= Phoenix.Naming.humanize(msg) %>
+                <div class="text-md font-bold text-red-600 py-4">
+                  <%= Phoenix.Naming.humanize(msg) %>
+                </div>
               <% end %>
             </div>
 
@@ -739,6 +741,14 @@ defmodule RauversionWeb.LiveHelpers do
     case Cldr.Date.to_string(date, format: format) do
       {:ok, d} -> d
       _ -> date
+    end
+  end
+
+  def my_music_label(current_user) do
+    if Rauversion.Accounts.is_label?(current_user) do
+      gettext("My label")
+    else
+      gettext("My Music")
     end
   end
 end

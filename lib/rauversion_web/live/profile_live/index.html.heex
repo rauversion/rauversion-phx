@@ -20,16 +20,30 @@
     <%= case @title do
       # TODO: this is the same as all, but eventually will list all only the pinned ones
       "all" ->
-        live_component(
-          RauversionWeb.TrackLive.TrackListComponent,
-          id: "all-track-#{@profile.id}",
-          profile: @profile,
-          title: @title,
-          tracks: [],
-          track_meta: %{},
-          page: 1,
-          current_user: assigns[:current_user]
-        )
+        if Rauversion.Accounts.is_label?(@profile) do
+          live_component(
+            RauversionWeb.ProfileLive.Components.ArtistsList,
+            id: "profile-insights-#{@profile.id}",
+            profile: @profile,
+            title: @title,
+            page: 1,
+            playlists: [],
+            track_meta: %{},
+            page: 1,
+            current_user: @current_user
+          )
+        else
+          live_component(
+            RauversionWeb.TrackLive.TrackListComponent,
+            id: "all-track-#{@profile.id}",
+            profile: @profile,
+            title: @title,
+            tracks: [],
+            track_meta: %{},
+            page: 1,
+            current_user: assigns[:current_user]
+          )
+        end
 
       "tracks_all" ->
         live_component(
@@ -86,6 +100,19 @@
       "insights" ->
         live_component(
           RauversionWeb.InsightsLive.InsightComponent,
+          id: "profile-insights-#{@profile.id}",
+          profile: @profile,
+          title: @title,
+          page: 1,
+          playlists: [],
+          track_meta: %{},
+          page: 1,
+          current_user: @current_user
+        )
+
+      "artists" ->
+        live_component(
+          RauversionWeb.ProfileLive.Components.ArtistsList,
           id: "profile-insights-#{@profile.id}",
           profile: @profile,
           title: @title,

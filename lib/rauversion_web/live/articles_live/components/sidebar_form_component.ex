@@ -181,7 +181,9 @@ defmodule RauversionWeb.ArticlesLive.SidebarFormComponent do
                           <% end %>
 
                           <%= for {_ref, msg, } <- @uploads.cover.errors do %>
-                            <%= Phoenix.Naming.humanize(msg) %>
+                            <div class="text-md font-bold text-red-600 py-4">
+                              <%= Phoenix.Naming.humanize(msg) %>
+                            </div>
                           <% end %>
                         </div>
 

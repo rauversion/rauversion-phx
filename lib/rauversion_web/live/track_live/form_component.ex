@@ -101,7 +101,7 @@ defmodule RauversionWeb.TrackLive.FormComponent do
         {:noreply,
          response
          |> put_flash(:info, "Track updated successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_patch(to: socket.assigns.return_to)}
 
       {:error, response} ->
         {:noreply, response}

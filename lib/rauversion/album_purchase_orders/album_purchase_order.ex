@@ -38,20 +38,20 @@ defmodule Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder do
       Rauversion.Playlists.get_playlist!(order.playlist_id)
       |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: [:audio_blob]]]])
 
-    # {:ok, fd, file_path} = Temp.open("my-file")
-    #
-    # text = """
-    #  <h1>#{playlist.title}</h1>
-    #  <p>#{playlist.description}</p>
-    #  <p>Visit: <a href="#{Application.get_env(:rauversion, :domain) <> "/playlists/#{playlist.slug}"}">#{playlist.title}</a> on #{Application.get_env(:rauversion, :domain)}</p>
-    # """
-    #
-    # IO.write(fd, text)
-    # charlist = String.to_charlist(text)
-    # IO.write(fd, charlist)
-    ## File.close(fd) ## close file?
-    #
-    # file_entry = [source: {:file, file_path}, path: "/#{playlist.slug}/#{playlist.slug}.html"]
+    {:ok, fd, file_path} = Temp.open("my-file")
+
+    text = """
+      <h1>#{playlist.title}</h1>
+
+      <p>#{playlist.description}</p>
+
+      <p>Visit: <a href="#{Application.get_env(:rauversion, :domain) <> "/playlists/#{playlist.slug}"}">#{playlist.title}</a> on #{Application.get_env(:rauversion, :domain)}</p>
+    """
+
+    IO.write(fd, text)
+    # File.close(fd) ## close file?
+
+    file_entry = [source: {:file, file_path}, path: "/#{playlist.slug}/#{playlist.slug}.html"]
 
     entries =
       Enum.map(playlist.track_playlists, fn item ->
@@ -65,7 +65,7 @@ defmodule Rauversion.AlbumPurchaseOrders.AlbumPurchaseOrder do
         ]
       end)
 
-    # entries = entries ++ [file_entry]
+    entries = entries ++ [file_entry]
 
     cover = Rauversion.BlobUtils.blob_proxy_url(playlist, :cover)
 

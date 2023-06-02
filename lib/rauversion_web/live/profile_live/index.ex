@@ -1,6 +1,6 @@
 defmodule RauversionWeb.ProfileLive.Index do
   use RauversionWeb, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount(RauversionWeb.UserLiveAuth)
 
   alias Rauversion.{Accounts, Tracks, UserFollows}
 
@@ -29,12 +29,6 @@ defmodule RauversionWeb.ProfileLive.Index do
   defp get_follow_for_current_user(_id, _current_user = nil) do
     nil
   end
-
-  # @impl true
-  # def handle_info({Tracks, [:tracks, _], _}, socket) do
-  #  IO.puts("OLIII")
-  #  {:noreply, assign(socket, :tracks, Tracks.list_tracks())}
-  # end
 
   @impl true
   def handle_event("follow-user", %{}, socket) do
@@ -166,7 +160,18 @@ defmodule RauversionWeb.ProfileLive.Index do
     |> assign(:data, menu(socket, id, "insights"))
   end
 
-  defp menu(socket, id, kind) do
+  defp apply_action(socket, :artists, %{"username" => id}) do
+    socket
+    |> assign(:title, "artists")
+    |> assign(:page_title, gettext("%{id}'s artists on Rauversion", id: id))
+    |> assign(:data, menu(socket, id, "insights"))
+  end
+
+  # TODO: we should do a menu for FAN?
+
+  # menu for artists
+  defp menu(socket = %{assigns: %{profile: %Rauversion.Accounts.User{label: label}}}, id, kind)
+       when is_nil(label) or label == false do
     [
       %{
         name: "All",
@@ -202,6 +207,29 @@ defmodule RauversionWeb.ProfileLive.Index do
         name: "Reposts",
         url: Routes.profile_index_path(socket, :reposts, id),
         selected: kind == "reposts",
+        kind: kind
+      }
+    ]
+  end
+
+  # menu for labels
+  defp menu(
+         socket = %{assigns: %{profile: %Rauversion.Accounts.User{label: label}}},
+         id,
+         kind
+       )
+       when not is_nil(label) do
+    [
+      %{
+        name: "Artists",
+        selected: kind == "artists",
+        url: Routes.profile_index_path(socket, :artists, id),
+        kind: kind
+      },
+      %{
+        name: "Music",
+        url: Routes.profile_index_path(socket, :albums, id),
+        selected: kind == "albums",
         kind: kind
       }
     ]

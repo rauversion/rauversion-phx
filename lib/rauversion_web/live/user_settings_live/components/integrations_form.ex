@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.IntegrationsForm do
+defmodule RauversionWeb.UserSettingsLive.IntegrationsForm do
   use RauversionWeb, :live_component
   alias Rauversion.Repo
 

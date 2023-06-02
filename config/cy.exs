@@ -116,6 +116,8 @@ config :active_storage, :secret_key_base, "xxxxxxxxxxx"
 config :active_job, repo: Rauversion.Repo
 config :active_storage, repo: Rauversion.Repo
 
+config :rauversion, :domain, "http://localhost:4002"
+
 config :mogrify,
   mogrify_command: [
     path: "mogrify",

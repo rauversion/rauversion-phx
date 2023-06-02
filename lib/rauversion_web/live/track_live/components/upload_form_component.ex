@@ -36,7 +36,9 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
               </p>
             </div>
 
-            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5" phx-drop-target={@uploads.audio.ref}>
+            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5"
+              data-cy="upload-track"
+              phx-drop-target={@uploads.audio.ref}>
               <div class="flex-col">
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                   <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md">
@@ -59,7 +61,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                       <div class="flex text-sm text-gray-600 text-gray-300 py-3">
                         <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                           <span><%= gettext("Upload a Audio file") %></span>
-                          <.live_file_input upload={@uploads.audio} class="hidden" />
+                          <.live_file_input upload={@uploads.audio} class="invisible" />
                           <% # = live_file_input @uploads.audio, class: "hidden" %>
                         </label>
                         <p class="pl-1"><%= gettext("or drag and drop") %></p>
@@ -76,8 +78,10 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                         <% end %>
 
                         <%= for {_ref, msg, } <- @uploads.audio.errors do %>
-                          <%= Phoenix.Naming.humanize(msg) %>
-                        <% end %>
+                          <div class="text-md font-bold text-red-600 py-4">
+                            <%= Phoenix.Naming.humanize(msg) %>
+                          </div>
+                         <% end %>
                       </div>
 
                       <p class="text-xs text-gray-500">

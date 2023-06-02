@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UsersettingsLive.FormComponent do
+defmodule RauversionWeb.UserSettingsLive.FormComponent do
   use RauversionWeb, :live_component
 
   alias Rauversion.Accounts
@@ -22,6 +22,21 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
   defp get_change_set(:profile, socket, user) do
     socket
     |> assign(:changeset, Accounts.change_user_profile(user))
+    |> allow_upload(:avatar,
+      accept: ~w(.jpg .jpeg .png),
+      max_entries: 1,
+      max_file_size: 15_000_000
+    )
+    |> allow_upload(:profile_header,
+      accept: ~w(.jpg .jpeg .png),
+      max_entries: 1,
+      max_file_size: 15_000_000
+    )
+  end
+
+  defp get_change_set(:labels, socket, user) do
+    socket
+    |> assign(:changeset, Accounts.change_user_email(user))
     |> allow_upload(:avatar,
       accept: ~w(.jpg .jpeg .png),
       max_entries: 1,
@@ -120,6 +135,19 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
     save_profile(socket, socket.assigns.action, params)
   end
 
+  @impl true
+  def handle_event(
+        "save",
+        %{"action" => "update_label"} = params,
+        socket = %{
+          assigns: %{
+            action: :labels
+          }
+        }
+      ) do
+    save_label(socket, socket.assigns.action, params)
+  end
+
   defp save_email(socket, :email, %{"current_password" => password, "user" => user_params}) do
     user = socket.assigns.current_user
 
@@ -137,7 +165,28 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
             :info,
             "A link to confirm your email change has been sent to the new address."
           )
-          |> push_redirect(to: socket.assigns.return_to)
+          |> push_navigate(to: socket.assigns.return_to)
+
+        {:error, changeset} ->
+          socket |> assign(:changeset, changeset)
+      end
+
+    {:noreply, socket}
+  end
+
+  defp save_label(socket, :labels, params) do
+    %{"user" => user_params} = params
+
+    user = socket.assigns.current_user
+
+    socket =
+      case Accounts.update_label(user, user_params) do
+        {:ok, _user} ->
+          socket
+          |> put_flash(:info, "Label config updated successfully.")
+          |> push_navigate(to: "/users/settings/labels")
+
+        # |> PhoenixLiveSession.put_session(:user_return_to, "/user/settings/security")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)
@@ -175,20 +224,18 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
       |> Map.put("avatar", files_for(socket, :avatar))
       |> Map.put("profile_header", files_for(socket, :profile_header))
 
-    IO.inspect(user_params)
+    case Accounts.update_user_profile(user, user_params) do
+      {:ok, _user} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "User profile updated successfully.")
+         # |> put_session(:flash, %{info: "Event created successfully"})
 
-    socket =
-      case Accounts.update_user_profile(user, user_params) do
-        {:ok, _user} ->
-          socket
-          |> put_flash(:info, "User profile updated successfully.")
-          |> push_redirect(to: "/users/settings")
+         |> push_patch(to: "/users/settings")}
 
-        {:error, changeset} ->
-          socket |> assign(:changeset, changeset)
-      end
-
-    {:noreply, socket}
+      {:error, changeset} ->
+        {:noreply, socket |> assign(:changeset, changeset)}
+    end
   end
 
   defp save_profile(socket, :notifications, %{"user" => user_params}) do
@@ -199,7 +246,7 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
         {:ok, _user} ->
           socket
           |> put_flash(:info, "User profile updated successfully.")
-          |> redirect(to: "/users/settings")
+          |> push_navigate(to: "/users/settings")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)
@@ -216,7 +263,7 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
         {:ok, _user} ->
           socket
           |> put_flash(:info, "User profile updated successfully.")
-          |> redirect(to: "/users/settings/notifications")
+          |> push_navigate(to: "/users/settings/notifications")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)
@@ -233,7 +280,7 @@ defmodule RauversionWeb.UsersettingsLive.FormComponent do
         {:ok, _user} ->
           socket
           |> put_flash(:info, "User profile updated successfully.")
-          |> redirect(to: "/users/settings/transbank")
+          |> push_navigate(to: "/users/settings/transbank")
 
         {:error, changeset} ->
           socket |> assign(:changeset, changeset)
