@@ -123,21 +123,30 @@ defmodule RauversionWeb.PlaylistLive.Show do
 
   @impl true
   def handle_params(%{"id" => id} = _params, _, socket) do
-    playlist = get_playlist(id, socket.assigns.live_action)
+    case get_playlist(id, socket.assigns.live_action, socket.assigns.current_user) do
+      %{} = playlist ->
+        track =
+          case playlist.track_playlists do
+            [tp | _] -> tp.track
+            _ -> nil
+          end
 
-    track =
-      case playlist.track_playlists do
-        [tp | _] -> tp.track
-        _ -> nil
-      end
+        {:noreply,
+         socket
+         |> assign(:current_tab, "basic-info-tab")
+         |> assign(:page_title, page_title(socket.assigns.live_action))
+         |> assign(:playlist, playlist)
+         |> assign(:track, track)
+         |> assign(:meta_tags, metatags(playlist))}
 
-    {:noreply,
-     socket
-     |> assign(:current_tab, "basic-info-tab")
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:playlist, playlist)
-     |> assign(:track, track)
-     |> assign(:meta_tags, metatags(playlist))}
+      _ ->
+        {
+          :noreply,
+          socket
+          |> put_flash(:error, "not allowed")
+          |> push_patch(to: ~p"/")
+        }
+    end
   end
 
   @impl true
@@ -189,17 +198,22 @@ defmodule RauversionWeb.PlaylistLive.Show do
     socket |> assign(:playlist, event) |> assign(:payment_failure, true)
   end
 
-  defp get_playlist(id, :private) do
+  defp get_playlist(id, :private, _current_user) do
     Rauversion.Playlists.find_by_signed_id!(id)
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 
-  defp get_playlist(id, :edit) do
-    Playlists.get_by_slug!(id)
-    |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+  defp get_playlist(id, :edit, current_user) do
+    case Rauversion.Accounts.get_playlist_by_slug!(current_user, id) do
+      %{} = p ->
+        p |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+
+      _ ->
+        nil
+    end
   end
 
-  defp get_playlist(id, :show) do
+  defp get_playlist(id, :show, _current_user) do
     Playlists.get_by_slug!(id)
     |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end

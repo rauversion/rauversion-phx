@@ -26,7 +26,7 @@ defmodule Rauversion.MixProject do
   def application do
     [
       mod: {Rauversion.Application, []},
-      extra_applications: [:phoenix, :ex_cldr, :logger, :runtime_tools, :os_mon, :ssl]
+      extra_applications: [:phoenix, :phoenix_live_view, :ex_cldr, :logger, :runtime_tools, :os_mon, :ssl]
     ]
   end
 
@@ -52,8 +52,8 @@ defmodule Rauversion.MixProject do
       {:phoenix_view, "2.0.2"},
       {:phoenix_html, "3.3.0"},
       {:phoenix_live_reload, "~> 1.2", only: [:dev, :cy, :test]},
-      {:phoenix_live_view, "~> 0.18.4"},
-      {:phoenix_live_dashboard, "~> 0.7"},
+      {:phoenix_live_view, "~> 0.19.0"},
+      {:phoenix_live_dashboard, "~> 0.8"},
       {:floki, ">= 0.30.0", override: true},
       {:mux, "~> 1.8.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},

@@ -226,11 +226,8 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
       end)
 
     case downloaded_stream do
-      {:ok, conn} ->
-        conn
-
-      _ ->
-        conn
+      {:ok, conn} -> conn
+      _ -> conn
     end
 
     # send_stream(
