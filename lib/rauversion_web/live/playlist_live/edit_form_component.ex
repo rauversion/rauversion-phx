@@ -57,7 +57,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                 <%= gettext("Cover photo") %>
               </label>
               <div
-                phx-drop-target={@uploads.cover.ref}
+                phx-drop-target={@live_uploads.cover.ref}
                 class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md"
               >
                 <div class="space-y-1 text-center">
@@ -79,13 +79,13 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                   <div class="flex text-sm text-gray-600">
                     <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                       <span><%= gettext("Upload Cover") %></span>
-                      <.live_file_input upload={@uploads.cover} class="hidden" />
+                      <.live_file_input upload={@live_uploads.cover} class="hidden" />
                     </label>
                     <p class="pl-1">or drag and drop</p>
                   </div>
 
                   <div>
-                    <%= for entry <- @uploads.cover.entries do %>
+                    <%= for entry <- @live_uploads.cover.entries do %>
                       <div class="flex items-center space-x-2">
                         <.live_img_preview entry={entry} width={300} />
                         <div class="text-xl font-bold">
@@ -94,7 +94,7 @@ defmodule RauversionWeb.PlaylistLive.EditFormComponent do
                       </div>
                     <% end %>
 
-                    <%= for {_ref, msg, } <- @uploads.cover.errors do %>
+                    <%= for {_ref, msg, } <- @live_uploads.cover.errors do %>
                       <%= Phoenix.Naming.humanize(msg) %>
                     <% end %>
                   </div>

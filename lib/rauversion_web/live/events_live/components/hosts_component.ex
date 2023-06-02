@@ -284,7 +284,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.HostsComponent do
                   <div class="sm:col-span-4 pb-4">
                     <%= form_input_renderer(i, %{
                       type: :upload,
-                      uploads: @uploads,
+                      live_uploads: @uploads,
                       name: :avatar,
                       label: "Avatar"
                     }) %>

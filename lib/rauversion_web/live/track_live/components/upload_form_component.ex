@@ -6,7 +6,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
 
   def render(
         %{
-          uploads: _uploads,
+          #uploads: _uploads,
           target: _target,
           track: _track,
           current_user: _current_user,
@@ -36,7 +36,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
               </p>
             </div>
 
-            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5" phx-drop-target={@uploads.audio.ref}>
+            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5" phx-drop-target={@live_uploads.audio.ref}>
               <div class="flex-col">
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                   <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md">
@@ -59,14 +59,14 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                       <div class="flex text-sm text-gray-600 text-gray-300 py-3">
                         <label class="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                           <span><%= gettext("Upload a Audio file") %></span>
-                          <.live_file_input upload={@uploads.audio} class="hidden" />
+                          <.live_file_input upload={@live_uploads.audio} class="hidden" />
                           <% # = live_file_input @uploads.audio, class: "hidden" %>
                         </label>
                         <p class="pl-1"><%= gettext("or drag and drop") %></p>
                       </div>
 
                       <div>
-                        <%= for entry <- @uploads.audio.entries do %>
+                        <%= for entry <- @live_uploads.audio.entries do %>
                           <div class="flex items-center space-x-2">
                             <%= live_audio_preview(entry, height: 80) %>
                             <div class="text-xl font-bold">
@@ -75,7 +75,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
                           </div>
                         <% end %>
 
-                        <%= for {_ref, msg, } <- @uploads.audio.errors do %>
+                        <%= for {_ref, msg, } <- @live_uploads.audio.errors do %>
                           <%= Phoenix.Naming.humanize(msg) %>
                         <% end %>
                       </div>
@@ -97,7 +97,7 @@ defmodule RauversionWeb.TrackLive.UploadFormComponent do
               <%= radio_button(f, :private, false) %>
             </div>
 
-            <%= if @uploads.audio.entries |> Enum.any? do %>
+            <%= if @live_uploads.audio.entries |> Enum.any? do %>
               <div class="pt-5">
                 <div class="flex items-center justify-end">
                   <%= live_redirect to: Routes.profile_index_path(@socket, :index, @current_user.username), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>

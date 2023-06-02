@@ -583,7 +583,7 @@ defmodule RauversionWeb.LiveHelpers do
       <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div
           class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md"
-          phx-drop-target={@field.uploads[@name].ref}
+          phx-drop-target={@field.live_uploads[@name].ref}
         >
           <div class="space-y-1 text-center">
             <%= if Rauversion.BlobUtils.blob_for(@form.data, "#{@name}") == nil do %>
@@ -614,7 +614,7 @@ defmodule RauversionWeb.LiveHelpers do
                   <%= gettext("Upload a %{subject}", %{subject: @field[:label] || "Track"}) %>
                 </span>
                 <% # = form.file_field :audio, direct_upload: true, id: "file-audio-upload", class: "sr-only" %>
-                <.live_file_input upload={@field.uploads[@name]} class="hidden" />
+                <.live_file_input upload={@field.live_uploads[@name]} class="hidden" />
                 <% # = live_file_input @field.uploads[name], class: "hidden" %>
               </label>
               <p class="pl-1">
@@ -623,7 +623,7 @@ defmodule RauversionWeb.LiveHelpers do
             </div>
 
             <div>
-              <%= for entry <- @field.uploads[@name].entries do %>
+              <%= for entry <- @field.live_uploads[@name].entries do %>
                 <div class="flex items-center space-x-2">
                   <.live_img_preview entry={entry} width={300} />
                   <div class="text-xl font-bold">
@@ -632,7 +632,7 @@ defmodule RauversionWeb.LiveHelpers do
                 </div>
               <% end %>
 
-              <%= for {_ref, msg, } <- @field.uploads[@name].errors do %>
+              <%= for {_ref, msg, } <- @field.live_uploads[@name].errors do %>
                 <%= Phoenix.Naming.humanize(msg) %>
               <% end %>
             </div>

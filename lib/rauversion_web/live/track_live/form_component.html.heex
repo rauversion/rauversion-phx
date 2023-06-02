@@ -12,7 +12,7 @@
             step={@step}
             target={@myself}
             current_user={@current_user}
-            uploads={@uploads}
+            live_uploads={@uploads}
             return_to={Routes.track_index_path(@socket, :index)}
           />
         <% else %>
@@ -60,7 +60,7 @@
           step={@step}
           target={@myself}
           current_user={@current_user}
-          uploads={@uploads}
+          live_uploads={@uploads}
           return_to={Routes.track_index_path(@socket, :index)}
         />
       <% end %>
@@ -74,7 +74,7 @@
           step={@step}
           target={@myself}
           current_user={@current_user}
-          uploads={@uploads}
+          live_uploads={@uploads}
           current_tab={@current_tab}
           return_to={Routes.track_index_path(@socket, :index)}
         />

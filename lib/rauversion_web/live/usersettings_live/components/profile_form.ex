@@ -113,9 +113,9 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
                     <span>Change</span>
                     <span class="sr-only"><%= gettext("user photo") %></span>
                   <% end %>
-                  <div phx-drop-target={@uploads.avatar.ref}>
+                  <div phx-drop-target={@live_uploads.avatar.ref}>
                     <.live_file_input
-                      upload={@uploads.avatar}
+                      upload={@live_uploads.avatar}
                       class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
                     />
                     <% # = live_file_input @uploads.avatar, class: "absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md" %>
@@ -135,7 +135,7 @@ defmodule RauversionWeb.UsersettingsLive.ProfileForm do
           <div class="sm:col-span-6">
             <%= form_input_renderer(f, %{
               type: :upload,
-              uploads: @uploads,
+              live_uploads: @live_uploads,
               name: :profile_header,
               label: gettext("Cover image")
             }) %>
