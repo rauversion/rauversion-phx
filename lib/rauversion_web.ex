@@ -49,7 +49,7 @@ defmodule RauversionWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {RauversionWeb.LayoutView, "live.html"}
+        layout: {RauversionWeb.LayoutView, :live}
 
       use PhoenixMetaTags.TagController
 
