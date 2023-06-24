@@ -60,11 +60,16 @@ Player = {
 
       // this.el.dataset.playerPeaks = e.detail.peaks
       // this.el.dataset.playerUrl = e.detail.url
-      setTimeout(()=>{
+
+
+      this._wave.stop()
+      this._wave.load(this.el.dataset.playerUrl, JSON.parse(this.el.dataset.playerPeaks))
+      this._wave.play()
+      /*setTimeout(()=>{
         this.destroyWave();
         this.initWave();
         this.playSong()
-      }, 400)
+      }, 400)*/
     }
 
     this.waveClickListener = (e)=> {
@@ -127,7 +132,7 @@ Player = {
 
     this._wave = WaveSurfer.create({
       container: this.playerTarget,
-      backend: 'MediaElement',
+      //backend: 'MediaElement',
       waveColor: 'grey',
       progressColor: 'tomato',
       ignoreSilenceMode: true,
@@ -160,9 +165,9 @@ Player = {
       this.dispatchPlay()
     })
 
-    this._wave.on('loading', (percent)=> {
+    /*this._wave.on('loading', (percent)=> {
       console.log("loaddingggnn!!")
-    })
+    })*/
 
     this._wave.backend.on('canplay', () => {
       console.log("CAN PLAY!!")
@@ -206,6 +211,7 @@ Player = {
   },
   dispatchPlay(){
     this.playiconTarget.style.display = 'block'
+    this.loadingiconTarget.style.display = 'none'
     // this.loadingiconTarget.style.display = 'block'
     this.pauseiconTarget.style.display = 'none'
 
@@ -234,12 +240,12 @@ Player = {
     this?._wave?.destroy()
   },
   nextSong(){
-    this.destroyWave()
+    //this.destroyWave()
     this.pushEvent("request-song", {action: "next"} )
     console.log("no more songs to play")
   },
   prevSong(){
-    this.destroyWave()
+    //this.destroyWave()
     this.pushEvent("request-song", {action: "prev"} )
   },
   playSong(){
