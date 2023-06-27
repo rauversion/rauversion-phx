@@ -40,7 +40,8 @@ Player = {
       // this._wave.drawer.progressWave.style.width = `${e.detail}px`
       // this._wave.drawer.progress(e.detail)
       // this.drawer.progress(this.backend.getPlayedPercents());
-      this._wave.drawer.progress(e.detail.percent)
+      //this._wave.drawer.progress(e.detail.percent)
+      this._wave.seekTo(e.detail.percent)
     }
 
     this.audioProcessPlayListeners = (e) => {
@@ -48,7 +49,8 @@ Player = {
       this.playiconTarget.style.display = 'block'
       this.pauseiconTarget.style.display = 'none'
       this.playing = true
-      this._wave.drawer.progress(e.detail.percent)
+      //this._wave.drawer.progress(e.detail.percent)
+      this._wave.seekTo(e.detail.percent)
     }
 
     this.audioProcessPauseListeners = (e) => {
@@ -56,7 +58,8 @@ Player = {
       this.playiconTarget.style.display = 'none'
       this.pauseiconTarget.style.display = 'block'
       this.playing = false
-      this._wave.drawer.progress(e.detail.percent)
+      //this._wave.drawer.progress(e.detail.percent)
+      this._wave.seekTo(e.detail.percent)
     }
 
     this.drawerListener = (e)=> {
@@ -65,8 +68,8 @@ Player = {
         const ev = new CustomEvent(`audio-process-mouseup`, {
           detail: {
            trackId: trackId,
-           position: this._wave.drawer.lastPos,
-           percent: this._wave.backend.getPlayedPercents()
+           position: this._wave.getCurrentTime(),
+           percent: this._wave.getCurrentTime() / this._wave.getDuration()
          }
         });
         document.dispatchEvent(ev)
@@ -107,13 +110,13 @@ Player = {
       height: this.height || 45,
       barWidth: 2,
       barGap: 3,
-      minPxPerSec: 2,
+      //minPxPerSec: 2,
       pixelRatio: 10,
       cursorWidth: 1,
       cursorColor: "lightgray",
-      normalize: false,
+      //normalize: false,
       responsive: true,
-      fillParent: true
+      //fillParent: true
     })
 
     const data = JSON.parse(this.peaks) 
@@ -122,7 +125,7 @@ Player = {
     this._wave.on('ready', ()=> {
       console.log("TRACK HOOK READY")
       // sends the progress position to track_component
-      this._wave.drawer.wrapper.addEventListener('click', this.drawerListener)
+      this._wave.getWrapper().addEventListener('click', this.drawerListener)
     })
   },
   destroyWave() {

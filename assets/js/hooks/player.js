@@ -63,24 +63,20 @@ Player = {
 
 
       this._wave.stop()
-      this._wave.load(this.el.dataset.playerUrl, JSON.parse(this.el.dataset.playerPeaks))
-      this._wave.play()
-      /*setTimeout(()=>{
-        this.destroyWave();
-        this.initWave();
-        this.playSong()
-      }, 400)*/
+      this._wave.once('ready', () => this._wave.play())
+      setTimeout(()=>{
+        this._wave.load(this.el.dataset.playerUrl, JSON.parse(this.el.dataset.playerPeaks))
+      }, 400)
     }
 
     this.waveClickListener = (e)=> {
 
       setTimeout(()=>{
-
         const trackId = this.el.dataset.trackId
         const ev = new CustomEvent(`audio-process-${trackId}`, {
           detail: {
-           position: this._wave.drawer.lastPos,
-           percent: this._wave.backend.getPlayedPercents()
+           position: this._wave.getCurrentTime(),
+           percent: this._wave.getCurrentTime() / this._wave.getDuration()
          }
         });
         document.dispatchEvent(ev)
@@ -91,7 +87,8 @@ Player = {
 
     this.mouseUpHandler = (e) => {
       if(e.detail.trackId == this.el.dataset.trackId){
-        this._wave.drawer.progress(e.detail.percent)
+        this._wave.seekTo(e.detail.percent)
+        //this._wave.drawer.progress(e.detail.percent)
       }
     }
 
@@ -132,24 +129,21 @@ Player = {
 
     this._wave = WaveSurfer.create({
       container: this.playerTarget,
-      //backend: 'MediaElement',
+      autoplay: true,
       waveColor: 'grey',
       progressColor: 'tomato',
-      ignoreSilenceMode: true,
       height: 45,
       barWidth: 2,
       barGap: 3,
-      //fillParent: false,
-      //barHeight: 10, // the height of the wave
-      minPxPerSec: 2,
-      pixelRatio: 10,
-      cursorWidth: 1,
-      cursorColor: "lightgray",
-      normalize: false,
       responsive: true,
-      fillParent: true,
+      //minPxPerSec: 2,
+      pixelRatio: 10,
+      //cursorWidth: 1,
+      //cursorColor: "lightgray",
       volume: this.range.value
     })
+
+    window.w = this._wave
 
     this._wave.setVolume( window.store.getState().volume )
 
@@ -165,25 +159,18 @@ Player = {
       this.dispatchPlay()
     })
 
-    /*this._wave.on('loading', (percent)=> {
-      console.log("loaddingggnn!!")
-    })*/
-
-    this._wave.backend.on('canplay', () => {
+    /*this._wave.backend.on('canplay', () => {
       console.log("CAN PLAY!!")
       this.loadingiconTarget.style.display = 'none'
-      // this.pauseiconTarget.style.display = 'block'
-      //this.loadingiconTarget.style.display = 'none'
-      //this.playiconTarget.style.display = 'block'
-    });
+    });*/
 
     this._wave.on('audioprocess', (e)=> {
       const trackId = this.el.dataset.trackId
       // console.log("AUDIO PROCESS", e)
       const ev = new CustomEvent(`audio-process-${trackId}`, {
         detail: {
-          position: this._wave.drawer.lastPos,
-          percent: this._wave.backend.getPlayedPercents()
+          position: this._wave.getCurrentTime(), //this._wave.drawer.lastPos,
+          percent: this._wave.getCurrentTime() / this._wave.getDuration()
         }
       });
       document.dispatchEvent(ev)
@@ -195,7 +182,8 @@ Player = {
       //this.playiconTarget.style.display = 'block'
       //this.loadingiconTarget.style.display = 'none'
 
-      this._wave.drawer.wrapper.addEventListener('click', this.waveClickListener)
+      this._wave.getWrapper().addEventListener('click', this.waveClickListener)
+      //this._wave.drawer.wrapper.addEventListener('click', this.waveClickListener)
     })
 
     // receives audio-process progress from track hook
