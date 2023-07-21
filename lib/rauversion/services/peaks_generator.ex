@@ -2,7 +2,8 @@ defmodule Rauversion.Services.PeaksGenerator do
   def run_audiowaveform(file, duration) do
     desired_pixels = 10
 
-    pixels_per_second = desired_pixels_per_second(desired_pixels, duration)
+    # desired_pixels_per_second(desired_pixels, duration)
+    pixels_per_second = calculate_pixels_per_second(duration)
 
     IO.inspect("pixels_per_second: #{pixels_per_second}")
 
@@ -20,6 +21,8 @@ defmodule Rauversion.Services.PeaksGenerator do
            "-"
          ]) do
       {output, _status} ->
+        IO.inspect(output)
+
         output
         |> Jason.decode!()
         |> get_in(["data"])
@@ -57,6 +60,10 @@ defmodule Rauversion.Services.PeaksGenerator do
     end)
     |> Enum.filter(&(!is_nil(&1)))
     |> normalize
+  end
+
+  def calculate_pixels_per_second(duration_in_seconds, desired_waveform_width \\ 800) do
+    :erlang.integer_to_binary(round(desired_waveform_width / duration_in_seconds))
   end
 
   def desired_pixels_per_second(desired_pixels, duration) do

@@ -1,18 +1,3 @@
-<%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.track_index_path(@socket, :index)}>
-    <.live_component
-      module={RauversionWeb.TrackLive.FormComponent}
-      id={@track.id || :new}
-      title={@page_title}
-      action={@live_action}
-      track={@track}
-      current_user={@current_user}
-      step={@step}
-      return_to={Routes.track_index_path(@socket, :index)}
-    />
-  </.modal>
-<% end %>
-
 <main class="bg-white dark:bg-black">
   <div>
     <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">

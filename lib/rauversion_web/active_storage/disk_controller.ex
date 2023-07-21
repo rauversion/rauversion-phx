@@ -35,10 +35,17 @@ defmodule RauversionWeb.ActiveStorage.DiskController do
       {:ok, decoded} ->
         [content_length] = get_req_header(conn, "content-length")
 
-        [mime_type] = get_req_header(conn, "content-type")
+        # [mime_type] = get_req_header(conn, "content-type")
+        mime_type = nil
 
         if acceptable_content?(decoded, content_length, mime_type) do
-          {:ok, body, _conn_details} = Plug.Conn.read_body(conn)
+          body =
+            case Plug.Conn.read_body(conn) do
+              {:more, body, _conn_details} -> body
+              {:ok, body, _conn_details} -> body
+              _ -> nil
+            end
+
           service_name = decoded["service_name"] || :local
 
           service = named_disk_service(service_name)
@@ -79,8 +86,8 @@ defmodule RauversionWeb.ActiveStorage.DiskController do
   end
 
   def acceptable_content?(token, content_length, content_mime_type) do
-    token["content_type"] == content_mime_type &&
-      to_string(token["content_length"]) == content_length
+    # token["content_type"] == content_mime_type &&
+    to_string(token["content_length"]) == content_length
   end
 
   defp error_response(conn, status, message) do

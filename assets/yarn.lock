@@ -191,12 +191,12 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
-"@rails/activestorage@^6.0.5":
-  version "6.0.5"
-  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-6.0.5.tgz"
-  integrity sha512-jp2UKh1QChjOGsApYO3HHuBH1yfv4mqOcKuB70fsT79O/CJWEACVnjKIdaqO+B9BJTKihaxyyepvL7kLfUFiDw==
+"@rails/activestorage@^7.0.6":
+  version "7.0.6"
+  resolved "https://registry.npmjs.org/@rails/activestorage/-/activestorage-7.0.6.tgz"
+  integrity sha512-sLr5Uj8cnWkX9lLV7wk8mIVFt6XFOJR7mAXm0QmDnrR/YGMF4Ho5tcVRUHzlyAisRQcHp6D0zHSVgOUukF8OHg==
   dependencies:
-    spark-md5 "^3.0.0"
+    spark-md5 "^3.0.1"
 
 "@tiptap/core@2.0.0-beta.182", "@tiptap/core@^2.0.0-beta.182":
   version "2.0.0-beta.182"
@@ -983,19 +983,19 @@ path-type@^4.0.0:
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
 phoenix@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/phoenix/-/phoenix-1.7.1.tgz#99a2f697eb8e0a95c64e5756829621c52966069c"
-  integrity sha512-DORpAOHp8XdQDs6WT2yD65fhUQXhzrD+CTZCKqWQ9g0G/fyM8EKsSDhtOwl54Nr2DDBu8JARMR97OfLYCiKAoQ==
+  version "1.7.6"
+  resolved "https://registry.npmjs.org/phoenix/-/phoenix-1.7.6.tgz"
+  integrity sha512-TOZmJqQaZIWDXMcRXo/qLSBcROFgfA0W/LlaJ9RpETGSYSTouGTJKw5ozR6dII6iPHpOXHagc9kV5WYO9LtTRQ==
 
 phoenix_html@^3.3.1:
   version "3.3.1"
-  resolved "https://registry.yarnpkg.com/phoenix_html/-/phoenix_html-3.3.1.tgz#87461c879a075cad6a7340e434e40f69a815f11b"
+  resolved "https://registry.npmjs.org/phoenix_html/-/phoenix_html-3.3.1.tgz"
   integrity sha512-t/9Saqpe8vznZYHMDim7HS32Dd2/rKf3+uxuKKNRADLpGXVIDjselOY6pK8aNaLiY2gnlqsoz6yIpUBuoLT63w==
 
 phoenix_live_view@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/phoenix_live_view/-/phoenix_live_view-0.19.0.tgz#ba155fef60966ede49e8530a8b0117fce7c9daec"
-  integrity sha512-A5csAJh8wHqhconanS2BI/5vhCSRKvdrEqLc+FF8BaKGm1xu00f3rC/mENT7Aen+jeKP9jjy028fDMMYWk4F+w==
+  version "0.19.3"
+  resolved "https://registry.npmjs.org/phoenix_live_view/-/phoenix_live_view-0.19.3.tgz"
+  integrity sha512-naXvQmIOfpV99+g+YdIFz8I2O79R3vFRziSVuyqmZ1bemMV0TZIHAAwOhsMjoXtkvM8GmGbTrxMU8hq/atRrnw==
 
 pify@^2.3.0:
   version "2.3.0"
@@ -1319,7 +1319,7 @@ source-map@^0.5.7:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz"
   integrity sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==
 
-spark-md5@^3.0.0:
+spark-md5@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.2.tgz"
   integrity sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==
@@ -1440,7 +1440,7 @@ w3c-keyname@^2.2.0:
 
 wavesurfer.js@7.0.0-beta.11:
   version "7.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/wavesurfer.js/-/wavesurfer.js-7.0.0-beta.11.tgz#83f6526bc51e8318e487beb3de2cab7c4fb08003"
+  resolved "https://registry.npmjs.org/wavesurfer.js/-/wavesurfer.js-7.0.0-beta.11.tgz"
   integrity sha512-PwcnEIcV3x8Zi0XMWFkzRy0NsJyTaFITIXByoQn/y6OqtJn9W5jzryTvt/mxv+FcKAWA7yGqkxRGX336D0iWTQ==
 
 web-vitals@^1.0.1:

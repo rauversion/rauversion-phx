@@ -1,6 +1,8 @@
 <div class="dark:bg-black dark:text-white space-y-8 divide-y divide-gray-200 dark:divide-gray-800 sm:space-y-5">
   <%= if is_creator?(@current_user) do %>
     <div class="mx-20 py-20">
+      <% #= Jason.encode!(@blob) %>
+
       <%= if @step.name == "upload" do %>
         <%= # is_creator?(@current_user) do
           if true do %>
@@ -11,6 +13,7 @@
             track={@track}
             step={@step}
             target={@myself}
+            blob={@blob}
             current_user={@current_user}
             live_uploads={@uploads}
             return_to={Routes.track_index_path(@socket, :index)}

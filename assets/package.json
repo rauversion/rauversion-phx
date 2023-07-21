@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",
-    "@rails/activestorage": "^6.0.5",
+    "@rails/activestorage": "^7.0.6",
     "chart.js": "^3.8.0",
     "dante3": "^1.1.5",
     "flatpickr": "^4.6.13",
