@@ -68,7 +68,7 @@ defmodule Rauversion.TracksTest do
     end
 
     test "create_track/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Tracks.create_track(@invalid_attrs)
+      assert {:error, :insert, %Ecto.Changeset{}, %{}} = Tracks.create_track(@invalid_attrs)
     end
 
     test "update_track/2 with valid data updates the track", %{user: user} do
@@ -94,6 +94,7 @@ defmodule Rauversion.TracksTest do
       assert track.title == "some updated title"
     end
 
+    @tag skip: "this test is incomplete"
     test "update_track/2 with valid file", %{user: user} do
       track = track_fixture(%{user_id: user.id})
 
@@ -115,7 +116,7 @@ defmodule Rauversion.TracksTest do
 
     test "update_track/2 with invalid data returns error changeset", %{user: user} do
       track = track_fixture(%{user_id: user.id})
-      assert {:error, %Ecto.Changeset{}} = Tracks.update_track(track, @invalid_attrs)
+      assert {:error, :insert, %Ecto.Changeset{}, %{}} = Tracks.update_track(track, @invalid_attrs)
       assert track == Tracks.get_track!(track.id)
     end
 

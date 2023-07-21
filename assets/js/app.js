@@ -33,6 +33,7 @@ import Editor from "./hooks/editor"
 import ArticleContent from "./hooks/article_content"
 import PlayButton from "./hooks/play_button"
 import Select from "./hooks/select"
+import AudioUploader from "./hooks/audio_uploader"
 
 import { datetimeHook } from './hooks/datetime_picker'
 
@@ -97,6 +98,7 @@ Hooks.Editor = Editor
 Hooks.ArticleContent = ArticleContent
 Hooks.DatetimeHook = datetimeHook
 Hooks.Select = Select
+Hooks.AudioUploader = AudioUploader
 
 Hooks.currentTimezone = {
   mounted(){
@@ -166,12 +168,15 @@ window.addEventListener(`phx:remove-from-playlist`, (e) => {
   }
 })
 
-let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {
-  _csrf_token: csrfToken,
-  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  timezone_offset: -(new Date().getTimezoneOffset() / 60)
-  //store: JSON.stringify(store.getState().playlist)
-}})
+let liveSocket = new LiveSocket("/live", Socket, {
+  hooks: Hooks, 
+  params: {
+    _csrf_token: csrfToken,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    timezone_offset: -(new Date().getTimezoneOffset() / 60)
+    //store: JSON.stringify(store.getState().playlist)
+  }
+})
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()

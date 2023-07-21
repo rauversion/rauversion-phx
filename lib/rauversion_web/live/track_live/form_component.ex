@@ -84,11 +84,32 @@ defmodule RauversionWeb.TrackLive.FormComponent do
     track_params =
       track_params
       |> Map.put("cover", files_for(socket, :cover))
-      |> Map.put("audio", files_for(socket, :audio))
+      |> Map.put("user_id", socket.assigns.current_user.id)
+      # |> Map.put("audio", files_for(socket, :audio))
+      |> Map.put("audio", %{"blob" => socket.assigns.blob})
 
     case Tracks.update_track(socket.assigns.track, track_params) do
-      {:ok, _track} ->
-        {:ok, socket}
+      {:ok, track} ->
+        track = track |> Rauversion.Repo.preload(:user)
+        {:ok, socket |> assign(:track, track)}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:error, assign(socket, :changeset, changeset)}
+    end
+  end
+
+  defp handle_create(socket, track_params) do
+    track_params =
+      track_params
+      |> Map.put("cover", files_for(socket, :cover))
+      |> Map.put("user_id", socket.assigns.current_user.id)
+      # |> Map.put("audio", files_for(socket, :audio))
+      |> Map.put("audio", %{"blob" => socket.assigns.blob})
+
+    case Tracks.create_track(track_params) do
+      {:ok, track} ->
+        track = track |> Rauversion.Repo.preload(:user)
+        {:ok, socket |> assign(:track, track)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:error, assign(socket, :changeset, changeset)}
@@ -98,8 +119,11 @@ defmodule RauversionWeb.TrackLive.FormComponent do
   defp save_track(socket, :edit, %{"track" => track_params}) do
     case handle_update(socket, track_params) do
       {:ok, response} ->
+        # IO.inspect(response)
+
         {:noreply,
          response
+
          |> put_flash(:info, "Track updated successfully")
          |> push_redirect(to: socket.assigns.return_to)}
 
@@ -109,14 +133,14 @@ defmodule RauversionWeb.TrackLive.FormComponent do
   end
 
   defp save_track(socket, :edit_from_create, %{"track" => track_params}) do
-    case handle_update(socket, track_params) do
+    case handle_create(socket, track_params) do
       {:ok, response} ->
         step = %Step{name: "share", prev: "info", next: nil}
 
         {:noreply,
          response
          |> put_flash(:info, "Track updated successfully")
-         |> assign(track: socket.assigns.track |> Rauversion.Repo.preload(:user))
+         |> assign(track: response.assigns.track |> Rauversion.Repo.preload(:user))
          |> assign(step: step)}
 
       # |> push_redirect(to: socket.assigns.return_to)}

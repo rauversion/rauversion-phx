@@ -191,6 +191,7 @@ defmodule Rauversion.Tracks do
   """
   def get_track!(id), do: Repo.get!(Track, id)
   def get_by_slug!(id), do: Repo.get_by!(Track, slug: id)
+  def get_by_slug(id), do: Repo.get_by(Track, slug: id)
 
   def get_public_track!(id) do
     Track
@@ -218,10 +219,50 @@ defmodule Rauversion.Tracks do
 
   """
   def create_track(attrs \\ %{}) do
-    %Track{}
-    |> Track.new_changeset(attrs)
-    |> Repo.insert()
-    |> broadcast_change([:tracks, :created])
+    changeset =
+      %Track{}
+      |> Track.changeset(attrs)
+      |> Track.process_one_upload(attrs, "cover")
+
+    multi =
+      Ecto.Multi.new()
+      # "save" operation
+      |> Ecto.Multi.insert(:insert, changeset)
+      # |> Ecto.Multi.update(:update, %{insert: changeset})
+      |> Ecto.Multi.run(:after_insert, fn _repo, %{insert: struct} ->
+        case attrs do
+          %{"audio" => %{"blob" => %{"id" => id}}} ->
+            blob = ActiveStorage.Blob |> Rauversion.Repo.get(id)
+
+            Rauversion.BlobUtils.attach_file(struct, "audio", blob)
+
+            %{track_id: struct.id}
+            |> Rauversion.Workers.TrackNewProcessorWorker.new()
+            |> Oban.insert()
+
+            {:ok, struct}
+
+          _ ->
+            {:ok, struct}
+        end
+      end)
+      |> Repo.transaction()
+
+    case multi do
+      {:ok,
+       %{
+         after_insert: track
+       }} ->
+        {:ok, track}
+
+      _ ->
+        multi
+    end
+
+    # %Track{}
+    # |> Track.new_changeset(attrs)
+    # |> Repo.insert()
+    # |> broadcast_change([:tracks, :created])
   end
 
   @doc """
@@ -237,12 +278,61 @@ defmodule Rauversion.Tracks do
 
   """
   def update_track(%Track{} = track, attrs) do
-    track
-    |> Track.changeset(attrs)
-    |> Track.process_one_upload(attrs, "cover")
-    |> Track.process_one_upload(attrs, "audio")
-    |> Repo.update()
-    |> broadcast_change([:tracks, :updated])
+    changeset =
+      track
+      |> Track.changeset(attrs)
+      |> Track.process_one_upload(attrs, "cover")
+
+    multi =
+      Ecto.Multi.new()
+      # "save" operation
+      |> Ecto.Multi.update(:insert, changeset)
+      # |> Ecto.Multi.update(:update, %{insert: changeset})
+      |> Ecto.Multi.run(:after_insert, fn _repo, %{insert: struct} ->
+        # Here, you can put your "after save" logic. This will only run if the insert operation succeeds.
+        # If this function returns an error tuple like {:error, reason}, the entire transaction is rolled back.
+
+        # An example of sending an email after successfully inserting a new user
+        # case MyMailer.send_welcome_email(struct) do
+        #  :ok -> {:ok, struct}
+        #  {:error, reason} -> {:error, reason}
+        # end
+        case attrs do
+          %{"audio" => %{"blob" => %{"id" => id}}} ->
+            blob = ActiveStorage.Blob |> Rauversion.Repo.get(id)
+            Rauversion.BlobUtils.attach_file(struct, "audio", blob)
+
+            %{track_id: struct.id}
+            |> Rauversion.Workers.TrackNewProcessorWorker.new()
+            |> Oban.insert()
+
+            {:ok, struct}
+
+          _ ->
+            {:ok, struct}
+        end
+      end)
+      |> Repo.transaction()
+
+    case multi do
+      {:ok,
+       %{
+         after_insert: track
+       }} ->
+        {:ok, track}
+
+      _ ->
+        multi
+    end
+
+    # track
+    # |> Track.changeset(attrs)
+    # |> Track.process_one_upload(attrs, "cover")
+    # |> Track.process_one_upload(attrs, "audio")
+    # |> Track.process_blob_attachment(attrs, "audio")
+    # |> Repo.update()
+
+    # |> broadcast_change([:tracks, :updated])
   end
 
   @doc """
@@ -308,10 +398,10 @@ defmodule Rauversion.Tracks do
         # pass track.metadata.id is needed in order to merge the embedded_schema properly.
         case track.metadata do
           nil ->
-            update_track(track, %{metadata: %{peaks: data}})
+            update_track(track, %{state: "processed", metadata: %{peaks: data}})
 
           metadata ->
-            update_track(track, %{metadata: %{id: metadata.id, peaks: data}})
+            update_track(track, %{state: "processed", metadata: %{id: metadata.id, peaks: data}})
         end
 
       err ->
@@ -319,6 +409,11 @@ defmodule Rauversion.Tracks do
         IO.puts("can't download the file")
         nil
     end
+  end
+
+  def post_process_uploaded(track) do
+    regenerate_mp3(track)
+    reprocess_peaks(track)
   end
 
   def regenerate_mp3(track) do

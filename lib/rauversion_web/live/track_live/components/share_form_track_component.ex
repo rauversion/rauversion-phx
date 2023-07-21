@@ -32,7 +32,7 @@ defmodule RauversionWeb.TrackLive.ShareFormTrackComponent do
             <div class="mx-0 mt-0 mb-3 text-base font-normal">
               <div class="leading-5"><%= @track.title %></div>
               <div class="text-sm font-thin leading-5 text-neutral-500">
-                <%= @track.user.username %>
+                <% # = @track.user.username %>
               </div>
             </div>
             <div class="hidden overflow-hidden mt-0 mr-1 mb-1 ml-0 h-5"></div>

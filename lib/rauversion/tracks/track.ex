@@ -1,10 +1,24 @@
 defmodule Rauversion.Tracks.Track.TitleSlug do
   use EctoAutoslugField.Slug, from: :title, to: :slug
+
+  def build_slug(sources) do
+    # See docs:
+    # https://hexdocs.pm/ecto_autoslug_field/EctoAutoslugField.SlugBase.html#build_slug/1
+    # => will receive default slug: my-todo
+    slug = super(sources)
+
+    if Rauversion.Tracks.get_by_slug(slug) do
+      slug <> "-" <> Ecto.UUID.generate()
+    else
+      slug
+    end
+  end
 end
 
 defmodule Rauversion.Tracks.Track do
   use Ecto.Schema
   import Ecto.Changeset
+  alias RauversionWeb.ActiveStorage.Blobs
   alias Rauversion.Tracks.Track.TitleSlug
 
   use ActiveStorage.Attached.Model
@@ -86,7 +100,8 @@ defmodule Rauversion.Tracks.Track do
       :private,
       :user_id,
       :caption,
-      :tags
+      :tags,
+      :state
       # :slug,
       # :caption,
       # :notification_settings,
@@ -113,6 +128,18 @@ defmodule Rauversion.Tracks.Track do
     |> validate_required([:user_id, :title])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
+  end
+
+  def process_blob_attachment(struct, attrs, kind) do
+    case attrs do
+      %{"audio" => %{"blob" => %{"id" => id}}} ->
+        blob = ActiveStorage.Blob |> Rauversion.Repo.get(id)
+        Rauversion.BlobUtils.attach_file(struct, kind, blob)
+        struct
+
+      _ ->
+        struct
+    end
   end
 
   def process_one_upload(struct, attrs, kind) do

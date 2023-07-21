@@ -29,7 +29,7 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
           <div>
             <div>
               <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-                Profile <%= @track.id %>
+                <%= @track.id %>
                 <%= @track.title %>
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
@@ -38,6 +38,12 @@ defmodule RauversionWeb.TrackLive.InfoFormComponent do
                 ) %>
               </p>
             </div>
+
+            <%= label(f, :private, "Privacy:") %>
+            <%= label(f, :private, "Private") %>
+            <%= radio_button(f, :private, true) %>
+            <%= label(f, :private, "Public") %>
+            <%= radio_button(f, :private, false) %>
 
             <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
               <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">

@@ -74,6 +74,9 @@ config :logger, :console,
 
 config :logger, level: :debug
 
+config :logger,
+  truncate: :infinity
+
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
