@@ -1438,10 +1438,10 @@ w3c-keyname@^2.2.0:
   resolved "https://registry.yarnpkg.com/w3c-keyname/-/w3c-keyname-2.2.6.tgz"
   integrity sha512-f+fciywl1SJEniZHD6H+kUO8gOnwIr7f4ijKA6+ZvJFjeGi1r4PDLl53Ayud9O/rk64RqgoQine0feoeOU0kXg==
 
-wavesurfer.js@7.0.0-beta.11:
-  version "7.0.0-beta.11"
-  resolved "https://registry.npmjs.org/wavesurfer.js/-/wavesurfer.js-7.0.0-beta.11.tgz"
-  integrity sha512-PwcnEIcV3x8Zi0XMWFkzRy0NsJyTaFITIXByoQn/y6OqtJn9W5jzryTvt/mxv+FcKAWA7yGqkxRGX336D0iWTQ==
+wavesurfer.js@7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/wavesurfer.js/-/wavesurfer.js-7.0.3.tgz#d3e0b07056c08d43db19d4950d2de68681f48606"
+  integrity sha512-gJ3P+Bd3Q4E8qETjjg0pneaVqm2J7jegG2Cc6vqEF5YDDKQ3m8sKsvVfgVhJkacKkO9jFAGDu58Hw4zLr7xD0A==
 
 web-vitals@^1.0.1:
   version "1.1.2"

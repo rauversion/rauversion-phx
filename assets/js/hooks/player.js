@@ -5,6 +5,7 @@ Player = {
   mounted(){
 
     this.waveClickListener = null
+    this.hasHalfwayEventFired = false;
 
     this.currentSongIndex = 0
     this.currentSong = window.store.getState().playlist[this.currentSongIndex]
@@ -63,8 +64,12 @@ Player = {
 
 
       this._wave.stop()
-      this._wave.once('ready', () => this._wave.play())
+      // this generates a double play and thereof a memory bloat ....
+      // this bug only happens when there is no store.playlist
+      //this._wave.once('ready', () => this._wave.play())
       setTimeout(()=>{
+        // this does nothing for now. We will improve this soon...
+        window.prependSongID(this.el.dataset.trackId)
         this._wave.load(this.el.dataset.playerUrl, JSON.parse(this.el.dataset.playerPeaks))
       }, 400)
     }
@@ -127,6 +132,7 @@ Player = {
     this.peaks = this.el.dataset.playerPeaks
     this.url = this.el.dataset.playerUrl
 
+    console.log("OELLELE")
     this._wave = WaveSurfer.create({
       container: this.playerTarget,
       autoplay: true,
@@ -166,7 +172,16 @@ Player = {
 
     this._wave.on('audioprocess', (e)=> {
       const trackId = this.el.dataset.trackId
-      // console.log("AUDIO PROCESS", e)
+      const currentTime = this._wave.getCurrentTime();
+      const duration = this._wave.getDuration();
+      const percent = currentTime / duration;
+      //console.log("AUDIO PROCESS", percent)
+
+      if (percent >= 0.3 && !this.hasHalfwayEventFired) {
+        this.hasHalfwayEventFired = true;
+        this.trackEvent(trackId);
+      }
+
       const ev = new CustomEvent(`audio-process-${trackId}`, {
         detail: {
           position: this._wave.getCurrentTime(), //this._wave.drawer.lastPos,
@@ -181,16 +196,16 @@ Player = {
       // sends the progress position to track_component
       //this.playiconTarget.style.display = 'block'
       //this.loadingiconTarget.style.display = 'none'
-
       this._wave.getWrapper().addEventListener('click', this.waveClickListener)
-      //this._wave.drawer.wrapper.addEventListener('click', this.waveClickListener)
     })
+
 
     // receives audio-process progress from track hook
     document.addEventListener('audio-process-mouseup', this.mouseUpHandler)
 
     // receives pause
     document.addEventListener('audio-pause', this.audioPauseHandler)
+    
 
     this._wave.on('finish', (e) => {
       console.log("FINISH PROCESS")
@@ -208,11 +223,6 @@ Player = {
       detail: {}
     });
     document.dispatchEvent(ev)
-    //setTimeout(()=>{
-      // if(this.)
-      this.trackEvent(trackId)
-    //}, 2000)
-    
   },
   dispatchPause(){
     this.playiconTarget.style.display = 'none'
@@ -228,15 +238,17 @@ Player = {
     this?._wave?.destroy()
   },
   nextSong(){
-    //this.destroyWave()
+    this.hasHalfwayEventFired = false;
     this.pushEvent("request-song", {action: "next"} )
     console.log("no more songs to play")
   },
   prevSong(){
+    this.hasHalfwayEventFired = false;
     //this.destroyWave()
     this.pushEvent("request-song", {action: "prev"} )
   },
   playSong(){
+    this.hasHalfwayEventFired = false;
     this._wave.playPause()
   },
   trackEvent(trackId) {

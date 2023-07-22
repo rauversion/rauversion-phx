@@ -156,6 +156,20 @@ window.addEventListener(`phx:playlist-clear`, (e) => {
   store.setState({playlist: e.detail.ids})
 })
 
+window.addEventListener(`phx:play-song`, (e) => {
+  console.log("PLAY", e.detail)
+  //store.setState({playlist: e.detail.ids})
+})
+
+window.appendSongID = function(id){
+  //store.setState({playlist: [...store.getState().playlist, id ] })
+}
+
+window.prependSongID = function(id){
+  //store.setState({playlist: [id, ...store.getState().playlist] })
+}
+
+
 window.addEventListener(`phx:remove-from-playlist`, (e) => {
   console.log("REMOVE PLAYLIST CLEAR", e.detail.index)
   const index = parseInt(e.detail.index)
