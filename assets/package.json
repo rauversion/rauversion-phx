@@ -15,7 +15,7 @@
     "stimulus-clipboard": "^3.2.0",
     "stimulus-dropdown": "^2.0.0",
     "stimulus-use": "^0.51.1",
-    "wavesurfer.js": "7.0.0-beta.11",
+    "wavesurfer.js": "7.0.3",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {

@@ -156,6 +156,12 @@ window.addEventListener(`phx:playlist-clear`, (e) => {
   store.setState({playlist: e.detail.ids})
 })
 
+window.addEventListener(`phx:play-song`, (e) => {
+  console.log("PLAY", e.detail)
+  //store.setState({playlist: e.detail.ids})
+})
+
+
 window.addEventListener(`phx:remove-from-playlist`, (e) => {
   console.log("REMOVE PLAYLIST CLEAR", e.detail.index)
   const index = parseInt(e.detail.index)

@@ -5,6 +5,7 @@ Player = {
   mounted(){
 
     this.waveClickListener = null
+    this.hasHalfwayEventFired = false;
 
     this.currentSongIndex = 0
     this.currentSong = window.store.getState().playlist[this.currentSongIndex]
@@ -166,7 +167,16 @@ Player = {
 
     this._wave.on('audioprocess', (e)=> {
       const trackId = this.el.dataset.trackId
-      // console.log("AUDIO PROCESS", e)
+      /*const currentTime = this._wave.getCurrentTime();
+      const duration = this._wave.getDuration();
+      const percent = currentTime / duration;
+      console.log("AUDIO PROCESS", percent)
+
+      if (percent >= 0.5 && !this.hasHalfwayEventFired) {
+        this.hasHalfwayEventFired = true;
+        this.trackEvent(trackId);
+      }*/
+
       const ev = new CustomEvent(`audio-process-${trackId}`, {
         detail: {
           position: this._wave.getCurrentTime(), //this._wave.drawer.lastPos,
@@ -210,7 +220,7 @@ Player = {
     document.dispatchEvent(ev)
     //setTimeout(()=>{
       // if(this.)
-      this.trackEvent(trackId)
+      // this.trackEvent(trackId)
     //}, 2000)
     
   },
@@ -228,15 +238,18 @@ Player = {
     this?._wave?.destroy()
   },
   nextSong(){
+    this.hasHalfwayEventFired = false;
     //this.destroyWave()
     this.pushEvent("request-song", {action: "next"} )
     console.log("no more songs to play")
   },
   prevSong(){
+    this.hasHalfwayEventFired = false;
     //this.destroyWave()
     this.pushEvent("request-song", {action: "prev"} )
   },
   playSong(){
+    this.hasHalfwayEventFired = false;
     this._wave.playPause()
   },
   trackEvent(trackId) {
