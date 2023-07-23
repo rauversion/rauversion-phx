@@ -219,13 +219,14 @@ defmodule RauversionWeb.UserSettingsLive.NavBar do
 
       <div class="flex-1 min-h-0 overflow-y-auto">
         <%= for item <- menu_items() do %>
-          <%= live_redirect to: item.to, class: item_class(@live_action, item.namespace) do %>
+          <.link navigate={item.to}
+            class={item_class(@live_action, item.namespace)}>
             <%= icon_for(item.namespace) %>
             <div class="ml-3 text-sm hidden xl:block">
               <p class="font-medium text-gray-900 dark:text-gray-100"><%= item.title %></p>
               <p class="mt-1 text-gray-500 dark:text-gray-300"><%= item.sub %></p>
             </div>
-          <% end %>
+          </.link>
         <% end %>
       </div>
     </nav>

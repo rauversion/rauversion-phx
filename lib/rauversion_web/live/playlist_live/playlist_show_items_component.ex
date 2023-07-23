@@ -41,14 +41,17 @@ defmodule RauversionWeb.PlaylistLive.PlaylistShowItemsComponent do
                             </p>
                           </p>
                           <p class="text-sm text-gray-500 dark:text-gray-300 truncate">
-                            <%= live_redirect(track_playlists.track.user.username,
-                              to:
+                            <.link
+                              navigate={
                                 Routes.profile_index_path(
                                   @socket,
                                   :index,
                                   track_playlists.track.user.username
                                 )
-                            ) %>
+                              }
+                            >
+                              <%= track_playlists.track.user.username %>
+                            </.link>
                           </p>
                         </div>
                       </div>

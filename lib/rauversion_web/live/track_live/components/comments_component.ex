@@ -130,10 +130,10 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                         <div class="min-w-0 flex-1">
                           <div>
                             <div class="text-sm">
-                              <%= live_redirect to: Routes.profile_index_path(@socket, :index, comment.user.username),
-                                  class: "font-medium text-gray-900 dark:text-gray-100" do %>
+                              <.link navigate={Routes.profile_index_path(@socket, :index, comment.user.username)}
+                                  class="font-medium text-gray-900 dark:text-gray-100">
                                 <%= comment.user.username %>
-                              <% end %>
+                              </.link>
                             </div>
                             <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
                               Commented <%= comment.inserted_at %>

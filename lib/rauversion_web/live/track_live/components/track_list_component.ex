@@ -106,8 +106,9 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
               <div class="flex justify-between items-center">
                 <h1 class="font-bold text-4xl"><%= @title %></h1>
 
-                <%= live_patch to: Routes.track_new_path(@socket, :new),
-                 class: "button-large-outline" do %>
+
+                <.link navigate={~p"/tracks/new"}
+                 class="button-large-outline" >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-6 w-6"
@@ -119,7 +120,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                   </svg>
                   <span><%= gettext("New Track") %></span>
-                <% end %>
+                </.link>
                 <% # = link_to 'New track', new_track_path,
                 # "data-turbo": false,
                 # class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>

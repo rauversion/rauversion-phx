@@ -7,29 +7,29 @@ defmodule RauversionWeb.ArticlesLive.ArticlesBlockComponent do
   def render(assigns) do
     ~H"""
     <div class="relative flex flex-wrap items-end w-full dark:text-white">
-      <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug), class: "w-full" do %>
+      <.link navigate={Routes.articles_show_path(@socket, :show, @post.slug)} class="w-full">
         <%= img_tag(
           Rauversion.Posts.proxy_cover_representation_url(@post, %{resize_to_limit: "500x500"}),
           class: "inset-0 block object-cover object-center w-full h-72 grayscale filter"
         ) %>
-      <% end %>
+      </.link>
 
       <div class="items-end w-full mt-4 text-left">
-        <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) do %>
+        <.link navigate={Routes.articles_show_path(@socket, :show, @post.slug)}>
           <h2 class="truncate mb-2 font-serif text-xl font-semibold text-black dark:text-white lg:text-2xl">
             <%= @post.title %>
           </h2>
-        <% end %>
+        </.link>
 
         <strong class="text-xs font-bold leading-relaxed tracking-widest uppercase">
-          by <%= @post.user.username %> · <%= Rauversion.Posts.date(@post.inserted_at, :y_mm_md) %>.
+          <%= gettext("by") %> <%= @post.user.username %> · <%= Rauversion.Posts.date(@post.inserted_at, :y_mm_md) %>.
         </strong>
 
         <p class="mt-4 text-sm tracking-wide  text-ellipsis overflow-hidden h-10">
           <%= @post.excerpt %>
         </p>
 
-        <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug), class: "inline-flex items-center py-4 mt-3 text-xs font-bold tracking-widest text-black uppercase transition duration-500 ease-in-out transform border-b-2 border-black dark:border-white dark:text-white hover:text-gray-600 hover:border-gray-600" do %>
+        <.link navigate={Routes.articles_show_path(@socket, :show, @post.slug)} class="inline-flex items-center py-4 mt-3 text-xs font-bold tracking-widest text-black uppercase transition duration-500 ease-in-out transform border-b-2 border-black dark:border-white dark:text-white hover:text-gray-600 hover:border-gray-600">
           <%= gettext("Read Now") %>
           <svg
             fill="none"
@@ -42,7 +42,7 @@ defmodule RauversionWeb.ArticlesLive.ArticlesBlockComponent do
           >
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
-        <% end %>
+        </.link>
       </div>
     </div>
     """

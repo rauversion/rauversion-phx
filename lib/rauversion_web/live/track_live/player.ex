@@ -451,7 +451,7 @@ defmodule RauversionWeb.TrackLive.Player do
                 </div>
 
                 <div class="flex items-center h-full leading-4 text-zinc-300">
-                  <%= live_redirect to: Routes.track_show_path(@socket, :show, @track.slug), class: "float-left my-0 mr-2 ml-0 text-blue-500 cursor-pointer hover:text-zinc-100" do %>
+                  <.link navigate={Routes.track_show_path(@socket, :show, @track.slug)} class="float-left my-0 mr-2 ml-0 text-blue-500 cursor-pointer hover:text-zinc-100">
                     <div
                       class="block relative w-8 h-8 text-center bg-no-repeat bg-cover"
                       style="height: 30px; width: 30px;"
@@ -465,18 +465,18 @@ defmodule RauversionWeb.TrackLive.Player do
                         class: "block relative w-8 h-8 opacity-100"
                       ) %>
                     </div>
-                  <% end %>
+                  </.link>
 
                   <div class="flex-grow w-0-- leading-6">
-                    <%= live_redirect to: Routes.profile_index_path(@socket, :index, @track.user.username), class: "flex items-center w-full h-4 text-xs cursor-pointer truncate text-neutral-200 focus:text-black hover:text-neutral-300", title: @track.title do %>
+                    <.link navigate={Routes.profile_index_path(@socket, :index, @track.user.username)} class="flex items-center w-full h-4 text-xs cursor-pointer truncate text-neutral-200 focus:text-black hover:text-neutral-300" title={@track.title}>
                       <%= @track.user.username %>
-                    <% end %>
+                    </.link>
 
                     <div class="flex items-center w-full h-4 text-zinc-800">
-                      <%= live_redirect to: Routes.track_show_path(@socket, :show, @track.slug), class: "text-xs cursor-pointer truncate text-stone-200 focus:text-black hover:text-neutral-200", title: @track.title  do %>
+                      <.link navigate={Routes.track_show_path(@socket, :show, @track.slug)} class="text-xs cursor-pointer truncate text-stone-200 focus:text-black hover:text-neutral-200" title={@track.title}>
                         <span class="sr-only">Current track: <%= @track.title %></span>
                         <span aria-hidden="true" class="whitespace-nowrap"><%= @track.title %></span>
-                      <% end %>
+                      </.link>
                     </div>
                   </div>
 

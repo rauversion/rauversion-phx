@@ -317,11 +317,10 @@ defmodule RauversionWeb.EventsStreamingLive.Show do
               </dl>
               -->
             <div class="mt-10">
-              <%= live_redirect to: "/events/",
-                  class: "text-base font-medium text-brand-600" do %>
+              <.link navigate={"/events/"} class="text-base font-medium text-brand-600">
                 <%= gettext("Go and check the event details") %>
                 <span aria-hidden="true"> &rarr;</span>
-              <% end %>
+              </.link>
             </div>
           </div>
         </div>

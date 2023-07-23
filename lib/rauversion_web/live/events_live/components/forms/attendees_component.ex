@@ -214,7 +214,9 @@ defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
                   <%= ticket.checked_in_at %>
                 </td>
                 <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                  <%= live_redirect("view", to: Rauversion.PurchasedTickets.url_for_ticket(ticket)) %>
+                  <.link navigate={Rauversion.PurchasedTickets.url_for_ticket(ticket)}>
+                    view
+                  </.link>
                   <a href="#" class="text-brand-600 hover:text-brand-900">
                     Refund<span class="sr-only"></span>
                   </a>

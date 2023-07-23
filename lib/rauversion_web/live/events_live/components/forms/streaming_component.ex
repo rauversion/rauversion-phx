@@ -223,11 +223,13 @@ defmodule RauversionWeb.Live.EventsLive.Components.StreamingComponent do
             ) %>
           </p>
 
-          <%= live_redirect(gettext("Go to streaming event page"),
-            to: Rauversion.Events.private_streaming_link(@event),
-            class:
+          <.link
+            navigate={Rauversion.Events.private_streaming_link(@event)}
+            class=
               "inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          ) %>
+          >
+            <%= gettext("Go to streaming event page") %>
+          </.link>
         </div>
       </div>
 

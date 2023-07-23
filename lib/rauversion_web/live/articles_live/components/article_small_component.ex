@@ -8,11 +8,11 @@ defmodule RauversionWeb.Live.ArticlesLive.ArticleSmallComponent do
         <div class="text-black lg:hidden xl:float-right xl:mt-0 xl:ml-4 box-border"></div>
 
         <div class="col-span-full p-0 mb-auto text-white box-border">
-          <%= live_redirect to: Routes.articles_show_path(@socket, :show, @post.slug) do %>
+          <.link navigate={Routes.articles_show_path(@socket, :show, @post.slug)}>
             <h2 class="mt-0 mb-2 font-sans text-base not-italic font-semibold leading-5 normal-case box-border lg:text-4xl-- lg:leading-5 md:mb-4 md:font-sans md:text-4xl-- md:font-bold md:normal-case md:not-italic md:leading-5">
               <%= @post.title %>
             </h2>
-          <% end %>
+          </.link>
 
           <div class="cursor-pointer box-border">
             <div class="mb-1 box-border">
