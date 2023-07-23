@@ -3,30 +3,30 @@
     <div class="flex justify-between h-16">
       <div class="flex items-center px-2 lg:px-0">
         <div class="flex-shrink-0 flex items-center">
-          <%= live_redirect to: "/", class: "flex items-center space-x-3 text-white sm:text-2xl text-sm font-extrabold" do %>
+          <.link navigate="/" class="flex items-center space-x-3 text-white sm:text-2xl text-sm font-extrabold">
             <img class="h-12 w-auto" src={Routes.static_path(@conn, "/images/logo.png")} alt="" />
 
             <span>RAUVERSION</span>
             <% # = RauversionWeb.Gettext |> Gettext.get_locale %>
             <% # = image_tag url_for(current_user.avatar), class: "h-8 w-auto" if current_user&.avatar&.persisted? %>
-          <% end %>
+          </.link>
         </div>
         <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
-          <%= live_redirect to: "/tracks", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+          <.link navigate="/tracks" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
             <%= gettext("Music") %>
-          <% end %>
+          </.link>
 
           <% # = live_redirect to: "/users/settings", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
           <% # = gettext "Account" %>
           <% # end %>
 
-          <%= live_redirect to: "/events", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+          <.link navigate="/events" class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
             <%= gettext("Events") %>
-          <% end %>
+          </.link>
 
-          <%= live_redirect to: "/articles", class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" do %>
+          <.link navigate={"/articles"} class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800">
             <%= gettext("Magazine") %>
-          <% end %>
+          </.link>
 
           <% # = if function_exported?(Routes, :live_dashboard_path, 2) do %>
           <% # = link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
@@ -67,8 +67,8 @@
       </div>
 
       <div class="flex items-center px-2 lg:px-0">
-        <%= live_redirect to: "/tracks/new",
-            class: "inline-flex items-center justify-center space-x-1 rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-brand-600" do %>
+        <.link navigate="/tracks/new"
+            class="inline-flex items-center justify-center space-x-1 rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-brand-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -86,19 +86,22 @@
           <span>
             <%= gettext("upload") %>
           </span>
-        <% end %>
+        </.link>
 
         <%= if !@current_user do %>
-          <%= link(gettext("Register"),
-            to: Routes.user_registration_path(@conn, :new),
-            class:
+          <.link
+            navigate={Routes.user_registration_path(@conn, :new)}
+            class="hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800"
+          >
+            <%= gettext("Register") %>
+          </.link>
+          <.link
+            navigate={Routes.user_session_path(@conn, :new)}
+            class=
               "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800"
-          ) %>
-          <%= link(gettext("Log in"),
-            to: Routes.user_session_path(@conn, :new),
-            class:
-              "hidden md:block rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800"
-          ) %>
+          >
+            <%= gettext("Log in") %>
+          </.link>
         <% end %>
       </div>
 
@@ -181,41 +184,54 @@
             >
               <div class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:bg-gray-800 bg-white rounded-md">
                 <%= if is_creator?(@current_user) && @current_user.username do %>
-                  <%= live_redirect(gettext("My Music"),
-                    to: Routes.profile_index_path(@conn, :index, @current_user.username),
-                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-                  ) %>
+                  <.link
+                    navigate={Routes.profile_index_path(@conn, :index, @current_user.username)}
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  >
+                    <%= gettext("My Music") %>
+                  </.link>
                   <% # = live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                 <% end %>
 
                 <%= if is_admin?(@current_user) do %>
-                  <%= live_redirect(gettext("My Articles"),
-                    to: "/articles/mine",
-                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-                  ) %>
-                  <%= live_redirect(gettext("My Events"),
-                    to: "/events/mine",
-                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-                  ) %>
+                  <.link
+                    navigate="/articles/mine"
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  > 
+                    <%= gettext("My Articles") %>
+                  </.link>
+
+                  <.link
+                    navigate={"/events/mine"}
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  >
+                    <%= gettext("My Events") %>
+                  </.link>
                 <% end %>
 
 
                 <%= if is_creator?(@current_user) do %>
-                  <%= live_redirect(gettext("My Purchases"),
-                    to: "/purchases",
-                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-                  ) %>
+                  <.link
+                    navigate={"/purchases"}
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  >
+                    <%= gettext("My Purchases") %>
+                  </.link>
                 <% end %>
 
-                <%= live_redirect(gettext("My Sales"),
-                  to: "/sales",
-                  class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-                ) %>
+                <.link
+                  navigate="/sales"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                >
+                  <%= gettext("My Sales") %>
+                </.link>
 
-                <%= live_redirect(gettext("Settings"),
-                  to: "/users/settings",
-                  class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-                ) %>
+                <.link
+                  to="/users/settings"
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                >
+                  <%= gettext("Settings") %>
+                </.link>
 
                 <div class="border-1" />
                   <a href="#" class="hidden block-- px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
@@ -224,11 +240,13 @@
                   <a href="#" class="hidden block- px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                     License
                   </a>
-                  <%= link(gettext("Log out"),
-                    to: Routes.user_session_path(@conn, :delete),
-                    method: :delete,
-                    class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-                  ) %>
+                  <.link
+                    navigate={Routes.user_session_path(@conn, :delete)}
+                    method={:delete}
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                  >
+                    <%= gettext("Log out") %>
+                  </.link>
 
                 <div class="flex items-center space-x-2">
                   <%= new_locale(
@@ -266,37 +284,50 @@
     x-show="open"
   >
     <div class="pt-2 pb-3 px-2 space-y-1">
-      <%= live_redirect(gettext("Music"),
-        to: "/tracks",
-        class:
+      <.link
+        navigate={"/tracks"}
+        class=
           "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
-      ) %>
-      <%= live_redirect(gettext("Magazine"),
-        to: "/articles",
-        class:
+      >
+        <%= gettext("Music") %>
+      </.link>
+
+      <.link
+        navigate="/articles"
+        class=
           "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
-      ) %>
-      <%= live_redirect(gettext("Events"),
-        to: "/events",
-        class:
+      >
+        <%= gettext("Magazine") %>
+      </.link>
+
+
+      <.link
+        navigate="/events"
+        class=
           "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
-      ) %>
+      >
+        <%= gettext("Events") %>
+      </.link>
 
       <% # = if function_exported?(Routes, :live_dashboard_path, 2) do %>
       <% # = link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
       <% # end %>
 
       <%= if !@current_user do %>
-        <%= link(gettext("Register"),
-          to: Routes.user_registration_path(@conn, :new),
-          class:
+        <.link
+          navigate={Routes.user_registration_path(@conn, :new)}
+          class=
             "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
-        ) %>
-        <%= link(gettext("Log in"),
-          to: Routes.user_session_path(@conn, :new),
-          class:
+        >
+          <%= gettext("Register") %>
+        </.link>
+        <.link
+          navigate={Routes.user_session_path(@conn, :new)}
+          class=
             "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"
-        ) %>
+        >
+          <%= gettext("Log in") %>
+        </.link>
       <% end %>
     </div>
     <div class="pt-4 pb-3 border-t border-gray-500">
@@ -345,41 +376,54 @@
           <% # = link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
 
           <%= if is_creator?(@current_user) && @current_user.username do %>
-            <%= live_redirect(gettext("My Music"),
-              to: Routes.profile_index_path(@conn, :index, @current_user.username),
-              class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-            ) %>
+            <.link
+              navigate={Routes.profile_index_path(@conn, :index, @current_user.username)}
+              class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            >
+              <%= gettext("My Music") %>
+            </.link>
           <% end %>
 
           <%= if is_admin?(@current_user) do %>
-            <%= live_redirect(gettext("My Articles"),
-              to: "/articles/mine",
-              class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-            ) %>
-            <%= live_redirect(gettext("My Events"),
-              to: "/events/mine",
-              class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-            ) %>
+            <.link
+              navigate={"/articles/mine"}
+              class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            >
+              <%= gettext("My Articles") %>
+            </.link>
+
+            <.link
+              navigate="/events/mine"
+              class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            >
+              <%= gettext("My Events") %>
+            </.link>
             <% # = live_redirect gettext("My Merch"), to: "/merch/mine", class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
           <% end %>
 
-          <%= live_redirect(gettext("My Purchases"),
-            to: "/purchases/tickets",
-            class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-          ) %>
-          <%= live_redirect(gettext("Settings"),
-            to: "/users/settings",
-            class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-          ) %>
+          <.link
+            navigate="/purchases/tickets"
+            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+          >
+            <%= gettext("My Purchases") %>
+          </.link>
+          <.link
+            navigate="/users/settings",
+            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+          >
+            <%= gettext("Settings") %>
+          </.link>
 
           <div class="border-1" />
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
-          <%= link(gettext("Log out"),
-            to: Routes.user_session_path(@conn, :delete),
-            method: :delete,
-            class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-          ) %>
+          <.link
+            navigate={Routes.user_session_path(@conn, :delete)}
+            method={:delete}
+            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+          >
+            <%= gettext("Log out") %>
+          </.link>
 
           <div class="flex items-center space-x-2">
             <%= new_locale(
