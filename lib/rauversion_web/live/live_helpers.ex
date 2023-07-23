@@ -241,7 +241,7 @@ defmodule RauversionWeb.LiveHelpers do
     if !is_nil(struct) do
       %{
         class:
-          "button:active"
+          "button-active"
       }
     else
       %{
