@@ -107,7 +107,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
                 <h1 class="font-bold text-4xl"><%= @title %></h1>
 
                 <%= live_patch to: Routes.track_new_path(@socket, :new),
-                 class: "inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium" do %>
+                 class: "button-large-outline" do %>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-6 w-6"

@@ -85,7 +85,7 @@
   </.modal>
 <% end %>
 
-<main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last dark:bg-black">
+<main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
   <!-- Breadcrumb -->
   <nav class="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
     <%= live_redirect  to: Routes.profile_index_path(@socket, :index, @track.user.username), 
@@ -114,7 +114,7 @@
     <!-- Profile header -->
     <div>
       <div class="flex flex-col sm:flex-row mb-6">
-        <div class="flex-grow bg-black items-center text-white">
+        <div class="flex-grow items-center text-white">
           <%= if Rauversion.Tracks.is_processed?(@track) do %>
             <img
               class="hidden h-32 w-full object-cover lg:h-48"
@@ -137,7 +137,7 @@
                     type="button"
                     data-action="audio#play"
                     data-audio-target="play"
-                    class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400"
+                    class="player-button"
                   >
                     <span class="sr-only">Play</span>
                     <svg
@@ -299,7 +299,7 @@
 
               <div>
                 <%= if @current_user && @track.user_id == @current_user.id do %>
-                  <%= live_patch to: Routes.track_show_path(@socket, :edit, @track.slug), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                  <%= live_patch to: Routes.track_show_path(@socket, :edit, @track.slug), class: "button" do %>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4"

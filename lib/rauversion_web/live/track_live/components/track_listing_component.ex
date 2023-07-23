@@ -106,18 +106,18 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
       data-paginate-end={assigns.track_meta.total_pages == @page}
     >
       <%= for track <- @tracks do %>
-        <%= live_redirect to: Routes.track_show_path(@socket, :show, track.slug), id: "track-item-#{track.id}" , class: "group" do %>
+        <%= live_redirect to: Routes.track_show_path(@socket, :show, track.slug), id: "track-item-#{track.id}" , class: "group space-y-2 p-2 hover:bg-gray-800 rounded-md" do %>
           <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
             <div
               phx-update="ignore"
               id={"play-button-#{track.id}-trending"}
               phx-hook="PlayButton"
               data-audio-id={track.id}
-              class="group-hover:absolute group-hover:z-10 w-full h-full flex justify-center items-center"
+              class="smooth-color group-hover:absolute group-hover:z-10 w-full h-full flex justify-center items-center"
             >
               <button
                 data-play-button="button"
-                class="flex justify-center items-center w-24 h-24 rounded-full bg-brand-500 border-4 border-brand-100 focus:outline-none"
+                class="smooth-grow flex justify-center items-center w-24 h-24 rounded-full bg-black border-4 border-brand-100 focus:outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
             ) %>
           </div>
 
-          <p class="mt-1 text-lg- font-medium leading-none text-gray-900 dark:text-gray-100 ">
+          <p class="mt-1 text-lg- font-medium leading-none text-gray-900 dark:text-gray-100 truncate">
             <%= track.title %>
           </p>
 

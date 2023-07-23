@@ -28,9 +28,15 @@ defmodule RauversionWeb.ArticlesLive.ArticlesHighlightsListComponent do
             <h2 class="text-xl sm:text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
               <%= gettext("Recent publications") %>
             </h2>
-            <p class="mt-3 text-sm sm:text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
-              <%= gettext("Selected articles & reviews from Rauversion community and editorial") %>
-            </p>
+            <div class="px-4 flex items-center justify-between sm:px-6 lg:px-0">
+              <h2 id="trending-heading" class="mt-3 text-sm sm:text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
+                <%= gettext("Selected articles & reviews from Rauversion community and editorial") %>
+              </h2>
+              <a href="/tracks" class="hidden sm:block text-sm font-semibold text-brand-600 hover:text-brand-500" data-phx-link="redirect" data-phx-link-state="push">
+                See everything
+                <span aria-hidden="true"> →</span>
+              </a>
+            </div>
           </div>
 
           <div class="container pb-4 mx-auto px-5- md:px-12- lg:px-16-">

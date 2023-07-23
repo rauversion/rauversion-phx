@@ -139,7 +139,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
           <div class="sm:col-span-6 flex justify-end space-x-2">
             <button
               type="button"
-              class="inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium"
+              class="button-large-outline"
               phx-target={@myself}
               phx-click="add-feature"
             >

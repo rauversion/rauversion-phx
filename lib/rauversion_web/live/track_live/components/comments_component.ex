@@ -198,7 +198,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                         <%= textarea(f, :body,
                           rows: 3,
                           class:
-                            "shadow-sm block w-full focus:ring-gray-900 focus:border-gray-900 sm:text-sm border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-100",
+                            "shadow-sm block w-full focus:ring-gray-900 focus:border-gray-900 sm:text-sm border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-900 dark:text-gray-100",
                           placeholder: "Leave a comment"
                         ) %>
                       </div>
@@ -207,8 +207,7 @@ defmodule RauversionWeb.TrackLive.CommentsComponent do
                         <%= submit(gettext("Comment"),
                           phx_disable_with: gettext("Saving..."),
                           "data-cy": "comment-submit",
-                          class:
-                            "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                          class: "button-large"
                         ) %>
                       </div>
                     </.form>

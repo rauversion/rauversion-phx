@@ -32,7 +32,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
             <%= if @current_user && @current_user.id != @profile.id do %>
               <div class="flex items-center md:ml-12">
                 <%= if @user_follow do %>
-                  <%= link to: "#", phx_click: "unfollow-user", class: "inline-flex items-center px-4 py-2 border border-brand-300 shadow-sm text-base font-medium rounded-md text-brand-700 bg-white hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                  <%= link to: "#", phx_click: "unfollow-user", class: "button-large-selected" do %>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-5 w-5"
@@ -48,7 +48,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
                     <span class="mx-2"><%= gettext("Following") %></span>
                   <% end %>
                 <% else %>
-                  <%= link to: "#", phx_click: "follow-user", class: "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
+                  <%= link to: "#", phx_click: "follow-user", class: "button-large" do %>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-5 w-5"

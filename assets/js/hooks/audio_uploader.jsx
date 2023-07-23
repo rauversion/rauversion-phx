@@ -107,7 +107,7 @@ AudioUploader = {
                           <input id="phx-F3MQNT6LavJO5AgD" type="file" name="audio" accept=".mp3,.mp4,.wav,.ogg,.flac,.aiff" data-phx-hook="Phoenix.LiveFileUpload" data-phx-update="ignore" data-phx-upload-ref="phx-F3MQNT6LavJO5AgD" data-phx-active-refs="" data-phx-done-refs="" data-phx-preflighted-refs="" className="hidden">
                           </label>*/}
 
-                        <div class="flex justify-center">
+                        <div className="flex justify-center">
                           <label htmlFor="fileUpload" 
                             className="relative cursor-pointer rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-brand-500">
                             <span>Upload a Audio file</span>

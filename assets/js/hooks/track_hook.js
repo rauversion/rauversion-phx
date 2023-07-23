@@ -106,7 +106,7 @@ Player = {
       container: this.playerTarget,
       backend: 'MediaElement',
       waveColor: 'grey',
-      progressColor: 'tomato',
+      progressColor: 'white',
       height: this.height || 45,
       barWidth: 2,
       barGap: 3,

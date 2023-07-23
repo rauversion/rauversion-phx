@@ -181,7 +181,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
               <% end %>
 
               <%= if @current_user && @current_user.id == @playlist.user_id do %>
-                <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "button" do %>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
@@ -196,7 +196,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     phx_click: "delete",
                     phx_value_id: @playlist.id,
                     phx_target: @list_ref,
-                    data: [confirm: "Are you sure?"], class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                    data: [confirm: "Are you sure?"], class: "button" do %>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"

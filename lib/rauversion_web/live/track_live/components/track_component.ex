@@ -69,7 +69,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                   type="button"
                   data-action="audio#play"
                   data-audio-target="play"
-                  class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400"
+                  class="player-button"
                 >
                   <span class="sr-only"><%= gettext("Play") %></span>
                   <svg
@@ -237,7 +237,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
               <button
                 type="button"
                 data-action="dropdown#toggle click@window->dropdown#hide"
-                class="space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="button"
                 aria-expanded="true"
                 aria-haspopup="true"
               >

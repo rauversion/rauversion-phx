@@ -109,7 +109,6 @@
     <div class="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:py-32 lg:px-8">
       <div class="px-4 flex items-center justify-between sm:px-6 lg:px-0">
         <h2
-          id="trending-heading"
           class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100"
         >
           <%= gettext("Recent Tracks") %>
@@ -128,7 +127,7 @@
           >
             <%= for track <- list_tracks(1) do %>
               <li class="w-64 inline-flex flex-col text-center lg:w-auto">
-                <div class="group relative">
+                <div class="group group-hover">
                   <div class="w-full bg-gray-200 dark:bg-gray-800 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
                     <div
                       phx-update="ignore"
@@ -139,7 +138,9 @@
                     >
                       <button
                         data-play-button="button"
-                        class="flex justify-center items-center w-24 h-24 rounded-full bg-brand-500 border-4 border-brand-100 focus:outline-none"
+                        class="flex justify-center items-center w-24 h-24 
+                        rounded-full bg-black border-4 border-brand-100 focus:outline-none
+                        smooth-grow"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -197,38 +198,64 @@
   <section aria-labelledby="collections-heading" class="bg-gray-100 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
-        <h2
-          id="collections-playlists"
-          class="text-2xl font-extrabold text-gray-900 dark:text-gray-100"
-        >
-          Playlists
-        </h2>
 
-        <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-5 lg:gap-x-6 lg:gap-y-6">
-          <%= for playlist <- list_playlists(1) do %>
-            <div class="w-64 inline-flex flex-col text-center lg:w-auto">
-              <div class="group relative">
-                <div class="relative w-full h-80 bg-white dark:bg-black rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                  <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"),
-                    class: "w-full h-full object-center object-cover"
-                  ) %>
-                </div>
+        <div data-controller="scroll">
 
-                <div class="space-y-1 text-sm text-left mt-2">
-                  <h3 class="font-medium leading-none">
-                    <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist.slug) do %>
-                      <%= playlist.title %>
-                    <% end %>
-                  </h3>
-                  <p class="text-xs text-slate-500 dark:text-slate-400">
-                    <%= gettext("by %{name}", %{name: playlist.user.username}) %>
-                  </p>
-                </div>
+          <div class="flex justify-between">
+
+            <h2
+              id="collections-playlists"
+              class="text-2xl font-extrabold text-gray-900 dark:text-gray-100"
+            >
+              Playlists
+            </h2>
+
+            <div class="flex items-center space-x-2">
+              <button data-action="click->scroll#scrollBackward" class="text-sm font-medium text-brand-600 hover:text-brand-500 md:block">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"></path>
+                </svg>
+              </button>
+
+              <button data-action="click->scroll#scrollForward" class="text-sm font-medium text-brand-600 hover:text-brand-500 md:block">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="overflow-auto no-scrollbar relative" data-scroll-target="scrollContainer">
+              <div class="grid grid-cols-1- grid-flow-col grid-rows-1- sm:gap-x-2 md:grid-cols-4- md:gap-y-0- lg:gap-x-8">
+                <%= for playlist <- list_playlists(1) do %>
+                  <div class="w-64 m-4">
+                    <div class="group group-hover relative">
+                      <div class="relative w-full h-80 bg-white dark:bg-black rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                        <%= img_tag(Rauversion.Playlists.blob_url(playlist, "cover"),
+                          class: "w-full h-full object-center object-cover"
+                        ) %>
+                      </div>
+
+                      <div class="space-y-1 text-sm text-left mt-2">
+                        <h3 class="font-medium leading-none">
+                          <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist.slug) do %>
+                            <%= playlist.title %>
+                          <% end %>
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                          <%= gettext("by %{name}", %{name: playlist.user.username}) %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
               </div>
             </div>
-          <% end %>
+          </div>
         </div>
       </div>
+      
     </div>
   </section>
   <% # end %>
@@ -243,11 +270,11 @@
           <%= gettext("Artists You Should Know") %>
         </h2>
 
-        <div class="mt-6 space-y-12 lg:space-y-0 grid-cols-4 grid lg:grid-cols-6 lg:gap-x-6 lg:gap-y-6">
+        <div class="mt-6 space-x-2 lg:space-y-0 grid-cols-4 grid lg:grid-cols-6 lg:gap-x-6 lg:gap-y-6">
           <%= for user <- list_artists(1) do %>
             <div class="group relative">
               <%= live_redirect to: Routes.profile_index_path(@socket, :index, user.username) do %>
-                <div class="relative sm:h-64-- w-full- h-80- bg-white rounded-full overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1">
+                <div class="relative bg-white rounded-full overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1">
                   <%= img_tag(Rauversion.Accounts.avatar_url(user, :medium),
                     class: "w-full h-full object-center object-cover"
                   ) %>

@@ -169,7 +169,7 @@ defmodule RauversionWeb.TrackLive.Player do
     <div
       id="main-player"
       phx-hook="PlayerInitiator"
-      class="z-50 fixed bottom-0 w-full h-[6rem]-- py-2 bg-gray-900 border-t border-gray-800"
+      class="z-50 fixed bottom-0 w-full h-[6rem]-- py-2 bg-black border-t border-gray-800"
     >
       <%= if @track do %>
         <div
@@ -224,7 +224,11 @@ defmodule RauversionWeb.TrackLive.Player do
               type="button"
               data-action="player#play"
               data-player-target="play"
-              class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400"
+              class="relative inline-flex items-center px-2 py-2
+              rounded-full text-black
+              bg-white text-sm font-medium
+              smooth-grow
+              focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-700 focus:border-gray-400"
             >
               <span class="sr-only"><%= gettext("Play") %></span>
               <svg
@@ -361,7 +365,7 @@ defmodule RauversionWeb.TrackLive.Player do
                 data-player-target="playicon"
                 style="display:none"
                 viewBox="0 0 15 15"
-                class="h-6 w-6"
+                class="h-5 w-5"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -372,7 +376,7 @@ defmodule RauversionWeb.TrackLive.Player do
               <svg
                 data-player-target="pauseicon"
                 viewBox="0 0 15 15"
-                class="h-6 w-6"
+                class="h-5 w-5"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -414,18 +418,20 @@ defmodule RauversionWeb.TrackLive.Player do
               <%= if @track do %>
                 <div class="flex items-center mx-2">
                   <div class="relative">
-                    <div class={" #{if @volume do "" else "hidden" end} h-[115px] absolute top-[-8em] left-[-25px] bg-white dark:bg-gray-900 border dark:border-0 shadow-md z-50"}>
+                    <div
+                      id="volume-wrapper"
+                      class={"hidden w-[17px] h-[115px] absolute top-[-8em] left-[0px] bg-white dark:bg-black border dark:border-0 shadow-md z-50"}>
                       <input
                         type="range"
                         min="0"
                         max="1"
                         step="0.1"
-                        class="vertical mt-[52px]"
+                        class="vertical mt-[52px] ml-[-55px]"
                         id="player-range"
                       />
                     </div>
 
-                    <button class="text-white" phx-click="toggle-volume">
+                    <button id="toggle-volume" class="text-white" phx-clickss="toggle-volume">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="h-6 w-6"

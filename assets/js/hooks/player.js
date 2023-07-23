@@ -45,6 +45,12 @@ Player = {
     this.rangeChangeListener = (e)=>{
       window.store.setState({volume: e.target.value})
       this._wave.setVolume(e.target.value)
+      this.rangePaint(e.target)
+    }
+
+    this.rangePaint = (range)=>{
+      let percent = parseFloat(range.value) * 100.0;
+      range.style.backgroundSize = `${percent}% 100%`;
     }
     
     this.addToNextListener = (e) => {
@@ -107,8 +113,15 @@ Player = {
     this.nextBtn.addEventListener("click", this.nextBtnClickListener)
     this.rewBtn.addEventListener("click", this.prevBtnClickListener)
     this.range.addEventListener("change", this.rangeChangeListener)
+
+    document.getElementById("toggle-volume").addEventListener("click", (e)=>{
+      document.getElementById("volume-wrapper").classList.toggle("hidden")
+    })
+
     window.addEventListener(`phx:add-to-next`, this.addToNextListener)
     window.addEventListener(`phx:play-song`, this.playSongListener)
+
+    this.rangePaint(this.range)
 
     this._wave = null
     this.initWave()
@@ -137,7 +150,8 @@ Player = {
       container: this.playerTarget,
       autoplay: true,
       waveColor: 'grey',
-      progressColor: 'tomato',
+      //progressColor: 'tomato',
+      progressColor: 'white',
       height: 45,
       barWidth: 2,
       barGap: 3,

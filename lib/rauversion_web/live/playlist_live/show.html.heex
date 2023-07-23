@@ -87,7 +87,7 @@
   </.modal>
 <% end %>
 
-<main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last dark:bg-black">
+<main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
   <!-- Breadcrumb -->
   <nav class="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
     <%= live_redirect  to: Routes.profile_index_path(@socket, :index, @playlist.user_id), 
@@ -115,7 +115,7 @@
     <!-- Profile header -->
     <div>
       <div class="flex flex-col sm:flex-row mb-6">
-        <div class="flex-grow bg-black items-center text-white">
+        <div class="flex-grow items-center text-white">
           <img
             class="hidden h-32 w-full object-cover lg:h-48"
             src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80"
@@ -140,7 +140,7 @@
                     type="button"
                     data-action="audio#play"
                     data-audio-target="play"
-                    class="relative inline-flex items-center px-2 py-2 rounded-full border border-brand-300 bg-brand-600 text-sm font-medium text-white hover:bg-brand-500 focus:z-10 focus:outline-none focus:ring-1 focus:ring-brand-700 focus:border-brand-400"
+                    class="player-button"
                   >
                     <span class="sr-only"><%= gettext("Play") %></span>
                     <svg

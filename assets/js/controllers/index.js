@@ -6,6 +6,7 @@ import Tabs from "./tabs_controller"
 import FooterPlayer from './footer_player_controller'
 import Chart from './chart_controller'
 import GoogleMaps from './google_maps'
+import Scroll from './scroll_controller'
 //import GeoChart from './geo_chart_controller'
 
 const application = Application.start()
@@ -21,6 +22,7 @@ application.register("player", FooterPlayer)
 application.register("clipboard", Clipboard)
 application.register("chart", Chart)
 application.register("gmaps", GoogleMaps)
+application.register("scroll", Scroll)
 // application.register("editor", Editor)
 // application.register("geo-chart", GeoChart)
 

@@ -105,29 +105,84 @@
 
 
 
+/*
+    Massive help from: https://nikitahl.com/style-range-input-css
+*/
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 8px;
+  background: #F1F5F9;
+  border-radius: 5px;
+  background-image: linear-gradient(#38BDF8, #38BDF8);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+}
+
+/*
+input[type="range"]{
+  background: #0F172A;
+  background-image: linear-gradient(#38BDF8, #38BDF8);
+  background-size: 0% 100%;
+  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.06);
+  background-repeat: no-repeat;
+}*/
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: ew-resize;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+  -webkit-transition: background .3s ease-in-out;
+  transition: background .3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb,
+input[type="range"]::-moz-range-thumb,
+input[type="range"]::-ms-thumb {
+  background: #E2E8F0;
+}
+
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-moz-range-track,
+input[type="range"]::-ms-track {
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
 
 /*Chrome*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-  input[type='range'] {
-    overflow: hidden;
+  input[type='rangexxxx'] {
+    //overflow: hidden;
     width: 80px;
     -webkit-appearance: none;
-    background-color: #f7f70d;
+    background-color: white;
   }
 
-  input[type='range']::-webkit-slider-runnable-track {
+  input[type='rangexxxx']::-webkit-slider-runnable-track {
     height: 10px;
     -webkit-appearance: none;
     color: #0a0801;
     margin-top: -1px;
   }
 
-  input[type='range']::-webkit-slider-thumb {
-    width: 10px;
+  input[type='rangexxxx']::-webkit-slider-thumb {
+    width: 15px;
     -webkit-appearance: none;
-    height: 10px;
+    height: 15px;
     cursor: ew-resize;
-    background: #f98b05;
+    border-radius: 50%;
+    background: red;
     box-shadow: -80px 0 0 80px #000;
   }
 
@@ -255,6 +310,54 @@ input[type="range"].vertical {
   .my-react-select-container .my-react-select__placeholder,
   .my-react-select-container .my-react-select__single-value {
     @apply text-neutral-600 dark: text-neutral-200;
+  }
+
+
+  .button {
+    @apply space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-900 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-indigo-900;
+  }
+
+
+
+  .button\:active {
+    @apply space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-900 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-brand-300 dark:bg-black  hover:bg-brand-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-brand-900;
+  }
+
+  .button-large-selected {
+    @apply inline-flex items-center px-4 py-2 border border-brand-300 shadow-sm text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-900 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+
+  .button-large {
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500;
+  }
+
+  .button-large-outline {
+    @apply inline-flex justify-between dark:border-2 dark:border-white rounded-lg py-3 px-5 bg-black text-white block font-medium;
+  }
+
+  .player-button {
+    @apply relative inline-flex items-center px-2 py-2
+          rounded-full text-black
+          bg-white text-sm font-medium
+          smooth-grow
+          focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-700 focus:border-gray-400;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .smooth-color {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+
+  .smooth-grow {
+    @apply transform transition duration-200 ease-in-out hover:scale-110;
+  }
+
+  .group-hover {
+    @apply relative hover:bg-gray-800 p-2 rounded-md smooth-color;
   }
 }
 

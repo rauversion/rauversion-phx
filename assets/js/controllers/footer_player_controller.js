@@ -37,7 +37,7 @@ export default class extends Controller {
       container: this.playerTarget,
       backend: 'MediaElement',
       waveColor: 'grey',
-      progressColor: 'tomato',
+      progressColor: 'white',
       height: 45,
       //fillParent: false,
       barWidth: 1,
