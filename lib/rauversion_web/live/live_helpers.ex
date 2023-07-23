@@ -44,12 +44,13 @@ defmodule RauversionWeb.LiveHelpers do
         phx-key="escape"
       >
         <%= if @return_to && !@close_handler do %>
-          <%= live_patch("✖",
-            to: @return_to,
-            id: "close",
-            class: "phx-modal-close dark:text-gray-100 dark:bg-gray-900",
-            phx_click: hide_modal()
-          ) %>
+          <.link
+            navigate={@return_to}
+            id="close"
+            class="phx-modal-close dark:text-gray-100 dark:bg-gray-900",
+            phx_click={hide_modal()}
+          > ✖
+          </.link>
         <% end %>
 
         <%= if @close_handler && !@return_to do %>
@@ -206,10 +207,10 @@ defmodule RauversionWeb.LiveHelpers do
     <%= if @track.tags && Enum.any?(@track.tags) do %>
       <div class="py-4">
         <%= for tag <- @track.tags do %>
-          <%= live_redirect to: "/tracks/genre/#{tag}",
-            class: "inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200" do %>
+          <.link navigate={"/tracks/genre/#{tag}"}
+            class="inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200">
             <%= tag %>
-          <% end %>
+          </.link>
         <% end %>
       </div>
     <% end %>
@@ -221,10 +222,10 @@ defmodule RauversionWeb.LiveHelpers do
     <%= if @playlist.tags && Enum.any?(@playlist.tags) do %>
       <div class="py-4">
         <%= for tag <- @playlist.tags do %>
-          <%= live_redirect to: "/playlists/genre/#{tag}",
-            class: "inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200" do %>
+          <.link navigate={"/playlists/genre/#{tag}"}
+            class="inline-flex dark:hover:bg-gray-900 hover:cursor-pointer items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-200">
             <%= tag %>
-          <% end %>
+          </.link>
         <% end %>
       </div>
     <% end %>

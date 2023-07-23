@@ -12,9 +12,10 @@ defmodule RauversionWeb.ProfileLive.StatsComponent do
           <%= gettext("Following") %>
         </p>
         <span class="text-base font-normal text-gray-500 dark:text-gray-200 text-xl ">
-          <%= live_redirect(Rauversion.UserFollows.followings_for(@profile),
-            to: Routes.follows_index_path(@socket, :followings, @profile.username)
-          ) %>
+          <.link
+            navigate={Routes.follows_index_path(@socket, :followings, @profile.username)}
+          ><%= Rauversion.UserFollows.followings_for(@profile) %>
+          </.link>
         </span>
       </div>
       <div class="p-4">
@@ -22,9 +23,10 @@ defmodule RauversionWeb.ProfileLive.StatsComponent do
           <%= gettext("Followers") %>
         </p>
         <span class="text-base font-normal text-gray-500 dark:text-gray-200 text-xl ">
-          <%= live_redirect(Rauversion.UserFollows.followers_for(@profile),
-            to: Routes.follows_index_path(@socket, :followers, @profile.username)
-          ) %>
+          <.link
+            navigate={Routes.follows_index_path(@socket, :followers, @profile.username)}
+          ><%= Rauversion.UserFollows.followers_for(@profile) %>
+          </.link>
         </span>
       </div>
       <div class="p-4">

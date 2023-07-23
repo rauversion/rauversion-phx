@@ -15,17 +15,18 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
               <%= for %{name: name, url: url, selected: selected, kind: _kind} <- assigns.data do %>
                 <% # = selected %>
                 <% # = kind %>
-                <%= live_redirect(name,
-                  id: "profile-menu-#{name}",
-                  "data-cy": "profile-menu-#{name}",
-                  to: url,
-                  class:
+                <.link
+                  id="profile-menu-#{name}",
+                  data-cy="profile-menu-#{name}",
+                  to={url}
+                  class={
                     "text-base font-medium #{if selected do
                       "border-b border-b-4 text-gray-800 hover:text-gray-900 border-brand-500 dark:text-gray-200 dark:hover:text-gray-100 dark:border-brand-300 "
                     else
                       "text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-100"
-                    end}"
-                ) %>
+                    end}"}
+                ><%= name %>
+                </.link>
               <% end %>
             </nav>
 
@@ -65,16 +66,17 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
 
             <%= if @current_user && @current_user.id == @profile.id do %>
               <div class="flex items-center md:ml-12">
-                <%= live_redirect(gettext("Your insights"),
-                  to: Routes.profile_index_path(@socket, :insights, @username),
-                  class:
-                    "text-base font-medium text-gray-500 hover:text-gray-900  dark:text-gray-300 dark:hover:text-gray-100"
-                ) %>
-                <%= live_redirect(gettext("Edit profile"),
-                  to: "/users/settings",
-                  class:
-                    "ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700"
-                ) %>
+                <.link
+                  navigate={Routes.profile_index_path(@socket, :insights, @username)}
+                  class="text-base font-medium text-gray-500 hover:text-gray-900  dark:text-gray-300 dark:hover:text-gray-100"
+                ><%= gettext("Your insights") %>
+                </.link>
+                <.link
+                  navigate={"/users/settings"}
+                  class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-600 hover:bg-gray-700"
+                >
+                <%= gettext("Edit profile") %>
+                </.link>
               </div>
             <% end %>
           </div>

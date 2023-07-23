@@ -217,9 +217,9 @@ defmodule RauversionWeb.PlaylistLive.CreateFormComponent do
             <% else %>
               <h3 class="text-2xl p-4"><%= @playlist.title %></h3>
               <div class="p-4 border border-gray-800">
-                <%= live_redirect("Go to playlist",
-                  to: Routes.playlist_show_path(@socket, :show, @playlist.slug)
-                ) %>
+                <.link navigate={Routes.playlist_show_path(@socket, :show, @playlist.slug)}>
+                  <%= gettext("Go to playlist") %>
+                </.link>
               </div>
             <% end %>
           </section>

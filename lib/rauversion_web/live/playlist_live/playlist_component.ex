@@ -96,9 +96,11 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
           <div class="flex flex-col">
             <div class="space-y-2">
               <h3 class="flex items-center space-x-2 mt-3- text-xl font-extrabold tracking-tight text-slate-900 dark:text-gray-100">
-                <%= live_redirect(@playlist.title,
-                  to: Routes.playlist_show_path(@socket, :show, @playlist.slug)
-                ) %>
+                <.link
+                  navigate={Routes.playlist_show_path(@socket, :show, @playlist.slug)}
+                >
+                  <%= @playlist.title %>
+                </.link>
                 <%= if Rauversion.Playlists.is_album?(@playlist) do %>
                   <span class="text-xs dark:text-gray-400 font-thin">
                     <%= gettext("Album") %> <%= simple_date_for(@playlist.release_date, :short) %>
@@ -153,8 +155,6 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
             </div>
 
             <div class="p-2 sm:p-0 sm:pt-2 flex items-center space-x-1">
-              <% # = live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-
               <.live_component
                 id={"share-playlist-button-#{@playlist.id}"}
                 module={RauversionWeb.PlaylistLive.SharePlaylistButtonComponent}
@@ -181,7 +181,9 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
               <% end %>
 
               <%= if @current_user && @current_user.id == @playlist.user_id do %>
-                <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "button" do %>
+                <.link
+                  navigate={Routes.playlist_show_path(@socket, :edit, @playlist.slug)}
+                  class="button">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
@@ -191,12 +193,13 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                   </svg>
                   <span><%= gettext("Edit") %></span>
-                <% end %>
-                <%= link to: "#",
-                    phx_click: "delete",
-                    phx_value_id: @playlist.id,
-                    phx_target: @list_ref,
-                    data: [confirm: "Are you sure?"], class: "button" do %>
+                </.link>
+                <.link
+                    phx-click={"delete"}
+                    phx-value-id={@playlist.id}
+                    phx-target={@list_ref}
+                    data-confirm="Are you sure?"
+                    class="button">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
@@ -210,7 +213,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
                     />
                   </svg>
                   <span><%= gettext("Delete") %></span>
-                <% end %>
+                </.link>
               <% end %>
             </div>
 

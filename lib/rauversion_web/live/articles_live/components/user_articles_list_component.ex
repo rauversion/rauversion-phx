@@ -96,11 +96,12 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
           </p>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <%= live_redirect("New article",
-            to: Routes.articles_new_path(@socket, :new),
-            class:
+          <.link
+            navigate={Routes.articles_new_path(@socket, :new)}
+            class=
               "inline-flex items-center justify-center rounded-md border border-transparent bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 sm:w-auto"
-          ) %>
+          > New article
+          </.link>
         </div>
       </div>
       <div class="mt-8 flex flex-col">
@@ -150,14 +151,14 @@ defmodule RauversionWeb.ArticlesLive.UserArticlesListComponent do
                         <%= post.state %>
                       </td>
                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 dark:text-gray-200 dark:bg-gray-900 divide-x space-x-2">
-                        <%= live_redirect to: Routes.articles_new_path(@socket, :edit, post.id), class: "text-brand-600 hover:text-brand-900" do %>
+                        <.link navigate={Routes.articles_new_path(@socket, :edit, post.id)} class="text-brand-600 hover:text-brand-900">
                           <%= gettext("Edit") %>
-                        <% end %>
+                        </.link>
 
                         <%= if post.slug do %>
-                          <%= live_redirect to: Routes.articles_show_path(@socket, :show, post.slug), class: "text-brand-600 hover:text-brand-900 pl-2" do %>
+                          <.link navigate={Routes.articles_show_path(@socket, :show, post.slug)} class="text-brand-600 hover:text-brand-900 pl-2">
                             <%= gettext("View Article") %>
-                          <% end %>
+                          </.link>
                         <% end %>
                       </td>
                     </tr>

@@ -42,7 +42,7 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
                     class: "h-8 w-8 rounded-full"
                   ) %>
                 </div>
-                <%= live_redirect to: Routes.track_show_path(@socket, :show, item.track_id), class: "min-w-0 flex-1" do %>
+                <.link navigate={Routes.track_show_path(@socket, :show, item.track_id)} class="min-w-0 flex-1">
                   <p class="text-sm text-gray-800 dark:text-gray-200"><%= item.body %></p>
                   <div class="mt-2 flex">
                     <span class="inline-flex items-center text-sm">
@@ -71,7 +71,7 @@ defmodule RauversionWeb.ProfileLive.TrendingComponent do
                       </button>
                     </span>
                   </div>
-                <% end %>
+                </.link>
               </li>
             <% end %>
           </ul>

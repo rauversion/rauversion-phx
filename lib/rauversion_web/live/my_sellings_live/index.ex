@@ -68,7 +68,7 @@ defmodule RauversionWeb.MySalesLive.Index do
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <%= for item <- get_items() do %>
             <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:hover:bg-gray-700 shadow">
-              <%= live_redirect to: "#{item[:href]}" do %>
+              <.link navigate={"#{item[:href]}"}>
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
                   <div class="flex-1 truncate">
                     <div class="flex items-center space-x-3">
@@ -86,7 +86,7 @@ defmodule RauversionWeb.MySalesLive.Index do
 
                   <%= icon_for(item[:name]) %>
                 </div>
-              <% end %>
+              </.link>
             </li>
           <% end %>
         </ul>

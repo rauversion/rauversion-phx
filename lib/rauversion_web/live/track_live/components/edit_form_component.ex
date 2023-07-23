@@ -557,9 +557,9 @@ defmodule RauversionWeb.TrackLive.EditFormComponent do
 
         <div class="pt-5">
           <div class="flex justify-center">
-            <%= live_redirect to: "/", class: "bg-white dark:bg-black py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
+            <.link navigste="/" class="bg-white dark:bg-black py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
               <%= gettext("Cancel") %>
-            <% end %>
+            </.link>
             <%= submit(gettext("Save"),
               phx_disable_with: gettext("Saving..."),
               class:

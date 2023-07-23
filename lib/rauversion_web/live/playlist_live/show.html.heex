@@ -27,9 +27,10 @@
         </h2>
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div class="inline-flex rounded-md shadow">
-            <%= live_redirect to: "/purchases/music", class: "inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700" do %>
+            <.link navigate={"/purchases/music"} 
+              class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700">
               <%= gettext("View your Orders") %>
-            <% end %>
+            </.link>
           </div>
         </div>
       </div>
@@ -72,11 +73,6 @@
   </.modal>
 <% end %>
 
-<% # = live_patch "Edit", to: Routes.playlist_show_path(@socket, :edit, @playlist), class: "button" %>
-<% # = live_redirect "Back", to: Routes.playlist_index_path(@socket, :index) %>
-
-<% # = @current_user.username %>
-
 <%= if assigns[:share_playlist] do %>
   <.modal return_to={Routes.profile_index_path(@socket, :index, @share_playlist.user.username)}>
     <.live_component
@@ -90,8 +86,8 @@
 <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
   <!-- Breadcrumb -->
   <nav class="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
-    <%= live_redirect  to: Routes.profile_index_path(@socket, :index, @playlist.user_id), 
-    class: "inline-flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-gray-100" do %>
+    <.link navigate={Routes.profile_index_path(@socket, :index, @playlist.user_id)} 
+    class="inline-flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-gray-100">
       <svg
         class="-ml-2 h-5 w-5 text-gray-400 dark:text-gray-600"
         x-description="Heroicon name: solid/chevron-left"
@@ -108,7 +104,7 @@
         </path>
       </svg>
       <span><%= gettext("Tracks") %></span>
-    <% end %>
+    </.link>
   </nav>
 
   <article>
@@ -195,9 +191,11 @@
                 </span>
                 <div class="ml-2 pl-6 pt-6">
                   <h4 class="text-lg font-bold flex items-center space-x-2">
-                    <%= live_redirect(@playlist.title,
-                      to: Routes.playlist_show_path(@socket, :show, @playlist.slug)
-                    ) %>
+                    <.link
+                      navigate={Routes.playlist_show_path(@socket, :show, @playlist.slug)}
+                    >
+                      <%= @playlist.title %>
+                    </.link>
                     <%= if Rauversion.Playlists.is_album?(@playlist) do %>
                       <span class="text-xs dark:text-gray-400 font-thin">
                         <%= gettext("Album") %> <%= simple_date_for(
@@ -206,12 +204,14 @@
                         ) %>
                       </span>
                     <% end %>
+                    
                   </h4>
                   <%= if @playlist.user do %>
                     <h5 class="text-sm font-">
-                      <%= live_redirect(@playlist.user.username,
-                        to: Routes.profile_index_path(@socket, :index, @playlist.user.username)
-                      ) %>
+                      <.link
+                        navigate={Routes.profile_index_path(@socket, :index, @playlist.user.username)}
+                      ><%= @playlist.user.username %>
+                      </.link>
                     </h5>
                   <% end %>
                 </div>
@@ -255,9 +255,11 @@
             <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
               <h1 class="text-2xl font-bold text-gray-900  dark:text-gray-100 truncate">
                 <%= if @playlist.user do %>
-                  <%= live_redirect(@playlist.user.username,
-                    to: Routes.profile_index_path(@socket, :index, "@playlist.user.username")
-                  ) %>
+                  <.link
+                    navigate={Routes.profile_index_path(@socket, :index, "@playlist.user.username")}
+                  >
+                    <%= @playlist.user.username %>
+                  </.link>
                 <% end %>
               </h1>
             </div>
@@ -307,7 +309,8 @@
               </button>
 
               <%= if @current_user && @playlist.user_id == @current_user.id do %>
-                <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist.slug), class: "inline-flex justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" do %>
+                <.link navigate={Routes.playlist_show_path(@socket, :edit, @playlist.slug)}
+                  class="inline-flex justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="-ml-1 mr-2 h-5 w-5 text-gray-400 dark:text-gray-600"
@@ -323,7 +326,7 @@
                     />
                   </svg>
                   <span><%= gettext("Edit") %></span>
-                <% end %>
+                </.link>
               <% end %>
             </div>
           </div>

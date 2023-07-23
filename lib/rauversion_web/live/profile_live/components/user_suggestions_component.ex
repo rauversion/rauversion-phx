@@ -60,14 +60,18 @@ defmodule RauversionWeb.ProfileLive.UserSuggestionComponent do
                   </div>
                   <div class="min-w-0 flex-1">
                     <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
-                      <%= live_redirect("#{item.first_name} #{item.last_name}",
-                        to: Routes.profile_index_path(@socket, :index, item.username)
-                      ) %>
+                      <.link
+                        navigate={Routes.profile_index_path(@socket, :index, item.username)}
+                      >
+                        <%= "#{item.first_name} #{item.last_name}" %>
+                      </.link>
                     </p>
                     <p class="text-sm text-gray-500">
-                      <%= live_redirect("#{item.username}",
-                        to: Routes.profile_index_path(@socket, :index, item.username)
-                      ) %>
+                      <.link
+                        navigate={Routes.profile_index_path(@socket, :index, item.username)}
+                      >
+                        <%= "#{item.username}" %>
+                      </.link>
                     </p>
                   </div>
                   <div class="flex-shrink-0">

@@ -60,10 +60,10 @@ defmodule RauversionWeb.QrLive.Components.TicketComponent do
             </div>
           </div>
           <div class="mt-5 sm:mt-6">
-            <%= live_redirect to: Routes.events_show_path(@socket, :show, @ticket.event_ticket.event.slug),
-              class: "inline-flex w-full justify-center rounded-md border border-transparent bg-brand-600 dark:bg-brand-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-brand-700 dark:hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-600 focus:ring-offset-2 sm:text-sm" do %>
+            <.link navigate={Routes.events_show_path(@socket, :show, @ticket.event_ticket.event.slug)}
+              class="inline-flex w-full justify-center rounded-md border border-transparent bg-brand-600 dark:bg-brand-400 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-brand-700 dark:hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-600 focus:ring-offset-2 sm:text-sm">
               <%= gettext("Go to Event") %>
-            <% end %>
+            </.link>
           </div>
         </div>
       </div>

@@ -120,7 +120,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
               <div class="flex-grow  ml-2 flex items-center justify-between">
                 <div class="">
                   <h4 class="text-md font-bold">
-                    <.link href={Routes.track_show_path(@socket, :show, @track.slug)}>
+                    <.link navigate={Routes.track_show_path(@socket, :show, @track.slug)}>
                       <%= @track.title %>
                     </.link>
                   </h4>
@@ -196,8 +196,6 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
         </p>
 
         <div class="p-2 sm:ml-3 sm:p-0 sm:pt-2 flex items-center space-x-1" data-turbo="false">
-          <% # = live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-
           <.live_component
             id={"share-track-button-#{@track.id}"}
             module={RauversionWeb.TrackLive.ShareTrackButtonComponent}

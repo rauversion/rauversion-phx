@@ -28,10 +28,10 @@
           </div>
 
           <h3 class="mt-3 text-sm text-gray-500 dark:text-gray-300 text-left">
-            <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist.slug) do %>
+            <.link navigate={Routes.playlist_show_path(@socket, :show, playlist.slug)}>
               <span class="absolute inset-0"></span>
               <%= playlist.title %>
-            <% end %>
+            </.link>
           </h3>
           <p class="text-base font-semibold text-gray-900 dark:text-gray-100 text-left">
             <%= playlist.user.username %>

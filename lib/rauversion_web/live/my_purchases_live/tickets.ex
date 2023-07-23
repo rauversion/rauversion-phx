@@ -50,9 +50,9 @@ defmodule RauversionWeb.MyPurchasesLive.Tickets do
                 <ol role="list" class="flex items-center space-x-4">
                   <li>
                     <div>
-                      <%= live_redirect to: "/purchases", class: "text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300" do %>
+                      <.link navigate={"/purchases"} class="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300">
                         <%= gettext("Purchases") %>
-                      <% end %>
+                      </.link>
                     </div>
                   </li>
                   <li>
@@ -132,7 +132,7 @@ defmodule RauversionWeb.MyPurchasesLive.Tickets do
             >
               <%= for ticket <- get_tickets(@current_user, @section) do %>
                 <li>
-                  <%= live_redirect to: Rauversion.PurchasedTickets.url_for_ticket(ticket), class: "group block" do %>
+                  <.link navigate={Rauversion.PurchasedTickets.url_for_ticket(ticket)} class="group block">
                     <div class="flex items-center py-5 px-4 sm:py-6 sm:px-0">
                       <div class="flex min-w-0 flex-1 items-center">
                         <!--<div class="flex-shrink-0">
@@ -212,7 +212,7 @@ defmodule RauversionWeb.MyPurchasesLive.Tickets do
                         </svg>
                       </div>
                     </div>
-                  <% end %>
+                  </.link>
                 </li>
               <% end %>
             </ul>

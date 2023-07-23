@@ -324,8 +324,8 @@ defmodule RauversionWeb.EventsLive.NavBar do
         <p class="text-lg font-medium text-blue-gray-900">Settings</p>
 
         <%= if @event.id do %>
-          <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, @event.slug),
-            class: "inline-flex items-center justify-center rounded-md border border-transparent text-sm bg-white px-2 py-2 font-medium text-gray-900 hover:bg-gray-50" do %>
+          <.link navigate={Routes.events_show_path(assigns.socket, :show, @event.slug)}
+            class="inline-flex items-center justify-center rounded-md border border-transparent text-sm bg-white px-2 py-2 font-medium text-gray-900 hover:bg-gray-50">
             View event
             <svg
               class="-mr-1 ml-3 h-5 w-5 text-gray-400"
@@ -348,20 +348,20 @@ defmodule RauversionWeb.EventsLive.NavBar do
               >
               </path>
             </svg>
-          <% end %>
+          </.link>
         <% end %>
       </div>
 
       <div class="flex-1 min-h-0 overflow-y-auto dark:bg-gray-900 ">
         <%= if @event.id do %>
           <%= for item <- menu_items(@event) do %>
-            <%= live_redirect to: item.to, class: item_class(@live_action, item.namespace) do %>
+            <.link navigate={item.to} class={item_class(@live_action, item.namespace)} >
               <%= icon_for(item.namespace) %>
               <div class="ml-3 text-sm hidden xl:block">
                 <p class="font-medium text-blue-gray-900"><%= item.title %></p>
                 <p class="mt-1 text-blue-gray-500"><%= item.sub %></p>
               </div>
-            <% end %>
+            </.link>
           <% end %>
         <% end %>
       </div>

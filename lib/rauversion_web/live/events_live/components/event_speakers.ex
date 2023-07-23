@@ -42,7 +42,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
   def render(assigns) do
     ~H"""
     <div>
-      <section id="speakers" aria-labelledby="speakers-title" class="py-20 sm:py-32">
+      <section id="speakers" aria-labelledby="speakers-title" class="py-20 sm:py-32 bg-black">
         <svg aria-hidden="true" width="0" height="0">
           <defs>
             <clipPath id=":R9m:-0" clipPathUnits="objectBoundingBox">
@@ -149,7 +149,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                             ) %>
                           <% else %>
                             <%= if performer.user && performer.user.username do %>
-                              <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                              <.link navigate={Routes.profile_index_path(@socket, :index, performer.user.username)}>
                                 <%= img_tag(
                                   Rauversion.BlobUtils.blob_representation_proxy_url(
                                     performer.user,
@@ -158,7 +158,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                                   ),
                                   class: "object-center object-cover group-hover:opacity-75 w-full"
                                 ) %>
-                              <% end %>
+                              </.link>
                             <% end %>
 
                             <%= if performer.user && !performer.user.username do %>
@@ -177,18 +177,18 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
                       <h3 class="mt-8 font-display text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
                         <%= if performer.name do %>
                           <%= if performer.user && performer.user.first_name && performer.user.username do %>
-                            <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                            <.link navigate={Routes.profile_index_path(@socket, :index, performer.user.username)}>
                               <%= performer.name %>
-                            <% end %>
+                            </.link>
                           <% else %>
                             <%= performer.name %>
                           <% end %>
                         <% end %>
 
                         <%= if !performer.name && performer.user && performer.user.first_name && performer.user.username do %>
-                          <%= live_redirect to: Routes.profile_index_path(@socket, :index, performer.user.username) do %>
+                          <.link navigate={Routes.profile_index_path(@socket, :index, performer.user.username)}>
                             <%= "#{performer.user.first_name} #{performer.user.last_name}" %>
-                          <% end %>
+                          </.link>
                         <% end %>
 
                         <%= if !performer.name && performer.user && performer.user.first_name && !performer.user.username do %>
@@ -207,7 +207,7 @@ defmodule RauversionWeb.EventsLive.EventSpeakers do
         </div>
       </section>
 
-      <section aria-label="Schedule" class="py-20 sm:py-32">
+      <section aria-label="Schedule" class="py-20 sm:py-32 bg-black">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-4xl lg:pr-24">
             <h2 class="font-display text-4xl font-medium tracking-tighter text-brand-600 sm:text-5xl">

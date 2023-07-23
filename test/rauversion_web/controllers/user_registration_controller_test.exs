@@ -9,7 +9,7 @@ defmodule RauversionWeb.UserRegistrationControllerTest do
       response = html_response(conn, 200)
       assert response =~ "Register"
       assert response =~ "Log in</a>"
-      assert response =~ "Register</a>"
+      assert response =~ "Register\n        </a>"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -35,8 +35,8 @@ defmodule RauversionWeb.UserRegistrationControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ email
-      assert response =~ "Settings</a>"
-      assert response =~ "Log out</a>"
+      assert response =~ "Settings\n          </a>"
+      assert response =~ "Log out\n          </a>"
     end
 
     test "render errors for invalid data", %{conn: conn} do

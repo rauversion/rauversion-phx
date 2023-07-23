@@ -45,9 +45,9 @@ defmodule RauversionWeb.MyPurchasesLive.Music do
       ) %>
 
       <div>
-        <%= live_redirect to: "/playlists/#{@resource.playlist.slug}" do %>
+        <.link navigate={"/playlists/#{@resource.playlist.slug}"}>
           <h3 class="text-2xl"><%= @resource.playlist.title %></h3>
-        <% end %>
+        </.link>
 
         <span><%= gettext("Created at:") %> <%= @resource.inserted_at %></span>
 
@@ -85,9 +85,9 @@ defmodule RauversionWeb.MyPurchasesLive.Music do
       ) %>
 
       <div>
-        <%= live_redirect to: "/tracks/#{@resource.track.slug}" do %>
+        <.link navigate={"/tracks/#{@resource.track.slug}"}>
           <h3 class="text-2xl"><%= @resource.track.title %></h3>
-        <% end %>
+        </.link>
 
         <span><%= gettext("Created at:") %> <%= @resource.inserted_at %></span>
 
@@ -124,9 +124,9 @@ defmodule RauversionWeb.MyPurchasesLive.Music do
                 <ol role="list" class="flex items-center space-x-4">
                   <li>
                     <div>
-                      <%= live_redirect to: "/purchases", class: "text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300" do %>
+                      <.link navigate="/purchases" class="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:text-gray-300">
                         <%= gettext("Purchases") %>
-                      <% end %>
+                      </.link>
                     </div>
                   </li>
                   <li>

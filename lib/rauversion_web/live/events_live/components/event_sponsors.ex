@@ -3,7 +3,7 @@ defmodule RauversionWeb.EventsLive.EventSponsors do
 
   def render(assigns) do
     ~H"""
-    <section id="sponsors" aria-label="Sponsors" class="py-20 sm:py-32">
+    <section id="sponsors" aria-label="Sponsors" class="py-20 sm:py-32 bg-black">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 class="mx-auto max-w-2xl text-center font-display text-4xl font-medium tracking-tighter text-brand-900 dark:text-brand-100 sm:text-5xl">
           <%= @event.event_settings.sponsors_description %>

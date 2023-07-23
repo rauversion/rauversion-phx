@@ -40,9 +40,9 @@
         </h2>
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div class="inline-flex rounded-md shadow">
-            <%= live_redirect to: "/purchases/music", class: "inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700" do %>
+            <.link navigate={"/purchases/music"} class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base font-medium text-white hover:bg-green-700">
               <%= gettext("View your Orders") %>
-            <% end %>
+            </.link>
           </div>
         </div>
       </div>
@@ -88,9 +88,9 @@
 <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
   <!-- Breadcrumb -->
   <nav class="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
-    <%= live_redirect  to: Routes.profile_index_path(@socket, :index, @track.user.username), 
-    "data-cy": "tracks-back",
-    class: "inline-flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-gray-100" do %>
+    <.link navigate={Routes.profile_index_path(@socket, :index, @track.user.username)}
+    data-cy="tracks-back"
+    class="inline-flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-gray-100">
       <svg
         class="-ml-2 h-5 w-5 text-gray-400 dark:text-gray-600"
         x-description="Heroicon name: solid/chevron-left"
@@ -107,7 +107,7 @@
         </path>
       </svg>
       <span><%= gettext("Tracks") %></span>
-    <% end %>
+    </.link>
   </nav>
 
   <article>
@@ -192,15 +192,19 @@
                 </span>
                 <div class="ml-2 pl-6 pt-6">
                   <h4 class="text-lg font-bold">
-                    <%= live_redirect(@track.title,
-                      to: Routes.track_show_path(@socket, :show, @track.slug)
-                    ) %>
+                    <.link
+                      navigate={Routes.track_show_path(@socket, :show, @track.slug)}
+                    >
+                    <%= @track.title %>
+                    </.link>
                   </h4>
                   <%= if @track.user do %>
                     <h5 class="text-sm font-">
-                      <%= live_redirect(@track.user.username,
-                        to: Routes.profile_index_path(@socket, :index, @track.user.username)
-                      ) %>
+                      <.link
+                        navigate={Routes.profile_index_path(@socket, :index, @track.user.username)}
+                      >
+                      <%= @track.user.username %>
+                      </.link>
                     </h5>
                   <% end %>
                 </div>
@@ -270,9 +274,11 @@
             <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
               <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
                 <%= if @track.user do %>
-                  <%= live_redirect(@track.user.username,
-                    to: Routes.profile_index_path(@socket, :index, @track.user.username)
-                  ) %>
+                  <.link
+                    navigate={Routes.profile_index_path(@socket, :index, @track.user.username)}
+                  >
+                    <%= @track.user.username %>
+                  </.link>
                 <% end %>
               </h1>
             </div>
@@ -299,7 +305,8 @@
 
               <div>
                 <%= if @current_user && @track.user_id == @current_user.id do %>
-                  <%= live_patch to: Routes.track_show_path(@socket, :edit, @track.slug), class: "button" do %>
+                  <.link navigate={Routes.track_show_path(@socket, :edit, @track.slug)}
+                    class="button">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4"
@@ -315,7 +322,7 @@
                       />
                     </svg>
                     <span><%= gettext("Edit") %></span>
-                  <% end %>
+                  </.link>
                 <% end %>
               </div>
             </div>
@@ -332,9 +339,9 @@
           <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
             <% # = @track&.user&.username %>
             <%= if @track.user do %>
-              <%= live_redirect(@track.user.username,
-                to: Routes.profile_index_path(@socket, :index, @track.user.username)
-              ) %>
+              <.link redirect={Routes.profile_index_path(@socket, :index, @track.user.username)}>
+                <%= @track.user.username %>
+              </.link>
             <% end %>
           </h1>
         </div>
