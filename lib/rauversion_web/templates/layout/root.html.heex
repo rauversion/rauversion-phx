@@ -56,6 +56,9 @@
     >
     </script>
 
+    <%= render("_footer.html", assigns) %>
+
+
     <%= if Application.get_env(:rauversion, :google_analytics_id) do %>
       <!-- Google tag (gtag.js) -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5CQZMGV0S">
