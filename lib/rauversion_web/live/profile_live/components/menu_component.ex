@@ -18,7 +18,7 @@ defmodule RauversionWeb.ProfileLive.MenuComponent do
                 <.link
                   id="profile-menu-#{name}",
                   data-cy="profile-menu-#{name}",
-                  to={url}
+                  navigate={url}
                   class={
                     "text-base font-medium #{if selected do
                       "border-b border-b-4 text-gray-800 hover:text-gray-900 border-brand-500 dark:text-gray-200 dark:hover:text-gray-100 dark:border-brand-300 "
