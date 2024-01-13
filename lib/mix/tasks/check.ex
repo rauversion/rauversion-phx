@@ -1,14 +1,11 @@
 defmodule Rauversion.Checks.CheckFFMPEG do
   def run() do
-    {_, status} = System.cmd("which", ["ffmpeg"])
+    case System.find_executable("ffmpeg") do
+      nil ->
+        {:error, "'ffmpeg' command not found on the system. Please install it to proceed."}
 
-    case status do
-      0 ->
-        true
-
-      err ->
-        IO.inspect(err, label: "ffmpeg error")
-        raise "ffmpeg command not found"
+      _path ->
+        {:ok, "'ffmpeg' command is available on the system."}
     end
   end
 end
@@ -18,20 +15,16 @@ defmodule Mix.Tasks.Check do
 
   alias Rauversion.Checks.CheckFFMPEG
 
-  defp is_ok(true) do
-    IO.inspect("All checks passed")
+  defp is_ok({:ok, message}) do
+    Mix.shell().info(message)
   end
 
-  defp is_ok(_) do
-    raise "Some dependencies are missing or wrongly configured."
-  end
-
-  defp check() do
-    CheckFFMPEG.run()
+  defp is_ok({:error, reason}) do
+    Mix.raise(reason)
   end
 
   @shortdoc "Check if deps versions are met."
-  def run(_id) do
-    is_ok(check())
+  def run(_args) do
+    is_ok(CheckFFMPEG.run())
   end
 end
